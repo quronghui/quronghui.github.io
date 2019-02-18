@@ -2,11 +2,13 @@
 layout: post
 title: Windows and GitHub Pages and Jeklly Building owns Bolg
 date: 2018-11-14
-Categories: Blog
-Tags: windows  GitHub Pages  jeklly  Blog 
+categories: Blog
+tags:  
+ - GitHub Pages  
+ - jeklly Blog
 ---
 
-# By GitHub Pages and Jekyll building Blog
+# Windows By GitHub Pages and Jekyll building Blog
 ## Install Tools
 + 整个流程参考链接如下，包括博客的模板
 + [Visit Link](https://blog.csdn.net/xudailong_blog/article/details/78762262)

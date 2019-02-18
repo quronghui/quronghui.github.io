@@ -3,6 +3,7 @@ layout: '[layout]'
 title: LinuxAndWin10
 date: 2019-02-18 11:25:12
 tags: linux win10 双系统
+categories: System
 ---
 
 # Win10 + Ubuntu 双系统
