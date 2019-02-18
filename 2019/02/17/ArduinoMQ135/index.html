@@ -113,7 +113,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/02/17/ArduinoMQ135/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/02/17/ArduinoMQ135/2.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/02/17/ArduinoMQ135/3.jpg">
-<meta property="og:updated_time" content="2019-02-17T14:17:58.886Z">
+<meta property="og:updated_time" content="2019-02-18T01:31:23.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArduinoMQ135">
 <meta name="twitter:description" content="口气检测仪 基于Arduino和MQ135硫化物传感器，实现口气检测  1. 总体实现描述　　人呼出的气体中含有多种痕量挥发性硫化物 , VSCs中硫化氢、甲硫醇和二甲基硫醚的量与口臭的强弱直接相关。这些化合物通常与人体健康及代谢过程相关, 一般分为口腔性和非口腔性, 其中90%来源于口腔，目前监测这种变化的方法目前有: (1) 感官分析法, 即鼻测法; (2) 仪器分析法:气相色谱法、气相色谱质">
@@ -380,12 +380,24 @@
                 
               
 
-              <time title="Created: 2019-02-17 19:31:44 / Modified: 22:17:58" itemprop="dateCreated datePublished" datetime="2019-02-17T19:31:44+08:00">2019-02-17</time>
+              <time title="Created: 2019-02-17 19:31:44" itemprop="dateCreated datePublished" datetime="2019-02-17T19:31:44+08:00">2019-02-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-18 09:31:23" itemprop="dateModified" datetime="2019-02-18T09:31:23+08:00">2019-02-18</time>
               
             
           </span>
@@ -465,7 +477,10 @@
 <p>（1）按键一：按下时开始进行口气检测，并在OLED上动态实现；当按键弹起的时候，OLED上固定显示本次检测的最大浓度值和评价等级；</p>
 <p>（2）按键二：按下的时候，显示第几次检测，检测的口气浓度值大小和等级。</p>
 <h3 id="2-5-供电"><a href="#2-5-供电" class="headerlink" title="2.5 供电"></a>2.5 供电</h3><p>　　锂电池供电，提供充电模块。</p>
-<h2 id="3-软件平台搭建"><a href="#3-软件平台搭建" class="headerlink" title="3. 软件平台搭建"></a>3. 软件平台搭建</h2><h3 id="3-1-MQ135浓度采样"><a href="#3-1-MQ135浓度采样" class="headerlink" title="3.1 MQ135浓度采样"></a>3.1 MQ135浓度采样</h3><p>　　通过map()函数，对采样的电压值进行映射，得到浓度值。将MQ135输出的电压值（0.1-0.3V – 4V）映射成浓度（10-1000 ppm）。</p>
+<h2 id="3-软件平台搭建"><a href="#3-软件平台搭建" class="headerlink" title="3. 软件平台搭建"></a>3. 软件平台搭建</h2><ul>
+<li>完整源码：<a href="https://github.com/quronghui/Arduino" target="_blank" rel="noopener">https://github.com/quronghui/Arduino</a></li>
+</ul>
+<h3 id="3-1-MQ135浓度采样"><a href="#3-1-MQ135浓度采样" class="headerlink" title="3.1 MQ135浓度采样"></a>3.1 MQ135浓度采样</h3><p>　　通过map()函数，对采样的电压值进行映射，得到浓度值。将MQ135输出的电压值（0.1-0.3V – 4V）映射成浓度（10-1000 ppm）。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">mapping</span><span class="params">(<span class="keyword">long</span> x, <span class="keyword">long</span> in_min, <span class="keyword">long</span> in_max, <span class="keyword">long</span> out_min, <span class="keyword">long</span> out_max)</span></span>;   <span class="comment">// 函数的映射</span></span><br></pre></td></tr></table></figure>
 <h3 id="3-2-存储采样数据"><a href="#3-2-存储采样数据" class="headerlink" title="3.2 存储采样数据"></a>3.2 存储采样数据</h3><p>　　通过数据对MQ135每次采样数据的存储，通过排序得到本次检测的最大浓度值，实现按键一（中断0）的功能。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MemoryData</span><span class="params">()</span></span>;              <span class="comment">// 采样数据的存储，存储到数据；</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">max</span><span class="params">()</span></span>;						<span class="comment">// 排序得到最大值</span></span><br></pre></td></tr></table></figure>
@@ -477,12 +492,57 @@
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int MQgrade(int temp);                 <span class="comment">// 进行等级的评定</span></span><br><span class="line">int score[] = &#123; &lt;<span class="number">30</span>,                          <span class="comment">// grade = 0 未检测</span></span><br><span class="line">               <span class="number">40</span>,<span class="number">45</span>,<span class="number">50</span>,                      <span class="comment">// grade = 1-3 轻微</span></span><br><span class="line">               <span class="number">55</span>,<span class="number">65</span>,<span class="number">70</span>,                     <span class="comment">// grade = 4-6 中度</span></span><br><span class="line">                <span class="number">75</span>,<span class="number">85</span>,<span class="number">90</span>,                    <span class="comment">// grade = 7-9 重度</span></span><br><span class="line">               &gt; <span class="number">100</span>                         <span class="comment">// grade =100 检测其他物体/或者传感器没有正常连接   </span></span><br><span class="line">              &#125;;</span><br></pre></td></tr></table></figure>
 <p>​                    <img src="/2019/02/17/ArduinoMQ135/H2S.png" title="人体能承受的H2S的范围">    </p>
 <h2 id="4-实现效果图"><a href="#4-实现效果图" class="headerlink" title="4. 实现效果图"></a>4. 实现效果图</h2><p>　　实现效果图主要分为以下三部分：（1）动态检测的浓度值；（2）本次检测的最大浓度值和浓度等级；（3）显示EEPROM 存储的检测值，显示第几次检测，检测的口气浓度值大小和等级。</p>
-<img src="/2019/02/17/ArduinoMQ135/1.jpg" title="人体能承受的H2S的范围">；<img src="/2019/02/17/ArduinoMQ135/2.jpg" title="人体能承受的H2S的范围">；<br><br><img src="/2019/02/17/ArduinoMQ135/3.jpg" title="人体能承受的H2S的范围">
+<p>(1) 按键一按下后，显示口气检测仪的动态浓度采样值</p>
+<img src="/2019/02/17/ArduinoMQ135/1.jpg" title="口气检测仪的动态浓度采样值">
+<p>(2) 按键一弹起后，固定显示本次口气检测的最大浓度值和等级</p>
+<img src="/2019/02/17/ArduinoMQ135/2.jpg" title="人体能承受的H2S的范围">
+<p>(3) 按键二：按一次，显示第几次检测（T），检测浓度大小（ppm），评价等级（G）</p>
+<img src="/2019/02/17/ArduinoMQ135/3.jpg" title="人体能承受的H2S的范围">
 <h2 id="5-总结注意"><a href="#5-总结注意" class="headerlink" title="5. 总结注意"></a>5. 总结注意</h2><ol>
 <li>MQ135传感器的特性，要求预热足够的时间，40小时以上，检测的浓度值才会稳定。</li>
 <li>口气检测仪开始检测时，要进行通电预热，待稳定的时候在进行检测。</li>
 <li>由于MQ135的材料特性，每个传感器预热后的初值都不太相同，因此为了检测的灵敏度要求，需要手动调整一下代码。</li>
 </ol>
+<h2 id="6-价格"><a href="#6-价格" class="headerlink" title="6. 价格"></a>6. 价格</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">物料 / 个</th>
+<th style="text-align:center">价格 / 元</th>
+<th style="text-align:center">链接</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Arduino Pro Mini</td>
+<td style="text-align:center">10.9</td>
+<td style="text-align:center"><a href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.17792e8dX05esy&amp;id=570526032936&amp;_u=i23c070s6e66" target="_blank" rel="noopener">智能创客科技</a></td>
+</tr>
+<tr>
+<td style="text-align:center">MQ135</td>
+<td style="text-align:center">9.23</td>
+<td style="text-align:center"><a href="https://detail.tmall.com/item.htm?id=13302081252&amp;spm=a1z09.2.0.0.17792e8dX05esy&amp;_u=i23c070sc980" target="_blank" rel="noopener">risym旗舰店</a></td>
+</tr>
+<tr>
+<td style="text-align:center">OLED</td>
+<td style="text-align:center">22.99</td>
+<td style="text-align:center"><a href="https://detail.tmall.com/item.htm?id=525584032584&amp;spm=a1z09.2.0.0.17792e8dX05esy&amp;_u=i23c070s808d" target="_blank" rel="noopener">telesky旗舰店</a></td>
+</tr>
+<tr>
+<td style="text-align:center">PCB制板</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">嘉利创</td>
+</tr>
+<tr>
+<td style="text-align:center">锂电池</td>
+<td style="text-align:center">13</td>
+<td style="text-align:center"><a href="https://item.taobao.com/item.htm?id=571443525847&amp;ali_refid=a3_420434_1006:1151968984:N:%E9%94%82%E7%94%B5%E6%B1%A0:2a581f477100d75e1049e99f43f59ee6&amp;ali_trackid=1_2a581f477100d75e1049e99f43f59ee6&amp;spm=a230r.1.1957635.7" target="_blank" rel="noopener">海兄弟锂电池 </a></td>
+</tr>
+<tr>
+<td style="text-align:center">其他电容电阻和接插件</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -650,7 +710,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#口气检测仪"><span class="nav-number">1.</span> <span class="nav-text">口气检测仪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-总体实现描述"><span class="nav-number">1.1.</span> <span class="nav-text">1. 总体实现描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-硬件平台搭建"><span class="nav-number">1.2.</span> <span class="nav-text">2. 硬件平台搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-主控Arduino"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 主控Arduino　　</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-传感器-MQ135"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2  传感器 MQ135</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-显示OLED"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 显示OLED</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-按键设计"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 按键设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-供电"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 供电</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-软件平台搭建"><span class="nav-number">1.3.</span> <span class="nav-text">3. 软件平台搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-MQ135浓度采样"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 MQ135浓度采样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-存储采样数据"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 存储采样数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-EEPROM-存储本次检测的等级和浓度值"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 EEPROM 存储本次检测的等级和浓度值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-OLED显示"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 OLED显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-浓度等级评定"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 浓度等级评定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-实现效果图"><span class="nav-number">1.4.</span> <span class="nav-text">4. 实现效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-总结注意"><span class="nav-number">1.5.</span> <span class="nav-text">5. 总结注意</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#口气检测仪"><span class="nav-number">1.</span> <span class="nav-text">口气检测仪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-总体实现描述"><span class="nav-number">1.1.</span> <span class="nav-text">1. 总体实现描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-硬件平台搭建"><span class="nav-number">1.2.</span> <span class="nav-text">2. 硬件平台搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-主控Arduino"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 主控Arduino　　</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-传感器-MQ135"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2  传感器 MQ135</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-显示OLED"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 显示OLED</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-按键设计"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 按键设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-供电"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 供电</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-软件平台搭建"><span class="nav-number">1.3.</span> <span class="nav-text">3. 软件平台搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-MQ135浓度采样"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 MQ135浓度采样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-存储采样数据"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 存储采样数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-EEPROM-存储本次检测的等级和浓度值"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 EEPROM 存储本次检测的等级和浓度值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-OLED显示"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 OLED显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-浓度等级评定"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5 浓度等级评定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-实现效果图"><span class="nav-number">1.4.</span> <span class="nav-text">4. 实现效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-总结注意"><span class="nav-number">1.5.</span> <span class="nav-text">5. 总结注意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-价格"><span class="nav-number">1.6.</span> <span class="nav-text">6. 价格</span></a></li></ol></li></ol></div>
             
 
           </div>
