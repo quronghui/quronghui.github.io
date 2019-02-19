@@ -182,7 +182,85 @@ categories: Blog
    ```
    hemes/next下的_config.yml文件
    local_search:
-       enable: true
+       enable: true## HEXO 添加搜索
+   ```
+
+
+## HEXO 修改默认生成的文档界面
+
+1. 站点配置文件_config.yml查看
+
+   ```
+   default_layout ：post
+   ```
+
+2. 修改
+
+   ```
+   /scaffolds/post : 修改默认页面
+   	layout: post
+   	title: {{ title }}
+   	date: {{ date }}
+   	categories: 
+   	tags: 
+   ```
+
+3. 新建页面
+
+   + 使用 hexo new post < name >
+
+## HEXO 文章引用pdf  -- 可查看 
+
+1. 安装pdf插件
+
+   ```
+   npm install --save hexo-pdf
+   ```
+
+2. 本地存在的pdf 
+
+   ```
+   1. 将pdf文件放在 /source/_post/name 下
+   2. 文档中使用 {% pdf ./pdf名字.pdf %}
+   ```
+
+3. 网上链接
+
+   ```
+   {% pdf http://7xov2f.com1.z0.glb.clouddn.com/bash_freshman.pdf %}
+   ```
+
+## HEXO 添加本地文件下载
+
+1. 调整程序配置文件_config.yml 里的post_asset_folder:这个选项设置为True
+
+2. 在source下创建/document文件夹
+
+   ```
+   mkdir document
+   把文件复制到这个文件夹
+   ```
+
+3. 在 .md 中引入
+
+    [ name ]（/ document /name.ppt）
+
+## HEXO markdown文档添加多个分类
+
+1. 添加子分类
+
+   ```
+   categories:
+     - Java
+     - Servlet
+   ```
+
+2. 添加多个分类
+
+   ```
+   categories:
+     -[Java]
+     -[Servlet]
    ```
 
    

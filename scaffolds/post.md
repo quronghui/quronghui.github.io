@@ -1,7 +1,8 @@
 ---
+layout: post
 title: {{ title }}
 date: {{ date }}
-tags:
-categories:
+categories: 
+tags: 
 ---
 
