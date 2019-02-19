@@ -1,13 +1,17 @@
 ---
 layout: post
-title: Computer-Composition-Principle
+title: Computer Outline and Technology
 date: 2018-02-18 21:35:14
-categories: Hardware Interface 
+categories: 
+ - [Hardware Interface]
+ - [Computer-Composition-Principle]
 tags: 
  - Hardware Interface 
 ---
 
 # 第一章 计算机概要与技术 
+
+{% asset_img count.png  %}
 
 ## Proper Noun
 
