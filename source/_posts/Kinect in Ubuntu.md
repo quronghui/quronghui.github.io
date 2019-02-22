@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Kinect
+title: Kinect in Ubuntu
 date: 2019-02-20 14:39:36
 categories: Kinect
 tags: kinect
 ---
 
-# OpenKinect Application
+# OpenKinect Application for Ubuntu
 
 ## OpenKinect on linux 环境搭建
 
@@ -77,6 +77,15 @@ tags: kinect
    
 
 ## QTGUI for linux
+
+
+
+# Kinect for Windows
+
+## Kinect SDK 安装
+
+1. Bug
+   + 首次安装KinectSDK-v1.8-Setup
 
 
 
