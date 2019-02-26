@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F02%2F21%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Kinect in Ubuntu]]></title>
+    <url>%2F2019%2F02%2F20%2FKinect%20in%20Ubuntu%2F</url>
+    <content type="text"><![CDATA[OpenKinect Application for UbuntuOpenKinect on linux 环境搭建 OpenKinect/libfreenect libusb的安装 Download libusb &gt;= 1.0.18 安装过程 ./configure执行报错时 1./configure --build=x86_64-linux --disable-udev sudo make install Use 提示安装好了lib，目录所在。 1make[1]: 离开目录“/home/quronghui/Kinect/libusb-1.0.22” 所以我们基于libusb编程的时候，需要包含这个库 */ 编译时加上 –lusb-1.0 就是这个原因，库放在这个目录下，需要链接上。 CMake安装方法 Download : Source Distribution 或者 Binary Distribution，前者是源代码版，你需要自己编译成可执行软件。后者是已经编译好的可执行版，直接可以拿来用的。 安装教程 Python3 安装方法 参考教程 下载Python3 时候特别的慢，一直在等。 Libfreenect 安装 编译 1234567git clone https://github.com/OpenKinect/libfreenectcd libfreenectmkdir buildcd build // 在这之后的操作需要插入设备 // 尽量带sudo ,不然会少安装一些东西sudo cmake -L .. # -L lists all the project optionssudo make 更新依赖库 12sudo apt-get install git cmake build-essential libusb-1.0-0-devsudo apt-get install freeglut3-dev libxmu-dev libxi-dev 测试设备 12cd build/binsudo ./freenect-glview QTGUI for linuxKinect for WindowsKinect SDK 安装 Bug 首次安装KinectSDK-v1.8-Setup]]></content>
+      <categories>
+        <category>Kinect</category>
+      </categories>
+      <tags>
+        <tag>kinect</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Kinect in Windows]]></title>
+    <url>%2F2019%2F02%2F20%2FKinect%20in%20Win%2F</url>
+    <content type="text"><![CDATA[[TOC] Kinect in Windows Kinect in Windows 开发指南 kinect + opencv + vs 环境配置 安装 Kinect SDK Bug 首次安装KinectSDK-v1.8-Setup 连上kinect后，打开一次后，第二次打开提示 “ No kinet to connect ” 重新卸载后，安装KinectSDK-v1.7-Setup，成功 在官方网站下载Kinect for Windows SDK和Developer Toolkit： 参考教程 KinectSDK-v1.7-Setup.exe KinectDeveloperToolkit-v1.7.0-Setup.exe 安装成功后，连上kinect, 设备管理器出现 “ Kinect for windows ” 通过kinect tools 测试 XBox的好坏 安装 Visual StudioVS2017 安装教程 Download Visual Studio Community免费版 选择工作负载这里仅勾选”使用C++的桌面开发”，单个组件和语音包使用默认 按照需要选择要安装的模块（但是我下载后没有已安装的选项） VS2017的文件目录 C:\Users\quronghui\source\repos 安装注意 直接安装VS2017，并且卸载完之前安装的VS2015版本（如果可以的话直接升级） 我的是因为之前安装的VS2015 ios镜像不成功，卸载不完全，导致的系统重装. Mircosoft 的软件安装的时候，不要中途暂停，不然容易造成卸载不了的问题 解决方案 重装系统后，直接安装VS2017，这样就不会报错了 因该是以前装VS其他版本没有卸载干净，导致的后果 Kiinect SDK 关于 VS 的配置 Kiinect SDK 关于 VS 的配置 使用VS进行开发的话，需要配置include和lib路径 进入VS，右键-项目属性，Debug + x64，选择VC++Directories: 1234Debug and Release 都要添加 Include files : add C:\Program Files\Microsoft SDKs\Kinect\v1.7\inc； Library files : add C:\Program Files\Microsoft SDKs\Kinect\v1.7\lib\x64； 链接器 : add Kinect10.lib C:\Program Files\MicrosoftSDKs\Kinect\v1.6\inc 目录下有： 1234- NuiApi.h ---包含所有的NUI(自然用户界面) API头文件和定义基本的初始化和函数访问入口。这是我们C++工程的主要头文件，它已经包含了NuiImageCamera.h 和 NuiSkeleton.h。- NuiImageCamera.h ---定义了图像和摄像头服务的API，包括调整摄像头的角度和仰角，打开数据流和读取数据流等。- NuiSkeleton.h ---骨架有关的API，包括使能骨架跟踪，获取骨架数据，骨架数据转换和平滑渲染等。- NuiSensor.h ---音频API，包括ISoundSourceLocalizer接口，用于返回声源的方向（波束形成）和音频的位置。 安装 OpenCV 本次安装的opencv，是为了迁移上一个工程师的代码，所以opencv的版本需要一致才能编译成功。 [opencv 2.4.6.0，vc10] Opencv 的安装和配置教程 Opencv 的安装 我是直接复制工程师的 opencv 解压包，只是进行依赖链接的配置。 环境变量 Opencv Start Dll 文件的复制 dll 文件都在安装的opencv的 bin 目录下 12copy : opencv_ffmpeg .dll to C:\Windows\System32copy : opencv_other .dll to C:\Windows\SysWOW64 Opencv With VS2017 VS 属性中（ Include Direction）: 12345Include Direction： C:\Software\opencv\opencv\includeC:\Software\opencv\opencv\build\include\opencvC:\Software\opencv\opencv\build\include\opencv2C:\Software\opencv\freetype\include // 为了在opencv里面检测的图片上加上字 VS 属性里面的 库目录 12Library Direction: C:\Software\opencv\opencv\build\x64\vc10\lib VS 属性 – 链接器 – 输入项 – 附加依赖项 1234567" **在 Debug x64 下面进行配置**"Link : opencv_core246d.lib // lib 库下面 opencv_xxx "d" : 代表的是Debug版本使用的库 opencv_highgui246d.lib opencv_video246d.lib opencv_imgproc246d.lib opencv_photo246d.lib 1234567" **切换 Release x64 下面进行配置**"Link : opencv_core246.lib // lib 库下面 opencv_xxx : 代表的是Release版本使用的库 opencv_highgui246.lib opencv_video246.lib opencv_imgproc246.lib opencv_photo246.lib 安装QTQT 的安装 安装方式 1234Notes: QT组件的选取： MSVC 2017 64-bit : VS2017 的QT编译器 MinGW 5.3.0 32 bit : gcc 的编译器吧 QT with VS2017 配置方式 Notes 123456VS 属性 -- 链接器 -- 输入项 -- 附加依赖项 ：加入QT. lib如果报错再加入： qtmain.lib Qt5Core.lib Qt5Gui.lib Qt5Widgets.lib 代码迁移后需要改动VS 的项目 – 配置属性 VC ++ 目录 ： 下面的包含目录和库目录。 注意修改迁移项目的目录链接。 （之前背的工程师的SDK or opencv 放在其他的目录下） Qt Meta-Object Complier: Include Path C/C++ 目录 常规 – 附加包含目录： 所有选项 – 附加包含目录 计算机中丢失 MSVCP100D.dll 代码迁移后，会报计算机中丢失 MSVCP100D.dll 解决方案：去对应工程师的电脑下，拷贝MSVCP100D.dll download 12copy xxx.dll files to C:\Windows\SysWOW64 copy xxx.dll files to C:\Windows\System32 VS2017 项目打包部署（.exe files） 参考链接]]></content>
+      <categories>
+        <category>Kinect</category>
+      </categories>
+      <tags>
+        <tag>kinect</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SerialCommunication]]></title>
+    <url>%2F2019%2F02%2F19%2FSerialCommunication%2F</url>
+    <content type="text"><![CDATA[GPIO，I2C，SPI，UART，USART，USB的区别GPIO（General Purpose Input Output ） 系统需要采用远端串行通信或控制时，GPIO产品能够提供额外的控制和监视功能。 SPI (Serial Peripheral Interface) 是一种标准的四线同步双向串行总线。 SPI接口主要应用在 EEPROM，FLASH，实时时钟，AD转换器，还有数字信号处理器和数字信号解码器之间。 芯片 – 间的高效通信 数据线 串行时钟(SCLK)、串行数据输出(SDO)、串行数据输入(SDI) SPI总线：一个Master，多个Slave设备 主从设备间可以实现全双工通信 通用IO口模拟SPI总线 主从设备：必须要有一个输出口(SDO)，一个输入口(SDI)， SCLK则视实现的设备类型而定 SPI 通信协议 一个主设备启动一个与从设备的同步通讯的协议，从而完成数据的交换 与普通的串行通讯不同，普通的串行通讯一次连续传送至少8位数据，而SPI允许数据一位一位的传送 至少8次时钟信号的改变（上沿和下沿为一次），就可以完成8位数据的传输 主设备通过对SCK时钟线的控制可以完成对通讯的控制 I2C (INTER IC BUS) 是一种集成电路间的总线标准，用于连接微控制器及其外围设备 非常适合在器件之间进行近距离、非经常性的数据通信 数据传输 传输数据时都会带上目的设备的设备地址，因此可以实现设备组网。 双向、两线(SCL、SDA)、串行、多主控（multi-master）接口标准 通用IO口模拟IIC总线 则需一个输入输出口(SDA)，另外还需一个输出口(SCL) I2C通信协议 接到总线的器件都可以通过唯一的地址和一直存在的简单的主机从机关系软件设定地址主机可以作为主机发送器或主机接收器 UART(Universal Asynchronous Receiver Transmitter) 通用异步接收/发送装置。 复杂 : 异步串口，因此一般比前两种同步串口的结构要复杂很多，半双工通信 数据线 一般由波特率产生器(产生的波特率等于传输波特率的16倍)、UART接收器、UART发送器组成 通用IO口模拟UART总线 需一个输入口，一个输出口 USART 通用同步异步收发器； USB：Universal Serial BUS 通用串行总线 CAN 现场总线]]></content>
+      <categories>
+        <category>Communication</category>
+      </categories>
+      <tags>
+        <tag>SerialCommunication</tag>
+        <tag>Electronic</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LinuxC]]></title>
+    <url>%2F2019%2F02%2F19%2FLinuxC%2F</url>
+    <content type="text"><![CDATA[Linux C编程一站式学习 C语言入门 程序的五个步骤 math函数的gcc编译 12$ gcc math.cpp -o math -lm // math的编译要加上 "-lm"$ gcc hello.c -o hello -Wall // gcc编译带上 -Wall,显示所有警告的信息 [UNIX编程艺术] The Art of UNIX Programming. Eric Raymond. 全局/局部变量 虽然方便，但是要慎用，能用函数传递参数的就不要使用全局变量 局部变量可以用任意类型相符的表达式来初始化,而全局变量只能用常量表达式初始化。 Debug 如果全局变量在定义时不初始化,则初始值是0。但是局部变量不初始化时，初值就不确定，局部变量先赋值 if/else else 总是和最近的一个if配对 如果需要隔开的话，加 “ { } ” 隔开 Debug Ways 增量式开发：通过printf的方式，一步步打印结果查看 printf (“ “) // 通过打印进行调试 递归函数：要加上 Base Case 12345int factorial(int n)&#123; if (n == 0) return 1;&#125; 递归和循环是等价的; 用循环能做的事用递归都能做 循环函数 循环函数:相当于将函数表达式展开，然后通过while()，进行循环的迭代 do / while 的格式 123do 语句；while(); // while 后面有个分号 Break and Continue break : 跳出当前循环体，执行后面的语句； Continue : 终止本次循环(循环里面的内容，在continue之后的语句都不执行)，然后回到循环体的开头准备再次执行循环体。]]></content>
+      <categories>
+        <category>LinuxC</category>
+        <category>Emededded</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HEXO Github]]></title>
+    <url>%2F2019%2F02%2F18%2FHEXOGithub%2F</url>
+    <content type="text"><![CDATA[Linux 下HEXO + Github 搭建博客HEXO 环境搭建流程 HEXO 环境搭建流程 安装Nodejs 和 npm 正式安装Hexo 初始化文件夹 hexo init Github 的部署 github 上建立repository ； 命名为 username.github.io; 修改hexo 目录下的_config.yml 12345修改hexo 目录下的_config.yml deploy: type: git repository: https://github.com/quronghui/quronghui.github.io.git branch: master 配置github 12$ git config --global user.name "yourName"$ git config --global user.eamil "email@example.com" HEXO 主题的修改 使用 NEXT主题 更改主题配置文件(NEXT)中的，站点配置文件_config.yml 动态效果还未实现 官方NEXT的配置文档 avatar 下添加头像 Hexo的Next主题详细配置 HEXO 博客分支备份 参考教程 在 hexo 博客文件夹下，创建两个分支（Github 的部署, 修改_config.yml时，只是添加git的源在里面，没有进行add 或者clone，因此没有master主分支） 12$ git branch dev(master) // 创建分支,dev只是分支名字$ git checkout dev(master) // 分支切换（也就是设置默认分支） clone 博客文件到本地，git clone https://github.com/quronghui/quronghui.github.io.git 将之前的hexo文件夹中的文件 ，复制至username.github.io文件夹，为了进行一次分支提交； 123456_config.ymlthemes/source/scaffolds/package.json.gitignore 将themes/next/ 下的.git/删除，否则无法将主题文件夹push； 123delete : themes/next/ 下的.git/删除 两个地方都删除 在username.github.io 下创建分支dev , 并且切换分支dev 这样以后就在username.github.io 下工作 123456分支： git branch dev git checkout devinstall sudo npm install sudo npm install hexo-deployer-git --save 提交文件到分支dev上。 123git add -A ;git commit -m "" ;git push origin dev ; 部署至Github上 12hexo ghexo d HEXO 博客迁移 主要是需要重装一遍环境 安装git； 安装Nodejs和npmwin； 使用`git clone -b hexo https://github.com/quronghui/quronghui.github.io.git 将仓库拷贝至本地； 在文件夹内执行以下命令 123npm install hexo-cli -gnpm installnpm install hexo-deployer-git HEXO 博客分支问题 在quronghui.github.io 文件夹下进行提交的时候，产生了很多冲突。因此，我直接删除hexo文件夹。 使用clone将仓库拷贝至本地； 1git clone -b hexo https://github.com/quronghui/quronghui.github.io.git 在文件夹内执行以下命令 12sudo npm installsudo npm install hexo-deployer-git 这样相当于在本地重建环境 HEXO关于Tags 点击无反应 参考链接 添加标签 ： hexo new page tags 确定配置文件中，大小写一致 确认站点配置文件里有tag_dir: tags 确认主题配置文件里有tags: /tags 编辑站点的source/tags/index.md，添加 1234title: tagsdate: 2015-10-20 06:49:50type: "tags"comments: false HEXO 添加搜索 npm install hexo-generator-searchdb –save 修改站点配置文件 12345search: path: search.xml field: post format: html limit: 10000 修改主题配置文件 123hemes/next下的_config.yml文件local_search: enable: true## HEXO 添加搜索 HEXO 修改默认生成的文档界面 站点配置文件_config.yml查看 1default_layout ：post 修改 123456/scaffolds/post : 修改默认页面 layout: post title: &#123;&#123; title &#125;&#125; date: &#123;&#123; date &#125;&#125; categories: tags: 新建页面 使用 hexo new post &lt; name &gt; HEXO 文章引用pdf – 可查看 安装pdf插件 1npm install --save hexo-pdf 本地存在的pdf 121. 将pdf文件放在 /source/_post/name 下2. 文档中使用 &#123;% pdf ./pdf名字.pdf %&#125; 网上链接 1&#123;% pdf http://7xov2f.com1.z0.glb.clouddn.com/bash_freshman.pdf %&#125; HEXO 添加本地文件下载 调整程序配置文件_config.yml 里的post_asset_folder:这个选项设置为True 在source下创建/document文件夹 12mkdir document把文件复制到这个文件夹 在 .md 中引入 [ name ]（/ document /name.ppt） HEXO markdown文档添加多个分类 添加子分类 123categories: - Java - Servlet 添加多个分类 123categories: -[Java] -[Servlet]]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>linux hexo github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LinuxAndWin10]]></title>
+    <url>%2F2019%2F02%2F18%2FLinuxAndWin10%2F</url>
+    <content type="text"><![CDATA[Win10 + Ubuntu 双系统Win10 + Ubuntu环境的搭建 参考链接 有些工作需要切换windows,因此才搭建了双系统。 准备工作 下载UltralSO，这是用来制作启动盘的软件 下载Linux系统的镜像ubuntu16.04，可以在官网上下载 （可选）下载启动项编辑工具[EasyBCD] windows系统下进行分盘 我的电脑–计算机管理–压缩的磁盘–右键–压缩卷 选择未分配区域，右键选择“新建卷“ – 右键“删除卷”可以将这变成可用空间 制作ubunut启动盘 打开UltraSO软件，选择“文件”-“打开”打开之前下好的iso映像文件 选择“启动”-“写入硬盘映像”。此处注意选择正确硬盘驱动器。 依次点击“格式化”和“写入”，完成后它会在消息处提示“刻录成功！” 设置window 下的BIOS 关闭快速启动。选择控制面板-电源选项-选择电源按钮的功能，选择“更改当前不可用的设置”，取消选中“启用快速启动” 安装ubuntu 在下一步之前，一定要先联网，会进行下载 选择 安装音频相关软件…… Ubuntu 工具的安装 参考链接 用到的时候直接搜索]]></content>
+      <categories>
+        <category>System</category>
+      </categories>
+      <tags>
+        <tag>linux win10 双系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ArduinoMQ135]]></title>
+    <url>%2F2019%2F02%2F17%2FArduinoMQ135%2F</url>
+    <content type="text"><![CDATA[口气检测仪项目报告 基于Arduino和MQ135硫化物传感器，实现口气检测 [TOC] 1. 总体实现描述 人呼出的气体中含有多种痕量挥发性硫化物 , VSCs中硫化氢、甲硫醇和二甲基硫醚的量与口臭的强弱直接相关。这些化合物通常与人体健康及代谢过程相关, 一般分为口腔性和非口腔性, 其中90%来源于口腔，目前监测这种变化的方法目前有: (1) 感官分析法, 即鼻测法; (2) 仪器分析法:气相色谱法、气相色谱质谱联用法、硫化物分析仪 (Halimeter) 法、便携式气相色谱口臭测量仪。本产品主要是根据人体呼出气体中硫化物的浓度进行评判的。 本产品基于Arduino作为主控，通过其模拟通道，结合MQ135传感器，对人体呼出的气体中硫化物的浓度进行采集，（人体口气中的成分如如图）对浓度值进行AD转换，对得到的浓度值进行等级的划分，最后得到用户口气检测的等级，用户通过等级查看小程序的相关建议，从而得到口腔保护的建议。 ​ 产品设计总的流程框架图如下所示: ​ 2. 硬件平台搭建2.1 主控Arduino 主控选择开源硬件Arduino, 使用AD转换的模拟通道进行MQ135的检测，数字通道检测按键的状态，IIC通信方式显示检测过程中的浓度大小。 ​ 2.2 传感器 MQ135 传感器检测口气中可挥发性硫化物，使用的是电导率较低的二样化锡SnO2，电导率随空气中污染气体浓度的增加而增大，输出一个模拟电压，主控arduino的AD采样值进行采样，并将电压值映射10-1000ppm之间的浓度。 ​ 2.3 显示OLED 采用IIC的OLED显示屏，对检测过程中的浓度进行动态显示，并且能显示以前检测的浓度值。 ​ 2.4 按键设计 按键设计了两部分： （1）按键一：按下时开始进行口气检测，并在OLED上动态实现；当按键弹起的时候，OLED上固定显示本次检测的最大浓度值和评价等级； （2）按键二：按下的时候，显示第几次检测，检测的口气浓度值大小和等级。 2.5 供电 锂电池供电，提供充电模块。 3. 软件平台搭建 完整源码：https://github.com/quronghui/Arduino 3.1 MQ135浓度采样 通过map()函数，对采样的电压值进行映射，得到浓度值。将MQ135输出的电压值（0.1-0.3V – 4V）映射成浓度（10-1000 ppm）。 1long mapping(long x, long in_min, long in_max, long out_min, long out_max); // 函数的映射 3.2 存储采样数据 通过数据对MQ135每次采样数据的存储，通过排序得到本次检测的最大浓度值，实现按键一（中断0）的功能。 12void MemoryData(); // 采样数据的存储，存储到数据；void max(); // 排序得到最大值 3.3 EEPROM 存储本次检测的等级和浓度值 为了用户能查阅以前检测的等级，设计EEPROM函数，对每次检测的等级和浓度值进行保存，当按键二（中断1）按下时后，显示第几次检测，检测的口气浓度值大小和等级，实现按键二的功能。 12345// EEPROM 存储的函数声明void EepromWriteMaxArray(int EEP_data); // 写入每次检测到的最大浓度值EEPROM存储器,void EepromWriteGrade(int grade_data); // 写入每次检测的等级值void EepromRead(); // 从EEPROM存储器读出数据void EepromClear(); // 清除EEPROM里面的数据 3.4 OLED显示 采用IIC通信方式，动态显示每次检测的浓度值，以及显示EEPROM 存储的检测值，满足按键一和按键二的需求。 12345678// 对每一次数组的采样值进行OLED显示u8g.firstPage(); //一下是显示实现部分do &#123; u8g.setFont(u8g_font_fub30); //设置字体和自号，目前测试字号有fub14,17,20,30 u8g.setPrintPos(0, 50); //显示的位置 u8g.print(array[i]); //显示变量i的值&#125; while( u8g.nextPage() );delay(500); 3.5 浓度等级评定 浓度等级的评定，主要是根据MQ135的检测结果，和人体承受硫化物浓度的范围进行设定的，根据需求将测量的浓度等级分为5大块，具体设定参考下图。 1234567int MQgrade(int temp); // 进行等级的评定int score[] = &#123; &lt;30, // grade = 0 未检测 40,45,50, // grade = 1-3 轻微 55,65,70, // grade = 4-6 中度 75,85,90, // grade = 7-9 重度 &gt; 100 // grade =100 检测其他物体/或者传感器没有正常连接 &#125;; ​ 4. 实现效果图 实现效果图主要分为以下三部分：（1）动态检测的浓度值；（2）本次检测的最大浓度值和浓度等级；（3）显示EEPROM 存储的检测值，显示第几次检测，检测的口气浓度值大小和等级。 (1) 按键一按下后，显示口气检测仪的动态浓度采样值 (2) 按键一弹起后，固定显示本次口气检测的最大浓度值和等级 (3) 按键二：按一次，显示第几次检测（T），检测浓度大小（ppm），评价等级（G） 5. 总结注意 MQ135传感器的特性，要求预热足够的时间，40小时以上，检测的浓度值才会稳定。 口气检测仪开始检测时，要进行通电预热，待稳定的时候在进行检测。 由于MQ135的材料特性，每个传感器预热后的初值都不太相同，因此为了检测的灵敏度要求，需要手动调整一下代码。 6. 价格 物料 / 个 价格 / 元 链接 Arduino Pro Mini 10.9 智能创客科技 MQ135 9.23 risym旗舰店 OLED 22.99 telesky旗舰店 PCB制板 5 嘉利创 锂电池 13 海兄弟锂电池 其他电容电阻和接插件]]></content>
+      <categories>
+        <category>Product</category>
+      </categories>
+      <tags>
+        <tag>arduino</tag>
+        <tag>MQ135</tag>
+        <tag>OLED</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2018_HUST_PPT]]></title>
+    <url>%2F2018%2F12%2F11%2F2018-12-11-2018-HUST-PPT%2F</url>
+    <content type="text"><![CDATA[2018_HUST_PPTEPIC Lab PPT 20180905AIWAC宝宝机器人.pptx 20180905武大EEG硬件PPT.pptx 20181211CBIB口气检测仪.pptx 20181211EEG项目汇报.pptx 20181211Minchen.pptx 20181216EEG项目汇报.pptx CBIB Lab PPT 20181228CBIB电影龙猫.pptx 20181228CBIB开发社区.pptx 20190104长跑.pptx 20190111Computer.pptx 20190119 Computer Programe.pptx]]></content>
+      <categories>
+        <category>PPT</category>
+      </categories>
+      <tags>
+        <tag>PPT</tag>
+        <tag>epic</tag>
+        <tag>cbib</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Windows and GitHub Pages and Jeklly Building owns Bolg]]></title>
+    <url>%2F2018%2F11%2F14%2F2018-11-14-win-git-jekyll%2F</url>
+    <content type="text"><![CDATA[Windows By GitHub Pages and Jekyll building BlogInstall Tools 整个流程参考链接如下，包括博客的模板 Visit Link github Building yourself github account number. Build a New respository. Name : “github_name”.github.io (ep: quronghui.github.io) git clone 选好的模板 上传到你的GitHub Github Page GitHub Page 相当于一个服务器 Jekyll 运行在 GitHub Page 上 Jekyll 环境的搭建Jekyll Knowledge Jekyll 是一个简单的博客形态的静态站点生产机器 Jeklly 的一个最好的特点是“关注 blog 本身”，一个文件夹_posts下进行管理，减少繁琐 Jekyll 搭建 GitHub Pages + jekyll 的方式 直接参考这个Link Jekyll环境的搭建 Jekyll 搭建中安装包的说明 安装Ruby Ruby 是一种开源的面向对象程序设计的服务器端脚本语言 没找到在Blog中担当的角色 安装RubyGems 用于对 Ruby 组件进行打包的 Ruby 打包系统 也就是 Ruby 的管理系统 用Rubygem 安装Jekyll,所有的依赖包都会被安装 用RubyGems安装Jekyll cd到博客文件夹，开启服务器 访问 http://localhost:4000/ 提交代码到远程GitHub上 jekyll 中文说明文档 Jekyll 变量语法 jekyll serve =&gt; 一个开发服务器将会运行在 http://localhost:4000/ 始终需要重新更新 jekyll serve –watch 本地调试的时候，会自动更新 categories 和 tags categories 属性归类 tags 类似于搜索标签 date 变量 这个日期会覆盖文件命名的日期，并作为发布的时间。 Jekyll 文件夹 _posts Blog文件夹 年-月-日-标题.MARKUP MARKUP : 是一种标记，是用什么格式写。 example .md 和 .textile _assets 图片和文档目录 图片和文档的引用，前提是图片和文档放在assets 目录下 PDF文档 _drafts 草稿文件夹 保存一些占时没有写好的文档，不会进行发表。 jekyll serve –drafts : 查看未发表的草稿博客 github.io 文件夹目录 index.html – 创建主页面 任何网站的配置一样，需要按约定在站点的要目录下找到index.html 这个文件就将是你的 Jekyll 生成站点的主页。 为其他文件创建页面 命名 HTML 文件 没有真正理解这个每个页面的展示，没有成功实现 _config.yml – 文件 修改文件，好像本地博客不会发生改变代码亮亮 代码亮亮 给代码加入行号]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>GitHub Pages</tag>
+        <tag>jeklly Blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Computer Language]]></title>
+    <url>%2F2018%2F02%2F19%2FComputerLanguage%2F</url>
+    <content type="text"><![CDATA[第二章 指令–计算机的语言Schedule Dateline start time end time Learning 2018/12/6 8：50 9：50 第二章计算机指令 2018/12/7 8：20 9：30 MIPS寄存器和存储器 2018/12/8 8：40 9:11 效率低 2018/12/10 19：00 19：44 效率低 2018/12/11 8：36 9：22 多寄存器的冲突问题 Proper Noun Full name 中文 acronym instruction set 指令集 一个给定的计算机体系结构所包含的指令集合。 American Standrad Code for Information Interchange ASCII 计算机的文字处理 Acorn Risc Machine ARM 处理器 P99页 ARM 有更多的寻址模式 MIPS 有更多的寄存器 Question 1、为什么 Java 和 C 会是一样的呢？？ 解释和编译的平衡随着时间的推移逐步形成。 2、加速大概率事件？是什么意思. 3、编译C语言和解释Java语言？在配套的网站上。 Conception 指令集：计算机体系结构所包含的指令集合； MISP: 可方便硬件和编译器的设计，性能最佳且功耗最低。 存储程序的概念：多种类型的指令和数据均以数字形式存储于存储器中的概念。 数据传送指令：在存储器和寄存器之间移动数据的指令； 地址：用于在存储器空间中表示元素位置的值 存储程序：存储器存放程序和编译后的机器码（0/1），文本；甚至是用于生成机器码的编译器。 MIPS 的指令集 MIPS指令集，是一种寄存器到寄存器的语言。 MIPS操作数： | 类别 | 表示 | 数据访问 | 特点 || —————- | ——– | —————————- | ————————————– || 32个寄存器(32位) | $zero | 寄存器用于数据的快速存取 | 只能对存放在寄存器的数据进行算术操作。 || 2^30个存储器字 | Memory[] | 只能通过数据访问传输指令访问 | 字节编程；相邻Memory[4] 字地址相差4 | MIPS 算术运算 一条指令，由三个操作数构成 其余的汇编指令 P42页 ​ MIPS 32位各字段的表示和命名 操作码：指令中用来表示操作和格式的字段 计算机硬件的操作数 寄存器 $s0…… 用于表示C和Java程序中变量所对应的寄存器； $t0……用于表示将程序编译为MIPS，用到的临时寄存器； MIPS 算数运算指令的操作数，必须来自寄存器，由于寄存器位数有限，所以需要从存储器中取数据； 存储器 数据传送指令和地址； 存放像数组或结构那样的复杂数据结构； 存储器 –&gt; 寄存器 ：取数操作 load word 寄存器 –&gt; 存储器 ：存数操作 store word 软硬件接口 将变量和寄存器对应； 编译器在存储器中为数组和结构数据分配相应的位置； 编译器将存储器中数据对应的起始地址存放在：数据传送指令中。 软硬件接口 由于load和store指令中的地址是二进制的，作为主存的DRAM容量使用二进制而非十进制。 符号位和非符号位表示方式 负数的表示方式：采用补码的形式表示 补码：最高位设置为1，源码取反（最高位不变），最低位加1。 软硬件接口 寄存器的数量和定长指令的需求和设置–矛盾； 寄存器任何数量的增长，都需要在指令格式中各个寄存器字段至少增加一位； 寄存器越小越快，所以目用的寄存器大多是16/32。 逻辑操作 逻辑左移sll 和右移srl ：$$左移i位 = 原数 * 2^i$$ 软硬件接口 编译器的最初阶段：将程序分解为若干基本块； 基本快：没有分支，并且没有分支目标和标签的指令序列. 计算机硬件对过程的支持 为了解决更多寄存器使用的冲突问题。 栈的使用 栈的增长是一种先进先出的结构； 地址从高到低进行的,压栈时，栈的指针值减小；（从上到下） 过程嵌套，出现寄存器的冲突问题 通多对寄存器进行压栈处理，解决冲突； 软硬件接口–全局指针 全局指针：$gp，指向静态数据区的保留寄存器 为了简化静态数据的访问时间。 栈中使用的指针 帧指针（frame pointer)：$fp—-指向过程帧的第一个字； 栈指针：$sp 指向栈顶 人机交互 计算机是为了数字计算 计算机表示文字的处理，实现了人机交互。遵循ASCII 为了表示web的全球特性,当今的大部分web页面采Unicode,而非ASCII。 Java中的字符和字符串 字符串是一个标准的Java类，它对连接，比较，转换的方法提供了专门的方法 P75 数组和指针 1、指针中变量的地址用 &amp; 表示，指针所指向的对象用 * 表示。 2、寄存器的操作都是通过地址进行操作的。 3、编译器技术的理解，是理解性能的关键。 ARM7(32)位指令集 区别 ARM(32位) MIPS 多寻址模式 多寄存器 保存0 没有专门的寄存器 zero寄存器保存 第三章 计算机的算数运算Proper Noun Full name 中文 acronym Arithmetic logic unit 算数逻辑单元 ALU Exception Program Counter 异常程序计数器 EPC Question ？ 1、无符号数通常表示内存地址，溢出可以忽略？ 2、每个编译器都将以2为底的指数乘法替换为移位来进行优化。 3、使用32位数据表示通常要处理的无限数字。 4、乘法和除法：尽可能用 0/1 加法和减法 运算规则 加法运算：从右到左，二进制代码相加进位； 减法运算：将负数取反后，按照加法进行 计算是否会溢出 加法:源操作数异号时，不会溢出。 减法:源操作数同号时，不会溢出。 异常程序计数器EPC 保存导致异常的指令地址 乘法 乘法运算 被乘数和乘数的表示？ 被乘数每次左移一位，和乘数的一位相乘，结果相加 积的位数 = 被乘数的位数 + 乘数的位数 被乘数，乘数，积 每次进行的移位操作 积：每次的求和结果 更快速乘法 给每一个乘法数分配一个32位的加法器； 形成一个加法树； 除法 除法没有怎么看懂？ 计算的方式 除数：在右边补0，使其和被除数一样的位数 计算的时候：商左移，除数右移 除法：做减法；乘法：做加法 第四章 处理器]]></content>
+      <categories>
+        <category>Hardware Interface</category>
+        <category>Computer-Composition-Principle</category>
+      </categories>
+      <tags>
+        <tag>Hardware Interface</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Math-matric]]></title>
+    <url>%2F2018%2F02%2F18%2FMath-matric%2F</url>
+    <content type="text"><![CDATA[邮箱： hustmath2018@163.com – math2018 typora使用操作 矩阵论 考试内容 Schedule Dateline start time end time Learning 2018/12/4 20:00 20:40 2018/12/10 20:00 10:00 2018/12/12 15:10 2018/12/13 14：35-17: 10 19:20- 2018/12/15 15：00 线性空间 条件：V是一非空集，F是数域，V中元满足向量的一些性质（数乘，交换和结合）； 结论：V为F上的线性空间(或向量空间),记为V(F); 空间V中的元称为向量； 若 性质：零元是唯一的 线性相关：集合中某一元素可由其他元素组线性表示。 线性无关定义： 当 m &gt;2 时；线性无关的条件是，向量组a_i中没有一个元素，可以由其他元素线性表示 单个非零向量组是线性无关； 在空间V中若能找到 n 个线性无关的向量组成dimV = n; 基（基底）的概念 基：最大线性无关向量的集合。 如何求多项式P(t)，在基B={a_i}下，的坐标x={x_i} 坐标：其实就是 A x = b中，向量x的解 求解：（1）构造增广矩阵，进行初等行变换化简；（2）行元素对应相等进行求解 基变换矩阵 空间 V 中的两个基B1 和 B2，存在一个变换矩阵P(ij)，使得B2中的每一个元素，可以通过B1和矩阵P(ij)的某一列相乘得到： 求解技巧： 通过逆矩阵：求解的坐标是n*m维，选用增广矩阵构造 单位矩阵 E，进行初等行变换； 坐标变换矩阵 由基变换引出的概念：求同一个坐标下，不同基对应的元素求解； 根据对应关系求解就行：向量 X = 基 B * 坐标 P； 这样，在根据基变换矩阵便可以求出关系式 当基为标准基：单位矩阵时；任何其他基，相同坐标下的向量都为零矩阵 子空间 线性空间V本身及由V的零元构成的零空间(记为{0}，都是V的子空间，称它们为平凡子空间。 张成子空间：span 子空间W的交；子空间W的和 —-维度 对于维度：先求W的和，再用公式求W交 子空间满足维 dim 的性质，维度就是不能线性表示的，元素的个数。 子空间的交，和满足的维度dim 子空间W的交；子空间W的和 —-基 对于基：先求W交的基，在求W和的基； 对于：W的交求基 存在一组不全为0的K，使得 V * K =0；最大线性无关向量的集合。 对于：W的和求基 直和：强调的是和空间的元素：唯一分解为两个子空间（各出一个元素）的和 直和：会考证明题——根据性质进行判断 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD 2. 直和的性质： 1. W的交为零空间； 2. dim( W1 + W2) = dim(W1) + dim(W2) 3. 直接证明组成的：W(1)+W(2)—线性无关 直和的性质： W的交为零空间； dim( W1 + W2) = dim(W1) + dim(W2) refs/remotes/origin/master]]></content>
+      <categories>
+        <category>Math</category>
+      </categories>
+      <tags>
+        <tag>matric</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Camera]]></title>
+    <url>%2F2018%2F02%2F18%2FCamera%2F</url>
+    <content type="text"><![CDATA[摄影知识三大元素 拍摄参数 | 场景 | 模式 | 光圈 | 感光度IOS | 快门 || :——–: | :——————: | :———————–: | :———: | :————: || 拍人像 | A模式-光圈优先 | 大光圈f/1.4、f/1.8、f/2.8 | 低 ISO &lt; 50 | A模式自动生成 || 拍夜景 | M-手动 或者 A | 大光圈 | 高ISO &gt; 400 | 大 = 1 / value || 晴朗的户外 | M-柔散迷人的景深效果 | 大光圈（F2.8） | 低 ISO &lt; 50 | 小 = 1/4000秒 || 快速的运动 | S-快门优先 | | | || 最常用的 | A-光圈优先 | 中等最好 | | 快门补偿曝光 | 光圈 摄影最重要的一个概念：光圈优先。光圈优先就是手动定义光圈的大小，相机会根据这个光圈值确定能正确曝光的快门速度。 光圈就是镜头里调节进光孔大小的装置。 光圈值： F1， F1.4， F2， F2.8， F4， F5.6， F8， F11， F16， F22， F32， F44， F64； 光圈大小：依次减小；进光量依次减小，相邻进光量相差一倍； 构图确定情况下（焦距确定），我们能控制景深的武器就只剩下光圈了。 大光圈（f/1.4、f/1.8、f/2.8等） 适用于光线不足时，增加曝光时间（快门速度变慢）； 背景模糊=景深浅：适用于拍人像（光圈数值越大，清晰的区域越小）； 小光圈（f/11、f/16、f/22等） 适用于光线充足时，捕捉时间； 背景清楚=景深深：适合拍风景（光圈数值越大，清晰的区域越大）； 中等光圈 镜头在中等光圈的时候成像最好（图片最清晰），成像最好的那档光圈就是最佳光圈； 景深：能够清晰成像的距离 景深浅，前景清晰，背景模糊；景深深，前景清晰，背景同样清晰； 拍摄时光圈越大景深就越浅； 拍摄时采用镜头焦距越长景深就越浅； 拍摄时相机与被摄对象距离越近景深就越浅。 调节位置：副拨码盘 感光度 IOS 高画质、低噪点与慢速快门 ISO &lt; 50 为低感光度 可以获得极为平滑、细腻的照片； 只要能够把照片拍清楚，就尽量使用低感光度。（宁可开大一级光圈，也不要把感光度提高一挡）; ISO400以上是高感光度 高的感光度能获得更快的快门速度; 但是高感光度的画质则是噪点比较大； 夜景的部份，则主要是利用在需要凝结瞬间的情境; 建议值：晴朗的室外使用ISO100；阴郁的天气使用ISO200；室内使用ISO400或更高。 调节位置 快门时间 快门时间 = 1 / value 快门速度 value 很大时：高速运动的瞬间被凝结了； value 很慢时：运动的过程被凝结下来 安全快门速度 快门值不慢于1/镜头焦距； 你使用的是50mm，快门值1/50便可以拍到一张不手震的照片了； 快门值设置 拍行走或快速移动时，设在1/250秒左右； 更快的自由落体或飞驰的物体，提高到1/400秒左右； 快速飞行时，设在1/800秒以上。 测光和自动曝光测光 测光范围：调节的方式 曝光和测光是一对双胞胎，如果不能准确测定光照强度，正确曝光就无从谈起。 点测光 ：只测取景框内一个小点的光线强度； 中央重点测光是简化的区域（平均）测光； 区域（平均）测光：加权平均得到光照强度； 曝光值：正值使拍摄对象更亮，负值则使其更暗]]></content>
+      <categories>
+        <category>Camera</category>
+      </categories>
+      <tags>
+        <tag>Camera</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Computer Outline and Technology]]></title>
+    <url>%2F2018%2F02%2F18%2FComputerComposition-principle%2F</url>
+    <content type="text"><![CDATA[第一章 计算机概要与技术 Proper Noun Full name 中文 acronym personal mobile device 个人移动设备 PMD Warehouse scale computer 巨型数据中心 WSC Liquid Crystal Display 液晶显示 LCD active matrix display 动态矩阵显示 Integrated circuit 集成电路 Central peocessor unit 中央处理单元 CPU dynamic random access memory 动态随机存储器 DRAM static random access memory 静态随机存储器 SRAM – 价格高于DRAM very large-scale integrated circuit 超大规模集成电路 VLSI clock cycle per instruction 执行每条指令所需时钟周期数的平均值 CPI System performance evaluation cooperative 计算机组织，为现代计算机系统建立基准测试集 SPEC Conception 计算机革命推动人类的进步 个人计算机和服务器 服务于个人，和服务于多人的一种可视化操作系统 嵌入式计算机：嵌入到其他设备中的计算机，一般运行预定义的一个或者一组应用程序。 云计算：集群服务器 软件即服务 现代微处理器： 理解现代微处理器硬件如何使性能提高200倍。 摩尔定律： 计算机设计者面临问题： 单芯片上的集成度没18-24个月翻一番，意味着驱动的快速变化。 使用抽象简化设计 抽象：表示不同的设计层次，从高层此种只能看到一个简化模型。 通过冗余提高可靠性 使用冗余部件提高系统的可靠性，并可以帮助检测错误。 学到啥 如何正确剖析软硬件，如何评价性能与功耗 程序入门概念 应用软件–&gt;系统软件–&gt;硬件执行 系统软件 提供常用的服务软件：操作系统，编译程序，加载程序和汇编程序。 操作系统 编译程序：将高级语言翻译为计算机识别的机器语言的程序 指令 0/1数字：即表述指令（计算机硬件理解并服从的命令），又表示数据（二进制位） 汇编语言 语言是一种指令（表示），程序是转换的过程。 汇编程序：将指令由助记符形式翻译成二进制形式的程序 汇编语言：以助记符形式表示的机器指令； 机器语言：以二进制形式表示的机器指令 硬件入门 正确剖析软硬件 基础硬件的基本功能 输入数据–输出数据–处理数据（数据通路和控制器）–存储数据 显示器 图像由像素矩阵组成，可以表示成二进制位的矩阵，称为位图（bit map） 处理器 逻辑上分为两部分：数据通路和控制器 数据通路：负责完成算数运算 控制器：负责指导数据通路 内存 内存：程序运行时的存储空间， 由多片DRAM组成 缓存 cache memory — SRAM 处理其内部的另外一种存储器 小而快的存储效应，作为DRAM的缓冲 抽象之一 - P15 该抽象被命名为计算机指令集体系结构 – 体系结构 硬件的实现方法必须依照体系结构的抽样 抽象系统中的一个关键接口是指令集体系结构–硬件和底层软件的接口 计算机网络 计算机不可缺少的功能 晶体管-硅制作的工艺–芯片chip 成品率的计算 性能 性能的评价因素 响应时间和吞吐量 增加性能和降低执行时间是一个倒数关系 CPU（Central Processing Unit） 性能及其影响因素 时钟周期数、时钟周期时间（时钟频率的倒数） CPU（t） = CPU ( 时钟周期数 ) / CPU ( 时钟频率 ) CPU 时钟周期数 = 程序的指令数 * CPI(每条指令的平均时钟周期数） 经典公式 ：CPU(t) = 指令数 * CPI / 时钟频率 功耗：使用能耗更合理 功耗：由于CMOS管0-1-0的跳变 能耗的来源是 CMOS 管开关动作中的消耗 一个晶体管能耗 = 1/2 负载电容 电压（平方） 一个晶体管功耗 = 1/2 负载电容 电压（平方）* 开关频率 单处理器–&gt;多处理器 原因： 增加多个微处理器，得到更大的吞吐量。不再继续追求单个程序运行在单个处理器上的响应时间 单处理器–processor or cores; 多核处理器(微处理器)– microprocessor 并行性 并行性对计算机性能十分重要，但它往往是隐蔽的 挑战：调度、负载平衡、同步、通信 硬件/软件接口：显示并行编程 并行性对计算机一直十分重要 程序员未来：显式并行编程，不单是串行 Iner Core i7 基准 SPEC CPU 基准测试程序 工作负载：运行在计算机上的一组程序。 基准测试程序：用于比较计算机性能的一组程序。 SPEC 采用单个的数字来进行归纳 SPECpower 功耗是有规定 称为：overall ssi_ops per watt 计算公式 谬论和陷阱 谬论：面向性能的设计和面向能量效率（功耗）的设计具有不相关的指标。 陷阱：用性能公示的一个子集去度量性能。 硬件和软件的设计者都采用分层的方法构建计算机系统，每个下层都对其上层隐藏本层的细节。 抽象：理解硬件和底层软件之间的接口，指令集的体系结构。 执行时间：唯一有效且不可推翻的性能评价指标。]]></content>
+      <categories>
+        <category>Hardware Interface</category>
+        <category>Computer-Composition-Principle</category>
+      </categories>
+      <tags>
+        <tag>Hardware Interface</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HC-05-Bluetooth]]></title>
+    <url>%2F2018%2F02%2F18%2FHC05-Bluetooth%2F</url>
+    <content type="text"><![CDATA[HC-05-Bluetooth-ATResourse 这个软件只能设置HC-03 和HC-05,其他的还需要另外的软件 百度网盘 AT指令调试 先安装setep控件； 打开“蓝牙测试软件”，这样才会获取模块的信息； HC-05的模块进入绝对AT状态 按住按键在上电（或者EN脚接高电平）； 波特率 38400； 按照AT指令输入相应的设置；]]></content>
+      <categories>
+        <category>Bluetooth</category>
+      </categories>
+      <tags>
+        <tag>Bluetooth</tag>
+        <tag>AT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ESP8266]]></title>
+    <url>%2F2018%2F02%2F18%2FESP8266%2F</url>
+    <content type="text"><![CDATA[ESP8266 串口测试 串口WiFi，将串口数据发送到服务器上 工作： 连接wifi 开启服务器监听，连接到服务器 所需工具软件 下载串口调试工具sscom 这个调试工具在输入 AT command后,需要加同一个回车 硬件 ESP8266 USB转TTL下载器 接线方式 esp8266供电方式VCC = 3.3v EN 使能方式,上拉到VCC=3.3v AT指令测试 ATcommand 波特率的设置9600 或者115200 ESP8266有三种模式 第一种是客户端模式：Station 第二种是接入点模式：AP 第三种是两种模式共存:Station+AP 发送指令：AT+CWMODE=3 发送指令：AT+CWJAP=”SSID的信号名”,”密码” 建议：在之后的实验中，可以先用手机热点或者电脑热点来测试设备。 重启自动连接 EN：使能脚需要一直拉高 ESP8266 tcp测试理论知识 什么是TCP 什么是UDP？ 任何网络服务器：理解为监听在指定端口的程序，负责接收数据并且做出反应。 需要在同一个网络下进行测试。ep：ESP8266和主机处于同一个路由器下。 手机作为服务器，进行TCP测试 测试原因：台式机没有无线发射器；实验室路由器没有充钱 后续： 在手机上测试，明白其原理，后续还是需要无线发射器。 软件 电脑：下载串口调试工具sscom 手机：手机TCP调试助手USR-TCP-Test 硬件 ESP8266 USB转TTL下载器 测试过程 手机开启热点，等待被连接； 电脑打开 sscom ,进行AT指令调试； AT+RST // 重启模块 AT+CWMODE=3 // 设置模式Station+AP 第三种是两种模式共存 AT+CWJAP=”SSID的信号名”,”密码” // 连接手机热点 AT+CIFSR // 查看ESP8266连上热点后的IP 注意 AT指令输入后，都会输出OK, 才表明配置成功 此时手机WLAN扫描可以看到ESP8266的wifi 如果不知道名字，可以先配置连上手机热点，看连接设备的名字。 手机打开调试助手–USR-TCP-Test 手机作为服务器，进行端口监视； 选择 tcp serve 配置端口号（IP 地址是手机网络的IP，不能更改（电脑也一样）） 点击激活，记下此时出现的 IP 和 端口port 切换到电脑 sscom, 进行AT调试 AT+CIPSTART=”TCP/UDP”,”IP”,port // 输入serve的IP和port,TCP/UDP用大写 手机端显示tcp连接成功的设备 此时，ESP8266和serve建立起了tcp连接；后面进行数据发送。 电脑 sscom，AT调试 AT+CIPSEND=4 // 设置数据包的字节数 输入 ABCD ESP8266作为服务器，进行TCP测试测试条件 在上面软硬件的基础上； ESP8266 连上手机wifi热点 测试过程 电脑端sscom AT+CIFSR // 查看ESP8266连上热点后的IP，使用START下的IP AT+CIPMUX=1 // AT+ CIPMUX=1 时才能开启服务器 AT+CIPSERVER=1,333 // 开启 server 后自动建立 server 监听 此时ESP8266开启了服务器监听 手机USR-TCP-Test，选择TCP Client 输入ESP8266模块的START_IP,和port; 连接服务器 输入数据进行发送 服务器接收到的数据 将手机换成笔记本 只需要换一个TCP调试工具 NetAssist。 完成了ESP8266的数据收发问题 接下来结合arduino,进行数据测试 参考链接]]></content>
+      <categories>
+        <category>WIFI</category>
+      </categories>
+      <tags>
+        <tag>ESP8266</tag>
+      </tags>
+  </entry>
+</search>

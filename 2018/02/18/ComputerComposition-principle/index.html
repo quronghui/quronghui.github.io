@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第一章 计算机概要与技术 Proper Noun   Full name 中文 acronym      personal mobile device 个人移动设备 PMD    Warehouse scale computer 巨型数据中心 WSC    Liquid Crystal Display 液晶显示 LCD    active matrix display 动态矩阵显示     Int">
+<meta name="keywords" content="Hardware Interface">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Outline and Technology">
+<meta property="og:url" content="http://yoursite.com/2018/02/18/ComputerComposition-principle/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="第一章 计算机概要与技术 Proper Noun   Full name 中文 acronym      personal mobile device 个人移动设备 PMD    Warehouse scale computer 巨型数据中心 WSC    Liquid Crystal Display 液晶显示 LCD    active matrix display 动态矩阵显示     Int">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/02/18/ComputerComposition-principle/learning.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/18/ComputerComposition-principle/hardware.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/18/ComputerComposition-principle/parallel.png">
+<meta property="og:image" content="http://yoursite.com/2018/02/18/ComputerComposition-principle/introduction.png">
+<meta property="og:updated_time" content="2019-02-21T09:22:17.814Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Computer Outline and Technology">
+<meta name="twitter:description" content="第一章 计算机概要与技术 Proper Noun   Full name 中文 acronym      personal mobile device 个人移动设备 PMD    Warehouse scale computer 巨型数据中心 WSC    Liquid Crystal Display 液晶显示 LCD    active matrix display 动态矩阵显示     Int">
+<meta name="twitter:image" content="http://yoursite.com/2018/02/18/ComputerComposition-principle/learning.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/18/ComputerComposition-principle/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Computer Outline and Technology | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/18/ComputerComposition-principle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Computer Outline and Technology
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2018-02-18 21:35:14" itemprop="dateCreated datePublished" datetime="2018-02-18T21:35:14+08:00">2018-02-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-02-21 17:22:17" itemprop="dateModified" datetime="2019-02-21T17:22:17+08:00">2019-02-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hardware-Interface/" itemprop="url" rel="index"><span itemprop="name">Hardware Interface</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Computer-Composition-Principle/" itemprop="url" rel="index"><span itemprop="name">Computer-Composition-Principle</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第一章-计算机概要与技术"><a href="#第一章-计算机概要与技术" class="headerlink" title="第一章 计算机概要与技术"></a>第一章 计算机概要与技术</h1>
+<h2 id="Proper-Noun"><a href="#Proper-Noun" class="headerlink" title="Proper Noun"></a>Proper Noun</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">Full name</th>
+<th style="text-align:center">中文</th>
+<th style="text-align:center">acronym</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">personal mobile device</td>
+<td style="text-align:center">个人移动设备</td>
+<td style="text-align:center">PMD</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">Warehouse scale computer</td>
+<td style="text-align:center">巨型数据中心</td>
+<td style="text-align:center">WSC</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">Liquid Crystal Display</td>
+<td style="text-align:center">液晶显示</td>
+<td style="text-align:center">LCD</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">active matrix display</td>
+<td style="text-align:center">动态矩阵显示</td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">Integrated circuit</td>
+<td style="text-align:center">集成电路</td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">Central peocessor unit</td>
+<td style="text-align:center">中央处理单元</td>
+<td style="text-align:center">CPU</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">dynamic random access memory</td>
+<td style="text-align:center">动态随机存储器</td>
+<td style="text-align:center">DRAM</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">static random access memory</td>
+<td style="text-align:center">静态随机存储器</td>
+<td style="text-align:center">SRAM – 价格高于DRAM</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">very large-scale integrated circuit</td>
+<td style="text-align:center">超大规模集成电路</td>
+<td style="text-align:center">VLSI</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">clock cycle per instruction</td>
+<td style="text-align:center">执行每条指令所需时钟周期数的平均值</td>
+<td style="text-align:center">CPI</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">System performance evaluation cooperative</td>
+<td style="text-align:center">计算机组织，为现代计算机系统建立基准测试集</td>
+<td style="text-align:center">SPEC</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="Conception"><a href="#Conception" class="headerlink" title="Conception"></a>Conception</h2><ul>
+<li>计算机革命推动人类的进步</li>
+</ul>
+<ol>
+<li>个人计算机和服务器<ul>
+<li>服务于个人，和服务于多人的一种可视化操作系统</li>
+<li>嵌入式计算机：嵌入到其他设备中的计算机，一般运行预定义的一个或者一组应用程序。</li>
+<li>云计算：集群服务器</li>
+<li>软件即服务</li>
+</ul>
+</li>
+<li><p>现代微处理器：</p>
+<ul>
+<li>理解现代微处理器硬件如何使性能提高200倍。</li>
+</ul>
+</li>
+<li>摩尔定律：<ul>
+<li>计算机设计者面临问题：</li>
+<li>单芯片上的集成度没18-24个月翻一番，意味着驱动的快速变化。</li>
+</ul>
+</li>
+<li><p>使用抽象简化设计</p>
+<ul>
+<li>抽象：表示不同的设计层次，从高层此种只能看到一个简化模型。</li>
+</ul>
+</li>
+<li><p>通过冗余提高可靠性</p>
+<ul>
+<li>使用冗余部件提高系统的可靠性，并可以帮助检测错误。  </li>
+</ul>
+</li>
+<li><p>学到啥</p>
+<ul>
+<li><p>如何正确剖析软硬件，如何评价性能与功耗</p>
+<img src="/2018/02/18/ComputerComposition-principle/learning.png">
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="程序入门概念"><a href="#程序入门概念" class="headerlink" title="程序入门概念"></a>程序入门概念</h2><ol>
+<li><p>应用软件–&gt;系统软件–&gt;硬件执行</p>
+</li>
+<li><p>系统软件</p>
+<ul>
+<li><p>提供常用的服务软件：操作系统，编译程序，加载程序和汇编程序。</p>
+</li>
+<li><p>操作系统</p>
+</li>
+<li>编译程序：将高级语言翻译为计算机识别的机器语言的程序</li>
+</ul>
+</li>
+<li><p>指令</p>
+<ul>
+<li>0/1数字：即表述指令（计算机硬件理解并服从的命令），又表示数据（二进制位）</li>
+</ul>
+</li>
+<li><p>汇编语言</p>
+<ul>
+<li>语言是一种指令（表示），程序是转换的过程。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>汇编程序：将指令由助记符形式翻译成二进制形式的程序</li>
+<li>汇编语言：以助记符形式表示的机器指令；</li>
+<li>机器语言：以二进制形式表示的机器指令</li>
+</ul>
+<h2 id="硬件入门"><a href="#硬件入门" class="headerlink" title="硬件入门"></a>硬件入门</h2><ul>
+<li><p><strong>正确剖析软硬件</strong></p>
+ <img src="/2018/02/18/ComputerComposition-principle/hardware.png">
+</li>
+</ul>
+<ol>
+<li><strong>基础硬件的基本功能</strong><ul>
+<li>输入数据–输出数据–处理数据（数据通路和控制器）–存储数据</li>
+</ul>
+</li>
+<li>显示器<ul>
+<li>图像由像素矩阵组成，可以表示成二进制位的矩阵，称为位图（bit map）</li>
+</ul>
+</li>
+<li>处理器<ul>
+<li>逻辑上分为两部分：数据通路和控制器</li>
+<li>数据通路：负责完成算数运算</li>
+<li>控制器：负责指导数据通路</li>
+</ul>
+</li>
+<li>内存<ul>
+<li>内存：程序运行时的存储空间，</li>
+<li>由多片DRAM组成</li>
+</ul>
+</li>
+<li>缓存 cache memory — SRAM<ul>
+<li>处理其内部的另外一种存储器</li>
+<li>小而快的存储效应，作为DRAM的缓冲</li>
+</ul>
+</li>
+<li><strong>抽象之一</strong> - P15<ul>
+<li>该抽象被命名为计算机<strong>指令集体系结构</strong> – 体系结构</li>
+<li>硬件的实现方法必须依照体系结构的抽样</li>
+<li>抽象系统中的一个关键接口是指令集体系结构–硬件和底层软件的接口</li>
+</ul>
+</li>
+<li>计算机网络<ul>
+<li>计算机不可缺少的功能</li>
+</ul>
+</li>
+<li>晶体管-硅制作的工艺–芯片chip<ul>
+<li>成品率的计算</li>
+</ul>
+</li>
+</ol>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><ol>
+<li><p>性能的评价因素</p>
+<ul>
+<li>响应时间和吞吐量</li>
+<li>增加性能和降低执行时间是一个倒数关系</li>
+</ul>
+</li>
+<li><p>CPU（Central Processing Unit） 性能及其影响因素</p>
+<ul>
+<li>时钟周期数、时钟周期时间（时钟频率的倒数）</li>
+<li><p>CPU（t） = CPU ( 时钟周期数 ) / CPU ( 时钟频率 )</p>
+</li>
+<li><p>CPU 时钟周期数 = 程序的指令数 * CPI(每条指令的平均时钟周期数）</p>
+</li>
+<li><p>经典公式 ：CPU(t) = 指令数 * CPI / 时钟频率</p>
+</li>
+</ul>
+</li>
+<li><p>功耗：使用能耗更合理</p>
+<ul>
+<li>功耗：由于CMOS管0-1-0的跳变</li>
+<li>能耗的来源是 CMOS 管开关动作中的消耗</li>
+<li>一个晶体管能耗 = 1/2 <em> 负载电容 </em> 电压（平方）</li>
+<li>一个晶体管功耗 = 1/2 <em> 负载电容 </em> 电压（平方）* 开关频率</li>
+</ul>
+</li>
+</ol>
+<h2 id="单处理器–-gt-多处理器"><a href="#单处理器–-gt-多处理器" class="headerlink" title="单处理器–&gt;多处理器"></a>单处理器–&gt;多处理器</h2><ol>
+<li>原因：<ul>
+<li>增加多个微处理器，得到更大的吞吐量。不再继续追求单个程序运行在单个处理器上的响应时间 </li>
+<li>单处理器–processor or cores; 多核处理器(微处理器)– microprocessor</li>
+</ul>
+</li>
+<li>并行性<ul>
+<li>并行性对计算机性能十分重要，但它往往是隐蔽的</li>
+<li>挑战：调度、负载平衡、同步、通信</li>
+</ul>
+</li>
+<li><p><strong>硬件/软件接口：显示并行编程</strong></p>
+<ul>
+<li>并行性对计算机一直十分重要</li>
+<li><p>程序员未来：显式并行编程，不单是串行</p>
+<img src="/2018/02/18/ComputerComposition-principle/parallel.png">
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Iner-Core-i7-基准"><a href="#Iner-Core-i7-基准" class="headerlink" title="Iner Core i7 基准"></a>Iner Core i7 基准</h2><ol>
+<li>SPEC CPU 基准测试程序<ul>
+<li>工作负载：运行在计算机上的一组程序。</li>
+<li>基准测试程序：用于比较计算机性能的一组程序。</li>
+</ul>
+</li>
+<li>SPEC 采用单个的数字来进行归纳<ul>
+<li>SPECpower 功耗是有规定</li>
+<li>称为：overall ssi_ops per watt</li>
+<li>计算公式</li>
+</ul>
+</li>
+</ol>
+<h2 id="谬论和陷阱"><a href="#谬论和陷阱" class="headerlink" title="谬论和陷阱"></a>谬论和陷阱</h2><ol>
+<li><p>谬论：面向性能的设计和面向能量效率（功耗）的设计具有不相关的指标。</p>
+</li>
+<li><p>陷阱：用性能公示的一个子集去度量性能。</p>
+</li>
+<li><p>硬件和软件的设计者都采用分层的方法构建计算机系统，每个下层都对其上层隐藏本层的细节。</p>
+</li>
+<li><p>抽象：理解硬件和底层软件之间的接口，指令集的体系结构。</p>
+</li>
+<li><p>执行时间：唯一有效且不可推翻的性能评价指标。    </p>
+<img src="/2018/02/18/ComputerComposition-principle/introduction.png">
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hardware-Interface/" rel="tag"># Hardware Interface</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/18/HC05-Bluetooth/" rel="next" title="HC-05-Bluetooth">
+                <i class="fa fa-chevron-left"></i> HC-05-Bluetooth
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/18/Camera/" rel="prev" title="Camera">
+                Camera <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-计算机概要与技术"><span class="nav-number">1.</span> <span class="nav-text">第一章 计算机概要与技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Proper-Noun"><span class="nav-number">1.1.</span> <span class="nav-text">Proper Noun</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conception"><span class="nav-number">1.2.</span> <span class="nav-text">Conception</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序入门概念"><span class="nav-number">1.3.</span> <span class="nav-text">程序入门概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件入门"><span class="nav-number">1.4.</span> <span class="nav-text">硬件入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能"><span class="nav-number">1.5.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单处理器–-gt-多处理器"><span class="nav-number">1.6.</span> <span class="nav-text">单处理器–&gt;多处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iner-Core-i7-基准"><span class="nav-number">1.7.</span> <span class="nav-text">Iner Core i7 基准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谬论和陷阱"><span class="nav-number">1.8.</span> <span class="nav-text">谬论和陷阱</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

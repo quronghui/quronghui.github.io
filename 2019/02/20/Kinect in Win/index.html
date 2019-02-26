@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="[TOC] Kinect in Windows Kinect in Windows 开发指南   kinect + opencv + vs 环境配置   安装 Kinect SDK Bug  首次安装KinectSDK-v1.8-Setup 连上kinect后，打开一次后，第二次打开提示 “ No kinet to connect ” 重新卸载后，安装KinectSDK-v1.7-Setup，成功">
+<meta name="keywords" content="kinect">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kinect in Windows">
+<meta property="og:url" content="http://yoursite.com/2019/02/20/Kinect in Win/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="[TOC] Kinect in Windows Kinect in Windows 开发指南   kinect + opencv + vs 环境配置   安装 Kinect SDK Bug  首次安装KinectSDK-v1.8-Setup 连上kinect后，打开一次后，第二次打开提示 “ No kinet to connect ” 重新卸载后，安装KinectSDK-v1.7-Setup，成功">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/KinectEnvironment.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/OpencvEnvironment.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/OpencvStartDll.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/OpencvVsInclude.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/OpencvVsLibrary.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/OpencvVsLink.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/OpencvVsLinkR.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/OTVsLinkDR.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/QtVsInclude.PNG">
+<meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/C++Direction.PNG">
+<meta property="og:updated_time" content="2019-02-25T12:38:24.263Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kinect in Windows">
+<meta name="twitter:description" content="[TOC] Kinect in Windows Kinect in Windows 开发指南   kinect + opencv + vs 环境配置   安装 Kinect SDK Bug  首次安装KinectSDK-v1.8-Setup 连上kinect后，打开一次后，第二次打开提示 “ No kinet to connect ” 重新卸载后，安装KinectSDK-v1.7-Setup，成功">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/KinectEnvironment.PNG">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/20/Kinect in Win/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Kinect in Windows | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/20/Kinect in Win/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kinect in Windows
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-20 14:39:36" itemprop="dateCreated datePublished" datetime="2019-02-20T14:39:36+08:00">2019-02-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-02-25 20:38:24" itemprop="dateModified" datetime="2019-02-25T20:38:24+08:00">2019-02-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kinect/" itemprop="url" rel="index"><span itemprop="name">Kinect</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h1 id="Kinect-in-Windows"><a href="#Kinect-in-Windows" class="headerlink" title="Kinect in Windows"></a>Kinect in Windows</h1><ul>
+<li><p><a href="https://blog.csdn.net/tanmengwen/article/details/8117005" target="_blank" rel="noopener">Kinect in Windows 开发指南 </a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/lizhiguo18/article/details/51037672" target="_blank" rel="noopener">kinect + opencv + vs 环境配置</a></p>
+</li>
+</ul>
+<h2 id="安装-Kinect-SDK"><a href="#安装-Kinect-SDK" class="headerlink" title="安装 Kinect SDK"></a>安装 Kinect SDK</h2><ol>
+<li><p>Bug</p>
+<ul>
+<li>首次安装KinectSDK-v1.8-Setup</li>
+<li>连上kinect后，打开一次后，第二次打开提示 “ No kinet to connect ”</li>
+<li>重新卸载后，安装KinectSDK-v1.7-Setup，成功</li>
+</ul>
+</li>
+<li><p>在官方网站下载Kinect for Windows SDK和Developer Toolkit：</p>
+<ul>
+<li><p><a href="https://blog.csdn.net/zouxy09/article/details/8146055" target="_blank" rel="noopener">参考教程</a></p>
+</li>
+<li><p><a href="https://www.microsoft.com/en-us/download/details.aspx?id=36996" target="_blank" rel="noopener">KinectSDK-v1.7-Setup.exe</a></p>
+</li>
+<li><a href="https://www.microsoft.com/en-us/download/details.aspx%3Fid%3D36998" target="_blank" rel="noopener">KinectDeveloperToolkit-v1.7.0-Setup.exe</a></li>
+<li>安装成功后，连上kinect, 设备管理器出现 “ Kinect for windows ”</li>
+<li>通过kinect tools 测试 XBox的好坏</li>
+</ul>
+</li>
+</ol>
+<h2 id="安装-Visual-Studio"><a href="#安装-Visual-Studio" class="headerlink" title="安装 Visual Studio"></a>安装 Visual Studio</h2><h3 id="VS2017"><a href="#VS2017" class="headerlink" title="VS2017"></a>VS2017</h3><ol>
+<li><a href="https://blog.csdn.net/fengbingchun/article/details/83990685" target="_blank" rel="noopener">安装教程</a></li>
+<li>Download <a href="https://visualstudio.microsoft.com/free-developer-offers/" target="_blank" rel="noopener">Visual Studio Community</a>免费版</li>
+<li>选择工作负载这里仅勾选”使用C++的桌面开发”，单个组件和语音包使用默认</li>
+<li>按照需要选择要安装的模块（但是我下载后没有已安装的选项）</li>
+<li>VS2017的文件目录 C:\Users\quronghui\source\repos</li>
+</ol>
+<h3 id="安装注意"><a href="#安装注意" class="headerlink" title="安装注意"></a>安装注意</h3><ol>
+<li>直接安装VS2017，并且卸载完之前安装的VS2015版本（如果可以的话直接升级）</li>
+<li>我的是因为之前安装的VS2015 ios镜像不成功，卸载不完全，导致的系统重装.</li>
+<li>Mircosoft 的软件安装的时候，不要中途暂停，不然容易造成卸载不了的问题</li>
+<li><strong>解决方案</strong><ul>
+<li>重装系统后，直接安装VS2017，这样就不会报错了</li>
+<li>因该是以前装VS其他版本没有卸载干净，导致的后果</li>
+</ul>
+</li>
+</ol>
+<h2 id="Kiinect-SDK-关于-VS-的配置"><a href="#Kiinect-SDK-关于-VS-的配置" class="headerlink" title="Kiinect SDK 关于 VS 的配置"></a>Kiinect SDK 关于 VS 的配置</h2><ol>
+<li><p>Kiinect SDK 关于 VS 的配置</p>
+<ul>
+<li><p>使用VS进行开发的话，需要配置include和lib路径</p>
+</li>
+<li><p>进入VS，右键-项目属性，Debug + x64，选择VC++Directories:</p>
+<img src="/2019/02/20/Kinect%20in%20Win/KinectEnvironment.PNG">
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Debug and Release 都要添加</span><br><span class="line">	Include files : add  <span class="symbol">C:</span>\Program Files\Microsoft SDKs\Kinect\v1.<span class="number">7</span>\inc；</span><br><span class="line">	Library files : add  <span class="symbol">C:</span>\Program Files\Microsoft SDKs\Kinect\v1.<span class="number">7</span>\<span class="class"><span class="keyword">lib</span>\<span class="title">x64</span>；</span></span><br><span class="line">	链接器         : add  Kinect10.<span class="keyword">lib</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>C:\Program Files\MicrosoftSDKs\Kinect\v1.6\inc 目录下有：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- NuiApi<span class="selector-class">.h</span> ---包含所有的NUI(自然用户界面) API头文件和定义基本的初始化和函数访问入口。这是我们C++工程的主要头文件，它已经包含了NuiImageCamera<span class="selector-class">.h</span> 和 NuiSkeleton.h。</span><br><span class="line">- NuiImageCamera<span class="selector-class">.h</span> ---定义了图像和摄像头服务的API，包括调整摄像头的角度和仰角，打开数据流和读取数据流等。</span><br><span class="line">- NuiSkeleton<span class="selector-class">.h</span> ---骨架有关的API，包括使能骨架跟踪，获取骨架数据，骨架数据转换和平滑渲染等。</span><br><span class="line">- NuiSensor<span class="selector-class">.h</span> ---音频API，包括ISoundSourceLocalizer接口，用于返回声源的方向（波束形成）和音频的位置。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="安装-OpenCV"><a href="#安装-OpenCV" class="headerlink" title="安装 OpenCV"></a>安装 OpenCV</h2><ul>
+<li>本次安装的opencv，是为了迁移上一个工程师的代码，所以opencv的版本需要一致才能编译成功。</li>
+<li>[opencv 2.4.6.0，vc10] </li>
+<li><a href="https://blog.csdn.net/qq_41175905/article/details/80560429" target="_blank" rel="noopener"> Opencv 的安装和配置教程 </a></li>
+</ul>
+<h3 id="Opencv-的安装"><a href="#Opencv-的安装" class="headerlink" title="Opencv 的安装"></a>Opencv 的安装</h3><ol>
+<li><p>我是直接复制工程师的 opencv 解压包，只是进行依赖链接的配置。</p>
+</li>
+<li><p>环境变量</p>
+<img src="/2019/02/20/Kinect%20in%20Win/OpencvEnvironment.jpg">
+</li>
+<li><p>Opencv Start Dll 文件的复制</p>
+<ul>
+<li><p>dll 文件都在安装的opencv的 bin 目录下</p>
+</li>
+<li><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">copy</span>   : opencv_ffmpeg .dll  <span class="keyword">to</span>  C:\Windows\System32</span><br><span class="line"><span class="keyword">copy</span>   : opencv_other  .dll  <span class="keyword">to</span>  C:\Windows\SysWOW64</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<img src="/2019/02/20/Kinect%20in%20Win/OpencvStartDll.PNG">
+</li>
+</ol>
+<h3 id="Opencv-With-VS2017"><a href="#Opencv-With-VS2017" class="headerlink" title="Opencv With VS2017"></a>Opencv With VS2017</h3><ol>
+<li><p>VS  属性中（ Include Direction）:</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Include Direction： </span><br><span class="line">C:<span class="symbol">\S</span>oftware<span class="symbol">\o</span>pencv<span class="symbol">\o</span>pencv<span class="symbol">\i</span>nclude</span><br><span class="line">C:<span class="symbol">\S</span>oftware<span class="symbol">\o</span>pencv<span class="symbol">\o</span>pencv<span class="symbol">\b</span>uild<span class="symbol">\i</span>nclude<span class="symbol">\o</span>pencv</span><br><span class="line">C:<span class="symbol">\S</span>oftware<span class="symbol">\o</span>pencv<span class="symbol">\o</span>pencv<span class="symbol">\b</span>uild<span class="symbol">\i</span>nclude<span class="symbol">\o</span>pencv2</span><br><span class="line">C:<span class="symbol">\S</span>oftware<span class="symbol">\o</span>pencv<span class="symbol">\f</span>reetype<span class="symbol">\i</span>nclude			// 为了在opencv里面检测的图片上加上字</span><br></pre></td></tr></table></figure>
+<ul>
+<li><img src="/2019/02/20/Kinect%20in%20Win/OpencvVsInclude.PNG">
+</li>
+</ul>
+</li>
+<li><p>VS 属性里面的 库目录</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Library <span class="symbol">Direction:</span></span><br><span class="line">	<span class="symbol">C:</span>\Software\opencv\opencv\build\x64\vc10\<span class="class"><span class="keyword">lib</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><img src="/2019/02/20/Kinect%20in%20Win/OpencvVsLibrary.PNG">
+</li>
+</ul>
+</li>
+<li><p>VS 属性 – 链接器 – 输入项 – 附加依赖项</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">" **在 Debug  x64 下面进行配置**"</span></span><br><span class="line">Link :</span><br><span class="line">	opencv_core246d<span class="selector-class">.lib</span>			<span class="comment">// lib 库下面 opencv_xxx "d" : 代表的是Debug版本使用的库</span></span><br><span class="line">	opencv_highgui246d.lib</span><br><span class="line">	opencv_video246d.lib</span><br><span class="line">	opencv_imgproc246d.lib</span><br><span class="line">	opencv_photo246d.lib</span><br></pre></td></tr></table></figure>
+<ul>
+<li><img src="/2019/02/20/Kinect%20in%20Win/OpencvVsLink.PNG">
+</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">" **切换 Release  x64 下面进行配置**"</span></span><br><span class="line">Link :</span><br><span class="line">	opencv_core246<span class="selector-class">.lib</span>			<span class="comment">// lib 库下面 opencv_xxx  : 代表的是Release版本使用的库</span></span><br><span class="line">	opencv_highgui246.lib</span><br><span class="line">	opencv_video246.lib</span><br><span class="line">	opencv_imgproc246.lib</span><br><span class="line">	opencv_photo246.lib</span><br></pre></td></tr></table></figure>
+<ul>
+<li><img src="/2019/02/20/Kinect%20in%20Win/OpencvVsLinkR.PNG">
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="安装QT"><a href="#安装QT" class="headerlink" title="安装QT"></a>安装QT</h2><h3 id="QT-的安装"><a href="#QT-的安装" class="headerlink" title="QT 的安装"></a>QT 的安装</h3><ol>
+<li><p><a href="https://blog.csdn.net/gaojixu/article/details/82185694" target="_blank" rel="noopener">安装方式</a></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">Notes:</span></span><br><span class="line">	QT组件的选取：</span><br><span class="line">	MSVC <span class="number">2017</span> <span class="number">64</span>-<span class="string">bit  :</span> VS2017 的QT编译器</span><br><span class="line">	MinGW <span class="number">5.3</span><span class="number">.0</span> <span class="number">32</span> <span class="string">bit :</span> gcc 的编译器吧</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="QT-with-VS2017"><a href="#QT-with-VS2017" class="headerlink" title="QT with VS2017"></a>QT with VS2017</h3><ol>
+<li><p><a href="https://blog.csdn.net/gaojixu/article/details/82185694" target="_blank" rel="noopener">配置方式</a></p>
+</li>
+<li><p>Notes</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">VS 属性 -- 链接器 -- 输入项 -- 附加依赖项 ：加入QT. <span class="class"><span class="keyword">lib</span></span></span><br><span class="line">如果报错再加入：</span><br><span class="line">	qtmain.<span class="keyword">lib</span></span><br><span class="line">	Qt5Core.<span class="keyword">lib</span></span><br><span class="line">	Qt5Gui.<span class="keyword">lib</span></span><br><span class="line">	Qt5Widgets.<span class="keyword">lib</span></span><br></pre></td></tr></table></figure>
+<img src="/2019/02/20/Kinect%20in%20Win/OTVsLinkDR.PNG"> 
+</li>
+</ol>
+<h2 id="代码迁移后需要改动"><a href="#代码迁移后需要改动" class="headerlink" title="代码迁移后需要改动"></a>代码迁移后需要改动</h2><h3 id="VS-的项目-–-配置属性"><a href="#VS-的项目-–-配置属性" class="headerlink" title="VS 的项目  –  配置属性"></a>VS 的项目  –  配置属性</h3><ol>
+<li><p>VC ++ 目录 ：</p>
+<ul>
+<li>下面的包含目录和库目录。</li>
+<li>注意修改迁移项目的目录链接。</li>
+<li>（之前背的工程师的SDK or opencv  放在其他的目录下）</li>
+</ul>
+</li>
+<li><p>Qt Meta-Object Complier:</p>
+<ul>
+<li><p>Include Path</p>
+<img src="/2019/02/20/Kinect%20in%20Win/QtVsInclude.PNG"> 
+</li>
+</ul>
+</li>
+<li><p>C/C++ 目录</p>
+<ul>
+<li><p>常规 – 附加包含目录：</p>
+<img src="/2019/02/20/Kinect%20in%20Win/C++Direction.PNG"> 
+</li>
+<li><p>所有选项 – 附加包含目录</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="计算机中丢失-MSVCP100D-dll"><a href="#计算机中丢失-MSVCP100D-dll" class="headerlink" title="计算机中丢失 MSVCP100D.dll"></a>计算机中丢失 MSVCP100D.dll</h3><ol>
+<li><p>代码迁移后，会报计算机中丢失 MSVCP100D.dll</p>
+</li>
+<li><p>解决方案：去对应工程师的电脑下，拷贝<strong>MSVCP100D.dll</strong></p>
+<ul>
+<li><a href="/_posts/Kinect in Win/msvcp100.zip">download</a></li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">copy</span>  xxx.dll <span class="keyword">files</span> <span class="keyword">to</span> C:\Windows\SysWOW64 </span><br><span class="line"><span class="keyword">copy</span>  xxx.dll <span class="keyword">files</span> <span class="keyword">to</span> C:\Windows\System32</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="VS2017-项目打包部署（-exe-files）"><a href="#VS2017-项目打包部署（-exe-files）" class="headerlink" title="VS2017 项目打包部署（.exe files）"></a>VS2017 项目打包部署（.exe files）</h1><ul>
+<li><a href="https://blog.csdn.net/fengxianxp/article/details/82806052" target="_blank" rel="noopener">参考链接</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kinect/" rel="tag"># kinect</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/19/SerialCommunication/" rel="next" title="SerialCommunication">
+                <i class="fa fa-chevron-left"></i> SerialCommunication
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/20/Kinect in Ubuntu/" rel="prev" title="Kinect in Ubuntu">
+                Kinect in Ubuntu <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kinect-in-Windows"><span class="nav-number">1.</span> <span class="nav-text">Kinect in Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Kinect-SDK"><span class="nav-number">1.1.</span> <span class="nav-text">安装 Kinect SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Visual-Studio"><span class="nav-number">1.2.</span> <span class="nav-text">安装 Visual Studio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VS2017"><span class="nav-number">1.2.1.</span> <span class="nav-text">VS2017</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装注意"><span class="nav-number">1.2.2.</span> <span class="nav-text">安装注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kiinect-SDK-关于-VS-的配置"><span class="nav-number">1.3.</span> <span class="nav-text">Kiinect SDK 关于 VS 的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-OpenCV"><span class="nav-number">1.4.</span> <span class="nav-text">安装 OpenCV</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Opencv-的安装"><span class="nav-number">1.4.1.</span> <span class="nav-text">Opencv 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Opencv-With-VS2017"><span class="nav-number">1.4.2.</span> <span class="nav-text">Opencv With VS2017</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装QT"><span class="nav-number">1.5.</span> <span class="nav-text">安装QT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QT-的安装"><span class="nav-number">1.5.1.</span> <span class="nav-text">QT 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QT-with-VS2017"><span class="nav-number">1.5.2.</span> <span class="nav-text">QT with VS2017</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码迁移后需要改动"><span class="nav-number">1.6.</span> <span class="nav-text">代码迁移后需要改动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VS-的项目-–-配置属性"><span class="nav-number">1.6.1.</span> <span class="nav-text">VS 的项目  –  配置属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机中丢失-MSVCP100D-dll"><span class="nav-number">1.6.2.</span> <span class="nav-text">计算机中丢失 MSVCP100D.dll</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VS2017-项目打包部署（-exe-files）"><span class="nav-number">2.</span> <span class="nav-text">VS2017 项目打包部署（.exe files）</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
