@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Kinect SDK for Windows]]></title>
+    <url>%2F2019%2F02%2F26%2FKinectSdk%2F</url>
+    <content type="text"><![CDATA[Kinect SDK for WindowsKinect Sensor 基于Kinect开发的应用程序最开始需要用到的对象就是KinectSensor对象，该对象直接表示Kinect硬件设备。 KinectSensor对象是我们想要获取数据。包括ColorImageStream，DepthlmageStream和SkeletonStream。 从KinectSensor获取数据：通过监听该对象的一系列事件。 每一个数据流以帧(frame)为单位。 每一种数据流都有对应的事件，当改类型数据流可用时，就会触发改时间。 ColorImageStream：触发ColorFrameReady事件]]></content>
+      <categories>
+        <category>Kinect</category>
+        <category>Kinect SDK</category>
+      </categories>
+      <tags>
+        <tag>kinect</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F02%2F21%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
