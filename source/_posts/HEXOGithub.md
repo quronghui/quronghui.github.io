@@ -112,7 +112,7 @@ categories: Blog
 
 1. 安装git；
 
-2. 安装Nodejs和npm；
+2. 安装Nodejs和npmwin；
 
 3. 使用`git clone -b hexo https://github.com/quronghui/quronghui.github.io.git 将仓库拷贝至本地；
 
