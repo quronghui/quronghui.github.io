@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Lucky Boy">
 <meta property="og:description" content="Kinect SDK for Windows 知识点  Kinect Sensor 基于Kinect开发的应用程序最开始需要用到的对象就是KinectSensor对象，该对象直接表示Kinect硬件设备。  KinectSensor对象是我们想要获取数据。包括ColorImageStream，DepthlmageStream和SkeletonStream。  从KinectSensor获取数据：通">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-26T10:38:27.632Z">
+<meta property="og:updated_time" content="2019-02-27T00:58:20.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kinect SDK for Windows">
 <meta name="twitter:description" content="Kinect SDK for Windows 知识点  Kinect Sensor 基于Kinect开发的应用程序最开始需要用到的对象就是KinectSensor对象，该对象直接表示Kinect硬件设备。  KinectSensor对象是我们想要获取数据。包括ColorImageStream，DepthlmageStream和SkeletonStream。  从KinectSensor获取数据：通">
@@ -399,12 +399,24 @@
                 
               
 
-              <time title="Post created: 2019-02-26 16:21:04 / Updated at: 18:38:27" itemprop="dateCreated datePublished" datetime="2019-02-26T16:21:04+08:00">2019-02-26</time>
+              <time title="Post created: 2019-02-26 16:21:04" itemprop="dateCreated datePublished" datetime="2019-02-26T16:21:04+08:00">2019-02-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-02-27 08:58:20" itemprop="dateModified" datetime="2019-02-27T08:58:20+08:00">2019-02-27</time>
               
             
           </span>
@@ -502,9 +514,24 @@
 <li><p>从KinectSensor获取数据：通过监听该对象的一<a href="http://www.hqew.com/tech/led/200010410003/27268.html" target="_blank" rel="noopener"><strong>系列</strong></a>事件。</p>
 <ul>
 <li>每一个数据流以帧(frame)为单位。</li>
-<li><p>每一种数据流都有对应的事件，当改类型数据流可用时，就会触发改时间。</p>
+<li>每一种数据流都有对应的事件，当改类型数据流可用时，就会触发改时间。</li>
+<li>ColorImageStream：触发ColorFrameReady事件</li>
+</ul>
 </li>
-<li><p>ColorImageStream：触发ColorFrameReady事件</p>
+<li><p>KinectSensor数据流形式</p>
+<ul>
+<li><p>每一种数据流(Color,Depth,Skeleton)都是以数据点的方式，在不同的坐标系中显示的</p>
+</li>
+<li><p>inectSensor对象有一些列的方法能够进行数据流到数据点阵的转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MapDepthToColorImagePoint；</span><br><span class="line">MapDepthToSkeletonPoint；</span><br><span class="line">MapSkeletonPointToDepth</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Kinect 设备连接检测</p>
+<ul>
+<li><p>通过SDK探测有无Kinect连接</p>
+</li>
+<li><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（<span class="number">1</span>）KinectSeneor对象有一个静态的属性KinectSensors</span><br><span class="line">（<span class="number">2</span>）该属性是一个KinectSensorCollection集合，该集合继承自ReadOnlyCollection</span><br><span class="line">（<span class="number">3</span>）ReadOnlyCollection集合很简单，他只有一个索引器和一个称之为StatusChanged的事件</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
