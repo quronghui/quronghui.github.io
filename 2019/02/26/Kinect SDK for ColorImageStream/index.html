@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Kinect SDK for ColorImageStream 网上的知识点 通过安装的SDK包，看相应的代码 下面介绍如何发现以及初始化Kinect传感器，从Kinect的影像摄像头获取图片。  Kinect Sensor 基于Kinect开发的应用程序最开始需要用到的对象就是KinectSensor对象，该对象直接表示Kinect硬件设备。  KinectSensor对象是我们想要获取数据。包">
+<meta name="keywords" content="kinect">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kinect SDK for ColorImageStream">
+<meta property="og:url" content="http://yoursite.com/2019/02/26/Kinect SDK for ColorImageStream/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="Kinect SDK for ColorImageStream 网上的知识点 通过安装的SDK包，看相应的代码 下面介绍如何发现以及初始化Kinect传感器，从Kinect的影像摄像头获取图片。  Kinect Sensor 基于Kinect开发的应用程序最开始需要用到的对象就是KinectSensor对象，该对象直接表示Kinect硬件设备。  KinectSensor对象是我们想要获取数据。包">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-27T12:13:54.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kinect SDK for ColorImageStream">
+<meta name="twitter:description" content="Kinect SDK for ColorImageStream 网上的知识点 通过安装的SDK包，看相应的代码 下面介绍如何发现以及初始化Kinect传感器，从Kinect的影像摄像头获取图片。  Kinect Sensor 基于Kinect开发的应用程序最开始需要用到的对象就是KinectSensor对象，该对象直接表示Kinect硬件设备。  KinectSensor对象是我们想要获取数据。包">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/26/Kinect SDK for ColorImageStream/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Kinect SDK for ColorImageStream | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/Kinect SDK for ColorImageStream/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kinect SDK for ColorImageStream
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-26 16:21:04" itemprop="dateCreated datePublished" datetime="2019-02-26T16:21:04+08:00">2019-02-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-02-27 20:13:54" itemprop="dateModified" datetime="2019-02-27T20:13:54+08:00">2019-02-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kinect-SDK/" itemprop="url" rel="index"><span itemprop="name">Kinect SDK</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kinect/" itemprop="url" rel="index"><span itemprop="name">Kinect</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Kinect-SDK-for-ColorImageStream"><a href="#Kinect-SDK-for-ColorImageStream" class="headerlink" title="Kinect SDK for ColorImageStream"></a>Kinect SDK for ColorImageStream</h1><ul>
+<li><a href="https://blog.csdn.net/cz19800823" target="_blank" rel="noopener">网上的知识点</a></li>
+<li>通过安装的SDK包，看相应的代码</li>
+<li>下面介绍如何<strong>发现以及初始化</strong>Kinect<a href="http://www.hqew.com/tech/cgq/200010150017/17350.html" target="_blank" rel="noopener"><strong>传感器</strong></a>，从Kinect的影像摄像头<strong>获取图片</strong>。</li>
+</ul>
+<h2 id="Kinect-Sensor"><a href="#Kinect-Sensor" class="headerlink" title="Kinect Sensor"></a>Kinect Sensor</h2><ol>
+<li><p>基于Kinect开发的应用程序最开始需要用到的对象就是KinectSensor对象，该对象直接表示Kinect硬件设备。</p>
+</li>
+<li><p>KinectSensor对象是我们想要获取数据。包括ColorImageStream，DepthlmageStream和SkeletonStream。</p>
+</li>
+<li><p>从KinectSensor获取数据：通过监听该对象的一<a href="http://www.hqew.com/tech/led/200010410003/27268.html" target="_blank" rel="noopener"><strong>系列</strong></a>事件。</p>
+<ul>
+<li>每一个数据流以帧(frame)为单位。</li>
+<li>每一种数据流都有对应的事件，当改类型数据流可用时，就会触发改时间。</li>
+<li>ColorImageStream：触发ColorFrameReady事件</li>
+</ul>
+</li>
+<li><p>KinectSensor数据流形式</p>
+<ul>
+<li><p>每一种数据流(Color,Depth,Skeleton)都是以数据点的方式，在不同的坐标系中显示的</p>
+</li>
+<li><p>inectSensor对象有一些列的方法能够进行数据流到数据点阵的转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MapDepthToColorImagePoint；</span><br><span class="line">MapDepthToSkeletonPoint；</span><br><span class="line">MapSkeletonPointToDepth</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Kinect-设备的发现和引用"><a href="#Kinect-设备的发现和引用" class="headerlink" title="Kinect 设备的发现和引用"></a>Kinect 设备的发现和引用</h3><ol>
+<li><p>通过SDK探测有无Kinect连接</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（<span class="number">1</span>）KinectSeneor对象有一个静态的属性KinectSensors</span><br><span class="line">（<span class="number">2</span>）该属性是一个KinectSensorCollection集合，该集合继承自ReadOnlyCollection</span><br><span class="line">（<span class="number">3</span>）ReadOnlyCollection集合很简单，他只有一个索引器和一个称之为StatusChanged的事件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Kinect 的初始化</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">When</span> <span class="string">:</span> <span class="string">Connect</span> <span class="meta">---</span> <span class="string">才进行赋值操作</span> </span><br><span class="line">	   <span class="string">not</span> <span class="string">connect</span>  <span class="meta">---</span> <span class="string">KinectSensor对象抛出InvalidOperationException异常</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Load and Unload 事件</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">（1）窗口的Loaded事件中程序通过DiscoverKinectSensor方法试图调用一个连接了的传感器</span><br><span class="line">（2）窗体的Loaded和Unloaded事件中注册这两个事件用来初始化和释放Kinect对象</span><br><span class="line">note :</span><br><span class="line">	 DiscoverKinectSensor方法只有两行代码，第一行代码注册StatusChanged事件，第二行代码通过lambda表达式查询集合中第一个处在Connected状态的传感器对象，并将该对象复制给Kinect属性。Kinect属性的set方法确保能都赋值一个合法的Kinect对象。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>StatusChanged事件: </p>
+<ul>
+<li>当状态为KinectSensor.Connected的时候，if 语句限制了应用程序只能有一个kinect传感器，他忽略了电脑中可能连接的其他Kinect传感器。</li>
+</ul>
+</li>
+<li><p><strong>以上代码展示了用于发现和引用Kinect设备的最精简的代码。</strong></p>
+</li>
+</ol>
+<h3 id="Kinect-Sensor-的打开和关闭"><a href="#Kinect-Sensor-的打开和关闭" class="headerlink" title="Kinect Sensor 的打开和关闭"></a>Kinect Sensor 的打开和关闭</h3><ol>
+<li><p>Connect 初始化传感器</p>
+<ul>
+<li><p>Enable  数据流 ：Color,Depth,Skeleton</p>
+</li>
+<li><p>数据流使用：使用Kinect对象的一些列事件</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ColorImageStream  <span class="comment">----  ColorFrameReady 事件</span></span><br><span class="line">DepthImageStream  <span class="comment">----  DepthFrameReady事件</span></span><br><span class="line">SkeletonStream    <span class="comment">----  SkeletonFrameReady事件</span></span><br><span class="line">	AllFramesReady 事件在任何一个数据流状态enabled时就能使用</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用程序调用KinectSensor对象的Start方法</p>
+<ul>
+<li>frame-ready事件就会触发从而产生数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Stop Kinect</p>
+<ul>
+<li><p>先检测Kinect sensor 是否为空；然后监听frameready事件</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Using</span> KinectSensor对象的 : <span class="keyword">Stop</span> ways</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用程序在不需要使用KinectSensor对象时，释放这些资源</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">Stop</span> ways </span><br><span class="line">注销frameready事件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Notes</p>
+<ul>
+<li>(1)不要去调用KinectSensor对象的Dispose方法。这将会阻止应用程序再次获取传感器。</li>
+<li>(2)应用程序必须从启或者将Kinect从新拔出然后插入才能再次获得并使用对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="ColorImageStream-的获取"><a href="#ColorImageStream-的获取" class="headerlink" title="ColorImageStream 的获取"></a>ColorImageStream 的获取</h2><ol>
+<li><p>初始化和释放KinectSensor和ColorImageStream对象</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">value</span>!=<span class="literal">null</span>&amp;&amp;<span class="keyword">value</span>.Status==KinectStatus.Connected)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">this</span>.kinect=<span class="keyword">value</span>;</span><br><span class="line">    InitializeKinectSensor(<span class="keyword">this</span>.kinect);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>InitializeKinectSensor对象 ：调用ColorImageStream的Enable方法，注册ColorFrameReady事件并调用start方法。</p>
+<ul>
+<li>一旦打开了传感器，当新数据帧大道是就会触发frameready事件，该事件触发频率是每秒30次。</li>
+</ul>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (kinectSensor != <span class="built_in">null</span>)</span><br><span class="line">   &#123;</span><br><span class="line">       kinectSensor.ColorStream.<span class="keyword">Enable</span>();</span><br><span class="line">       kinectSensor.ColorFrameReady += <span class="keyword">new</span> EventHandler&lt;ColorImageFrameReadyEventArgs&gt;				(kinectSensor_ColorFrameReady);</span><br><span class="line">       kinectSensor.Start();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数据显示</p>
+<ol>
+<li>）ColorFrameReady方法中：打开或者获取一个frame来提取获Frame数据。</li>
+<li>）ColorImageFrameReadyEventArgs对象中的OpenColorImageFrame属性：返回一个当前的ColorImageFrame对象。</li>
+<li>）ColorImageFrame对象：提取像素数据之前需要使用一个Byte数组保存获取到的数据。</li>
+<li>）FrameObject对象的PixelDataLength对象返回数据和序列的具体大小。</li>
+<li>）调用CopyPixelDataTo方法可以填充像素数据，然后将数据展示到image控件上。</li>
+</ol>
+</li>
+</ol>
+<h2 id="图像数据获取方式的改进"><a href="#图像数据获取方式的改进" class="headerlink" title="图像数据获取方式的改进"></a>图像数据获取方式的改进</h2><ul>
+<li><a href="https://blog.csdn.net/cz19800823/article/details/11639625" target="_blank" rel="noopener">知识参考</a></li>
+</ul>
+<h3 id="WriteableBitmap对象"><a href="#WriteableBitmap对象" class="headerlink" title="WriteableBitmap对象"></a>WriteableBitmap对象</h3><ol>
+<li>它位于System.Windows.Media.Imaging命名空间下面，该对象被用来处理需要频繁更新的像素数据。（之前是更新30幅图像 / 每秒）</li>
+<li>创建WriteableBitmap时，应用程序需要指定它的高度，宽度以及格式，以使得能够一次性为WriteableBitmap创建好内存，以后只需根据需要更新像素即可。</li>
+</ol>
+<h3 id="图像的处理"><a href="#图像的处理" class="headerlink" title="图像的处理"></a>图像的处理</h3><ol>
+<li>每一帧ColorImageFrame都是以字节序列的方式返回原始的像素数据：对这些原始数据进行一定的处理，然后再展示出来。</li>
+<li>for循环遍历每个像素，由于数据的格式是Bgr32，即RGB32位(一个像素共占4个字节，每个字节8位)，所以第一个字节是蓝色通道，第二个是绿色，第三个是红色。</li>
+<li>循环体类，将第一个和第二个通道设置为0.所以输出的代码中只用红色通道的信息。这是最基本的图像处理。</li>
+</ol>
+<h3 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h3><ol>
+<li>可能需要从彩色摄像头中截取一幅图像，例如可能要从摄像头中获取图像来设置人物头像。为了实现这一功能，首先需要在界面上设置一个按钮。</li>
+</ol>
+<h2 id="图片数据格式介绍"><a href="#图片数据格式介绍" class="headerlink" title="图片数据格式介绍"></a>图片数据格式介绍</h2><ol>
+<li>ImageStream是ColorImageStream的基类。因此ColorImageStream集成了4个描述每一帧每一个像素数据的属性。在之前的代码中，我们使用这些属性创建了一个WriteableBitmap对象。这些属性与ColorImageFormat的设置有关。</li>
+<li>ImageStream中除了这些属性外还有一个IsEnabled属性和Disable方法。IsEnabled属性是一个只读的。当Stream打开时返回true，当调用了Disabled方法后就返回false了。Disable方法关闭Stream流，之后数据帧的产生就会停止，ColorFrameReady事件的触发也会停止。</li>
+<li>当ColorImageStream设置为可用状态后，就能产生ColorImageFrame对象。ColorImageFrame对象很简单。他有一个Format方法，他是父类的ColorImageFormat值。他只有一个CopyPixelDataTo方法，能够将图像的像素数据拷贝到指定的byte数组中，只读的PixelDataLength属性定义了数组的大小PixelDataLength属性通过对象的宽度，高度以及每像素多少位属性来获得的。这些属性都继承自ImageFrame抽象类。</li>
+<li>数据流的格式决定了像素的格式，如果数据流是以ColorImageFormat.RgbResolution640<em>480<a href="http://www.hqew.com/tech/qtdz/200010160031/1305015.html" target="_blank" rel="noopener"><strong>Fps</strong></a>30格式初始化的，那么像素的格式就是Bgr32，它表示每一个像素占32位(4个字节)，第一个字节表示蓝色通道值，第二个表示绿色，第三个表示红色。第四个待用。当像素的格式是Bgra32时，第四个字节表示像素的<a href="http://www.hqew.com/tech/gdz/200010250015/90000.html" target="_blank" rel="noopener"><strong>alpha</strong></a>或者透明度值。如果一个图像的大小是640</em>480，那么对于的字节数组有122880个字节(width<em>height</em>BytesPerPixel=640<em>480</em>4).在处理影像时有时候也会用到Stride这一术语，他表示影像中一行的像素所占的字节数，可以通过图像的宽度乘以每一个像素所占字节数得到。</li>
+</ol>
+<h2 id="ImageStream-数据获取的方式"><a href="#ImageStream-数据获取的方式" class="headerlink" title="ImageStream 数据获取的方式"></a>ImageStream 数据获取的方式</h2><h3 id="事件模式"><a href="#事件模式" class="headerlink" title="事件模式"></a>事件模式</h3><ol>
+<li>目前为止我们都是使用KinectSensor对象的事件来获取数据的。事件在WPF（为不同用户界面提供统一的显示系统（ Windows Presentation Foundation））中应用很广泛，在数据或者状态发生变化时，事件机制能够通知应用程序。</li>
+</ol>
+<h3 id="“拉”模式"><a href="#“拉”模式" class="headerlink" title="“拉”模式"></a>“拉”模式</h3><ol>
+<li>采用拉模式获取数据的性能应该好于事件模式。</li>
+<li>唯一不能使用事件模型获取数据的情况是在编写非WPF平台的应用程序的时候。比如，当编写XNA或者其他的采用拉模式架构的应用程序。建议在编写基于WPF平台的Kinect应用程序时采用事件模式来获取数据。只有在极端注重性能的情况下才考虑使用“拉”的方式。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kinect/" rel="tag"># kinect</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/20/Kinect in Ubuntu/" rel="next" title="Kinect in Ubuntu">
+                <i class="fa fa-chevron-left"></i> Kinect in Ubuntu
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/26/ApplicationForUbuntu/" rel="prev" title="Application For Ubuntu">
+                Application For Ubuntu <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kinect-SDK-for-ColorImageStream"><span class="nav-number">1.</span> <span class="nav-text">Kinect SDK for ColorImageStream</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kinect-Sensor"><span class="nav-number">1.1.</span> <span class="nav-text">Kinect Sensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kinect-设备的发现和引用"><span class="nav-number">1.1.1.</span> <span class="nav-text">Kinect 设备的发现和引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kinect-Sensor-的打开和关闭"><span class="nav-number">1.1.2.</span> <span class="nav-text">Kinect Sensor 的打开和关闭</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ColorImageStream-的获取"><span class="nav-number">1.2.</span> <span class="nav-text">ColorImageStream 的获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像数据获取方式的改进"><span class="nav-number">1.3.</span> <span class="nav-text">图像数据获取方式的改进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WriteableBitmap对象"><span class="nav-number">1.3.1.</span> <span class="nav-text">WriteableBitmap对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图像的处理"><span class="nav-number">1.3.2.</span> <span class="nav-text">图像的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#截图"><span class="nav-number">1.3.3.</span> <span class="nav-text">截图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片数据格式介绍"><span class="nav-number">1.4.</span> <span class="nav-text">图片数据格式介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ImageStream-数据获取的方式"><span class="nav-number">1.5.</span> <span class="nav-text">ImageStream 数据获取的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件模式"><span class="nav-number">1.5.1.</span> <span class="nav-text">事件模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#“拉”模式"><span class="nav-number">1.5.2.</span> <span class="nav-text">“拉”模式</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

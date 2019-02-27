@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Struct]]></title>
+    <url>%2F2019%2F02%2F27%2FStruct%2F</url>
+    <content type="text"><![CDATA[Code link Struct 学习一门语言要注意的三点 本节将以结构体为例来讲解数据类型的组合和抽象。 结构体 代码链接 结构体定义 过程抽象：将一组语句通过函数名封装，当做整体调用 结构体 12345结构体：complex_struct不表示变量，而是表示类型,类似于int的符合类型 struct complex_struct &#123; double x, y; /* data */ &#125;z; 结构体的变量使用 12345678910结构体变量的初始化和使用（1）Ways1 double x = 3.0; // 不等同于Tag的z.x； z.x = x; // 变量访问成员，通过z.x z.y = 4.0; (2) Ways:定义的时候直接初始化 struct complex_struct z = &#123; 3.0, 4.0 &#125;; (3)错误的初始化 struct complex_struct z1; z1 = &#123; 3.0, 4.0 &#125;; 结构体当做函数的参数使用 123456789103. 项目描述：将结构体当做函数的参数和返回值来传递（1）结构体当做函数的参数，比如 int main,中的int(2) struct complex_struct 当做函数 add_complex的参数struct complex_struct add_complex(struct complex_struct z1, struct complex_struct z2)&#123; z1.x = z1.x + z2.x; z1.y = z1.y + z2.y; return z1; &#125; Data Abstraction (数据抽象)]]></content>
+      <categories>
+        <category>LinuxC</category>
+        <category>Emededded</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F02%2F27%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Kinect SDK for DepthImageStream]]></title>
+    <url>%2F2019%2F02%2F27%2FKinectSDKDepthImageStream%2F</url>
+    <content type="text"><![CDATA[Kinect SDK for DepthImageStream 网上的知识点](https://blog.csdn.net/cz19800823) 通过安装的SDK包，看相应的代码]]></content>
+      <categories>
+        <category>Kinect SDK</category>
+        <category>Kinect</category>
+        <category>c++</category>
+      </categories>
+      <tags>
+        <tag>kinect</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Kinect Sensor]]></title>
+    <url>%2F2019%2F02%2F27%2FKinectSensor%2F</url>
+    <content type="text"><![CDATA[Kinect Sensor 网上的知识点 Kinect 设备的硬件介绍 Kinect设备 基座和感应器之间有一个电动的马达，通过程序能够调整俯仰角度; 在上面的感应器中有一个红外投影仪，两个摄像头，四个麦克风和一个风扇。、 最左边是红外光源，其次是LED指示灯 中间的是彩色摄像头，用来收集RGB数据 最右边是红外摄像头用才采集景深数据 成像大小 彩色摄像头最大支持1280*960分辨率成像 红外摄像头最大支持640*480成像 麦克风阵列 一个在左边的红外发射器下面， 3个在右边景深摄像头下面 Kinect in windows 环境的搭建方式。 kinect in windows]]></content>
+      <categories>
+        <category>Kinect</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Application For Ubuntu]]></title>
     <url>%2F2019%2F02%2F26%2FApplicationForUbuntu%2F</url>
     <content type="text"><![CDATA[Application For UbuntuVS code1234sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-makesudo apt-get updatesudo apt-get install ubuntu-makesudo umake ide visual-studio-code PDF阅读器Okular1$ sudo apt-get install okular Typora1234sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAEsudo add-apt-repository 'deb http://typora.io linux/'sudo apt-get updatesudo apt-get install typora Sougou link 12Download : http://pinyin.sogou.com/linux/ sudo dpkg -i sogoupinyin_2.1.0.0082_amd64.deb]]></content>
@@ -12,28 +54,13 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F02%2F26%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Kinect SDK for Windows]]></title>
-    <url>%2F2019%2F02%2F26%2FKinectSdk%2F</url>
-    <content type="text"><![CDATA[Kinect SDK for Windows 知识点 Kinect Sensor 基于Kinect开发的应用程序最开始需要用到的对象就是KinectSensor对象，该对象直接表示Kinect硬件设备。 KinectSensor对象是我们想要获取数据。包括ColorImageStream，DepthlmageStream和SkeletonStream。 从KinectSensor获取数据：通过监听该对象的一系列事件。 每一个数据流以帧(frame)为单位。 每一种数据流都有对应的事件，当改类型数据流可用时，就会触发改时间。 ColorImageStream：触发ColorFrameReady事件 KinectSensor数据流形式 每一种数据流(Color,Depth,Skeleton)都是以数据点的方式，在不同的坐标系中显示的 inectSensor对象有一些列的方法能够进行数据流到数据点阵的转换 123MapDepthToColorImagePoint；MapDepthToSkeletonPoint；MapSkeletonPointToDepth Kinect 设备连接检测 通过SDK探测有无Kinect连接 123（1）KinectSeneor对象有一个静态的属性KinectSensors（2）该属性是一个KinectSensorCollection集合，该集合继承自ReadOnlyCollection（3）ReadOnlyCollection集合很简单，他只有一个索引器和一个称之为StatusChanged的事件]]></content>
+    <title><![CDATA[Kinect SDK for ColorImageStream]]></title>
+    <url>%2F2019%2F02%2F26%2FKinect%20SDK%20for%20ColorImageStream%2F</url>
+    <content type="text"><![CDATA[Kinect SDK for ColorImageStream 网上的知识点 通过安装的SDK包，看相应的代码 下面介绍如何发现以及初始化Kinect传感器，从Kinect的影像摄像头获取图片。 Kinect Sensor 基于Kinect开发的应用程序最开始需要用到的对象就是KinectSensor对象，该对象直接表示Kinect硬件设备。 KinectSensor对象是我们想要获取数据。包括ColorImageStream，DepthlmageStream和SkeletonStream。 从KinectSensor获取数据：通过监听该对象的一系列事件。 每一个数据流以帧(frame)为单位。 每一种数据流都有对应的事件，当改类型数据流可用时，就会触发改时间。 ColorImageStream：触发ColorFrameReady事件 KinectSensor数据流形式 每一种数据流(Color,Depth,Skeleton)都是以数据点的方式，在不同的坐标系中显示的 inectSensor对象有一些列的方法能够进行数据流到数据点阵的转换 123MapDepthToColorImagePoint；MapDepthToSkeletonPoint；MapSkeletonPointToDepth Kinect 设备的发现和引用 通过SDK探测有无Kinect连接 123（1）KinectSeneor对象有一个静态的属性KinectSensors（2）该属性是一个KinectSensorCollection集合，该集合继承自ReadOnlyCollection（3）ReadOnlyCollection集合很简单，他只有一个索引器和一个称之为StatusChanged的事件 Kinect 的初始化 12When : Connect --- 才进行赋值操作 not connect --- KinectSensor对象抛出InvalidOperationException异常 Load and Unload 事件 1234（1）窗口的Loaded事件中程序通过DiscoverKinectSensor方法试图调用一个连接了的传感器（2）窗体的Loaded和Unloaded事件中注册这两个事件用来初始化和释放Kinect对象note : DiscoverKinectSensor方法只有两行代码，第一行代码注册StatusChanged事件，第二行代码通过lambda表达式查询集合中第一个处在Connected状态的传感器对象，并将该对象复制给Kinect属性。Kinect属性的set方法确保能都赋值一个合法的Kinect对象。 StatusChanged事件: 当状态为KinectSensor.Connected的时候，if 语句限制了应用程序只能有一个kinect传感器，他忽略了电脑中可能连接的其他Kinect传感器。 以上代码展示了用于发现和引用Kinect设备的最精简的代码。 Kinect Sensor 的打开和关闭 Connect 初始化传感器 Enable 数据流 ：Color,Depth,Skeleton 数据流使用：使用Kinect对象的一些列事件 1234ColorImageStream ---- ColorFrameReady 事件DepthImageStream ---- DepthFrameReady事件SkeletonStream ---- SkeletonFrameReady事件 AllFramesReady 事件在任何一个数据流状态enabled时就能使用 应用程序调用KinectSensor对象的Start方法 frame-ready事件就会触发从而产生数据 Stop Kinect 先检测Kinect sensor 是否为空；然后监听frameready事件 1Using KinectSensor对象的 : Stop ways 应用程序在不需要使用KinectSensor对象时，释放这些资源 12Stop ways 注销frameready事件 Notes (1)不要去调用KinectSensor对象的Dispose方法。这将会阻止应用程序再次获取传感器。 (2)应用程序必须从启或者将Kinect从新拔出然后插入才能再次获得并使用对象 ColorImageStream 的获取 初始化和释放KinectSensor和ColorImageStream对象 12345if (value!=null&amp;&amp;value.Status==KinectStatus.Connected)&#123; this.kinect=value; InitializeKinectSensor(this.kinect);&#125; InitializeKinectSensor对象 ：调用ColorImageStream的Enable方法，注册ColorFrameReady事件并调用start方法。 一旦打开了传感器，当新数据帧大道是就会触发frameready事件，该事件触发频率是每秒30次。 123456if (kinectSensor != null) &#123; kinectSensor.ColorStream.Enable(); kinectSensor.ColorFrameReady += new EventHandler&lt;ColorImageFrameReadyEventArgs&gt; (kinectSensor_ColorFrameReady); kinectSensor.Start(); &#125; 数据显示 ）ColorFrameReady方法中：打开或者获取一个frame来提取获Frame数据。 ）ColorImageFrameReadyEventArgs对象中的OpenColorImageFrame属性：返回一个当前的ColorImageFrame对象。 ）ColorImageFrame对象：提取像素数据之前需要使用一个Byte数组保存获取到的数据。 ）FrameObject对象的PixelDataLength对象返回数据和序列的具体大小。 ）调用CopyPixelDataTo方法可以填充像素数据，然后将数据展示到image控件上。 图像数据获取方式的改进 知识参考 WriteableBitmap对象 它位于System.Windows.Media.Imaging命名空间下面，该对象被用来处理需要频繁更新的像素数据。（之前是更新30幅图像 / 每秒） 创建WriteableBitmap时，应用程序需要指定它的高度，宽度以及格式，以使得能够一次性为WriteableBitmap创建好内存，以后只需根据需要更新像素即可。 图像的处理 每一帧ColorImageFrame都是以字节序列的方式返回原始的像素数据：对这些原始数据进行一定的处理，然后再展示出来。 for循环遍历每个像素，由于数据的格式是Bgr32，即RGB32位(一个像素共占4个字节，每个字节8位)，所以第一个字节是蓝色通道，第二个是绿色，第三个是红色。 循环体类，将第一个和第二个通道设置为0.所以输出的代码中只用红色通道的信息。这是最基本的图像处理。 截图 可能需要从彩色摄像头中截取一幅图像，例如可能要从摄像头中获取图像来设置人物头像。为了实现这一功能，首先需要在界面上设置一个按钮。 图片数据格式介绍 ImageStream是ColorImageStream的基类。因此ColorImageStream集成了4个描述每一帧每一个像素数据的属性。在之前的代码中，我们使用这些属性创建了一个WriteableBitmap对象。这些属性与ColorImageFormat的设置有关。 ImageStream中除了这些属性外还有一个IsEnabled属性和Disable方法。IsEnabled属性是一个只读的。当Stream打开时返回true，当调用了Disabled方法后就返回false了。Disable方法关闭Stream流，之后数据帧的产生就会停止，ColorFrameReady事件的触发也会停止。 当ColorImageStream设置为可用状态后，就能产生ColorImageFrame对象。ColorImageFrame对象很简单。他有一个Format方法，他是父类的ColorImageFormat值。他只有一个CopyPixelDataTo方法，能够将图像的像素数据拷贝到指定的byte数组中，只读的PixelDataLength属性定义了数组的大小PixelDataLength属性通过对象的宽度，高度以及每像素多少位属性来获得的。这些属性都继承自ImageFrame抽象类。 数据流的格式决定了像素的格式，如果数据流是以ColorImageFormat.RgbResolution640480Fps30格式初始化的，那么像素的格式就是Bgr32，它表示每一个像素占32位(4个字节)，第一个字节表示蓝色通道值，第二个表示绿色，第三个表示红色。第四个待用。当像素的格式是Bgra32时，第四个字节表示像素的alpha或者透明度值。如果一个图像的大小是640480，那么对于的字节数组有122880个字节(widthheightBytesPerPixel=6404804).在处理影像时有时候也会用到Stride这一术语，他表示影像中一行的像素所占的字节数，可以通过图像的宽度乘以每一个像素所占字节数得到。 ImageStream 数据获取的方式事件模式 目前为止我们都是使用KinectSensor对象的事件来获取数据的。事件在WPF（为不同用户界面提供统一的显示系统（ Windows Presentation Foundation））中应用很广泛，在数据或者状态发生变化时，事件机制能够通知应用程序。 “拉”模式 采用拉模式获取数据的性能应该好于事件模式。 唯一不能使用事件模型获取数据的情况是在编写非WPF平台的应用程序的时候。比如，当编写XNA或者其他的采用拉模式架构的应用程序。建议在编写基于WPF平台的Kinect应用程序时采用事件模式来获取数据。只有在极端注重性能的情况下才考虑使用“拉”的方式。]]></content>
       <categories>
-        <category>Kinect</category>
         <category>Kinect SDK</category>
-      </categories>
-      <tags>
-        <tag>kinect</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Kinect in Windows]]></title>
-    <url>%2F2019%2F02%2F20%2FKinect%20in%20Win%2F</url>
-    <content type="text"><![CDATA[[TOC] Kinect in Windows Kinect in Windows 开发指南 kinect + opencv + vs 环境配置 安装 Kinect SDK Bug 首次安装KinectSDK-v1.8-Setup 连上kinect后，打开一次后，第二次打开提示 “ No kinet to connect ” 重新卸载后，安装KinectSDK-v1.7-Setup，成功 在官方网站下载Kinect for Windows SDK和Developer Toolkit： 参考教程 KinectSDK-v1.7-Setup.exe KinectDeveloperToolkit-v1.7.0-Setup.exe 安装成功后，连上kinect, 设备管理器出现 “ Kinect for windows ” 通过kinect tools 测试 XBox的好坏 安装 Visual StudioVS2017 安装教程 Download Visual Studio Community免费版 选择工作负载这里仅勾选”使用C++的桌面开发”，单个组件和语音包使用默认 按照需要选择要安装的模块（但是我下载后没有已安装的选项） VS2017的文件目录 C:\Users\quronghui\source\repos 安装注意 直接安装VS2017，并且卸载完之前安装的VS2015版本（如果可以的话直接升级） 我的是因为之前安装的VS2015 ios镜像不成功，卸载不完全，导致的系统重装. Mircosoft 的软件安装的时候，不要中途暂停，不然容易造成卸载不了的问题 解决方案 重装系统后，直接安装VS2017，这样就不会报错了 因该是以前装VS其他版本没有卸载干净，导致的后果 Kiinect SDK 关于 VS 的配置 Kiinect SDK 关于 VS 的配置 使用VS进行开发的话，需要配置include和lib路径 进入VS，右键-项目属性，Debug + x64，选择VC++Directories: 1234Debug and Release 都要添加 Include files : add C:\Program Files\Microsoft SDKs\Kinect\v1.7\inc； Library files : add C:\Program Files\Microsoft SDKs\Kinect\v1.7\lib\x64； 链接器 : add Kinect10.lib C:\Program Files\MicrosoftSDKs\Kinect\v1.6\inc 目录下有： 1234- NuiApi.h ---包含所有的NUI(自然用户界面) API头文件和定义基本的初始化和函数访问入口。这是我们C++工程的主要头文件，它已经包含了NuiImageCamera.h 和 NuiSkeleton.h。- NuiImageCamera.h ---定义了图像和摄像头服务的API，包括调整摄像头的角度和仰角，打开数据流和读取数据流等。- NuiSkeleton.h ---骨架有关的API，包括使能骨架跟踪，获取骨架数据，骨架数据转换和平滑渲染等。- NuiSensor.h ---音频API，包括ISoundSourceLocalizer接口，用于返回声源的方向（波束形成）和音频的位置。 安装 OpenCV 本次安装的opencv，是为了迁移上一个工程师的代码，所以opencv的版本需要一致才能编译成功。 opencv 2.4.6.0，vc10 提取码：f3pz Opencv 的安装和配置教程 Opencv 的安装 我是直接复制工程师的 opencv 解压包，只是进行依赖链接的配置。 环境变量 Opencv Start Dll 文件的复制 dll 文件都在安装的opencv的 bin 目录下 12copy : opencv_ffmpeg .dll to C:\Windows\System32copy : opencv_other .dll to C:\Windows\SysWOW64 Opencv With VS2017 VS 属性中（ Include Direction）: 12345Include Direction： C:\Software\opencv\opencv\includeC:\Software\opencv\opencv\build\include\opencvC:\Software\opencv\opencv\build\include\opencv2C:\Software\opencv\freetype\include // 为了在opencv里面检测的图片上加上字 VS 属性里面的 库目录 12Library Direction: C:\Software\opencv\opencv\build\x64\vc10\lib VS 属性 – 链接器 – 输入项 – 附加依赖项 1234567" **在 Debug x64 下面进行配置**"Link : opencv_core246d.lib // lib 库下面 opencv_xxx "d" : 代表的是Debug版本使用的库 opencv_highgui246d.lib opencv_video246d.lib opencv_imgproc246d.lib opencv_photo246d.lib 1234567" **切换 Release x64 下面进行配置**"Link : opencv_core246.lib // lib 库下面 opencv_xxx : 代表的是Release版本使用的库 opencv_highgui246.lib opencv_video246.lib opencv_imgproc246.lib opencv_photo246.lib 安装QTQT 的安装 安装方式 1234Notes: QT组件的选取： MSVC 2017 64-bit : VS2017 的QT编译器 MinGW 5.3.0 32 bit : gcc 的编译器吧 QT with VS2017 配置方式 Notes 123456VS 属性 -- 链接器 -- 输入项 -- 附加依赖项 ：加入QT. lib如果报错再加入： qtmain.lib Qt5Core.lib Qt5Gui.lib Qt5Widgets.lib 代码迁移后需要改动VS 的项目 – 配置属性 VC ++ 目录 ： 下面的包含目录和库目录。 注意修改迁移项目的目录链接。 （之前背的工程师的SDK or opencv 放在其他的目录下） Qt Meta-Object Complier: Include Path C/C++ 目录 常规 – 附加包含目录： 所有选项 – 附加包含目录 计算机中丢失 MSVCP100D.dll 代码迁移后，会报计算机中丢失 MSVCP100D.dll 解决方案：去对应工程师的电脑下，拷贝MSVCP100D.dll download提取码：fkvr 12copy xxx.dll files to C:\Windows\SysWOW64 copy xxx.dll files to C:\Windows\System32 VS2017 项目打包部署（.exe files） 参考链接]]></content>
-      <categories>
         <category>Kinect</category>
+        <category>c++</category>
       </categories>
       <tags>
         <tag>kinect</tag>
@@ -43,6 +70,17 @@
     <title><![CDATA[Kinect in Ubuntu]]></title>
     <url>%2F2019%2F02%2F20%2FKinect%20in%20Ubuntu%2F</url>
     <content type="text"><![CDATA[OpenKinect Application for UbuntuOpenKinect on linux 环境搭建 OpenKinect/libfreenect libusb的安装 Download libusb &gt;= 1.0.18 安装过程 ./configure执行报错时 1./configure --build=x86_64-linux --disable-udev sudo make install Use 提示安装好了lib，目录所在。 1make[1]: 离开目录“/home/quronghui/Kinect/libusb-1.0.22” 所以我们基于libusb编程的时候，需要包含这个库 */ 编译时加上 –lusb-1.0 就是这个原因，库放在这个目录下，需要链接上。 CMake安装方法 Download : Source Distribution 或者 Binary Distribution，前者是源代码版，你需要自己编译成可执行软件。后者是已经编译好的可执行版，直接可以拿来用的。 安装教程 Python3 安装方法 参考教程 下载Python3 时候特别的慢，一直在等。 Libfreenect 安装 编译 1234567git clone https://github.com/OpenKinect/libfreenectcd libfreenectmkdir buildcd build // 在这之后的操作需要插入设备 // 尽量带sudo ,不然会少安装一些东西sudo cmake -L .. # -L lists all the project optionssudo make 更新依赖库 12sudo apt-get install git cmake build-essential libusb-1.0-0-devsudo apt-get install freeglut3-dev libxmu-dev libxi-dev 测试设备 12cd build/binsudo ./freenect-glview QTGUI for linuxKinect for WindowsKinect SDK 安装 Bug 首次安装KinectSDK-v1.8-Setup]]></content>
+      <categories>
+        <category>Kinect</category>
+      </categories>
+      <tags>
+        <tag>kinect</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Kinect in Windows]]></title>
+    <url>%2F2019%2F02%2F20%2FKinect%20in%20Win%2F</url>
+    <content type="text"><![CDATA[[TOC] Kinect in Windows Kinect in Windows 开发指南 kinect + opencv + vs 环境配置 安装 Kinect SDK Bug 首次安装KinectSDK-v1.8-Setup 连上kinect后，打开一次后，第二次打开提示 “ No kinet to connect ” 重新卸载后，安装KinectSDK-v1.7-Setup，成功 在官方网站下载Kinect for Windows SDK和Developer Toolkit： 参考教程 KinectSDK-v1.7-Setup.exe KinectDeveloperToolkit-v1.7.0-Setup.exe 安装成功后，连上kinect, 设备管理器出现 “ Kinect for windows ” 通过kinect tools 测试 XBox的好坏 安装 Visual StudioVS2017 安装教程 Download Visual Studio Community免费版 选择工作负载这里仅勾选”使用C++的桌面开发”，单个组件和语音包使用默认 按照需要选择要安装的模块（但是我下载后没有已安装的选项） VS2017的文件目录 C:\Users\quronghui\source\repos 安装注意 直接安装VS2017，并且卸载完之前安装的VS2015版本（如果可以的话直接升级） 我的是因为之前安装的VS2015 ios镜像不成功，卸载不完全，导致的系统重装. Mircosoft 的软件安装的时候，不要中途暂停，不然容易造成卸载不了的问题 解决方案 重装系统后，直接安装VS2017，这样就不会报错了 因该是以前装VS其他版本没有卸载干净，导致的后果 Kiinect SDK 关于 VS 的配置 Kiinect SDK 关于 VS 的配置 使用VS进行开发的话，需要配置include和lib路径 进入VS，右键-项目属性，Debug + x64，选择VC++Directories: 1234Debug and Release 都要添加 Include files : add C:\Program Files\Microsoft SDKs\Kinect\v1.7\inc； Library files : add C:\Program Files\Microsoft SDKs\Kinect\v1.7\lib\x64； 链接器 : add Kinect10.lib C:\Program Files\MicrosoftSDKs\Kinect\v1.6\inc 目录下有： 1234- NuiApi.h ---包含所有的NUI(自然用户界面) API头文件和定义基本的初始化和函数访问入口。这是我们C++工程的主要头文件，它已经包含了NuiImageCamera.h 和 NuiSkeleton.h。- NuiImageCamera.h ---定义了图像和摄像头服务的API，包括调整摄像头的角度和仰角，打开数据流和读取数据流等。- NuiSkeleton.h ---骨架有关的API，包括使能骨架跟踪，获取骨架数据，骨架数据转换和平滑渲染等。- NuiSensor.h ---音频API，包括ISoundSourceLocalizer接口，用于返回声源的方向（波束形成）和音频的位置。 安装 OpenCV 本次安装的opencv，是为了迁移上一个工程师的代码，所以opencv的版本需要一致才能编译成功。 opencv 2.4.6.0，vc10 提取码：f3pz Opencv 的安装和配置教程 Opencv 的安装 我是直接复制工程师的 opencv 解压包，只是进行依赖链接的配置。 环境变量 Opencv Start Dll 文件的复制 dll 文件都在安装的opencv的 bin 目录下 12copy : opencv_ffmpeg .dll to C:\Windows\System32copy : opencv_other .dll to C:\Windows\SysWOW64 Opencv With VS2017 VS 属性中（ Include Direction）: 12345Include Direction： C:\Software\opencv\opencv\includeC:\Software\opencv\opencv\build\include\opencvC:\Software\opencv\opencv\build\include\opencv2C:\Software\opencv\freetype\include // 为了在opencv里面检测的图片上加上字 VS 属性里面的 库目录 12Library Direction: C:\Software\opencv\opencv\build\x64\vc10\lib VS 属性 – 链接器 – 输入项 – 附加依赖项 1234567" **在 Debug x64 下面进行配置**"Link : opencv_core246d.lib // lib 库下面 opencv_xxx "d" : 代表的是Debug版本使用的库 opencv_highgui246d.lib opencv_video246d.lib opencv_imgproc246d.lib opencv_photo246d.lib 1234567" **切换 Release x64 下面进行配置**"Link : opencv_core246.lib // lib 库下面 opencv_xxx : 代表的是Release版本使用的库 opencv_highgui246.lib opencv_video246.lib opencv_imgproc246.lib opencv_photo246.lib 安装QTQT 的安装 安装方式 1234Notes: QT组件的选取： MSVC 2017 64-bit : VS2017 的QT编译器 MinGW 5.3.0 32 bit : gcc 的编译器吧 QT with VS2017 配置方式 Notes 123456VS 属性 -- 链接器 -- 输入项 -- 附加依赖项 ：加入QT. lib如果报错再加入： qtmain.lib Qt5Core.lib Qt5Gui.lib Qt5Widgets.lib 代码迁移后需要改动VS 的项目 – 配置属性 VC ++ 目录 ： 下面的包含目录和库目录。 注意修改迁移项目的目录链接。 （之前背的工程师的SDK or opencv 放在其他的目录下） Qt Meta-Object Complier: Include Path C/C++ 目录 常规 – 附加包含目录： 所有选项 – 附加包含目录 计算机中丢失 MSVCP100D.dll 代码迁移后，会报计算机中丢失 MSVCP100D.dll 解决方案：去对应工程师的电脑下，拷贝MSVCP100D.dll download提取码：fkvr 12copy xxx.dll files to C:\Windows\SysWOW64 copy xxx.dll files to C:\Windows\System32 VS2017 项目打包部署（.exe files） 参考链接 迁移安装后的 .exe 缺少运行的环境，因此还是不成功。 目前采取的方式 使用之前的环境，将编译生成的 .exe文件拷到原先的平板上的环境。]]></content>
       <categories>
         <category>Kinect</category>
       </categories>
@@ -63,9 +101,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LinuxC]]></title>
+    <title><![CDATA[C语言入门]]></title>
     <url>%2F2019%2F02%2F19%2FLinuxC%2F</url>
-    <content type="text"><![CDATA[Linux C编程一站式学习 C语言入门 程序的五个步骤 math函数的gcc编译 12$ gcc math.cpp -o math -lm // math的编译要加上 "-lm"$ gcc hello.c -o hello -Wall // gcc编译带上 -Wall,显示所有警告的信息 [UNIX编程艺术] The Art of UNIX Programming. Eric Raymond. 全局/局部变量 虽然方便，但是要慎用，能用函数传递参数的就不要使用全局变量 局部变量可以用任意类型相符的表达式来初始化,而全局变量只能用常量表达式初始化。 Debug 如果全局变量在定义时不初始化,则初始值是0。但是局部变量不初始化时，初值就不确定，局部变量先赋值 if/else else 总是和最近的一个if配对 如果需要隔开的话，加 “ { } ” 隔开 Debug Ways 增量式开发：通过printf的方式，一步步打印结果查看 printf (“ “) // 通过打印进行调试 递归函数：要加上 Base Case 12345int factorial(int n)&#123; if (n == 0) return 1;&#125; 递归和循环是等价的; 用循环能做的事用递归都能做 循环函数 循环函数:相当于将函数表达式展开，然后通过while()，进行循环的迭代 do / while 的格式 123do 语句；while(); // while 后面有个分号 Break and Continue break : 跳出当前循环体，执行后面的语句； Continue : 终止本次循环(循环里面的内容，在continue之后的语句都不执行)，然后回到循环体的开头准备再次执行循环体。]]></content>
+    <content type="text"><![CDATA[Linux C编程一站式学习 C语言入门 程序的五个步骤 math函数的gcc编译 12$ gcc math.cpp -o math -lm // math的编译要加上 "-lm"$ gcc hello.c -o hello -Wall // gcc编译带上 -Wall,显示所有警告的信息 [UNIX编程艺术] The Art of UNIX Programming. Eric Raymond. 全局/局部变量 虽然方便，但是要慎用，能用函数传递参数的就不要使用全局变量 局部变量可以用任意类型相符的表达式来初始化,而全局变量只能用常量表达式初始化。 Debug 如果全局变量在定义时不初始化,则初始值是0。但是局部变量不初始化时，初值就不确定，局部变量先赋值 if/else else 总是和最近的一个if配对 如果需要隔开的话，加 “ { } ” 隔开 Debug Ways 增量式开发：通过printf的方式，一步步打印结果查看 printf (“ “) // 通过打印进行调试 递归函数：要加上 Base Case 12345int factorial(int n)&#123; if (n == 0) //也就是0项 return 1;&#125; 递归和循环是等价的; 用循环能做的事用递归都能做 循环函数 循环函数:相当于将函数表达式展开，然后通过while()，进行循环的迭代 do / while 的格式 123do 语句；while(); // while 后面有个分号 Break and Continue break : 跳出当前循环体，执行后面的语句； Continue : 终止本次循环(循环里面的内容，在continue之后的语句都不执行)，然后回到循环体的开头准备再次执行循环体。]]></content>
       <categories>
         <category>LinuxC</category>
         <category>Emededded</category>
