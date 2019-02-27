@@ -8,6 +8,9 @@ tags: C++
 
 # Kinect Sensor
 
++ [网上的知识点](https://blog.csdn.net/cz19800823)
++ Kinect 设备的硬件介绍
+
 ## Kinect设备
 
 1. 基座和感应器之间有一个电动的马达，通过程序能够调整俯仰角度;

@@ -223,4 +223,10 @@ tags: kinect
 
 # VS2017 项目打包部署（.exe files）
 
-+ [参考链接](https://blog.csdn.net/fengxianxp/article/details/82806052)
++ [参考链接](https://blog.csdn.net/u010638673/article/details/80652831)
+
+1. 迁移安装后的 .exe 缺少运行的环境，因此还是不成功。
+
+## 目前采取的方式
+
+1. 使用之前的环境，将编译生成的 .exe文件拷到原先的平板上的环境。
