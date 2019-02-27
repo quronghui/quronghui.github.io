@@ -32,3 +32,12 @@ sudo apt-get update
 sudo apt-get install typora
 ```
 
+## Sougou
+
++ [link](https://blog.csdn.net/areigninhell/article/details/79696751)
+
+```
+Download : http://pinyin.sogou.com/linux/ 
+	sudo dpkg -i sogoupinyin_2.1.0.0082_amd64.deb  	
+```
+
