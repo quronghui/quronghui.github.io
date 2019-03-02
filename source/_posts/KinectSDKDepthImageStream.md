@@ -9,7 +9,7 @@ categories:
 tags: kinect
 ---
 
-# Kinect SDK for ColorImageStream
+# Kinect SDK for DepthImageStream
 
 - [网上的知识点](https://blog.csdn.net/cz19800823)
 - KinectSensor的最主要功能之一就是能够产生三维数据，它有红外发射器和红外摄像头。

@@ -263,4 +263,7 @@ categories: Blog
      -[Servlet]
    ```
 
-   
+
+## Hexo 的侧边栏，显示错误
+
+1. 问题描述：Search 显示成了Suche
