@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LinuxC
+title: C语言入门
 date: 2019-02-19 09:57:24
 categories: 
  - [LinuxC] 
@@ -50,7 +50,7 @@ tags: [Linux, C]
    ```
    int factorial(int n)
    {
-       if (n == 0)
+       if (n == 0)			//也就是0项
        	return 1;
    }
    ```
@@ -75,4 +75,3 @@ tags: [Linux, C]
    + break : 跳出当前循环体，执行后面的语句；
    + Continue : 终止本次循环(循环里面的内容，在continue之后的语句都不执行)，然后回到循环体的开头准备再次执行循环体。
 
-9. 
