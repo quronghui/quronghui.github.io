@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Kinect Sdk SkeletonStream 网上的知识点 骨骼追踪技术通过处理景深数据来建立人体各个关节的坐标,骨骼追踪能够确定人体的各个部分。 骨骼追踪产生X,Y,Z的三维数据，从而确定这些骨骼点的坐标。  Gain Skeleton Data 骨骼数据来自：SkeletonStream  KinectSensor对象有一个名为SkeletonFrameReady事件。 当Skeleto">
+<meta name="keywords" content="kinect">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kinect Sdk SkeletonStream">
+<meta property="og:url" content="http://yoursite.com/2019/03/01/KinectSdkSkeletonStream/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="Kinect Sdk SkeletonStream 网上的知识点 骨骼追踪技术通过处理景深数据来建立人体各个关节的坐标,骨骼追踪能够确定人体的各个部分。 骨骼追踪产生X,Y,Z的三维数据，从而确定这些骨骼点的坐标。  Gain Skeleton Data 骨骼数据来自：SkeletonStream  KinectSensor对象有一个名为SkeletonFrameReady事件。 当Skeleto">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/KinectSdkSkeletonStream/skeleton.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/KinectSdkSkeletonStream/frameedge.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/KinectSdkSkeletonStream/joint.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/01/KinectSdkSkeletonStream/jointtrackingstate.png">
+<meta property="og:updated_time" content="2019-03-02T07:06:27.706Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kinect Sdk SkeletonStream">
+<meta name="twitter:description" content="Kinect Sdk SkeletonStream 网上的知识点 骨骼追踪技术通过处理景深数据来建立人体各个关节的坐标,骨骼追踪能够确定人体的各个部分。 骨骼追踪产生X,Y,Z的三维数据，从而确定这些骨骼点的坐标。  Gain Skeleton Data 骨骼数据来自：SkeletonStream  KinectSensor对象有一个名为SkeletonFrameReady事件。 当Skeleto">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/01/KinectSdkSkeletonStream/skeleton.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/01/KinectSdkSkeletonStream/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Kinect Sdk SkeletonStream | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/KinectSdkSkeletonStream/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kinect Sdk SkeletonStream
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-03-01 13:58:40" itemprop="dateCreated datePublished" datetime="2019-03-01T13:58:40+08:00">2019-03-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-03-02 15:06:27" itemprop="dateModified" datetime="2019-03-02T15:06:27+08:00">2019-03-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kinect-SDK/" itemprop="url" rel="index"><span itemprop="name">Kinect SDK</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Kinect/" itemprop="url" rel="index"><span itemprop="name">Kinect</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Kinect-Sdk-SkeletonStream"><a href="#Kinect-Sdk-SkeletonStream" class="headerlink" title="Kinect Sdk SkeletonStream"></a>Kinect Sdk SkeletonStream</h1><ul>
+<li><a href="https://blog.csdn.net/cz19800823" target="_blank" rel="noopener">网上的知识点</a></li>
+<li>骨骼追踪技术通过处理景深数据来建立人体各个关节的坐标,骨骼追踪能够确定人体的各个部分。</li>
+<li>骨骼追踪产生X,Y,Z的三维数据，从而确定这些骨骼点的坐标。</li>
+</ul>
+<h2 id="Gain-Skeleton-Data"><a href="#Gain-Skeleton-Data" class="headerlink" title="Gain Skeleton Data"></a>Gain Skeleton Data</h2><ol>
+<li><p>骨骼数据来自：SkeletonStream</p>
+<ul>
+<li>KinectSensor对象有一个名为SkeletonFrameReady事件。</li>
+<li>当SkeletonStream中有新的骨骼数据产生时就会触发该事件。</li>
+<li>SkeletonStream产生的每一帧数据Frame，都是一个骨骼对象集合。</li>
+</ul>
+</li>
+<li><p>Kinect SDK在SkeletonStream对象</p>
+<ul>
+<li>Kinect能够追踪到的骨骼数量是一个常量。</li>
+<li>定义了一个能够追踪到的骨骼个数常量FrameSkeletonArrayLength，使用这个常量可以方便的对数组进行初始化。</li>
+</ul>
+</li>
+<li><p>SkeletonFrameReady事件的响应方法</p>
+<ul>
+<li>每一次事件被激发时，通过调用事件参数的OpenSkeletonFrame方法就能够获取当前的骨骼数据帧。</li>
+<li>剩余的代码遍历骨骼数据帧的Skeleton数组frameSkeletons，在UI界面通过关节点将骨骼连接起来，用一条直线代表一根骨骼。</li>
+</ul>
+</li>
+<li><p>骨骼数据的检测</p>
+<ul>
+<li>使用Skeleton对象的 TrackingState 属性来判断，只有骨骼追踪引擎追踪到的骨骼我们才进行绘制。</li>
+<li>Kinect能够探测到6个游戏者，但是同时只能够追踪到2个游戏者的骨骼关节位置信息。、、</li>
+</ul>
+</li>
+<li><p>绘制骨骼直线</p>
+<ul>
+<li>CreateFigure方法为每一根骨骼绘制一条直线。</li>
+<li>GetJointPoint方法以关节点的三维坐标作为参数，然后调用 KinectSensor 对象的MapSkeletonPointToDepth 方法将骨骼坐标转换到 深度影像坐标上去。</li>
+<li>骨骼坐标系和深度坐标及彩色影像坐标系不一样，甚至和UI界面上的坐标系不一样。</li>
+</ul>
+</li>
+<li><p>三维数据处理</p>
+<ul>
+<li>骨骼关节点的三维坐标中我们舍弃了Z值，只用了X,Y值。</li>
+<li>可以发现图像的大小是和Z值(深度)成反的。深度值越小，图像越大，即人物离Kinect越近，骨骼数据越大。</li>
+</ul>
+<img src="/2019/03/01/KinectSdkSkeletonStream/skeleton.png">
+</li>
+</ol>
+<h2 id="Skeleton-对象模型"><a href="#Skeleton-对象模型" class="headerlink" title="Skeleton 对象模型"></a>Skeleton 对象模型</h2><ol>
+<li><p>对象模型有四个最主要的对象，他们是SkeletonStream，SkeletonFrame，Skeleton和Joint。</p>
+
+</li>
+</ol>
+<h3 id="SkeletonStream对象"><a href="#SkeletonStream对象" class="headerlink" title="SkeletonStream对象"></a>SkeletonStream对象</h3><ol>
+<li>Enable SkeletonStream对象，才能产生数据SkeletonFrame。</li>
+<li>骨骼数据处理是很耗费计算性能的操作。打开骨骼追踪是可以观察的到<a href="http://www.hqew.com/tech/detail/CPU.html" target="_blank" rel="noopener"><strong>CPU</strong></a>的占用率明显增加。当不需要骨骼数据时，关闭骨骼追踪很有必要。</li>
+</ol>
+<h4 id="骨骼关节点帧与帧之间的位置差异。"><a href="#骨骼关节点帧与帧之间的位置差异。" class="headerlink" title="骨骼关节点帧与帧之间的位置差异。"></a>骨骼关节点帧与帧之间的位置差异。</h4><ol>
+<li>Enable SkeletonStream对象时，调用重载的方法传入一个TransformSmoothParameters参数。</li>
+<li>SkeletonStream对象有两个与平滑有关只读属性：IsSmoothingEnabled和SmoothParameters。</li>
+<li>SmoothParameters属性用来存储定义平滑参数。</li>
+</ol>
+<h4 id="骨骼追踪对象选择"><a href="#骨骼追踪对象选择" class="headerlink" title="骨骼追踪对象选择"></a>骨骼追踪对象选择</h4><ol>
+<li>默认情况下，骨骼追踪引擎会对视野内的所有活动的游戏者进行追踪。但只会选择两个可能的游戏者产生骨骼数据。</li>
+<li>如果要自己选择追踪对象，需要使用AppChoosesSkeletons属性和ChooseSkeletons方法。</li>
+<li>要手动选择追踪者，需要将AppChoosesSkeleton设置为true，并调用ChooseSkeletons方法，传入TrackingIDs已表明需要追踪那个对象。</li>
+</ol>
+<h3 id="SkeletonFrame"><a href="#SkeletonFrame" class="headerlink" title="SkeletonFrame"></a>SkeletonFrame</h3><ol>
+<li>SkeletonStream产生SkeletonFrame对象,使用事件模型从事件参数中调用OpenSkeletonFrame方法来获取SkeletonFrame对象.</li>
+<li>调用SkeletonFrame 对象的 CopySkeletonDataTo方法将其保存的数据拷贝到骨骼对象数组.</li>
+<li>SkeletonFrame对象有一个SkeletonArrayLength的属性，这个属性表示追踪到的骨骼信息的个数。</li>
+</ol>
+<h4 id="时间标记字段"><a href="#时间标记字段" class="headerlink" title="时间标记字段"></a>时间标记字段</h4><ul>
+<li>SkeletonFrame的FrameNumber和Timestamp字段表示当前记录中的帧序列信息。</li>
+<li>FrameNumber和Timestamp这两个字段在分析处理帧序列数据时很重要</li>
+</ul>
+<ol>
+<li>FrameNumber 是景深数据帧中的用来产生骨骼数据帧的帧编号。帧编号通常是不连续的，但是之后的帧编号一定比之前的要大。<ul>
+<li>FrameNumber是一个32位的整型</li>
+</ul>
+</li>
+<li>Timestap字段记录字Kinect传感器初始化以来经过的累计毫秒时间。<ul>
+<li>imestamp是64位整型</li>
+</ul>
+</li>
+<li>在未来SDK中加入手势引擎之前，我们需要自己编写算法来对帧时间序列进行处理来识别手势，这样就会大量依赖这两个字段。</li>
+</ol>
+<h4 id="Frame-描述信息"><a href="#Frame-描述信息" class="headerlink" title="Frame 描述信息"></a>Frame 描述信息</h4><ol>
+<li>FloorClipPlane字段是一个有四个元素的元组Tuple&lt;int,int,int,int&gt;，每一个都是Ax+By+Cz+D=0地面平面(floor plane)表达式里面的系数项。</li>
+<li>D 通常为负数，是Kinect距离地面高度。</li>
+</ol>
+<h3 id="Skeleton"><a href="#Skeleton" class="headerlink" title="Skeleton"></a>Skeleton</h3><ol>
+<li>Skeleton类定义了一<a href="http://www.hqew.com/tech/led/200010410003/27268.html" target="_blank" rel="noopener"><strong>系列</strong></a>字段来描述骨骼信息，包括描述骨骼的位置以及骨骼中关节可能的位置信息。</li>
+<li>骨骼数据可以通过调用SkeletonFrame对象的CopySkeletonDataTo方法获得Skeleton数组。</li>
+</ol>
+<h4 id="TrackingID"><a href="#TrackingID" class="headerlink" title="TrackingID"></a>TrackingID</h4><ol>
+<li>骨骼追踪引擎对于每一个追踪到的游戏者的骨骼信息都有一个唯一编号。</li>
+<li>应用程序使用TrackingID来指定需要骨骼追踪引擎追踪那个游戏者。</li>
+<li>这个值是整型，他会随着新的追踪到的游戏者的产生添加增长。(不连续的)</li>
+<li>Kinect追踪到了一个新的游戏者，他会为其分配一个新的唯一编号。</li>
+<li>编号值为0表示这个骨骼信息不是游戏者的，他在集合中仅仅是一个占位符。</li>
+<li>调用SkeletonStream对象的ChooseSkeleton能以初始化对指定游戏者的追踪。</li>
+</ol>
+<h4 id="TrackingState"><a href="#TrackingState" class="headerlink" title="TrackingState"></a>TrackingState</h4><ul>
+<li>该字段表示当前的骨骼数据的状态。</li>
+<li>
+</li>
+</ul>
+<h4 id="Position"><a href="#Position" class="headerlink" title="Position"></a>Position</h4><ol>
+<li>Position一个SkeletonPoint类型的字段，代表所有骨骼的中间点。</li>
+<li>该字段提供了一个最快且最简单的所有视野范围内的游戏者位置的信息，而不管其是否在追踪状态中。</li>
+<li>例如，应用程序可能需要追踪距离Kinect最近的且处于追踪状态的游戏者，那么该字段就可以用来过滤掉其他的游戏者。</li>
+</ol>
+<h4 id="ClippedEdges"><a href="#ClippedEdges" class="headerlink" title="ClippedEdges"></a>ClippedEdges</h4><ol>
+<li><p>ClippedEdges字段用来描述追踪者的身体哪部分位于Kinect的视野范围外，提供了一个追踪这的位置信息。</p>
+</li>
+<li><p>该字段类型为FrameEdges，他是一个枚举并且有一个FlagsAtrribute自定义属性修饰。</p>
+</li>
+<li><p>FrameEdges 值</p>
+<img src="/2019/03/01/KinectSdkSkeletonStream/frameedge.png">
+</li>
+<li><p>Kinect底座上面有一个小的马达能够调整Kinect的俯仰角度。</p>
+<ul>
+<li>俯仰角度可以通过更改KinectSensor对象的ElevationAnagle属性来进行调整。</li>
+<li>如果应用程序对于游戏者脚部动作比较关注，那么通过程序调整Kinect的俯仰角能够决绝脚部超出视场下界的情况。</li>
+</ul>
+</li>
+<li><p>KinectSensor的MaxElevationAngle和MinElevationAngle确定了可以调整角度的上下界。</p>
+<ul>
+<li>任何将ElevationAngle设置超出上下界的操作将会掏出ArgumentOutOfRangeExcepthion异常。</li>
+<li>微软建议不要过于频繁重复的调整俯仰角以免损坏马达。</li>
+</ul>
+</li>
+</ol>
+<h3 id="Joints"><a href="#Joints" class="headerlink" title="Joints"></a>Joints</h3><ol>
+<li><p>该字段是一个JointsCollection类型，它存储了一些列的Joint结构来描述骨骼中可追踪的关节点(如head,hands,elbow等等)</p>
+</li>
+<li><p>应用程序使用JointsCollection索引获取特定的关节点，并通过节点的JointType枚举来过滤指定的关节点。</p>
+<img src="/2019/03/01/KinectSdkSkeletonStream/joint.png">
+</li>
+<li><p>骨骼追踪引擎能够跟踪和获取每个用户的近20个点或者关节点信息。</p>
+</li>
+<li><p>关节点</p>
+<ul>
+<li>都有类型为SkeletonPoint的Position属性，</li>
+<li>他通过X,Y,Z三个值来描述关节点的控件位置。</li>
+<li>X,Y值是相对于骨骼平面空间的位置，他和深度影像，彩色影像的空间坐标系不一样。</li>
+</ul>
+</li>
+<li><p>最后每一个Skeleton对象还有一个JointTrackingState属性</p>
+<img src="/2019/03/01/KinectSdkSkeletonStream/jointtrackingstate.png">
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kinect/" rel="tag"># kinect</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/28/BluetoothANT/" rel="next" title="BluetoothANT">
+                <i class="fa fa-chevron-left"></i> BluetoothANT
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/01/QtAndVs/" rel="prev" title="QtAndVs">
+                QtAndVs <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kinect-Sdk-SkeletonStream"><span class="nav-number">1.</span> <span class="nav-text">Kinect Sdk SkeletonStream</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gain-Skeleton-Data"><span class="nav-number">1.1.</span> <span class="nav-text">Gain Skeleton Data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skeleton-对象模型"><span class="nav-number">1.2.</span> <span class="nav-text">Skeleton 对象模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SkeletonStream对象"><span class="nav-number">1.2.1.</span> <span class="nav-text">SkeletonStream对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#骨骼关节点帧与帧之间的位置差异。"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">骨骼关节点帧与帧之间的位置差异。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#骨骼追踪对象选择"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">骨骼追踪对象选择</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SkeletonFrame"><span class="nav-number">1.2.2.</span> <span class="nav-text">SkeletonFrame</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#时间标记字段"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">时间标记字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Frame-描述信息"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Frame 描述信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Skeleton"><span class="nav-number">1.2.3.</span> <span class="nav-text">Skeleton</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TrackingID"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">TrackingID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TrackingState"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">TrackingState</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Position"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">Position</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ClippedEdges"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">ClippedEdges</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Joints"><span class="nav-number">1.2.4.</span> <span class="nav-text">Joints</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

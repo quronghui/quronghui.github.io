@@ -105,7 +105,7 @@
 <meta property="og:description" content="Code link  Struct 学习一门语言要注意的三点   本节将以结构体为例来讲解数据类型的组合和抽象。   结构体 代码链接   结构体定义  过程抽象：将一组语句通过函数名封装，当做整体调用 结构体  12345结构体：complex_struct不表示变量，而是表示类型,类似于int的符合类型 	struct complex_struct		    &amp;#123;        do">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/02/27/Struct/struct.png">
-<meta property="og:updated_time" content="2019-02-27T14:13:00.229Z">
+<meta property="og:updated_time" content="2019-03-02T07:18:57.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Struct">
 <meta name="twitter:description" content="Code link  Struct 学习一门语言要注意的三点   本节将以结构体为例来讲解数据类型的组合和抽象。   结构体 代码链接   结构体定义  过程抽象：将一组语句通过函数名封装，当做整体调用 结构体  12345结构体：complex_struct不表示变量，而是表示类型,类似于int的符合类型 	struct complex_struct		    &amp;#123;        do">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Post created: 2019-02-27 21:59:46 / Updated at: 22:13:00" itemprop="dateCreated datePublished" datetime="2019-02-27T21:59:46+08:00">2019-02-27</time>
+              <time title="Post created: 2019-02-27 21:59:46" itemprop="dateCreated datePublished" datetime="2019-02-27T21:59:46+08:00">2019-02-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-03-02 15:18:57" itemprop="dateModified" datetime="2019-03-02T15:18:57+08:00">2019-03-02</time>
               
             
           </span>
@@ -521,7 +533,12 @@
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>. 项目描述：将结构体当做函数的参数和返回值来传递</span><br><span class="line">（<span class="number">1</span>）结构体当做函数的参数，比如 int main,中的int</span><br><span class="line">(<span class="number">2</span>) <span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span></span> 当做函数 add_complex的参数</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span></span> add_complex(<span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span></span> z1, <span class="class"><span class="keyword">struct</span> <span class="title">complex_struct</span></span> z2)</span><br><span class="line">&#123;</span><br><span class="line">    z1.x = z1.x + z2.x;</span><br><span class="line">    z1.y = z1.y + z2.y;</span><br><span class="line">    <span class="keyword">return</span> z1; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="Data-Abstraction-数据抽象"><a href="#Data-Abstraction-数据抽象" class="headerlink" title="Data Abstraction (数据抽象)"></a>Data Abstraction (数据抽象)</h2>
+<h2 id="Data-Abstraction-数据抽象"><a href="#Data-Abstraction-数据抽象" class="headerlink" title="Data Abstraction (数据抽象)"></a>Data Abstraction (数据抽象)</h2><ol>
+<li><p>gcc编译时提示对‘sqrt’未定义的引用</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc　-*<span class="selector-class">.c</span> -lm		<span class="comment">// 需要链接 libm.so 库</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
       
     </div>
 
@@ -568,6 +585,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/28/WindowsSDK/" rel="prev" title="Windows SDK">
+                Windows SDK <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -639,7 +660,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -684,7 +705,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -743,7 +772,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
