@@ -82,15 +82,15 @@ tags: [Linux, C]
    {% asset_img GdbBacktrace.png %}
 
    + main函数传进来的参数；
-   + main函数的栈帧编号为1，add_range 的栈帧编号为0
+   + main函数的栈帧编号为1，功能函数add_range 的栈帧编号为0
 
    ```
-   /*查看 main函数当前的局部变量的值*/
+   zhi/*查看 main函数当前的局部变量的值*/
    $ (gdb) f(frame) 1	//选择1号栈帧，然后在查看局部变量
    $ (gdb) i locals	// 查看主函数，局部变量的值；
    
    /*在step,跟几步看看*/
-   $ (gdb) step
+   $ (gdb) step		//除了主函数，还有其他功能函数的值
    $ (gdb) finish		//finish 一直运行到当前函数返回为止,得出当前的结果
    $ (gdb) p result	//查看数组result的值，相当于print
    
@@ -105,6 +105,51 @@ tags: [Linux, C]
 
 1. 总结
    + i locals 查看当前的局部变量，这个是最有用的。
+   + 查询功能函数的变量是否初始化
 
 ## 断点
+
+### 字符型和整形
+
+1. 字符型转化为整形：
+
+   + 整形＝字符型　－　‘０’的ASCII值
+
+   + ASCII码值：'0'＝48; '\0' = 0
+
+### 断点加单步
+
+1. 单词断点流程
+
+   ```
+   $ gcc -g main.c -o main
+   $ gbd main
+   
+   $ display sum	//我们可以用display命令使得每次停下来的时候都显示当前sum值
+   				//每输入一次print sum ; 打印一次当前的sum值，
+   $ break 9		//break命令的参数也可以是函数名,(在第９行设置一个断点)
+   $ continue		//连续运行而非单步运行,程序到达断点会自动停下来,这样就可以停在下一次循环的开头。
+   $ next 			//单步调试，深入内容
+   ```
+
+2. 多个断点的设置
+
+   ```
+   $ break 12		//设置另外一个断点
+   $ i breakpoints	//一次调试可以设置多个断点,用info命令可以查看已经设置的断点
+   $ delete breakpoints 1		//删除编号为１的断点
+   
+   $ disable breakpoints 1		//通过禁用，而不用删除
+   $ enable breakpoints 1		//enable 启用断点１
+   ```
+
+3. 条件断点
+
+   ```
+   $ break 9 if sum != 0		//在循环开头设置断点,但是仅当sum不等于0时才中断
+   $ run 						//然后用run命令,重新从程序开头连续执行:
+   $ continue					//连续执行到断点的时候停止
+   ```
+
+   
 
