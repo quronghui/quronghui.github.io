@@ -2,8 +2,8 @@
 layout: post
 title: Application For Ubuntu
 date: 2019-02-26 21:31:51
-categories: System
-tags: system
+categories: ubuntu
+tags: ubuntu
 ---
 
 # Application For Ubuntu
@@ -41,3 +41,22 @@ Download : http://pinyin.sogou.com/linux/
 	sudo dpkg -i sogoupinyin_2.1.0.0082_amd64.deb  	
 ```
 
+## Arduino 
+
++ [ link ](https://blog.csdn.net/wowocpp/article/details/81175478)
+
+1. Extensions 安装
+
+   + 搜索 arduino
+   + vs code --> 首选项 --> 设置 --> 搜索arduino --> 设置 arduino.path
+
+   ```
+   查看软件安装目录：
+   	$ aptitude show sublime-text-installer 		//列出软件信息
+   	$ dpkg -l  					//列车所有安装的软件
+   	$ dpkg -l firefox 			//列出firefox 软件安装信息
+   	
+   	$ dpkg -L 软件名			//没有在PATH路径下保存，通过下面命令寻找安装目录
+   ```
+
+   

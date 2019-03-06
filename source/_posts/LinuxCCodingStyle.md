@@ -72,6 +72,9 @@ tags: [Linux, C]
    + 如get_current、radix_tree_insert。
 2. 分割函数
    + 多个.c的文件
+3. 功能函数
+   + C语言中的功能函数包含动词
+   + 字母加下划线的方式进行。void insertion_sort()
 
 ## Indent Tools
 
@@ -82,4 +85,4 @@ tags: [Linux, C]
    cat main.c
    ```
 
-   
+
