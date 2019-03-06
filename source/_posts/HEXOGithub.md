@@ -119,7 +119,7 @@ categories: Blog
 4. 在文件夹内执行以下命令 
 
    ```
-   npm install hexo-cli -g
+   ubuntunpm install hexo-cli -g
    npm install
    npm install hexo-deployer-git
    ```
