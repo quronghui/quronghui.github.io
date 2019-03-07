@@ -5,6 +5,7 @@ date: 2019-03-04 16:37:01
 categories: 
  - [LinuxC] 
  - [Emededded]
+ - [Gdb]
 tags: [Linux, C]
 ---
 

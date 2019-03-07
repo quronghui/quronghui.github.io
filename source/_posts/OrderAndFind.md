@@ -5,6 +5,7 @@ date: 2019-03-06 10:42:19
 categories: 
  - [LinuxC] 
  - [Emededded]
+ - [Order]
 tags: [Linux, C]
 ---
 
@@ -65,3 +66,13 @@ tags: [Linux, C]
 3. 时间复杂度计算
 
    {% aeest_img divide.png %}
+
+4. 设计不同时间复杂度的算法
+
+   + 这个就是算法的初步体现
+   + 通过不同的数据结构，体现算法的效能
+
+## 折半查找
+
+1. 折半查找提供了一种代码测试的思想
+   + assert.h 函数进行测试
