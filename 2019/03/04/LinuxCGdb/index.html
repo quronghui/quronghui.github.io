@@ -105,7 +105,7 @@
 <meta property="og:description" content="LinuxC Gdb Code link – Gdb的相关代码  Gdb调试方式 程序中除了一目了然的Bug之外都需要一定的调试手段来分析到底错在哪   根据程序执行时的出错现象假设错误原因,然后在代码中适当的位置插入printf , 强大的调试工具gdb,可以完全操控程序的运行。  调试思想 分析现象 –&amp;gt; 假设错误原因 –&amp;gt; 产生新的现象去验证假设  单步执行和跟踪函数调用开始调试">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/04/LinuxCGdb/GdbBacktrace.png">
-<meta property="og:updated_time" content="2019-03-06T02:42:29.475Z">
+<meta property="og:updated_time" content="2019-03-07T03:05:09.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LinuxC Gdb">
 <meta name="twitter:description" content="LinuxC Gdb Code link – Gdb的相关代码  Gdb调试方式 程序中除了一目了然的Bug之外都需要一定的调试手段来分析到底错在哪   根据程序执行时的出错现象假设错误原因,然后在代码中适当的位置插入printf , 强大的调试工具gdb,可以完全操控程序的运行。  调试思想 分析现象 –&amp;gt; 假设错误原因 –&amp;gt; 产生新的现象去验证假设  单步执行和跟踪函数调用开始调试">
@@ -226,7 +226,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -260,7 +260,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
 
   </li>
         
@@ -277,7 +277,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
 
@@ -288,7 +288,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -394,14 +394,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-03-04 16:37:01" itemprop="dateCreated datePublished" datetime="2019-03-04T16:37:01+08:00">2019-03-04</time>
+              <time title="Post created: 2019-03-04 16:37:01" itemprop="dateCreated datePublished" datetime="2019-03-04T16:37:01+08:00">2019-03-04</time>
             
 
             
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-06 10:42:29" itemprop="dateModified" datetime="2019-03-06T10:42:29+08:00">2019-03-06</time>
+                <time title="Updated at: 2019-03-07 11:05:09" itemprop="dateModified" datetime="2019-03-07T11:05:09+08:00">2019-03-07</time>
               
             
           </span>
@@ -432,17 +432,24 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LinuxC/" itemprop="url" rel="index"><span itemprop="name">LinuxC</span></a></span>
 
                 
                 
-                  , 
+                  . 
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Emededded/" itemprop="url" rel="index"><span itemprop="name">Emededded</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Gdb/" itemprop="url" rel="index"><span itemprop="name">Gdb</span></a></span>
 
                 
                 
@@ -554,6 +561,11 @@
 <li>i locals 查看当前的局部变量，这个是最有用的。</li>
 <li>查询功能函数的变量是否初始化。</li>
 <li>通过条件语句来设置终端，这个挺好用的。</li>
+</ul>
+</li>
+<li>step 和 next 区别<ul>
+<li>step 用于调到功能函数；</li>
+<li>next 在调到功能函数的时候，单步执行</li>
 </ul>
 </li>
 </ol>
@@ -705,10 +717,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -730,8 +742,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -783,8 +795,20 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
-                    <span class="site-state-item-name">categories</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -853,7 +877,7 @@
                       
                     
                     <span class="site-state-item-count">28</span>
-                    <span class="site-state-item-name">tags</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -934,7 +958,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
