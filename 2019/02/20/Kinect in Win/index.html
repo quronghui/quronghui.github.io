@@ -114,7 +114,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/OTVsLinkDR.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/QtVsInclude.PNG">
 <meta property="og:image" content="http://yoursite.com/2019/02/20/Kinect%20in%20Win/C++Direction.PNG">
-<meta property="og:updated_time" content="2019-02-27T12:13:54.447Z">
+<meta property="og:updated_time" content="2019-03-11T09:04:41.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kinect in Windows">
 <meta name="twitter:description" content="[TOC] Kinect in Windows Kinect in Windows 开发指南   kinect + opencv + vs 环境配置   安装 Kinect SDK Bug  首次安装KinectSDK-v1.8-Setup 连上kinect后，打开一次后，第二次打开提示 “ No kinet to connect ” 重新卸载后，安装KinectSDK-v1.7-Setup，成功">
@@ -427,7 +427,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-27 20:13:54" itemprop="dateModified" datetime="2019-02-27T20:13:54+08:00">2019-02-27</time>
+                <time title="Updated at: 2019-03-11 17:04:41" itemprop="dateModified" datetime="2019-03-11T17:04:41+08:00">2019-03-11</time>
               
             
           </span>
@@ -670,10 +670,37 @@
 <li><a href="https://blog.csdn.net/u010638673/article/details/80652831" target="_blank" rel="noopener">参考链接</a></li>
 </ul>
 <ol>
-<li>迁移安装后的 .exe 缺少运行的环境，因此还是不成功。</li>
+<li><a href="https://docs.microsoft.com/zh-cn/previous-versions/visualstudio/visual-studio-2010/e2444w33%28v%3dvs.100%29" target="_blank" rel="noopener"> Vs的部署方式 部署连接，Mircosoft官网</a></li>
 </ol>
-<h2 id="目前采取的方式"><a href="#目前采取的方式" class="headerlink" title="目前采取的方式"></a>目前采取的方式</h2><ol>
-<li>使用之前的环境，将编译生成的 .exe文件拷到原先的平板上的环境。</li>
+<h2 id="Vs-Qt-的应用程序发布部署"><a href="#Vs-Qt-的应用程序发布部署" class="headerlink" title="Vs + Qt 的应用程序发布部署"></a>Vs + Qt 的应用程序发布部署</h2><ul>
+<li><a href="https://blog.csdn.net/china_jeffery/article/details/78402623" target="_blank" rel="noopener">通过编译Release 得到可执行文件exe，生成相关可执行文件</a></li>
+</ul>
+<ol>
+<li><p>将需要发布的exe（Release ）文件编译后（如QtGuiApplication1.exe），放到单独的目录。</p>
+</li>
+<li><p>在“开始菜单”启动Qt 5.9.1 32-bit for Desktop (MSVC 2015);</p>
+<ol>
+<li><p>Win + R 进去 cmd编辑；</p>
+</li>
+<li><p>cd  C:\Software\kinect\QtGuiApplication1\x64\Release  进入 exe 文件的目录</p>
+</li>
+<li><p>执行命令</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">windeployqt</span><span class="selector-class">.exe</span> <span class="selector-tag">QtGuiApplication1</span><span class="selector-class">.exe</span> <span class="selector-tag">--qmldir</span> <span class="selector-tag">C</span>:\<span class="selector-tag">Qt</span>\<span class="selector-tag">Qt5</span><span class="selector-class">.12</span><span class="selector-class">.1</span>\5<span class="selector-class">.12</span><span class="selector-class">.1</span>\<span class="selector-tag">msvc2017_64</span>\<span class="selector-tag">qml</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成运行时需要的文件。（源程序发生改变，需要重新生成一次）</p>
+</li>
+</ol>
+</li>
+<li><p>Vs 2017的依赖库</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">进入路径</span><br><span class="line">C:<span class="symbol">\P</span>rogram Files (x86)<span class="symbol">\M</span>icrosoft Visual Studio<span class="symbol">\2</span>017<span class="symbol">\C</span>ommunity<span class="symbol">\C</span>ommon7<span class="symbol">\I</span>DE<span class="symbol">\R</span>emote Debugger<span class="symbol">\x</span>64</span><br><span class="line">拷贝文件</span><br><span class="line">api-ms-win-core-* </span><br><span class="line">concrt140.dll</span><br><span class="line">msvcp140.dll</span><br><span class="line">ucrtbase.dll</span><br><span class="line">vcruntime140.dll</span><br><span class="line">粘贴到 *步骤一的目录下*</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这样迁移到相同屏幕尺寸的电脑下，就可以运行了。</p>
+</li>
+<li><p>如果出现Qt提示的文字超出界面，修改字体的大小就能自适应平板了。</p>
+</li>
+</ol>
+<h2 id="增加语音功能"><a href="#增加语音功能" class="headerlink" title="增加语音功能"></a>增加语音功能</h2><ol>
+<li>增加语音功能，实现特定语句的播放</li>
 </ol>
 
       
@@ -795,7 +822,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -965,7 +992,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kinect-in-Windows"><span class="nav-number">1.</span> <span class="nav-text">Kinect in Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Kinect-SDK"><span class="nav-number">1.1.</span> <span class="nav-text">安装 Kinect SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Visual-Studio"><span class="nav-number">1.2.</span> <span class="nav-text">安装 Visual Studio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VS2017"><span class="nav-number">1.2.1.</span> <span class="nav-text">VS2017</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装注意"><span class="nav-number">1.2.2.</span> <span class="nav-text">安装注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kiinect-SDK-关于-VS-的配置"><span class="nav-number">1.3.</span> <span class="nav-text">Kiinect SDK 关于 VS 的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-OpenCV"><span class="nav-number">1.4.</span> <span class="nav-text">安装 OpenCV</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Opencv-的安装"><span class="nav-number">1.4.1.</span> <span class="nav-text">Opencv 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Opencv-With-VS2017"><span class="nav-number">1.4.2.</span> <span class="nav-text">Opencv With VS2017</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装QT"><span class="nav-number">1.5.</span> <span class="nav-text">安装QT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QT-的安装"><span class="nav-number">1.5.1.</span> <span class="nav-text">QT 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QT-with-VS2017"><span class="nav-number">1.5.2.</span> <span class="nav-text">QT with VS2017</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码迁移后需要改动"><span class="nav-number">1.6.</span> <span class="nav-text">代码迁移后需要改动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VS-的项目-–-配置属性"><span class="nav-number">1.6.1.</span> <span class="nav-text">VS 的项目  –  配置属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机中丢失-MSVCP100D-dll"><span class="nav-number">1.6.2.</span> <span class="nav-text">计算机中丢失 MSVCP100D.dll</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VS2017-项目打包部署（-exe-files）"><span class="nav-number">2.</span> <span class="nav-text">VS2017 项目打包部署（.exe files）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目前采取的方式"><span class="nav-number">2.1.</span> <span class="nav-text">目前采取的方式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kinect-in-Windows"><span class="nav-number">1.</span> <span class="nav-text">Kinect in Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Kinect-SDK"><span class="nav-number">1.1.</span> <span class="nav-text">安装 Kinect SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Visual-Studio"><span class="nav-number">1.2.</span> <span class="nav-text">安装 Visual Studio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VS2017"><span class="nav-number">1.2.1.</span> <span class="nav-text">VS2017</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装注意"><span class="nav-number">1.2.2.</span> <span class="nav-text">安装注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kiinect-SDK-关于-VS-的配置"><span class="nav-number">1.3.</span> <span class="nav-text">Kiinect SDK 关于 VS 的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-OpenCV"><span class="nav-number">1.4.</span> <span class="nav-text">安装 OpenCV</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Opencv-的安装"><span class="nav-number">1.4.1.</span> <span class="nav-text">Opencv 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Opencv-With-VS2017"><span class="nav-number">1.4.2.</span> <span class="nav-text">Opencv With VS2017</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装QT"><span class="nav-number">1.5.</span> <span class="nav-text">安装QT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QT-的安装"><span class="nav-number">1.5.1.</span> <span class="nav-text">QT 的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QT-with-VS2017"><span class="nav-number">1.5.2.</span> <span class="nav-text">QT with VS2017</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码迁移后需要改动"><span class="nav-number">1.6.</span> <span class="nav-text">代码迁移后需要改动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VS-的项目-–-配置属性"><span class="nav-number">1.6.1.</span> <span class="nav-text">VS 的项目  –  配置属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机中丢失-MSVCP100D-dll"><span class="nav-number">1.6.2.</span> <span class="nav-text">计算机中丢失 MSVCP100D.dll</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VS2017-项目打包部署（-exe-files）"><span class="nav-number">2.</span> <span class="nav-text">VS2017 项目打包部署（.exe files）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vs-Qt-的应用程序发布部署"><span class="nav-number">2.1.</span> <span class="nav-text">Vs + Qt 的应用程序发布部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加语音功能"><span class="nav-number">2.2.</span> <span class="nav-text">增加语音功能</span></a></li></ol></li></ol></div>
             
 
           </div>
