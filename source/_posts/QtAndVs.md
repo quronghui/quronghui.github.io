@@ -11,9 +11,11 @@ tags: Qt
 # Qt and Visiual Studio
 
 + 通过创建Qt GUI 的程序，实现按键的点击和事件的响应。
-+ [参考链接](https://blog.csdn.net/mieleizhi0522/article/details/79259222)
++ [安装Qt并且关联Vs](https://quronghui.github.io/2019/02/20/Kinect%20in%20Win/)
 
-## 文章的几个注意点
+## Vs 创建Qt 工程
+
++ [创建例程](https://blog.csdn.net/mieleizhi0522/article/details/79259222)
 
 1. Qt Gui 文件的类型介绍。
 
@@ -48,9 +50,7 @@ tags: Qt
      // SLOT(on_checkBox_clicked()))：槽函数，响应事件的方式
      ```
 
-## Qt 里面的函数
-
-### Gui 窗口大小的设置
+## Qt Gui 窗口大小
 
 1. Qt Gui窗口大小的设置方式
 
@@ -60,9 +60,33 @@ tags: Qt
    this->setWindowState(Qt::WindowMaximized);
    ```
 
+## Vs and Qt 实现语音功能
 
-## Question
++ [Qt to speech](https://doc.qt.io/qt-5/qtspeech-hello-speak-example.html)
 
-### VS 里面在哪里添加 Qt的函数
+### 问题
 
-1. 还没有解决
+1. 无法打开QtTextToSpeech文件
+
+   + 在VC++ 中添加目录
+
+     ```
+     C:\Qt\Qt5.12.1\5.12.1\msvc2017_64\include\QtTextToSpeech
+     ```
+
+2. 出现LNK2019
+
+   {% asset_img LNK2019.png %}
+
+   + 首先添加Qt的依赖库 和 lib文件目录
+   + 然后根据错误定位到QVoice，添加相关的头文件
+
+3. 不允许定义静态数据成员 dllimport
+
+   ```
+   代码使用：Qt 官方代码
+   Qt使用导出类报错：error C2491: “QTextToSpeech::staticMetaObject”: 不允许 dllimport 静态数据成员 的定义:
+   ```
+
+   
+
