@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[DataType]]></title>
+    <url>%2F2019%2F03%2F12%2FDataType%2F</url>
+    <content type="text"><![CDATA[DataType]]></content>
+      <tags>
+        <tag>Linux</tag>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Number Of Computer]]></title>
+    <url>%2F2019%2F03%2F12%2FNumberOfComputer%2F</url>
+    <content type="text"><![CDATA[Number Of Computer进制间的转换 最高位和最低位 十进制转二进制 除二取余 余数倒着写便是 小数转换 十进制转换为二进制 乘二取整，顺序排列。 整数的加减运算 负数的加减运算 减法运算：取被减数的补码（取反加一） 采用补码做加减运算时总是忽略MSB的进位？、 判断溢出的办法是这样的:在相加过程中最高位产生的进位和次高位产生的进位如果相同则没有溢出,否则就说明产生了溢出。 带符号数和不带符号数 用8个bit既表示正数又表示负数,则能够表示的范围是-128~127, 8个bit全部表示正数,则能够表示的范围是0~255,前者称为有符号数(Signed Number), 后者称为无符号数。 浮点数 数的表示：模型的三部分 符号位 指数部分（表示2的多少次方） 尾数部分（只表示小数点后面的数字）–（需要将有效数字全部移到小数点后面） 尾数部分如何表示？ 尾数的规定 尾数必须以 0.1 开头]]></content>
+      <categories>
+        <category>LinuxC</category>
+        <category>Emededded</category>
+        <category>Number of computer</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LinuxC Stack And Queue]]></title>
     <url>%2F2019%2F03%2F07%2FLinuxCStackAndQueue%2F</url>
     <content type="text"><![CDATA[Code link, Stack and Queue LinuxC Stack And Queue数据结构 数据结构(Data Structure)：是数据的组织方式。 程序中用到的数据都不是孤立的，而是有相互联系的，根据访问数据的需求不同，同样的数据可以有多种不同的组织方式。 把同一类型的数据组织成数组，或者把描述同一对象的各成员组织成结构体。 数据的组织方式 包含：存储方式和访问方式 数组的各元素是一个挨一个存储的，并且每个元素的大小相同，因此数组可以提供按下标访问的方式。 结构体的各成员也是一个挨一个存储的，但是每个成员的大小不同，所以只能用.运算符加成员名来访问,而不能按下标访问。 数据的存储方式和访问方式，决定了解决问题可以采用什么样的算法。 设计相应的数据结构来支持这种算法 [算法+数据结构=程序] Algorithms + Data Structures = Programs. Niklaus Wirth. Link 堆栈概念 堆栈：是一组元素的集合，类似于数组 数组可以按照下标访问元素； 堆栈被限制为Push(入)，Pop(出) 只能访问栈顶元素而不能访问其他元素 所有元素类型相同 堆栈的存储：可以用数组实现 访问操作：通过函数接口提供 数组stack 是堆栈的存储空间 top 用作数组stack 的索引， 注意top总是指向栈顶元素的下一个元素, 可以把它称为指针(Pointer)。 算法设计 代码 Assert 测试 前提条件 ：注意top总是指向栈顶元素的下一个元素 putchar函数的作用是把一个字符打印到屏幕上,和printf的%c作用 队列 Queue概念 队列也是一组元素的集合，也提供两种基本操作: Enqueue(入队)将元素添加到队尾 Dequeue(出队)从队头取出元素并返回。 FIFO(First In First Out,先进先出) 队列的索引 变量head、tail 就像前两节用来表示栈顶的top一样 是queue数组的索引或者叫指针,分别指向队头和队尾。 每个点的predecessor成员也是一个指针,指向它的前趋在queue数组中的位置。 算法设计 1234* (1) 广度优先是一种步步为营的策略,每次都从各个方向探索一步,将前线推进一步,* (2) 队列中的元素总是由前线的点组成的* (3) 广度优先搜索还有一个特点是可以找到从起点到终点的最短路径* (4)而深度优先搜索找到的不一定是最短路径 堆栈 VS 队列 堆栈 栈操作的top指针在Push（入）时增大 Pop（出）时减小 栈空间是可以重复利用的 队列 队列的head、tail指针都在一直增大； 虽然前面的元素已经出队了,但它所占的存储空间却不能重复利用 为了解决队列的问题 引入环形队列 从head到tail之间是队列的有效元素,从tail到head之间是空的存储位置, head追上tail就表示队列空了；tail追上head就表示队列的存储空间满了。]]></content>
@@ -187,7 +210,7 @@
   <entry>
     <title><![CDATA[Application For Ubuntu]]></title>
     <url>%2F2019%2F02%2F26%2FApplicationForUbuntu%2F</url>
-    <content type="text"><![CDATA[Application For UbuntuVS code1234sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-makesudo apt-get updatesudo apt-get install ubuntu-makesudo umake ide visual-studio-code PDF阅读器Okular1$ sudo apt-get install okular Typora1234sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAEsudo add-apt-repository 'deb http://typora.io linux/'sudo apt-get updatesudo apt-get install typora Sougou link 12Download : http://pinyin.sogou.com/linux/ sudo dpkg -i sogoupinyin_2.1.0.0082_amd64.deb Arduino link Extensions 安装 搜索 arduino vs code –&gt; 首选项 –&gt; 设置 –&gt; 搜索arduino –&gt; 设置 arduino.path 123456查看软件安装目录： $ aptitude show sublime-text-installer //列出软件信息 $ dpkg -l //列车所有安装的软件 $ dpkg -l firefox //列出firefox 软件安装信息 $ dpkg -L 软件名 //没有在PATH路径下保存，通过下面命令寻找安装目录]]></content>
+    <content type="text"><![CDATA[Application For UbuntuVS code1234sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-makesudo apt-get updatesudo apt-get install ubuntu-makesudo umake ide visual-studio-code PDF阅读器Okular1$ sudo apt-get install okular Typora1234sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAEsudo add-apt-repository 'deb http://typora.io linux/'sudo apt-get updatesudo apt-get install typora Sougou link 12Download : http://pinyin.sogou.com/linux/ sudo dpkg -i sogoupinyin_2.1.0.0082_amd64.deb Arduino link Extensions 安装 搜索 arduino vs code –&gt; 首选项 –&gt; 设置 –&gt; 搜索arduino –&gt; 设置 arduino.path 123456查看软件安装目录： $ aptitude show sublime-text-installer //列出软件信息 $ dpkg -l //列车所有安装的软件 $ dpkg -l firefox //列出firefox 软件安装信息 $ dpkg -L 软件名 //没有在PATH路径下保存，通过下面命令寻找安装目录 Screenshot ubuntu 自带的截图工具 用用软件进行下载更新]]></content>
       <categories>
         <category>ubuntu</category>
       </categories>
