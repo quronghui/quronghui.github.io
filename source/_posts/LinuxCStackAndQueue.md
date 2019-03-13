@@ -9,6 +9,8 @@ categories:
 tags: [Linux, C]
 ---
 
++ [Code link, Stack and Queue](https://github.com/quronghui/LinuxC.git) 
+
 # LinuxC Stack And Queue
 
 ## 数据结构
@@ -47,3 +49,49 @@ tags: [Linux, C]
 1. 代码 Assert 测试
    + 前提条件 ：注意top总是指向栈顶元素的下一个元素
 2. putchar函数的作用是把一个字符打印到屏幕上,和printf的%c作用
+
+## 队列 Queue
+
+### 概念
+
+1. 队列也是一组元素的集合，也提供两种基本操作:
+   + Enqueue(入队)将元素添加到队尾
+   + Dequeue(出队)从队头取出元素并返回。
+   + FIFO(First In First Out,先进先出)
+
+2. 队列的索引
+   + 变量head、tail 就像前两节用来表示栈顶的top一样
+   + 是queue数组的索引或者叫指针,分别指向队头和队尾。
+   + 每个点的predecessor成员也是一个指针,指向它的前趋在queue数组中的位置。
+
+   {% asset_img  queue.png %}
+
+### 算法设计
+
++ ```
+  *       (1) 广度优先是一种步步为营的策略,每次都从各个方向探索一步,将前线推进一步,
+  *       (2) 队列中的元素总是由前线的点组成的
+  *       (3) 广度优先搜索还有一个特点是可以找到从起点到终点的最短路径
+  *       (4)而深度优先搜索找到的不一定是最短路径
+  ```
+
+##  堆栈 VS 队列
+
+1. 堆栈
+
+   + 栈操作的top指针在Push（入）时增大
+   + Pop（出）时减小
+   + 栈空间是可以重复利用的
+
+2. 队列
+
+   + 队列的head、tail指针都在一直增大；
+   + 虽然前面的元素已经出队了,但它所占的存储空间却不能重复利用
+
+3. 为了解决队列的问题
+
+   + 引入环形队列
+   + 从head到tail之间是队列的有效元素,从tail到head之间是空的存储位置,
+   + head追上tail就表示队列空了；tail追上head就表示队列的存储空间满了。
+
+   {%  asset_img round.png  %}

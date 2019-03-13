@@ -11,7 +11,7 @@ tags: [Linux, C]
 
 # LinuxC Array
 
-Code link](https://github.com/quronghui/LinuxC.git) -- Array 的相关代码
+[Code link](https://github.com/quronghui/LinuxC.git) -- Array 的相关代码
 
 ## 数组的基本操作
 

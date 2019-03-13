@@ -40,7 +40,7 @@ tags: [Linux, C]
 
 1. 分析算法的时间复杂度
 
-   {% asser_img time.png %}
+   {% asset_img time.png %}
 
 2. 最坏情况和平均情况的复杂度都是 O(n^2)
 
@@ -65,7 +65,7 @@ tags: [Linux, C]
 
 3. 时间复杂度计算
 
-   {% aeest_img divide.png %}
+   {% asset_img divide.png %}
 
 4. 设计不同时间复杂度的算法
 
