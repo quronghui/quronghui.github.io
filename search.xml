@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[DataType]]></title>
-    <url>%2F2019%2F03%2F14%2FDataType%2F</url>
-    <content type="text"><![CDATA[DataType整形 计算机的最小存储单位：Byte(不是bit) 1 Byte = 8 bits char 占一个 Byte 代码的可移植性 编译器规定 有无符号类型 C 规定的Implementation Defined C语言和平台和编译器密不可分的； ASCII 的取值范围是 0-127 这时候char存储一个ASCII，不必写明signed和unsigned 如果char表示8位的整数 为了可移植性就必须写明是signed还是unsigned 2’s Complement : 表示的是补码 Implementation-defined、Unspecified和Undefined implementation Unspecified C标准没有明确规定按哪种方式处理，编译器可以自己决定，并且也不必写在编译器的文档中； 这样即使用同一个编译器的不同版本来编译也可能得到不同的结果 因为编译器没有在文档中明确写它会怎么处理,那么不同版本的编译器就可以选择不同的处理方式。 Undefined C标准规定 除了char类型需要表明 signed 和 unsigned 其他整形不明确表明signed 和 unsigned，都表示有符号(-127-128)的数 容易造成访问越界的问题 整形数据需要表明有无符号 C规定用八进制和十六进制常量，代替二进制常量。 除了char是C明确规定占一个字节，其他的几个字节都是implementation 浮点型 float 型通常是32位，double型通常是64位。 浮点型的后缀和类型 double : 没有后缀 float : f / F 的后缀 long double : l / L的后缀 类型转换 C语法中最复杂的一部分 Integer Promotion char，short，Bit-field：提升为整形int表示，或者unsigned int 12unsigned char c1 = 255, c2 = 2;int n = c1 + c2; 最后结果是257，而unsigned char 范围是0-255; 是先把c1 和c2提升为int类型，然后相加得到的 Usual Arithmetic Conversion 两边运算的类型不同，低的类型往高的类型转换 赋值类型的转换 右边的类型转换为左边的类型，在进行赋值 编译器的类型转换处理 规则不用用来记的，而是用来排错误 数据转换最大的问题便是：造成越界或者溢出]]></content>
-      <tags>
-        <tag>Linux</tag>
-        <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[LinuxC Operator]]></title>
-    <url>%2F2019%2F03%2F14%2FLinuxCoperator%2F</url>
-    <content type="text"><![CDATA[LinuxC Operator 主要是介绍位运算符，通过位运算对整数进行操作。 位运算按位与、或、异或、取反 要进行数据类型的转换：Data Type 123unsigned char c = 0xfc;unsigned int i = ~c;result : ffffff03 先进行类型的提升，在进行转换。 移位运算 移位运算符(Bitwise Shift)包括 左移 &lt;&lt; 和 右移 &gt;&gt; 无符号的移位 左移将一个整数的各二进制位全部左移若干位 有符号的移位 不建议使用，减少出错 正数的高位移入0 移位运算中：不同进制数 和 不同的类型之间的区别 不同的进制数：同一个数用不同的方式进行表示 不同的类型：存储一个数所能提供的空间（位） 同一个数在不同的类型转换中，会发生溢出现象 掩码 对一个整数的某些位进行操作 1define ： mask = 0x0000ff00; //(定义一个32的存储类型int)对一个数的8-15位进行操作 其他运算符复合赋值运算符 在赋值的同时做一次运算 对于有 Side Effect 的表达式，影响是不同的。 Sizeof and typedef sizeof 是一个特殊的运算符：sizeof 表达式和 sizeof(类型名) sizeof(表达式)： （表达式）不进行求值计算，将（表达式）类型所占的字节数，作为整个sizeof(表达式)的值 sizeof（表达式）的值 = 是size_t类型的 size_t 类型名 C明确规定：sizeof 的值是无符号整形 1typedef unsigned long size_t; // 为了不同平台，规定size_t的类型 typedef 用于给一个类型取名字 12typedef unsigned long size_t; // size_t是一个类型，代表unsigned long的类型unsigned long size_t; // size_t是一个变量，变量的类型是unsigned long 123typedef char array_t[10];array_t a;// 定义了一个 char类型的 a[10]]]></content>
-      <tags>
-        <tag>Linux</tag>
-        <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Ubuntu for ESP32]]></title>
     <url>%2F2019%2F03%2F12%2FEsp32%2F</url>
     <content type="text"><![CDATA[ESP-IDF for ESP32前言 通过gcc交叉编译进行开发 Esp32，开发类似于ESP8266，乐鑫官方提供相应的开发教程。 ESP32的SDK的编程指南，ESP-IDF编程指南 开发环境搭建 在Ubuntu下搭建ESP32开发环境 编译依赖工具 ESP32 的编译开发主要依赖两大核心工具，一个是乐鑫官方提供的ESP32交叉编译工具链，另外一个是python2.7。 配置工程，开始编译 有一个Bug，每次都要重新指定，ESPIDF的实际路径 1export IDF_PATH=/home/quronghui/HustFiles/Esp32/sources/esp-idf Arduino IDE for ESP32环境搭建 arduino-esp32 主要是在Arduino IDE 中加载 Esp32 的core; PlatformIO for ESP32环境搭建 VS Code 中加载组件platform。 在Ubuntu下搭建ESP32开发环境 需要搭建以下ubunut下的python2环境 先配置一下，使用platform时便能直接使用 Platform 开发 使用ESP-IDF进行开发 例子的参考 espressif/esp-idf 开发平台比较 在Ubuntu下进行开发 类别 ESP-IDF for ESP32 Arduino IDE for ESP32 PlatformIO for ESP32 环境搭建 有明确的文档 github有说明 直接加载平台就行 编译 编写makefile，指定IDF_PATH 平台操作 平台操作 下载 命令行 平台操作 平台操作 开发难度 目前来说有点难（make指令） 加载库 加载库 开发界面 vs code 不友好 vs code 选择 platformio]]></content>
@@ -40,6 +22,34 @@
       </categories>
       <tags>
         <tag>arduino</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LinuxC Operator]]></title>
+    <url>%2F2019%2F03%2F12%2FLinuxCoperator%2F</url>
+    <content type="text"><![CDATA[LinuxC Operator 主要是介绍位运算符，通过位运算对整数进行操作。 位运算按位与、或、异或、取反 要进行数据类型的转换：Data Type 123unsigned char c = 0xfc;unsigned int i = ~c;result : ffffff03 先进行类型的提升，在进行转换。 移位运算 移位运算符(Bitwise Shift)包括 左移 &lt;&lt; 和 右移 &gt;&gt; 无符号的移位 左移将一个整数的各二进制位全部左移若干位 有符号的移位 不建议使用，减少出错 正数的高位移入0 移位运算中：不同进制数 和 不同的类型之间的区别 不同的进制数：同一个数用不同的方式进行表示 不同的类型：存储一个数所能提供的空间（位） 同一个数在不同的类型转换中，会发生溢出现象 掩码 对一个整数的某些位进行操作 1define ： mask = 0x0000ff00; //(定义一个32的存储类型int)对一个数的8-15位进行操作 其他运算符复合赋值运算符 在赋值的同时做一次运算 对于有 Side Effect 的表达式，影响是不同的。 Sizeof and typedef sizeof 是一个特殊的运算符：sizeof 表达式和 sizeof(类型名) sizeof(表达式)： （表达式）不进行求值计算，将（表达式）类型所占的字节数，作为整个sizeof(表达式)的值 sizeof（表达式）的值 = 是size_t类型的 size_t 类型名 C明确规定：sizeof 的值是无符号整形 1typedef unsigned long size_t; // 为了不同平台，规定size_t的类型 typedef 用于给一个类型取名字 12typedef unsigned long size_t; // size_t是一个类型，代表unsigned long的类型unsigned long size_t; // size_t是一个变量，变量的类型是unsigned long 123typedef char array_t[10];array_t a;// 定义了一个 char类型的 a[10]]]></content>
+      <categories>
+        <category>LinuxC</category>
+        <category>Emededded</category>
+        <category>LinuxC Operator</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[DataType]]></title>
+    <url>%2F2019%2F03%2F12%2FDataType%2F</url>
+    <content type="text"><![CDATA[DataType整形 计算机的最小存储单位：Byte(不是bit) 1 Byte = 8 bits char 占一个 Byte 代码的可移植性 编译器规定 有无符号类型 C 规定的Implementation Defined C语言和平台和编译器密不可分的； ASCII 的取值范围是 0-127 这时候char存储一个ASCII，不必写明signed和unsigned 如果char表示8位的整数 为了可移植性就必须写明是signed还是unsigned 2’s Complement : 表示的是补码 Implementation-defined、Unspecified和Undefined implementation Unspecified C标准没有明确规定按哪种方式处理，编译器可以自己决定，并且也不必写在编译器的文档中； 这样即使用同一个编译器的不同版本来编译也可能得到不同的结果 因为编译器没有在文档中明确写它会怎么处理,那么不同版本的编译器就可以选择不同的处理方式。 Undefined C标准规定 除了char类型需要表明 signed 和 unsigned 其他整形不明确表明signed 和 unsigned，都表示有符号(-127-128)的数 容易造成访问越界的问题 整形数据需要表明有无符号 C规定用八进制和十六进制常量，代替二进制常量。 除了char是C明确规定占一个字节，其他的几个字节都是implementation 浮点型 float 型通常是32位，double型通常是64位。 浮点型的后缀和类型 double : 没有后缀 float : f / F 的后缀 long double : l / L的后缀 类型转换 C语法中最复杂的一部分 Integer Promotion char，short，Bit-field：提升为整形int表示，或者unsigned int 12unsigned char c1 = 255, c2 = 2;int n = c1 + c2; 最后结果是257，而unsigned char 范围是0-255; 是先把c1 和c2提升为int类型，然后相加得到的 Usual Arithmetic Conversion 两边运算的类型不同，低的类型往高的类型转换 赋值类型的转换 右边的类型转换为左边的类型，在进行赋值 编译器的类型转换处理 规则不用用来记的，而是用来排错误 数据转换最大的问题便是：造成越界或者溢出]]></content>
+      <categories>
+        <category>LinuxC</category>
+        <category>Emededded</category>
+        <category>Data Type</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>C</tag>
       </tags>
   </entry>
   <entry>
