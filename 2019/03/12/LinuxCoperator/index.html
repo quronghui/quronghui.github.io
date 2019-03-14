@@ -106,7 +106,9 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/LinuxCoperator/operator.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/LinuxCoperator/assignment.png">
-<meta property="og:updated_time" content="2019-03-14T01:26:01.747Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/LinuxCoperator/rule.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/LinuxCoperator/summary.png">
+<meta property="og:updated_time" content="2019-03-14T02:32:39.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LinuxC Operator">
 <meta name="twitter:description" content="LinuxC Operator 主要是介绍位运算符，通过位运算对整数进行操作。  位运算按位与、或、异或、取反 要进行数据类型的转换：Data Type  123unsigned char c = 0xfc;unsigned int i = ~c;result : ffffff03  先进行类型的提升，在进行转换。   移位运算 移位运算符(Bitwise Shift)包括 左移 &amp;lt;&amp;lt;">
@@ -419,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-14 09:26:01" itemprop="dateModified" datetime="2019-03-14T09:26:01+08:00">2019-03-14</time>
+                <time title="Updated at: 2019-03-14 10:32:39" itemprop="dateModified" datetime="2019-03-14T10:32:39+08:00">2019-03-14</time>
               
             
           </span>
@@ -577,9 +579,51 @@
 </li>
 <li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">size_t</span>;	<span class="comment">// size_t是一个类型，代表unsigned long的类型</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">size_t</span>;			<span class="comment">// size_t是一个变量，变量的类型是unsigned long</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> <span class="keyword">array_t</span>[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">array_t</span> a;</span><br><span class="line"><span class="comment">// 定义了一个 char类型的 a[10]</span></span><br></pre></td></tr></table></figure></li>
+<li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> <span class="keyword">array_t</span>[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">array_t</span> a;</span><br><span class="line"><span class="comment">// 定义了一个 char类型的 a[10]</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
+</ol>
+<h3 id="Side-Effect-and-Sequence-Point"><a href="#Side-Effect-and-Sequence-Point" class="headerlink" title="Side Effect and Sequence Point"></a>Side Effect and Sequence Point</h3><ul>
+<li>造成的后果：结果出现Undefined</li>
+</ul>
+<ol>
+<li><p>Side effect : 针对函数调用过程中，先后顺序不确定，造成结果的Undefined.</p>
+</li>
+<li><p>Sequence Point：调用一个函数时,在所有准备工作做完之后、函数调用开始之前。</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo( <span class="name">f</span>(), g())<span class="comment">;		//调用函数f(),g()的Side Effect发生的顺序不一定；等所有的Side Effect调用完了，才调用foo()</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>short-circuit : 简写 &amp;&amp;  ||  的逻辑表达式</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a &amp;&amp; b		<span class="comment">// &amp;&amp;：a为真才调用b，写成if(a) b; </span></span><br><span class="line">a || b		<span class="comment">// ||: a为假才调用b, 写成 if(!a) b;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Sequence Point</p>
+<ul>
+<li>哪些地方是一个Sequence Point（序列点）</li>
+<li>一个完整的操作前后都可以称之为Sequence Point；</li>
+<li>完整的声明；完整表达式的末尾； “ ； ”</li>
+<li>像printf 、scanf 这种带转换说明的输入/输出库函数,在处理完每一个转换说明相关的输/输出操作时是一个Sequence Point。</li>
+</ul>
+</li>
+<li><p>定义规则</p>
+<ul>
+<li>在两个Sequence Point之间,同一个变量的值只允许被改变一次。</li>
+<li>如果在两个Sequence Point之间既要读一个变量的值又要改它的值,只有在读写顺序确定的情况下才可以这么写。</li>
+</ul>
+</li>
+<li><p>错误示例</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int a=0<span class="comment">;</span></span><br><span class="line">a = (<span class="name">++a</span>)+(<span class="name">++a</span>)+(<span class="name">++a</span>)+(<span class="name">++a</span>)<span class="comment">;		//对变量a有5次Side Effect</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">a</span>[i++] = i;			<span class="comment">	// 变量i的读写顺序不能确定</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="运算符总结"><a href="#运算符总结" class="headerlink" title="运算符总结"></a>运算符总结</h2><ol>
+<li><p>运算符的规则：也就是优先级</p>
+<img src="/2019/03/12/LinuxCoperator/rule.png">
+</li>
+<li><p>Bug 查错的规则：优先级的先后顺序</p>
+<ul>
+<li>算数 &gt; 移位 &gt; 关系 &gt; 相等性 &gt; 按位操作 &gt; 逻辑操作 &gt; 条件运算符 &gt; 赋值 &gt; 逗号</li>
+</ul>
+<img src="/2019/03/12/LinuxCoperator/summary.png"></li>
 </ol>
 
       
@@ -703,7 +747,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -788,7 +832,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -861,7 +909,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">30</span>
+                      
+                    
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -897,7 +947,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LinuxC-Operator"><span class="nav-number">1.</span> <span class="nav-text">LinuxC Operator</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算"><span class="nav-number">1.1.</span> <span class="nav-text">位运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按位与、或、异或、取反"><span class="nav-number">1.1.1.</span> <span class="nav-text">按位与、或、异或、取反</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位运算"><span class="nav-number">1.1.2.</span> <span class="nav-text">移位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#掩码"><span class="nav-number">1.1.3.</span> <span class="nav-text">掩码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他运算符"><span class="nav-number">1.2.</span> <span class="nav-text">其他运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#复合赋值运算符"><span class="nav-number">1.2.1.</span> <span class="nav-text">复合赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sizeof-and-typedef"><span class="nav-number">1.2.2.</span> <span class="nav-text">Sizeof and typedef</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LinuxC-Operator"><span class="nav-number">1.</span> <span class="nav-text">LinuxC Operator</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算"><span class="nav-number">1.1.</span> <span class="nav-text">位运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按位与、或、异或、取反"><span class="nav-number">1.1.1.</span> <span class="nav-text">按位与、或、异或、取反</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位运算"><span class="nav-number">1.1.2.</span> <span class="nav-text">移位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#掩码"><span class="nav-number">1.1.3.</span> <span class="nav-text">掩码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他运算符"><span class="nav-number">1.2.</span> <span class="nav-text">其他运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#复合赋值运算符"><span class="nav-number">1.2.1.</span> <span class="nav-text">复合赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sizeof-and-typedef"><span class="nav-number">1.2.2.</span> <span class="nav-text">Sizeof and typedef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Side-Effect-and-Sequence-Point"><span class="nav-number">1.2.3.</span> <span class="nav-text">Side Effect and Sequence Point</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符总结"><span class="nav-number">1.3.</span> <span class="nav-text">运算符总结</span></a></li></ol></li></ol></div>
             
 
           </div>
