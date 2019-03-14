@@ -2,6 +2,7 @@
 layout: post
 title: DataType
 date: 2019-03-12 10:03:09
+categories: 
  - [LinuxC] 
  - [Emededded]
  - [Data Type]

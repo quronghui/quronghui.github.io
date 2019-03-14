@@ -176,3 +176,8 @@ stty -F /dev/ttyUSB0				//查看Usb的属性
  stty -F /dev/ttyUSB0  115200		//修改usb的波特率
 ```
 
+## 声卡无声音
+
+1. Ubuntu 18没有声音
+2. [解决方式参考](https://blog.csdn.net/multimicro/article/details/82528730)
+
