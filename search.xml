@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[CC2540]]></title>
+    <url>%2F2019%2F03%2F17%2FCC2540%2F</url>
+    <content type="text"><![CDATA[CC2540核心板电路图阿莫电子 正常工作：CC2540工常工作的晶振是32M,休眠晶振是32.768K。 IT 官网 RESET 引脚：接了一个电阻 复位键：加了一个下拉电阻。（通过一个电阻减小电流对reset pin 造成的影响） CC2540 连接不上仿真器外部晶振不工作 原来CC2540为了降低功耗：设置了几种不同的工作模式，在没有程序运行的情况下，默认是关闭外部的晶振的，所以在新片子刚焊上时，晶振当然也就不起振了。 两端的匹配电容大小要合适，不然导致无法起振； 选择的电容的值越大单片机的耗电能力也就越强，而且易造成不起振的情况。减小晶振的电容值 PCB 焊接错误 参考蓝牙 底部是需要进行焊接的：之前焊接的时候都是有意避开底部，不上焊锡。 电压检查 Bias 引脚 开发手册 参考教程]]></content>
+      <categories>
+        <category>cc2540</category>
+        <category>Electronic</category>
+      </categories>
+      <tags>
+        <tag>cc2540</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Crystal Oscillator]]></title>
+    <url>%2F2019%2F03%2F17%2FCrystalOscillator%2F</url>
+    <content type="text"><![CDATA[Oscillator and Crystal有源晶振 oscillator（振荡器） 有源晶振是右石英晶体组成的。 石英晶片：可以当为振荡器使用，是基于它的压电效应：在晶片的两个极上加一电场，会使晶体产生机械变形； 四脚晶振 有源的四脚晶振：有个点标记的为1脚，按逆时针（管脚向下）分别为2、3、4 有源晶振通常的用法：一脚悬空，二脚接地，三脚接输出，四脚接电压。 配置电路 有源晶振不需要DSP的内部振荡器，信号质量好，比较稳定，而且连接方式相对简单。 电源滤波：通常使用一个电容和电感构成的PI型滤波网络， 三脚输出端：用一个小阻值的电阻过滤信号。 无源晶振 Crystal 仅由阻容元件组成 起振需求 无源晶振是有2个引脚的无极性元件，需要借助于时钟电路才能产生振荡信号，自身无法振荡起来。 两端的匹配电容大小要合适，不然导致无法起振。 晶振是否起振测量示波器测量 通电的情况下，测量双脚： 脚1和脚3是通电的，电流从脚1流入、脚3流出。 正接脚1，负接3； 以探头最好打到衰减档进行测试，探头测试晶振管脚有固定正确频率的正弦波信号输出即可。 通电的情况下，测量单脚： 用示波器连接任意一个引脚与地线， 观测到震荡波形且频率与晶振频率相符（频率不对的话是干扰信号）就说明已经起振。 原因分析焊接 晶振的温度范围 -50 – 85。 焊接时烙铁的温度200 度左右。 PCB 工艺问题 电容值不匹配，电容值大小和晶振起振相反。 降低电容值，看是否起振 选择的电容的值越大单片机的耗电能力也就越强。而且易造成不起振的情况。 晶振两脚之间有走线 晶振电路的走线过长]]></content>
+      <categories>
+        <category>Oscillator</category>
+        <category>Electronic</category>
+      </categories>
+      <tags>
+        <tag>Oscillator</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[post]]></title>
+    <url>%2F2019%2F03%2F17%2Fpost%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[x86Programe]]></title>
     <url>%2F2019%2F03%2F14%2Fx86Programe%2F</url>
     <content type="text"><![CDATA[x86 Programe 确实没怎么看懂 X86的寄存器 x86的通用寄存器有eax 、ebx 、ecx、edx 、edi 、esi 前面加 %eax 汇编语句的编译执行 文件命名：.s 代码解读 .globl name : 需用连接器 ld 知道的名字 edi / ebx / eax ELF 文件 ELF Header 目标文件布局]]></content>
@@ -385,7 +414,7 @@
   <entry>
     <title><![CDATA[Electronic Direction]]></title>
     <url>%2F2018%2F12%2F25%2FElectronicDirection%2F</url>
-    <content type="text"><![CDATA[Electronic Studying 嵌入式学习的一个方向指导 嵌入式过程中常用的工具，社区，书籍 Contents[TOC] Computer history 从嵌入式的元件，到计算机的整体架构； bilibili 视频学习教程 搜索计算机科学—-【计算机科学速成课】 Awesome Electronics 介绍嵌入式的一些网址，工具，和开源社区 GitHub 中kitspace/awesome-electronics github 中的 awesome，是一个很强大的 Project Communication IIC and Uart and SPI Book Eagle 的学习使用【高质量PCB设计入门–Eagle使用】 LinuxC 编程一站式学习 看芯片制作的相关书 ToolsAutoDesk Student AutoDesk 选择地区是中国的，为了后面的学校验证 { % aeest_img autodesk.png % } 用学校邮箱创建账户，进行验证 进入免费软件一栏，可以看到免费软件 { % aeest_img autodesk_free.png % } Eagle PCB绘制工具，相对于AD来说更加轻量级，而且有大量的封装库。 申请免费的Eagle { % aeest_img eagle.png % } 学习【高质量PCB设计入门–Eagle使用】 Adobe Creative Cloud Adobe Creative Cloud 通过安装Adobe Creative Cloud desk，从而安装 Illustrator (AI的矢量图) Illustrator 能够绘制矢量图，从而导入到 Eagle. Eagle : 不能写中文，而且图形不是矢量的。 AutoCADOpen Link IT Community stackoverflow ：IT与程序相关的IT技术问答网站 element : IT的互助社群 China IT Community CSDN ：国内IT的博客分享平台 开源中国 ：中国最大的开源IT社区 UI Design UI dribbble UI Behance Vector ICONS FlatIcon : 有版权限制的矢量图标 iconfont : 矢量图标 Security Community 看雪论坛 : 致力于PC、移动、智能设备安全研究及逆向工程的开发者社区 吾爱破解：论坛致力于软件安全与病毒分析的前沿,丰富的技术版块交相辉映,由无数热衷于软件加密解密及反病毒爱好者共同维护 [ i 春秋 ]注网络安全、信息安全、白帽子技术的在线学习,教育、培训的平台 Emebadded Community hackaday ： Hardware open source items hackster ：Hardware open source store Cadlab.io ： 可以使用github push 的可视化图形软件 Crowdfunding Community kickstarter ：众筹项目 indiegogo : 众筹项目 modian : 中国的众筹项目 Hacker New ：世界的重要新闻 RSS (Really Simple Syndication) inoreader : RSS订阅是站点用来和其他站点之间共享内容的一种简易方式，即Really Simple Syndication（简易信息聚合）。 feedly : Feedly是一款第三方RSS阅读器，在经过了几次更新后，已经有比较多的忠实的使用者。 第一次访问Feedly的用户，Feedly会自动提示接入 Google Reader的访问权限，无需注册新会员. 能够增加我们之前的Open Source PDF Transform Doc https://pdf2doc.com/ Algorithm visualization* https://visualgo.net/zh : 算法可视化的工具，用于展示算法的好工具 UART HMI 通过串口发送，就之间显示出对应的图形和数据 在显示屏上显示二维码就可以用。 与非网：一些嵌入式的前沿 可能你已修炼成资深行业观察家，如何小庆老师那样真知灼见； 可能你善于分析行业趋势，如飞翔的鸭子侃侃而谈； 可能你精通某一项技术，如加菲那样精讲技术而不失幽默； 可能你善于发现身边的工程师故事，如骆驼般娓娓道来。]]></content>
+    <content type="text"><![CDATA[Electronic Studying 嵌入式学习的一个方向指导 嵌入式过程中常用的工具，社区，书籍 Contents[TOC] Computer history 从嵌入式的元件，到计算机的整体架构； bilibili 视频学习教程 搜索计算机科学—-【计算机科学速成课】 Awesome Electronics 介绍嵌入式的一些网址，工具，和开源社区 GitHub 中kitspace/awesome-electronics github 中的 awesome，是一个很强大的 Project Communication IIC and Uart and SPI Book Eagle 的学习使用【高质量PCB设计入门–Eagle使用】 LinuxC 编程一站式学习 凸优化，嵌入式的算法模型 看芯片制作的相关书 ToolsAutoDesk Student AutoDesk 选择地区是中国的，为了后面的学校验证 { % aeest_img autodesk.png % } 用学校邮箱创建账户，进行验证 进入免费软件一栏，可以看到免费软件 { % aeest_img autodesk_free.png % } Eagle PCB绘制工具，相对于AD来说更加轻量级，而且有大量的封装库。 申请免费的Eagle { % aeest_img eagle.png % } 学习【高质量PCB设计入门–Eagle使用】 Adobe Creative Cloud Adobe Creative Cloud 通过安装Adobe Creative Cloud desk，从而安装 Illustrator (AI的矢量图) Illustrator 能够绘制矢量图，从而导入到 Eagle. Eagle : 不能写中文，而且图形不是矢量的。 AutoCADOpen Link IT Community stackoverflow ：IT与程序相关的IT技术问答网站 element : IT的互助社群 China IT Community CSDN ：国内IT的博客分享平台 开源中国 ：中国最大的开源IT社区 UI Design UI dribbble UI Behance Vector ICONS FlatIcon : 有版权限制的矢量图标 iconfont : 矢量图标 Security Community 看雪论坛 : 致力于PC、移动、智能设备安全研究及逆向工程的开发者社区 吾爱破解：论坛致力于软件安全与病毒分析的前沿,丰富的技术版块交相辉映,由无数热衷于软件加密解密及反病毒爱好者共同维护 [ i 春秋 ]注网络安全、信息安全、白帽子技术的在线学习,教育、培训的平台 Emebadded Community hackaday ： Hardware open source items hackster ：Hardware open source store Cadlab.io ： 可以使用github push 的可视化图形软件 Crowdfunding Community kickstarter ：众筹项目 indiegogo : 众筹项目 modian : 中国的众筹项目 Hacker New ：世界的重要新闻 RSS (Really Simple Syndication) inoreader : RSS订阅是站点用来和其他站点之间共享内容的一种简易方式，即Really Simple Syndication（简易信息聚合）。 feedly : Feedly是一款第三方RSS阅读器，在经过了几次更新后，已经有比较多的忠实的使用者。 第一次访问Feedly的用户，Feedly会自动提示接入 Google Reader的访问权限，无需注册新会员. 能够增加我们之前的Open Source PDF Transform Doc https://pdf2doc.com/ Algorithm visualization* https://visualgo.net/zh : 算法可视化的工具，用于展示算法的好工具 UART HMI 通过串口发送，就之间显示出对应的图形和数据 在显示屏上显示二维码就可以用。 与非网：一些嵌入式的前沿 可能你已修炼成资深行业观察家，如何小庆老师那样真知灼见； 可能你善于分析行业趋势，如飞翔的鸭子侃侃而谈； 可能你精通某一项技术，如加菲那样精讲技术而不失幽默； 可能你善于发现身边的工程师故事，如骆驼般娓娓道来。]]></content>
       <categories>
         <category>Electronic Direction</category>
         <category>Open Link</category>
