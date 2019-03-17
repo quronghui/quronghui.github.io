@@ -40,7 +40,8 @@ tags: Electronic Direction
 
 1. Eagle 的学习使用【高质量PCB设计入门--Eagle使用】
 2. LinuxC 编程一站式学习
-3. 看芯片制作的相关书
+3. [凸优化，嵌入式的算法模型](https://github.com/KeKe-Li/book/tree/master/AI)
+4. 看芯片制作的相关书
 
 ## Tools
 
