@@ -81,7 +81,28 @@ tags: ANT
 2.  1GHz=1000MHz 1MHz=1000kHz 1kHz=1000Hz
 3. 过孔会产生寄生电感，高频信号对此会产生非常大的衰减，所以走射频线的时候尽量不要有过孔。
 
-## PCB 布线
+## PCB 布线问题
+
+### ANT 和 GND 相连
 
 1. 出现一种现象：RF射频线和GND相连报错。
 2. 因为这是RF信号，也就是微波。微波就不能当一般的数字，模拟信号来对待了。虽然用万用表量，这个天线与地是短路的。而对微波，其实这整个天线铜皮其实是相当于包括了很多电阻，电容，电感等组成的等效电路。
+
+   ·{% asset_img AntGnd.png %}
+
+### ANT 天线没有盖油
+
+1. 如何查看是否盖油
+
+   + Altium Design -- >  只显示 Top Sloder /  Bottom Sloder
+
+     {% asset_img ANT.png %}
+
+   + 原因：CC2540 的元件，绘制的时候加了 top sloder 层，导致PCB生成Gerber文件的时候默认为开窗
+
+     {% asset_img topsloder.png %}
+
+2. 如何解决：
+
+   + 找到对应天线的元件库，删除top sloder绘制的Track
+   + 
