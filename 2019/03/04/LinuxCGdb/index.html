@@ -105,7 +105,7 @@
 <meta property="og:description" content="LinuxC Gdb Code link – Gdb的相关代码  Gdb调试方式 程序中除了一目了然的Bug之外都需要一定的调试手段来分析到底错在哪   根据程序执行时的出错现象假设错误原因,然后在代码中适当的位置插入printf , 强大的调试工具gdb,可以完全操控程序的运行。  调试思想 分析现象 –&amp;gt; 假设错误原因 –&amp;gt; 产生新的现象去验证假设  单步执行和跟踪函数调用开始调试">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/04/LinuxCGdb/GdbBacktrace.png">
-<meta property="og:updated_time" content="2019-03-07T03:05:09.671Z">
+<meta property="og:updated_time" content="2019-03-18T01:08:43.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LinuxC Gdb">
 <meta name="twitter:description" content="LinuxC Gdb Code link – Gdb的相关代码  Gdb调试方式 程序中除了一目了然的Bug之外都需要一定的调试手段来分析到底错在哪   根据程序执行时的出错现象假设错误原因,然后在代码中适当的位置插入printf , 强大的调试工具gdb,可以完全操控程序的运行。  调试思想 分析现象 –&amp;gt; 假设错误原因 –&amp;gt; 产生新的现象去验证假设  单步执行和跟踪函数调用开始调试">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-07 11:05:09" itemprop="dateModified" datetime="2019-03-07T11:05:09+08:00">2019-03-07</time>
+                <time title="Updated at: 2019-03-18 09:08:43" itemprop="dateModified" datetime="2019-03-18T09:08:43+08:00">2019-03-18</time>
               
             
           </span>
@@ -617,6 +617,9 @@
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> run					<span class="comment">//运行代码，当出现错误的时候会自动停止运行</span></span><br><span class="line"><span class="symbol">$</span> bt					<span class="comment">//查看那个函数调用产生的错误</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<h2 id="反汇编"><a href="#反汇编" class="headerlink" title="反汇编"></a>反汇编</h2><h3 id="C和汇编穿插显示"><a href="#C和汇编穿插显示" class="headerlink" title="C和汇编穿插显示"></a>C和汇编穿插显示</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -g main<span class="selector-class">.c</span> -o main -Wall	<span class="comment">// 生成可执行文件</span></span><br><span class="line">objdump -dS main			<span class="comment">// 把C代码和汇编代码穿插起来显示</span></span><br></pre></td></tr></table></figure>
+<h3 id="只生成汇编"><a href="#只生成汇编" class="headerlink" title="只生成汇编"></a>只生成汇编</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -S main<span class="selector-class">.c</span>				<span class="comment">//只生成汇编代码main.s,而不生成二进制的目标文件。</span></span><br></pre></td></tr></table></figure>
+<h3 id="汇编调试"><a href="#汇编调试" class="headerlink" title="汇编调试"></a>汇编调试</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) disassemble			<span class="comment">//可以反汇编当前函数或者指定的函数</span></span><br><span class="line">(gdb) si 					<span class="comment">//step 命令可以一行代码一行代码地单步调试,而这里用到的si命令可以一条指令一条指令地单步调试。</span></span><br><span class="line">(gdb) info registers 		<span class="comment">//可以显示所有寄存器的当前值。</span></span><br><span class="line">(gdb) <span class="selector-tag">p</span> <span class="variable">$esp</span>				<span class="comment">//打印esp寄存器的值,</span></span><br><span class="line"><span class="comment">// 在上例中esp 寄存器的值是0xbff1c3f4,所以x/20 $esp 命令查看内存中从0xbff1c3f4地址开始的20个32位数。</span></span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
 <li>学C语言不可能不去了解底层计算机体系结构和操作系统的原理，不了解底层原理连一个scanf函数都没办法用好，更没有办法保证写出正确的程序。</li>
 </ol>
@@ -742,7 +745,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -837,7 +840,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                    <span class="site-state-item-count">42</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -916,7 +921,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">33</span>
+                      
+                    
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -952,7 +959,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LinuxC-Gdb"><span class="nav-number">1.</span> <span class="nav-text">LinuxC Gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gdb"><span class="nav-number">1.1.</span> <span class="nav-text">Gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#调试方式"><span class="nav-number">1.1.1.</span> <span class="nav-text">调试方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试思想"><span class="nav-number">1.1.2.</span> <span class="nav-text">调试思想</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单步执行和跟踪函数调用"><span class="nav-number">1.2.</span> <span class="nav-text">单步执行和跟踪函数调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开始调试"><span class="nav-number">1.2.1.</span> <span class="nav-text">开始调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单步调试"><span class="nav-number">1.2.2.</span> <span class="nav-text">单步调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试命令"><span class="nav-number">1.2.3.</span> <span class="nav-text">调试命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#断点"><span class="nav-number">1.3.</span> <span class="nav-text">断点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符型和整形"><span class="nav-number">1.3.1.</span> <span class="nav-text">字符型和整形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#断点加单步"><span class="nav-number">1.3.2.</span> <span class="nav-text">断点加单步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观察点"><span class="nav-number">1.4.</span> <span class="nav-text">观察点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段错误"><span class="nav-number">1.5.</span> <span class="nav-text">段错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LinuxC-Gdb"><span class="nav-number">1.</span> <span class="nav-text">LinuxC Gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gdb"><span class="nav-number">1.1.</span> <span class="nav-text">Gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#调试方式"><span class="nav-number">1.1.1.</span> <span class="nav-text">调试方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试思想"><span class="nav-number">1.1.2.</span> <span class="nav-text">调试思想</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单步执行和跟踪函数调用"><span class="nav-number">1.2.</span> <span class="nav-text">单步执行和跟踪函数调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开始调试"><span class="nav-number">1.2.1.</span> <span class="nav-text">开始调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单步调试"><span class="nav-number">1.2.2.</span> <span class="nav-text">单步调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试命令"><span class="nav-number">1.2.3.</span> <span class="nav-text">调试命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#断点"><span class="nav-number">1.3.</span> <span class="nav-text">断点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符型和整形"><span class="nav-number">1.3.1.</span> <span class="nav-text">字符型和整形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#断点加单步"><span class="nav-number">1.3.2.</span> <span class="nav-text">断点加单步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#观察点"><span class="nav-number">1.4.</span> <span class="nav-text">观察点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段错误"><span class="nav-number">1.5.</span> <span class="nav-text">段错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反汇编"><span class="nav-number">1.6.</span> <span class="nav-text">反汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C和汇编穿插显示"><span class="nav-number">1.6.1.</span> <span class="nav-text">C和汇编穿插显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#只生成汇编"><span class="nav-number">1.6.2.</span> <span class="nav-text">只生成汇编</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编调试"><span class="nav-number">1.6.3.</span> <span class="nav-text">汇编调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
