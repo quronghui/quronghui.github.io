@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Complation And C
+title: Assembler And C
 date: 2019-03-18 08:39:46
 categories: 
  - [LinuxC]
@@ -9,6 +9,8 @@ tags: complation
 ---
 
 #  Complation And C
+
+# **Assembler And C**
 
 ## 汇编代码生成
 
@@ -42,6 +44,7 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
 2. esp 寄存器总是指向栈顶，ebp指向栈底
 
    + esp 随着压栈和出栈操作随时变化，ebp保持不变
+   + 有高地址想低地址增长
    + 函数的参数和局部变量都是通过ebp 的值加上一个偏移量来访问的
 
    {% asset_img esp.png %}
@@ -86,7 +89,7 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
 
    ```
    $ gcc -g main.c -o main	
-   $ readelf -a main		//查看符号表
+   $ readelf -a main		//查看符号表 global and local
    ```
 
 ### 关键字修饰变量
@@ -105,4 +108,47 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
 
    + static 修饰的变量，LOCAL
    + LOCAL 的符号只能在某一个目标文件中定义和使用,而不能定义在一个目标文件中却在另一个目标文件中使用。
+
+### 作用域（Scope）些名词,因为我不是在写C标准。
+
+1. 作用域适合于所有的标识符，而不仅仅是变量。
+2. 作用域范围
+   + 从当前位置，到所在函数结束
+
+### 命名空间 （Name Space）
+
+1. 对于重名标识符，内层作用域的标识符将覆盖外层作用域的标识符。
+
+### 存储类型标识符（Storage Class Specifier）
+
+{%  asset_img specifier.png %}
+
+## 结构体和联合体
+
+### 存储
+
+1. 栈：是从高地址向低地址增长的；
+2. 结构体成员：从低地址向高地址排列，这一点和数组类似。但有一点和数组不同,结构体的各成员并不是一个紧挨一个排列的,中间有空隙,称为填充。
+
+## C和内联汇编
+
++ 内联汇编：为了提高Ｃ的执行效率。因为Ｃ的代码是由编译器进行翻译的。
+
+### 内联方式
+
+1. 内联格式
+
+   ```
+   _asm_(assembler code)
+   ```
+
+2. C中的内联汇编，需要和Ｃ的变量建立关联
+
+   ```
+   __asm__(assembler template
+   	: output operands				/* optional */
+   	: input operands				/* optional */
+   	: list of clobbered registers	/* optional */
+   );
+   ```
 
