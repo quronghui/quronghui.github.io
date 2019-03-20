@@ -13,6 +13,7 @@ tags: cbib
 
 + autocad 制作盒子给kinect
 + [KinectXobx](/document/cad/KinectXbox.dwg)
++ [xbox.pdf](/document/cad/xbox.pdf)
 
 ## 尺寸图
 
