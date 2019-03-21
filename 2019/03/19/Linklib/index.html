@@ -110,7 +110,8 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/19/Linklib/stack_h.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/19/Linklib/static.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/19/Linklib/staticlib.png">
-<meta property="og:updated_time" content="2019-03-21T06:02:12.512Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/19/Linklib/virtual.png">
+<meta property="og:updated_time" content="2019-03-21T07:13:45.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Link lib">
 <meta name="twitter:description" content="Link lib Code link – Link  多目标文件链接 编译查看命令 12$ gcc main.c -o main	//编译可执行文件$ readelf -a main 		//查看到个函数的段定义   目的：  能查看到跟函数的段定义 Data Segment 后面的一些Segment，主要是调试信息   包含其他的 .c 文件  为什么编译器在处理函数，调用代码时需要有函数原型?">
@@ -423,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-21 14:02:12" itemprop="dateModified" datetime="2019-03-21T14:02:12+08:00">2019-03-21</time>
+                <time title="Updated at: 2019-03-21 15:13:45" itemprop="dateModified" datetime="2019-03-21T15:13:45+08:00">2019-03-21</time>
               
             
           </span>
@@ -598,6 +599,7 @@
 </ol>
 <h2 id="静态库"><a href="#静态库" class="headerlink" title="静态库"></a>静态库</h2><ul>
 <li>将一组代码编译成一个库</li>
+<li>链接器只会取出静态库中：有用的那部分代码。</li>
 </ul>
 <h3 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h3><ol>
 <li><p>代码目录的区别：编译的时候需要指定目录</p>
@@ -615,9 +617,54 @@
 </li>
 <li><p>链接主函数 main.c 和 libstack.a</p>
 <ul>
-<li>-L 选项告诉编译器去哪里找需要的库文件：-L. 表示在当前目录找</li>
+<li>-L 选项告诉编译器去哪里找需要的库文件：<strong>-L .</strong>  表示在当前目录找</li>
+<li>-lstack ：告诉编译器链接 libstack库</li>
+<li>-Istack：告诉编译器寻找头文件</li>
 </ul>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gcc main<span class="selector-class">.c</span> -L. -lstack -Istack -o main</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看编译器会查询的目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gcc -<span class="built_in">print</span>-search-dirs</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="共享库"><a href="#共享库" class="headerlink" title="共享库"></a>共享库</h2><h3 id="编译，链接，运行"><a href="#编译，链接，运行" class="headerlink" title="编译，链接，运行"></a>编译，链接，运行</h3><ol>
+<li><p>编译</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -c -fPIC stack/stack<span class="selector-class">.c</span> stack/push<span class="selector-class">.c</span> stack/pop.c</span><br><span class="line">stack/is_empty<span class="selector-class">.c</span>	<span class="comment">// -f 编译选项；PIC 是其中一种</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成共享库</p>
+<ul>
+<li>使用了PIC：共享库的各段加载地址没有定死，可以加载到任意位置</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -shared -o libstack<span class="selector-class">.so</span> stack<span class="selector-class">.o</span> push<span class="selector-class">.o</span> pop<span class="selector-class">.o</span> is_empty.o</span><br><span class="line">$ objdump -dS libstack<span class="selector-class">.so</span>	<span class="comment">//反汇编查看共享库</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>链接库</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gcc main<span class="selector-class">.c</span> -g -L. -lstack -Istack -o main</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行出错</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> ./main		<span class="comment">// 运行的时候：找不到动态链接库 libstack.so??</span></span><br><span class="line"><span class="symbol">$</span> ldd main		<span class="comment">//ldd查看main函数依赖哪些共享库</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>添加动态库的路径<ul>
+<li>pwd : 得到 .so 的绝对路径</li>
+<li>vi etc/ld.so.conf ：每个路径一行，添加</li>
+<li>sudo ldconfig -v</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="共享库的命名"><a href="#共享库的命名" class="headerlink" title="共享库的命名"></a>共享库的命名</h3><ol>
+<li><p>按照共享库的命名惯例,每个共享库有三个文件名:real name、soname和linker name。</p>
+</li>
+<li><p>指定库的名字</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -shared -Wl,-soname,libstack<span class="selector-class">.so</span>.<span class="number">1</span> -o libstack<span class="selector-class">.so</span>.<span class="number">1.0</span> stack<span class="selector-class">.o</span> push<span class="selector-class">.o</span> pop<span class="selector-class">.o</span> is_empty.o</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="虚拟内存管理"><a href="#虚拟内存管理" class="headerlink" title="虚拟内存管理"></a>虚拟内存管理</h2><h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> ps	<span class="comment">//查看当前终端下的进程</span></span><br><span class="line"><span class="comment">// bash 进程的 id 是 3279</span></span><br><span class="line"><span class="symbol">$</span> cat /proc/<span class="number">3279</span>/maps		<span class="comment">//查看它的虚拟空间地址</span></span><br><span class="line"><span class="comment">// proc 是内核虚拟出来的文件系统</span></span><br><span class="line"><span class="comment">// 当前系统中运行的每个进程在/proc 下都有一个子目录,目录名就是进程的id</span></span><br></pre></td></tr></table></figure>
+<h3 id="进程地址空间"><a href="#进程地址空间" class="headerlink" title="进程地址空间"></a>进程地址空间</h3><img src="/2019/03/19/Linklib/virtual.png">
+<ol>
+<li><p>进程空间是独立的：每个进程都有各自的VA 和 PA</p>
+</li>
+<li><p>系统中可分配的内存总量 = 物理内存的大小 + 交换设备的大小</p>
 </li>
 </ol>
 
@@ -956,7 +1003,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Link-lib"><span class="nav-number">1.</span> <span class="nav-text">Link lib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多目标文件链接"><span class="nav-number">1.1.</span> <span class="nav-text">多目标文件链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义和声明"><span class="nav-number">1.2.</span> <span class="nav-text">定义和声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extern-和-static"><span class="nav-number">1.2.1.</span> <span class="nav-text">extern 和 static</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接包含-c-文件-–-–-错误的"><span class="nav-number">1.2.2.</span> <span class="nav-text">直接包含 .c 文件 – – 错误的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义声明的详细规则"><span class="nav-number">1.2.3.</span> <span class="nav-text">定义声明的详细规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库"><span class="nav-number">1.3.</span> <span class="nav-text">静态库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码结构"><span class="nav-number">1.3.1.</span> <span class="nav-text">代码结构</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Link-lib"><span class="nav-number">1.</span> <span class="nav-text">Link lib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多目标文件链接"><span class="nav-number">1.1.</span> <span class="nav-text">多目标文件链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义和声明"><span class="nav-number">1.2.</span> <span class="nav-text">定义和声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extern-和-static"><span class="nav-number">1.2.1.</span> <span class="nav-text">extern 和 static</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直接包含-c-文件-–-–-错误的"><span class="nav-number">1.2.2.</span> <span class="nav-text">直接包含 .c 文件 – – 错误的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义声明的详细规则"><span class="nav-number">1.2.3.</span> <span class="nav-text">定义声明的详细规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态库"><span class="nav-number">1.3.</span> <span class="nav-text">静态库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码结构"><span class="nav-number">1.3.1.</span> <span class="nav-text">代码结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享库"><span class="nav-number">1.4.</span> <span class="nav-text">共享库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译，链接，运行"><span class="nav-number">1.4.1.</span> <span class="nav-text">编译，链接，运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享库的命名"><span class="nav-number">1.4.2.</span> <span class="nav-text">共享库的命名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟内存管理"><span class="nav-number">1.5.</span> <span class="nav-text">虚拟内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看命令"><span class="nav-number">1.5.1.</span> <span class="nav-text">查看命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程地址空间"><span class="nav-number">1.5.2.</span> <span class="nav-text">进程地址空间</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
