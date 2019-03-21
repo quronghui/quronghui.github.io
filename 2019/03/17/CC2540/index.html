@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/17/CC2540/reset.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/17/CC2540/crystal.png">
-<meta property="og:updated_time" content="2019-03-17T08:53:46.963Z">
+<meta property="og:updated_time" content="2019-03-21T05:55:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CC2540">
 <meta name="twitter:description" content="CC2540核心板电路图阿莫电子  	      	     正常工作：CC2540工常工作的晶振是32M,休眠晶振是32.768K。  IT 官网 RESET 引脚：接了一个电阻  复位键：加了一个下拉电阻。（通过一个电阻减小电流对reset pin 造成的影响）     CC2540 连接不上仿真器外部晶振不工作 原来CC2540为了降低功耗：设置了几种不同的工作模式，在没有程序运行的情况下，">
@@ -402,12 +402,24 @@
                 
               
 
-              <time title="Post created: 2019-03-17 11:38:32 / Updated at: 16:53:46" itemprop="dateCreated datePublished" datetime="2019-03-17T11:38:32+08:00">2019-03-17</time>
+              <time title="Post created: 2019-03-17 11:38:32" itemprop="dateCreated datePublished" datetime="2019-03-17T11:38:32+08:00">2019-03-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-03-21 13:55:51" itemprop="dateModified" datetime="2019-03-21T13:55:51+08:00">2019-03-21</time>
               
             
           </span>
@@ -528,6 +540,22 @@
 <h3 id="电压检查"><a href="#电压检查" class="headerlink" title="电压检查"></a>电压检查</h3><ol>
 <li>Bias 引脚</li>
 </ol>
+<h3 id="错误原因排除"><a href="#错误原因排除" class="headerlink" title="错误原因排除"></a>错误原因排除</h3><ol>
+<li><p>32 M 晶振的是适配电容用12 pF;</p>
+</li>
+<li><p>PCB板子的底部应该是打孔 3*3</p>
+</li>
+<li><p>cc2540内部集成了上电的复位电路，我们没有，应该加上电复位Reset</p>
+<ul>
+<li><p>TI 建议在RESET 上连接RC 滤波电路，这样增加系统的可靠性，其实也可以直连<br>RESET。</p>
+
+</li>
+</ul>
+</li>
+<li><p>CC-debugger 板子的2脚反馈电压不正常，板子的供电不正常。– 排除</p>
+
+</li>
+</ol>
 <h2 id="开发手册"><a href="#开发手册" class="headerlink" title="开发手册"></a>开发手册</h2><ul>
 <li><a href="https://www.cnblogs.com/zc110747/p/6729635.html" target="_blank" rel="noopener">参考教程</a></li>
 </ul>
@@ -577,8 +605,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/18/ComplationAndC/" rel="prev" title="Complation And C">
-                Complation And C <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/18/ComplationAndC/" rel="prev" title="Assembler And C">
+                Assembler And C <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -651,7 +679,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -750,7 +778,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -831,7 +861,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -867,7 +899,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CC2540"><span class="nav-number">1.</span> <span class="nav-text">CC2540</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心板电路图"><span class="nav-number">1.1.</span> <span class="nav-text">核心板电路图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#阿莫电子"><span class="nav-number">1.1.1.</span> <span class="nav-text">阿莫电子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IT-官网"><span class="nav-number">1.1.2.</span> <span class="nav-text">IT 官网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CC2540-连接不上仿真器"><span class="nav-number">1.2.</span> <span class="nav-text">CC2540 连接不上仿真器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#外部晶振不工作"><span class="nav-number">1.2.1.</span> <span class="nav-text">外部晶振不工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-焊接错误"><span class="nav-number">1.2.2.</span> <span class="nav-text">PCB 焊接错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电压检查"><span class="nav-number">1.2.3.</span> <span class="nav-text">电压检查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发手册"><span class="nav-number">1.3.</span> <span class="nav-text">开发手册</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CC2540"><span class="nav-number">1.</span> <span class="nav-text">CC2540</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心板电路图"><span class="nav-number">1.1.</span> <span class="nav-text">核心板电路图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#阿莫电子"><span class="nav-number">1.1.1.</span> <span class="nav-text">阿莫电子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IT-官网"><span class="nav-number">1.1.2.</span> <span class="nav-text">IT 官网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CC2540-连接不上仿真器"><span class="nav-number">1.2.</span> <span class="nav-text">CC2540 连接不上仿真器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#外部晶振不工作"><span class="nav-number">1.2.1.</span> <span class="nav-text">外部晶振不工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-焊接错误"><span class="nav-number">1.2.2.</span> <span class="nav-text">PCB 焊接错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电压检查"><span class="nav-number">1.2.3.</span> <span class="nav-text">电压检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误原因排除"><span class="nav-number">1.2.4.</span> <span class="nav-text">错误原因排除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发手册"><span class="nav-number">1.3.</span> <span class="nav-text">开发手册</span></a></li></ol></li></ol></div>
             
 
           </div>
