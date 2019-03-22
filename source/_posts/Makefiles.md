@@ -50,3 +50,101 @@ tags: Makefile
    {% asset_img makerule.png %}
 
 ### make clean
+
+```
+clean:
+	@echo "cleanning project"
+	-rm main *.o
+	@echo "clean completed"
+
+.PHONY: clean	/* 声明clean为一个伪目标 */
+```
+
+1. clean 目标不依赖于任何条件,并且执行它的命令列表不会生成 clean文件
+
+2. rm and mkdir
+
+   + 命令前面加 “ - ”
+   + 即使这条命令出错，也会继续执行后面的命令
+   + 因为rm 要删除的文件可能不存在,mkdir 要创建的目录可能已存在
+
+3. 在命令前加 @
+
+   + 加了命令在前面，不显示命令本身 而只显示它的结果;
+
+4.  .PHONY: clean
+
+   + 声明clean为一个伪目标
+   + 为了将clean 当做特殊的名字使用
+
+   {% asset_img make.png %}
+
+### 类似于clean的目标名字
+
+​	{% asset_img clean.png%}
+
+## Makefile 隐含规则和模式规则
+
+​	{% asset_img rule.png %}
+
+## 变量
+
+| 符号                                                        | 作用                                     |
+| ----------------------------------------------------------- | ---------------------------------------- |
+| “ := ”    y := $(x) bar                                     | make 遇到变量定义的时候：立即展开        |
+| nullstring :=<br/>space := $(nullstring)  # end of the line | 为了定义变量的值为空格；注释前面是有空格 |
+| “ ?= ”   foo ?= $(bar)                                      | 相当于 “ = ”，定义foo的值为$(bar)        |
+| “ += ”                                                      | 保持了“ :=  ”的特性                      |
+
+### 特殊变量
+
++ 可以减少书写错误
+
+1. 特殊变量：替代makefile中的规则，简写
+
+   {% asset_img variable.png %}
+
+2. 特殊变量的使用
+
+   {% asset_img variableuse.png %}
+
+3. " $? "的使用
+
+   + 用于生成静态、共享库
+
+   ```
+   libsome.a: foo.o bar.o lose.o win.o
+   		ar r libsome.a $?
+   		ranlib libsome.a
+   ```
+
+### 变量的缺省值
+
+{% asset_img Default_value.png %}
+
+{% asset_img Default_value1.png %}
+
+## 自动处理头文件的依赖关系
+
++ 省去了手动敲命令
+
+### 命令
+
+```
+$ gcc -M main.c		/* 找出所有的依赖头文件 */
+$ gcc -MM main.c		/* 排除系统头文件 */
+```
+
+## Make命令选项
+
+1. Makefile 文件
+   + 从主目录到子目录中都存在
+   + 总的Makefile ： make -C 执行每个子目录下的Makefile
+
+```
+$ make -n		/*只打印要执行的命令，而不是直接执行；检查makefile是否正确*/
+$ make -C testmake	/* 切换到目录testmake下，编译 */
+$ make -C			/*执行每个子目录下的Makefile*/
+$ make CFLAGS=-g	/*在编译中增加调试选项*/
+```
+
