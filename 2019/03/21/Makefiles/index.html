@@ -105,7 +105,14 @@
 <meta property="og:description" content="Makefile 基础  Link code  – Makefiles  Makefile 基本规则Makefile 例子 12345678main: main.o stack.o maze.o		gcc main.o stack.o maze.o -o mainmain.o: main.c main.h stack.h maze.h		gcc -c main.cstack.o: stack.c">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/makerule.png">
-<meta property="og:updated_time" content="2019-03-21T12:48:50.417Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/make.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/clean.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/rule.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/variable.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/variableuse.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/Default_value.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/Default_value1.png">
+<meta property="og:updated_time" content="2019-03-22T06:40:54.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Makefile">
 <meta name="twitter:description" content="Makefile 基础  Link code  – Makefiles  Makefile 基本规则Makefile 例子 12345678main: main.o stack.o maze.o		gcc main.o stack.o maze.o -o mainmain.o: main.c main.h stack.h maze.h		gcc -c main.cstack.o: stack.c">
@@ -401,12 +408,24 @@
                 
               
 
-              <time title="Post created: 2019-03-21 19:25:24 / Updated at: 20:48:50" itemprop="dateCreated datePublished" datetime="2019-03-21T19:25:24+08:00">2019-03-21</time>
+              <time title="Post created: 2019-03-21 19:25:24" itemprop="dateCreated datePublished" datetime="2019-03-21T19:25:24+08:00">2019-03-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-03-22 14:40:54" itemprop="dateModified" datetime="2019-03-22T14:40:54+08:00">2019-03-22</time>
               
             
           </span>
@@ -515,7 +534,90 @@
 <img src="/2019/03/21/Makefiles/makerule.png">
 </li>
 </ol>
-<h3 id="make-clean"><a href="#make-clean" class="headerlink" title="make clean"></a>make clean</h3>
+<h3 id="make-clean"><a href="#make-clean" class="headerlink" title="make clean"></a>make clean</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">clean</span>:</span><br><span class="line">	<span class="variable">@echo</span> <span class="string">"cleanning project"</span></span><br><span class="line">	-rm main *.o</span><br><span class="line">	<span class="variable">@echo</span> <span class="string">"clean completed"</span></span><br><span class="line"></span><br><span class="line">.<span class="attribute">PHONY</span>: clean	<span class="comment">/* 声明clean为一个伪目标 */</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>clean 目标不依赖于任何条件,并且执行它的命令列表不会生成 clean文件</p>
+</li>
+<li><p>rm and mkdir</p>
+<ul>
+<li>命令前面加 “ - ”</li>
+<li>即使这条命令出错，也会继续执行后面的命令</li>
+<li>因为rm 要删除的文件可能不存在,mkdir 要创建的目录可能已存在</li>
+</ul>
+</li>
+<li><p>在命令前加 @</p>
+<ul>
+<li>加了命令在前面，不显示命令本身 而只显示它的结果;</li>
+</ul>
+</li>
+<li><p>.PHONY: clean</p>
+<ul>
+<li>声明clean为一个伪目标</li>
+<li>为了将clean 当做特殊的名字使用</li>
+</ul>
+<img src="/2019/03/21/Makefiles/make.png">
+</li>
+</ol>
+<h3 id="类似于clean的目标名字"><a href="#类似于clean的目标名字" class="headerlink" title="类似于clean的目标名字"></a>类似于clean的目标名字</h3><p>​    <img src="/2019/03/21/Makefiles/clean.png"></p>
+<h2 id="Makefile-隐含规则和模式规则"><a href="#Makefile-隐含规则和模式规则" class="headerlink" title="Makefile 隐含规则和模式规则"></a>Makefile 隐含规则和模式规则</h2><p>​    <img src="/2019/03/21/Makefiles/rule.png"></p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“ := ”    y := $(x) bar</td>
+<td>make 遇到变量定义的时候：立即展开</td>
+</tr>
+<tr>
+<td>nullstring :=<br>space := $(nullstring)  # end of the line</td>
+<td>为了定义变量的值为空格；注释前面是有空格</td>
+</tr>
+<tr>
+<td>“ ?= ”   foo ?= $(bar)</td>
+<td>相当于 “ = ”，定义foo的值为$(bar)</td>
+</tr>
+<tr>
+<td>“ += ”</td>
+<td>保持了“ :=  ”的特性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="特殊变量"><a href="#特殊变量" class="headerlink" title="特殊变量"></a>特殊变量</h3><ul>
+<li>可以减少书写错误</li>
+</ul>
+<ol>
+<li><p>特殊变量：替代makefile中的规则，简写</p>
+<img src="/2019/03/21/Makefiles/variable.png">
+</li>
+<li><p>特殊变量的使用</p>
+<img src="/2019/03/21/Makefiles/variableuse.png">
+</li>
+<li><p>“ $? “的使用</p>
+<ul>
+<li>用于生成静态、共享库</li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">libsome.<span class="keyword">a</span>: foo.o bar.o lose.o win.o</span><br><span class="line">		ar r libsome.<span class="keyword">a</span> $?</span><br><span class="line">		ranlib libsome.<span class="keyword">a</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="变量的缺省值"><a href="#变量的缺省值" class="headerlink" title="变量的缺省值"></a>变量的缺省值</h3><img src="/2019/03/21/Makefiles/Default_value.png">
+<img src="/2019/03/21/Makefiles/Default_value1.png">
+<h2 id="自动处理头文件的依赖关系"><a href="#自动处理头文件的依赖关系" class="headerlink" title="自动处理头文件的依赖关系"></a>自动处理头文件的依赖关系</h2><ul>
+<li>省去了手动敲命令</li>
+</ul>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -M main<span class="selector-class">.c</span>		<span class="comment">/* 找出所有的依赖头文件 */</span></span><br><span class="line">$ gcc -MM main<span class="selector-class">.c</span>		<span class="comment">/* 排除系统头文件 */</span></span><br></pre></td></tr></table></figure>
+<h2 id="Make命令选项"><a href="#Make命令选项" class="headerlink" title="Make命令选项"></a>Make命令选项</h2><ol>
+<li>Makefile 文件<ul>
+<li>从主目录到子目录中都存在</li>
+<li>总的Makefile ： make -C 执行每个子目录下的Makefile</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> make -n		<span class="comment">/*只打印要执行的命令，而不是直接执行；检查makefile是否正确*/</span></span><br><span class="line"><span class="symbol">$</span> make -C testmake	<span class="comment">/* 切换到目录testmake下，编译 */</span></span><br><span class="line"><span class="symbol">$</span> make -C			<span class="comment">/*执行每个子目录下的Makefile*/</span></span><br><span class="line"><span class="symbol">$</span> make CFLAGS=-g	<span class="comment">/*在编译中增加调试选项*/</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -560,6 +662,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/22/Pointer/" rel="prev" title="Pointer">
+                Pointer <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -631,7 +737,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">50</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -736,7 +842,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">46</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -823,7 +935,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">37</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -859,7 +975,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Makefile-基础"><span class="nav-number">1.</span> <span class="nav-text">Makefile 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-基本规则"><span class="nav-number">1.1.</span> <span class="nav-text">Makefile 基本规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile"><span class="nav-number">1.1.1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-编译"><span class="nav-number">1.1.2.</span> <span class="nav-text">make 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-clean"><span class="nav-number">1.1.3.</span> <span class="nav-text">make clean</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Makefile-基础"><span class="nav-number">1.</span> <span class="nav-text">Makefile 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-基本规则"><span class="nav-number">1.1.</span> <span class="nav-text">Makefile 基本规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile"><span class="nav-number">1.1.1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-编译"><span class="nav-number">1.1.2.</span> <span class="nav-text">make 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-clean"><span class="nav-number">1.1.3.</span> <span class="nav-text">make clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类似于clean的目标名字"><span class="nav-number">1.1.4.</span> <span class="nav-text">类似于clean的目标名字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-隐含规则和模式规则"><span class="nav-number">1.2.</span> <span class="nav-text">Makefile 隐含规则和模式规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">1.3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">特殊变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的缺省值"><span class="nav-number">1.3.2.</span> <span class="nav-text">变量的缺省值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动处理头文件的依赖关系"><span class="nav-number">1.4.</span> <span class="nav-text">自动处理头文件的依赖关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.4.1.</span> <span class="nav-text">命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make命令选项"><span class="nav-number">1.5.</span> <span class="nav-text">Make命令选项</span></a></li></ol></li></ol></div>
             
 
           </div>

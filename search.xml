@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[阿里AI安全讲座]]></title>
+    <url>%2F2019%2F03%2F22%2FWork%2F</url>
+    <content type="text"><![CDATA[阿里AI安全讲座 工作和学习的建议 主讲人：张荣 个人的工作经历 第一阶段的工作：快速成长 跳出生活的舒适区，刚毕业对生活的节奏很新鲜，工资翻倍，小生活滋润 需要有鞭策，寻找新视野，更上工作的步伐，为后续的转行做准备 第二阶段的工作：拒绝吃老本行 跳出工作的舒适区，适应工作环境和工作节奏之后的状态 学习新的知识，寻找新的方向和平台 第三阶段的工作：止跌回升 找到大平台，资源； 为自己的方向而打拼 用计算机的思维去思考问题 第四阶段的工作：行业内寻找新方向 在行业中寻找新的方向 选择 行业～进入快速发展的行业 企业～进入前途远大的企业 业务～进入成长性的业务 老板～跟上有雄心壮志的老板 行业 科技发展的2个主线：能量和信息 5G : 基础设施，超高速传输，广覆盖 IoT：万物互联 感知 – 认知 企业 巨头：资源过剩，平台大，优秀的人多，不容易脱颖而出 二线：发展的机会欠缺，不利于成长 超新星：国家和政府扶持，目前最需要的 初创：不关注个人成长，只是让你完成任务 企业面试看中什么？ 校招和社招不同 校招～为未来投资，面向未来，技能总会过时 阿里校招的需求 基础品质 完整的项目经历，项目落地的经历 基础知识 技术文档：英语写作能力，口头交流能力 编程基础 学生到职场人 做决定和承担的能力 有自己的想法和idea 自我驱动和发展 公司需要的能力 从公司的规模来看： 完成 – 完善 – 对外推广 从公司的结构 网状：上下连接，生产实现，推销 Leader：不应该是团队的技术核心，应该是一个连接者，组建一个由长板构成的团队 面试和笔试 基础必须好： 数据结构题目的刷人，时间复杂度，空间复杂度是多少 编程问题：基础能力必须牢固 想面试阿里：用一个钉钉客户端，里面有阿里邮箱 AI 安全技术相关]]></content>
+      <categories>
+        <category>work</category>
+        <category>AI cathedra</category>
+      </categories>
+      <tags>
+        <tag>work</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Pointer]]></title>
+    <url>%2F2019%2F03%2F22%2FPointer%2F</url>
+    <content type="text"><![CDATA[Pointer (指针)指针的基本操作理解指针 堆栈和队列 堆栈有栈顶指针，队列有头指针和尾指针 这种指针本质：是一个整数，是数组的索引 指针概念 把一个变量所在的内存单元的地址 保存在另外一个内存单元 此内存单元 称为指针 1234int i;int *pi = &amp;i; /*全局变量的赋值：右边必须是常量表达式*/char c;char *pc = &amp;c; /*32位的虚拟机，他们的内存单元都是4 byte*/ 根据指针知找到变量 指针的关系 &amp;运算符的操作数必须是左值,因为只有左值（变量）才表示一个内存单元,才会有地址, 表达式E可以做左值（变量），*&amp;E = E E是指针类型，&amp;*E = E 123int *p; /*定义指针类型p*/p = &amp;i; /*此时p保存的是i的地址*/int j = *p; /*此时 *p = *&amp;i; 也就是i的值*/ 指针间的赋值 12int *ptri;ptri = pi; /*是把变量pi所保存的地址值赋给变量ptri*/ /*保证ptri 和 pi是同一种类型，否则需要强制转化 指针很容易指向错误的地址，访问这样的地址可能导致段错误 空指针和野指针 定义局部类型的指针变量，却没有赋值 – 野指针(Unbound Pointer)（和局部变量定义却不赋值） 避免野指针，定义指针变量因该赋值，货值初始化NULL 123int *p = NULL;#define NULL ((void *)0) /*将地址0转换为指针类型*//*任何对地址0的访问都会立刻产生段错误*/ void * 类型 void *指针与其它类型的指针之间可以隐式转换,而不必用类型转换运算符。 只能定义void *指针，而不能定义void 型的变量。 因为void *指针和别的指针一样都占4个字节，void型的变量就不清楚了 指针和数组表示方式 指针指向数组 a[0] 的地址 123int a[10];int *pa = &amp;a[0]; /*后缀运算符优先级高于单目运算符*/pa++;]]></content>
+      <categories>
+        <category>LinuxC</category>
+        <category>Pointer</category>
+      </categories>
+      <tags>
+        <tag>pointer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Makefile]]></title>
     <url>%2F2019%2F03%2F21%2FMakefiles%2F</url>
-    <content type="text"><![CDATA[Makefile 基础 Link code – Makefiles Makefile 基本规则Makefile 例子 12345678main: main.o stack.o maze.o gcc main.o stack.o maze.o -o mainmain.o: main.c main.h stack.h maze.h gcc -c main.cstack.o: stack.c stack.h main.h gcc -c stack.cmaze.o: maze.c maze.h main.h gcc -c maze.c Makefile 由一组规则 rule组成 1234target ... : prerequisites ... command1 command2 ... 目标和条件之间的关系是：欲更新目标，必须首先更新它的所有条件; 所有条件中只要有一个条件被更新了，目标也必须随之被更新。 所谓“更新”就是执行一遍规则中的命令列表；命令列表中的每条命令必须以一个Tab开头；（注意不能是空格） 对于Makefile中的每个以Tab开头的命令,make 会创建一个Shell进程去执行它。 make 编译 make 会自动选择那些受影响的源文件重新编译，不受影响的源文件则不重新编译。 make clean]]></content>
+    <content type="text"><![CDATA[Makefile 基础 Link code – Makefiles Makefile 基本规则Makefile 例子 12345678main: main.o stack.o maze.o gcc main.o stack.o maze.o -o mainmain.o: main.c main.h stack.h maze.h gcc -c main.cstack.o: stack.c stack.h main.h gcc -c stack.cmaze.o: maze.c maze.h main.h gcc -c maze.c Makefile 由一组规则 rule组成 1234target ... : prerequisites ... command1 command2 ... 目标和条件之间的关系是：欲更新目标，必须首先更新它的所有条件; 所有条件中只要有一个条件被更新了，目标也必须随之被更新。 所谓“更新”就是执行一遍规则中的命令列表；命令列表中的每条命令必须以一个Tab开头；（注意不能是空格） 对于Makefile中的每个以Tab开头的命令,make 会创建一个Shell进程去执行它。 make 编译 make 会自动选择那些受影响的源文件重新编译，不受影响的源文件则不重新编译。 make clean123456clean: @echo "cleanning project" -rm main *.o @echo "clean completed".PHONY: clean /* 声明clean为一个伪目标 */ clean 目标不依赖于任何条件,并且执行它的命令列表不会生成 clean文件 rm and mkdir 命令前面加 “ - ” 即使这条命令出错，也会继续执行后面的命令 因为rm 要删除的文件可能不存在,mkdir 要创建的目录可能已存在 在命令前加 @ 加了命令在前面，不显示命令本身 而只显示它的结果; .PHONY: clean 声明clean为一个伪目标 为了将clean 当做特殊的名字使用 类似于clean的目标名字​ Makefile 隐含规则和模式规则​ 变量 符号 作用 “ := ” y := $(x) bar make 遇到变量定义的时候：立即展开 nullstring :=space := $(nullstring) # end of the line 为了定义变量的值为空格；注释前面是有空格 “ ?= ” foo ?= $(bar) 相当于 “ = ”，定义foo的值为$(bar) “ += ” 保持了“ := ”的特性 特殊变量 可以减少书写错误 特殊变量：替代makefile中的规则，简写 特殊变量的使用 “ $? “的使用 用于生成静态、共享库 123libsome.a: foo.o bar.o lose.o win.o ar r libsome.a $? ranlib libsome.a 变量的缺省值 自动处理头文件的依赖关系 省去了手动敲命令 命令12$ gcc -M main.c /* 找出所有的依赖头文件 */$ gcc -MM main.c /* 排除系统头文件 */ Make命令选项 Makefile 文件 从主目录到子目录中都存在 总的Makefile ： make -C 执行每个子目录下的Makefile 1234$ make -n /*只打印要执行的命令，而不是直接执行；检查makefile是否正确*/$ make -C testmake /* 切换到目录testmake下，编译 */$ make -C /*执行每个子目录下的Makefile*/$ make CFLAGS=-g /*在编译中增加调试选项*/]]></content>
       <categories>
         <category>LinuxC</category>
         <category>Makefile</category>
