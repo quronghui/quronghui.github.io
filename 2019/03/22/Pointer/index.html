@@ -105,9 +105,10 @@
 <meta property="og:description" content="Pointer (指针)指针的基本操作理解指针 堆栈和队列  堆栈有栈顶指针，队列有头指针和尾指针 这种指针本质：是一个整数，是数组的索引   指针概念  把一个变量所在的内存单元的地址 保存在另外一个内存单元  此内存单元 称为指针  1234int i;int *pi = &amp;amp;i;	/*全局变量的赋值：右边必须是常量表达式*/char c;char *pc = &amp;amp;c;	/*32位">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/22/Pointer/pointer.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/22/Pointer/array.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/22/Pointer/const.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/22/Pointer/argv.png">
-<meta property="og:updated_time" content="2019-03-25T09:40:48.258Z">
+<meta property="og:updated_time" content="2019-03-25T11:18:25.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pointer">
 <meta name="twitter:description" content="Pointer (指针)指针的基本操作理解指针 堆栈和队列  堆栈有栈顶指针，队列有头指针和尾指针 这种指针本质：是一个整数，是数组的索引   指针概念  把一个变量所在的内存单元的地址 保存在另外一个内存单元  此内存单元 称为指针  1234int i;int *pi = &amp;amp;i;	/*全局变量的赋值：右边必须是常量表达式*/char c;char *pc = &amp;amp;c;	/*32位">
@@ -420,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-25 17:40:48" itemprop="dateModified" datetime="2019-03-25T17:40:48+08:00">2019-03-25</time>
+                <time title="Updated at: 2019-03-25 19:18:25" itemprop="dateModified" datetime="2019-03-25T19:18:25+08:00">2019-03-25</time>
               
             
           </span>
@@ -540,13 +541,13 @@
 <li><p>指针间的赋值</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int *ptri<span class="comment">;</span></span><br><span class="line"><span class="attribute">ptri</span> = pi<span class="comment">;		/*是把变量pi所保存的地址值赋给变量ptri*/</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>/*保证ptri 和 pi是同一种类型，否则需要强制转化</li>
+<li>保证ptri 和 pi是同一种类型，否则需要强制转化</li>
 <li>指针很容易指向错误的地址，访问这样的地址可能导致段错误</li>
 </ul>
 </li>
 </ol>
 <h3 id="空指针和野指针"><a href="#空指针和野指针" class="headerlink" title="空指针和野指针"></a>空指针和野指针</h3><ul>
-<li><p>定义局部类型的指针变量，却没有赋值 – 野指针(Unbound Pointer)（和局部变量定义却不赋值）</p>
+<li><p>定义局部类型的指针变量，却没有赋值 – 野指针(Unbound Pointer)（局部变量定义却不赋值）</p>
 </li>
 <li><p>避免野指针，定义指针变量因该赋值，货值初始化NULL</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = <span class="literal">NULL</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NULL ((void *)0)	<span class="comment">/*将地址0转换为指针类型*/</span></span></span><br><span class="line"><span class="comment">/*任何对地址0的访问都会立刻产生段错误*/</span></span><br></pre></td></tr></table></figure>
@@ -558,7 +559,7 @@
 <li>因为void *指针和别的指针一样都占4个字节，void型的变量就不清楚了</li>
 </ol>
 <h2 id="指针和数组"><a href="#指针和数组" class="headerlink" title="指针和数组"></a>指针和数组</h2><ol>
-<li><p>指针指向数组 a[0] 的地址</p>
+<li><p>指针指向数组 a[0] 的首地址</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> *pa = &amp;a[<span class="number">0</span>];		<span class="comment">/*后缀运算符优先级高于单目运算符*/</span></span><br><span class="line">pa++;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>由于数组a做右值使用时和 &amp;a[0]是一样的</li>
@@ -575,6 +576,7 @@
 <li><p>指针的相减运算</p>
 <ul>
 <li><p>相减：表示两个指针间，相差的元素个数</p>
+<img src="/2019/03/22/Pointer/array.png">
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pa - <span class="keyword">a</span> = ?</span><br><span class="line">pa - <span class="number">1</span> = <span class="keyword">a</span>; pa - <span class="keyword">a</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -838,7 +840,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-count">51</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -949,7 +951,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">49</span>
+                      
+                    
+                    <span class="site-state-item-count">50</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1040,7 +1044,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
