@@ -11,6 +11,8 @@ tags: [Linux, C]
 # Linux C编程一站式学习
 
 + {% pdf LinuxC.pdf %}
++ [LinuxC 课后习题答案](https://www.zybuluo.com/ChristopherWu/note/72463)
++ [LinuxC.pdf 文档中的代码](https://github.com/quronghui/LinuxC.git)
 
 ## C语言入门
 
