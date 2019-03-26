@@ -106,7 +106,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/25/FuncationInterface/man_page.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/25/FuncationInterface/strcpy.png">
-<meta property="og:updated_time" content="2019-03-25T13:24:59.274Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/25/FuncationInterface/malloc_unit.png">
+<meta property="og:updated_time" content="2019-03-26T08:55:54.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Funcation Interface">
 <meta name="twitter:description" content="Funcation Interface 我们讲过void *类型 和任何指针类型之间可以相互隐式转换。  函数接口的定义 函数的调用者和函数的实现者之间订立了一个契约  调用函数之前：调用者要为实现者提供某些条件 函数返回时：实现者要对调用者尽到某些义务。   首先靠函数接口来描述  即函数名,参数,返回值,只要函数和参数的名字起得合理 参数和返回值的类型定得准确   函数接口并不能表达函数的全部">
@@ -227,7 +228,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -261,7 +262,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
 
   </li>
         
@@ -278,7 +279,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -289,7 +290,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
         </li>
       
     </ul>
@@ -395,19 +396,31 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-03-25 19:24:34 / Updated at: 21:24:59" itemprop="dateCreated datePublished" datetime="2019-03-25T19:24:34+08:00">2019-03-25</time>
+              <time title="Created: 2019-03-25 19:24:34" itemprop="dateCreated datePublished" datetime="2019-03-25T19:24:34+08:00">2019-03-25</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-26 16:55:54" itemprop="dateModified" datetime="2019-03-26T16:55:54+08:00">2019-03-26</time>
               
             
           </span>
@@ -421,14 +434,14 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LinuxC/" itemprop="url" rel="index"><span itemprop="name">LinuxC</span></a></span>
 
                 
                 
-                  . 
+                  , 
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Funcation-Interface/" itemprop="url" rel="index"><span itemprop="name">Funcation Interface</span></a></span>
@@ -581,6 +594,44 @@
 </ul>
 </li>
 </ol>
+<h2 id="传入参数和传出参数"><a href="#传入参数和传出参数" class="headerlink" title="传入参数和传出参数"></a>传入参数和传出参数</h2><ul>
+<li><a href="https://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener">parameter code</a></li>
+</ul>
+<ol>
+<li>传入参数：把指针所指向的数据传给函数使用；</li>
+<li>传出参数：由函数填充指针所指的内存空间,传回给调用者使用</li>
+<li>如果传入参数是NULL表示取缺省值,也可能表示不做特别处理。</li>
+<li>如果传出参数是NULL 表示调用者不需要传出值,例如time(2) 的参数。</li>
+</ol>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void <span class="function"><span class="keyword">func</span><span class="params">(const unit_t *p)</span></span>	<span class="comment">//传入参数</span></span><br><span class="line">void <span class="function"><span class="keyword">func</span><span class="params">(unit_t *p)</span></span>		<span class="comment">//传出参数</span></span><br><span class="line">void <span class="function"><span class="keyword">func</span><span class="params">(unit_t *p)</span></span>;		<span class="comment">//Value-result参数示例:</span></span><br></pre></td></tr></table></figure>
+<h2 id="两层指针"><a href="#两层指针" class="headerlink" title="两层指针"></a>两层指针</h2><ul>
+<li><a href="https://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener">TwoPointer</a></li>
+</ul>
+<h3 id="两层指针的内存分配"><a href="#两层指针的内存分配" class="headerlink" title="两层指针的内存分配"></a>两层指针的内存分配</h3><img src="/2019/03/25/FuncationInterface/malloc_unit.png">
+<h3 id="两层指针和单层指针"><a href="#两层指针和单层指针" class="headerlink" title="两层指针和单层指针"></a>两层指针和单层指针</h3><ol>
+<li>两层指针只能作为传出参数，两种情况<ul>
+<li>传出的指针指向静态内存,或者指向已分配的动态内存；</li>
+<li>在函数中动态分配内存，然后传出的指针指向这块内存空间,这种情况下调用者应该在使用内存之后调用释放内存的函数。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">alloc_unit</span><span class="params">(<span class="keyword">unit_t</span> **pp)</span></span>; 	<span class="comment">//分配内存</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free_unit</span><span class="params">(<span class="keyword">unit_t</span> *p)</span></span>;		<span class="comment">//释放内存</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>参数分配内存则需要两层指针</li>
+</ol>
+<h2 id="返回值是指针的情况"><a href="#返回值是指针的情况" class="headerlink" title="返回值是指针的情况"></a>返回值是指针的情况</h2><h3 id="返回指向已分配内存的指针示例"><a href="#返回指向已分配内存的指针示例" class="headerlink" title="返回指向已分配内存的指针示例"></a>返回指向已分配内存的指针示例</h3><ul>
+<li><a href="https://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener">FuncationInterface / ReturnPointer</a></li>
+<li>unit_t *func(void)</li>
+</ul>
+<h3 id="动态分配内存并返回指针"><a href="#动态分配内存并返回指针" class="headerlink" title="动态分配内存并返回指针"></a>动态分配内存并返回指针</h3><ul>
+<li><p><a href="https://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener">FuncationInterface / ReturnPointer / Return </a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unit *<span class="title">alloc_unit</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free_unit</span><span class="params">(unit *p)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过返回值分配内存就只需要一层返回指针；</p>
+</li>
+<li><p>参数分配内存则需要两层指针</p>
+</li>
+</ul>
 
       
     </div>
@@ -617,8 +668,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/22/Work/" rel="next" title="阿里AI安全讲座">
-                <i class="fa fa-chevron-left"></i> 阿里AI安全讲座
+              <a href="/2019/03/25/Piano/" rel="next" title="Piano">
+                <i class="fa fa-chevron-left"></i> Piano
               </a>
             
           </div>
@@ -672,10 +723,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -697,8 +748,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">51</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -810,8 +861,12 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">52</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -903,8 +958,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
-                    <span class="site-state-item-name">Tags</span>
+                      
+                    
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
               
@@ -939,7 +996,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Funcation-Interface"><span class="nav-number">1.</span> <span class="nav-text">Funcation Interface</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数接口的定义"><span class="nav-number">1.1.</span> <span class="nav-text">函数接口的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#strcpy-and-strncpy"><span class="nav-number">1.1.1.</span> <span class="nav-text">strcpy and strncpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#malloc-and-free"><span class="nav-number">1.1.2.</span> <span class="nav-text">malloc and free</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Funcation-Interface"><span class="nav-number">1.</span> <span class="nav-text">Funcation Interface</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数接口的定义"><span class="nav-number">1.1.</span> <span class="nav-text">函数接口的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#strcpy-and-strncpy"><span class="nav-number">1.1.1.</span> <span class="nav-text">strcpy and strncpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#malloc-and-free"><span class="nav-number">1.1.2.</span> <span class="nav-text">malloc and free</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传入参数和传出参数"><span class="nav-number">1.2.</span> <span class="nav-text">传入参数和传出参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">1.2.1.</span> <span class="nav-text">函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两层指针"><span class="nav-number">1.3.</span> <span class="nav-text">两层指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两层指针的内存分配"><span class="nav-number">1.3.1.</span> <span class="nav-text">两层指针的内存分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两层指针和单层指针"><span class="nav-number">1.3.2.</span> <span class="nav-text">两层指针和单层指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回值是指针的情况"><span class="nav-number">1.4.</span> <span class="nav-text">返回值是指针的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#返回指向已分配内存的指针示例"><span class="nav-number">1.4.1.</span> <span class="nav-text">返回指向已分配内存的指针示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态分配内存并返回指针"><span class="nav-number">1.4.2.</span> <span class="nav-text">动态分配内存并返回指针</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -985,7 +1042,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
