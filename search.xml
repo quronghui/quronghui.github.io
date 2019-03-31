@@ -507,9 +507,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[LinuxAndWin10]]></title>
+    <title><![CDATA[Ubuntu18 And Win10]]></title>
     <url>%2F2019%2F02%2F18%2FLinuxAndWin10%2F</url>
-    <content type="text"><![CDATA[Win10 + Ubuntu 双系统Win10 + Ubuntu环境的搭建 参考链接 有些工作需要切换windows,因此才搭建了双系统。 准备工作 下载UltralSO，这是用来制作启动盘的软件 下载Linux系统的镜像ubuntu16.04，可以在官网上下载 （可选）下载启动项编辑工具[EasyBCD] windows系统下进行分盘 我的电脑–计算机管理–压缩的磁盘–右键–压缩卷 选择未分配区域，右键选择“新建卷“ – 右键“删除卷”可以将这变成可用空间 制作ubunut启动盘 打开UltraSO软件，选择“文件”-“打开”打开之前下好的iso映像文件 选择“启动”-“写入硬盘映像”。此处注意选择正确硬盘驱动器。 依次点击“格式化”和“写入”，完成后它会在消息处提示“刻录成功！” 设置window 下的BIOS 关闭快速启动。选择控制面板-电源选项-选择电源按钮的功能，选择“更改当前不可用的设置”，取消选中“启用快速启动” 安装ubuntu 在下一步之前，一定要先联网，会进行下载 选择 安装音频相关软件…… Ubuntu 工具的安装 参考链接 用到的时候直接搜索]]></content>
+    <content type="text"><![CDATA[Win10 + Ubuntu 双系统Win10 + Ubuntu环境的搭建 参考链接 有些工作需要切换windows,因此才搭建了双系统。 主机环境是SSD+HDD 压缩卷的时候，不用压缩SSD，找一个大一点的机械硬盘，直接将其状态删除为未分配的状态。 准备工作 下载UltralSO，这是用来制作启动盘的软件 下载Linux系统的镜像ubuntu16.04，可以在官网上下载 （可选）下载启动项编辑工具[EasyBCD] windows系统下进行分盘 我的电脑–计算机管理–压缩的磁盘–右键–压缩卷 选择未分配区域，右键选择“新建卷“ – 右键“删除卷”可以将这变成可用空间 制作ubunut启动盘 打开UltraSO软件，选择“文件”-“打开”打开之前下好的iso映像文件 选择“启动”-“写入硬盘映像”。此处注意选择正确硬盘驱动器。 依次点击“格式化”和“写入”，完成后它会在消息处提示“刻录成功！” 设置window 下的BIOS 关闭快速启动。选择控制面板-电源选项-选择电源按钮的功能，选择“更改当前不可用的设置”，取消选中“启用快速启动” 安装ubuntu 在下一步之前，一定要先联网，会进行下载 选择 安装音频相关软件…… Ubuntu 工具的安装 参考链接 用到的时候直接搜索]]></content>
       <categories>
         <category>System</category>
       </categories>
