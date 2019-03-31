@@ -32,16 +32,12 @@ tags: Electronic Direction
 - GitHub 中[kitspace](https://github.com/kitspace)/**awesome-electronics**
 - github 中的 awesome，是一个很强大的 Project
 
-### Communication
-
-1. IIC and Uart and SPI 
-
 ## Book
 
 1. Eagle 的学习使用【高质量PCB设计入门--Eagle使用】
+   + [PCB SCH 绘制规则参考ESP32](https://www.espressif.com/zh-hans/company/contact-extra/technical-inquiries-hardware-prologue)
 2. LinuxC 编程一站式学习
 3. [凸优化，嵌入式的算法模型](https://github.com/KeKe-Li/book/tree/master/AI)
-4. 看芯片制作的相关书
 
 ## Tools
 
@@ -75,8 +71,6 @@ tags: Electronic Direction
 2. 通过安装Adobe Creative Cloud desk，从而安装 Illustrator (AI的矢量图)
 3. Illustrator 能够绘制矢量图，从而导入到 Eagle.
 4. Eagle : 不能写中文，而且图形不是矢量的。
-
-### AutoCAD
 
 ## Open Link
 

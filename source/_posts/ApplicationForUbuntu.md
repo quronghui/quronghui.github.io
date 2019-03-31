@@ -171,13 +171,95 @@ ls ttyACM*				//arduino 端口的serial
 
 ## 设置PlatformIo 串口的波特率
 
+### 单次修改串口波特率
+
 ```
 stty -F /dev/ttyUSB0				//查看Usb的属性
  stty -F /dev/ttyUSB0  115200		//修改usb的波特率
 ```
+
+### 修改默认值
+
+1. 进入platformIO的python目录
+
+   ```
+   /home/quronghui/.platformio/penv/lib/python2.7/site-packages/serial/tools
+   ```
+
+2. 给权限并且修改内容
+
+   ```
+   chmod 777 sudo miniterm.py
+   /*********find***************/
+   parser.add_argument(
+       "baudrate",			// 修改波特率这一栏就可以了
+       nargs='?',
+       type=int,
+       help="set baud rate, default: %(default)s",
+       default=115200) # default这里改成你想要默认的波特率，115200
+   ```
+
+3. 然后删除本目录下的miniterm.pyc文件，再次开启串口监视器时会重新编译生成此文件。
 
 ## 声卡无声音
 
 1. Ubuntu 18没有声音
 2. [解决方式参考](https://blog.csdn.net/multimicro/article/details/82528730)
 
+## git clone 速度慢
+
+1. git clone https://
+
+   + 克隆的是工程所有的提交历史quronghui
+
+2. 克隆最近一次的commit，然后更新得到所有的提交历史
+
+   ```
+   $ git clone http://github.com/large-repository --depth 1
+   $ cd large-repository
+   $ git fetch --unshallow
+   ```
+
+   
+
+## 配置shadowsocket
+
++ [git](https://github.com/quronghui/shadowsocks.git)
+
+## ubuntu18 误删除 /etc/shadow
+
+### /etc/shadow
+
+1. 是Ubuntu系统的登录和权限认证的文件
+2. 保存了密码
+
+### 如何进行恢复
+
++ [参考博客](http://www.bluestep.cc/ubuntu-17-04-%E4%B8%8D%E5%B0%8F%E5%BF%83%E5%88%A0%E9%99%A4etcpasswd%E6%88%96etcshadow%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E7%B3%BB%E7%BB%9F%EF%BC%9A%E4%BF%AE%E6%94%B9root%E5%AF%86%E7%A0%81/)
+
+1. 进去recovery 编辑模式
+
+   {% asset_img recovery.png%}
+
+   + 这里不是 Enter选中，而是直按下e
+
+2. 按e进入如下界面，找到图中红色框的recovery nomodeset并将其删掉，再在这一行的后面输入quiet splash rw init=/bin/bash
+
+   {% asset_img quiet.png %}
+
+   + 我的系统后面没有 find_pressed ....
+   + 我是加上后才成功的
+
+3. 接着按F10后出现如下界面
+
+   ```
+   passwd username		// 一定要加用户名，不然修改后不能成功
+   ```
+
+4. reboot 重启一直报错
+
+   ```
+   reboot -f
+   ```
+
+   
