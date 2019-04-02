@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/25/FuncationInterface/man_page.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/25/FuncationInterface/strcpy.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/25/FuncationInterface/malloc_unit.png">
-<meta property="og:updated_time" content="2019-03-26T08:55:54.791Z">
+<meta property="og:updated_time" content="2019-04-02T07:06:33.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Funcation Interface">
 <meta name="twitter:description" content="Funcation Interface 我们讲过void *类型 和任何指针类型之间可以相互隐式转换。  函数接口的定义 函数的调用者和函数的实现者之间订立了一个契约  调用函数之前：调用者要为实现者提供某些条件 函数返回时：实现者要对调用者尽到某些义务。   首先靠函数接口来描述  即函数名,参数,返回值,只要函数和参数的名字起得合理 参数和返回值的类型定得准确   函数接口并不能表达函数的全部">
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-26 16:55:54" itemprop="dateModified" datetime="2019-03-26T16:55:54+08:00">2019-03-26</time>
+                <time title="Updated at: 2019-04-02 15:06:33" itemprop="dateModified" datetime="2019-04-02T15:06:33+08:00">2019-04-02</time>
               
             
           </span>
@@ -589,7 +589,10 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">malloc</span>(<span class="number">0</span>);		<span class="keyword">return</span> 非<span class="literal">NULL</span>的指针</span><br><span class="line"><span class="built_in">free</span>(<span class="literal">NULL</span>);		合法的</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>free 产生错误</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">malloc(<span class="name">p</span>)<span class="comment">;</span></span><br><span class="line">free(<span class="name">p</span>)<span class="comment">;</span></span><br><span class="line">free(<span class="name">p</span>)<span class="comment">;	//到这里会报错</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">malloc(<span class="name">p</span>)<span class="comment">;</span></span><br><span class="line">free(<span class="name">p</span>)<span class="comment">;</span></span><br><span class="line">free(<span class="name">p</span>)<span class="comment">;	//第二次释放的时候，找不到指针，到这里会报错</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>正确的free过程</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">free(p-&gt;msg)<span class="comment">;</span></span><br><span class="line">free(p)<span class="comment">;</span></span><br><span class="line"><span class="attribute">p</span> = NULL<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -599,7 +602,7 @@
 </ul>
 <ol>
 <li>传入参数：把指针所指向的数据传给函数使用；</li>
-<li>传出参数：由函数填充指针所指的内存空间,传回给调用者使用</li>
+<li>传出参数：由函数填充指针所指的内存空间，传回给调用者使用</li>
 <li>如果传入参数是NULL表示取缺省值,也可能表示不做特别处理。</li>
 <li>如果传出参数是NULL 表示调用者不需要传出值,例如time(2) 的参数。</li>
 </ol>
@@ -752,7 +755,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -871,7 +874,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">53</span>
+                      
+                    
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -968,7 +973,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">42</span>
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
