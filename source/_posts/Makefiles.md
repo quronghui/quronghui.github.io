@@ -145,6 +145,17 @@ $ gcc -MM main.c		/* 排除系统头文件 */
 $ make -n		/*只打印要执行的命令，而不是直接执行；检查makefile是否正确*/
 $ make -C testmake	/* 切换到目录testmake下，编译 */
 $ make -C			/*执行每个子目录下的Makefile*/
-$ make CFLAGS=-g	/*在编译中增加调试选项*/
+$ make CFLAGS=-g	/*在编译中增加调试选项, gdb调试不能用*/
 ```
+
+# GNU make
+
++ [GNU Make](https://docs.huihoo.com/gnu/linux/gmake.html)
+
++ 编写Makefile文件进行大项目的管理；
+
+## Why Use
+
+1. 明确搜索位置
+   + 
 

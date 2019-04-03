@@ -145,9 +145,18 @@ tags: [standard lib]
 
    + 很多文件格式或协议格式中会规定一些分隔符或者叫界定符(Delimiter),例如/etc/passwd文件中保存着系统的帐号信息。
 
-3. strken
+3. strtok
 
    + C标准库提供的strtok函数可以很方便地完成分割字符串的操作。
    + tok是Token的缩写,分割出来的每一段字符串称为一个Token
 
-   
+   ```
+   #include <string.h>
+   char *strtok(char *str, const char *delim);
+   char *strtok_r(char *str, const char *delim, char **saveptr);
+   ```
+
+   + 每次都是改写的str
+
+4. 第一次调用时把字符串传给strtok,以后每次调用时第一个参数只要传NULL 就可以了,strtok函数自己会记住上次处理到字符串的什么位置(显然这是通过strtok 函数中的一个静态指针变量记住的)。
+
