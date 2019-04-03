@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/04/02/Manpage/man-K.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/02/Manpage/mans-printf.png">
-<meta property="og:updated_time" content="2019-04-03T01:09:21.340Z">
+<meta property="og:updated_time" content="2019-04-03T12:14:29.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Man Page">
 <meta name="twitter:description" content="LinuxC ManPage Man Page 是linux自带的文档 manual  手册  Command 列出某一个章节 12man passwd		//这就是第一页man 5 passwd	//指定第五页  列出可查询的章节 1234567man -aw printf		//查询文档在第几章节result：	/usr/share/man/man1/printf.1.gz		// 在第一章和">
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-03 09:09:21" itemprop="dateModified" datetime="2019-04-03T09:09:21+08:00">2019-04-03</time>
+                <time title="Updated at: 2019-04-03 20:14:29" itemprop="dateModified" datetime="2019-04-03T20:14:29+08:00">2019-04-03</time>
               
             
           </span>
@@ -541,7 +541,7 @@
 </li>
 </ol>
 <h2 id="优化界面"><a href="#优化界面" class="headerlink" title="优化界面"></a>优化界面</h2><ol>
-<li><p>给字体分配颜色</p>
+<li><p>给字体分配颜色：这个得加</p>
 <figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bashrc	<span class="comment">// 打开文件</span></span><br><span class="line">add <span class="keyword">code</span></span><br><span class="line">	# Less Colors for Man Pages</span><br><span class="line">    <span class="keyword">export</span> LESS_TERMCAP_mb=$<span class="string">'\E[01;31m'</span>       # begin blinking</span><br><span class="line">    <span class="keyword">export</span> LESS_TERMCAP_md=$<span class="string">'\E[01;38;5;74m'</span>  # begin bold</span><br><span class="line">    <span class="keyword">export</span> LESS_TERMCAP_me=$<span class="string">'\E[0m'</span>           # end mode</span><br><span class="line">    <span class="keyword">export</span> LESS_TERMCAP_se=$<span class="string">'\E[0m'</span>           # end standout-mode</span><br><span class="line">    <span class="keyword">export</span> LESS_TERMCAP_so=$<span class="string">'\E[38;5;246m'</span>    # begin standout-mode - info box</span><br><span class="line">    <span class="keyword">export</span> LESS_TERMCAP_ue=$<span class="string">'\E[0m'</span>           # end underline</span><br><span class="line">    <span class="keyword">export</span> LESS_TERMCAP_us=$<span class="string">'\E[04;38;5;146m'</span> # begin underline	</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
 </li>
 </ol>

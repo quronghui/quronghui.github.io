@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/variableuse.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/Default_value.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/Default_value1.png">
-<meta property="og:updated_time" content="2019-03-22T06:40:54.820Z">
+<meta property="og:updated_time" content="2019-04-03T13:42:47.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Makefile">
 <meta name="twitter:description" content="Makefile 基础  Link code  – Makefiles  Makefile 基本规则Makefile 例子 12345678main: main.o stack.o maze.o		gcc main.o stack.o maze.o -o mainmain.o: main.c main.h stack.h maze.h		gcc -c main.cstack.o: stack.c">
@@ -425,7 +425,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-22 14:40:54" itemprop="dateModified" datetime="2019-03-22T14:40:54+08:00">2019-03-22</time>
+                <time title="Updated at: 2019-04-03 21:42:47" itemprop="dateModified" datetime="2019-04-03T21:42:47+08:00">2019-04-03</time>
               
             
           </span>
@@ -616,7 +616,19 @@
 </ul>
 </li>
 </ol>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> make -n		<span class="comment">/*只打印要执行的命令，而不是直接执行；检查makefile是否正确*/</span></span><br><span class="line"><span class="symbol">$</span> make -C testmake	<span class="comment">/* 切换到目录testmake下，编译 */</span></span><br><span class="line"><span class="symbol">$</span> make -C			<span class="comment">/*执行每个子目录下的Makefile*/</span></span><br><span class="line"><span class="symbol">$</span> make CFLAGS=-g	<span class="comment">/*在编译中增加调试选项*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> make -n		<span class="comment">/*只打印要执行的命令，而不是直接执行；检查makefile是否正确*/</span></span><br><span class="line"><span class="symbol">$</span> make -C testmake	<span class="comment">/* 切换到目录testmake下，编译 */</span></span><br><span class="line"><span class="symbol">$</span> make -C			<span class="comment">/*执行每个子目录下的Makefile*/</span></span><br><span class="line"><span class="symbol">$</span> make CFLAGS=-g	<span class="comment">/*在编译中增加调试选项, gdb调试不能用*/</span></span><br></pre></td></tr></table></figure>
+<h1 id="GNU-make"><a href="#GNU-make" class="headerlink" title="GNU make"></a>GNU make</h1><ul>
+<li><p><a href="https://docs.huihoo.com/gnu/linux/gmake.html" target="_blank" rel="noopener">GNU Make</a></p>
+</li>
+<li><p>编写Makefile文件进行大项目的管理；</p>
+</li>
+</ul>
+<h2 id="Why-Use"><a href="#Why-Use" class="headerlink" title="Why Use"></a>Why Use</h2><ol>
+<li>明确搜索位置<ul>
+<li></li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -1001,7 +1013,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Makefile-基础"><span class="nav-number">1.</span> <span class="nav-text">Makefile 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-基本规则"><span class="nav-number">1.1.</span> <span class="nav-text">Makefile 基本规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile"><span class="nav-number">1.1.1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-编译"><span class="nav-number">1.1.2.</span> <span class="nav-text">make 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-clean"><span class="nav-number">1.1.3.</span> <span class="nav-text">make clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类似于clean的目标名字"><span class="nav-number">1.1.4.</span> <span class="nav-text">类似于clean的目标名字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-隐含规则和模式规则"><span class="nav-number">1.2.</span> <span class="nav-text">Makefile 隐含规则和模式规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">1.3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">特殊变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的缺省值"><span class="nav-number">1.3.2.</span> <span class="nav-text">变量的缺省值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动处理头文件的依赖关系"><span class="nav-number">1.4.</span> <span class="nav-text">自动处理头文件的依赖关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.4.1.</span> <span class="nav-text">命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make命令选项"><span class="nav-number">1.5.</span> <span class="nav-text">Make命令选项</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Makefile-基础"><span class="nav-number">1.</span> <span class="nav-text">Makefile 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-基本规则"><span class="nav-number">1.1.</span> <span class="nav-text">Makefile 基本规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile"><span class="nav-number">1.1.1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-编译"><span class="nav-number">1.1.2.</span> <span class="nav-text">make 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-clean"><span class="nav-number">1.1.3.</span> <span class="nav-text">make clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类似于clean的目标名字"><span class="nav-number">1.1.4.</span> <span class="nav-text">类似于clean的目标名字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-隐含规则和模式规则"><span class="nav-number">1.2.</span> <span class="nav-text">Makefile 隐含规则和模式规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">1.3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">特殊变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的缺省值"><span class="nav-number">1.3.2.</span> <span class="nav-text">变量的缺省值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动处理头文件的依赖关系"><span class="nav-number">1.4.</span> <span class="nav-text">自动处理头文件的依赖关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.4.1.</span> <span class="nav-text">命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make命令选项"><span class="nav-number">1.5.</span> <span class="nav-text">Make命令选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GNU-make"><span class="nav-number">2.</span> <span class="nav-text">GNU make</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Use"><span class="nav-number">2.1.</span> <span class="nav-text">Why Use</span></a></li></ol></li></ol></div>
             
 
           </div>
