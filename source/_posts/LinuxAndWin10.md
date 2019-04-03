@@ -1,6 +1,6 @@
 ---
 layout: '[layout]'
-title: LinuxAndWin10
+title: Ubuntu18 And Win10
 date: 2019-02-18 11:25:12
 tags: linux win10 双系统
 categories: System
@@ -11,7 +11,14 @@ categories: System
 ## Win10 + Ubuntu环境的搭建
 
 - [参考链接](https://blog.csdn.net/qq_41057206/article/details/80534194) 
+
 - 有些工作需要切换windows,因此才搭建了双系统。
+
+- 主机环境是SSD+HDD
+
+  - 压缩卷的时候，不用压缩SSD，找一个大一点的机械硬盘，直接将其状态删除为未分配的状态。
+
+  {% asset_img ssdandhdd.png %}
 
 1. 准备工作
    - [下载UltralSO，这是用来制作启动盘的软件](https://cn.ultraiso.net/uiso9_cn.exe)
@@ -34,3 +41,4 @@ categories: System
 
 - [参考链接](https://www.jianshu.com/p/19353fbda01e) 
 - 用到的时候直接搜索
+

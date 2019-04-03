@@ -69,7 +69,7 @@ tags: esp32
 
 #### BT模式下进行
 
-​	{% asset_img wakeup.png %}
+​	{% asset_img wake.png %}
 
 + 为了通过Wi-Fi或BT源唤醒芯片，芯片将在Active、Modem-sleep和Light-sleep之间进行切换，CPU、Wi-Fi、Bluetooth和射频模块均将在预设间隔中唤醒，保证Wi-Fi/蓝牙的正常连接。
 

@@ -99,16 +99,25 @@ tags: [Funcation Interface]
      ```
      malloc(p);
      free(p);
-     free(p);	//到这里会报错
+     free(p);	//第二次释放的时候，找不到指针，到这里会报错
      ```
 
+   + 正确的free过程
+
+     ```
+     free(p->msg);
+     free(p);
+     p = NULL;
+     ```
+
+     
 
 ## 传入参数和传出参数
 
 + [parameter code](https://github.com/quronghui/LinuxC.git)
 
 1. 传入参数：把指针所指向的数据传给函数使用；
-2. 传出参数：由函数填充指针所指的内存空间,传回给调用者使用
+2. 传出参数：由函数填充指针所指的内存空间，传回给调用者使用
 3. 如果传入参数是NULL表示取缺省值,也可能表示不做特别处理。
 4. 如果传出参数是NULL 表示调用者不需要传出值,例如time(2) 的参数。
 
@@ -119,6 +128,8 @@ void func(const unit_t *p)	//传入参数
 void func(unit_t *p)		//传出参数
 void func(unit_t *p);		//Value-result参数示例:
 ```
+
+
 
 ## 两层指针
 
@@ -160,3 +171,9 @@ void free_unit(unit_t *p);		//释放内存
 + 通过返回值分配内存就只需要一层返回指针；
 
 + 参数分配内存则需要两层指针
+
+## 回调函数
+
+1. 利用函数指针的方法进行调用
+
+   {% asset_img callback.png %}
