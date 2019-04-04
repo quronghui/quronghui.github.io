@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/variableuse.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/Default_value.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/Default_value1.png">
-<meta property="og:updated_time" content="2019-04-03T13:42:47.599Z">
+<meta property="og:updated_time" content="2019-04-04T01:12:43.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Makefile">
 <meta name="twitter:description" content="Makefile 基础  Link code  – Makefiles  Makefile 基本规则Makefile 例子 12345678main: main.o stack.o maze.o		gcc main.o stack.o maze.o -o mainmain.o: main.c main.h stack.h maze.h		gcc -c main.cstack.o: stack.c">
@@ -425,7 +425,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-03 21:42:47" itemprop="dateModified" datetime="2019-04-03T21:42:47+08:00">2019-04-03</time>
+                <time title="Updated at: 2019-04-04 09:12:43" itemprop="dateModified" datetime="2019-04-04T09:12:43+08:00">2019-04-04</time>
               
             
           </span>
@@ -624,12 +624,44 @@
 </li>
 </ul>
 <h2 id="Why-Use"><a href="#Why-Use" class="headerlink" title="Why Use"></a>Why Use</h2><ol>
-<li>明确搜索位置<ul>
-<li></li>
+<li>明确搜索位置</li>
+<li>减少项目的编译时间<ul>
+<li>只针对改动的项目进行编译</li>
+</ul>
+</li>
+<li>从很多目标文件生成一个程序包 (Library)比从一个单一的大目标文件<br>生成要好的多<ul>
+<li>使用 gcc/ld (一个 GNU C 编译／连接器) 把一个程序包连接到一个程序时；</li>
+<li>在连接的过程中，它将不去连接没有使用到的部分。</li>
+<li>程序是很模块化的，文件之间的共享部分被减到最少</li>
 </ul>
 </li>
 </ol>
-
+<h2 id="When-Use"><a href="#When-Use" class="headerlink" title="When Use"></a>When Use</h2><ol>
+<li>如果你需要开发一个相当大的项目，在开始前，应该考虑一下你将如何实现它，并且生成几个文件（用适当的名字）来放你的代码。</li>
+<li>当然，在你的项目开发的过程中，你可以建立新的文件，但如果你这么做的话，说明你可能改变了当初的想法，你应该想想是否需要对整体结构也进行相应的调整。</li>
+</ol>
+<h2 id="How-Use"><a href="#How-Use" class="headerlink" title="How Use"></a>How Use</h2><ol>
+<li>不要用一个 header 文件指向多个源码文件;</li>
+<li>如果可以的话，完全可以用超过一个的 header 文件来指向同一个源码文件。</li>
+<li>不要在多个 header 文件中重复定义信息。</li>
+<li>关键字“static”：要防止一个符号在它被定义的源文件以外被看到</li>
+</ol>
+<h3 id="header"><a href="#header" class="headerlink" title="header"></a>header</h3><ol>
+<li><p>不要在 header 档里定义变量，只能用作声明变量和函数。</p>
+</li>
+<li><p>你只需要在 header 档里声明，然后在适当的Ｃ源码文件（只在 #include header<br>）里定义一次。</p>
+</li>
+<li><p>声明和定义</p>
+<ul>
+<li>声明：告诉编译器其所声明的符号应该存在，并且要有所指定的类型。但是，它并不会使编译器分配贮存空间。</li>
+<li>定义：要求编译器分配贮存空间。</li>
+</ul>
+</li>
+<li><p>防止出现重复声明</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> FILENAME_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILENAME_H</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="编译和连接"><a href="#编译和连接" class="headerlink" title="编译和连接"></a>编译和连接</h3>
       
     </div>
 
@@ -1013,7 +1045,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Makefile-基础"><span class="nav-number">1.</span> <span class="nav-text">Makefile 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-基本规则"><span class="nav-number">1.1.</span> <span class="nav-text">Makefile 基本规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile"><span class="nav-number">1.1.1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-编译"><span class="nav-number">1.1.2.</span> <span class="nav-text">make 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-clean"><span class="nav-number">1.1.3.</span> <span class="nav-text">make clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类似于clean的目标名字"><span class="nav-number">1.1.4.</span> <span class="nav-text">类似于clean的目标名字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-隐含规则和模式规则"><span class="nav-number">1.2.</span> <span class="nav-text">Makefile 隐含规则和模式规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">1.3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">特殊变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的缺省值"><span class="nav-number">1.3.2.</span> <span class="nav-text">变量的缺省值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动处理头文件的依赖关系"><span class="nav-number">1.4.</span> <span class="nav-text">自动处理头文件的依赖关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.4.1.</span> <span class="nav-text">命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make命令选项"><span class="nav-number">1.5.</span> <span class="nav-text">Make命令选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GNU-make"><span class="nav-number">2.</span> <span class="nav-text">GNU make</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Use"><span class="nav-number">2.1.</span> <span class="nav-text">Why Use</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Makefile-基础"><span class="nav-number">1.</span> <span class="nav-text">Makefile 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-基本规则"><span class="nav-number">1.1.</span> <span class="nav-text">Makefile 基本规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Makefile"><span class="nav-number">1.1.1.</span> <span class="nav-text">Makefile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-编译"><span class="nav-number">1.1.2.</span> <span class="nav-text">make 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#make-clean"><span class="nav-number">1.1.3.</span> <span class="nav-text">make clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类似于clean的目标名字"><span class="nav-number">1.1.4.</span> <span class="nav-text">类似于clean的目标名字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Makefile-隐含规则和模式规则"><span class="nav-number">1.2.</span> <span class="nav-text">Makefile 隐含规则和模式规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">1.3.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">特殊变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的缺省值"><span class="nav-number">1.3.2.</span> <span class="nav-text">变量的缺省值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动处理头文件的依赖关系"><span class="nav-number">1.4.</span> <span class="nav-text">自动处理头文件的依赖关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">1.4.1.</span> <span class="nav-text">命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make命令选项"><span class="nav-number">1.5.</span> <span class="nav-text">Make命令选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GNU-make"><span class="nav-number">2.</span> <span class="nav-text">GNU make</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Use"><span class="nav-number">2.1.</span> <span class="nav-text">Why Use</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#When-Use"><span class="nav-number">2.2.</span> <span class="nav-text">When Use</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-Use"><span class="nav-number">2.3.</span> <span class="nav-text">How Use</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#header"><span class="nav-number">2.3.1.</span> <span class="nav-text">header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译和连接"><span class="nav-number">2.3.2.</span> <span class="nav-text">编译和连接</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

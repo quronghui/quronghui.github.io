@@ -96,22 +96,24 @@
 
 
 
-  <meta name="description" content="Complation And CAssembler And C汇编代码生成C和汇编穿插显示12gcc -g main.c -o main -Wall	// 生成可执行文件objdump -dS main			// 把C代码和汇编代码穿插起来显示 只生成汇编1gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文件。 汇编调试12345(gdb) disassemb">
+  <meta name="description" content="Assembler And C汇编代码生成C和汇编穿插显示12gcc -g main.c -o main -Wall	// 生成可执行文件.outobjdump -dS main			// 把C代码和汇编代码穿插起来显示 只生成汇编1gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文件。 汇编调试12345(gdb) disassemble			//可以反汇编">
 <meta name="keywords" content="complation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Assembler And C">
 <meta property="og:url" content="http://yoursite.com/2019/03/18/ComplationAndC/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="Complation And CAssembler And C汇编代码生成C和汇编穿插显示12gcc -g main.c -o main -Wall	// 生成可执行文件objdump -dS main			// 把C代码和汇编代码穿插起来显示 只生成汇编1gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文件。 汇编调试12345(gdb) disassemb">
+<meta property="og:description" content="Assembler And C汇编代码生成C和汇编穿插显示12gcc -g main.c -o main -Wall	// 生成可执行文件.outobjdump -dS main			// 把C代码和汇编代码穿插起来显示 只生成汇编1gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文件。 汇编调试12345(gdb) disassemble			//可以反汇编">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/18/ComplationAndC/esp.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/18/ComplationAndC/gcc.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/18/ComplationAndC/clib.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/ComplationAndC/Scope.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/ComplationAndC/nameSpace.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/18/ComplationAndC/specifier.png">
-<meta property="og:updated_time" content="2019-03-19T01:25:42.129Z">
+<meta property="og:updated_time" content="2019-04-04T02:49:54.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Assembler And C">
-<meta name="twitter:description" content="Complation And CAssembler And C汇编代码生成C和汇编穿插显示12gcc -g main.c -o main -Wall	// 生成可执行文件objdump -dS main			// 把C代码和汇编代码穿插起来显示 只生成汇编1gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文件。 汇编调试12345(gdb) disassemb">
+<meta name="twitter:description" content="Assembler And C汇编代码生成C和汇编穿插显示12gcc -g main.c -o main -Wall	// 生成可执行文件.outobjdump -dS main			// 把C代码和汇编代码穿插起来显示 只生成汇编1gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文件。 汇编调试12345(gdb) disassemble			//可以反汇编">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/18/ComplationAndC/esp.png">
 
 
@@ -421,7 +423,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-19 09:25:42" itemprop="dateModified" datetime="2019-03-19T09:25:42+08:00">2019-03-19</time>
+                <time title="Updated at: 2019-04-04 10:49:54" itemprop="dateModified" datetime="2019-04-04T10:49:54+08:00">2019-04-04</time>
               
             
           </span>
@@ -508,7 +510,7 @@
       
 
       
-        <h1 id="Complation-And-C"><a href="#Complation-And-C" class="headerlink" title="Complation And C"></a>Complation And C</h1><h1 id="Assembler-And-C"><a href="#Assembler-And-C" class="headerlink" title="Assembler And C"></a><strong>Assembler And C</strong></h1><h2 id="汇编代码生成"><a href="#汇编代码生成" class="headerlink" title="汇编代码生成"></a>汇编代码生成</h2><h3 id="C和汇编穿插显示"><a href="#C和汇编穿插显示" class="headerlink" title="C和汇编穿插显示"></a>C和汇编穿插显示</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -g main<span class="selector-class">.c</span> -o main -Wall	<span class="comment">// 生成可执行文件</span></span><br><span class="line">objdump -dS main			<span class="comment">// 把C代码和汇编代码穿插起来显示</span></span><br></pre></td></tr></table></figure>
+        <h1 id="Assembler-And-C"><a href="#Assembler-And-C" class="headerlink" title="Assembler And C"></a>Assembler And C</h1><h2 id="汇编代码生成"><a href="#汇编代码生成" class="headerlink" title="汇编代码生成"></a>汇编代码生成</h2><h3 id="C和汇编穿插显示"><a href="#C和汇编穿插显示" class="headerlink" title="C和汇编穿插显示"></a>C和汇编穿插显示</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -g main<span class="selector-class">.c</span> -o main -Wall	<span class="comment">// 生成可执行文件.out</span></span><br><span class="line">objdump -dS main			<span class="comment">// 把C代码和汇编代码穿插起来显示</span></span><br></pre></td></tr></table></figure>
 <h3 id="只生成汇编"><a href="#只生成汇编" class="headerlink" title="只生成汇编"></a>只生成汇编</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -S main<span class="selector-class">.c</span>				<span class="comment">//只生成汇编代码main.s,而不生成二进制的目标文件。</span></span><br></pre></td></tr></table></figure>
 <h3 id="汇编调试"><a href="#汇编调试" class="headerlink" title="汇编调试"></a>汇编调试</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) disassemble			<span class="comment">//可以反汇编当前函数或者指定的函数</span></span><br><span class="line">(gdb) si 					<span class="comment">//step 命令可以一行代码一行代码地单步调试,而这里用到的si命令可以一条指令一条指令地单步调试。</span></span><br><span class="line">(gdb) info registers 		<span class="comment">//可以显示所有寄存器的当前值。</span></span><br><span class="line">(gdb) <span class="selector-tag">p</span> <span class="variable">$esp</span>				<span class="comment">//打印esp寄存器的值,</span></span><br><span class="line"><span class="comment">// 在上例中esp 寄存器的值是0xbff1c3f4,所以x/20 $esp 命令查看内存中从0xbff1c3f4地址开始的20个32位数。</span></span><br></pre></td></tr></table></figure>
 <h3 id="数据的存储"><a href="#数据的存储" class="headerlink" title="数据的存储"></a>数据的存储</h3><ol>
@@ -523,15 +525,32 @@
 <img src="/2019/03/18/ComplationAndC/esp.png">
 </li>
 </ol>
-<h2 id="程序入口"><a href="#程序入口" class="headerlink" title="程序入口"></a>程序入口</h2><ol>
+<h2 id="程序入口"><a href="#程序入口" class="headerlink" title="程序入口"></a>程序入口</h2><ul>
+<li>-o ：作用 –&gt; 只是为了取名字，而不是其他的作用 </li>
+<li>编译的作用：翻译高级语言为可执行的二进制语言。</li>
+</ul>
+<ol>
 <li><p>汇编程序入口函数：_start；C程序的入口是：main()</p>
 </li>
 <li><p>汇编函数编译</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ as hello<span class="selector-class">.s</span> -o hello<span class="selector-class">.o</span>		<span class="comment">//翻译为汇编代码</span></span><br><span class="line">$ ld hello<span class="selector-class">.o</span> -o hello			<span class="comment">//ld进行链接库</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>C程序的编译</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -S main<span class="selector-class">.c</span>				<span class="comment">//生成汇编代码</span></span><br><span class="line">$ gcc -c main<span class="selector-class">.s</span>				<span class="comment">//生成目标文件</span></span><br><span class="line">$ gcc main<span class="selector-class">.o</span>				<span class="comment">//生成可执行文件</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -S main<span class="selector-class">.c</span> -o main<span class="selector-class">.s</span>	<span class="comment">//生成汇编代码</span></span><br><span class="line">$ gcc -c main<span class="selector-class">.s</span> -o main<span class="selector-class">.o</span>	<span class="comment">//生成目标文件 </span></span><br><span class="line">$ gcc main<span class="selector-class">.o</span> -o main		<span class="comment">//生成可执行文件</span></span><br></pre></td></tr></table></figure>
 <img src="/2019/03/18/ComplationAndC/gcc.png">
+<ul>
+<li>汇编代码：<ul>
+<li>可以直接命名为 xxx.s ；进行编写<ul>
+<li>通过as进行编译，ld进行链接。</li>
+</ul>
+</li>
+<li>可以通过 xxx.c 生成<ul>
+<li>通过 gcc -S 生成 .s汇编代码</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ol>
 <h3 id="C程序链接库的过程"><a href="#C程序链接库的过程" class="headerlink" title="C程序链接库的过程"></a>C程序链接库的过程</h3><ol>
@@ -544,7 +563,7 @@
 </ol>
 <h2 id="变量的存储布局"><a href="#变量的存储布局" class="headerlink" title="变量的存储布局"></a>变量的存储布局</h2><ol>
 <li><p>查看命令</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g main<span class="selector-class">.c</span> -o main	</span><br><span class="line">$ readelf -<span class="selector-tag">a</span> main		<span class="comment">//查看符号表 global and local</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g main<span class="selector-class">.c</span> -o main	<span class="comment">// gdb 调试文件生成</span></span><br><span class="line">$ readelf -<span class="selector-tag">a</span> main		<span class="comment">//查看符号表 global and local</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="关键字修饰变量"><a href="#关键字修饰变量" class="headerlink" title="关键字修饰变量"></a>关键字修饰变量</h3><ol>
@@ -567,17 +586,44 @@
 </ul>
 </li>
 </ol>
-<h3 id="作用域（Scope）些名词-因为我不是在写C标准。"><a href="#作用域（Scope）些名词-因为我不是在写C标准。" class="headerlink" title="作用域（Scope）些名词,因为我不是在写C标准。"></a>作用域（Scope）些名词,因为我不是在写C标准。</h3><ol>
-<li>作用域适合于所有的标识符，而不仅仅是变量。</li>
-<li>作用域范围<ul>
-<li>从当前位置，到所在函数结束</li>
+<h3 id="标识符的作用域（Scope）"><a href="#标识符的作用域（Scope）" class="headerlink" title="标识符的作用域（Scope）"></a>标识符的作用域（Scope）</h3><ul>
+<li>关键字：时用来修饰标识符和变量的。<ul>
+<li>用来定义他们的作用范围</li>
+</ul>
+</li>
+<li>标识符：</li>
+</ul>
+<ol>
+<li><p>作用域适合于所有的标识符，而不仅仅是变量。</p>
+<img src="/2019/03/18/ComplationAndC/Scope.png">
+</li>
+</ol>
+<h3 id="命名空间-（Name-Space）的重名标识符"><a href="#命名空间-（Name-Space）的重名标识符" class="headerlink" title="命名空间 （Name Space）的重名标识符"></a>命名空间 （Name Space）的重名标识符</h3><ol>
+<li><p>对于重名标识符，内层作用域的标识符将覆盖外层作用域的标识符。</p>
+<img src="/2019/03/18/ComplationAndC/nameSpace.png">
+</li>
+</ol>
+<h3 id="标识符的链接属性-Linkage"><a href="#标识符的链接属性-Linkage" class="headerlink" title="标识符的链接属性 Linkage"></a>标识符的链接属性 Linkage</h3><ol>
+<li>外部链接（External Linkage）<ul>
+<li>标识符在任意程序文件中即使声明多次也都代表同一个变量或函数,则这个标识符具有External Linkage。</li>
+<li>具有External Linkage的标识符编译后在符号表中是GLOBAL的符号。</li>
+</ul>
+</li>
+<li>内部链接（Internal Linkage）<ul>
+<li>如果一个标识符在<strong>某个程序文件</strong>中即使声明多次也都代表同一个变量或函数,则这个标识符具有Internal Linkage。</li>
+<li>具有Internal Linkage的标识符编译后在符号表中是LOCAL的符号</li>
+</ul>
+</li>
+<li>无链接(No Linkage)。<ul>
+<li>除以上情况之外的标识符都属于No Linkage的</li>
+<li>例如函数的局部变量，以及不表示变量和函数的其它标识符。</li>
 </ul>
 </li>
 </ol>
-<h3 id="命名空间-（Name-Space）"><a href="#命名空间-（Name-Space）" class="headerlink" title="命名空间 （Name Space）"></a>命名空间 （Name Space）</h3><ol>
-<li>对于重名标识符，内层作用域的标识符将覆盖外层作用域的标识符。</li>
-</ol>
-<h3 id="存储类型标识符（Storage-Class-Specifier）"><a href="#存储类型标识符（Storage-Class-Specifier）" class="headerlink" title="存储类型标识符（Storage Class Specifier）"></a>存储类型标识符（Storage Class Specifier）</h3><img src="/2019/03/18/ComplationAndC/specifier.png">
+<h3 id="存储类型修饰符–关键字（Storage-Class-Specifier）"><a href="#存储类型修饰符–关键字（Storage-Class-Specifier）" class="headerlink" title="存储类型修饰符–关键字（Storage Class Specifier）"></a>存储类型修饰符–关键字（Storage Class Specifier）</h3><ul>
+<li>typedef ，static，extern</li>
+</ul>
+<img src="/2019/03/18/ComplationAndC/specifier.png">
 <h2 id="结构体和联合体"><a href="#结构体和联合体" class="headerlink" title="结构体和联合体"></a>结构体和联合体</h2><h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3><ol>
 <li>栈：是从高地址向低地址增长的；</li>
 <li>结构体成员：从低地址向高地址排列，这一点和数组类似。但有一点和数组不同,结构体的各成员并不是一个紧挨一个排列的,中间有空隙,称为填充。</li>
@@ -977,7 +1023,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Complation-And-C"><span class="nav-number">1.</span> <span class="nav-text">Complation And C</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Assembler-And-C"><span class="nav-number">2.</span> <span class="nav-text">Assembler And C</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编代码生成"><span class="nav-number">2.1.</span> <span class="nav-text">汇编代码生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C和汇编穿插显示"><span class="nav-number">2.1.1.</span> <span class="nav-text">C和汇编穿插显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#只生成汇编"><span class="nav-number">2.1.2.</span> <span class="nav-text">只生成汇编</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编调试"><span class="nav-number">2.1.3.</span> <span class="nav-text">汇编调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的存储"><span class="nav-number">2.1.4.</span> <span class="nav-text">数据的存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序入口"><span class="nav-number">2.2.</span> <span class="nav-text">程序入口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C程序链接库的过程"><span class="nav-number">2.2.1.</span> <span class="nav-text">C程序链接库的过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量的存储布局"><span class="nav-number">2.3.</span> <span class="nav-text">变量的存储布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字修饰变量"><span class="nav-number">2.3.1.</span> <span class="nav-text">关键字修饰变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域（Scope）些名词-因为我不是在写C标准。"><span class="nav-number">2.3.2.</span> <span class="nav-text">作用域（Scope）些名词,因为我不是在写C标准。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名空间-（Name-Space）"><span class="nav-number">2.3.3.</span> <span class="nav-text">命名空间 （Name Space）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储类型标识符（Storage-Class-Specifier）"><span class="nav-number">2.3.4.</span> <span class="nav-text">存储类型标识符（Storage Class Specifier）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体和联合体"><span class="nav-number">2.4.</span> <span class="nav-text">结构体和联合体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储"><span class="nav-number">2.4.1.</span> <span class="nav-text">存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C和内联汇编"><span class="nav-number">2.5.</span> <span class="nav-text">C和内联汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内联方式"><span class="nav-number">2.5.1.</span> <span class="nav-text">内联方式</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Assembler-And-C"><span class="nav-number">1.</span> <span class="nav-text">Assembler And C</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编代码生成"><span class="nav-number">1.1.</span> <span class="nav-text">汇编代码生成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C和汇编穿插显示"><span class="nav-number">1.1.1.</span> <span class="nav-text">C和汇编穿插显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#只生成汇编"><span class="nav-number">1.1.2.</span> <span class="nav-text">只生成汇编</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编调试"><span class="nav-number">1.1.3.</span> <span class="nav-text">汇编调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的存储"><span class="nav-number">1.1.4.</span> <span class="nav-text">数据的存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序入口"><span class="nav-number">1.2.</span> <span class="nav-text">程序入口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C程序链接库的过程"><span class="nav-number">1.2.1.</span> <span class="nav-text">C程序链接库的过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量的存储布局"><span class="nav-number">1.3.</span> <span class="nav-text">变量的存储布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字修饰变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">关键字修饰变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符的作用域（Scope）"><span class="nav-number">1.3.2.</span> <span class="nav-text">标识符的作用域（Scope）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名空间-（Name-Space）的重名标识符"><span class="nav-number">1.3.3.</span> <span class="nav-text">命名空间 （Name Space）的重名标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符的链接属性-Linkage"><span class="nav-number">1.3.4.</span> <span class="nav-text">标识符的链接属性 Linkage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储类型修饰符–关键字（Storage-Class-Specifier）"><span class="nav-number">1.3.5.</span> <span class="nav-text">存储类型修饰符–关键字（Storage Class Specifier）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构体和联合体"><span class="nav-number">1.4.</span> <span class="nav-text">结构体和联合体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储"><span class="nav-number">1.4.1.</span> <span class="nav-text">存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C和内联汇编"><span class="nav-number">1.5.</span> <span class="nav-text">C和内联汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内联方式"><span class="nav-number">1.5.1.</span> <span class="nav-text">内联方式</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
