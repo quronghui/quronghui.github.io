@@ -104,10 +104,12 @@
 <meta property="og:site_name" content="Lucky Boy">
 <meta property="og:description" content="C Standard Lib C标准主要由两部分组成，一部分描述C的语法，一部分描述C标准库。 平台支持C语言 实现C编译器 实现C标准库   函数文件的命名，以.c 为准 在 ’.c‘ file：void * 类型的数，做右值的时候会自动进行转换； 在 ’ .cpp ‘file：不会自动的转换   POSIX 是Unix系统的标准，不属于C标准库  String Funcation 程序按功能划">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-03T12:38:08.683Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/ls-l.png">
+<meta property="og:updated_time" content="2019-04-08T08:04:21.955Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C Standard Lib">
 <meta name="twitter:description" content="C Standard Lib C标准主要由两部分组成，一部分描述C的语法，一部分描述C标准库。 平台支持C语言 实现C编译器 实现C标准库   函数文件的命名，以.c 为准 在 ’.c‘ file：void * 类型的数，做右值的时候会自动进行转换； 在 ’ .cpp ‘file：不会自动的转换   POSIX 是Unix系统的标准，不属于C标准库  String Funcation 程序按功能划">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/02/CStandardLib/ls-l.png">
 
 
 
@@ -416,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-03 20:38:08" itemprop="dateModified" datetime="2019-04-03T20:38:08+08:00">2019-04-03</time>
+                <time title="Updated at: 2019-04-08 16:04:21" itemprop="dateModified" datetime="2019-04-08T16:04:21+08:00">2019-04-08</time>
               
             
           </span>
@@ -648,6 +650,233 @@
 </ul>
 </li>
 <li><p>第一次调用时把字符串传给strtok,以后每次调用时第一个参数只要传NULL 就可以了,strtok函数自己会记住上次处理到字符串的什么位置(显然这是通过strtok 函数中的一个静态指针变量记住的)。</p>
+</li>
+</ol>
+<h2 id="标准I-O库函数"><a href="#标准I-O库函数" class="headerlink" title="标准I/O库函数"></a>标准I/O库函数</h2><h3 id="文件的基本概念"><a href="#文件的基本概念" class="headerlink" title="文件的基本概念"></a>文件的基本概念</h3><ul>
+<li><p>用C标准库对文件进行读写操作,对文件的读写也属于I/O操作的一种</p>
+</li>
+<li><p>十六进制数，十六进制的ASCII值</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">十六进制数			十六进制的ASCII值</span><br><span class="line">	<span class="number">5</span>					  <span class="number">32</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ASCII 码值 </p>
+<ul>
+<li>0 - 127 : 128位的ASCII码值</li>
+<li>有33位不能显示出来，只能显示95个</li>
+</ul>
+</li>
+</ul>
+<h4 id="文本文件（Text-file）"><a href="#文本文件（Text-file）" class="headerlink" title="文本文件（Text file）"></a>文本文件（Text file）</h4><ol>
+<li><p>Text file –&gt; Source file</p>
+<ul>
+<li>文本文件是用来保存字符的</li>
+<li>文件中的字节都是字符的某种编码(例如ASCII或UTF-8)</li>
+</ul>
+</li>
+<li><p>编写和查看</p>
+<ul>
+<li>vi : 进行编辑</li>
+<li>cat : 查看里面的内容</li>
+</ul>
+</li>
+<li><p>查看text file的长度</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> ls -l textfile	<span class="comment">/* 查看文本的长度，vi会自动在文件末尾加一个换行符 */</span></span><br></pre></td></tr></table></figure>
+<img src="/2019/04/02/CStandardLib/ls-l.png" title="textfile输入了5678，可以看到文本长度">
+</li>
+<li><p><strong>od Command</strong></p>
+<ul>
+<li>-tx1：将文件中的字节以十六进制的形式列出来</li>
+<li>-tc :    将文件中的ASCII码以字符形式列出来。</li>
+<li>-Ax :   要求以十六进制显示文件中的地址。（类似于hexdump）</li>
+</ul>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ od -tx1 -tc -Ax textfile </span><br><span class="line"><span class="number">000000</span>  <span class="number">35</span>  <span class="number">36</span>  <span class="number">37</span>  <span class="number">38</span>  <span class="number">0</span>a		<span class="comment">// 十六进制的ASCII码值</span></span><br><span class="line">         <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>   <span class="number">8</span>  \n		<span class="comment">// 十六进制数</span></span><br><span class="line"><span class="number">000005</span>							<span class="comment">// 地址</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexdump textfile </span><br><span class="line"><span class="number">0000000</span> <span class="number">3635</span> <span class="number">3837</span> <span class="number">000</span>a                         </span><br><span class="line"><span class="number">0000005</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="二进制文件-Binary-file"><a href="#二进制文件-Binary-file" class="headerlink" title="二进制文件 Binary file"></a>二进制文件 Binary file</h4><ol>
+<li>Binary file<ul>
+<li>目标文件，库文件和可执行文件</li>
+<li>有些字节表示各Section和Segment在文件中的位置,有些字节表示各Segment的加载地址。</li>
+</ul>
+</li>
+<li>查看<ul>
+<li>hexdump command :进行查看</li>
+</ul>
+</li>
+</ol>
+<h3 id="fopen-fclose"><a href="#fopen-fclose" class="headerlink" title="fopen / fclose"></a>fopen / fclose</h3><ol>
+<li><p>fopen : 就是在操作系统中分配一些资源用于保存该文件的状态信息，并得到该文件的标识。</p>
+</li>
+<li><p>fclose: </p>
+</li>
+<li><p>man fopen</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FILE *<span class="title">fopen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">const</span> <span class="keyword">char</span> *mode)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>指针类型：FILE *</p>
+</li>
+<li><p><strong>返回值做判断</strong>：在代码中对返回值进行判断</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( (fp = fopen(<span class="string">"/tmp/file1"</span>, <span class="string">"r"</span>)) == NULL)	<span class="regexp">/*绝对路径*/</span></span><br><span class="line">&#123;</span><br><span class="line">    printf(<span class="string">"error open file /tmp/file1!\n"</span>);</span><br><span class="line">    <span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="mode"><a href="#mode" class="headerlink" title="mode"></a>mode</h4><ul>
+<li>“a” :   只能在文件末尾追加数据,如果文件不存在则创建</li>
+<li>“a+”:  允许读和追加数据,如果文件不存在则创建</li>
+<li>“w”:   只写,如果文件不存在则创建,如果文件已存在则把文件长度截断(Truncate)为0字节<br>再重新写,也就是替换掉原来的文件内容</li>
+<li>“r”:  只读,文件必须已存在</li>
+</ul>
+<h4 id="路径的介绍"><a href="#路径的介绍" class="headerlink" title="路径的介绍"></a>路径的介绍</h4><ol>
+<li><p>Shell 提示符显示当前目录</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~<span class="symbol">$</span>		<span class="comment">//当前工作目录是主目录</span></span><br><span class="line">/etc<span class="symbol">$</span>	<span class="comment">//当前工作目录是 /etc</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绝对路径：不同进程下的工作目录</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fp</span> = fopen(<span class="string">"/tmp/file1"</span>, <span class="string">"w"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>相对路径：</p>
+<ul>
+<li>相对路径是相对于当前工作目录(Current Working Directory)的路径</li>
+<li>每个进程都有自己的当前工作目录</li>
+<li>Shell进程的当前工作目录可以用pwd 命令查看</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fp</span> = fopen(<span class="string">"file.a"</span>, <span class="string">"r"</span>); //在当前工作目录下打开文件</span><br><span class="line"><span class="attr">fp</span> = fopen(<span class="string">"../a.out"</span>, <span class="string">"r"</span>); //只读打开当前工作目录下上一层目录下的文件</span><br><span class="line"><span class="attr">fp</span> = fopen(<span class="string">"Desktop/file3"</span>, <span class="string">"w"</span>);	//当前工作目录下的子目录Desktop</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="stdin-stdout-stderr"><a href="#stdin-stdout-stderr" class="headerlink" title="stdin/stdout/stderr"></a>stdin/stdout/stderr</h3><ol>
+<li><p>终端操作：人机交互的设备，此时的I/O是对设备的操作。</p>
+<ul>
+<li>设备和文件占时不做区分</li>
+</ul>
+</li>
+<li><p>I/O设备的操作，printf 和scanf 不用打开就可以操作设备</p>
+<ul>
+<li>c程序启动是会自动把终端设备打开三次,</li>
+<li>分别赋给三个FILE *指针stdin 、stdout和stderr ，</li>
+<li>这三个文件指针是libc 中定义的全局变量,</li>
+</ul>
+</li>
+<li><p>函数的操作</p>
+<ul>
+<li><p>printf：向stdout中写；</p>
+</li>
+<li><p>scanf：从stdin中读</p>
+</li>
+<li><p>stderr：打印标准错误，所以fopen的标准错误代码</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( (fp = fopen(<span class="string">"/tmp/file1"</span>, <span class="string">"r"</span>)) == NULL)	<span class="regexp">/*绝对路径*/</span></span><br><span class="line">&#123;</span><br><span class="line">    printf(<span class="string">"error open file /tmp/file1!\n"</span>);</span><br><span class="line">    <span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="errno-perror"><a href="#errno-perror" class="headerlink" title="errno / perror"></a>errno / perror</h3><ol>
+<li><p>errno </p>
+<ul>
+<li>很多系统函数在错误返回时将错误原因记录在libc 定义的全局变量errno 中</li>
+<li>每个错误原因对因一个错误码。</li>
+<li>所有错误码都是正整数。</li>
+</ul>
+</li>
+<li><p>perror</p>
+<ul>
+<li>对错误码errno的整数进行解读：解释成字符串再打印</li>
+<li>可以添加附加信息：方便定位错误</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    FILE *fp = fopen(<span class="string">"abcde"</span>, <span class="string">"r"</span>);</span><br><span class="line">    <span class="keyword">if</span> (fp == NULL) &#123;</span><br><span class="line">        perror(<span class="string">"Open file abcde"</span>);	<span class="regexp">//</span> 添加的额外信息Open file abcde：</span><br><span class="line">        <span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>strerror</p>
+<ul>
+<li>strerror 函数可以根据错误号返回错误原因字符串。</li>
+<li>以后学线程库时我们会看到,有些函数的错误码并不保存在errno 中,而是通过返回值返回。就不能调用perror打印错误原因了，这时strerror就需要使用strerror</li>
+</ul>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fputs(<span class="name">strerror</span>(<span class="name">n</span>), stderr)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="以字节为单位的I-O函数"><a href="#以字节为单位的I-O函数" class="headerlink" title="以字节为单位的I/O函数"></a>以字节为单位的I/O函数</h3><ul>
+<li><a href="htpps://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener"> CSlib/fgetc.c </a></li>
+</ul>
+<ol>
+<li><p>fgetc(stdin)</p>
+<ul>
+<li>从指定的文件中读一个字节</li>
+<li>fgetc 读到文件末尾时返回EOF ，只是用这个返回值表示已读到文件末尾,并不<br>是说每个文件末尾都有一个字节是EOF (根据上面的分析,EOF并不是一个字节)。</li>
+</ul>
+</li>
+<li><p>getchar 从标准输入读一个字节</p>
+<ul>
+<li>调用getchar() 相当于调用fgetc(stdin)</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fgetc</span><span class="params">(FILE *stream)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getchar</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line">返回值:成功返回读到的字节,出错或者读到文件末尾时返回EOF</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>fputs 向指定的文件写一个字节</p>
+<ul>
+<li>每调用一次fputc ,读写位置向后移动一个字节,因此可以连续多次调用fputc 函数依次写入多个字节</li>
+</ul>
+</li>
+<li><p>putchar(c) 向标准输出写入一个字节</p>
+<ul>
+<li>调用putchar，相当于调用fputc( c, stdout )</li>
+</ul>
+</li>
+<li><p>从终端输入时有两种方法表示文件结束</p>
+<ul>
+<li><p>直接输入 ctrl + D</p>
+</li>
+<li><p>利用Shell 的Heredoc语法</p>
+<ul>
+<li>&lt;&lt;END 表示从下一行开始是标准输入,直到某一行开头出现END时结束。</li>
+<li>&lt;&lt; 后面的结束符可以任意指定,不一定得是END ,只要和输入的内容能区分开就行。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./a.out &lt;&lt;END</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> hello</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> hey</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> END</span></span><br><span class="line">hello</span><br><span class="line">hey</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="操作读写位置的函数"><a href="#操作读写位置的函数" class="headerlink" title="操作读写位置的函数"></a>操作读写位置的函数</h3><ol>
+<li><p>三个函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fseek</span><span class="params">(FILE *stream, <span class="keyword">long</span> offset, <span class="keyword">int</span> whence)</span></span>;	<span class="comment">//返回值:成功返回0,出错返回-1并设置errno</span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">ftell</span><span class="params">(FILE *stream)</span></span>;	<span class="comment">//返回值:成功返回当前读写位置,出错返回-1并设置errno</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rewind</span><span class="params">(FILE *stream)</span></span>;	<span class="comment">//把读写位置移到文件开头</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>fseek(FILE *stream, long offset, int whence)</p>
+<ul>
+<li>offset ：可正可负<ul>
+<li>负值表示向前(向文件开头的方向)移动,正值表示向后(向文件末尾的方向)移动,</li>
+<li>如果向前移动的字节数超过了文件开头则出错返回</li>
+<li>如果向后移动的字节数超过了文件末尾,再次写入时将增大文件尺寸,,从原来的文件末尾到fseek 移动之后的读写位置之间的字节都是0.</li>
+</ul>
+</li>
+<li>whence ：何时<ul>
+<li>SEEK_SET：从文件开头移动offset个字节</li>
+<li>SEEK_CUR（current）从当前位置移动offset个字节</li>
+<li>SEEK_END 从文件末尾移动offset个字节</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="以字符串位单位的I-O函数"><a href="#以字符串位单位的I-O函数" class="headerlink" title="以字符串位单位的I/O函数"></a>以字符串位单位的I/O函数</h3><ol>
+<li><p>fgets : 从指定的文件中读一行字符到调用者提供的缓冲区中供的缓冲区中。</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">char</span> *fgets(<span class="built_in">char</span> *s, <span class="built_in">int</span> <span class="built_in">size</span>, <span class="keyword">FILE</span> *stream); // s--指向buffer;<span class="built_in">size</span>--读取长度；stream--原始文件</span><br></pre></td></tr></table></figure>
+<ul>
+<li>该函数从stream 所指的文件中读取以’\n’结尾的一行(包括’\n’ 在内)存到缓冲区s中<ul>
+<li>如果文件中的一行太长,fgets 从文件中读了size-1个字符还没有读到’\n’ </li>
+<li>则将size-1个字符和‘\0’添加到buffer，剩下的下一次调用</li>
+</ul>
+</li>
+<li>并且在该行末尾添加一个’\0’ ，组成完整的字符串。</li>
+</ul>
+</li>
+<li><p>fgets 对于 ‘\n’ 和 ‘\0’</p>
+<ul>
+<li>对于fgets 来说,’\n’是一个特别的字符,而’\0’ 并无任何特别之处</li>
+<li>如果读到’\0’ 就当作普通字符读入。</li>
+<li>fgets 只适合读文本文件而不适合读二进制文件,</li>
+</ul>
+</li>
+<li><p>fputs : 向指定的文件写入一个字符串,puts向标准输出写入一个字符串。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fputs</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s, FILE *stream)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">puts</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>缓冲区s中保存的是以’\0’ 结尾的字符串，fputs 将该字符串写入文件stream，但并不写入结尾的’\0’；</li>
+<li>fputs 并不关心的字符串中的’\n’ 字符,字符串中可以有’\n’也可没有’\n’</li>
+</ul>
+</li>
+<li><p>puts将字符串s写到标准输出(不包括结尾的’\0’ ),然后自动写一个’\n’ 到标准输出。</p>
 </li>
 </ol>
 
@@ -1034,7 +1263,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Standard-Lib"><span class="nav-number">1.</span> <span class="nav-text">C Standard Lib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-Funcation"><span class="nav-number">1.1.</span> <span class="nav-text">String Funcation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝字符串"><span class="nav-number">1.1.1.</span> <span class="nav-text">拷贝字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接字符串"><span class="nav-number">1.1.2.</span> <span class="nav-text">连接字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较字符串"><span class="nav-number">1.1.3.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索字符串"><span class="nav-number">1.1.4.</span> <span class="nav-text">搜索字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割字符串"><span class="nav-number">1.1.5.</span> <span class="nav-text">分割字符串</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Standard-Lib"><span class="nav-number">1.</span> <span class="nav-text">C Standard Lib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-Funcation"><span class="nav-number">1.1.</span> <span class="nav-text">String Funcation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝字符串"><span class="nav-number">1.1.1.</span> <span class="nav-text">拷贝字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接字符串"><span class="nav-number">1.1.2.</span> <span class="nav-text">连接字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较字符串"><span class="nav-number">1.1.3.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索字符串"><span class="nav-number">1.1.4.</span> <span class="nav-text">搜索字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割字符串"><span class="nav-number">1.1.5.</span> <span class="nav-text">分割字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准I-O库函数"><span class="nav-number">1.2.</span> <span class="nav-text">标准I/O库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的基本概念"><span class="nav-number">1.2.1.</span> <span class="nav-text">文件的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文本文件（Text-file）"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">文本文件（Text file）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二进制文件-Binary-file"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">二进制文件 Binary file</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fopen-fclose"><span class="nav-number">1.2.2.</span> <span class="nav-text">fopen / fclose</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mode"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路径的介绍"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">路径的介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdin-stdout-stderr"><span class="nav-number">1.2.3.</span> <span class="nav-text">stdin/stdout/stderr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errno-perror"><span class="nav-number">1.2.4.</span> <span class="nav-text">errno / perror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字节为单位的I-O函数"><span class="nav-number">1.2.5.</span> <span class="nav-text">以字节为单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作读写位置的函数"><span class="nav-number">1.2.6.</span> <span class="nav-text">操作读写位置的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字符串位单位的I-O函数"><span class="nav-number">1.2.7.</span> <span class="nav-text">以字符串位单位的I/O函数</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
