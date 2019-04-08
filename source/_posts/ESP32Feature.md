@@ -82,3 +82,26 @@ tags: esp32
 + 但是esp_sleep.h 的头文件中唤醒模式没有BT
 
   {% asset_img espsleep.png %}
+
+## Datasheet
+
+### Pin Mode
+
+1. EN : Module-enable signal. Active high.
+
+2. Software can read the values of these five bits from register ”GPIO_STRAPPING”.
+
+   + MTDI -- > gpio12
+   + MTDO --> gpio15
+
+   {% asset_img gpio.png %}
+
+3. GPIO0
+
+   + 首先长按Boot键，同时按 reset键，系统将会进入下载模式，然后 make flash
+   + 长按boot键，就是将其拉低。
+
+### Download
+
+1. 通过CP2102  USB to TTL 
+   + ESP32 通过串口进行下载
