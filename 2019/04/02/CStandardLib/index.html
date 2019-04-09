@@ -105,7 +105,10 @@
 <meta property="og:description" content="C Standard Lib C标准主要由两部分组成，一部分描述C的语法，一部分描述C标准库。 平台支持C语言 实现C编译器 实现C标准库   函数文件的命名，以.c 为准 在 ’.c‘ file：void * 类型的数，做右值的时候会自动进行转换； 在 ’ .cpp ‘file：不会自动的转换   POSIX 是Unix系统的标准，不属于C标准库  String Funcation 程序按功能划">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/ls-l.png">
-<meta property="og:updated_time" content="2019-04-08T08:04:21.955Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/fread.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/print.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/printf_e.png">
+<meta property="og:updated_time" content="2019-04-09T03:44:02.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C Standard Lib">
 <meta name="twitter:description" content="C Standard Lib C标准主要由两部分组成，一部分描述C的语法，一部分描述C标准库。 平台支持C语言 实现C编译器 实现C标准库   函数文件的命名，以.c 为准 在 ’.c‘ file：void * 类型的数，做右值的时候会自动进行转换； 在 ’ .cpp ‘file：不会自动的转换   POSIX 是Unix系统的标准，不属于C标准库  String Funcation 程序按功能划">
@@ -418,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-08 16:04:21" itemprop="dateModified" datetime="2019-04-08T16:04:21+08:00">2019-04-08</time>
+                <time title="Updated at: 2019-04-09 11:44:02" itemprop="dateModified" datetime="2019-04-09T11:44:02+08:00">2019-04-09</time>
               
             
           </span>
@@ -684,7 +687,7 @@
 </li>
 <li><p><strong>od Command</strong></p>
 <ul>
-<li>-tx1：将文件中的字节以十六进制的形式列出来</li>
+<li>-tx1：将文件中的字节以<strong>十六进制码</strong>的形式列出来</li>
 <li>-tc :    将文件中的ASCII码以字符形式列出来。</li>
 <li>-Ax :   要求以十六进制显示文件中的地址。（类似于hexdump）</li>
 </ul>
@@ -879,6 +882,72 @@
 <li><p>puts将字符串s写到标准输出(不包括结尾的’\0’ ),然后自动写一个’\n’ 到标准输出。</p>
 </li>
 </ol>
+<h3 id="以记录为单位的I-O文件"><a href="#以记录为单位的I-O文件" class="headerlink" title="以记录为单位的I/O文件"></a>以记录为单位的I/O文件</h3><ul>
+<li><a href="https://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener">/CSlib/fread_and_fwrite/</a></li>
+</ul>
+<ol>
+<li><p>fread / fwrite</p>
+<ul>
+<li>用于读写记录，这里的记录是指一串固定长度的字节,比如一个int、一个结构体或者一个定长数组。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">size_t</span> fread(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> nmemb, FILE *stream);</span><br><span class="line"><span class="keyword">size_t</span> fwrite(<span class="keyword">const</span> <span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> nmemb, FILE</span><br><span class="line">*stream);</span><br><span class="line">返回值:读或写的记录数,成功时返回的记录数等于nmemb,出错或读到文件末尾时返回</span><br><span class="line">的记录数小于nmemb,也可能返回<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>该程序生成的recfile 文件是二进制文件而非文本文件,因为其中不仅保存着字符型数据,还保存着整型数据24和28((在od命令的输出中以八进制显示为030和034)</p>
+<img src="/2019/04/02/CStandardLib/fread.png">
+</li>
+</ul>
+</li>
+<li><p>注意,直接在文件中读写结构体的程序是不可移植的</p>
+<ul>
+<li>结果输出不一定相同</li>
+<li>因为不同平台的大小端可能不同(因而对整型数据的存储方式不同)</li>
+<li>,结构体的填充方式也可能不同(因而同一个结构体所占的字节数可能不同）</li>
+</ul>
+</li>
+</ol>
+<h3 id="格式化的I-O函数"><a href="#格式化的I-O函数" class="headerlink" title="格式化的I/O函数"></a>格式化的I/O函数</h3><ul>
+<li>格式化的I/O函数：以特定的格式进行输入和输出</li>
+<li>printf  and scanf</li>
+<li><a href="https://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener">/IO/print/print.c</a></li>
+</ul>
+<h4 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h4><ul>
+<li>格式化打印到标准输出</li>
+</ul>
+<ol>
+<li><p>关于printf的函数：很多种分类</p>
+<img src="/2019/04/02/CStandardLib/print.png">
+</li>
+<li><p>printf 转换说明的可选项</p>
+<ul>
+<li><p>“%#x ” ：指定输出类型是0x 十六进制</p>
+<ul>
+<li>“ %#X ” : 输出大写字符</li>
+</ul>
+</li>
+<li><p>“-%10d-”： 长度为10，格式化后的内容居左,右边可以留空格。</p>
+</li>
+<li><p>“ %<em> . </em>d ”：打印输出的%6.4—长度位6，精度位4</p>
+</li>
+<li><p>“ %hhd ” ：对于整型参数可以指定字长,hh、h 、l 、ll 分别表示char 、short 、long、long long 的字长</p>
+</li>
+<li><p>“ %p ” :  打印main函数的首地址</p>
+</li>
+<li><p>“%f ”:   double型参数格式化，精度=小数点后6位</p>
+</li>
+<li><p>“ %e/E ” : 取double型参数格式化为，转化为指数模式</p>
+<img src="/2019/04/02/CStandardLib/printf_e.png">
+</li>
+<li><p>“ %g/G “ : 精度指有效数字，默认是6位有效数字，多余的就抹去</p>
+</li>
+<li><p>“%%” ： 格式化输出一个 %</p>
+</li>
+</ul>
+</li>
+<li><p>printf并不知道实际参数的类型，只能按转换说明指出的参数类型从栈帧上取参数，</p>
+</li>
+<li><p>所以如果实际参数和转换说明的类型不符,结果可能会有些意外。</p>
+</li>
+</ol>
 
       
     </div>
@@ -999,7 +1068,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-count">57</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1124,7 +1193,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">56</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1227,7 +1300,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">45</span>
+                      
+                    
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1263,7 +1338,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Standard-Lib"><span class="nav-number">1.</span> <span class="nav-text">C Standard Lib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-Funcation"><span class="nav-number">1.1.</span> <span class="nav-text">String Funcation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝字符串"><span class="nav-number">1.1.1.</span> <span class="nav-text">拷贝字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接字符串"><span class="nav-number">1.1.2.</span> <span class="nav-text">连接字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较字符串"><span class="nav-number">1.1.3.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索字符串"><span class="nav-number">1.1.4.</span> <span class="nav-text">搜索字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割字符串"><span class="nav-number">1.1.5.</span> <span class="nav-text">分割字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准I-O库函数"><span class="nav-number">1.2.</span> <span class="nav-text">标准I/O库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的基本概念"><span class="nav-number">1.2.1.</span> <span class="nav-text">文件的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文本文件（Text-file）"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">文本文件（Text file）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二进制文件-Binary-file"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">二进制文件 Binary file</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fopen-fclose"><span class="nav-number">1.2.2.</span> <span class="nav-text">fopen / fclose</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mode"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路径的介绍"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">路径的介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdin-stdout-stderr"><span class="nav-number">1.2.3.</span> <span class="nav-text">stdin/stdout/stderr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errno-perror"><span class="nav-number">1.2.4.</span> <span class="nav-text">errno / perror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字节为单位的I-O函数"><span class="nav-number">1.2.5.</span> <span class="nav-text">以字节为单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作读写位置的函数"><span class="nav-number">1.2.6.</span> <span class="nav-text">操作读写位置的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字符串位单位的I-O函数"><span class="nav-number">1.2.7.</span> <span class="nav-text">以字符串位单位的I/O函数</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Standard-Lib"><span class="nav-number">1.</span> <span class="nav-text">C Standard Lib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-Funcation"><span class="nav-number">1.1.</span> <span class="nav-text">String Funcation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝字符串"><span class="nav-number">1.1.1.</span> <span class="nav-text">拷贝字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接字符串"><span class="nav-number">1.1.2.</span> <span class="nav-text">连接字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较字符串"><span class="nav-number">1.1.3.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索字符串"><span class="nav-number">1.1.4.</span> <span class="nav-text">搜索字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割字符串"><span class="nav-number">1.1.5.</span> <span class="nav-text">分割字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准I-O库函数"><span class="nav-number">1.2.</span> <span class="nav-text">标准I/O库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的基本概念"><span class="nav-number">1.2.1.</span> <span class="nav-text">文件的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文本文件（Text-file）"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">文本文件（Text file）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二进制文件-Binary-file"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">二进制文件 Binary file</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fopen-fclose"><span class="nav-number">1.2.2.</span> <span class="nav-text">fopen / fclose</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mode"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路径的介绍"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">路径的介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdin-stdout-stderr"><span class="nav-number">1.2.3.</span> <span class="nav-text">stdin/stdout/stderr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errno-perror"><span class="nav-number">1.2.4.</span> <span class="nav-text">errno / perror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字节为单位的I-O函数"><span class="nav-number">1.2.5.</span> <span class="nav-text">以字节为单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作读写位置的函数"><span class="nav-number">1.2.6.</span> <span class="nav-text">操作读写位置的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字符串位单位的I-O函数"><span class="nav-number">1.2.7.</span> <span class="nav-text">以字符串位单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以记录为单位的I-O文件"><span class="nav-number">1.2.8.</span> <span class="nav-text">以记录为单位的I/O文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化的I-O函数"><span class="nav-number">1.2.9.</span> <span class="nav-text">格式化的I/O函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#printf"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">printf</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
