@@ -96,20 +96,23 @@
 
 
 
-  <meta name="description" content="三极管的详解 Reference  特性 核心是“PN”结；  电流的流向是PN时，才是正向偏执    发射区：发射的是电子  溶度高的话，利于渗透 集电结面积大：集电区与发射区为同一性质的掺杂半导体，但集电区的掺杂浓度要低，面积要大，便于收集电子。 发射区高掺杂：为了便于发射结发射电子，发射区半导体掺浓度高于基区的掺杂浓度，且发射结的面积较小; 三极管不是两个PN结的间单拼凑，两个二极管是组成不">
-<meta name="keywords" content="-[Audion ]">
+  <meta name="description" content="三极管的详解 Reference  电荷的判断 正电荷是不会移动的，只有负电荷（电子）才能移动； 负电荷的移动，形成了电势差； 电势差的产生，形成了电流，电流是正电荷。  特性 核心是“PN”结；  电流的流向是PN时，才是正向偏执    发射区：发射的是电子  溶度高的话，利于渗透 集电结面积大：集电区与发射区为同一性质的掺杂半导体，但集电区的掺杂浓度要低，面积要大，便于收集电子。 发射区高掺杂">
+<meta name="keywords" content="NPN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Audion NPN">
+<meta property="og:title" content="三极管和场效应管的工作原理">
 <meta property="og:url" content="http://yoursite.com/2019/04/08/AudionNPN/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="三极管的详解 Reference  特性 核心是“PN”结；  电流的流向是PN时，才是正向偏执    发射区：发射的是电子  溶度高的话，利于渗透 集电结面积大：集电区与发射区为同一性质的掺杂半导体，但集电区的掺杂浓度要低，面积要大，便于收集电子。 发射区高掺杂：为了便于发射结发射电子，发射区半导体掺浓度高于基区的掺杂浓度，且发射结的面积较小; 三极管不是两个PN结的间单拼凑，两个二极管是组成不">
+<meta property="og:description" content="三极管的详解 Reference  电荷的判断 正电荷是不会移动的，只有负电荷（电子）才能移动； 负电荷的移动，形成了电势差； 电势差的产生，形成了电流，电流是正电荷。  特性 核心是“PN”结；  电流的流向是PN时，才是正向偏执    发射区：发射的是电子  溶度高的话，利于渗透 集电结面积大：集电区与发射区为同一性质的掺杂半导体，但集电区的掺杂浓度要低，面积要大，便于收集电子。 发射区高掺杂">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/04/08/AudionNPN/npnconnect.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/08/AudionNPN/pnpcollect.png">
-<meta property="og:updated_time" content="2019-04-09T00:36:37.322Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/08/AudionNPN/NMOS.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/08/AudionNPN/C-MOS.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/08/AudionNPN/NP-MOS.png">
+<meta property="og:updated_time" content="2019-04-10T12:23:22.812Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Audion NPN">
-<meta name="twitter:description" content="三极管的详解 Reference  特性 核心是“PN”结；  电流的流向是PN时，才是正向偏执    发射区：发射的是电子  溶度高的话，利于渗透 集电结面积大：集电区与发射区为同一性质的掺杂半导体，但集电区的掺杂浓度要低，面积要大，便于收集电子。 发射区高掺杂：为了便于发射结发射电子，发射区半导体掺浓度高于基区的掺杂浓度，且发射结的面积较小; 三极管不是两个PN结的间单拼凑，两个二极管是组成不">
+<meta name="twitter:title" content="三极管和场效应管的工作原理">
+<meta name="twitter:description" content="三极管的详解 Reference  电荷的判断 正电荷是不会移动的，只有负电荷（电子）才能移动； 负电荷的移动，形成了电势差； 电势差的产生，形成了电流，电流是正电荷。  特性 核心是“PN”结；  电流的流向是PN时，才是正向偏执    发射区：发射的是电子  溶度高的话，利于渗透 集电结面积大：集电区与发射区为同一性质的掺杂半导体，但集电区的掺杂浓度要低，面积要大，便于收集电子。 发射区高掺杂">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/08/AudionNPN/npnconnect.png">
 
 
@@ -127,7 +130,7 @@
   };
 </script>
 
-  <title>Audion NPN | Lucky Boy</title>
+  <title>三极管和场效应管的工作原理 | Lucky Boy</title>
   
 
 
@@ -376,7 +379,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Audion NPN
+          <h1 class="post-title" itemprop="name headline">三极管和场效应管的工作原理
 
               
             
@@ -419,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-09 08:36:37" itemprop="dateModified" datetime="2019-04-09T08:36:37+08:00">2019-04-09</time>
+                <time title="Updated at: 2019-04-10 20:23:22" itemprop="dateModified" datetime="2019-04-10T20:23:22+08:00">2019-04-10</time>
               
             
           </span>
@@ -436,14 +439,14 @@
                 <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NPN/" itemprop="url" rel="index"><span itemprop="name">NPN</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/三极管/" itemprop="url" rel="index"><span itemprop="name">三极管</span></a></span>
 
                 
                 
                   . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PNP/" itemprop="url" rel="index"><span itemprop="name">PNP</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/场效应管/" itemprop="url" rel="index"><span itemprop="name">场效应管</span></a></span>
 
                 
                 
@@ -509,6 +512,11 @@
         <h1 id="三极管的详解"><a href="#三极管的详解" class="headerlink" title="三极管的详解"></a>三极管的详解</h1><ul>
 <li><a href="http://www.sohu.com/a/127959186_468626" target="_blank" rel="noopener">Reference</a></li>
 </ul>
+<h2 id="电荷的判断"><a href="#电荷的判断" class="headerlink" title="电荷的判断"></a>电荷的判断</h2><ol>
+<li>正电荷是不会移动的，只有负电荷（电子）才能移动；</li>
+<li>负电荷的移动，形成了电势差；</li>
+<li>电势差的产生，形成了电流，电流是正电荷。</li>
+</ol>
 <h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ol>
 <li><p>核心是“PN”结；</p>
 <ul>
@@ -583,7 +591,78 @@
 <li>PNP : s8550</li>
 <li>NPN:  s8050</li>
 </ol>
-<h2 id="场效应管A03401"><a href="#场效应管A03401" class="headerlink" title="场效应管A03401"></a>场效应管A03401</h2>
+<h1 id="场效应管"><a href="#场效应管" class="headerlink" title="场效应管"></a>场效应管</h1><ul>
+<li><a href="http://m.eepw.com.cn/article/201501/268248.html" target="_blank" rel="noopener">Reference</a></li>
+<li><a href="http://www.eepw.com.cn/article/268236.htm" target="_blank" rel="noopener">Reference2</a></li>
+</ul>
+<h2 id="场效应管的划分"><a href="#场效应管的划分" class="headerlink" title="场效应管的划分"></a>场效应管的划分</h2><ol>
+<li>场效应管(FET)是场效应晶体管(field-effect transistor)的简称，即：在一定结构的半导体器件上，加上二氧化硅和金属，形成栅极。</li>
+<li>所有的FET都有栅极g(gate)、漏极d(drain)、源极s(source)三个极</li>
+<li>分别对应双极性晶体管的基极b(base)、集电极c(collector)和发射极e(emitter)。</li>
+<li>P区与N区交界面形成耗尽层，而漏极d与源极s间的非耗尽层区域称为导电沟道。</li>
+</ol>
+<h2 id="MOS管工作原理–MOS管的特性"><a href="#MOS管工作原理–MOS管的特性" class="headerlink" title="MOS管工作原理–MOS管的特性"></a>MOS管<a href="http://www.eepw.com.cn/news/listbylabel/label/工作原理" target="_blank" rel="noopener"><em>工作原理</em></a>–MOS管的特性</h2><h3 id="MOS管的输入、输出特性"><a href="#MOS管的输入、输出特性" class="headerlink" title="MOS管的输入、输出特性"></a>MOS管的输入、输出特性</h3><ol>
+<li>对于共源极接法的电路，源极和衬底之间被二氧化硅绝缘层隔离，所以栅极电流为0。</li>
+</ol>
+<h3 id="MOS管的导通特性"><a href="#MOS管的导通特性" class="headerlink" title="MOS管的导通特性"></a>MOS管的导通特性</h3><ol>
+<li><p>MOS管作为开关元件，同样是工作在截止或导通两种状态。由于MOS管是电压控制元件，所以主要由栅源电压uGS决定其工作状态。</p>
+<img src="/2019/04/08/AudionNPN/NMOS.png">
+</li>
+<li><p><a href="http://www.eepw.com.cn/news/listbylabel/label/NMOS" target="_blank" rel="noopener"><em>NMOS</em></a>的特性</p>
+<ul>
+<li>Vgs大于一定的值就会导通，适合用于源极接地时的情况(低端驱动)，只要栅极电压达<strong>到4V或10V</strong>就可以了。</li>
+</ul>
+</li>
+<li><p><em>PMOS</em>的特性，</p>
+<ul>
+<li>Vgs小于一定的值就会导通，适合用于源极接VCC时的情况(高端驱动)。</li>
+<li>但是，虽然PMOS可以很方便地用作高端驱动，但由于导通电阻大，价格贵，替换种类少等原因，在高端驱动中，通常还是使用NMOS。</li>
+</ul>
+</li>
+</ol>
+<h2 id="场效应管的工作原理"><a href="#场效应管的工作原理" class="headerlink" title="场效应管的工作原理"></a>场效应管的工作原理</h2><ol>
+<li><p>结型场效应管(JFET)因有两个PN结而得名</p>
+</li>
+<li><p>绝缘栅型场效应管(JGFET)则因栅极与其它电极完全绝缘而得名</p>
+<ul>
+<li>为绝缘栅型场效应管的栅极为金属铝，故又称为MOS管。</li>
+</ul>
+</li>
+<li><p>分成耗尽型与增强型</p>
+<ul>
+<li>耗尽型：当栅压为零时有较大漏极电流的称为</li>
+<li>增强型：当栅压为零，漏极电流也为零，必须再加一定的栅压之后才有漏极电流的称为。</li>
+</ul>
+</li>
+<li><p>无论是结型场效应管还是绝缘栅型场效应管，无论是耗尽型场效应管或是增强型场效应管，都可分为N沟道和P沟道，其结构分别如下图所示</p>
+<img src="/2019/04/08/AudionNPN/C-MOS.png">
+</li>
+<li><p>如何进行区分</p>
+<img src="/2019/04/08/AudionNPN/NP-MOS.png">
+</li>
+</ol>
+<h3 id="结型场效应管–结型"><a href="#结型场效应管–结型" class="headerlink" title="结型场效应管–结型"></a>结型场效应管–结型</h3><ol>
+<li><p>N沟道结型场效应管—-结型</p>
+<ul>
+<li><p>为保证能正常工作，应在其栅-源之间加负向电压(即uGS&lt;0),以保证耗尽层承受反向电压;</p>
+</li>
+<li><p>在漏-源之间加正向电压uDS，以形成漏极电流。</p>
+</li>
+<li>栅-源之间负向电压越大，PN结交界面所形成的耗尽区就越厚，导电沟道越窄，沟道电阻变大，漏极电流iD越小;</li>
+<li>若栅-源之间负向电压越小，则耗尽区就越薄，导电沟道越宽，沟道电阻变小，漏极电流iD越大。</li>
+<li>因此实现了场效应管的栅-源间负向电压对沟道电流的控制。</li>
+</ul>
+</li>
+<li><p>P沟道结型场效应管：</p>
+<ul>
+<li>其栅-源之间加正向电压(即uGS&gt;0)才能保证其能能正常工作。</li>
+</ul>
+</li>
+</ol>
+<h3 id="结型场效应管–-绝缘栅型"><a href="#结型场效应管–-绝缘栅型" class="headerlink" title="结型场效应管– 绝缘栅型"></a>结型场效应管– 绝缘栅型</h3><ol>
+<li>N沟道耗尽型MOS管为例<br>+ </li>
+</ol>
+
       
     </div>
 
@@ -606,7 +685,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Audion/" rel="tag"># -[Audion ]</a>
+            <a href="/tags/NPN/" rel="tag"># NPN</a>
           
         </div>
       
@@ -969,7 +1048,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三极管的详解"><span class="nav-number">1.</span> <span class="nav-text">三极管的详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特性"><span class="nav-number">1.1.</span> <span class="nav-text">特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#电流控制原理"><span class="nav-number">1.1.1.</span> <span class="nav-text">电流控制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电压控制原理"><span class="nav-number">1.1.2.</span> <span class="nav-text">电压控制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三极管核心功能"><span class="nav-number">1.1.3.</span> <span class="nav-text">三极管核心功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NPN-and-PNP"><span class="nav-number">1.2.</span> <span class="nav-text">NPN and PNP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-number">1.2.1.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电路接法"><span class="nav-number">1.2.2.</span> <span class="nav-text">电路接法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元器件的代表"><span class="nav-number">1.2.3.</span> <span class="nav-text">元器件的代表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场效应管A03401"><span class="nav-number">1.3.</span> <span class="nav-text">场效应管A03401</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三极管的详解"><span class="nav-number">1.</span> <span class="nav-text">三极管的详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#电荷的判断"><span class="nav-number">1.1.</span> <span class="nav-text">电荷的判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特性"><span class="nav-number">1.2.</span> <span class="nav-text">特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#电流控制原理"><span class="nav-number">1.2.1.</span> <span class="nav-text">电流控制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电压控制原理"><span class="nav-number">1.2.2.</span> <span class="nav-text">电压控制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三极管核心功能"><span class="nav-number">1.2.3.</span> <span class="nav-text">三极管核心功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NPN-and-PNP"><span class="nav-number">1.3.</span> <span class="nav-text">NPN and PNP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-number">1.3.1.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电路接法"><span class="nav-number">1.3.2.</span> <span class="nav-text">电路接法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元器件的代表"><span class="nav-number">1.3.3.</span> <span class="nav-text">元器件的代表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#场效应管"><span class="nav-number">2.</span> <span class="nav-text">场效应管</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#场效应管的划分"><span class="nav-number">2.1.</span> <span class="nav-text">场效应管的划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MOS管工作原理–MOS管的特性"><span class="nav-number">2.2.</span> <span class="nav-text">MOS管工作原理–MOS管的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MOS管的输入、输出特性"><span class="nav-number">2.2.1.</span> <span class="nav-text">MOS管的输入、输出特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MOS管的导通特性"><span class="nav-number">2.2.2.</span> <span class="nav-text">MOS管的导通特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场效应管的工作原理"><span class="nav-number">2.3.</span> <span class="nav-text">场效应管的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结型场效应管–结型"><span class="nav-number">2.3.1.</span> <span class="nav-text">结型场效应管–结型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结型场效应管–-绝缘栅型"><span class="nav-number">2.3.2.</span> <span class="nav-text">结型场效应管– 绝缘栅型</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -108,7 +108,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/fread.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/print.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/printf_e.png">
-<meta property="og:updated_time" content="2019-04-09T11:02:35.681Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/fflush.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/cash.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/malloc.png">
+<meta property="og:updated_time" content="2019-04-10T04:36:47.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C Standard Lib">
 <meta name="twitter:description" content="C Standard Lib C标准主要由两部分组成，一部分描述C的语法，一部分描述C标准库。 平台支持C语言 实现C编译器 实现C标准库   函数文件的命名，以.c 为准 在 ’.c‘ file：void * 类型的数，做右值的时候会自动进行转换； 在 ’ .cpp ‘file：不会自动的转换   POSIX 是Unix系统的标准，不属于C标准库  String Funcation 程序按功能划">
@@ -421,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-09 19:02:35" itemprop="dateModified" datetime="2019-04-09T19:02:35+08:00">2019-04-09</time>
+                <time title="Updated at: 2019-04-10 12:36:47" itemprop="dateModified" datetime="2019-04-10T12:36:47+08:00">2019-04-10</time>
               
             
           </span>
@@ -949,13 +952,106 @@
 </li>
 </ol>
 <h4 id="scanf"><a href="#scanf" class="headerlink" title="scanf"></a>scanf</h4><ol>
-<li>scanf 从标准输入读字符,按格式化字符串format中的转换说明解释这些字符<ul>
+<li><p>scanf 从标准输入读字符,按格式化字符串format中的转换说明解释这些字符</p>
+<ul>
 <li>转换后赋给后面的参数,后面的参数都是传出参数,因此必须传地址而不能传值。</li>
 <li>scanf 用输入的字符去匹配，格式化字符串中的字符和转换说明<ul>
 <li>如果成功匹配一个转换说明,就给一个参数赋值</li>
 <li>或者如果遇到和格式化字符串不匹配的地方就停止。</li>
 </ul>
 </li>
+</ul>
+</li>
+<li><p>scanf的转换字符还得注意一点</p>
+<ul>
+<li>对于整型参数可以指定字长,有hh 、h、l、ll(也可以写成一个L),含义和printf相<br>同。</li>
+<li>但l和L还有一层含义,当转换字符是e、f、g时,</li>
+<li>表示赋值参数的类型是float <em>而非double </em>这一点跟printf不同,这时前面加上l或L表示double <em>或long double </em>型。</li>
+</ul>
+</li>
+<li>scanf 字符转换<ul>
+<li>scanf(%d, &amp;i);    // 传的是地址，不能传值</li>
+<li>“%d”：匹配十进制整数(开头可以有负号),赋值参数的类型是int * 。</li>
+<li>“% i ”:  匹配整数(开头可以有负号),赋值参数的类型是int * <ul>
+<li>以0x或0X开头，则匹配十六进制整数</li>
+<li>以0开头则匹配八进制整数</li>
+</ul>
+</li>
+<li>“%o , %u, %x”:  匹配无符号八进制、十进制、十六进制整数，赋值参数类型是usigned int *</li>
+<li>“ %c “ : 匹配一串字符,字符的个数由宽度指定,缺省宽度是1,赋值参数的类型char *<ul>
+<li>末尾不会添加’\0’ 。</li>
+<li>如果输入字符的开头有空白字符,这些空白字符并不被忽略,而是保存到参数中,</li>
+<li>要想跳过开头的空白字符,可以在格式化字符串中用一个空格去匹配。</li>
+</ul>
+</li>
+<li>“%s”:  匹配一串非空白字符<ul>
+<li>从输入字符中的第一个非空白字符开始匹配到下一个空白字符之前,或者匹配到指定的宽度,赋值参数的类型是char *,</li>
+<li>莫为自动添加‘\0’</li>
+</ul>
+</li>
+<li>“%e, %f, %g” : 匹配浮点数(开头可以有负号),赋值参数的类型是float *<ul>
+<li>可以指定double <em>或long double </em>的字长。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="C标准库的I-O缓存"><a href="#C标准库的I-O缓存" class="headerlink" title="C标准库的I/O缓存"></a>C标准库的I/O缓存</h3><ol>
+<li><p>用户程序调用C标准I/O库函数读写文件或设备，</p>
+<ul>
+<li>库函数要通过系统调用把读写请求传给内核</li>
+<li>由内核驱动磁盘或设备完成I/O操作<ul>
+<li>内核写回设备的操作是Flush操作；</li>
+<li>库函数是fflush</li>
+<li>fclose函数在关闭文件之前也会做Flush操作。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>分配一个I/O缓冲区以加速读写操作</p>
+<img src="/2019/04/02/CStandardLib/fflush.png">
+</li>
+<li><p>缓冲区分为三类</p>
+<img src="/2019/04/02/CStandardLib/cash.png">
+<ul>
+<li>printf 标准的输出，分配的是行缓冲；<ul>
+<li>每次遇到 \n ；换行符，便进行flush操作；</li>
+<li>写回内核，输入到设备</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="数值字符串转换函数"><a href="#数值字符串转换函数" class="headerlink" title="数值字符串转换函数"></a>数值字符串转换函数</h2><ol>
+<li><p>将一串字符中能识别成某种进制的数，转换为int or double</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">atoi</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *nptr)</span></span>;	<span class="comment">//  把一个字符串开头可以识别成十进制整数的部分转换成int 型,</span></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">atof</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *nptr)</span></span>; <span class="comment">// atof 把一个字符串开头可以识别成浮点数的部分转换成double型</span></span><br><span class="line">返回值:转换结果</span><br></pre></td></tr></table></figure>
+<ul>
+<li>开头没有可识别的进制数，则返回0</li>
+</ul>
+</li>
+<li><p>strtol and strtod </p>
+<ul>
+<li>能控制识别的进制数（8,10,16）</li>
+<li>能区分返回值error and 0</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">int</span> <span class="title">strtol</span>(<span class="params"><span class="keyword">const</span> <span class="keyword">char</span> *nptr, <span class="keyword">char</span> **endptr, <span class="keyword">int</span> <span class="keyword">base</span></span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">strtod</span>(<span class="params"><span class="keyword">const</span> <span class="keyword">char</span> *nptr, <span class="keyword">char</span> **endptr</span>)</span>;</span><br><span class="line">返回值:转换结果,出错时设置errno</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="分配内存函数"><a href="#分配内存函数" class="headerlink" title="分配内存函数"></a>分配内存函数</h2><ol>
+<li><p>在堆空间分配内存的函数</p>
+<img src="/2019/04/02/CStandardLib/malloc.png">
+</li>
+<li><p>calloc</p>
+<ul>
+<li>分配nmemb 个元素的内存空间,每个元素占size 字节</li>
+<li>calloc负责把这块内存空间用字节0填充,而malloc 并不负责把分配的内存空间清零。</li>
+</ul>
+</li>
+<li><p>realloc</p>
+<ul>
+<li>候用malloc 或calloc分配的内存空间使用了一段时间之后需要改变它的大小</li>
+<li>把原内存空间的指针ptr传给realloc,通过参数size 指定新的大小(字节数)</li>
+<li>realloc返回新内存空间的首地址,并释放原内存空间。</li>
 </ul>
 </li>
 </ol>
@@ -1349,7 +1445,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Standard-Lib"><span class="nav-number">1.</span> <span class="nav-text">C Standard Lib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-Funcation"><span class="nav-number">1.1.</span> <span class="nav-text">String Funcation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝字符串"><span class="nav-number">1.1.1.</span> <span class="nav-text">拷贝字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接字符串"><span class="nav-number">1.1.2.</span> <span class="nav-text">连接字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较字符串"><span class="nav-number">1.1.3.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索字符串"><span class="nav-number">1.1.4.</span> <span class="nav-text">搜索字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割字符串"><span class="nav-number">1.1.5.</span> <span class="nav-text">分割字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准I-O库函数"><span class="nav-number">1.2.</span> <span class="nav-text">标准I/O库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的基本概念"><span class="nav-number">1.2.1.</span> <span class="nav-text">文件的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文本文件（Text-file）"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">文本文件（Text file）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二进制文件-Binary-file"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">二进制文件 Binary file</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fopen-fclose"><span class="nav-number">1.2.2.</span> <span class="nav-text">fopen / fclose</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mode"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路径的介绍"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">路径的介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdin-stdout-stderr"><span class="nav-number">1.2.3.</span> <span class="nav-text">stdin/stdout/stderr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errno-perror"><span class="nav-number">1.2.4.</span> <span class="nav-text">errno / perror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字节为单位的I-O函数"><span class="nav-number">1.2.5.</span> <span class="nav-text">以字节为单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作读写位置的函数"><span class="nav-number">1.2.6.</span> <span class="nav-text">操作读写位置的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字符串位单位的I-O函数"><span class="nav-number">1.2.7.</span> <span class="nav-text">以字符串位单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以记录为单位的I-O文件"><span class="nav-number">1.2.8.</span> <span class="nav-text">以记录为单位的I/O文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化的I-O函数"><span class="nav-number">1.2.9.</span> <span class="nav-text">格式化的I/O函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#printf"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">printf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scanf"><span class="nav-number">1.2.9.2.</span> <span class="nav-text">scanf</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Standard-Lib"><span class="nav-number">1.</span> <span class="nav-text">C Standard Lib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-Funcation"><span class="nav-number">1.1.</span> <span class="nav-text">String Funcation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝字符串"><span class="nav-number">1.1.1.</span> <span class="nav-text">拷贝字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接字符串"><span class="nav-number">1.1.2.</span> <span class="nav-text">连接字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较字符串"><span class="nav-number">1.1.3.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索字符串"><span class="nav-number">1.1.4.</span> <span class="nav-text">搜索字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割字符串"><span class="nav-number">1.1.5.</span> <span class="nav-text">分割字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准I-O库函数"><span class="nav-number">1.2.</span> <span class="nav-text">标准I/O库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的基本概念"><span class="nav-number">1.2.1.</span> <span class="nav-text">文件的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文本文件（Text-file）"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">文本文件（Text file）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二进制文件-Binary-file"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">二进制文件 Binary file</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fopen-fclose"><span class="nav-number">1.2.2.</span> <span class="nav-text">fopen / fclose</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mode"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路径的介绍"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">路径的介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdin-stdout-stderr"><span class="nav-number">1.2.3.</span> <span class="nav-text">stdin/stdout/stderr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errno-perror"><span class="nav-number">1.2.4.</span> <span class="nav-text">errno / perror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字节为单位的I-O函数"><span class="nav-number">1.2.5.</span> <span class="nav-text">以字节为单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作读写位置的函数"><span class="nav-number">1.2.6.</span> <span class="nav-text">操作读写位置的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字符串位单位的I-O函数"><span class="nav-number">1.2.7.</span> <span class="nav-text">以字符串位单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以记录为单位的I-O文件"><span class="nav-number">1.2.8.</span> <span class="nav-text">以记录为单位的I/O文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化的I-O函数"><span class="nav-number">1.2.9.</span> <span class="nav-text">格式化的I/O函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#printf"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">printf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scanf"><span class="nav-number">1.2.9.2.</span> <span class="nav-text">scanf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C标准库的I-O缓存"><span class="nav-number">1.2.10.</span> <span class="nav-text">C标准库的I/O缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值字符串转换函数"><span class="nav-number">1.3.</span> <span class="nav-text">数值字符串转换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配内存函数"><span class="nav-number">1.4.</span> <span class="nav-text">分配内存函数</span></a></li></ol></li></ol></div>
             
 
           </div>
