@@ -111,7 +111,9 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/fflush.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/cash.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/malloc.png">
-<meta property="og:updated_time" content="2019-04-10T04:36:47.726Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/ini.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/02/CStandardLib/xml.png">
+<meta property="og:updated_time" content="2019-04-13T01:43:58.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C Standard Lib">
 <meta name="twitter:description" content="C Standard Lib C标准主要由两部分组成，一部分描述C的语法，一部分描述C标准库。 平台支持C语言 实现C编译器 实现C标准库   函数文件的命名，以.c 为准 在 ’.c‘ file：void * 类型的数，做右值的时候会自动进行转换； 在 ’ .cpp ‘file：不会自动的转换   POSIX 是Unix系统的标准，不属于C标准库  String Funcation 程序按功能划">
@@ -424,7 +426,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-10 12:36:47" itemprop="dateModified" datetime="2019-04-10T12:36:47+08:00">2019-04-10</time>
+                <time title="Updated at: 2019-04-13 09:43:58" itemprop="dateModified" datetime="2019-04-13T09:43:58+08:00">2019-04-13</time>
               
             
           </span>
@@ -1055,6 +1057,48 @@
 </ul>
 </li>
 </ol>
+<h2 id="综合练习"><a href="#综合练习" class="headerlink" title="综合练习"></a>综合练习</h2><h3 id="日志文件中添加记录"><a href="#日志文件中添加记录" class="headerlink" title="日志文件中添加记录"></a>日志文件中添加记录</h3><ol>
+<li>获取当前的系统时间需要调用time(2)函数,返回的结果是一个time_t 类型；</li>
+<li>其实就是一个大整数，其值表示从UTC(Coordinated Universal Time)时间1970年1月1日00:00:00(称为UNIX系统的Epoch时间)到当前时刻的秒数。</li>
+<li>然后调用localtime(3)将time_t所表示的UTC时间转换为本地时间(我们是+8区,比UTC多8个小时)并转成struct tm 类型</li>
+<li>该类型的各数据成员分别表示年月日时分秒</li>
+<li>调用sleep(3) 函数可以指定程序睡眠多少秒。</li>
+</ol>
+<h3 id="INI-and-XML-files"><a href="#INI-and-XML-files" class="headerlink" title="INI and XML files"></a>INI and XML files</h3><ol>
+<li><p>INI文件：是Initialization File的缩写，即初始化文件，系统<a href="https://baike.baidu.com/item/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6" target="_blank" rel="noopener">配置文件</a>所采用的存储格式</p>
+<ul>
+<li>文件扩展名：配置文件 . ini</li>
+<li>格式：由节，键，值组成<ul>
+<li>节： [ section ]</li>
+<li>键 = 值 ：name = value</li>
+</ul>
+</li>
+<li>注释：注解使用分号表示（;）。在分号后面的文字，直到该行结尾都全部为注解。</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">example：</span><br><span class="line">	; exp ini file</span><br><span class="line">    [port]</span><br><span class="line">    <span class="attribute">portname</span>=COM4</span><br><span class="line">    <span class="attribute">port</span>=4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>XML文件：同样是一个配置文件的格式</p>
+</li>
+<li><p>两者区别</p>
+<ul>
+<li>xml,对于描述复杂的数据结构非常的方便，缺点相对ini使用麻烦一点。<ul>
+<li>而且因为它有比较严格的格式审查机制，容错性也不是特别好,在手写时容易出现错误。</li>
+<li>抛开配置的功能，作为存储传输数据的手段，xml还有个缺点就是它的处理和存储的效率非常低下，解析速度慢，占用更多的存储空间。</li>
+</ul>
+</li>
+<li>INI ：通常用于对软件的参数进行配置和记录。<ul>
+<li>优点是使用方便，嵌入程序也容易，几个接口就够了，很容易掌握。</li>
+<li>配置文件更小巧，手工配置也更容易。</li>
+<li>缺点是它的结构只有2层，对于复杂类型数据描绘就显得比较无力了。</li>
+<li>另外ini文件有64kb的大小限制。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>转换ini 为xml</p>
+<img src="/2019/04/02/CStandardLib/ini.png">
+<img src="/2019/04/02/CStandardLib/xml.png"></li>
+</ol>
 
       
     </div>
@@ -1175,7 +1219,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">57</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1304,7 +1348,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">58</span>
+                      
+                    
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1409,7 +1455,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">46</span>
+                      
+                    
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1445,7 +1493,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Standard-Lib"><span class="nav-number">1.</span> <span class="nav-text">C Standard Lib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-Funcation"><span class="nav-number">1.1.</span> <span class="nav-text">String Funcation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝字符串"><span class="nav-number">1.1.1.</span> <span class="nav-text">拷贝字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接字符串"><span class="nav-number">1.1.2.</span> <span class="nav-text">连接字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较字符串"><span class="nav-number">1.1.3.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索字符串"><span class="nav-number">1.1.4.</span> <span class="nav-text">搜索字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割字符串"><span class="nav-number">1.1.5.</span> <span class="nav-text">分割字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准I-O库函数"><span class="nav-number">1.2.</span> <span class="nav-text">标准I/O库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的基本概念"><span class="nav-number">1.2.1.</span> <span class="nav-text">文件的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文本文件（Text-file）"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">文本文件（Text file）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二进制文件-Binary-file"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">二进制文件 Binary file</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fopen-fclose"><span class="nav-number">1.2.2.</span> <span class="nav-text">fopen / fclose</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mode"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路径的介绍"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">路径的介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdin-stdout-stderr"><span class="nav-number">1.2.3.</span> <span class="nav-text">stdin/stdout/stderr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errno-perror"><span class="nav-number">1.2.4.</span> <span class="nav-text">errno / perror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字节为单位的I-O函数"><span class="nav-number">1.2.5.</span> <span class="nav-text">以字节为单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作读写位置的函数"><span class="nav-number">1.2.6.</span> <span class="nav-text">操作读写位置的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字符串位单位的I-O函数"><span class="nav-number">1.2.7.</span> <span class="nav-text">以字符串位单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以记录为单位的I-O文件"><span class="nav-number">1.2.8.</span> <span class="nav-text">以记录为单位的I/O文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化的I-O函数"><span class="nav-number">1.2.9.</span> <span class="nav-text">格式化的I/O函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#printf"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">printf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scanf"><span class="nav-number">1.2.9.2.</span> <span class="nav-text">scanf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C标准库的I-O缓存"><span class="nav-number">1.2.10.</span> <span class="nav-text">C标准库的I/O缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值字符串转换函数"><span class="nav-number">1.3.</span> <span class="nav-text">数值字符串转换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配内存函数"><span class="nav-number">1.4.</span> <span class="nav-text">分配内存函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Standard-Lib"><span class="nav-number">1.</span> <span class="nav-text">C Standard Lib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String-Funcation"><span class="nav-number">1.1.</span> <span class="nav-text">String Funcation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拷贝字符串"><span class="nav-number">1.1.1.</span> <span class="nav-text">拷贝字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接字符串"><span class="nav-number">1.1.2.</span> <span class="nav-text">连接字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较字符串"><span class="nav-number">1.1.3.</span> <span class="nav-text">比较字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索字符串"><span class="nav-number">1.1.4.</span> <span class="nav-text">搜索字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割字符串"><span class="nav-number">1.1.5.</span> <span class="nav-text">分割字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准I-O库函数"><span class="nav-number">1.2.</span> <span class="nav-text">标准I/O库函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的基本概念"><span class="nav-number">1.2.1.</span> <span class="nav-text">文件的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文本文件（Text-file）"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">文本文件（Text file）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二进制文件-Binary-file"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">二进制文件 Binary file</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fopen-fclose"><span class="nav-number">1.2.2.</span> <span class="nav-text">fopen / fclose</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mode"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#路径的介绍"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">路径的介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdin-stdout-stderr"><span class="nav-number">1.2.3.</span> <span class="nav-text">stdin/stdout/stderr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errno-perror"><span class="nav-number">1.2.4.</span> <span class="nav-text">errno / perror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字节为单位的I-O函数"><span class="nav-number">1.2.5.</span> <span class="nav-text">以字节为单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作读写位置的函数"><span class="nav-number">1.2.6.</span> <span class="nav-text">操作读写位置的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以字符串位单位的I-O函数"><span class="nav-number">1.2.7.</span> <span class="nav-text">以字符串位单位的I/O函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以记录为单位的I-O文件"><span class="nav-number">1.2.8.</span> <span class="nav-text">以记录为单位的I/O文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化的I-O函数"><span class="nav-number">1.2.9.</span> <span class="nav-text">格式化的I/O函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#printf"><span class="nav-number">1.2.9.1.</span> <span class="nav-text">printf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scanf"><span class="nav-number">1.2.9.2.</span> <span class="nav-text">scanf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C标准库的I-O缓存"><span class="nav-number">1.2.10.</span> <span class="nav-text">C标准库的I/O缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值字符串转换函数"><span class="nav-number">1.3.</span> <span class="nav-text">数值字符串转换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配内存函数"><span class="nav-number">1.4.</span> <span class="nav-text">分配内存函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#综合练习"><span class="nav-number">1.5.</span> <span class="nav-text">综合练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志文件中添加记录"><span class="nav-number">1.5.1.</span> <span class="nav-text">日志文件中添加记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INI-and-XML-files"><span class="nav-number">1.5.2.</span> <span class="nav-text">INI and XML files</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
