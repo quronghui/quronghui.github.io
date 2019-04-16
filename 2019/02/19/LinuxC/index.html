@@ -105,7 +105,7 @@
 <meta property="og:description" content="Linux C编程一站式学习   	      	    LinuxC 课后习题答案 LinuxC.pdf 文档中的代码  C语言入门 程序的五个步骤     math函数的gcc编译 12$ gcc math.cpp -o math -lm 		 // math的编译要加上 &quot;-lm&quot;$ gcc hello.c -o hello -Wall 	 // gcc编译带上 -Wall,显示所有警告的信">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/02/19/LinuxC/programmer.png">
-<meta property="og:updated_time" content="2019-03-27T01:42:15.471Z">
+<meta property="og:updated_time" content="2019-04-16T08:20:02.357Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言入门">
 <meta name="twitter:description" content="Linux C编程一站式学习   	      	    LinuxC 课后习题答案 LinuxC.pdf 文档中的代码  C语言入门 程序的五个步骤     math函数的gcc编译 12$ gcc math.cpp -o math -lm 		 // math的编译要加上 &quot;-lm&quot;$ gcc hello.c -o hello -Wall 	 // gcc编译带上 -Wall,显示所有警告的信">
@@ -226,7 +226,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -260,7 +260,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
 
   </li>
         
@@ -277,7 +277,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -288,7 +288,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
         </li>
       
     </ul>
@@ -394,14 +394,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-19 09:57:24" itemprop="dateCreated datePublished" datetime="2019-02-19T09:57:24+08:00">2019-02-19</time>
+              <time title="Created: 2019-02-19 09:57:24" itemprop="dateCreated datePublished" datetime="2019-02-19T09:57:24+08:00">2019-02-19</time>
             
 
             
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-27 09:42:15" itemprop="dateModified" datetime="2019-03-27T09:42:15+08:00">2019-03-27</time>
+                <time title="Modified: 2019-04-16 16:20:02" itemprop="dateModified" datetime="2019-04-16T16:20:02+08:00">2019-04-16</time>
               
             
           </span>
@@ -432,14 +432,14 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LinuxC/" itemprop="url" rel="index"><span itemprop="name">LinuxC</span></a></span>
 
                 
                 
-                  . 
+                  , 
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Emededded/" itemprop="url" rel="index"><span itemprop="name">Emededded</span></a></span>
@@ -584,6 +584,27 @@
 </ul>
 </li>
 </ol>
+<h2 id="goto-跳转语句"><a href="#goto-跳转语句" class="headerlink" title="goto 跳转语句"></a>goto 跳转语句</h2><ol>
+<li><p>goto : 实现无条件的跳转</p>
+<ul>
+<li>我们知道break 只能跳出最内层的循环</li>
+<li>如果在一个嵌套循环中遇到某个错误条件需要立即跳到循环之外的某个地方做出错处理,就可以用goto 语句。</li>
+</ul>
+</li>
+<li><p>语法</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for (...)</span><br><span class="line">	for (...) &#123;</span><br><span class="line">    	...</span><br><span class="line">		if (出现错误条件)</span><br><span class="line">			goto error;</span><br><span class="line">	&#125;</span><br><span class="line">error:</span><br><span class="line">		出错处理;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>error 叫做标号lable，给标号起名字也遵循标识符的命名规则。</li>
+</ul>
+</li>
+<li><p>goto的限制</p>
+<ul>
+<li>goto 语句过于强大了,从程序中的任何地方都可以无条件跳转到任何其它地方,只要给那个地方取个标号。</li>
+<li>唯一的限制是goto 只能跳到同一个函数的某个标号处,而不能跳到别的函数里面。</li>
+<li>不推荐使用goto</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -681,10 +702,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -707,7 +728,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">58</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -838,7 +859,7 @@
                       
                     
                     <span class="site-state-item-count">59</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -945,7 +966,7 @@
                       
                     
                     <span class="site-state-item-count">47</span>
-                    <span class="site-state-item-name">Tags</span>
+                    <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
               
@@ -980,7 +1001,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-C编程一站式学习"><span class="nav-number">1.</span> <span class="nav-text">Linux C编程一站式学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言入门"><span class="nav-number">1.1.</span> <span class="nav-text">C语言入门</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-C编程一站式学习"><span class="nav-number">1.</span> <span class="nav-text">Linux C编程一站式学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言入门"><span class="nav-number">1.1.</span> <span class="nav-text">C语言入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goto-跳转语句"><span class="nav-number">1.2.</span> <span class="nav-text">goto 跳转语句</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1026,7 +1047,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 

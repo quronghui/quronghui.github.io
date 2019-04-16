@@ -96,18 +96,24 @@
 
 
 
-  <meta name="description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作   本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台">
+  <meta name="description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作   本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台    汇编程序的Hello world 注意在C语言中字符串的末尾隐含有一个’\0’ ，而汇编指示.ascii定义的字符串末尾没有隐含的’\0">
 <meta name="keywords" content="file and io">
 <meta property="og:type" content="article">
 <meta property="og:title" content="file_and_IO">
 <meta property="og:url" content="http://yoursite.com/2019/04/13/file-and-IO/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作   本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台">
+<meta property="og:description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作   本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台    汇编程序的Hello world 注意在C语言中字符串的末尾隐含有一个’\0’ ，而汇编指示.ascii定义的字符串末尾没有隐含的’\0">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-13T02:07:47.962Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/unbuffer.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/file_descriptor.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/open_and_fopen.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/close.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/running.png">
+<meta property="og:updated_time" content="2019-04-16T09:42:16.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="file_and_IO">
-<meta name="twitter:description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作   本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台">
+<meta name="twitter:description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作   本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台    汇编程序的Hello world 注意在C语言中字符串的末尾隐含有一个’\0’ ，而汇编指示.ascii定义的字符串末尾没有隐含的’\0">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/13/file-and-IO/unbuffer.png">
 
 
 
@@ -224,7 +230,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -258,7 +264,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
 
   </li>
         
@@ -275,7 +281,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -286,7 +292,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
         </li>
       
     </ul>
@@ -392,19 +398,31 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-13 09:52:42 / Updated at: 10:07:47" itemprop="dateCreated datePublished" datetime="2019-04-13T09:52:42+08:00">2019-04-13</time>
+              <time title="Created: 2019-04-13 09:52:42" itemprop="dateCreated datePublished" datetime="2019-04-13T09:52:42+08:00">2019-04-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-16 17:42:16" itemprop="dateModified" datetime="2019-04-16T17:42:16+08:00">2019-04-16</time>
               
             
           </span>
@@ -418,14 +436,14 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LinuxC/" itemprop="url" rel="index"><span itemprop="name">LinuxC</span></a></span>
 
                 
                 
-                  . 
+                  , 
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/file-and-io/" itemprop="url" rel="index"><span itemprop="name">file and io</span></a></span>
@@ -502,6 +520,151 @@
 </ul>
 </li>
 </ul>
+<h2 id="汇编程序的Hello-world"><a href="#汇编程序的Hello-world" class="headerlink" title="汇编程序的Hello world"></a>汇编程序的Hello world</h2><ol>
+<li>注意在C语言中字符串的末尾隐含有一个’\0’ ，而汇编指示.ascii定义的字符串末尾没有隐含的’\0’ 。</li>
+<li>在汇编程序中用.可以取出当前地址计数器的值,是一个常量。</li>
+</ol>
+<h2 id="C标准I-O库函数与Unbuffered-I-O函数"><a href="#C标准I-O库函数与Unbuffered-I-O函数" class="headerlink" title="C标准I/O库函数与Unbuffered I/O函数"></a>C标准I/O库函数与Unbuffered I/O函数</h2><ol>
+<li>对于C标准I/O库来说，打开的文件由FILE *指针标识；</li>
+<li>而对于内核来说，打开的文件由文件描述符标识，文件描述符从open 系统调用获得；</li>
+</ol>
+<h3 id="Unbuffered-I-O-函数"><a href="#Unbuffered-I-O-函数" class="headerlink" title="Unbuffered I/O 函数"></a>Unbuffered I/O 函数</h3><ol>
+<li><p>而Unbuffered I/O函数是UNIX标准的一部分</p>
+<ul>
+<li><p>在所有支持C的平台上应该都可以用C标准库函数(除了有些平台的C编译器没有完全符合C标准之外)</p>
+</li>
+<li><p>而只有在UNIX平台上才能使用Unbuffered I/O函数</p>
+</li>
+<li><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Man Page中的 COMFORMING TO部分可以看出来一个函数接口属于哪个平台。</p>
+</li>
+<li><p>我们知道UNIX的传统是Everything is a file，Unbuffered I/O的函数属于无缓存的函数,也就是直接写到设备。</p>
+</li>
+<li><p>关系</p>
+<img src="/2019/04/13/file-and-IO/unbuffer.png">
+</li>
+</ol>
+<h3 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h3><ol>
+<li><p>Linux Kernel 中</p>
+<ul>
+<li><p>task_struct  ：维护进程想信息，Process Descriptor</p>
+<ul>
+<li><p>file_srtuct ：文件描述符表</p>
+<ul>
+<li>每个表包含已打开的文件指针</li>
+</ul>
+</li>
+<li><p>用户程序不能直接访问内核中的文件描述符表,而只能使用文件描述符表的索引(即0、1、2、3这些数字),这些索引就称为文件描述符(File Descriptor)</p>
+<img src="/2019/04/13/file-and-IO/file_descriptor.png">
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Open-and-Close"><a href="#Open-and-Close" class="headerlink" title="Open and Close"></a>Open and Close</h2><h3 id="Open-函数flags参数"><a href="#Open-函数flags参数" class="headerlink" title="Open 函数flags参数"></a>Open 函数flags参数</h3><ol>
+<li><p>open的flags参数</p>
+<ul>
+<li>O_CREAT:  若此文件不存在则创建它。使用此选项时需要提供第三个参数mode ,表示该文件的访问权限。</li>
+<li>O_TRUNC: 如果文件已存在,并且以只写或可读可写方式打开,则将其长度截断<br>(Truncate)为0字节。</li>
+</ul>
+</li>
+<li><p>open and fopen 区别</p>
+<ul>
+<li>创建新的文件，和文件追加内容那块有区别；</li>
+</ul>
+<img src="/2019/04/13/file-and-IO/open_and_fopen.png">
+</li>
+</ol>
+<h3 id="open函数-mode参数"><a href="#open函数-mode参数" class="headerlink" title="open函数 mode参数"></a>open函数 mode参数</h3><ol>
+<li><p>文件的权限</p>
+<ul>
+<li>文件的权限由open 的mode参数和当前进程的umask 掩码共同决定。</li>
+</ul>
+</li>
+<li><p>几个权限值</p>
+<ul>
+<li><p>Shell进程的umask </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">umask</span>			// 权限值是 0022</span><br><span class="line">				//<span class="built_in">umask</span> 掩码：就是取<span class="built_in">umask</span>的反码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>touch file</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> touch <span class="keyword">file</span>	<span class="comment">// 用touch 命令创建一个文件时,创建权限是0666</span></span><br><span class="line"><span class="symbol">$</span> ls -l <span class="keyword">file</span>	<span class="comment">// 看到文件是 -rw;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>而touch 进程继承了Shell进程的umask 掩码,所以最终的文件权限是0666 &amp; ~022=0644。</li>
+</ul>
+</li>
+<li><p>gcc </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc main<span class="selector-class">.c</span>	<span class="comment">// 用gcc 编译生成一个可执行文件时,创建权限是0777,</span></span><br><span class="line">$ ls -l <span class="selector-tag">a</span><span class="selector-class">.out</span>	<span class="comment">// 文件的权限 -rwxr</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>同样道理,用gcc 编译生成一个可执行文件时,创建权限是0777,而最终的文件权限<br>是0777&amp;~022=0755。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="close"><a href="#close" class="headerlink" title="close"></a>close</h3><ol>
+<li><p>由open 返回的文件描述符一定是该进程尚未使用的最小描述符。</p>
+</li>
+<li><p>可以利用这一点在标准输入、标准输出或标准错误输出上打开一个新文件,实现重定向的功能。</p>
+<img src="/2019/04/13/file-and-IO/close.png">
+</li>
+</ol>
+<h2 id="read-and-write"><a href="#read-and-write" class="headerlink" title="read and write"></a>read and write</h2><h3 id="read-and-fgetc"><a href="#read-and-fgetc" class="headerlink" title="read and fgetc"></a>read and fgetc</h3><ol>
+<li>读数据的过程<ul>
+<li>read : 读上来的数据保存在缓冲区buf 中，同时文件的当前<strong>读写位置</strong>向后移；<ul>
+<li>没有取完的数据继续保存在buf中</li>
+<li>读写位置：记录在内核中的。</li>
+</ul>
+</li>
+<li>fgetc:  getc 有可能从内核中预读1024个字节到I/O缓冲区中,再返回第一个字节,<ul>
+<li>这时该文件在内核中记录的读写位置是1024</li>
+<li>而在FILE 结构体中记录的读写位置是1。</li>
+</ul>
+</li>
+<li>是ssize_t,表示有符号的size_t </li>
+</ul>
+</li>
+<li>read and write 中的count<ul>
+<li>面对读写常规文件时：read / write 的返回值通常等于请求写的字节数count</li>
+<li>面对的是终端设备Terminal：通常以行为单位,读到换行符就返回，不一定是count。</li>
+<li>面对网络读写时：有不同的传输协议，不一定是count</li>
+</ul>
+</li>
+</ol>
+<h3 id="阻塞-Block-现象"><a href="#阻塞-Block-现象" class="headerlink" title="阻塞 Block 现象"></a>阻塞 Block 现象</h3><ul>
+<li>阻塞状态：针对终端设备和网络读取</li>
+</ul>
+<ol>
+<li><p>Sleeping：当进程调用一个阻塞的系统函数时，该进程被置于睡眠(Sleep)状态，这时内核调度其它进程运行，直到该进程等待的事件发生。</p>
+</li>
+<li><p>Running：</p>
+<ul>
+<li><p>正在都被调度执行：</p>
+<img src="/2019/04/13/file-and-IO/running.png">
+</li>
+<li><p>就绪状态</p>
+<ul>
+<li>已经准备好，处于排队中，随时准备被调用</li>
+<li>按照优先级进行调用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Unblocking"><a href="#Unblocking" class="headerlink" title="Unblocking"></a>Unblocking</h3><ul>
+<li>如果在open 一个设备时指定了O_NONBLOCK 标志,read / write 就不会阻塞。</li>
+</ul>
+<ol>
+<li>轮询（Poll）方式<ul>
+<li>表示本来应该阻塞在这里(would block,虚拟语气),事实上并没有阻塞而是直接返回错误,调用者应该试着再读一次(again)。</li>
+<li>调用者只是查询一下，而不是阻塞在这里死等，这样可以同时监视多个设备:</li>
+</ul>
+</li>
+<li>通过 goto 无条件跳转函数，实现非阻塞读终端</li>
+</ol>
 
       
     </div>
@@ -593,10 +756,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -619,7 +782,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">58</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -750,7 +913,7 @@
                       
                     
                     <span class="site-state-item-count">59</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -857,7 +1020,7 @@
                       
                     
                     <span class="site-state-item-count">47</span>
-                    <span class="site-state-item-name">Tags</span>
+                    <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
               
@@ -892,7 +1055,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FIle-and-IO"><span class="nav-number">1.</span> <span class="nav-text">FIle and IO</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FIle-and-IO"><span class="nav-number">1.</span> <span class="nav-text">FIle and IO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编程序的Hello-world"><span class="nav-number">1.1.</span> <span class="nav-text">汇编程序的Hello world</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C标准I-O库函数与Unbuffered-I-O函数"><span class="nav-number">1.2.</span> <span class="nav-text">C标准I/O库函数与Unbuffered I/O函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unbuffered-I-O-函数"><span class="nav-number">1.2.1.</span> <span class="nav-text">Unbuffered I/O 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件描述符"><span class="nav-number">1.2.2.</span> <span class="nav-text">文件描述符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-and-Close"><span class="nav-number">1.3.</span> <span class="nav-text">Open and Close</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Open-函数flags参数"><span class="nav-number">1.3.1.</span> <span class="nav-text">Open 函数flags参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#open函数-mode参数"><span class="nav-number">1.3.2.</span> <span class="nav-text">open函数 mode参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#close"><span class="nav-number">1.3.3.</span> <span class="nav-text">close</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#read-and-write"><span class="nav-number">1.4.</span> <span class="nav-text">read and write</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read-and-fgetc"><span class="nav-number">1.4.1.</span> <span class="nav-text">read and fgetc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞-Block-现象"><span class="nav-number">1.4.2.</span> <span class="nav-text">阻塞 Block 现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unblocking"><span class="nav-number">1.4.3.</span> <span class="nav-text">Unblocking</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -938,7 +1101,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
