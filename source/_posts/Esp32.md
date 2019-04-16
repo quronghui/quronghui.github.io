@@ -43,21 +43,19 @@ tags: Esp32
 ### 环境搭建
 
 1. VS Code 中加载组件platform。
-2. [在Ubuntu下搭建ESP32开发环境](https://blog.csdn.net/weixin_37127273/article/details/84790079)
-   + 需要搭建以下ubunut下的python2环境
-   + 先配置一下，使用platform时便能直接使用
+2. 在platform 中加载ESP32的库。
 
 ### 基于ESP-IDF开发
 
 + 使用ESP-IDF进行开发
 
-  {% asset_img platform.ong %}
+  {% asset_img platform.png %}
 
 + 例子的参考 [[espressif](https://github.com/espressif)/**esp-idf**  ]()
 
 ### 基于Arduino 开发
 
-+ 开发平台选择arduino
++ 开发平台选择arduino，这样就可以直接开发了
 
 ## 开发平台比较
 

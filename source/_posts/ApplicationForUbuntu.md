@@ -23,6 +23,19 @@ sudo umake ide visual-studio-code
 
 + [C/C++](https://blog.csdn.net/qq_34347375/article/details/80851417)
 
+### VS 更新
+
+```
+$ sudo wget https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable -O /tmp/code_latest_amd64.deb
+$ sudo dpkg -i /tmp/code_latest_amd64.deb
+$ 关闭vs code，然后再次打开会看到release note的页面，说明已经完成更新。
+```
+
+### vs code 代码能编译通过，但是头文件全是红色
+
+1. 删除文件夹下的 .vscode
+2. 相当于重新建立索引，应该就能解决。
+
 ## PDF阅读器Okular
 
 ```

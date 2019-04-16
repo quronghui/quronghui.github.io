@@ -1,22 +1,23 @@
 ---
 layout: post
-title: Pretreatment
+title: Preprocessing
 date: 2019-03-21 15:15:19
 categories:
  - [LinuxC]
- - [Pretreatment]
+ - [Preprocessing]
 tags: Pretreatment
 ---
 
-# Pretreatment 预处理
+# Preprocessing
 
 ## 预处理步骤
 
-+ 经过以下步骤之后，把空白字符丢掉，把Token交给C编译器做语法解析,
++ 经过以下步骤之后，把空白字符丢掉，把Token交给C编译器做语法解析
++ Token：通过分隔符将字符串，分成一个个的子块
 
 ### 换行符
 
-1. Windows平台的文本文件用\r\n 做行分隔符,而Linux平台用\n做行分隔符；
+1. Windows平台的文本文件用 \r \n 做行分隔符，而Linux平台用 \n 做行分隔符；
 2. C编译器要能处理差别
 3. 把用 “ \ ” 字符续行的多行代码连成一行
 4. 把注释都替换为一个空格
@@ -26,32 +27,56 @@ tags: Pretreatment
 1. 然后预处理器把逻辑代码行划分成Token和空白字符,
 2. 这时的Token称为预处理Token：包括标识符、整数常量、浮点数常量、字符常量、字符串、运算符和其它符号
 
+### include and define
+
+1. 在Token过程中，遇到
+   + #include 预处理指示：则把相应的源文件包含进来
+   + 宏定义：。如果遇到宏定义则做宏展开。
+
 ## 宏定义
 
-+ 较大的项目都会用大量的宏定义来组织代码，宏定义很常用
++ 较大的项目都会用大量的宏定义来组织代码，宏定义很常用。
++ 看起来宏展开就是做个替换（展开替换）而已,其实里面有比较复杂的规则,
 
 ### 函数式宏定义
 
-1. 变量式
+1. 变量式宏定义（Object-like Macro）
 
    ```
    #define N 20
+   #define STR "hello, world"
    ```
 
-2. 函数式
+2. 函数式宏定义
 
    ```
    #define MAX(a, b) ((a)>(b)?(a):(b))		// 不加括号，展开后会报优先级错误
    k = MAX(i&0x0f, j&0x0f)
    ```
 
-3. 函数式宏定义
+   + 函数式宏定义不建议使用
 
-   + 不建议使用
 
 ### 内联函数
 
 1. 关键词：inline
+   + 用于定义内联函数 inline funcation
+   + inline关键字告诉编译器,这个函数的调用要尽可能快,可以当普通的函数调用实现,也可以用宏展开的办法实现。
+
+### "# and ## 运算符"和可变参数
+
+1. **#** 运算符用于创建字符串，运算符后面应该跟一个形参（中间可能有Tab）
+
+   ```
+   #define	STR #s	//#的用法
+   ```
+
+2. **##** 运算符将两个字符连接在一起 
+
+   + 宏展开时前后两个#号被这个运算符连接在一起。
+   + 而根据定义## 运算符用于连接前后两个预处理Token,不能出现在宏定义的开头或末尾,所以会报错。
+
+
 
 ## 条件预处理提示
 
@@ -80,7 +105,7 @@ tags: Pretreatment
 
 3. 把没有定义的宏换成 0
 
-4. 把得到的表达式 ，像C表达式一样求职
+4. 把得到的表达式 ，像C表达式一样求值
 
 ## 其他预处理特性
 
@@ -90,7 +115,7 @@ tags: Pretreatment
 
 ### assert.h 实现
 
-1. #undef assert 确保取笑前面对assert的定义
+1. #undef assert 确保前面对assert的定义
 2. 然后分另种情况：
 
 {% asset_img assert.png %}

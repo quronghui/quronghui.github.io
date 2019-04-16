@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Assembler And C
+title: Assembly And C
 date: 2019-03-18 08:39:46
 categories: 
  - [LinuxC]
@@ -8,16 +8,14 @@ categories:
 tags: complation
 ---
 
-#  Complation And C
-
-# **Assembler And C**
+# Assembly And C
 
 ## 汇编代码生成
 
 ### C和汇编穿插显示
 
 ```
-gcc -g main.c -o main -Wall	// 生成可执行文件
+gcc -g main.c -o main -Wall	// 生成可执行文件.out
 objdump -dS main			// 把C代码和汇编代码穿插起来显示
 ```
 
@@ -51,6 +49,9 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
 
 ## 程序入口
 
++ -o ：作用 --> 只是为了取名字，而不是其他的作用 
++ 编译的作用：翻译高级语言为可执行的二进制语言。
+
 1. 汇编程序入口函数：_start；C程序的入口是：main()
 
 2. 汇编函数编译
@@ -63,12 +64,18 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
 3. C程序的编译
 
    ```
-   $ gcc -S main.c				//生成汇编代码
-   $ gcc -c main.s				//生成目标文件
-   $ gcc main.o				//生成可执行文件
+   $ gcc -S main.c -o main.s	//生成汇编代码
+   $ gcc -c main.s -o main.o	//生成目标文件 
+   $ gcc main.o -o main		//生成可执行文件
    ```
 
    {% asset_img gcc.png%}
+
+   + 汇编代码：
+     + 可以直接命名为 xxx.s ；进行编写
+       + 通过as进行编译，ld进行链接。
+     + 可以通过 xxx.c 生成
+       + 通过 gcc -S 生成 .s汇编代码
 
 ### C程序链接库的过程
 
@@ -88,7 +95,7 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
 1. 查看命令
 
    ```
-   $ gcc -g main.c -o main	
+   $ gcc -g main.c -o main	// gdb 调试文件生成
    $ readelf -a main		//查看符号表 global and local
    ```
 
@@ -109,17 +116,37 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
    + static 修饰的变量，LOCAL
    + LOCAL 的符号只能在某一个目标文件中定义和使用,而不能定义在一个目标文件中却在另一个目标文件中使用。
 
-### 作用域（Scope）些名词,因为我不是在写C标准。
+### 标识符的作用域（Scope）
 
-1. 作用域适合于所有的标识符，而不仅仅是变量。
-2. 作用域范围
-   + 从当前位置，到所在函数结束
++ 关键字：时用来修饰标识符和变量的。
 
-### 命名空间 （Name Space）
+  + 用来定义他们的作用范围
++ 标识符：作用域适合于所有的标识符，而不仅仅是变量。
+
+  {% asset_img Scope.png %}
+
+### 命名空间 （Name Space）的重名标识符
 
 1. 对于重名标识符，内层作用域的标识符将覆盖外层作用域的标识符。
 
-### 存储类型标识符（Storage Class Specifier）
+   {% asset_img nameSpace.png %}
+
+### 标识符的链接属性 Linkage
+
+1. 外部链接（External Linkage）
+   + 标识符在任意程序文件中即使声明多次也都代表同一个变量或函数,则这个标识符具有External Linkage。
+   + 具有External Linkage的标识符编译后在符号表中是GLOBAL的符号。
+2. 内部链接（Internal Linkage）
+   + 如果一个标识符在**某个程序文件**中即使声明多次也都代表同一个变量或函数,则这个标识符具有Internal Linkage。
+   + 具有Internal Linkage的标识符编译后在符号表中是LOCAL的符号
+3. 无链接(No Linkage)。
+   + 除以上情况之外的标识符都属于No Linkage的
+   + 例如函数的局部变量，以及不表示变量和函数的其它标识符。
+
+### 存储类型修饰符--关键字（Storage Class Specifier）
+
++ typedef ，static，extern
++ 修饰一个变量的声明
 
 {%  asset_img specifier.png %}
 
@@ -128,7 +155,7 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
 ### 存储
 
 1. 栈：是从高地址向低地址增长的；
-2. 结构体成员：从低地址向高地址排列，这一点和数组类似。但有一点和数组不同,结构体的各成员并不是一个紧挨一个排列的,中间有空隙,称为填充。
+2. 结构体成员：从低地址向高地址排列，这一点和数组类似。但有一点和数组不同，结构体的各成员并不是一个紧挨一个排列的，中间有空隙，称为填充。
 
 ## C和内联汇编
 
@@ -152,3 +179,36 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
    );
    ```
 
+## Volatile 限定符
+
++ 编译器优化对寄存器代码产生的影响
++ 在为调试而编译时不要指定优化选项,否则可能无法一步步跟踪源代码的执行过程。
+
+### 编译器优化
+
+1. 指令形式
+
+   ```
+   gcc main.c -g -O -o main	// -o 对生成的文件进行命名；
+   							// -O 制定优化选项
+   ```
+
+2.  -O 优化寄存器代码，造成了错误
+
+   + 设备寄存器中的数据不需要改写就可以自己发生变化,每次读上来的值都可能不一样
+   + 连续多次向设备寄存器中写数据并不是在做无用功,而是有特殊意义的。
+
+### 如何防止编译器优化造成的影响
+
+1. 加上限定符volatile
+
+   ```
+   /* artificial device registers */
+   volatile unsigned char recv;	// 仿照寄存器设备
+   volatile unsigned char send;
+   ```
+
+### Volatile
+
+1. 有了volatile 限定符,是可以防止编译器优化对设备寄存器的访问。
+2. 当一个全局变量被同一进程中的多个控制流程访问时也要用volatile限定,比如信号处理函数和多线程。

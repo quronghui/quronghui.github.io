@@ -18,7 +18,7 @@ tags: [Linklib]
 
    ```
    $ gcc main.c -o main	//编译可执行文件
-   $ readelf -a main 		//查看到个函数的段定义
+   $ readelf -a main 		//查看符号表 global and local
    ```
 
    {% asset_img readelf.png %}
@@ -28,10 +28,10 @@ tags: [Linklib]
    + 能查看到跟函数的**段定义**
    + Data Segment 后面的一些Segment，主要是调试信息
 
-3. 包含其他的 .c 文件
+3. 为什么要声明函数
 
-   + 为什么编译器在处理函数，调用代码时需要有函数原型?
-   + 因为必须知道参数的类型和个数以及返回值的类型才知道生成什么样的指令。
+   + 为什么编译器在处理函数，调用代码时需要知道函数原型?
+   + 因为必须知道参数的类型和个数以及返回值的类型，才知道生成什么样的指令。
 
 ## 定义和声明
 
@@ -44,11 +44,10 @@ tags: [Linklib]
 
 ### extern 和 static 
 
-1. 包含其他的 .c 文件时    ---    **直接包含// #include "stack.cpp" ，错误的想法**
+1. 直接包含 .c 文件    ---    **直接包含// #include "stack.cpp" ，错误的想法**
 
    ```
    #include <stdio.h>
-   // #include "stack.cpp"     // 有了函数的声明，就不需要加引用了
    
    extern void push(char);
    extern char pop(void);
@@ -64,7 +63,7 @@ tags: [Linklib]
    + 表示一个Internal Linkage的属性
    + 有些模块不希望被外界访问到，声明为内部的
 
-###　头文件 .h
+### 头文件 .h
 
 1. 将变量和函数的声明放在一个 .h 的文件中
 
@@ -74,13 +73,24 @@ tags: [Linklib]
 2. 预处理关键词
 
    ```
-   #ifndef STACK_H     /* 预处理的关键词 */
+   #ifndef STACK_H     /* 预处理的关键词 */ if not define STACK_H, so define STACK_H; if have define STACK_H, it is NULL.
    #define STACK_H
    ...
    #endif
    ```
 
    {% asset_img head.png %}
+
+3. #include <>  and #inlclude ""
+
+   + <> ：gcc编译的时候首先查找 -I 选项指定的目录，然后查找系统的头文件目录(/usr/include)
+   + “ ”：gcc首先查找包含头文件的.c 文件所在的目录，然后查找 - I 选项指定的目录，然后查找系统的头文件目录。
+
+   ```
+   gcc -c main.c -Istack	//用-I选项告诉gcc 头文件要到子目录stack里找;stack是一个子目录
+   ```
+
+   
 
 ###  直接包含 .c 文件 -- -- 错误的
 
@@ -106,6 +116,10 @@ tags: [Linklib]
 1. 有相应的作用域和作用范围
 
    {% asset_img static.png %}
+
+2. 三个关键字 Storage Class
+
+   {% asset_img storageclass.png %}
 
 ## 静态库
 
