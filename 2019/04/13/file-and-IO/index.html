@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/open_and_fopen.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/close.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/running.png">
-<meta property="og:updated_time" content="2019-04-16T09:42:16.281Z">
+<meta property="og:updated_time" content="2019-04-18T06:42:13.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="file_and_IO">
 <meta name="twitter:description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作   本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台    汇编程序的Hello world 注意在C语言中字符串的末尾隐含有一个’\0’ ，而汇编指示.ascii定义的字符串末尾没有隐含的’\0">
@@ -230,7 +230,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -264,7 +264,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
 
   </li>
         
@@ -281,7 +281,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
 
@@ -292,7 +292,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -398,14 +398,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-04-13 09:52:42" itemprop="dateCreated datePublished" datetime="2019-04-13T09:52:42+08:00">2019-04-13</time>
+              <time title="Post created: 2019-04-13 09:52:42" itemprop="dateCreated datePublished" datetime="2019-04-13T09:52:42+08:00">2019-04-13</time>
             
 
             
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-16 17:42:16" itemprop="dateModified" datetime="2019-04-16T17:42:16+08:00">2019-04-16</time>
+                <time title="Updated at: 2019-04-18 14:42:13" itemprop="dateModified" datetime="2019-04-18T14:42:13+08:00">2019-04-18</time>
               
             
           </span>
@@ -436,14 +436,14 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LinuxC/" itemprop="url" rel="index"><span itemprop="name">LinuxC</span></a></span>
 
                 
                 
-                  , 
+                  . 
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/file-and-io/" itemprop="url" rel="index"><span itemprop="name">file and io</span></a></span>
@@ -665,6 +665,64 @@
 </li>
 <li>通过 goto 无条件跳转函数，实现非阻塞读终端</li>
 </ol>
+<h2 id="lseek-移动当前的读写位置"><a href="#lseek-移动当前的读写位置" class="headerlink" title="lseek 移动当前的读写位置"></a>lseek 移动当前的读写位置</h2><ol>
+<li><p>lseek 和 标准I/O库的fseek 函数类似,可以移动当前读写位置(或者叫偏移量)。</p>
+<ul>
+<li>参数offset和whence的含义和fseek 函数完全相同。只不过第一个参数换成了文件描述符。</li>
+<li><p>fseek 成功时返回0失败时返回-1,要返回当前偏移量需调用ftell </p>
+</li>
+<li><p>而lseek 成功时返回当前偏移量失败时返回-1。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Fcntl"><a href="#Fcntl" class="headerlink" title="Fcntl"></a>Fcntl</h2><ul>
+<li>对已经打开的文件，重新设定其属性，新设置读、写、追加、非阻塞等标志 （file status flag）</li>
+<li>优点：不用重新打开文件<ul>
+<li>像标准输入 stdin stdout stderr；这些标准输出文件，在开始运行的时候便已经打开；</li>
+<li>或者其他已经打开的文件，需要重新设定其属性</li>
+</ul>
+</li>
+</ul>
+<h3 id="Shell-的重定向功能"><a href="#Shell-的重定向功能" class="headerlink" title="Shell 的重定向功能"></a>Shell 的重定向功能</h3><ul>
+<li>利用Shell的重定向功能在该描述符上打开文件</li>
+<li>open打开的文件，返回的文件描述符一定是该进程尚未使用的最小描述符；<ul>
+<li>以利用这一点在标准输入、标准输出或标准错误输出上打开一个新文件,实现重定向的功能。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>shell重定向语法</p>
+<ul>
+<li>如果在&lt;、&gt;、&gt;&gt;、&lt;&gt;前面添一个数字，该数字就表示在哪个文件描述符上打开文件,</li>
+<li><a href="https://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener">file_and_io/fcntl/cmd_flag.c</a></li>
+</ul>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="string">./cmd.flag</span> 0 &lt; <span class="string">/dev/tty</span>	<span class="string">//</span>时将它的标准输入重定向到<span class="string">/dev/tty</span> ,并且是只读的。</span><br><span class="line"><span class="string">//</span> argv[0] 是<span class="string">"./a.out"</span>,argv[1] 是<span class="string">"0"</span></span><br><span class="line"><span class="string">//</span>重定向由Shell解释,在启动程序时已经生效,程序在运行时并不知道标准输入被重定向了。</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ./<span class="selector-tag">a</span><span class="selector-class">.out</span> <span class="number">1</span> &gt; temp<span class="selector-class">.foo</span>	<span class="comment">// 标准输出，重定向到文件temp.foo</span></span><br><span class="line">$ ./<span class="selector-tag">a</span><span class="selector-class">.out</span> <span class="number">2</span> <span class="number">2</span>&gt;&gt;temp<span class="selector-class">.foo</span>	<span class="comment">//,注意2和&gt;&gt;之间不能有空格,否则2就被解释成命令行参数了。</span></span><br><span class="line">$ ./<span class="selector-tag">a</span><span class="selector-class">.out</span> <span class="number">5</span> <span class="number">5</span>&lt;&gt;temp.foo</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="dev-null-设备文件"><a href="#dev-null-设备文件" class="headerlink" title="/dev/null  设备文件"></a>/dev/null  设备文件</h3><ul>
+<li>/dev/null 设备文件只有一个作用,往它里面写任何数据都被直接丢弃。</li>
+<li>因此保证了该命令执行时屏幕上没有任何输出，既不打印正常信息也不打印错误信息，让命令安静地执行。</li>
+<li>这种写法在Shell脚本中很常见。</li>
+</ul>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ command &gt; /dev/<span class="literal">null</span> <span class="number">2</span>&gt;<span class="meta">&amp;1	<span class="comment">//文件描述符数字写在重定向符号右边需要加&amp;号,否则就被解释成文件名，二期不能有空格</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="ioctl"><a href="#ioctl" class="headerlink" title="ioctl"></a>ioctl</h2><ol>
+<li>ioctl 用于向设备发控制和配置命令,有些命令也需要读写一些数据,但这些数据是不能用read /write 读写的,称为Out-of-band数据。<ul>
+<li>read/ write 读写的数据是in-band数据,是I/O操作的主体。</li>
+<li>而ioctl 命令传送的是控制信息,其中的数据是辅助的数据。</li>
+</ul>
+</li>
+</ol>
+<h2 id="mmap-映射函数"><a href="#mmap-映射函数" class="headerlink" title="mmap 映射函数"></a>mmap 映射函数</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><ol>
+<li><p>mmap 可以把磁盘文件的一部分直接映射到内存,这样文件中的位置直接就有对应的内存地址；</p>
+</li>
+<li><p>对文件的读写可以直接用指针来做而不需要read /write 函数。</p>
+</li>
+<li><p>strace command</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ strace ./<span class="selector-tag">a</span>.out</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
@@ -711,6 +769,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/04/18/file-system/" rel="prev" title="file_system">
+                file_system <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -756,10 +818,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -781,8 +843,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">58</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -912,8 +974,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">59</span>
-                    <span class="site-state-item-name">categories</span>
+                      
+                    
+                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -1019,8 +1083,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">47</span>
-                    <span class="site-state-item-name">tags</span>
+                      
+                    
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -1055,7 +1121,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FIle-and-IO"><span class="nav-number">1.</span> <span class="nav-text">FIle and IO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编程序的Hello-world"><span class="nav-number">1.1.</span> <span class="nav-text">汇编程序的Hello world</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C标准I-O库函数与Unbuffered-I-O函数"><span class="nav-number">1.2.</span> <span class="nav-text">C标准I/O库函数与Unbuffered I/O函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unbuffered-I-O-函数"><span class="nav-number">1.2.1.</span> <span class="nav-text">Unbuffered I/O 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件描述符"><span class="nav-number">1.2.2.</span> <span class="nav-text">文件描述符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-and-Close"><span class="nav-number">1.3.</span> <span class="nav-text">Open and Close</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Open-函数flags参数"><span class="nav-number">1.3.1.</span> <span class="nav-text">Open 函数flags参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#open函数-mode参数"><span class="nav-number">1.3.2.</span> <span class="nav-text">open函数 mode参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#close"><span class="nav-number">1.3.3.</span> <span class="nav-text">close</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#read-and-write"><span class="nav-number">1.4.</span> <span class="nav-text">read and write</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read-and-fgetc"><span class="nav-number">1.4.1.</span> <span class="nav-text">read and fgetc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞-Block-现象"><span class="nav-number">1.4.2.</span> <span class="nav-text">阻塞 Block 现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unblocking"><span class="nav-number">1.4.3.</span> <span class="nav-text">Unblocking</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FIle-and-IO"><span class="nav-number">1.</span> <span class="nav-text">FIle and IO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编程序的Hello-world"><span class="nav-number">1.1.</span> <span class="nav-text">汇编程序的Hello world</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C标准I-O库函数与Unbuffered-I-O函数"><span class="nav-number">1.2.</span> <span class="nav-text">C标准I/O库函数与Unbuffered I/O函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Unbuffered-I-O-函数"><span class="nav-number">1.2.1.</span> <span class="nav-text">Unbuffered I/O 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件描述符"><span class="nav-number">1.2.2.</span> <span class="nav-text">文件描述符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-and-Close"><span class="nav-number">1.3.</span> <span class="nav-text">Open and Close</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Open-函数flags参数"><span class="nav-number">1.3.1.</span> <span class="nav-text">Open 函数flags参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#open函数-mode参数"><span class="nav-number">1.3.2.</span> <span class="nav-text">open函数 mode参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#close"><span class="nav-number">1.3.3.</span> <span class="nav-text">close</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#read-and-write"><span class="nav-number">1.4.</span> <span class="nav-text">read and write</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read-and-fgetc"><span class="nav-number">1.4.1.</span> <span class="nav-text">read and fgetc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阻塞-Block-现象"><span class="nav-number">1.4.2.</span> <span class="nav-text">阻塞 Block 现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unblocking"><span class="nav-number">1.4.3.</span> <span class="nav-text">Unblocking</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lseek-移动当前的读写位置"><span class="nav-number">1.5.</span> <span class="nav-text">lseek 移动当前的读写位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fcntl"><span class="nav-number">1.6.</span> <span class="nav-text">Fcntl</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell-的重定向功能"><span class="nav-number">1.6.1.</span> <span class="nav-text">Shell 的重定向功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dev-null-设备文件"><span class="nav-number">1.6.2.</span> <span class="nav-text">/dev/null  设备文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ioctl"><span class="nav-number">1.7.</span> <span class="nav-text">ioctl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mmap-映射函数"><span class="nav-number">1.8.</span> <span class="nav-text">mmap 映射函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.8.1.</span> <span class="nav-text">Introduction</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1101,7 +1167,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
