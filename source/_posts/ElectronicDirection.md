@@ -104,7 +104,6 @@ tags: Electronic Direction
    2. [feedly](https://feedly.com/)  :  Feedly是一款第三方RSS阅读器，在经过了几次更新后，已经有比较多的忠实的使用者。
       - 第一次访问*Feedly*的用户，*Feedly*会自动提示接入 Google Reader的访问权限，无需注册新会员.
       - 能够增加我们之前的Open Source
-
 10. PDF Transform Doc
     1. https://pdf2doc.com/
 11. Algorithm  visualization*
@@ -117,4 +116,9 @@ tags: Electronic Direction
     2. 可能你善于分析行业趋势，如[飞翔的鸭子](https://www.eefocus.com/article/tag/%E9%A3%9E%E9%B8%AD%E8%B0%88%E8%8A%AF)侃侃而谈；
     3. 可能你精通某一项技术，如[加菲](https://www.eefocus.com/article/tag/verilog%E4%BC%A0%E5%A5%87)那样精讲技术而不失幽默；
     4. 可能你善于发现身边的工程师故事，如[骆驼](https://www.eefocus.com/article/tag/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%B6%A3%E4%BA%8B%E4%B8%80%E7%AE%A9%E7%AD%90)般娓娓道来。
+14. awesome 项目
+    1. github 上搜索 awesome-xxxx
+    2. 会有很多开源项目
+15. typing lesson
+    + [打字练习](https://www.typing.com/student/lesson/337/advanced-wrap-up)
 
