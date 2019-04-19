@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/18/file-system/ext2_block.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/18/file-system/ls_dev.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/18/file-system/inode.png">
-<meta property="og:updated_time" content="2019-04-18T13:35:36.294Z">
+<meta property="og:updated_time" content="2019-04-19T05:46:55.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="file_system">
 <meta name="twitter:description" content="file_system ext2 文件系统磁盘分区划分 磁盘分区  格式化工具：mkfs 对每个分区进行格式化 目的：格式化为某种文件系统，才能存储文件 格式化过程：在磁盘写一些管理存储布局的信息。   文件系统  文件系统中存储的最小单位是块(Block)；  Block size 12$ mke2fs -b 1024 / 2048 / 4096	//指定块的大小// 32位的每一页大小是4kb">
@@ -229,7 +229,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -263,7 +263,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
 
   </li>
         
@@ -280,7 +280,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
 
@@ -291,7 +291,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -397,19 +397,31 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-04-18 14:42:46 / Modified: 21:35:36" itemprop="dateCreated datePublished" datetime="2019-04-18T14:42:46+08:00">2019-04-18</time>
+              <time title="Post created: 2019-04-18 14:42:46" itemprop="dateCreated datePublished" datetime="2019-04-18T14:42:46+08:00">2019-04-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-04-19 13:46:55" itemprop="dateModified" datetime="2019-04-19T13:46:55+08:00">2019-04-19</time>
               
             
           </span>
@@ -423,14 +435,14 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LinuxC/" itemprop="url" rel="index"><span itemprop="name">LinuxC</span></a></span>
 
                 
                 
-                  , 
+                  . 
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/file-system/" itemprop="url" rel="index"><span itemprop="name">file_system</span></a></span>
@@ -683,7 +695,92 @@
 </ul>
 </li>
 </ol>
-<h2 id="文件和目标操作的系统文件"><a href="#文件和目标操作的系统文件" class="headerlink" title="文件和目标操作的系统文件"></a>文件和目标操作的系统文件</h2><h3 id="系统函数"><a href="#系统函数" class="headerlink" title="系统函数"></a>系统函数</h3><p>1. </p>
+<h2 id="文件和目标操作的系统文件"><a href="#文件和目标操作的系统文件" class="headerlink" title="文件和目标操作的系统文件"></a>文件和目标操作的系统文件</h2><h3 id="系统函数"><a href="#系统函数" class="headerlink" title="系统函数"></a>系统函数</h3><ol>
+<li>stat<ul>
+<li>stat(2)函数读取文件的inode</li>
+<li>然后把inode中的各种文件属性填入一个struct stat 结构体传出给调用者。</li>
+</ul>
+</li>
+<li>access 函数<ul>
+<li>access(2) 函数检查执行当前进程的用户是否有权限访问某个文件</li>
+<li>access函数取出文件inode中的st_mode 字段,比较一下访问权限，0/-1</li>
+</ul>
+</li>
+<li>chmod(2) 和fchmod(2) 函数<ul>
+<li>改变文件的访问权限,也就是修改inode中的st_mode字段</li>
+</ul>
+</li>
+<li>utime(2) 函数<ul>
+<li>改变文件的访问时间和修改时间,</li>
+</ul>
+</li>
+<li>link(2)函数<ul>
+<li>创建硬链接,其原理是在目录的数据块中添加一条新记录,其中的inode号字段和原文件相同。</li>
+<li>symlink(2) 函数创建一个符号链接,这需要创建一个新的inode,其中st_mode字段的文件类型是符号链接</li>
+</ul>
+</li>
+<li>unlink(2) 函数删除一个链接。</li>
+<li>rename(2) 函数<ul>
+<li>改变文件名,需要修改目录数据块中的文件名记录,</li>
+</ul>
+</li>
+</ol>
+<h2 id="VFS-Virtual-Filesystem"><a href="#VFS-Virtual-Filesystem" class="headerlink" title="VFS (Virtual Filesystem)"></a>VFS (Virtual Filesystem)</h2><h3 id="目录树"><a href="#目录树" class="headerlink" title="目录树"></a>目录树</h3><ol>
+<li>不同的磁盘分区、光盘或其它存储设备都有不同的文件系统格式,然而这些文件系统都可以mount 到某个目录下。<ul>
+<li>用ls命令看起来是一样的,读写操作用起来也都是一样的</li>
+</ul>
+</li>
+<li>VFS<ul>
+<li>Linux 内核在各种不同的文件系统格式之上做了一个抽象层；</li>
+<li>使得文件、目录、读写访问等概念成为抽象层的概念</li>
+<li>因此各种文件系统看起来用起来都一样,这个抽象层称为虚拟文件系统</li>
+</ul>
+</li>
+</ol>
+<h3 id="内核数据结构"><a href="#内核数据结构" class="headerlink" title="内核数据结构"></a>内核数据结构</h3><ol>
+<li>每个进程的process control block <ul>
+<li>保存着一份文件描述符</li>
+<li>已打开的文件在内核中用file 结构体表示,文件描述符表中的指针指向 file struct</li>
+</ul>
+</li>
+<li>file struct<ul>
+<li>维护File Status Flag(file 结构体的成员f_flags)</li>
+<li>和当前读写位置(file 结构体的成员f_pos )</li>
+<li>f_count：表示引用计数(Reference Count)<ul>
+<li>例如有fd1和fd2 都引用同一个file 结构体，要close（d1）,close(d2)；</li>
+<li>才会释放file struct</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>file_operation<ul>
+<li>每个file 结构体都指向一个file_operations 结构体,,这个结构体的成员都是函数指针</li>
+<li>指向实现各种文件操作的内核函数。</li>
+</ul>
+</li>
+<li>dentry<ul>
+<li>每个file 结构体都有一个指向dentry结构体的指针,“dentry”是directory entry(目录项)的缩写</li>
+<li>为了减少读盘次数,内核缓存了目录的树状结构,称为dentry cache</li>
+</ul>
+</li>
+<li>inode<ul>
+<li>每个dentry结构体都有一个指针指向inode 结构体。</li>
+<li>inode 结构体保存着从磁盘inode读上来的信息。</li>
+</ul>
+</li>
+<li>super_block<ul>
+<li>inode 结构体有一个指向super_block结构体的指针</li>
+<li>super_block结构体保存着从磁盘分区的超级块读上来的信息,</li>
+</ul>
+</li>
+</ol>
+<h3 id="dup-and-dup2-函数"><a href="#dup-and-dup2-函数" class="headerlink" title="dup and dup2 函数"></a>dup and dup2 函数</h3><ol>
+<li><p>dup 和dup2 都可用来复制一个现存的文件描述符,使两个文件描述符指向同一个file 结构体。</p>
+</li>
+<li><p>dup2</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup</span><span class="params">(<span class="keyword">int</span> oldfd)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dup2</span><span class="params">(<span class="keyword">int</span> oldfd, <span class="keyword">int</span> newfd)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
@@ -775,10 +872,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -801,7 +898,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">59</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -934,7 +1031,7 @@
                       
                     
                     <span class="site-state-item-count">60</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -1043,7 +1140,7 @@
                       
                     
                     <span class="site-state-item-count">48</span>
-                    <span class="site-state-item-name">tags</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -1078,7 +1175,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#file-system"><span class="nav-number">1.</span> <span class="nav-text">file_system</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ext2-文件系统"><span class="nav-number">1.1.</span> <span class="nav-text">ext2 文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘分区划分"><span class="nav-number">1.1.1.</span> <span class="nav-text">磁盘分区划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ext2文件系统"><span class="nav-number">1.1.2.</span> <span class="nav-text">ext2文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看指令"><span class="nav-number">1.1.3.</span> <span class="nav-text">查看指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统的实例"><span class="nav-number">1.2.</span> <span class="nav-text">文件系统的实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化分区"><span class="nav-number">1.2.1.</span> <span class="nav-text">格式化分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据块寻址"><span class="nav-number">1.3.</span> <span class="nav-text">数据块寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和目标操作的系统文件"><span class="nav-number">1.4.</span> <span class="nav-text">文件和目标操作的系统文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统函数"><span class="nav-number">1.4.1.</span> <span class="nav-text">系统函数</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#file-system"><span class="nav-number">1.</span> <span class="nav-text">file_system</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ext2-文件系统"><span class="nav-number">1.1.</span> <span class="nav-text">ext2 文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘分区划分"><span class="nav-number">1.1.1.</span> <span class="nav-text">磁盘分区划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ext2文件系统"><span class="nav-number">1.1.2.</span> <span class="nav-text">ext2文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看指令"><span class="nav-number">1.1.3.</span> <span class="nav-text">查看指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统的实例"><span class="nav-number">1.2.</span> <span class="nav-text">文件系统的实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化分区"><span class="nav-number">1.2.1.</span> <span class="nav-text">格式化分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据块寻址"><span class="nav-number">1.3.</span> <span class="nav-text">数据块寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和目标操作的系统文件"><span class="nav-number">1.4.</span> <span class="nav-text">文件和目标操作的系统文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统函数"><span class="nav-number">1.4.1.</span> <span class="nav-text">系统函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VFS-Virtual-Filesystem"><span class="nav-number">1.5.</span> <span class="nav-text">VFS (Virtual Filesystem)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录树"><span class="nav-number">1.5.1.</span> <span class="nav-text">目录树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核数据结构"><span class="nav-number">1.5.2.</span> <span class="nav-text">内核数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dup-and-dup2-函数"><span class="nav-number">1.5.3.</span> <span class="nav-text">dup and dup2 函数</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1124,7 +1221,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
