@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="System ProcessProcess 每个进程：在内核中都有一个进程控制块(PCB Process control block)来维护进程相关的信息  Linux内核的进程控制块是task_struct结构体 结构体包含的信息    fork and exec  fork 和exec 是本章要介绍的两个重要的系统调用。 fork : 根据一个现有的进程复制出一个新进程 父进程：parent">
+<meta name="keywords" content="process">
+<meta property="og:type" content="article">
+<meta property="og:title" content="system_process">
+<meta property="og:url" content="http://yoursite.com/2019/04/22/system-process/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="System ProcessProcess 每个进程：在内核中都有一个进程控制块(PCB Process control block)来维护进程相关的信息  Linux内核的进程控制块是task_struct结构体 结构体包含的信息    fork and exec  fork 和exec 是本章要介绍的两个重要的系统调用。 fork : 根据一个现有的进程复制出一个新进程 父进程：parent">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/task_struct.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/fork_and_exec.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/sentenv.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/fork_result.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/exec.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/execve.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/waitpid.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/ipc.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/pipe.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/pipewait.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/system-process/processC.png">
+<meta property="og:updated_time" content="2019-04-24T00:55:33.535Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="system_process">
+<meta name="twitter:description" content="System ProcessProcess 每个进程：在内核中都有一个进程控制块(PCB Process control block)来维护进程相关的信息  Linux内核的进程控制块是task_struct结构体 结构体包含的信息    fork and exec  fork 和exec 是本章要介绍的两个重要的系统调用。 fork : 根据一个现有的进程复制出一个新进程 父进程：parent">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/22/system-process/task_struct.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/22/system-process/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>system_process | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/system-process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">system_process
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-22 14:11:43" itemprop="dateCreated datePublished" datetime="2019-04-22T14:11:43+08:00">2019-04-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-04-24 08:55:33" itemprop="dateModified" datetime="2019-04-24T08:55:33+08:00">2019-04-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LinuxC/" itemprop="url" rel="index"><span itemprop="name">LinuxC</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/process/" itemprop="url" rel="index"><span itemprop="name">process</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="System-Process"><a href="#System-Process" class="headerlink" title="System Process"></a>System Process</h1><h2 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h2><ol>
+<li><p>每个进程：在内核中都有一个进程控制块(PCB Process control block)来维护进程相关的信息</p>
+<ul>
+<li>Linux内核的进程控制块是task_struct结构体</li>
+<li>结构体包含的信息</li>
+</ul>
+<img src="/2019/04/22/system-process/task_struct.png">
+</li>
+<li><p>fork and exec</p>
+<ul>
+<li>fork 和exec 是本章要介绍的两个重要的系统调用。</li>
+<li>fork : 根据一个现有的进程复制出一个新进程<ul>
+<li>父进程：parent process</li>
+<li>子进程：child process</li>
+</ul>
+</li>
+<li>exec : 在Shell下输入命令（终端）可以运行一个程序<ul>
+<li>Shell进程在读取用户输入的命令之后会调用fork 复制出一个新的Shell进程</li>
+<li>然后新的Shell进程调用exec 执行新的程序。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>父进程和子进程</p>
+<ul>
+<li>子进程的PCB是根据父进程复制而来的,所以其中的umask 掩码也和父进程一样。</li>
+</ul>
+<img src="/2019/04/22/system-process/fork_and_exec.png">
+<ul>
+<li>父进程在创建子进程时会复制一份环境变量给子进程,但此后二者的环境变量互不影响。</li>
+</ul>
+</li>
+</ol>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><ol>
+<li><p>exec 系统调用</p>
+<ul>
+<li>exec 系统调用执行新程序时会把命令行参数和环境变量表传递给main 函数</li>
+<li>和命令行参数argv类似,环境变量表也是一组字符串</li>
+</ul>
+</li>
+<li><p>全局变量 environ</p>
+<ul>
+<li><p>libc 中定义的全局变量environ指向环境变量表,</p>
+</li>
+<li><p>environ 没有包含在任何头文件中,所以在使用时要用extern声明。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span> **environ;</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>; environ[i]!=<span class="literal">NULL</span>; i++)</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, environ[i]);	<span class="comment">// 打印出环境变量</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>环境变量</p>
+<ul>
+<li><p>,环境变量字符串都是name=value 这样的形式,</p>
+<ul>
+<li>name 由大写字母加下划线组成，叫做环境变量</li>
+<li>value：,value 的部分则是环境变量的值。</li>
+</ul>
+</li>
+<li><p>环境变量值含义</p>
+<ul>
+<li><p>PATH </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$PATH</span>	// 查看环境变量的值: <span class="variable">$xxx</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SHELL : 它的值通常是/bin/bash 。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>gentenv 函数</p>
+<ul>
+<li>查找某一个环境变量的值它对应的value ；</li>
+</ul>
+</li>
+<li><p>sentenv 函数</p>
+<ul>
+<li>修改环境变量可以用以下函数</li>
+</ul>
+<img src="/2019/04/22/system-process/sentenv.png">
+</li>
+</ol>
+<h2 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h2><h3 id="fork-函数"><a href="#fork-函数" class="headerlink" title="fork 函数"></a>fork 函数</h3><ol>
+<li><p>pid = fork() 调用的返回结果</p>
+<img src="/2019/04/22/system-process/fork_result.png">
+</li>
+<li><p>调用过程</p>
+<ul>
+<li>父进程和子进程的PCB信息相同,用户态代码和数据也相同；</li>
+<li>现在有两个一模一样的进程看起来都调用了fork 进入内核等待从内核返回，返回的先后顺序取决于内核的调度算法</li>
+</ul>
+</li>
+<li><p>fork函数</p>
+<ul>
+<li>fork 函数的特点概括起来就是“调用一次,返回两次”,在父进程中调用一次,在父进程和子进程中各返回一次。</li>
+<li>子进程中fork 的返回值是0,而父进程中fork 的返回值则是子进程的id</li>
+</ul>
+</li>
+<li><p>gdb调试</p>
+<ul>
+<li>gdb只能跟踪一个进程(默认是跟踪父进程)，而不能同时跟踪多个进程，</li>
+<li>但可以设置gdb 在fork 之后跟踪父进程还是子进程</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> (gdb) <span class="keyword">set</span> follow-fork-mode <span class="comment">child</span>	//<span class="comment"> gdb</span> 跟踪子进程</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="exec-函数"><a href="#exec-函数" class="headerlink" title="exec 函数"></a>exec 函数</h3><ol>
+<li><p>子进程如何执行程序</p>
+<ul>
+<li>用fork 创建子进程后执行的是和父进程相同的程序，子进程往往要调用一种exec 函数以执行另一个程序。</li>
+<li>调用exec 并不创建新进程，以调用exec 前后该进程的id并未改变。</li>
+</ul>
+</li>
+<li><p>exec 函数族</p>
+<ul>
+<li>如果调用出错则返回-1，所以exec 函数只有出错的返回值而没有成功的返回值。</li>
+</ul>
+<img src="/2019/04/22/system-process/exec.png">
+<ul>
+<li><p>不带字母p(表示path)的exec函数第一个参数必须是程序的相对路径或绝对路径</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/ls or ./<span class="selector-tag">a</span><span class="selector-class">.out</span>		不能是  ls or <span class="selector-tag">a</span>.out</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>于带字母p的函数:</p>
+<ul>
+<li>如果参数中包含 / ，则将其视为路径名。</li>
+<li>否则视为不带路径的程序名，在PATH环境变量的目录列表中搜索这个程序。</li>
+</ul>
+</li>
+<li><p>带有字母l(表示list)的exec函数</p>
+<ul>
+<li>要求将新程序的每个命令行参数都当作一个参数传给它</li>
+<li>命令行参数的个数是可变的</li>
+</ul>
+</li>
+<li><p>对于带有字母v(表示vector)的函数</p>
+<ul>
+<li>则应该先构造一个指向各参数的指针数组,然后将该数组的首地址当作参数传给它,数组中的最后一个指针也应该是NULL </li>
+<li>就像main 函数的argv参数或者环境变量表一样。</li>
+</ul>
+</li>
+<li><p>对于以e(表示environment)结尾的exec 函数</p>
+<ul>
+<li>可以把一份新的环境变量表传给它,其他exec 函数仍使用当前的环境变量表执行新程序。</li>
+</ul>
+</li>
+<li><p>事实上,只有execve是真正的系统调用,其它五个函数最终都调用execve </p>
+<ul>
+<li>man 2 execve</li>
+</ul>
+<img src="/2019/04/22/system-process/execve.png">
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="upper-函数"><a href="#upper-函数" class="headerlink" title="upper 函数"></a>upper 函数</h3><ul>
+<li>转换小写为大些</li>
+</ul>
+<ol>
+<li><p>函数实现</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>((ch = getchar()) != EOF) &#123;</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="built_in">toupper</span>(ch));	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>she’ll的重定向功能 </p>
+<ul>
+<li>简单的标准输入输出重定向(&lt;和&gt;)</li>
+</ul>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat <span class="keyword">file</span>.txt</span><br><span class="line">this <span class="keyword">is</span> the <span class="keyword">file</span>, <span class="keyword">file</span>.txt, it <span class="keyword">is</span> <span class="keyword">all</span> lower <span class="keyword">case</span>.</span><br><span class="line">$ ./upper &lt; <span class="keyword">file</span>.txt</span><br><span class="line">THIS <span class="keyword">IS</span> THE <span class="keyword">FILE</span>, <span class="keyword">FILE</span>.TXT, IT <span class="keyword">IS</span> <span class="keyword">ALL</span> LOWER <span class="keyword">CASE</span>.</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="wait-and-waitpid-函数"><a href="#wait-and-waitpid-函数" class="headerlink" title="wait and waitpid 函数"></a>wait and waitpid 函数</h3><ol>
+<li><p>彻底清除进程</p>
+<ul>
+<li>一个进程在终止时会关闭所有文件描述符，释放在用户空间分配的内存；</li>
+<li>内核在其中保存了一些关于进程是否正确退出</li>
+<li>Shell是它的父进程,当它终止时Shell调用wait 或waitpid 得到它的退出状态同时彻底清除掉这个进程。</li>
+</ul>
+</li>
+<li><p>僵尸(Zombie)进程</p>
+<ul>
+<li>如果一个进程已经终止,但是它的父进程尚未调用wait 或waitpid对它进行清理</li>
+<li>自动调用函数，除非自己写函数进行查看。</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> ps u	<span class="comment">// 查看进程状态</span></span><br><span class="line">STAT 为z时 -- 僵尸进程的状态</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>清除僵尸进程</p>
+<ul>
+<li>调用函数</li>
+</ul>
+<img src="/2019/04/22/system-process/waitpid.png">
+</li>
+</ol>
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><h3 id="IPC-InterProcess-Communication"><a href="#IPC-InterProcess-Communication" class="headerlink" title="IPC InterProcess Communication"></a>IPC InterProcess Communication</h3><ol>
+<li><p>进程各自有不同的用户地址空间,任何一个进程的全局变量在另一个进程中都看不到。</p>
+</li>
+<li><p>进程之间要交换数据必须通过内核，进程1把数据从用户空间拷到内核缓冲区,进程2再从内核缓冲区把数据读走。</p>
+<img src="/2019/04/22/system-process/ipc.png">
+</li>
+</ol>
+<h3 id="Pipe-管道"><a href="#Pipe-管道" class="headerlink" title="Pipe 管道"></a>Pipe 管道</h3><ol>
+<li><p>函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> filedes[<span class="number">2</span>])</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>数组filedes[0] 指向管道的读端，filedes[1] 指向管道的写端(很好记,就像0是标准输入1是标准输出一样)。</li>
+</ul>
+</li>
+<li><p>管道单向通信</p>
+<img src="/2019/04/22/system-process/pipe.png">
+<ul>
+<li>父进程调用fork创建子进程，那么子进程也有两个文件描述符指向同一管道。</li>
+<li>父进程关闭管道读端,子进程关闭管道写端。</li>
+<li>数据从写端流入从读端流出,这样就实现了进程间通信</li>
+</ul>
+</li>
+<li><p>管道通信的特殊情况</p>
+<ul>
+<li>进程间通信必须通过内核提供的通道，两个进程通过一个管道只能实现单向通信</li>
+<li>管道的读写端通过打开的文件描述符来传递；</li>
+<li>通过fork 传递文件描述符使两个进程都能访问同一管道,它们才能通信。</li>
+</ul>
+<img src="/2019/04/22/system-process/pipewait.png">
+</li>
+</ol>
+<h3 id="其他-IPC-机制"><a href="#其他-IPC-机制" class="headerlink" title="其他 IPC 机制"></a>其他 IPC 机制</h3><img src="/2019/04/22/system-process/processC.png">
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/process/" rel="tag"># process</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/22/shell-script/" rel="next" title="shell_script">
+                <i class="fa fa-chevron-left"></i> shell_script
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">63</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#System-Process"><span class="nav-number">1.</span> <span class="nav-text">System Process</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Process"><span class="nav-number">1.1.</span> <span class="nav-text">Process</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量"><span class="nav-number">1.2.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">1.3.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fork-函数"><span class="nav-number">1.3.1.</span> <span class="nav-text">fork 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exec-函数"><span class="nav-number">1.3.2.</span> <span class="nav-text">exec 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upper-函数"><span class="nav-number">1.3.3.</span> <span class="nav-text">upper 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wait-and-waitpid-函数"><span class="nav-number">1.3.4.</span> <span class="nav-text">wait and waitpid 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间通信"><span class="nav-number">1.4.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IPC-InterProcess-Communication"><span class="nav-number">1.4.1.</span> <span class="nav-text">IPC InterProcess Communication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pipe-管道"><span class="nav-number">1.4.2.</span> <span class="nav-text">Pipe 管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他-IPC-机制"><span class="nav-number">1.4.3.</span> <span class="nav-text">其他 IPC 机制</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
