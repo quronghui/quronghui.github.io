@@ -106,7 +106,12 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/04/22/shell-script/Unix_shell.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/22/shell-script/other_shell.png">
-<meta property="og:updated_time" content="2019-04-22T02:20:20.366Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/shell-script/wildcard.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/shell-script/test.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/shell-script/or.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/shell-script/shell$.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/shell-script/script.png">
+<meta property="og:updated_time" content="2019-04-25T07:37:29.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell_script">
 <meta name="twitter:description" content="Shell ScriptShell History Shell   用户的命令，用户输入一条命令，Shell就解释执行一条，不需要编译 Batch 批处理的方式，便是she’ll script   Unix She’ll   本章只介绍bash 和sh的用法和相关语法,不介绍其它Shell。   切换其他的she’ll    Shell 如何执行命令执行 用户在命令行输入命令后，一般情况下Shel">
@@ -402,12 +407,24 @@
                 
               
 
-              <time title="Post created: 2019-04-22 08:37:13 / Updated at: 10:20:20" itemprop="dateCreated datePublished" datetime="2019-04-22T08:37:13+08:00">2019-04-22</time>
+              <time title="Post created: 2019-04-22 08:37:13" itemprop="dateCreated datePublished" datetime="2019-04-22T08:37:13+08:00">2019-04-22</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-04-25 15:37:29" itemprop="dateModified" datetime="2019-04-25T15:37:29+08:00">2019-04-25</time>
               
             
           </span>
@@ -563,6 +580,240 @@
 </ul>
 </li>
 </ol>
+<h2 id="Shell-语法"><a href="#Shell-语法" class="headerlink" title="Shell 语法"></a>Shell 语法</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ol>
+<li><p>环境变量</p>
+<ul>
+<li>环境变量可以从父进程传给子进程，进程调用 fork()</li>
+</ul>
+</li>
+<li><p>本地变量</p>
+<ul>
+<li>只存在于当前Shell进程</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> printenv	<span class="comment">// 显示当前Shell进程的环境变量。</span></span><br><span class="line"><span class="symbol">$</span> <span class="keyword">set</span> 		<span class="comment">//可以显示当前Shell进程中定义的所有变量(包括本地变量和环境变量)和函数。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>环境变量是任何进程都有的概念,而本地变量是Shell特有的概念。</li>
+</ul>
+</li>
+<li><p>Shell 中变量的定义</p>
+<ul>
+<li>环境变量、本地变量 ：变量的定义，等号两边都不能有空格</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> VARNAME=value		// 变量的定义	</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span> VARNAME	// 用<span class="built_in">export</span>命令可以把本地变量导出为环境变量</span></span><br><span class="line"><span class="meta">	$</span><span class="bash"> <span class="built_in">export</span> VARNAME=value</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unset</span> VARNAME		// 可以删除已定义的环境变量或本地变量。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Shell 中变量的赋值</p>
+<ul>
+<li>Shell变量的值都是字符串</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$SHELL</span>		// 查看变量<span class="variable">$SHELL</span> 的值</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$SHELL</span> abc	// 给<span class="variable">$SHELL</span> 变量赋值字符串 abc</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Shell变量不需要先定义后使用,如果对一个没有定义的变量取值,则值为空字符串。</li>
+</ul>
+</li>
+</ol>
+<h3 id="文件名替换"><a href="#文件名替换" class="headerlink" title="文件名替换"></a>文件名替换</h3><ul>
+<li><p>这些用于匹配的字符称为通配符(Wildcard)</p>
+<img src="/2019/04/22/shell-script/wildcard.png">
+</li>
+<li><p>Globbing所匹配的文件名是由Shell展开的,也就是说在参数还没传给程序之前已经展开</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">ls</span> <span class="string">/dev/ttyS</span>*		<span class="string">//</span>匹配<span class="string">/dev/ttyS</span>的所有文件</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="命令代换"><a href="#命令代换" class="headerlink" title="命令代换"></a>命令代换</h3><ul>
+<li><p>由反引号括起来的也是一条命令</p>
+<ul>
+<li>Shell先执行该命令,</li>
+<li>然后将输出结果立刻代换到当前命令行中。</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>DATE=<span class="string">'date'</span></span><br><span class="line"><span class="variable">$ </span>echo <span class="variable">$DATE</span>		--&gt; 	<span class="variable">$DATE</span>=<span class="variable">$(</span>date)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="算数代换"><a href="#算数代换" class="headerlink" title="算数代换 $(())"></a>算数代换 $(())</h3><ul>
+<li><p>$(()) 中的Shell变量取值将转换成整数</p>
+</li>
+<li><p>$(()) 中只能用+-*/和()运算符,并且只能做整数运算。</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> VAR=<span class="number">45</span>	<span class="comment">// 变量的赋值</span></span><br><span class="line"><span class="symbol">$</span> echo <span class="symbol">$</span>((<span class="symbol">$</span>VRA +<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符 \"></a>转义字符 \</h3><ul>
+<li><p>\  在Shell中被用作转义字符,用于去除紧跟其后的单个字符的特殊意义(回车除外)</p>
+<ul>
+<li>在 \ 后面的字符取字面值</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>echo <span class="variable">$SHELL</span>	--&gt;		/bin/bash</span><br><span class="line"><span class="variable">$ </span>echo \<span class="variable">$SHELL</span>	--&gt;		<span class="variable">$SHELL</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立包含特殊字符的文件名</p>
+<figure class="highlight smalltalk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$ </span>touch \<span class="string">$\</span> \<span class="string">$\</span>		// 创建一个文件名为“<span class="string">$ </span><span class="string">$”</span>的文件</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="单引号-‘-‘"><a href="#单引号-‘-‘" class="headerlink" title="单引号 ‘ ‘"></a>单引号 ‘ ‘</h3><ul>
+<li><p>和C语言不一样,Shell脚本中的单引号和双引号一样都是字符串的界定符,而不是字符的界定符</p>
+</li>
+<li><p>单引号用于保持引号内所有字符的字面值，即使引号内的\和回车也不例外,</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">'$SHELL'</span>		--&gt; 	<span class="variable">$SHELL</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">'ABC\(回车)		// 单引号需要配对，如果没有配对就输入回车</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> DE<span class="string">'(再按一次回车结束命令)	--&gt; ABC\</span></span></span><br><span class="line">								DE</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="双引号-“”"><a href="#双引号-“”" class="headerlink" title="双引号 “”"></a>双引号 “”</h3><ul>
+<li>双引号用于保持引号内所有字符的字面值(回车也不例外)</li>
+<li>有几种例外的情况，用到的时候在说</li>
+</ul>
+<h2 id="Bash-脚本"><a href="#Bash-脚本" class="headerlink" title="Bash 脚本"></a>Bash 脚本</h2><ul>
+<li>启动脚本是bash 启动时自动执行的脚本。</li>
+<li>用户可以把一些环境变量的设置和alias 、umask 设置放在启动脚本中,这样每次启动Shell时这些设置都自动生效。</li>
+<li>bash 在执行启动脚本时是以fork 子Shell方式执行的还是以source方式执行的?</li>
+</ul>
+<h3 id="交互登录Shell启动"><a href="#交互登录Shell启动" class="headerlink" title="交互登录Shell启动"></a>交互登录Shell启动</h3><ol>
+<li><p>交互Shell：是指用户在提示符下输命令的Shell而非执行脚本的Shell,</p>
+</li>
+<li><p>登录Shell：是在输入用户名和密码登录后得到的Shell</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/etc/</span>profile	<span class="regexp">//</span> 用户设置都在这个脚本</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Shell-脚本语法"><a href="#Shell-脚本语法" class="headerlink" title="Shell 脚本语法"></a>Shell 脚本语法</h2><h3 id="条件测试"><a href="#条件测试" class="headerlink" title="条件测试"></a>条件测试</h3><ol>
+<li><p>命令test 或[ 可以测试一个条件是否成立</p>
+<ul>
+<li><p>测试结果为真，Exit Status返回 0,</p>
+</li>
+<li><p>测试结果为假，Exit Status返回 1</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> VAR=<span class="number">2</span></span><br><span class="line"><span class="symbol">$</span> test <span class="symbol">$</span>VAR -<span class="keyword">gt</span> <span class="number">1</span>		--&gt;		<span class="symbol">$</span> [ <span class="symbol">$</span>VAR -<span class="keyword">gt</span> <span class="number">3</span> ]	<span class="comment">// 命令和参数要用空格隔开</span></span><br><span class="line"><span class="symbol">$</span> echo <span class="symbol">$</span>?				--&gt;		<span class="symbol">$</span> echo <span class="symbol">$</span>?</span><br><span class="line"><span class="number">0</span>						--&gt;		<span class="number">1</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>测试命令</p>
+<ul>
+<li><p>基本命令</p>
+<img src="/2019/04/22/shell-script/test.png">
+</li>
+<li><p>与或非</p>
+<ul>
+<li><img src="/2019/04/22/shell-script/or.png">
+</li>
+</ul>
+</li>
+<li><p>作为一种好的Shell编程习惯，应该总是把变量取值放在双引号之中(展开为[ -d Desktop -a “” = ‘abc’ ]):</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unset</span> VAR</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -d Desktop -a <span class="variable">$VAR</span> = <span class="string">'abc'</span> ]</span></span><br><span class="line">	bash: [: too many arguments</span><br><span class="line"><span class="meta">$</span><span class="bash"> [ -d Desktop -a <span class="string">"<span class="variable">$VAR</span>"</span> = <span class="string">'abc'</span> ]</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> $?</span></span><br><span class="line">	1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="分支控制"><a href="#分支控制" class="headerlink" title="分支控制"></a>分支控制</h3><ul>
+<li>在Shell中用if 、then 、elif 、else 、fi这几条命令实现分支控制</li>
+</ul>
+<ol>
+<li><p>规则</p>
+<ul>
+<li>如果两条命令写在同一行则需要用;号隔开，一行只写一条则不需要</li>
+<li>要注意命令和各参数之间必须用空格隔开  [ a b ]</li>
+<li>Exit Status为0(表示真)</li>
+<li>Shell脚本没有{}括号,所以用fi 表示if 语句块的结束。</li>
+</ul>
+</li>
+<li><p>“ : “号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/sh</span></span><br><span class="line"><span class="keyword">if</span> [ -f /bin/bash ]		// 一条命令占一行</span><br><span class="line"><span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"/bin/bash is a file"</span></span><br><span class="line"><span class="keyword">else</span> <span class="built_in">echo</span> <span class="string">"/bin/bash is NOT a file"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> :; <span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">"always true"</span>; <span class="keyword">fi</span>	// 有分号隔开</span><br></pre></td></tr></table></figure>
+<ul>
+<li>:是一个特殊的命令,称为空命令,该命令不做任何事，但Exit Status总是真。</li>
+</ul>
+</li>
+<li><p>read </p>
+<ul>
+<li><p>的read 命令的作用是等待用户输入一行字符串,将该字符串存到一个Shell变量中。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> YES_OR_NO</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Shell还提供了&amp;&amp;和||语法</p>
+<ul>
+<li>&amp;&amp;相当于“if…then…”,而 || 相当于“if not…then…”</li>
+<li>而上面讲的-a和-o仅用于在测试表达式中的两个条件、</li>
+</ul>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">test </span>"$VAR" -gt 1 -a "$VAR" -lt 3	// -gt 大于； -lt 小于； -a 测试</span><br><span class="line"><span class="keyword">test </span>"$VAR" -gt 1 &amp;&amp; test "$VAR" -lt 3</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="case-esac"><a href="#case-esac" class="headerlink" title="case/esac"></a>case/esac</h3><ol>
+<li><p>case 命令可类比C语言的switch/case 语句,esac 表示case 语句块的结束。</p>
+<ul>
+<li>Shell脚本的case 可以匹配字符串和Wildcard</li>
+<li>末尾必须以;;结束</li>
+<li>执行时找到第一个匹配的分支并执行相应的命令,然后直接跳到esac 之后,不需要像C语言一样用break 跳出。</li>
+</ul>
+</li>
+<li><p>$1 是一个特殊变量,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">		start)</span><br><span class="line">			<span class="built_in">echo</span> <span class="string">""</span> ;;</span><br><span class="line">		stop)</span><br><span class="line">			<span class="built_in">echo</span> <span class="string">""</span> ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>$1 是一个特殊变量,在执行脚本时自动取值为第一个命令行参数,也就是start </p>
+</li>
+<li><p>命令行参数指定为stop 、reload或restart 可以进入其它分支执行停止服务、重新加载配置文件或重新启动服务的相关命令。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="regexp">/etc/i</span>nit.d<span class="regexp">/apache2 start	/</span><span class="regexp">/ 传入start进行执行</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="for-do-done"><a href="#for-do-done" class="headerlink" title="for / do / done"></a>for / do / done</h3><ol>
+<li><p>Shell脚本的for 循环结构和C语言很不一样,它类似于某些编程语言的foreach循环。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="keyword">for</span> FILENAME <span class="keyword">in</span> chap?; <span class="keyword">do</span> mv <span class="variable">$FILENAME</span> <span class="variable">$FILENAME</span>~; <span class="keyword">done</span>	// 将文件chap 替换成chap~</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="while-do-done"><a href="#while-do-done" class="headerlink" title="while/do/done"></a>while/do/done</h3><ol>
+<li><p>while 的用法和C语言类似。比如一个验证密码的脚本:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Enter password:"</span>		<span class="comment"># ""保留字面值</span></span><br><span class="line"><span class="built_in">read</span> TRY					<span class="comment"># 读用户输入</span></span><br><span class="line"><span class="keyword">while</span> [ <span class="string">"<span class="variable">$TRY</span>"</span> != <span class="string">"secret"</span> ]; <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"Sorry, try again"</span></span><br><span class="line">	<span class="built_in">read</span> TRY</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="位置参数和特殊变量"><a href="#位置参数和特殊变量" class="headerlink" title="位置参数和特殊变量"></a>位置参数和特殊变量</h3><ol>
+<li><p>Shell自动赋值的特殊变量</p>
+<img src="/2019/04/22/shell-script/shell$.png">
+</li>
+<li><p>位置参数可以用shift 命令左移</p>
+<ul>
+<li>比如shift 3 表示原来的$4 现在变成$1,</li>
+<li>原来的$1、$2、$3 丢弃,$0不移动。(不够移动)</li>
+<li>不带参数的shift 命令相当于shift 1</li>
+</ul>
+</li>
+</ol>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ol>
+<li><p>规则</p>
+<ul>
+<li><p>Shell中也有函数的概念,但是函数定义中没有返回值也没有参数列表。</p>
+</li>
+<li><p>函数体的左花括号：{ 和后面的命令之间必须有空格或换行</p>
+</li>
+<li><p>最后一条命令和右花括号 } 写在同一行，命令末尾必须有“ ; “号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">foo</span></span>()&#123; <span class="built_in">echo</span> <span class="string">"Function foo is called"</span>;&#125;	<span class="comment"># 不在同一行就不需要加</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数先定义，后使用；</p>
+</li>
+<li><p>函数调用，foo 后面不加（）</p>
+</li>
+<li><p>Shell脚本中的函数必须先定义后调用,一般把函数定义都写在脚本的前面,把函数调用和其它命令写在脚本的最后</p>
+<ul>
+<li>类似C语言中的main 函数,这才是整个脚本实际开始执行命令的地方</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Shell函数没有参数列表并不表示不能传参数,</p>
+<ul>
+<li>在函数内同样是用$0 、$1、$2 等变量来提取参数</li>
+<li>函数中的位置参数相当于函数的局部变量,改变这些变量并不会影响函数外面的$0、$1 、$2等变量。</li>
+<li>如果return后面跟一个数字则表示函数的Exit Status。</li>
+</ul>
+</li>
+</ol>
+<h2 id="Shell-调试方法"><a href="#Shell-调试方法" class="headerlink" title="Shell 调试方法"></a>Shell 调试方法</h2><ol>
+<li><p>调试脚本的选项</p>
+<img src="/2019/04/22/shell-script/script.png">
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">sh</span> -x ./script.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在脚本开头提供参数</p>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#! /bin/sh -x</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在脚本中用set命令启用或禁用参数</p>
+<ul>
+<li>set -x和set +x 分别表示启用和禁用 “-x参数”</li>
+<li>这样可以只对脚本中的某一段进行跟踪调试。</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -683,7 +934,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-count">63</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -822,7 +1073,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">63</span>
+                      
+                    
+                    <span class="site-state-item-count">64</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -937,7 +1190,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">51</span>
+                      
+                    
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -973,7 +1228,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell-Script"><span class="nav-number">1.</span> <span class="nav-text">Shell Script</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell-History"><span class="nav-number">1.1.</span> <span class="nav-text">Shell History</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell-如何执行命令"><span class="nav-number">1.2.</span> <span class="nav-text">Shell 如何执行命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行"><span class="nav-number">1.2.1.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行脚本"><span class="nav-number">1.2.2.</span> <span class="nav-text">执行脚本</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell-Script"><span class="nav-number">1.</span> <span class="nav-text">Shell Script</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell-History"><span class="nav-number">1.1.</span> <span class="nav-text">Shell History</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell-如何执行命令"><span class="nav-number">1.2.</span> <span class="nav-text">Shell 如何执行命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行"><span class="nav-number">1.2.1.</span> <span class="nav-text">执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行脚本"><span class="nav-number">1.2.2.</span> <span class="nav-text">执行脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell-语法"><span class="nav-number">1.3.</span> <span class="nav-text">Shell 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件名替换"><span class="nav-number">1.3.2.</span> <span class="nav-text">文件名替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令代换"><span class="nav-number">1.3.3.</span> <span class="nav-text">命令代换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算数代换"><span class="nav-number">1.3.4.</span> <span class="nav-text">算数代换 $(())</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转义字符"><span class="nav-number">1.3.5.</span> <span class="nav-text">转义字符 \</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单引号-‘-‘"><span class="nav-number">1.3.6.</span> <span class="nav-text">单引号 ‘ ‘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双引号-“”"><span class="nav-number">1.3.7.</span> <span class="nav-text">双引号 “”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bash-脚本"><span class="nav-number">1.4.</span> <span class="nav-text">Bash 脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#交互登录Shell启动"><span class="nav-number">1.4.1.</span> <span class="nav-text">交互登录Shell启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell-脚本语法"><span class="nav-number">1.5.</span> <span class="nav-text">Shell 脚本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件测试"><span class="nav-number">1.5.1.</span> <span class="nav-text">条件测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支控制"><span class="nav-number">1.5.2.</span> <span class="nav-text">分支控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case-esac"><span class="nav-number">1.5.3.</span> <span class="nav-text">case/esac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-do-done"><span class="nav-number">1.5.4.</span> <span class="nav-text">for / do / done</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while-do-done"><span class="nav-number">1.5.5.</span> <span class="nav-text">while/do/done</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位置参数和特殊变量"><span class="nav-number">1.5.6.</span> <span class="nav-text">位置参数和特殊变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">1.5.7.</span> <span class="nav-text">函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell-调试方法"><span class="nav-number">1.6.</span> <span class="nav-text">Shell 调试方法</span></a></li></ol></li></ol></div>
             
 
           </div>
