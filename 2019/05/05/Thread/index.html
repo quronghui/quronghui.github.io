@@ -104,10 +104,14 @@
 <meta property="og:site_name" content="Lucky Boy">
 <meta property="og:description" content="ThreadIntroduction Why?  有些情况需要在一个进程中同时执行多个控制流程； 比如实现一个图形界面的下载软件：下载和交互多个线程   main 函数和信号处理函数是同一个进程地址空间中的多个控制流程 信号处理函数的控制流程只是在信号递达时产生 在处理完信号之后就结束   多线程的控制流程 可以长期并存，操作系统会在各线程之间调度和切换,就像在多个进程之间调度和切换一样。 同一进">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-05T13:43:42.926Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/05/Thread/thread_exit.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/05/Thread/pthread_join.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/05/Thread/cond_wait.png">
+<meta property="og:updated_time" content="2019-05-06T07:34:27.328Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Thread">
 <meta name="twitter:description" content="ThreadIntroduction Why?  有些情况需要在一个进程中同时执行多个控制流程； 比如实现一个图形界面的下载软件：下载和交互多个线程   main 函数和信号处理函数是同一个进程地址空间中的多个控制流程 信号处理函数的控制流程只是在信号递达时产生 在处理完信号之后就结束   多线程的控制流程 可以长期并存，操作系统会在各线程之间调度和切换,就像在多个进程之间调度和切换一样。 同一进">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/05/Thread/thread_exit.png">
 
 
 
@@ -399,12 +403,24 @@
                 
               
 
-              <time title="Post created: 2019-05-05 19:11:04 / Updated at: 21:43:42" itemprop="dateCreated datePublished" datetime="2019-05-05T19:11:04+08:00">2019-05-05</time>
+              <time title="Post created: 2019-05-05 19:11:04" itemprop="dateCreated datePublished" datetime="2019-05-05T19:11:04+08:00">2019-05-05</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-05-06 15:34:27" itemprop="dateModified" datetime="2019-05-06T15:34:27+08:00">2019-05-06</time>
               
             
           </span>
@@ -530,8 +546,12 @@
 </ul>
 </li>
 </ol>
-<h2 id="Thread-Control"><a href="#Thread-Control" class="headerlink" title="Thread Control"></a>Thread Control</h2><h3 id="thread-create"><a href="#thread-create" class="headerlink" title="thread_create"></a>thread_create</h3><ol>
-<li>thread_create()<ul>
+<h2 id="Thread-Control"><a href="#Thread-Control" class="headerlink" title="Thread Control"></a>Thread Control</h2><ul>
+<li>变量类型 pthread_t</li>
+</ul>
+<h3 id="thread-create"><a href="#thread-create" class="headerlink" title="thread_create"></a>thread_create</h3><ol>
+<li><p>thread_create()</p>
+<ul>
 <li>线程 –&gt; pthread_create( )，当前线程从pthread_create()返回继续往下执行;</li>
 <li>新线程执行代码：<ul>
 <li>由函数指针start_routine决定</li>
@@ -543,7 +563,8 @@
 <li>其它线程可以调用pthread_join 得到start_routine的返回值</li>
 </ul>
 </li>
-<li>Process vs Thread<ul>
+<li><p>Process vs Thread</p>
+<ul>
 <li>Process<ul>
 <li>id 的类型是pid_t ，id在整个系统中是唯一的；</li>
 <li>调用getpid(2)可以获得当前进程的id , 是一个正整数值。</li>
@@ -566,9 +587,144 @@
 </li>
 </ul>
 </li>
-<li>中止<ul>
+<li><p>中止</p>
+<ul>
 <li>如果任意一个线程调用了exit 或_exit ,则整个进程的所有线程都终止</li>
 </ul>
+</li>
+<li><p>make 编译</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g -c thread<span class="selector-class">.c</span> -o thread.o</span><br><span class="line">$ gcc thread<span class="selector-class">.o</span> -plthread -o thread	<span class="comment">// -plthread 位置要在后面，才能正常link</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="thread-exit"><a href="#thread-exit" class="headerlink" title="thread_exit"></a>thread_exit</h3><ol>
+<li><p>三种终止线程的方式</p>
+<img src="/2019/05/05/Thread/thread_exit.png">
+</li>
+<li><p>pthread_join()</p>
+<img src="/2019/05/05/Thread/pthread_join.png">
+<ul>
+<li>在Linux的pthread库中常数PTHREAD_CANCELED 的值是-1。可以在头文件pthread.h 中找到它的定义。</li>
+</ul>
+</li>
+<li><p>pthread_detach</p>
+<ul>
+<li>线程终止后，其终止状态一直保留到其它线程调用pthread_join获取它的状态为止</li>
+<li>线程置为detach状态：这样的线程一旦终止就立刻回收它占用的所有资源,而不保留终止状态。</li>
+<li>一个线程调用了pthread_detach 就不能再调用pthread_join 了。</li>
+</ul>
+</li>
+</ol>
+<h2 id="thread-time-synchronize"><a href="#thread-time-synchronize" class="headerlink" title="thread time synchronize"></a>thread time synchronize</h2><h3 id="metux"><a href="#metux" class="headerlink" title="metux"></a>metux</h3><ul>
+<li><p>变量类型：pthread_mutex_t</p>
+</li>
+<li><p>多个线程同时访问共享数据时可能会冲突,这跟前面讲信号时所说的可重入性是同样的问题。</p>
+</li>
+</ul>
+<ol>
+<li><p>Mutual Excludive Lock 互斥锁</p>
+<ul>
+<li>获得锁的线程可以完成“读-修改-写”的操作，然后释放锁给其它线程，没有获得锁的线程只能等待而不能访问共享数据</li>
+<li>这样“读-修改-写”三步操作组成一个原子操作，中间不会被打断</li>
+</ul>
+</li>
+<li><p>Metux init</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">pthread_mutex_t</span> mutex = PTHREAD_MUTEX_INITIALIZER;	<span class="comment">//:成功返回0,失败返回错误号</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>metux lock and unlock</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_lock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;		<span class="comment">// lock</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_trylock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;	<span class="comment">// don't hang up</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_unlock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;	<span class="comment">//unlock</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>pthread _mutex_trylock<ul>
+<li>如果一个线程既想获得锁,又不想挂起等待</li>
+<li>如果Mutex已经被另一个线程获得，这个函数会失败返回EBUSY，而不会使线程挂起等待。</li>
+</ul>
+</li>
+<li>lock and unlock<ul>
+<li>互斥锁已经被某个线程获得，其它线程再调用lock只能挂起等待。</li>
+<li>unlock操作中唤醒等待线程</li>
+</ul>
+</li>
+<li>对Mutex变量的读取、判断和修改不是原子操作<ul>
+<li>为了实现互斥锁操作,大多数体系结构都提供了swap或exchange指令</li>
+</ul>
+</li>
+<li>避免死锁<ul>
+<li>A 挂起等待B的锁；B也挂起等待A的锁；造成死锁状态</li>
+<li>尽量使用pthread_mutex_trylock调用代替pthread_mutex_lock调用,以免死锁。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Condition-Variable"><a href="#Condition-Variable" class="headerlink" title="Condition Variable"></a>Condition Variable</h3><ol>
+<li><p>条件时间同步</p>
+<ul>
+<li>通过条件变量(Condition Variable)来阻塞等待一个条件,或者唤醒等待这个条件的线程。</li>
+<li>用pthread_cond_t 类型的变量表示</li>
+</ul>
+</li>
+<li><p>cond_init</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>pthread_cond_t <span class="keyword">cond</span> = PTHREAD_COND_INITIALIZER; <span class="regexp">//</span>成功返回<span class="number">0</span>,失败返回错误号。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cond_funcation</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>  pthread_cond_timedwait()	<span class="comment">//可以设置超时时间</span></span><br><span class="line"><span class="symbol">$</span>  pthread_cond_wait()</span><br><span class="line"><span class="symbol">$</span>  pthread_cond_signal()	<span class="comment">// 唤醒在某个Condition Variable上等待的另一个线程</span></span><br><span class="line"><span class="symbol">$</span>   pthread_cond_broadcast() <span class="comment">//唤醒在这个Condition Variable上等待的所有线程。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>一个Condition Variable总是和一个Mutex搭配使用的。</p>
+</li>
+<li><p>阻塞等待</p>
+<img src="/2019/05/05/Thread/cond_wait.png">
+</li>
+</ul>
+</li>
+<li><p>code</p>
+<ul>
+<li>节生产者-消费者的例子是基于链表的,其空间可以动态分配</li>
+</ul>
+</li>
+</ol>
+<h3 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h3><ul>
+<li>man sem_overview</li>
+<li>semaphore变量的类型为sem_t,</li>
+</ul>
+<ol>
+<li><p>Mutex and Semaphore</p>
+<ul>
+<li>Mutex ：变量是非0即1的，可看作一种资源的可用数量 0/1 </li>
+<li>Semaphore：可用资源的数量，和Mutex不同的是这个数量可以大于1。</li>
+</ul>
+</li>
+<li><p>semaphore funcation</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">int</span> sem_init()	<span class="comment">// sem_init()初始化一个semaphore变量</span></span><br><span class="line">$ <span class="keyword">int</span> sem_wait()	<span class="comment">// 调用sem_wait()可以获得资源,使 semaphore--</span></span><br><span class="line">$ <span class="keyword">int</span> sem_trywait()	<span class="comment">// semaphore = 0；如果不希望挂起等待</span></span><br><span class="line">$ <span class="keyword">int</span> sem_post()	<span class="comment">// 释放资源,semaphore++,同时唤醒挂起等待的线程。</span></span><br><span class="line">$ <span class="keyword">int</span> sem_destory() <span class="comment">// 销毁变量</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>code</p>
+<ul>
+<li>现在基于固定大小的环形队列重写这个程序。</li>
+</ul>
+</li>
+</ol>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><ol>
+<li>线程冲突概念：<ul>
+<li>共享数据只读：那么各线程读到的数据应该总是一致的,不会出现访问冲突。</li>
+<li>一个线程可以改写数据：就必须考虑线程间同步的问题。</li>
+</ul>
+</li>
+<li>读者写者锁(Reader-Writer Lock)<ul>
+<li>Reader之间并不互斥,可以同时读共享数据</li>
+<li>而Writer是独占的(exclusive)<ul>
+<li>,在Writer修改数据时其它Reader或Writer不能访问数据,</li>
+<li>可见Reader-WriterLock比Mutex具有更好的并发性。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>并发性<ul>
+<li>用挂起等待的方式解决访问冲突不见得是最好的办法,因为这样毕竟会影响系统的并发性</li>
+<li>例如Linux内核的Seqlock、RCU(read-copy-update)等机制。</li>
+</ul>
+</li>
+</ol>
+<h2 id="死锁问题"><a href="#死锁问题" class="headerlink" title="死锁问题"></a>死锁问题</h2><ol>
+<li><p>微秒级延时：加快仿真速度。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>usleep(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -616,6 +772,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/06/TcpIp/" rel="prev" title="Tcp Ip">
+                Tcp Ip <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -687,7 +847,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -836,7 +996,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">68</span>
+                      
+                    
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -963,7 +1125,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">57</span>
+                      
+                    
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -999,7 +1163,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Thread"><span class="nav-number">1.</span> <span class="nav-text">Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread-Control"><span class="nav-number">1.2.</span> <span class="nav-text">Thread Control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thread-create"><span class="nav-number">1.2.1.</span> <span class="nav-text">thread_create</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Thread"><span class="nav-number">1.</span> <span class="nav-text">Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread-Control"><span class="nav-number">1.2.</span> <span class="nav-text">Thread Control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thread-create"><span class="nav-number">1.2.1.</span> <span class="nav-text">thread_create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thread-exit"><span class="nav-number">1.2.2.</span> <span class="nav-text">thread_exit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#thread-time-synchronize"><span class="nav-number">1.3.</span> <span class="nav-text">thread time synchronize</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#metux"><span class="nav-number">1.3.1.</span> <span class="nav-text">metux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Condition-Variable"><span class="nav-number">1.3.2.</span> <span class="nav-text">Condition Variable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Semaphore"><span class="nav-number">1.3.3.</span> <span class="nav-text">Semaphore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other"><span class="nav-number">1.3.4.</span> <span class="nav-text">Other</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁问题"><span class="nav-number">1.4.</span> <span class="nav-text">死锁问题</span></a></li></ol></li></ol></div>
             
 
           </div>
