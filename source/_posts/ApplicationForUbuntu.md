@@ -8,6 +8,15 @@ tags: ubuntu
 
 # Application For Ubuntu
 
+## update
+
+```
+$ sudo apt update	// 搜索可以更新
+$ apt list --upgradable	// 可以看看有哪些可更新的软件
+$ sudo apt upgrade 		// 行更新操作
+$ sudo apt autoremove	//更新完成之后会有一些不需要的旧组件需要清除
+```
+
 ## VS code 
 
 ### 安装
@@ -275,4 +284,23 @@ stty -F /dev/ttyUSB0				//查看Usb的属性
    reboot -f
    ```
 
-   
+
+## 流程图工具
+
++ [Reference](https://blog.csdn.net/haohaojian/article/details/8742406)
+
+## 安装Eagle
+
+1. 安装方式
+
+   + Autodesk student 
+   + eagle for Linux
+
+2. 报错
+
+   ```
+   ./eagle: symbol lookup error: /usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0: undefined symbol: xcb_dri3_get_supported_modifiers
+   ```
+
+   {% asset_img eagle.png  没有解决 %}
+
