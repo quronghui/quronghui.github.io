@@ -4,7 +4,7 @@ title: Thread
 date: 2019-05-05 19:11:04
 categories: 
 - [LinuxC]
-- [Thread]
+- [Linux system complie]
 tags: Thread
 ---
 
@@ -38,7 +38,7 @@ tags: Thread
    + 线程库函数是由POSIX标准定义的,称为POSIX thread或者pthread。
 
      ```
-     $ man pthread 
+     $ man pthread_
      ```
 
 ## Thread Control

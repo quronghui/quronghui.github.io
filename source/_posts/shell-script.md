@@ -5,11 +5,14 @@ title: shell_script
 date: 2019-04-22 08:37:13
 categories: 
 - [LinuxC]
-- [shell]
+- [Linux system complie]
 tags: shell
 ---
 
 # Shell Script 
+
++ shell script 编写语法和执行
++ 环境变量：变量值=文件所在的目录;
 
 ## Shell History
 

@@ -1,15 +1,16 @@
 ---
 layout: post
-title: LinuxCSignal
+title: LinuxC Signal
 date: 2019-04-26 09:42:38
 categories: 
 - [LinuxC]
-- [Signal]
+- [Linux system complie]
 tags: signal
 ---
 
-# LinuxCSignal 
+# LinuxC Signal 
 
++ 进程在执行代码时，收到内核的Signal，使得进程终止
 + 代码遇到一个问题：头文件包含函数，但是函数调用不成功
 
 ## Signal

@@ -3,14 +3,17 @@ layout: post
 title: DaemonControl
 date: 2019-04-28 09:42:24
 categories: 
-- [Daemon]
 - [LinuxC]
+- [Linux system complie]
 tags: 
 - [Daemon]
 - [Control]
 ---
 
-# DaemonControl
+# Daemon Control
+
++ 作业控制：将进程放在前台或者后台执行
++ 守护进程：即使关闭了terminal，进程也能继续执行
 
 ## Terminal
 

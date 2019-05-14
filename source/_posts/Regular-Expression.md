@@ -4,7 +4,7 @@ title: Regular_Expression
 date: 2019-04-25 15:38:19
 categories: 
 - [LinuxC]
-- [grep]
+- [Linux system complie]
 tags: grep
 ---
 

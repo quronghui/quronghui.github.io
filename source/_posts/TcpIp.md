@@ -4,7 +4,7 @@ title: Tcp Ip
 date: 2019-05-06 15:35:12
 categories:
 - [TCP/IP]
-- [LinuxC]
+- [Linux system complie]
 tags: TCP/IP
 ---
 

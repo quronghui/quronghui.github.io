@@ -4,11 +4,15 @@ title: system_process
 date: 2019-04-22 14:11:43
 categories: 
 - [LinuxC]
-- [process]
+- [Linux system complie]
 tags: process
 ---
 
 # System Process
+
++ process：分为子进程和父进程；
++ exec：子进程执行代码时，调用的函数
++ 父进程和子进程的通信：pipe 模式
 
 ## Process
 

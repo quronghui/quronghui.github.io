@@ -304,3 +304,27 @@ stty -F /dev/ttyUSB0				//查看Usb的属性
 
    {% asset_img eagle.png  没有解决 %}
 
+## 安装WPS
+
+1. 下载wps for linux
+
+   + WPS官网下载deb包：<http://linux.wps.cn/>
+   + wps_symbol_fonts.zip: <https://pan.baidu.com/s/1eS6xIzo>
+
+2. 安装
+
+   ```
+   $ sudo dpkg -i xxx
+   $ cd wps_symbol_fontsls
+   $ sudo cp mtextra.ttf  symbol.ttf  WEBDINGS.TTF  wingding.ttf  WINGDNG2.ttf  WINGDNG3.ttf  /usr/share/fonts
+   $ sudo apt-get remove libreoffice-common
+   ```
+
+## 安装Google
+
+```
+$ sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb	// download
+$ sudo dpkg -i google-chrome*
+$ sudo apt-get -f install
+```
+

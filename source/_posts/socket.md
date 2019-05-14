@@ -2,8 +2,11 @@
 layout: post
 title: socket
 date: 2019-05-08 15:44:22
-categories:
+categories: 
+- [LinuxC]
+- [socket]
 tags:
+- [socket]
 ---
 
 # Socket
@@ -164,3 +167,116 @@ tags:
    + ,也就是源地址:源端口号和目的地址:目的端口号,也对应一个TCP连接。
 
    {% asset_img socket_fd.png %}
+
+### 错误处理和读写控制
+
++ [socket / wrap.c ](https://github.com/quronghui/LinuxC.git)
+
+1. 针对文件读写的一个错误信息跳转
+2. 信号重连接
+   + 慢系统调用accept、read和write被信号中断时应该重试。
+   + connect虽然也会阻塞,但是被信号中断时不能立刻重试。
+3. 如果应用层协议的各字段长度固定,用readn来读是非常方便的。
+   + 字段长度固定的协议往往不够灵活,难以适应新的变化。
+   + TFTP协议的各字段是可变长的
+4. 常见的应用层协议都是带有可变长字段的
+   + 可变长字段的协议用readn来读就很不方便了,为此我们实现一个类似于fgets的readline函数
+
+### server and client 多用户处理
+
+1. client改为交互式输入
+
+   + 不断从终端接受用户输入并和server交互
+   + 修改 [socket_api/TCP/client.c] 
+
+2. server 修改，可以多次处理同一客户端的请求。
+
+3. fork() 并发 处理多个client的请求
+
+   + 父进程专门负责监听端口，每次accept一个新的客户端连接就fork出一个子进程专门服务这个客户端。
+
+4. setsockopt
+
+   + 在同一个终端，关闭server后，还能重新开启server
+   + 表示创建端口号相同，但IP地址不同的多个socket描述符。
+
+5. select 
+
+   + \*   1)select是网络程序中很常用的一个系统调用,它可以同时监听多个阻塞的文件描述符
+
+     \*   2)不需要fork和多进程就可以实现并发服务的server。
+
+     \*   3) 未使用
+
+## 基于UDP的网络编程
+
+1. udp 中的采用的是数据报文，并非流 SOCK_STREAM --> SOCK_DGRAM 
+2.  UDP 不用考虑多个client的链接
+   + 不用考虑同意终端关闭server后不能重新开启的现象
+
+##  UNIX Domain Socket IPC
+
+1. 网络socket
+
+   + 用于同一台主机的进程间通讯(通过loopback地Domain Soc址127.0.0.1)
+
+2. UNIX Domain Socket
+
+   + socket API原本是为网络通讯设计的，但后来在socket的框架上发展出一种IPC机制
+   + 不需要经过网络协议栈,不需要打包拆包、计算校验和、维护序号和应答等
+     + 只是将应用层数据从一个进程拷贝到另一个进程
+
+3. IPC机制：本质上是可靠的通讯，而网络协议是为不可靠的通讯设计的。
+
+4. UNIX Domain Socket
+
+   + 提供面向流和面向数据包两种API接口，类似于TCP和UDP
+   + 但是面向消息的UNIX Domain Socket也是可靠的,消息既不会丢失也不会顺序错乱。
+
+5. 区别
+
+   |                  | UNIX Domain Socket                                   | 网络socket       |
+   | ---------------- | ---------------------------------------------------- | ---------------- |
+   | socket文件描述符 | fd = sock()                                          | fd = sock()      |
+   | address family   | AF_UNIX                                              | AF_INET          |
+   | type             | 择SOCK_DGRAM或SOCK_STREAM                            | tcp/udp 区分     |
+   | 地址格式         | sockaddr_un                                          | sockaddr_in      |
+   | socket地址       | socket类型的文件在文件系统中的路径                   | 是IP地址加端口号 |
+   | connect()        | 客户端要显式调用bind函数，而不依赖系统自动分配的地址 |                  |
+
+   + 客户端bind一个自己指定的socket文件名的好处是：
+     + 该文件名可以包含客户端的pid以便服务器区分不同的客户端。
+
+## Web server
+
++ web服务器对浏览器的处理方式
+
+1. 浏览器 ----> 发送http协议请求  --->  web server
+
+   + input ：IP + Port
+
+   + HTTP 的协议头
+
+     ```
+     $ GET / HTTP/1.1	// 第一行是GET请求和协议版本
+     ```
+
+2. web server ---> 将对应目录下的索引页(默认的根目录/(在是index.html) ---- >  发送给浏览器
+
+   + 格式应答
+
+   ```
+   HTTP/1.1 200 OK		// 是协议版本和应答码；200--标示成功，ok可以随意写
+   Content-Type: text/html	//为MIME类型--text/html；纯文本是text/plain；图							片则是image/jpg
+   <html>
+   <head><title>Test Page</title></head>
+   <body>
+   		<p>Test OK</p>
+   		<img src='mypic.jpg'>
+   </body>
+   </html>
+   ```
+
+   + 而HTTP协议规定服务器主动关闭连接
+
+   {% asset_img web_server.png %}

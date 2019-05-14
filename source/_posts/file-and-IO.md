@@ -4,14 +4,17 @@ title: file_and_IO
 date: 2019-04-13 09:52:42
 categories: 
 - [LinuxC]
-- [file and io]
-tags: [file and io]
+- [Linux system complie]
+tags: [file and IO]
 ---
 
 # FIle and IO
 
 + 本书中库函数和系统函数的区别和联系
   + 库函数：对应的是C的标准库，针对符号的处理和I/O操作
+    + 函数操作的区域是：buffer
+  + 系统函数：内核提供给应用程序的接口 sys/xxx
+    + 函数操作的区域是：内核
 + 本书中讲解的计算机的体系结构：好好学习x86平台
   + 只讲Linux平台的特性，只讲Linux内核的工作原理，
   + 涉及体系结构时只讲x86平台
@@ -19,7 +22,7 @@ tags: [file and io]
 ## 汇编程序的Hello world
 
 1. 注意在C语言中字符串的末尾隐含有一个'\0' ，而汇编指示.ascii定义的字符串末尾没有隐含的'\0' 。
-2. 在汇编程序中用.可以取出当前地址计数器的值,是一个常量。
+2. 在汇编程序中用". xxx"可以取出当前地址计数器的值,是一个常量。
 
 ##  C标准I/O库函数与Unbuffered I/O函数
 
@@ -28,7 +31,7 @@ tags: [file and io]
 
 ### Unbuffered I/O 函数
 
-1. 而Unbuffered I/O函数是UNIX标准的一部分
+1. Unbuffered I/O函数是UNIX标准的一部分
 
    + 在所有支持C的平台上应该都可以用C标准库函数(除了有些平台的C编译器没有完全符合C标准之外)
 
@@ -50,7 +53,7 @@ tags: [file and io]
 
 1. Linux Kernel 中
 
-   + task_struct  ：维护进程想信息，Process Descriptor
+   + task_struct  ：维护进程信息，Process Descriptor
 
      + file_srtuct ：文件描述符表
 

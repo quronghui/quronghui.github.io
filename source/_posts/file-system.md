@@ -4,11 +4,13 @@ title: file_system
 date: 2019-04-18 14:42:46
 categories: 
 - [LinuxC]
-- [file_system]
+- [Linux system complie]
 tags: file_system
 ---
 
 # file_system
+
++ 文件系统：目录管理结构 + 数据存储；便于访问和读写
 
 {% asset_img ext2.png %}
 
