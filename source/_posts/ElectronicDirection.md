@@ -32,22 +32,39 @@ tags: Electronic Direction
 - GitHub 中[kitspace](https://github.com/kitspace)/**awesome-electronics**
 - github 中的 awesome，是一个很强大的 Project
 
-## Book
+## Book -- 高清完整书签PDF版
 
 + [收藏的电子书清单（多个学科，含下载链接）(https://github.com/programthink/books)
 
+### PCB
+
 1. Eagle 的学习使用【高质量PCB设计入门--Eagle使用】
    + [PCB SCH 绘制规则参考ESP32](https://www.espressif.com/zh-hans/company/contact-extra/technical-inquiries-hardware-prologue)
-2. LinuxC 编程一站式学习
-3. [凸优化，嵌入式的算法模型](https://github.com/KeKe-Li/book/tree/master/AI)
-4. [C++ Primer第五版中文版](http://itbook1234.com/134.html)
-5. [现代操作系统 原书第4版](https://pan.baidu.com/s/1EnlH0saLicZo1uobE7cmBQ)
+
+### LinuxC
+
+1. LinuxC 编程一站式学习 -- ok
+2. [C和指针.pdf](https://github.com/mymmsc/books/blob/master/c/C和指针.pdf)
+3. [C专家编程.pdf](https://github.com/mymmsc/books/blob/master/c/C专家编程.pdf)
+4. 深入理解Linux 内核
+5. [鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf](http://itbook1234.com/1093.html)
+
+### data struct
+
++ [data struct](https://www.infoq.cn/article/ur1QLockeQ*hXobPm0kI)
++ [[数据结构与算法分析：C语言描述_原书第2版_高清版.pdf](https://github.com/Bzhnja/ebooks/blob/master/数据结构与算法分析：C语言描述_原书第2版_高清版.pdf)]
+
+### 面试
+
+### algorithm
+
+2. [凸优化，嵌入式的算法模型](https://github.com/KeKe-Li/book/tree/master/AI)
+3. [C++ Primer第五版中文版](http://itbook1234.com/134.html)
+4. [现代操作系统 原书第4版](https://pan.baidu.com/s/1EnlH0saLicZo1uobE7cmBQ)
+   
    + 提取码：j5p9
-6. [[数据结构与算法分析：C语言描述_原书第2版_高清版.pdf](https://github.com/Bzhnja/ebooks/blob/master/数据结构与算法分析：C语言描述_原书第2版_高清版.pdf)]
-7. [C和指针.pdf](https://github.com/mymmsc/books/blob/master/c/C和指针.pdf)
-8. [C专家编程.pdf](https://github.com/mymmsc/books/blob/master/c/C专家编程.pdf)
-9. 深入理解Linux 内核
-10. [鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf](http://itbook1234.com/1093.html)
+   
+   
 
 ## Tools
 
