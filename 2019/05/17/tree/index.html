@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Tree1.文件系统：三种访问结构；前中后序访问 2.算术表达式的计算：后缀表达式转化为中缀表达式 3.树的搜索：将最坏的时间上届限制到O(logN)，通过二叉树进行控制. 树的实现 通过递归的方式实现树  树的元素 – 节点 节点的父子关系 1）n(1) –&amp;gt; n(2)：n(1) 是n(2)的祖先； 2）n(1) != n(2);  n(1) 是n(2)的真祖先； 3）parent 、ch">
+<meta name="keywords" content="tree">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tree">
+<meta property="og:url" content="http://yoursite.com/2019/05/17/tree/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="Tree1.文件系统：三种访问结构；前中后序访问 2.算术表达式的计算：后缀表达式转化为中缀表达式 3.树的搜索：将最坏的时间上届限制到O(logN)，通过二叉树进行控制. 树的实现 通过递归的方式实现树  树的元素 – 节点 节点的父子关系 1）n(1) –&amp;gt; n(2)：n(1) 是n(2)的祖先； 2）n(1) != n(2);  n(1) 是n(2)的真祖先； 3）parent 、ch">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/05/17/tree/firstchild.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/17/tree/expression.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/17/tree/insert_node.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/17/tree/one_tree.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/17/tree/b_tree.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/17/tree/2_3.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/17/tree/change_b.png">
+<meta property="og:updated_time" content="2019-06-04T07:18:03.532Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tree">
+<meta name="twitter:description" content="Tree1.文件系统：三种访问结构；前中后序访问 2.算术表达式的计算：后缀表达式转化为中缀表达式 3.树的搜索：将最坏的时间上届限制到O(logN)，通过二叉树进行控制. 树的实现 通过递归的方式实现树  树的元素 – 节点 节点的父子关系 1）n(1) –&amp;gt; n(2)：n(1) 是n(2)的祖先； 2）n(1) != n(2);  n(1) 是n(2)的真祖先； 3）parent 、ch">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/17/tree/firstchild.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/17/tree/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>tree | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/17/tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">tree
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-05-17 15:24:33" itemprop="dateCreated datePublished" datetime="2019-05-17T15:24:33+08:00">2019-05-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/data-struct-algorithm/" itemprop="url" rel="index"><span itemprop="name">data_struct_algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h1><p>1.文件系统：三种访问结构；前中后序访问</p>
+<p>2.算术表达式的计算：后缀表达式转化为中缀表达式</p>
+<p>3.树的搜索：将最坏的时间上届限制到O(logN)，通过二叉树进行控制.</p>
+<h2 id="树的实现"><a href="#树的实现" class="headerlink" title="树的实现"></a>树的实现</h2><ul>
+<li>通过递归的方式实现树</li>
+</ul>
+<h3 id="树的元素-–-节点"><a href="#树的元素-–-节点" class="headerlink" title="树的元素 – 节点"></a>树的元素 – 节点</h3><ol>
+<li><p>节点的父子关系</p>
+<p>1）n(1) –&gt; n(2)：n(1) 是n(2)的祖先；</p>
+<p>2）n(1) != n(2);  n(1) 是n(2)的真祖先；</p>
+<p>3）parent 、child、sibling、leaf、grandparents、grandchild</p>
+</li>
+<li><p>节点数的长度length：从1递增到n的</p>
+<p>1)节点深度depth：从root到n(i)的唯一路径长；root(depth) = 0</p>
+<p>2)节点的高度height：从n(i)到树叶leaf的最长路径; leaf(height) = 0</p>
+<p>3)一棵树的深度 = 高度</p>
+</li>
+<li><p>树的一种表达方式</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">treenode</span>&#123;</span></span><br><span class="line">	ElementType element;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">treenode</span> <span class="title">firstchild</span>;</span>	<span class="comment">//第一个儿子节点</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">treenode</span> <span class="title">nextsibling</span>;</span>	<span class="comment">//下一个兄弟节点</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<img src="/2019/05/17/tree/firstchild.png">
+</li>
+</ol>
+<h3 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h3><ol>
+<li><p>遍历的顺序</p>
+<p>针对于父节点先处理还是后处理：</p>
+<p>1）先序遍历：先父节点，在左儿子节点，最后右儿子。</p>
+<ul>
+<li>打印出目录结构</li>
+</ul>
+<p>2）后序遍历：先左儿子节点，然后右儿子，在父节点。</p>
+<ul>
+<li>打印出每个文件占的块block大小</li>
+</ul>
+</li>
+<li><p>所谓的驱动程序：是将硬件设备和内核之间建立连接，调用的时候相当于驱动？</p>
+</li>
+</ol>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ul>
+<li><p>二叉树：是一棵树，每个节点的child，不能多于两个。</p>
+</li>
+<li><p>平均深度的计算：</p>
+<p>1）平均二叉树：depth = O(节点数开根)</p>
+<p>2）二叉查找树：depth = O(logN)</p>
+</li>
+</ul>
+<h3 id="二叉树实现"><a href="#二叉树实现" class="headerlink" title="二叉树实现"></a>二叉树实现</h3><ol>
+<li>二叉树的图形表示：圆圈加直线</li>
+<li>二叉树的每一次插入：<ul>
+<li>调用malloc创建一个节点；</li>
+<li>调用free删除后被释放；</li>
+</ul>
+</li>
+<li>Null 指针：<ul>
+<li>每一棵N节点的二叉树，需要（N+1）个NULL指针</li>
+<li>每一个叶子节点：包含两个NULL指针</li>
+</ul>
+</li>
+</ol>
+<h3 id="二叉树应用—-表达式树"><a href="#二叉树应用—-表达式树" class="headerlink" title="二叉树应用—-表达式树"></a>二叉树应用—-表达式树</h3><ol>
+<li><p>编译器的设计领域，计算表达式的应用：</p>
+<ul>
+<li><p>中序遍历策略：中缀表达式；</p>
+</li>
+<li><p>后序遍历策略：后缀表达式；</p>
+</li>
+<li><p>前序遍历策略：前缀表达式；</p>
+</li>
+</ul>
+</li>
+<li><p>树定义：表达式</p>
+<ul>
+<li><p>操作数：叶子节点</p>
+</li>
+<li><p>运算符：父节点</p>
+</li>
+</ul>
+</li>
+<li><p>构造表达式树：</p>
+<ul>
+<li>把后缀表达式 转化为中缀表达式，每一部分加上括号</li>
+<li>方法相反：操作数压栈，读操作数时弹出操作数；</li>
+</ul>
+<p>a.  用指针指向：每个操作数，以及每次运算得到的大操作数</p>
+<ul>
+<li>操作数的指针压栈，顺序是左child，右child；</li>
+<li>读到操作符时弹出操作数：每次弹出两个操作数；<ul>
+<li>操作符做为父节点；</li>
+<li>先弹出的做为右child；后弹出的为左child</li>
+</ul>
+</li>
+<li>将每次操作后得到的<strong>大操作数</strong>指针：压入栈中；</li>
+<li>最后有一个指针指向这个<strong>树</strong>：将指针压入栈中</li>
+<li>栈中只有一个指针</li>
+</ul>
+<img src="/2019/05/17/tree/expression.png">
+</li>
+</ol>
+<h3 id="二叉树应用—-查找树ADT"><a href="#二叉树应用—-查找树ADT" class="headerlink" title="二叉树应用—- 查找树ADT"></a>二叉树应用—- 查找树ADT</h3><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/* </span><br><span class="line"><span class="bullet">*   </span>tree.c</span><br><span class="line"><span class="bullet">*   </span>二叉查找树：用关键字表示</span><br><span class="line"><span class="bullet">*   </span>1)find tree:查找到叶子节点，还没的话，返回NULL</span><br><span class="line"><span class="bullet">*   </span>2)find<span class="emphasis">_min _</span>max: 递归和非递归的方式进行实现；</span><br><span class="line"><span class="bullet">*       </span>非递归：考虑base基准情况</span><br><span class="line"><span class="bullet">*   </span>3) insert: 插入元素的关键字时：考虑tree是否为空；tree不为空时，元素是否已存在</span><br><span class="line"><span class="bullet">*   </span>4) delete<span class="emphasis">_x: 遍历得到元素位置，还得考虑该位置包含两个child和一个child的情况。</span></span><br><span class="line"><span class="emphasis">*/</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>二叉查找树：</p>
+<p>1）每个节点：指定一个关键字值；</p>
+<p>2）关键字互异；</p>
+<p>3) 关键字：左子树的 &lt; 小于X节点 &lt; 右子树的</p>
+<p>4）元素关键字的排列是按照某种顺序进行</p>
+</li>
+<li><p>二叉树的创建</p>
+<ul>
+<li>空间创建的时候：以节点数N来进行创建的。</li>
+<li>平均深度是O(logN)，不用担心栈空间用尽</li>
+</ul>
+</li>
+<li><p>二叉树的删除：</p>
+<ul>
+<li>当被删除节点：包含两个child节点时；</li>
+<li>用该节点右子树的最小数据代替该节点的数据，并<strong>递归的删除</strong>那个节点；</li>
+</ul>
+</li>
+<li><p>懒惰删除：</p>
+<ul>
+<li>当元素x的出现频率&gt;1时，当删除x一次，只是频率减一，树不发生变化</li>
+</ul>
+</li>
+</ol>
+<h2 id="AVL-树"><a href="#AVL-树" class="headerlink" title="AVL 树"></a>AVL 树</h2><ol>
+<li>AVL树：是带有平衡条件的二叉查找树<ul>
+<li>平衡条件：一棵AVL树是其<strong>每个节点</strong>的左子树和右子树的高度最多差1的二叉查找树</li>
+</ul>
+</li>
+<li>AVL 特性破坏：插入新的节点后，破坏了原来的AVL树特性<ul>
+<li>插入新的节点，破坏了AVL的深度，插入的节点会变大，导致不在同一层</li>
+<li>旋转：重新平衡插入后树的深度</li>
+</ul>
+</li>
+</ol>
+<h3 id="新的节点插入树的方式"><a href="#新的节点插入树的方式" class="headerlink" title="新的节点插入树的方式"></a>新的节点插入树的方式</h3><ol>
+<li><p>四中插入方式：</p>
+<img src="/2019/05/17/tree/insert_node.png">
+</li>
+<li><p>单旋转</p>
+<ul>
+<li>元素插入是：左左插入和右右插入</li>
+</ul>
+</li>
+<li><p>双旋转：</p>
+<ul>
+<li>元素插入是：左右插入和右左插入</li>
+</ul>
+</li>
+</ol>
+<h3 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h3><ol>
+<li><p>单旋转发生的操作：</p>
+<ul>
+<li><p>插入节点n的：父节点p往上升一级，n的祖父节点g往下降一级；</p>
+</li>
+<li><p>p的另外一个孩子，高度不变，换到相反的一边</p>
+</li>
+<li><p>形成新的AVL树；</p>
+</li>
+</ul>
+</li>
+<li><p>插入节点n和父节点p，祖父节点g 进行比较：</p>
+<p>1）n &lt; p &lt; g : 破坏AVL平衡的话，单旋转便能达到新的平衡；</p>
+<p>2）p &lt; n &lt; g : 破坏AVL平衡的话，双旋转才行；</p>
+<p>3）原先节点p 的另外一个孩子，调整到另外一边</p>
+<p>4）插入多个数据的时候：单双旋转都需要进行；</p>
+<p>5）旋转除了保证AVL高度平衡外；还需要满足二叉树关键字大小的特性</p>
+</li>
+<li><p>双旋转发生的操作</p>
+<ul>
+<li>插入节点n的：父节点p往上升二级，到达n的祖祖父节点gg 的位置，往下降一级；</li>
+<li>p节点的其他孩子：在左边child的就分配到左边（做另外节点的右child）；</li>
+</ul>
+</li>
+</ol>
+<h2 id="伸展树"><a href="#伸展树" class="headerlink" title="伸展树"></a>伸展树</h2><ol>
+<li>伸展树的思想：<ul>
+<li>当一个节点被访问后，节点就要经过一系列AVL树的旋转到达根节点。</li>
+<li>不需要考虑存储的花费</li>
+</ul>
+</li>
+<li>一棵伸展树每次操作的摊还代价是：O(log N)<ul>
+<li>进行M次操作的时间就是 O(M logN )</li>
+</ul>
+</li>
+</ol>
+<h3 id="展开："><a href="#展开：" class="headerlink" title="展开："></a>展开：</h3><ul>
+<li>类似于前面介绍的旋转的想法，旋转的实施上有了选择</li>
+</ul>
+<ol>
+<li>情形一：之字形 zig-zag<ul>
+<li>AVL那样的双旋转</li>
+</ul>
+</li>
+<li>情形二：一字形 zig-zig</li>
+</ol>
+<img src="/2019/05/17/tree/one_tree.png">
+<h2 id="树的遍历-1"><a href="#树的遍历-1" class="headerlink" title="树的遍历"></a>树的遍历</h2><ol>
+<li><p>总的运行时间是 O（logN）</p>
+<ul>
+<li>每个节点进行以此判断：NULL;</li>
+<li>执行函数是：printelement；</li>
+<li>运行时间是O(N)</li>
+</ul>
+</li>
+<li><p>便利的应用</p>
+<ul>
+<li><p>中序遍历：进行关键字的排序</p>
+</li>
+<li><p>后序遍历：计算出树的高度</p>
+</li>
+<li><p>先序遍历：计算出树的深度</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="B-树"><a href="#B-树" class="headerlink" title="B-树"></a>B-树</h2><ol>
+<li><p>阶为M的B-树具备下列的结构</p>
+<img src="/2019/05/17/tree/b_tree.png">
+<ul>
+<li>儿子数 和 每个叶子节点包含的关键字数目 （M/2 – M）</li>
+<li>所有的关键字包含在叶子节点上；其他的节点包含关键字的判断信息</li>
+</ul>
+</li>
+<li><p>3 阶 B-树</p>
+<ul>
+<li>2-3 B树</li>
+</ul>
+<img src="/2019/05/17/tree/2_3.png">
+</li>
+<li><p>M=3阶 B树 插入新的关键字</p>
+<ul>
+<li>如何进行调整</li>
+<li>不停的分裂出节点：节点包含的关键字在 （M/2 – M）之间</li>
+<li>同一层调整不成功的话：增加树的深度（保证叶子节点在同一深度）</li>
+</ul>
+<img src="/2019/05/17/tree/change_b.png">
+</li>
+</ol>
+<h2 id="Difference"><a href="#Difference" class="headerlink" title="Difference"></a>Difference</h2><table>
+<thead>
+<tr>
+<th>tree</th>
+<th>作用</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表达式树</td>
+<td>分析树–编译器中<br>分析树不是二叉树：表达式树的扩充</td>
+<td></td>
+</tr>
+<tr>
+<td>查找树</td>
+<td>递归实现查找</td>
+<td></td>
+</tr>
+<tr>
+<td>AVL树</td>
+<td>要求每个节点的左右子树：height 差 &lt; 1<br>插入关键字后：进行新的平衡–通过旋转</td>
+<td>O(logN)</td>
+</tr>
+<tr>
+<td>伸展树</td>
+<td>节点的深度：不做限制<br>节点就要经过一系列AVL树的旋转到达根节点。</td>
+<td>O(M logN)</td>
+</tr>
+<tr>
+<td>B-树</td>
+<td>平衡M-路树，很好的匹配磁盘<br>平衡的条件：（除根节点）非叶子节点的儿子数；<br>                 叶子节点的关键字数 – (M/2 – M)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>平衡树方案</td>
+<td>AVL 和 B-树；<br>没有二叉树的省时</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tree/" rel="tag"># tree</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/15/table-stack-queue/" rel="next" title="list_stack_queue">
+                <i class="fa fa-chevron-left"></i> list_stack_queue
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/19/hash-ADT/" rel="prev" title="hash_ADT">
+                hash_ADT <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tree"><span class="nav-number">1.</span> <span class="nav-text">Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#树的实现"><span class="nav-number">1.1.</span> <span class="nav-text">树的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树的元素-–-节点"><span class="nav-number">1.1.1.</span> <span class="nav-text">树的元素 – 节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的遍历"><span class="nav-number">1.1.2.</span> <span class="nav-text">树的遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树实现"><span class="nav-number">1.2.1.</span> <span class="nav-text">二叉树实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树应用—-表达式树"><span class="nav-number">1.2.2.</span> <span class="nav-text">二叉树应用—-表达式树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树应用—-查找树ADT"><span class="nav-number">1.2.3.</span> <span class="nav-text">二叉树应用—- 查找树ADT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL-树"><span class="nav-number">1.3.</span> <span class="nav-text">AVL 树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新的节点插入树的方式"><span class="nav-number">1.3.1.</span> <span class="nav-text">新的节点插入树的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转"><span class="nav-number">1.3.2.</span> <span class="nav-text">旋转</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伸展树"><span class="nav-number">1.4.</span> <span class="nav-text">伸展树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#展开："><span class="nav-number">1.4.1.</span> <span class="nav-text">展开：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的遍历-1"><span class="nav-number">1.5.</span> <span class="nav-text">树的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树"><span class="nav-number">1.6.</span> <span class="nav-text">B-树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Difference"><span class="nav-number">1.7.</span> <span class="nav-text">Difference</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -96,22 +96,22 @@
 
 
 
-  <meta name="description" content="Pointer (指针)指针的基本操作理解指针 堆栈和队列  堆栈有栈顶指针，队列有头指针和尾指针 这种指针本质：是一个整数，是数组的索引   指针概念  把一个变量所在的内存单元的地址 保存在另外一个内存单元  此内存单元 称为指针  1234int i;int *pi = &amp;amp;i;	/*全局变量的赋值：右边必须是常量表达式*/char c;char *pc = &amp;amp;c;	/*32位">
+  <meta name="description" content="Pointer (指针)指针的基本操作理解指针 堆栈和队列  堆栈有栈顶指针，队列有头指针和尾指针 这种指针本质：是一个整数，是数组的索引   指针概念  把一个变量所在的内存单元的地址 保存在另外一个内存单元  此内存单元 称为指针  12345int i;int *pi = &amp;amp;i;	/*全局变量的赋值：右边必须是常量表达式*/				/* 定义一个指向int型的指针变量pi,并用i的地">
 <meta name="keywords" content="pointer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pointer">
 <meta property="og:url" content="http://yoursite.com/2019/03/22/Pointer/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="Pointer (指针)指针的基本操作理解指针 堆栈和队列  堆栈有栈顶指针，队列有头指针和尾指针 这种指针本质：是一个整数，是数组的索引   指针概念  把一个变量所在的内存单元的地址 保存在另外一个内存单元  此内存单元 称为指针  1234int i;int *pi = &amp;amp;i;	/*全局变量的赋值：右边必须是常量表达式*/char c;char *pc = &amp;amp;c;	/*32位">
+<meta property="og:description" content="Pointer (指针)指针的基本操作理解指针 堆栈和队列  堆栈有栈顶指针，队列有头指针和尾指针 这种指针本质：是一个整数，是数组的索引   指针概念  把一个变量所在的内存单元的地址 保存在另外一个内存单元  此内存单元 称为指针  12345int i;int *pi = &amp;amp;i;	/*全局变量的赋值：右边必须是常量表达式*/				/* 定义一个指向int型的指针变量pi,并用i的地">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/22/Pointer/pointer.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/22/Pointer/array.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/22/Pointer/const.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/22/Pointer/argv.png">
-<meta property="og:updated_time" content="2019-04-02T07:25:51.919Z">
+<meta property="og:updated_time" content="2019-06-04T07:18:03.340Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pointer">
-<meta name="twitter:description" content="Pointer (指针)指针的基本操作理解指针 堆栈和队列  堆栈有栈顶指针，队列有头指针和尾指针 这种指针本质：是一个整数，是数组的索引   指针概念  把一个变量所在的内存单元的地址 保存在另外一个内存单元  此内存单元 称为指针  1234int i;int *pi = &amp;amp;i;	/*全局变量的赋值：右边必须是常量表达式*/char c;char *pc = &amp;amp;c;	/*32位">
+<meta name="twitter:description" content="Pointer (指针)指针的基本操作理解指针 堆栈和队列  堆栈有栈顶指针，队列有头指针和尾指针 这种指针本质：是一个整数，是数组的索引   指针概念  把一个变量所在的内存单元的地址 保存在另外一个内存单元  此内存单元 称为指针  12345int i;int *pi = &amp;amp;i;	/*全局变量的赋值：右边必须是常量表达式*/				/* 定义一个指向int型的指针变量pi,并用i的地">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/22/Pointer/pointer.png">
 
 
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-02 15:25:51" itemprop="dateModified" datetime="2019-04-02T15:25:51+08:00">2019-04-02</time>
+                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
               
             
           </span>
@@ -521,9 +521,16 @@
 <li>保存在另外一个内存单元 </li>
 <li>此<strong>内存单元</strong> 称为指针</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">int</span> *pi = &amp;i;	<span class="comment">/*全局变量的赋值：右边必须是常量表达式*/</span></span><br><span class="line"><span class="keyword">char</span> c;</span><br><span class="line"><span class="keyword">char</span> *pc = &amp;c;	<span class="comment">/*32位的虚拟机，他们的内存单元都是4 byte*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> i;</span><br><span class="line"><span class="built_in">int</span> *<span class="built_in">pi</span> = &amp;i;	/*全局变量的赋值：右边必须是常量表达式*/</span><br><span class="line">				/* 定义一个指向<span class="built_in">int</span>型的指针变量<span class="built_in">pi</span>,并用i的地址来初始化<span class="built_in">pi</span>  */</span><br><span class="line"><span class="built_in">char</span> c;</span><br><span class="line"><span class="built_in">char</span> *pc = &amp;c;	/*<span class="number">32</span>位的虚拟机，他们的内存单元都是<span class="number">4</span> byte*/</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<ul>
+<li>指针变量 pi 和pc 指向不同类型的指针变量，但内存单元都占4 byte；<ul>
+<li>32 bit 的平台：占4byte；</li>
+<li>64 bit 的平台：占8byte；</li>
+</ul>
+</li>
+</ul>
 <h3 id="根据指针知找到变量"><a href="#根据指针知找到变量" class="headerlink" title="根据指针知找到变量"></a>根据指针知找到变量</h3><ol>
 <li><img src="/2019/03/22/Pointer/pointer.png">
 </li>
@@ -889,7 +896,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1036,11 +1043,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1169,7 +1172,37 @@
                     
                       
                     
-                    <span class="site-state-item-count">58</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>

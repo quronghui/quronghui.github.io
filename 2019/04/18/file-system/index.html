@@ -96,22 +96,22 @@
 
 
 
-  <meta name="description" content="file_system ext2 文件系统磁盘分区划分 磁盘分区  格式化工具：mkfs 对每个分区进行格式化 目的：格式化为某种文件系统，才能存储文件 格式化过程：在磁盘写一些管理存储布局的信息。   文件系统  文件系统中存储的最小单位是块(Block)；  Block size 12$ mke2fs -b 1024 / 2048 / 4096	//指定块的大小// 32位的每一页大小是4kb">
+  <meta name="description" content="file_system 文件系统：目录管理结构 + 数据存储；便于访问和读写   ext2 文件系统磁盘分区划分 磁盘分区  格式化工具：mkfs 对每个分区进行格式化 目的：格式化为某种文件系统，才能存储文件 格式化过程：在磁盘写一些管理存储布局的信息。   文件系统  文件系统中存储的最小单位是块(Block)；  Block size 12$ mke2fs -b 1024 / 2048 /">
 <meta name="keywords" content="file_system">
 <meta property="og:type" content="article">
 <meta property="og:title" content="file_system">
 <meta property="og:url" content="http://yoursite.com/2019/04/18/file-system/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="file_system ext2 文件系统磁盘分区划分 磁盘分区  格式化工具：mkfs 对每个分区进行格式化 目的：格式化为某种文件系统，才能存储文件 格式化过程：在磁盘写一些管理存储布局的信息。   文件系统  文件系统中存储的最小单位是块(Block)；  Block size 12$ mke2fs -b 1024 / 2048 / 4096	//指定块的大小// 32位的每一页大小是4kb">
+<meta property="og:description" content="file_system 文件系统：目录管理结构 + 数据存储；便于访问和读写   ext2 文件系统磁盘分区划分 磁盘分区  格式化工具：mkfs 对每个分区进行格式化 目的：格式化为某种文件系统，才能存储文件 格式化过程：在磁盘写一些管理存储布局的信息。   文件系统  文件系统中存储的最小单位是块(Block)；  Block size 12$ mke2fs -b 1024 / 2048 /">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/04/18/file-system/ext2.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/18/file-system/ext2_block.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/18/file-system/ls_dev.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/18/file-system/inode.png">
-<meta property="og:updated_time" content="2019-04-19T05:46:55.885Z">
+<meta property="og:updated_time" content="2019-06-04T07:18:03.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="file_system">
-<meta name="twitter:description" content="file_system ext2 文件系统磁盘分区划分 磁盘分区  格式化工具：mkfs 对每个分区进行格式化 目的：格式化为某种文件系统，才能存储文件 格式化过程：在磁盘写一些管理存储布局的信息。   文件系统  文件系统中存储的最小单位是块(Block)；  Block size 12$ mke2fs -b 1024 / 2048 / 4096	//指定块的大小// 32位的每一页大小是4kb">
+<meta name="twitter:description" content="file_system 文件系统：目录管理结构 + 数据存储；便于访问和读写   ext2 文件系统磁盘分区划分 磁盘分区  格式化工具：mkfs 对每个分区进行格式化 目的：格式化为某种文件系统，才能存储文件 格式化过程：在磁盘写一些管理存储布局的信息。   文件系统  文件系统中存储的最小单位是块(Block)；  Block size 12$ mke2fs -b 1024 / 2048 /">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/18/file-system/ext2.png">
 
 
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-19 13:46:55" itemprop="dateModified" datetime="2019-04-19T13:46:55+08:00">2019-04-19</time>
+                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
               
             
           </span>
@@ -445,7 +445,7 @@
                   . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/file-system/" itemprop="url" rel="index"><span itemprop="name">file_system</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux-system-complie/" itemprop="url" rel="index"><span itemprop="name">Linux system complie</span></a></span>
 
                 
                 
@@ -508,7 +508,10 @@
       
 
       
-        <h1 id="file-system"><a href="#file-system" class="headerlink" title="file_system"></a>file_system</h1><img src="/2019/04/18/file-system/ext2.png">
+        <h1 id="file-system"><a href="#file-system" class="headerlink" title="file_system"></a>file_system</h1><ul>
+<li>文件系统：目录管理结构 + 数据存储；便于访问和读写</li>
+</ul>
+<img src="/2019/04/18/file-system/ext2.png">
 <h2 id="ext2-文件系统"><a href="#ext2-文件系统" class="headerlink" title="ext2 文件系统"></a>ext2 文件系统</h2><h3 id="磁盘分区划分"><a href="#磁盘分区划分" class="headerlink" title="磁盘分区划分"></a>磁盘分区划分</h3><ol>
 <li><p>磁盘分区</p>
 <ul>
@@ -901,7 +904,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1048,11 +1051,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1181,7 +1180,37 @@
                     
                       
                     
-                    <span class="site-state-item-count">58</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>

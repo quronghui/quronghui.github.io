@@ -96,23 +96,23 @@
 
 
 
-  <meta name="description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作   本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台    汇编程序的Hello world 注意在C语言中字符串的末尾隐含有一个’\0’ ，而汇编指示.ascii定义的字符串末尾没有隐含的’\0">
-<meta name="keywords" content="file and io">
+  <meta name="description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作 函数操作的区域是：buffer   系统函数：内核提供给应用程序的接口 sys/xxx 函数操作的区域是：内核     本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台    汇编程序的Hello">
+<meta name="keywords" content="file and IO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="file_and_IO">
 <meta property="og:url" content="http://yoursite.com/2019/04/13/file-and-IO/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作   本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台    汇编程序的Hello world 注意在C语言中字符串的末尾隐含有一个’\0’ ，而汇编指示.ascii定义的字符串末尾没有隐含的’\0">
+<meta property="og:description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作 函数操作的区域是：buffer   系统函数：内核提供给应用程序的接口 sys/xxx 函数操作的区域是：内核     本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台    汇编程序的Hello">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/unbuffer.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/file_descriptor.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/open_and_fopen.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/close.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/13/file-and-IO/running.png">
-<meta property="og:updated_time" content="2019-04-18T06:42:13.262Z">
+<meta property="og:updated_time" content="2019-06-04T07:18:03.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="file_and_IO">
-<meta name="twitter:description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作   本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台    汇编程序的Hello world 注意在C语言中字符串的末尾隐含有一个’\0’ ，而汇编指示.ascii定义的字符串末尾没有隐含的’\0">
+<meta name="twitter:description" content="FIle and IO 本书中库函数和系统函数的区别和联系 库函数：对应的是C的标准库，针对符号的处理和I/O操作 函数操作的区域是：buffer   系统函数：内核提供给应用程序的接口 sys/xxx 函数操作的区域是：内核     本书中讲解的计算机的体系结构：好好学习x86平台 只讲Linux平台的特性，只讲Linux内核的工作原理， 涉及体系结构时只讲x86平台    汇编程序的Hello">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/13/file-and-IO/unbuffer.png">
 
 
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-18 14:42:13" itemprop="dateModified" datetime="2019-04-18T14:42:13+08:00">2019-04-18</time>
+                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
               
             
           </span>
@@ -446,7 +446,7 @@
                   . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/file-and-io/" itemprop="url" rel="index"><span itemprop="name">file and io</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux-system-complie/" itemprop="url" rel="index"><span itemprop="name">Linux system complie</span></a></span>
 
                 
                 
@@ -511,7 +511,14 @@
       
         <h1 id="FIle-and-IO"><a href="#FIle-and-IO" class="headerlink" title="FIle and IO"></a>FIle and IO</h1><ul>
 <li>本书中库函数和系统函数的区别和联系<ul>
-<li>库函数：对应的是C的标准库，针对符号的处理和I/O操作</li>
+<li>库函数：对应的是C的标准库，针对符号的处理和I/O操作<ul>
+<li>函数操作的区域是：buffer</li>
+</ul>
+</li>
+<li>系统函数：内核提供给应用程序的接口 sys/xxx<ul>
+<li>函数操作的区域是：内核</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>本书中讲解的计算机的体系结构：好好学习x86平台<ul>
@@ -522,14 +529,14 @@
 </ul>
 <h2 id="汇编程序的Hello-world"><a href="#汇编程序的Hello-world" class="headerlink" title="汇编程序的Hello world"></a>汇编程序的Hello world</h2><ol>
 <li>注意在C语言中字符串的末尾隐含有一个’\0’ ，而汇编指示.ascii定义的字符串末尾没有隐含的’\0’ 。</li>
-<li>在汇编程序中用.可以取出当前地址计数器的值,是一个常量。</li>
+<li>在汇编程序中用”. xxx”可以取出当前地址计数器的值,是一个常量。</li>
 </ol>
 <h2 id="C标准I-O库函数与Unbuffered-I-O函数"><a href="#C标准I-O库函数与Unbuffered-I-O函数" class="headerlink" title="C标准I/O库函数与Unbuffered I/O函数"></a>C标准I/O库函数与Unbuffered I/O函数</h2><ol>
 <li>对于C标准I/O库来说，打开的文件由FILE *指针标识；</li>
 <li>而对于内核来说，打开的文件由文件描述符标识，文件描述符从open 系统调用获得；</li>
 </ol>
 <h3 id="Unbuffered-I-O-函数"><a href="#Unbuffered-I-O-函数" class="headerlink" title="Unbuffered I/O 函数"></a>Unbuffered I/O 函数</h3><ol>
-<li><p>而Unbuffered I/O函数是UNIX标准的一部分</p>
+<li><p>Unbuffered I/O函数是UNIX标准的一部分</p>
 <ul>
 <li><p>在所有支持C的平台上应该都可以用C标准库函数(除了有些平台的C编译器没有完全符合C标准之外)</p>
 </li>
@@ -550,7 +557,7 @@
 <h3 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h3><ol>
 <li><p>Linux Kernel 中</p>
 <ul>
-<li><p>task_struct  ：维护进程想信息，Process Descriptor</p>
+<li><p>task_struct  ：维护进程信息，Process Descriptor</p>
 <ul>
 <li><p>file_srtuct ：文件描述符表</p>
 <ul>
@@ -746,7 +753,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/file-and-io/" rel="tag"># file and io</a>
+            <a href="/tags/file-and-IO/" rel="tag"># file and IO</a>
           
         </div>
       
@@ -843,7 +850,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -990,11 +997,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1123,7 +1126,37 @@
                     
                       
                     
-                    <span class="site-state-item-count">58</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>

@@ -96,18 +96,21 @@
 
 
 
-  <meta name="description" content="Lucky Smile">
-<meta name="keywords" content="Emebedded Electronic">
+  <meta name="description" content="Socket socket：IP地址 + TCP/UDP 端口号  —– 唯一标识网络通讯中的一个进程 socket pair ：建立连接的两个进程各自有一个socket来标识，两个socket连接 socket API ：TCP/IP协议设计的应用层编程接口。 unix 网络编程 介绍TCP协议的函数接口 最后简要介绍UDP协议和UNIX Domain Socket （套接字）的函数接口。  I">
+<meta name="keywords" content="socket">
 <meta property="og:type" content="article">
 <meta property="og:title" content="socket">
 <meta property="og:url" content="http://yoursite.com/2019/05/08/socket/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="Lucky Smile">
+<meta property="og:description" content="Socket socket：IP地址 + TCP/UDP 端口号  —– 唯一标识网络通讯中的一个进程 socket pair ：建立连接的两个进程各自有一个socket来标识，两个socket连接 socket API ：TCP/IP协议设计的应用层编程接口。 unix 网络编程 介绍TCP协议的函数接口 最后简要介绍UDP协议和UNIX Domain Socket （套接字）的函数接口。  I">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-08T07:44:22.410Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/08/socket/socket_fd.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/08/socket/web_server.png">
+<meta property="og:updated_time" content="2019-06-04T07:18:03.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="socket">
-<meta name="twitter:description" content="Lucky Smile">
+<meta name="twitter:description" content="Socket socket：IP地址 + TCP/UDP 端口号  —– 唯一标识网络通讯中的一个进程 socket pair ：建立连接的两个进程各自有一个socket来标识，两个socket连接 socket API ：TCP/IP协议设计的应用层编程接口。 unix 网络编程 介绍TCP协议的函数接口 最后简要介绍UDP协议和UNIX Domain Socket （套接字）的函数接口。  I">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/08/socket/socket_fd.png">
 
 
 
@@ -403,8 +406,49 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+              
+            
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LinuxC/" itemprop="url" rel="index"><span itemprop="name">LinuxC</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/socket/" itemprop="url" rel="index"><span itemprop="name">socket</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -462,7 +506,285 @@
       
 
       
-        
+        <h1 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h1><ul>
+<li>socket：IP地址 + TCP/UDP 端口号  —– 唯一标识网络通讯中的一个进程</li>
+<li>socket pair ：建立连接的两个进程各自有一个socket来标识，两个socket连接</li>
+<li>socket API ：TCP/IP协议设计的应用层编程接口。 unix 网络编程</li>
+<li>介绍TCP协议的函数接口</li>
+<li>最后简要介绍UDP协议和UNIX Domain Socket （套接字）的函数接口。</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="网络字节序"><a href="#网络字节序" class="headerlink" title="网络字节序"></a>网络字节序</h3><ol>
+<li><p>多字节数据</p>
+<ul>
+<li>多字节数据：看成一个整体，也就是数据流；</li>
+<li>数据流：在内存、磁盘文件存储的时候都是存在顺序的，顺序分为大端和小端；</li>
+<li>网络数据流的<strong>地址</strong>：先发出的数据是低地址，后发出的数据是高地址。</li>
+</ul>
+</li>
+<li><p>TCP/IP协议网络数据流</p>
+<ul>
+<li><p>应采用大端字节序，即低地址 高字节。</p>
+<ul>
+<li>低地址：数据在内存中的存储地址是由低到高的</li>
+<li>高字节：字节在进制数表示时的位置</li>
+</ul>
+</li>
+<li><p>主机和网络字节序</p>
+<ul>
+<li>考虑发送和接收数据方：大端、小端字节序—–需要统一</li>
+</ul>
+</li>
+<li><p>库函数</p>
+<ul>
+<li>网络字节序和主机字节序的转换。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">uint32_t</span> htonl(<span class="keyword">uint32_t</span> hostlong);</span><br><span class="line"><span class="comment">// h表示host,n表示network,to表示转换方向；l表示32位长整数,s表示16位短整数。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果主机是小端字节序,这些函数将参数做相应的大小端转换然后返回,</li>
+<li>如果主机是大端字节序,这些函数不做转换,将参数原封不动地返回。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="socket地址的数据类型"><a href="#socket地址的数据类型" class="headerlink" title="socket地址的数据类型"></a>socket地址的数据类型</h3><ol>
+<li><p>socket API</p>
+<ul>
+<li>是一层抽象的网络编程接口，适用于各种底层网络协议：IPv4、IPv6，UNIX Domain Socket。</li>
+<li>然而,各种网络协议的地址格式并不相同</li>
+</ul>
+</li>
+<li><p>socket 地址结构体</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="selector-id">#include</span> &lt;sys/socket<span class="selector-class">.h</span> &gt;	<span class="comment">//介绍程序中用到的socket API函数</span></span><br><span class="line">$ <span class="selector-id">#include</span> &lt;netinet/<span class="keyword">in</span>.h&gt; 	<span class="comment">// IPv4和IPv6的地址格式定义</span></span><br><span class="line">$ sockaddr_in 结构体		<span class="comment">// 表示IPV4的地址，,包括16位端口号和32位IP地址</span></span><br><span class="line">$ sockaddr_in6 结构体		<span class="comment">// 表示IPv6地址包括16位端口号、128位IP地址</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>各种socket地址结构体的开头都是相同的；</li>
+<li>前16位表示整个结构体的长度；</li>
+<li>后16位表示地址类型<ul>
+<li>IPv4 – AF_INET、IPv6 – AF_INET6；Unix Domain Socket – AF_UNIX</li>
+</ul>
+</li>
+<li>socket API可以接受各种类型的sockaddr结构体指针做参数<ul>
+<li>参数都用struct sockaddr *类型强制转换一下</li>
+<li>bind、accept、connect等函数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>IPV4 的socket网络编程</p>
+<ul>
+<li><p>sockaddr_in中的成员struct in_addr sin_addr表示32位的IP地址。</p>
+</li>
+<li><p>我们通常用点分十进制的<strong>字符串</strong>表示IP地址</p>
+</li>
+<li><p>字符串(10进制) 转 in_addr (十六进制)的函数:</p>
+
+<ul>
+<li>其中inet_pton和inet_ntop不仅可以转换IPv4的in_addr,还可以转换IPv6的in6_addr</li>
+<li>函数的接口是void *addrptr。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="基于TCP协议的网络程序"><a href="#基于TCP协议的网络程序" class="headerlink" title="基于TCP协议的网络程序"></a>基于TCP协议的网络程序</h2><ol>
+<li><p>client to server</p>
+
+<ul>
+<li>函数操作过程中：没有数据到达时，进行阻塞等待</li>
+</ul>
+</li>
+<li><p>关闭连接</p>
+<ul>
+<li>调用close()：任何一方调用close()后,连接的两个传输方向都关闭,不能再发送数据了。</li>
+<li>调用shutdown()：如果一方调用shutdown()则连接处于半关闭状态,仍可接收对方发来的数据。</li>
+</ul>
+</li>
+<li><p>学习socket API时要注意应用程序和TCP协议层是如何交互的:</p>
+<ul>
+<li>调用connect()会发出SYN段 </li>
+<li>如read()返回0就表明收到了FIN段</li>
+</ul>
+</li>
+</ol>
+<h3 id="TCP-网络程序"><a href="#TCP-网络程序" class="headerlink" title="TCP 网络程序"></a>TCP 网络程序</h3><ul>
+<li><a href="https://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener">socket / server.c</a></li>
+</ul>
+<h4 id="server"><a href="#server" class="headerlink" title="server"></a>server</h4><ul>
+<li>完成server的全过程</li>
+</ul>
+<ol>
+<li><p>socket()函数</p>
+<ul>
+<li>socket()打开一个网络通讯端口，成功返回的文件描述符</li>
+<li>网络通讯端口：就像是一个文件一样，有了文件描述符，便能对一个文件进行读写操作</li>
+</ul>
+</li>
+<li><p>bind()函数</p>
+<ul>
+<li>服务器程序：需要调用bind绑定一个固定的网络地址和端口号，为了方便客户端的连接<ul>
+<li>内核分配的话：每次都会发生改变</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *myaddr, <span class="keyword">socklen_t</span></span></span></span><br><span class="line"><span class="function"><span class="params">addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>bind()的作用是将参数sockfd和myaddr绑定在一起,使sockfd这个用于网络通讯的文件描述符监听myaddr所描述的地址和端口号。</li>
+<li>struct sockaddr *是一个通用指针类型，myaddr参数实际上可以接受多种协议的sockaddr结构体</li>
+<li>myaddr 初始化之后，才能用bind()函数</li>
+</ul>
+</li>
+<li><p>网络地址</p>
+<ul>
+<li>IPV4 或者是IPV6</li>
+<li>INADDR_ANY 参数目前还不知道哪里找到的；<ul>
+<li>表示本地的任意IP地址,</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>两个文件描述符</p>
+<ul>
+<li>accept()的参数listenfd是先前的监听文件描述符；</li>
+<li>而accept()的返回值是另外一个文件描述符connfd，之后与客户端之间就通过这个connfd通讯<ul>
+<li>之后与客户端之间就通过这个connfd通讯,</li>
+<li>再次回到循环开头listenfd仍然用作accept的参数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="client"><a href="#client" class="headerlink" title="client"></a>client</h3><ol>
+<li><p>connect()</p>
+<ul>
+<li>connect和bind的参数形式一致</li>
+<li>区别在于bind的参数是自己的地址</li>
+<li>而connect的参数是对方的地址。</li>
+</ul>
+</li>
+<li><p>运行</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> ./server	<span class="comment">// 启动server</span></span><br><span class="line"><span class="symbol">$</span> netstat  -apn|grep <span class="number">8000</span> 	<span class="comment">// 得到此时开启的tcp的源地址和端口号</span></span><br><span class="line"><span class="symbol">$</span> ./client	advvv	<span class="comment">// 启动客户端</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>socket文件描述符</p>
+<ul>
+<li>一个socket文件描述符对应一个socket pair</li>
+<li>,也就是源地址:源端口号和目的地址:目的端口号,也对应一个TCP连接。</li>
+</ul>
+<img src="/2019/05/08/socket/socket_fd.png">
+</li>
+</ol>
+<h3 id="错误处理和读写控制"><a href="#错误处理和读写控制" class="headerlink" title="错误处理和读写控制"></a>错误处理和读写控制</h3><ul>
+<li><a href="https://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener">socket / wrap.c </a></li>
+</ul>
+<ol>
+<li>针对文件读写的一个错误信息跳转</li>
+<li>信号重连接<ul>
+<li>慢系统调用accept、read和write被信号中断时应该重试。</li>
+<li>connect虽然也会阻塞,但是被信号中断时不能立刻重试。</li>
+</ul>
+</li>
+<li>如果应用层协议的各字段长度固定,用readn来读是非常方便的。<ul>
+<li>字段长度固定的协议往往不够灵活,难以适应新的变化。</li>
+<li>TFTP协议的各字段是可变长的</li>
+</ul>
+</li>
+<li>常见的应用层协议都是带有可变长字段的<ul>
+<li>可变长字段的协议用readn来读就很不方便了,为此我们实现一个类似于fgets的readline函数</li>
+</ul>
+</li>
+</ol>
+<h3 id="server-and-client-多用户处理"><a href="#server-and-client-多用户处理" class="headerlink" title="server and client 多用户处理"></a>server and client 多用户处理</h3><ol>
+<li><p>client改为交互式输入</p>
+<ul>
+<li>不断从终端接受用户输入并和server交互</li>
+<li>修改 [socket_api/TCP/client.c] </li>
+</ul>
+</li>
+<li><p>server 修改，可以多次处理同一客户端的请求。</p>
+</li>
+<li><p>fork() 并发 处理多个client的请求</p>
+<ul>
+<li>父进程专门负责监听端口，每次accept一个新的客户端连接就fork出一个子进程专门服务这个客户端。</li>
+</ul>
+</li>
+<li><p>setsockopt</p>
+<ul>
+<li>在同一个终端，关闭server后，还能重新开启server</li>
+<li>表示创建端口号相同，但IP地址不同的多个socket描述符。</li>
+</ul>
+</li>
+<li><p>select </p>
+<ul>
+<li><p>*   1)select是网络程序中很常用的一个系统调用,它可以同时监听多个阻塞的文件描述符</p>
+<p>*   2)不需要fork和多进程就可以实现并发服务的server。</p>
+<p>*   3) 未使用</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="基于UDP的网络编程"><a href="#基于UDP的网络编程" class="headerlink" title="基于UDP的网络编程"></a>基于UDP的网络编程</h2><ol>
+<li>udp 中的采用的是数据报文，并非流 SOCK_STREAM –&gt; SOCK_DGRAM </li>
+<li>UDP 不用考虑多个client的链接<ul>
+<li>不用考虑同意终端关闭server后不能重新开启的现象</li>
+</ul>
+</li>
+</ol>
+<h2 id="UNIX-Domain-Socket-IPC"><a href="#UNIX-Domain-Socket-IPC" class="headerlink" title="UNIX Domain Socket IPC"></a>UNIX Domain Socket IPC</h2><ol>
+<li><p>网络socket</p>
+<ul>
+<li>用于同一台主机的进程间通讯(通过loopback地Domain Soc址127.0.0.1)</li>
+</ul>
+</li>
+<li><p>UNIX Domain Socket</p>
+<ul>
+<li>socket API原本是为网络通讯设计的，但后来在socket的框架上发展出一种IPC机制</li>
+<li>不需要经过网络协议栈,不需要打包拆包、计算校验和、维护序号和应答等<ul>
+<li>只是将应用层数据从一个进程拷贝到另一个进程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>IPC机制：本质上是可靠的通讯，而网络协议是为不可靠的通讯设计的。</p>
+</li>
+<li><p>UNIX Domain Socket</p>
+<ul>
+<li>提供面向流和面向数据包两种API接口，类似于TCP和UDP</li>
+<li>但是面向消息的UNIX Domain Socket也是可靠的,消息既不会丢失也不会顺序错乱。</li>
+</ul>
+</li>
+<li><p>区别</p>
+<p>|                  | UNIX Domain Socket                                   | 网络socket       |<br>| —————- | —————————————————- | —————- |<br>| socket文件描述符 | fd = sock()                                          | fd = sock()      |<br>| address family   | AF_UNIX                                              | AF_INET          |<br>| type             | 择SOCK_DGRAM或SOCK_STREAM                            | tcp/udp 区分     |<br>| 地址格式         | sockaddr_un                                          | sockaddr_in      |<br>| socket地址       | socket类型的文件在文件系统中的路径                   | 是IP地址加端口号 |<br>| connect()        | 客户端要显式调用bind函数，而不依赖系统自动分配的地址 |                  |</p>
+<ul>
+<li>客户端bind一个自己指定的socket文件名的好处是：<ul>
+<li>该文件名可以包含客户端的pid以便服务器区分不同的客户端。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Web-server"><a href="#Web-server" class="headerlink" title="Web server"></a>Web server</h2><ul>
+<li>web服务器对浏览器的处理方式</li>
+</ul>
+<ol>
+<li><p>浏览器 —-&gt; 发送http协议请求  —&gt;  web server</p>
+<ul>
+<li><p>input ：IP + Port</p>
+</li>
+<li><p>HTTP 的协议头</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="meta">GET</span> / HTTP/<span class="number">1</span>.<span class="number">1</span>	// 第一行是<span class="meta">GET</span>请求和协议版本</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>web server —&gt; 将对应目录下的索引页(默认的根目录/(在是index.html) —- &gt;  发送给浏览器</p>
+<ul>
+<li>格式应答</li>
+</ul>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK		// 是协议版本和应答码；<span class="number">200</span>--标示成功，ok可以随意写</span><br><span class="line">Content-Type: <span class="type">text</span>/html	//为MIME类型--<span class="type">text</span>/html；纯文本是<span class="type">text</span>/plain；图							片则是image/jpg</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><span class="xml"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Test Page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><span class="xml"></span></span><br><span class="line"><span class="xml"></span><span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">		</span><span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Test OK<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><span class="xml"></span></span><br><span class="line"><span class="xml">		</span><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">'mypic.jpg'</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><span class="xml"></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>而HTTP协议规定服务器主动关闭连接</li>
+</ul>
+<img src="/2019/05/08/socket/web_server.png"></li>
+</ol>
+
       
     </div>
 
@@ -483,6 +805,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/socket/" rel="tag"># socket</a>
+          
+        </div>
+      
 
       
       
@@ -501,6 +829,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/14/data-struct-algorithm/" rel="prev" title="data_struct_algorithm">
+                data_struct_algorithm <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -545,8 +877,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -563,7 +904,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -710,11 +1051,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -843,7 +1180,37 @@
                     
                       
                     
-                    <span class="site-state-item-count">58</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -868,6 +1235,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Socket"><span class="nav-number">1.</span> <span class="nav-text">Socket</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络字节序"><span class="nav-number">1.1.1.</span> <span class="nav-text">网络字节序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#socket地址的数据类型"><span class="nav-number">1.1.2.</span> <span class="nav-text">socket地址的数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于TCP协议的网络程序"><span class="nav-number">1.2.</span> <span class="nav-text">基于TCP协议的网络程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-网络程序"><span class="nav-number">1.2.1.</span> <span class="nav-text">TCP 网络程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#server"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">server</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#client"><span class="nav-number">1.2.2.</span> <span class="nav-text">client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误处理和读写控制"><span class="nav-number">1.2.3.</span> <span class="nav-text">错误处理和读写控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server-and-client-多用户处理"><span class="nav-number">1.2.4.</span> <span class="nav-text">server and client 多用户处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于UDP的网络编程"><span class="nav-number">1.3.</span> <span class="nav-text">基于UDP的网络编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UNIX-Domain-Socket-IPC"><span class="nav-number">1.4.</span> <span class="nav-text">UNIX Domain Socket IPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-server"><span class="nav-number">1.5.</span> <span class="nav-text">Web server</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

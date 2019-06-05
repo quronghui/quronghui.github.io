@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Sort ways 数据结构：考虑数据的存储方式，数据的快速查找和取出  排序前提 假设： 1）数组中元素类型为整数； 2）内部排序：整个排序工作在主存中完成 3）外部排序：在磁盘上完成排序  算法： 1）每个算法都将接受一个含有元素的数组和一个包含元素个数的整数。   内部排序插入排序 算法：  每次取后一个元素，和前面已排好序的数组进行比较；  1）每次都是取后一个元素p，和前面的数组进行比较">
+<meta name="keywords" content="sort">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sort_ways">
+<meta property="og:url" content="http://yoursite.com/2019/05/22/Sort-ways/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="Sort ways 数据结构：考虑数据的存储方式，数据的快速查找和取出  排序前提 假设： 1）数组中元素类型为整数； 2）内部排序：整个排序工作在主存中完成 3）外部排序：在磁盘上完成排序  算法： 1）每个算法都将接受一个含有元素的数组和一个包含元素个数的整数。   内部排序插入排序 算法：  每次取后一个元素，和前面已排好序的数组进行比较；  1）每次都是取后一个元素p，和前面的数组进行比较">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/Sort-ways/shell_sort.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/Sort-ways/Decision.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/22/Sort-ways/de_tree.png">
+<meta property="og:updated_time" content="2019-06-04T07:18:03.344Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sort_ways">
+<meta name="twitter:description" content="Sort ways 数据结构：考虑数据的存储方式，数据的快速查找和取出  排序前提 假设： 1）数组中元素类型为整数； 2）内部排序：整个排序工作在主存中完成 3）外部排序：在磁盘上完成排序  算法： 1）每个算法都将接受一个含有元素的数组和一个包含元素个数的整数。   内部排序插入排序 算法：  每次取后一个元素，和前面已排好序的数组进行比较；  1）每次都是取后一个元素p，和前面的数组进行比较">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/22/Sort-ways/shell_sort.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/22/Sort-ways/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Sort_ways | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/Sort-ways/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Sort_ways
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-05-22 08:40:47" itemprop="dateCreated datePublished" datetime="2019-05-22T08:40:47+08:00">2019-05-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/data-struct-algorithm/" itemprop="url" rel="index"><span itemprop="name">data_struct_algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Sort-ways"><a href="#Sort-ways" class="headerlink" title="Sort ways"></a>Sort ways</h1><ul>
+<li>数据结构：考虑数据的存储方式，数据的快速查找和取出</li>
+</ul>
+<h2 id="排序前提"><a href="#排序前提" class="headerlink" title="排序前提"></a>排序前提</h2><ol>
+<li><p>假设：</p>
+<p>1）数组中元素类型为整数；</p>
+<p>2）内部排序：整个排序工作在主存中完成</p>
+<p>3）外部排序：在磁盘上完成排序</p>
+</li>
+<li><p>算法：</p>
+<p>1）每个算法都将接受一个含有元素的数组和一个包含元素个数的整数。</p>
+</li>
+</ol>
+<h2 id="内部排序"><a href="#内部排序" class="headerlink" title="内部排序"></a>内部排序</h2><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><ol>
+<li><p>算法：</p>
+<ul>
+<li>每次取后一个元素，和前面已排好序的数组进行比较；</li>
+</ul>
+<p>1）每次都是取后一个元素p，和前面的数组进行比较，如果比p大，那么就往后移一位，替换覆盖；</p>
+<p>2）前面的数组都是排好序的；</p>
+<p>3）以前的想法：每一个元素：和所有的元素比较，先找出最小值</p>
+</li>
+<li><p>插入排序的运行时间</p>
+<ul>
+<li>反序输入：O(N^2)</li>
+<li>正序输入：O(N) – 元素不需要排序，将元素输入到数组需要花时间</li>
+</ul>
+</li>
+</ol>
+<h3 id="逆序"><a href="#逆序" class="headerlink" title="逆序"></a>逆序</h3><ol>
+<li>逆序性质<ul>
+<li>当 i &lt; j,  a[ i ] &gt; a[ j ] ：这边是一个逆序对（  a[ i ] ， a[ j ] ）</li>
+<li>I = 是数组中的逆序对数；</li>
+<li>排序好的数组是没有逆序的，所以插入排序运行时间 O(I + N);</li>
+<li>交换相邻的两个元素，相当于交换逆序对。</li>
+</ul>
+</li>
+<li>插入排序<ul>
+<li>互异数：假设没有重复的数；</li>
+<li>在插入排序的时候，每次比较交换删除的不止一个逆序对</li>
+</ul>
+</li>
+</ol>
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><ol>
+<li><p>算法：</p>
+<ul>
+<li>比较相距一定间隔的元素来工作，各趟比较所用的距离h(k)，随算法的进行而减小，直到只比较相邻元素的最后一趟排序为止</li>
+</ul>
+</li>
+<li><p>shell缩小增量序列</p>
+<ul>
+<li><p>1）用 a[i] 数组和 a[ i + h(k) ]进行比较；</p>
+<p>2）初始值：h(k) = N/2 ; </p>
+<p>3）递减：h(k) = h(k) / 2</p>
+</li>
+</ul>
+</li>
+<li><p>希尔比较的方式</p>
+<img src="/2019/05/22/Sort-ways/shell_sort.jpg">
+</li>
+<li><p>增量的选择</p>
+<ul>
+<li>使用 shell 的希尔增量最坏情况 O(N^2)，类似插入排序</li>
+<li>使用 hibbard 的希尔增量最坏情况 O(N ^ (3/2))</li>
+<li>sedgewick 增量排序：其他的几种增量形式，降低运行时间；</li>
+</ul>
+</li>
+</ol>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><ol>
+<li><p>算法：</p>
+<ul>
+<li>通过优先队列方式：进行delete_min，得到排序数组；</li>
+<li>优先队列花费时间O(N * log N)，只是需要附加数组</li>
+</ul>
+</li>
+<li><p>delete_min 实现</p>
+<ul>
+<li><p>每次将最后的单元，存放刚刚删除的元素，得到从小到大的排序数组</p>
+<p>1）delete_min 删除最后的元素后，整个堆以递减的顺序得到数组–max 堆；</p>
+<p>2）现实中构建的堆：和二叉堆的性质相反之处 – （任一节点的关键字大于其儿子节点的关键字）；</p>
+<p>3）delete_min：得到从小到大的排序数组</p>
+</li>
+<li><p>和二叉堆不同的是：0位置包含元素</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><ol>
+<li><p>算法</p>
+<ul>
+<li><p>合并两个已经排序的表，将两个表插入到第三个表中完成排序</p>
+</li>
+<li><p>N 为元素的总数：</p>
+<p>1）将N分为前 / 后半部分数据各自递归排序；</p>
+<p>2）将排好序的两部分进行合并，两个指针分别指向A,B；每次比较后插入一个元素；直到最后一次比较，插入两个数据</p>
+<p>3）得到一个排序数组</p>
+</li>
+</ul>
+</li>
+<li><p>归并排序</p>
+<ul>
+<li>运行时间：O(N * log N)</li>
+<li>归并排序：递归排序</li>
+</ul>
+</li>
+</ol>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><ol>
+<li>快速排序<ul>
+<li>当枢纽元位于中间，平均时间 = O(N log N);</li>
+<li>当枢纽元选择为最小元素，最坏的情况 = O(N^2);</li>
+<li>类似于归并排序，快速排序也是归并排序；</li>
+</ul>
+</li>
+<li><p>快排算法</p>
+<ul>
+<li>假设：元素互异</li>
+<li>在数组中选择枢纽元 v；</li>
+<li>将数组<strong>分割</strong>为三部分，a [left] = { x  &lt;  v }；a[center] = {v} ; a[right] = { x  &gt;  v }；</li>
+<li>三部分各自排序后，组合在一起</li>
+</ul>
+</li>
+<li><p>枢纽元选择：</p>
+<ul>
+<li>三数中值分割法 ：选择中间</li>
+<li>v = [ ( left + right) / 2 ]</li>
+</ul>
+</li>
+<li><p>分割策略：</p>
+<p>1）将枢纽元与最后元素交换，使得枢纽元离开要被分割的数据段；</p>
+<p>2）i从第一个元素开始；j从倒数第二个元素开始；相对于枢纽元，i和j的元素才交换</p>
+<p>3）将所有小元素移到左边，大元素移到右边；</p>
+<p>4）当i 和j交错时，停止移动，此时 i指向一个大元素，j指向一个小元素；</p>
+<p>5）将枢纽元和i的元素交换</p>
+<p>6）分割策略注意：当i和j遇到和枢纽p相同时，i和j停止移动</p>
+</li>
+</ol>
+<h3 id="排序的下界-–-决策树"><a href="#排序的下界-–-决策树" class="headerlink" title="排序的下界 – 决策树"></a>排序的下界 – 决策树</h3><ol>
+<li><p>决策树：用于证明下届的抽象概念；</p>
+<ul>
+<li>决策树：一颗二叉树；</li>
+</ul>
+</li>
+<li><p>决策树表示：</p>
+<ul>
+<li><p>只是用比较进行排序的算法，都可以通过决策树表示；</p>
+</li>
+<li><p>决策树：只有输入数据非常少的情况下决策树才是可行的。</p>
+<ul>
+<li>画出 a, b, c三个元素的比较情况</li>
+<li>每次是两个元素的比较，进行分支</li>
+</ul>
+<img src="/2019/05/22/Sort-ways/Decision.png">
+</li>
+</ul>
+</li>
+<li><p>决策树的性质</p>
+<ul>
+<li><p>1）深度为k的决策树（二叉树），最多有(2^k)个树叶；</p>
+<p>2）反之，具有L片树叶的深度至少是log L</p>
+</li>
+<li><p>比较次数 = 决策树的深度；</p>
+</li>
+<li><p>只使用元素间比较的任何排序算法，需要进行</p>
+</li>
+</ul>
+<img src="/2019/05/22/Sort-ways/de_tree.png">
+</li>
+</ol>
+<h3 id="桶式排序"><a href="#桶式排序" class="headerlink" title="桶式排序"></a>桶式排序</h3><ol>
+<li>桶式排序提供了一个前提：<ul>
+<li>输入数据都需要小于一个M的整数</li>
+</ul>
+</li>
+</ol>
+<h2 id="外部排序"><a href="#外部排序" class="headerlink" title="外部排序"></a>外部排序</h2><ol>
+<li><p>外部排序的限制</p>
+<ul>
+<li>内部排序算法：将数据装入内存，这样数据的访问便可以不按顺序进行；</li>
+<li>外部排序：数据的输入输出是在物理设备上，只能按照顺序访问；</li>
+</ul>
+</li>
+<li><p>外部排序的模型：</p>
+<ul>
+<li>外部排序比内部排序对设备依赖性更高；</li>
+<li>建立的模型：在磁带上进行；<ul>
+<li>访问某个元素时，需要把磁带转动到正确位置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>算法：</p>
+<ul>
+<li>使用归并排序的merge例程；</li>
+<li>四个磁带空间：不停地将两个磁带中的数据（顺串）作为输入，另外两个磁带空间作为输出；直到所有的顺串合并为一个长的顺串；</li>
+<li>顺串：将每组排过序的记录叫做顺串；</li>
+</ul>
+</li>
+<li><p>merge算法进过的次数</p>
+<ul>
+<li><p>这个算法是两路merge：两个输入，两个输出</p>
+</li>
+<li><p>算法需要 [ log( N/M )]趟工作，每次合并2^n个数据；</p>
+<p>1）N：总得自己数；</p>
+<p>2）M：内存的大小；</p>
+<p>3）N/M：数据被分成多少个顺串；</p>
+</li>
+</ul>
+</li>
+<li><p>多路合并merge</p>
+<ul>
+<li><p>两路合并：只需要比较两个元素的最小值；</p>
+</li>
+<li><p>k路合并：</p>
+<ul>
+<li><p>每次需要比较k个元素的最小值；</p>
+</li>
+<li><p>1）优先队列的方法，delete_min</p>
+</li>
+<li><p>2) 算法需要 [ log(k) [ N/M ] ]趟工作，每次以2^n进行合并；</p>
+</li>
+<li><p>3）十盘磁带：k = 5；一半作为输入，一半作为输出；</p>
+</li>
+</ul>
+</li>
+<li><p>k路合并，需要2k盘磁带</p>
+</li>
+</ul>
+</li>
+<li><p>多相合并</p>
+<ul>
+<li>k 路合并，需要（k+1）盘磁带<ul>
+<li>为了减小磁带数量</li>
+</ul>
+</li>
+<li>顺串最初的分配有很大的关系，决定后续多少趟的进行；<ul>
+<li>顺串不均分在k个磁带上，第（k+1）个磁带用于输出数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>替换选择</p>
+<ul>
+<li><p>目的：考虑顺串的构造</p>
+</li>
+<li><p>替换选择</p>
+<ul>
+<li><p>1）首先读入M个记录放在队列上，然后delete_min将最小值输出到磁带上；</p>
+<p>2）读入下一个记录是和 最小值比较，大于–放入优先对列；(二叉堆的构建)</p>
+<p>3）优先队列少一个元素，将小于每次delete_min的元素，存入优先队列的死区，直到顺串完成构建；</p>
+<p>4）这个元素用于下一个顺串；（堆排序的做法：最小值取出后放在最后一个位置）</p>
+<p>5）持续上述做法，直到优先队列大小为0，完成顺串构建</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>内部排序算法的选择：<ul>
+<li>插入排序；希尔排序；快速排序；</li>
+<li>通过数据的输入量的大小决定</li>
+</ul>
+</li>
+<li>外部排序算法：<ul>
+<li>合并 merge 是中心思想</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sort/" rel="tag"># sort</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/19/priority-queue/" rel="next" title="priority_queue">
+                <i class="fa fa-chevron-left"></i> priority_queue
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/24/Union-ADT/" rel="prev" title="Union_ADT">
+                Union_ADT <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sort-ways"><span class="nav-number">1.</span> <span class="nav-text">Sort ways</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序前提"><span class="nav-number">1.1.</span> <span class="nav-text">排序前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部排序"><span class="nav-number">1.2.</span> <span class="nav-text">内部排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">1.2.1.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逆序"><span class="nav-number">1.2.2.</span> <span class="nav-text">逆序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序"><span class="nav-number">1.2.3.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">1.2.4.</span> <span class="nav-text">堆排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">1.2.5.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序"><span class="nav-number">1.2.6.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序的下界-–-决策树"><span class="nav-number">1.2.7.</span> <span class="nav-text">排序的下界 – 决策树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桶式排序"><span class="nav-number">1.2.8.</span> <span class="nav-text">桶式排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外部排序"><span class="nav-number">1.3.</span> <span class="nav-text">外部排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

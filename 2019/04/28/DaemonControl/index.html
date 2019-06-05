@@ -96,19 +96,19 @@
 
 
 
-  <meta name="description" content="DaemonControlTerminalIntroduction 控制终端(Controlling Terminal)  用户通过终端登录系统后得到一个Shell进程，这个终端成为Shell进程的控制终端 控制终端是保存在PCB中的信息 每个进程的标准输入、标准输出和标准错误输出都指向控制终端 在控制终端输入一些特殊的控制键可以给前台进程发信号 例如 Ctrl-C表示SIGINT Ctrl-\">
+  <meta name="description" content="Daemon Control 作业控制：将进程放在前台或者后台执行 守护进程：即使关闭了terminal，进程也能继续执行  TerminalIntroduction 控制终端(Controlling Terminal)  用户通过终端登录系统后得到一个Shell进程，这个终端成为Shell进程的控制终端 控制终端是保存在PCB中的信息 每个进程的标准输入、标准输出和标准错误输出都指向控制终端 在">
 <meta name="keywords" content="Daemon,Control">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DaemonControl">
 <meta property="og:url" content="http://yoursite.com/2019/04/28/DaemonControl/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="DaemonControlTerminalIntroduction 控制终端(Controlling Terminal)  用户通过终端登录系统后得到一个Shell进程，这个终端成为Shell进程的控制终端 控制终端是保存在PCB中的信息 每个进程的标准输入、标准输出和标准错误输出都指向控制终端 在控制终端输入一些特殊的控制键可以给前台进程发信号 例如 Ctrl-C表示SIGINT Ctrl-\">
+<meta property="og:description" content="Daemon Control 作业控制：将进程放在前台或者后台执行 守护进程：即使关闭了terminal，进程也能继续执行  TerminalIntroduction 控制终端(Controlling Terminal)  用户通过终端登录系统后得到一个Shell进程，这个终端成为Shell进程的控制终端 控制终端是保存在PCB中的信息 每个进程的标准输入、标准输出和标准错误输出都指向控制终端 在">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/04/28/DaemonControl/session.png">
-<meta property="og:updated_time" content="2019-05-05T03:10:33.627Z">
+<meta property="og:updated_time" content="2019-06-04T07:18:03.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DaemonControl">
-<meta name="twitter:description" content="DaemonControlTerminalIntroduction 控制终端(Controlling Terminal)  用户通过终端登录系统后得到一个Shell进程，这个终端成为Shell进程的控制终端 控制终端是保存在PCB中的信息 每个进程的标准输入、标准输出和标准错误输出都指向控制终端 在控制终端输入一些特殊的控制键可以给前台进程发信号 例如 Ctrl-C表示SIGINT Ctrl-\">
+<meta name="twitter:description" content="Daemon Control 作业控制：将进程放在前台或者后台执行 守护进程：即使关闭了terminal，进程也能继续执行  TerminalIntroduction 控制终端(Controlling Terminal)  用户通过终端登录系统后得到一个Shell进程，这个终端成为Shell进程的控制终端 控制终端是保存在PCB中的信息 每个进程的标准输入、标准输出和标准错误输出都指向控制终端 在">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/28/DaemonControl/session.png">
 
 
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-05-05 11:10:33" itemprop="dateModified" datetime="2019-05-05T11:10:33+08:00">2019-05-05</time>
+                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
               
             
           </span>
@@ -442,7 +442,7 @@
                   . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Daemon/" itemprop="url" rel="index"><span itemprop="name">Daemon</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux-system-complie/" itemprop="url" rel="index"><span itemprop="name">Linux system complie</span></a></span>
 
                 
                 
@@ -505,7 +505,11 @@
       
 
       
-        <h1 id="DaemonControl"><a href="#DaemonControl" class="headerlink" title="DaemonControl"></a>DaemonControl</h1><h2 id="Terminal"><a href="#Terminal" class="headerlink" title="Terminal"></a>Terminal</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><ol>
+        <h1 id="Daemon-Control"><a href="#Daemon-Control" class="headerlink" title="Daemon Control"></a>Daemon Control</h1><ul>
+<li>作业控制：将进程放在前台或者后台执行</li>
+<li>守护进程：即使关闭了terminal，进程也能继续执行</li>
+</ul>
+<h2 id="Terminal"><a href="#Terminal" class="headerlink" title="Terminal"></a>Terminal</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><ol>
 <li><p>控制终端(Controlling Terminal)</p>
 <ul>
 <li>用户通过终端登录系统后得到一个Shell进程，这个终端成为Shell进程的控制终端</li>
@@ -703,8 +707,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/26/LinuxCSignal/" rel="next" title="LinuxCSignal">
-                <i class="fa fa-chevron-left"></i> LinuxCSignal
+              <a href="/2019/04/26/LinuxCSignal/" rel="next" title="LinuxC Signal">
+                <i class="fa fa-chevron-left"></i> LinuxC Signal
               </a>
             
           </div>
@@ -787,7 +791,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -934,11 +938,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1067,7 +1067,37 @@
                     
                       
                     
-                    <span class="site-state-item-count">58</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1103,7 +1133,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DaemonControl"><span class="nav-number">1.</span> <span class="nav-text">DaemonControl</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Terminal"><span class="nav-number">1.1.</span> <span class="nav-text">Terminal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Terminal-Login"><span class="nav-number">1.1.2.</span> <span class="nav-text">Terminal Login</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Network-Login"><span class="nav-number">1.1.3.</span> <span class="nav-text">Network Login</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jobs-Control"><span class="nav-number">1.2.</span> <span class="nav-text">Jobs Control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Session-和进程组"><span class="nav-number">1.2.1.</span> <span class="nav-text">Session 和进程组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与作业控制有关的信号"><span class="nav-number">1.2.2.</span> <span class="nav-text">与作业控制有关的信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Daemon-Process"><span class="nav-number">1.2.3.</span> <span class="nav-text">Daemon Process</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Daemon-Control"><span class="nav-number">1.</span> <span class="nav-text">Daemon Control</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Terminal"><span class="nav-number">1.1.</span> <span class="nav-text">Terminal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Terminal-Login"><span class="nav-number">1.1.2.</span> <span class="nav-text">Terminal Login</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Network-Login"><span class="nav-number">1.1.3.</span> <span class="nav-text">Network Login</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jobs-Control"><span class="nav-number">1.2.</span> <span class="nav-text">Jobs Control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Session-和进程组"><span class="nav-number">1.2.1.</span> <span class="nav-text">Session 和进程组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与作业控制有关的信号"><span class="nav-number">1.2.2.</span> <span class="nav-text">与作业控制有关的信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Daemon-Process"><span class="nav-number">1.2.3.</span> <span class="nav-text">Daemon Process</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
