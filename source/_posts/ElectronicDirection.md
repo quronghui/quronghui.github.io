@@ -43,7 +43,7 @@ tags: Electronic Direction
 
 ### LinuxC
 
-1. LinuxC 编程一站式学习 -- ok
+1. LinuxC 编程一站式学习 --  2019.2.14 - 5.14
 2. [C和指针.pdf](https://github.com/mymmsc/books/blob/master/c/C和指针.pdf)
 3. [C专家编程.pdf](https://github.com/mymmsc/books/blob/master/c/C专家编程.pdf)
 4. 深入理解Linux 内核
@@ -52,19 +52,17 @@ tags: Electronic Direction
 ### data struct
 
 + [data struct](https://www.infoq.cn/article/ur1QLockeQ*hXobPm0kI)
-+ [[数据结构与算法分析：C语言描述_原书第2版_高清版.pdf](https://github.com/Bzhnja/ebooks/blob/master/数据结构与算法分析：C语言描述_原书第2版_高清版.pdf)]
-
-### 面试
++ [[数据结构与算法分析：C语言描述_原书第2版_高清版.pdf](https://github.com/Bzhnja/ebooks/blob/master/数据结构与算法分析：C语言描述_原书第2版_高清版.pdf)] -- 2019.5.14 - 5.27
 
 ### algorithm
 
 2. [凸优化，嵌入式的算法模型](https://github.com/KeKe-Li/book/tree/master/AI)
 3. [C++ Primer第五版中文版](http://itbook1234.com/134.html)
-4. [现代操作系统 原书第4版](https://pan.baidu.com/s/1EnlH0saLicZo1uobE7cmBQ)
-   
-   + 提取码：j5p9
-   
-   
+
+### system
+
+1. [现代操作系统 原书第4版](https://pan.baidu.com/s/1EnlH0saLicZo1uobE7cmBQ)
+   - 提取码：j5p9
 
 ## Tools
 

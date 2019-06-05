@@ -220,8 +220,8 @@ tags: [tree]
 1. 情形一：之字形 zig-zag
    + AVL那样的双旋转
 2. 情形二：一字形 zig-zig
-   + 只是将左子树换成右子树；
-   + 不进行AVL的旋转
+
+{% asset_img one_tree.png %}
 
 ## 树的遍历
 
