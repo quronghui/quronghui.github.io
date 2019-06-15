@@ -113,7 +113,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/Default_value.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/Default_value1.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/21/Makefiles/CFLAGS.png">
-<meta property="og:updated_time" content="2019-06-04T07:18:03.316Z">
+<meta property="og:updated_time" content="2019-06-12T09:21:12.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Makefile">
 <meta name="twitter:description" content="Makefile 基础  Link code  – Makefiles 注释是 “#”  Makefile 基本规则Makefile 例子 12345678main: main.o stack.o maze.o		gcc main.o stack.o maze.o -o mainmain.o: main.c main.h stack.h maze.h		gcc -c main.cstack.o:">
@@ -426,7 +426,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+                <time title="Updated at: 2019-06-12 17:21:12" itemprop="dateModified" datetime="2019-06-12T17:21:12+08:00">2019-06-12</time>
               
             
           </span>
@@ -702,7 +702,7 @@
 </ul>
 </li>
 <li><p>Makefile 文件编写</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 变量定义</span></span><br><span class="line">OBJS = main.o			</span><br><span class="line">CC = gcc</span><br><span class="line">CFLAGS = -Wall -O -g</span><br><span class="line"><span class="comment"># Makefile 文件</span></span><br><span class="line"><span class="section">all: main		# 按照惯例,用all 做缺省目标。</span></span><br><span class="line">main : <span class="variable">$(OBJS)</span></span><br><span class="line">  <span class="variable">$(CC)</span> <span class="variable">$^</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">main.o : main.c main.h </span><br><span class="line">  <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span>	<span class="comment"># 类似于 gcc -c main.c</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	@echo <span class="string">"cleanning project"</span></span><br><span class="line">	-rm main *.o</span><br><span class="line">	@echo <span class="string">"cleanning compile"</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>:clean</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译条件</span></span><br><span class="line">OBJS = main.o			</span><br><span class="line">CC = gcc</span><br><span class="line">CFLAGS = -Wall -O -g</span><br><span class="line"><span class="comment"># 目标文件</span></span><br><span class="line"><span class="section">all: main		# 按照惯例,用all 做缺省目标。</span></span><br><span class="line"><span class="comment"># 编译条件</span></span><br><span class="line">main : <span class="variable">$(OBJS)</span></span><br><span class="line">  <span class="variable">$(CC)</span> <span class="variable">$^</span> -o <span class="variable">$@</span></span><br><span class="line">main.o : main.c main.h </span><br><span class="line">  <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span>	<span class="comment"># 类似于 gcc -c main.c</span></span><br><span class="line"><span class="comment"># clean</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	@echo <span class="string">"cleanning project"</span></span><br><span class="line">	-rm main *.o</span><br><span class="line">	@echo <span class="string">"cleanning compile"</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>:clean</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="隐含规则"><a href="#隐含规则" class="headerlink" title="隐含规则"></a>隐含规则</h3><ol>
@@ -842,7 +842,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-count">84</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -989,7 +989,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">67</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">70</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1148,7 +1154,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">73</span>
+                      
+                    
+                    <span class="site-state-item-count">74</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
