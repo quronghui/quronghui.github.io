@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="数组中元素的查找数组方法的应用 缺点  空间效率应用差   优点  内存连续：根据下标在O(1)时间读写任意元素； 数组实现简单的哈希表   一维数组  解决问题：在一个长度为n的数组里的所有数字都在0到n-1的范围内。找出重复的数字 和面试官交流的问题： 数组是否排序； 数组是够可以改变；    | 数组的情况           | 方法">
+  <meta name="description" content="数组中元素的查找数组方法的应用 缺点  空间效率应用差   优点  内存连续：根据下标在O(1)时间读写任意元素； 数组实现简单的哈希表   一维数组  解决问题：在一个长度为n的数组里的所有数字都在0到n-1的范围内。找出重复的数字 和面试官交流的问题：  数组是否排序；  数组是够可以改变；          数组的情况 方法 时间 空间     数组排序 遍历下标和数组元素值 O(n) O(">
 <meta name="keywords" content="array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一维数组和二维数组的查找">
 <meta property="og:url" content="http://yoursite.com/2019/06/15/一维数组和二维数组的查找/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="数组中元素的查找数组方法的应用 缺点  空间效率应用差   优点  内存连续：根据下标在O(1)时间读写任意元素； 数组实现简单的哈希表   一维数组  解决问题：在一个长度为n的数组里的所有数字都在0到n-1的范围内。找出重复的数字 和面试官交流的问题： 数组是否排序； 数组是够可以改变；    | 数组的情况           | 方法">
+<meta property="og:description" content="数组中元素的查找数组方法的应用 缺点  空间效率应用差   优点  内存连续：根据下标在O(1)时间读写任意元素； 数组实现简单的哈希表   一维数组  解决问题：在一个长度为n的数组里的所有数字都在0到n-1的范围内。找出重复的数字 和面试官交流的问题：  数组是否排序；  数组是够可以改变；          数组的情况 方法 时间 空间     数组排序 遍历下标和数组元素值 O(n) O(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-15T14:21:29.050Z">
+<meta property="og:updated_time" content="2019-06-16T01:19:35.734Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一维数组和二维数组的查找">
-<meta name="twitter:description" content="数组中元素的查找数组方法的应用 缺点  空间效率应用差   优点  内存连续：根据下标在O(1)时间读写任意元素； 数组实现简单的哈希表   一维数组  解决问题：在一个长度为n的数组里的所有数字都在0到n-1的范围内。找出重复的数字 和面试官交流的问题： 数组是否排序； 数组是够可以改变；    | 数组的情况           | 方法">
+<meta name="twitter:description" content="数组中元素的查找数组方法的应用 缺点  空间效率应用差   优点  内存连续：根据下标在O(1)时间读写任意元素； 数组实现简单的哈希表   一维数组  解决问题：在一个长度为n的数组里的所有数字都在0到n-1的范围内。找出重复的数字 和面试官交流的问题：  数组是否排序；  数组是够可以改变；          数组的情况 方法 时间 空间     数组排序 遍历下标和数组元素值 O(n) O(">
 
 
 
@@ -399,12 +399,24 @@
                 
               
 
-              <time title="Post created: 2019-06-15 21:47:54 / Updated at: 22:21:29" itemprop="dateCreated datePublished" datetime="2019-06-15T21:47:54+08:00">2019-06-15</time>
+              <time title="Post created: 2019-06-15 21:47:54" itemprop="dateCreated datePublished" datetime="2019-06-15T21:47:54+08:00">2019-06-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-06-16 09:19:35" itemprop="dateModified" datetime="2019-06-16T09:19:35+08:00">2019-06-16</time>
               
             
           </span>
@@ -506,29 +518,103 @@
 <li><p><strong>一维数组</strong></p>
 <ul>
 <li>解决问题：<strong>在一个长度为n的数组里的所有数字都在0到n-1的范围内。找出重复的数字</strong></li>
-<li>和面试官交流的问题：<ul>
-<li>数组是否排序；</li>
-<li>数组是够可以改变；</li>
+<li><p>和面试官交流的问题：</p>
+<ul>
+<li><p>数组是否排序；</p>
+</li>
+<li><p>数组是够可以改变；</p>
+</li>
 </ul>
 </li>
 </ul>
-<p>| 数组的情况           | 方法                                                       | 时间            | 空间 |<br>| ——————– | ———————————————————- | ————— | —- |<br>| 数组排序             | 遍历下标和数组元素值                                       | O(n)            | O(1) |<br>| 未排序，可改变数组   | 先排序O(nlogn)，在遍历(O(n))：                             | O(nlogn) + O(n) | O(1) |<br>|                      | 创建哈希表，记录次数                                       | 查找O(1)        | O(n) |<br>|                      | 下标和值对应相等，不相等则进行交换                         | O(n)            | O(1) |<br>| 未排序，不可改变数组 | 创建额外O(n)数组，复制条件：数值为m元素放在下标为m处的位置 | 遍历一遍O(n)    | O(n) |<br>|                      | 二分查找法：中间元素进行分半                               | O(nlogn)        | O(1) |</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>数组的情况</th>
+<th>方法</th>
+<th>时间</th>
+<th>空间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数组排序</td>
+<td>遍历下标和数组元素值</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>未排序，可改变数组</td>
+<td>先排序O(nlogn)，在遍历(O(n))：</td>
+<td>O(nlogn) + O(n)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td></td>
+<td>创建哈希表，记录次数</td>
+<td>查找O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td></td>
+<td>下标和值对应相等，不相等则进行交换</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>未排序，不可改变数组</td>
+<td>创建额外O(n)数组，复制条件：数值为m元素放在下标为m处的位置</td>
+<td>遍历一遍O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td></td>
+<td>二分查找法：中间元素进行分半</td>
+<td>O(nlogn)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>时间和空间复杂度：查找元素时候的花费</li>
 <li>创建哈希表的时候，以数组的下标进行分就行；扫描一遍数组，便能通过O(1)的时间查找出有无重复</li>
 </ul>
-</li>
+<ol start="4">
 <li><p><strong>二维数组</strong> </p>
 <ul>
 <li>解决问题：二维数组中元素的查找</li>
-<li>和面试官交流的问题：<ul>
-<li>数组是否有递增的规律；</li>
-</ul>
+<li><p>和面试官交流的问题：</p>
+</li>
+<li><p>数组是否有递增的规律；</p>
 </li>
 </ul>
-<p>| 数组的情况                                 | 方法             | 时间             | 空间 |<br>| —————————————— | —————- | —————- | —- |<br>| 数组未有递增的规律；                       | 遍历数组         | O(n^2)           | O(1) |<br>| left to right  递增  col : up to down 递增 | 从右上角进行遍历 | O(row) or O(col) |      |</p>
 </li>
 </ol>
+<table>
+<thead>
+<tr>
+<th>数组的情况</th>
+<th>方法</th>
+<th>时间</th>
+<th>空间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数组未有递增的规律；</td>
+<td>遍历数组</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>left to right  递增  col : up to down 递增</td>
+<td>从右上角进行遍历</td>
+<td>O(row) or O(col)</td>
+</tr>
+</tbody>
+</table>
 <h2 id="数组注意事项"><a href="#数组注意事项" class="headerlink" title="数组注意事项"></a>数组注意事项</h2><ol>
 <li><p>bool 类型</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span>	//C中包含头文件</span></span><br></pre></td></tr></table></figure>
