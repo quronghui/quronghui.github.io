@@ -77,9 +77,9 @@ tags: [sword offer]
    |              |                          |                        |
    |              |                          |                        |
 
-### 数组特征
+### 数组
 
-
++ [数组的相关题目解答](https://luckywater.top/2019/06/15/一维数组和二维数组的查找/)
 
 ### 字符串
 
@@ -99,47 +99,9 @@ tags: [sword offer]
 
 ### 链表
 
-​	
++ [链表中节点的插入](https://luckywater.top/2019/06/15/单链表和双链表插入/#more)
 
 ## 编程中的知识点
-
-### 数组
-
-1. bool 类型
-
-   ```
-   #include <stdbool.h>	//C中包含头文件
-   ```
-
-2. while 和for 循环
-
-   + for : 准确知道循环次数；
-   + while：准确知道循环结束条件
-
-3. 数组的长度
-
-   ```
-   length = sizeof(array) / sizeof(int); /* 分32位和64位的系统，判断数组中一个元素占4个字节 */
-   ```
-
-4. 二维数组的表示
-
-   + 通过一位数组的方式，表示二维数组
-
-   ```
-   matrix[row*cols + col] == number) 
-   ```
-
-5. 题目强调不能修改数组中的元素
-
-   ```
-   const int *number;
-   ```
-
-6. 数组越界情况
-
-   + array [ N ] ：元素访问从 array[0] -- array[ N-1 ]
-   + array [N] : 访问不到
 
 ### 字符串
 
@@ -166,68 +128,3 @@ tags: [sword offer]
    strcpy(string, "hello world");
    ```
 
-
-### 链表
-
-1. 链表的存储空间是不连续的，需要插入新的节点的时候
-
-   ```
-   #include <stdlib.h>
-   $	malloc
-   ```
-
-2. 单链表插入时，根节点的访问
-
-   + 采用指针指向头结点指针，这样修改的时候就只是修改phead的地址
-
-   ```
-   void addToSomewhere(List **pHead, int value)	/* 指向指针的指针 */
-   // 访问函数
-   List *pHead;
-   addToSomewhere( &pHead, value );
-   ```
-
-   + 先找出前驱节点，然后再进行插入节点
-
-     ```
-     	/* 找出插入value的 前驱节点, 先找出前驱位置 */
-         while(pNode != NULL && pNode->mValue < value){
-             previous = pNode;
-             pNode = pNode->pNext;
-         }
-         
-     **  pNew->pNext = pNode;     /* 先将后面的节点放在新节点后 */
-         if(previous == NULL)      /* 头结点为空,要进行判断 */
-             *pHead = pNew;      
-         else{
-             previous->pNext = pNew;
-         }  
-     ```
-
-3. 双链表的插入：学会画图理解指针
-
-   ```
-   
-   ```
-*   题目：双链表 节点的插入和删除
-   *   1) 双链表的插入有四种情况：
-   *       a.插入到链表中间；b.插入到起始位置；  
-   *       c.插入到末尾节点；d.插入到空链表中;   
-   *   2)Parameter:
-           *phead; 头指正；
-           *fwd: 前向指针
-           *bwd: 后向指针   
-           *preview 插入节点的前驱节点；
-           *pNode : 插入节点的后一个节点；
-       3)双链表 需要 根节点, 保存两个指针
-           a. root->pwd：指向最后一个节点； 第一个节点的 fwd = null; 这样才能从头后者末尾开始访问
-           b. fwd 指向第一个节点； 
-           c. pwd 指向最后一个节点；
-       4) 链表通过画图，得到控制条件
-           a.  先遍历找出插入点的位置： 
-           a.  previous != pHead
-           b.  pNode != Null 
-   ```
-   
-   
-   ```
