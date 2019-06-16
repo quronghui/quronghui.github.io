@@ -267,18 +267,18 @@ $ make CFLAGS=-g	/*在编译中增加调试选项*/
 3. Makefile 文件编写
 
    ```
-   # 变量定义
+   # 编译条件
    OBJS = main.o			
    CC = gcc
    CFLAGS = -Wall -O -g
-   # Makefile 文件
+   # 目标文件
    all: main		# 按照惯例,用all 做缺省目标。
+   # 编译条件
    main : $(OBJS)
      $(CC) $^ -o $@
-   
    main.o : main.c main.h 
      $(CC) $(CFLAGS) -c $< -o $@	# 类似于 gcc -c main.c
-   
+   # clean
    clean:
    	@echo "cleanning project"
    	-rm main *.o

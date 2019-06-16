@@ -35,6 +35,7 @@ tags: Electronic Direction
 ## Book -- 高清完整书签PDF版
 
 + [收藏的电子书清单（多个学科，含下载链接）(https://github.com/programthink/books)
++ xxx. epub 用亚马逊的账号登录，kindle进行阅读
 
 ### PCB
 
@@ -44,7 +45,7 @@ tags: Electronic Direction
 ### LinuxC
 
 1. LinuxC 编程一站式学习 --  2019.2.14 - 5.14
-2. [C和指针.pdf](https://github.com/mymmsc/books/blob/master/c/C和指针.pdf)
+2. [C和指针.pdf](https://github.com/tolerious/Programming_learning_resource/tree/master/C-Language)
 3. [C专家编程.pdf](https://github.com/mymmsc/books/blob/master/c/C专家编程.pdf)
 4. 深入理解Linux 内核
 5. [鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf](http://itbook1234.com/1093.html)
@@ -63,6 +64,18 @@ tags: Electronic Direction
 
 1. [现代操作系统 原书第4版](https://pan.baidu.com/s/1EnlH0saLicZo1uobE7cmBQ)
    - 提取码：j5p9
+
+### 嵌入式
+
+1. CPU 方向：
+   + 计算机 / SOC 架构；
+   + 脚本语言，Python 优先；
+2. 物联网方案
+   + 悉 TCP 与 UDP 的特点与使用，了解 Wi-Fi / 蓝牙协议优先；
+   + FreeRTOS / uCOS 等嵌入式系统优先；
+   + 熟悉脚本语言，掌握 Python 优先；
+   + 熟悉计算机网络协议熟悉 802.11 协议或蓝牙协议优先；
+   + 熟悉 GCC 和 GDB；
 
 ## Tools
 

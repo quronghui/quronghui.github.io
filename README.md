@@ -54,3 +54,16 @@
 2. 安装Nodejs和npm；
 3. 使用`git clone git@github.com:WincerChan/WincerChan.github.io.git`将仓库拷贝至本地；
 4. 在文件夹内执行以下命令`npm install hexo-cli -g`、`npm install`、`npm install hexo-deployer-git`。
+
+## hexo 域名的更换
+
+1. 购买阿里云域名
+   + [参考链接](https://juejin.im/post/5a71a4f9518825733a3105ac)
+
+2. 域名的解析
+3. github 修改
+
+## hexo 博客menu 单词错误
+
+1. 跟着网上的教程，弄得hexo deploy 时候，静态界面出现404错误；
+2. 通过以前备份的文件，宠新提交才能用

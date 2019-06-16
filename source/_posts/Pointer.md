@@ -253,10 +253,25 @@ int *swap(int *px, int *py)		/*指针类型的形参*/
 2. 代码类型
 
    ```
+   char c;
+   char *pc = &c;
    int i;
    int *pi = &i;	// pi 保存的是 i 的地址
-   int **ppi = &pi;	// *(*ppi) = &pi: (*ppi)取 pi的值; *(*ppi) 取 i的值
+   int **ppi = &pi;	// *ppi = &pi: ppi保存pi的地址; *ppi保存的是i的地址
    ```
+   
+   + 如何进行参数的传递呢？
+   
+     ```
+     void insert(int **ppi, int value);	/* 形式参数 */
+     
+     int *pi = null;
+     insert(&pi, 5);	/* 指向指针的指针，使用和指向int 型的指针类似，换的只不过是类型而已 */
+     ```
+   
+     
+   
+   {% asset_img pointer_to_pointer.png %}
 
 ### 指针数组
 
@@ -308,7 +323,7 @@ int *swap(int *px, int *py)		/*指针类型的形参*/
    ```
 
    + 可以认为 后缀运算符 [ ]，优先级高于 单目运算符 *
-     + int *a[10]：a和[]先结合，a表示数组，数组元素是10个 int *型 的数
+     + int *a[10]：a和[]先结合，a[10]表示数组指针，指向 int * 类型， 数组元素是10个 int *型 的数
      + int (*a)[10]：a和 * 先结合，a表示指针，指向含有10 个int 型的数组
 
 2. 指针数组使用
