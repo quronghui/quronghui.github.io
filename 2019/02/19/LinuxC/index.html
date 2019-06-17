@@ -96,19 +96,19 @@
 
 
 
-  <meta name="description" content="Linux C编程一站式学习   	      	    LinuxC 课后习题答案 LinuxC.pdf 文档中的代码  C语言入门 程序的五个步骤     math函数的gcc编译 12$ gcc math.cpp -o math -lm 		 // math的编译要加上 &quot;-lm&quot;$ gcc hello.c -o hello -Wall 	 // gcc编译带上 -Wall,显示所有警告的信">
+  <meta name="description" content="Linux C编程一站式学习 LinuxC 课后习题答案 LinuxC.pdf 文档中的代码  C语言入门 程序的五个步骤     math函数的gcc编译 12$ gcc math.cpp -o math -lm 		 // math的编译要加上 &quot;-lm&quot;$ gcc hello.c -o hello -Wall 	 // gcc编译带上 -Wall,显示所有警告的信息  [UNIX编程艺术]">
 <meta name="keywords" content="Linux,C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言入门">
 <meta property="og:url" content="http://yoursite.com/2019/02/19/LinuxC/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="Linux C编程一站式学习   	      	    LinuxC 课后习题答案 LinuxC.pdf 文档中的代码  C语言入门 程序的五个步骤     math函数的gcc编译 12$ gcc math.cpp -o math -lm 		 // math的编译要加上 &quot;-lm&quot;$ gcc hello.c -o hello -Wall 	 // gcc编译带上 -Wall,显示所有警告的信">
+<meta property="og:description" content="Linux C编程一站式学习 LinuxC 课后习题答案 LinuxC.pdf 文档中的代码  C语言入门 程序的五个步骤     math函数的gcc编译 12$ gcc math.cpp -o math -lm 		 // math的编译要加上 &quot;-lm&quot;$ gcc hello.c -o hello -Wall 	 // gcc编译带上 -Wall,显示所有警告的信息  [UNIX编程艺术]">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/02/19/LinuxC/programmer.png">
-<meta property="og:updated_time" content="2019-06-04T07:18:03.288Z">
+<meta property="og:updated_time" content="2019-06-16T06:05:55.547Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言入门">
-<meta name="twitter:description" content="Linux C编程一站式学习   	      	    LinuxC 课后习题答案 LinuxC.pdf 文档中的代码  C语言入门 程序的五个步骤     math函数的gcc编译 12$ gcc math.cpp -o math -lm 		 // math的编译要加上 &quot;-lm&quot;$ gcc hello.c -o hello -Wall 	 // gcc编译带上 -Wall,显示所有警告的信">
+<meta name="twitter:description" content="Linux C编程一站式学习 LinuxC 课后习题答案 LinuxC.pdf 文档中的代码  C语言入门 程序的五个步骤     math函数的gcc编译 12$ gcc math.cpp -o math -lm 		 // math的编译要加上 &quot;-lm&quot;$ gcc hello.c -o hello -Wall 	 // gcc编译带上 -Wall,显示所有警告的信息  [UNIX编程艺术]">
 <meta name="twitter:image" content="http://yoursite.com/2019/02/19/LinuxC/programmer.png">
 
 
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+                <time title="Updated at: 2019-06-16 14:05:55" itemprop="dateModified" datetime="2019-06-16T14:05:55+08:00">2019-06-16</time>
               
             
           </span>
@@ -506,14 +506,6 @@
 
       
         <h1 id="Linux-C编程一站式学习"><a href="#Linux-C编程一站式学习" class="headerlink" title="Linux C编程一站式学习"></a>Linux C编程一站式学习</h1><ul>
-<li>
-
-	<div class="row">
-    <embed src="LinuxC.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-</li>
 <li><a href="https://www.zybuluo.com/ChristopherWu/note/72463" target="_blank" rel="noopener">LinuxC 课后习题答案</a></li>
 <li><a href="https://github.com/quronghui/LinuxC.git" target="_blank" rel="noopener">LinuxC.pdf 文档中的代码</a></li>
 </ul>
@@ -584,6 +576,17 @@
 </ul>
 </li>
 </ol>
+<h2 id="C-中的输入输出"><a href="#C-中的输入输出" class="headerlink" title="C 中的输入输出"></a>C 中的输入输出</h2><ol>
+<li><p>printf 语句打印</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">printf</span><span class="params">(<span class="string">" %g "</span>)</span></span>	<span class="comment">// 打印一个浮点值</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>格式化的输入输出 </p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scanf(<span class="string">"%d"</span>, <span class="symbol">&amp;i</span>)<span class="comment">;</span></span><br><span class="line">printf(<span class="string">"%d"</span>, i)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符：非格式化</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getchar()<span class="comment">;</span></span><br><span class="line">putchar()<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <h2 id="goto-跳转语句"><a href="#goto-跳转语句" class="headerlink" title="goto 跳转语句"></a>goto 跳转语句</h2><ol>
 <li><p>goto : 实现无条件的跳转</p>
 <ul>
@@ -605,6 +608,7 @@
 </ul>
 </li>
 </ol>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><p>1. </p>
 
       
     </div>
@@ -727,7 +731,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -880,7 +884,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1041,7 +1045,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">74</span>
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1077,7 +1081,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-C编程一站式学习"><span class="nav-number">1.</span> <span class="nav-text">Linux C编程一站式学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言入门"><span class="nav-number">1.1.</span> <span class="nav-text">C语言入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goto-跳转语句"><span class="nav-number">1.2.</span> <span class="nav-text">goto 跳转语句</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-C编程一站式学习"><span class="nav-number">1.</span> <span class="nav-text">Linux C编程一站式学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言入门"><span class="nav-number">1.1.</span> <span class="nav-text">C语言入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-中的输入输出"><span class="nav-number">1.2.</span> <span class="nav-text">C 中的输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goto-跳转语句"><span class="nav-number">1.3.</span> <span class="nav-text">goto 跳转语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">1.4.</span> <span class="nav-text">数据</span></a></li></ol></li></ol></div>
             
 
           </div>

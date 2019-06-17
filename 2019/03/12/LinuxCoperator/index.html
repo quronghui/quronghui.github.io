@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/12/LinuxCoperator/assignment.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/LinuxCoperator/rule.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/LinuxCoperator/summary.png">
-<meta property="og:updated_time" content="2019-06-04T07:18:03.316Z">
+<meta property="og:updated_time" content="2019-06-17T02:18:57.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LinuxC Operator">
 <meta name="twitter:description" content="LinuxC Operator 主要是介绍位运算符，通过位运算对整数进行操作。  位运算按位与、或、异或、取反 要进行数据类型的转换：Data Type  123unsigned char c = 0xfc;unsigned int i = ~c;result : ffffff03  先进行类型的提升，在进行转换。   移位运算 移位运算符(Bitwise Shift)包括 左移 &amp;lt;&amp;lt;">
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+                <time title="Updated at: 2019-06-17 10:18:57" itemprop="dateModified" datetime="2019-06-17T10:18:57+08:00">2019-06-17</time>
               
             
           </span>
@@ -623,7 +623,18 @@
 <ul>
 <li>算数 &gt; 移位 &gt; 关系 &gt; 相等性 &gt; 按位操作 &gt; 逻辑操作 &gt; 条件运算符 &gt; 赋值 &gt; 逗号</li>
 </ul>
-<img src="/2019/03/12/LinuxCoperator/summary.png"></li>
+<img src="/2019/03/12/LinuxCoperator/summary.png">
+</li>
+</ol>
+<h2 id="左值和右值"><a href="#左值和右值" class="headerlink" title="左值和右值"></a>左值和右值</h2><ol>
+<li><p>左值的判断</p>
+<ul>
+<li>在等号左边的表达式，并且能表示一个可以存储结果值的地点，通过左值表达式可以访问</li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">a</span> = b + <span class="number">25</span>;<span class="comment">	//a就是一个左值，能保存表达式 b+25的值</span></span><br><span class="line">b+<span class="number">25</span> = <span class="keyword">a</span>;<span class="comment">	// (b+25) 不能成为左值，虽然（b+25）表示一个值，但是不知道存储在某个角落</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>右值的判断</p>
+</li>
 </ol>
 
       
@@ -747,7 +758,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-count">83</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -900,7 +911,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1061,7 +1072,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">74</span>
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1097,7 +1108,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LinuxC-Operator"><span class="nav-number">1.</span> <span class="nav-text">LinuxC Operator</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算"><span class="nav-number">1.1.</span> <span class="nav-text">位运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按位与、或、异或、取反"><span class="nav-number">1.1.1.</span> <span class="nav-text">按位与、或、异或、取反</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位运算"><span class="nav-number">1.1.2.</span> <span class="nav-text">移位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#掩码"><span class="nav-number">1.1.3.</span> <span class="nav-text">掩码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他运算符"><span class="nav-number">1.2.</span> <span class="nav-text">其他运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#复合赋值运算符"><span class="nav-number">1.2.1.</span> <span class="nav-text">复合赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sizeof-and-typedef"><span class="nav-number">1.2.2.</span> <span class="nav-text">Sizeof and typedef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Side-Effect-and-Sequence-Point"><span class="nav-number">1.2.3.</span> <span class="nav-text">Side Effect and Sequence Point</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符总结"><span class="nav-number">1.3.</span> <span class="nav-text">运算符总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LinuxC-Operator"><span class="nav-number">1.</span> <span class="nav-text">LinuxC Operator</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算"><span class="nav-number">1.1.</span> <span class="nav-text">位运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按位与、或、异或、取反"><span class="nav-number">1.1.1.</span> <span class="nav-text">按位与、或、异或、取反</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位运算"><span class="nav-number">1.1.2.</span> <span class="nav-text">移位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#掩码"><span class="nav-number">1.1.3.</span> <span class="nav-text">掩码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他运算符"><span class="nav-number">1.2.</span> <span class="nav-text">其他运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#复合赋值运算符"><span class="nav-number">1.2.1.</span> <span class="nav-text">复合赋值运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sizeof-and-typedef"><span class="nav-number">1.2.2.</span> <span class="nav-text">Sizeof and typedef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Side-Effect-and-Sequence-Point"><span class="nav-number">1.2.3.</span> <span class="nav-text">Side Effect and Sequence Point</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符总结"><span class="nav-number">1.3.</span> <span class="nav-text">运算符总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#左值和右值"><span class="nav-number">1.4.</span> <span class="nav-text">左值和右值</span></a></li></ol></li></ol></div>
             
 
           </div>
