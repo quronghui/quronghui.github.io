@@ -9,9 +9,7 @@ tags: running_time
 
 # data_struct_algorithm
 
-+ {% pdf data_struct.pdf %}
-
-# Introduction
++ Introduction
 
 + 数据结构：对大量数据的组织和研究
 + 算法分析：对算法运行时间的评估

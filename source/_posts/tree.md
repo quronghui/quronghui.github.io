@@ -276,3 +276,53 @@ tags: [tree]
 |            |                                                              |            |
 | 平衡树方案 | AVL 和 B-树；<br />没有二叉树的省时                          |            |
 
+# 树的实现
+
+## 基础知识
+
+1. 树的几种特例
+   - 二叉搜索树：左边节点值 < root < 右边节点的值
+   - 二叉堆：任意节点的关键字小于它所有后裔的关键字；
+     - 完全二叉树的插入：从左边依次插入，所以不用考虑顺序；
+   - 红黑树：红黑树是具有着色性质的二叉查找树；
+2. 树实现的两种方法：递归和循环；
+   + 由于递归在尾部的算法出现(尾部递归)，所以使用**迭代**更加有效.
+   + **迭代**：递归是不停的调用自身，迭代是通过叠加旧值产生新值
+3. 树的遍历：
+   - 前序，中序，后序，层次遍历
+
+### 二叉搜索树的知识
+
+1. 二叉树中删除节点
+   
+   + 代码中没有给出，实现太过复杂
+   
+   + 情况1：删除没有孩子的节点；
+     + 不存在重新建立连接的问题
+   + 情况2：删除只有一个孩子的节点；
+     + 把这个节点的：双亲和孩子连接就行，仍然保持二叉树的特性；
+   + 情况3：删除有两个孩子的节点；
+     + 不删除这个节点，删除其左子树中值最大的那个节点
+   
+2. 二叉搜索树的插入：
+
+   + 默认没有重复的节点
+
+3. **数组实现二叉搜索树**：
+
+   + **最重要的条件**：数组元素的下标，应该和树中节点的位置对应
+     + 对应关系：树的深度为 -- depth，树最多能存储 2^(depth + 1) - 1 个节点
+     + 数组的空间大小至少是 2^(depth + 1) - 1 
+   + **数组下标**
+     + 数组下标：从0开始，所以我们假定0位置不存节点，从位置1开始存储；
+     + 节点N的双亲节点 N/2；左孩子 2N；右孩子2N+1;
+
+## 树的应用
+
+### 	应用一 ：[ 根据前序遍历和中序遍历，构建一颗二叉树 ](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/construct_binary_tree.c)
+
+### 	应用二：[找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/next_binary_tree_node.c)
+
+### 应用三：[静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/static_array_binary_tree.c)
+
+### 应用四：[链式构建二叉搜索树,实现节点的插入，搜索，递归遍历](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/link_binary_search_tree.c)

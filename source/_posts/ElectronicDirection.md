@@ -35,6 +35,7 @@ tags: Electronic Direction
 ## Book -- 高清完整书签PDF版
 
 + [收藏的电子书清单（多个学科，含下载链接）(https://github.com/programthink/books)
++ [[**极客侠栈**](https://pymlovelyq.github.io/)]
 + xxx. epub 用亚马逊的账号登录，kindle进行阅读
 
 ### PCB
@@ -110,53 +111,42 @@ tags: Electronic Direction
 3. Illustrator 能够绘制矢量图，从而导入到 Eagle.
 4. Eagle : 不能写中文，而且图形不是矢量的。
 
-## Open Link
+## 毕设的方向
 
-1. **IT Community**
-   1. [stackoverflow](https://stackoverflow.com/)  ：IT与程序相关的IT技术问答网站
-   2. [element](https://www.element14.com/community/welcome) :  IT的互助社群
-2. **China IT Community **
-   1. [CSDN](https://www.csdn.net/)  ：国内IT的博客分享平台
-   2. [开源中国](https://www.oschina.net/)  ：中国最大的开源IT社区
-3. **UI Design**
-   1. [UI dribbble ](https://dribbble.com/justui)  
-   2. [UI Behance ]() 
-4. **Vector ICONS**
-   1. [FlatIcon](https://www.flaticon.com/)  : 有版权限制的矢量图标
-   2. [iconfont](https://www.iconfont.cn/)  : 矢量图标
-5. **Security Community**
-   1. [看雪论坛](https://bbs.pediy.com/) : 致力于PC、移动、智能设备安全研究及逆向工程的开发者社区
-   2. [吾爱破解](https://www.52pojie.cn/)：论坛致力于软件安全与病毒分析的前沿,丰富的技术版块交相辉映,由无数热衷于软件加密解密及反病毒爱好者共同维护
-   3. [ i 春秋 ]注网络安全、信息安全、白帽子技术的在线学习,教育、培训的平台
-6. **Emebadded Community**
-   1. [hackaday](https://hackaday.com)  ： Hardware open source items
-   2. [hackster](https://www.hackster.io/)    ：Hardware open source store
-   3. [Cadlab.io ](https://cadlab.io/) ： 可以使用github push 的可视化图形软件
-7. **Crowdfunding Community **
-   1. [kickstarter](https://www.kickstarter.com/)  ：众筹项目
-   2. [indiegogo](https://www.indiegogo.com/)   :  众筹项目
-   3. [modian](https://www.modian.com/)       :  中国的众筹项目
-8. [Hacker New](https://news.ycombinator.com/news)  ：世界的重要新闻
-9. **RSS**  (Really Simple Syndication)
-   1. [inoreader](https://www.inoreader.com/)  :  RSS订阅是站点用来和其他站点之间共享内容的一种简易方式，即Really Simple Syndication（简易信息聚合）。
-   2. [feedly](https://feedly.com/)  :  Feedly是一款第三方RSS阅读器，在经过了几次更新后，已经有比较多的忠实的使用者。
-      - 第一次访问*Feedly*的用户，*Feedly*会自动提示接入 Google Reader的访问权限，无需注册新会员.
-      - 能够增加我们之前的Open Source
-10. PDF Transform Doc
-    1. https://pdf2doc.com/
-11. Algorithm  visualization*
-    1. https://visualgo.net/zh : 算法可视化的工具，用于展示算法的好工具
-12. UART HMI
-    1. 通过串口发送，就之间显示出对应的图形和数据
-    2. 在显示屏上显示二维码就可以用。
-13. 与非网：一些嵌入式的前沿
-    1. 可能你已修炼成资深行业观察家，如[何小庆](https://www.eefocus.com/article/tag/%E6%98%BE%E5%BE%AE%E9%95%9C%E4%B8%8B%E7%9A%84%E5%B5%8C%E5%85%A5%E5%BC%8F%E4%BA%A7%E4%B8%9A)老师那样真知灼见；
-    2. 可能你善于分析行业趋势，如[飞翔的鸭子](https://www.eefocus.com/article/tag/%E9%A3%9E%E9%B8%AD%E8%B0%88%E8%8A%AF)侃侃而谈；
-    3. 可能你精通某一项技术，如[加菲](https://www.eefocus.com/article/tag/verilog%E4%BC%A0%E5%A5%87)那样精讲技术而不失幽默；
-    4. 可能你善于发现身边的工程师故事，如[骆驼](https://www.eefocus.com/article/tag/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%B6%A3%E4%BA%8B%E4%B8%80%E7%AE%A9%E7%AD%90)般娓娓道来。
-14. awesome 项目
-    1. github 上搜索 awesome-xxxx
-    2. 会有很多开源项目
-15. typing lesson
-    + [打字练习](https://www.typing.com/student/lesson/337/advanced-wrap-up)
++ 基于物联网设备的边缘计算系统的搭建
 
+### 研究背景
+
+​	随着大数据、云计算、物联网、人工智能等技术的快速发展，万物互联时代加速到来，连接到网络的设备数量和数据量都呈现快速增长态势。
+
+​	如果按照传统的方式，将嵌入式设备采集到的数组一起发送到云平台，将会造成网络的严重负载。云计算模式的缺陷日益突出，而边缘计算为解决工业互联网智能制造过程中数据分析和实时控制提供了有效手段。
+
+​	在健康监测等领域，边缘计算可以让需要针对用户进行无监督机器学习的可穿戴设备获益颇多。此外，在未经事先学习的情况下，定制的应用程序若要实现迅速推理，通常需要极高的数据处理能力作为支撑，而这正是边缘人工智能的专长所在。
+
+### 研究内容
+
+1. **边缘人工智能化**：嵌入式设备方案 + 物联网云平台 + 边缘计算框架的搭建和部署
+
+2. 嵌入式设备方案 (嵌入式方案可以更换)
+
+   - [看物联网如何颠覆传统设计，这十个方案给你答案！](https://www.cirmall.com/articles/389181)
+   - 题目一：基于STM32单片机的物联网远程数据监控系统
+
+3. 物联网云平台
+
+   + 通过WIFI无线通讯技术将数据上传到物联网云平台，通过物联网云平台将数据可视化，
+   + 可进行远程监控和计算
+
+4.  边缘计算框架的搭建和部署
+
+   + 研究边缘计算的相关框架，以及如何将模型迁移到物联网的基础设备上
+   + 将一部分的计算放在嵌入式设备上，减少云平台和嵌入式设备间的直接交互；
+   + 通过嵌入式设备本地的计算，发送控制信号；
+
+   
+
+5. 物联网 + 边缘计算 ：是一种理论的研究。仿真或者是
+
+   + [边缘智能或将打通物联网应用之路的最后一公里](https://www.eefocus.com/communication/442608)
+
+   + 物联网+边缘计算：减少物联网设备中数据的发送，在边缘进行处理

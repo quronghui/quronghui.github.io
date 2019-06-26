@@ -55,13 +55,17 @@
 3. 使用`git clone git@github.com:WincerChan/WincerChan.github.io.git`将仓库拷贝至本地；
 4. 在文件夹内执行以下命令`npm install hexo-cli -g`、`npm install`、`npm install hexo-deployer-git`。
 
-## hexo 域名的更换
+## 
 
-1. 购买阿里云域名
-   + [参考链接](https://juejin.im/post/5a71a4f9518825733a3105ac)
+## 阿里云域名的绑定
 
+- [参考链接](https://juejin.im/post/5a71a4f9518825733a3105ac)
+
+1. 阿里云域名的购买
 2. 域名的解析
 3. github 修改
+4. 博客目录下进行修改
+   - 在 `hexo` 生成的博客的 `source` 目录下新建一个 `CNAME` 文件，然后在这个文件中填入你的域名，这样就不会每次发布之后，`gitpage` 里的 `custom domain` 都被重置掉啦。
 
 ## hexo 博客menu 单词错误
 

@@ -10,7 +10,6 @@ tags: [Linux, C]
 
 # Linux C编程一站式学习
 
-+ {% pdf LinuxC.pdf %}
 + [LinuxC 课后习题答案](https://www.zybuluo.com/ChristopherWu/note/72463)
 + [LinuxC.pdf 文档中的代码](https://github.com/quronghui/LinuxC.git)
 
@@ -82,14 +81,28 @@ tags: [Linux, C]
    + 由 “ = ”进行连接
      + 左边：表示的是存储位置；--- 称为左值
      + 右边：表示要存储的值；-- 称为右值
-   
-10. printf 语句打印
 
-    ```
-    printf(" %g ")	// 打印一个浮点值
-    ```
+## C 中的输入输出
 
-    
+1. printf 语句打印
+
+   ```
+   printf(" %g ")	// 打印一个浮点值
+   ```
+
+2. 格式化的输入输出 
+
+   ```
+   scanf("%d", &i);
+   printf("%d", i);
+   ```
+
+3. 字符：非格式化
+
+   ```
+   getchar();
+   putchar();
+   ```
 
 ## goto 跳转语句
 
@@ -119,3 +132,6 @@ tags: [Linux, C]
    + 唯一的限制是goto 只能跳到同一个函数的某个标号处,而不能跳到别的函数里面。
    + 不推荐使用goto
 
+## 数据
+
+1. 

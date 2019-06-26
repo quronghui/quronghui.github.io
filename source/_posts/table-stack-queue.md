@@ -1,191 +1,96 @@
 ---
 layout: post
-title: list_stack_queue
+title: Abstract Data Type
 date: 2019-05-15 09:57:09
 categories:
 - [data_struct_algorithm]
-tags: 
-- [list]
-- [stack]
-- [queue]
+tags: ADT
 ---
 
 # Abstract Data Type
 
 + 理解数据结构的三种类型：看代码实现的细微差别
 
+## 内存分配
+
+1. 所有的ADT都需要确定，如何获取内存存储值；
+   + 静态数组：结构长度固定
+   + 动态分配的数组结构：重新构建一个数组，复制原先数组到新数组，并删除原先数组
+     + **动态分配**：考虑创建，以及销毁
+     + 为了避免内存泄露
+   + 动态分配的链式结构：每个元素单独分配内存空间
+
 ## Link_list
 
 1. 数组存储数据
 
    + 插入和删除，时间成本很昂贵
-
-   + 简单数组一般不用来实现表这种结构
-
-2. 链表数据结构
-
-   1）数据存储在一组结构体中，每一个结构体包含数据以及指向下一结构体的指针
-
-   2）链表操作的时候，先查找元素的前驱元素 --> leftprevious
-
-   3）链表包含一个头指针，作为元素的开头；指针不能为空，才能指向下一个元素
-
-3. 链表出现的错误
-
-   + 指针变量定义，没有初始化；
-
-     ```
-     error：memory access violation；segmentation violation
-     ```
-
-   + malloc 函数申请一个新的单元
-
-   + 链表删除后，要对存储单元进行释放 free()
-
-4. 循环链表
-
-   + 循环链表节省空间，但是要花费时间代价
-
-5. link_list.c 
-
-   \*   1) 结构体数组中的数据在链表中怎么存储；是不是只能一个个的读入
-
-   \*   2) malloc(sizeof(struct node))创建元素的存储空间；如果是malloc(sizeof(pointer) 只是指针的存储空间
-
-   \*   4) 删除整个链表,释放链表的每一个元素,将List 置Null；此时定义另外一个指针完成每个元素释放的工作
-
-6. 双等号
-
-   ```
-   return s->Next == NULL; // 这个 == 表示比较的意思；比较两个的值，返回值是0/1
-   ```
++ 简单数组一般不用来实现表这种结构
+  
+2. [**链表节点的插入和删除**](https://luckywater.top/2019/06/15/单链表和双链表插入/)
 
 ## Stack
 
-+ 栈：被定义为指向一个结构体的指针
-
-### stack —— pointer
-
-1. 栈：是限制插入和删除只能在一个位置进行的表，该位置是表的末端，表示栈顶。
-
-   + 栈的ADT错误：对空栈进行pop and top 操作
-     + top是取出栈顶元素，类似于出栈
-   + 实现错误，不是ADT错误：push时空间用尽
-
-2. 栈的实现
-
-   + 和链表一样：可以通过指针实现，同样可以通过数组实现
-
-   ```
-   判断栈是否为空的code
-   return s->Next == NULL; // 这个 == 表示比较的意思；比较两个的值，返回值是0/1
-   ```
-
-3. 栈的指针实现:
-
-   + 1) 入栈和出栈：都是在栈顶进行操作的；
-     + pop 出栈：free 释放存储空间
-
-   + 2）入栈：新元素加入，malloc分配存储空间；
-
-   + 3）top 指向栈顶的，栈顶都是header 空指针，元素的操作都是检查第二个栈；
-
-4.  栈指针的缺点
-
-   + 缺点是：malloc and free 调用的开销很昂贵
-
-### stack —— array
-
-1. 栈的数组实现：array_stack.h
-
-   + 数据的操作是通过数组的形式：下标进行访问元素
-
-   \*   1) 数组定义：定义到结构体中，定义成指针数组；
-
-   \*   2) 数组做右值的时候，自动转换成指针；数组取元素，其实也是地址取元素
-
-   \*   3)int TopOfStack; //表示数组的下标地址；int型能够自加；类似于next 
-
-2. 函数定义 ：array_stack.c
-
-   \*   1) 数组大小，通过变量传进去；和malloc 创建的内存单元
-
-   \*   2) s->TopOfStack 表示的是下标，数组下标的错误应该是负数; 判断栈数组是空的还是满的；通过下标判断
-
-   \*   3)s->array[ ++s->TopOfStack ] 通过数组的方式：进行出栈和进栈
-
-### 栈的运用
-
-1. 后缀表达式：算数运算--通过栈实现
-
-   1）将数和运算符，按照先后顺序读入栈；
-
-   2）计算的时候弹出，计算的结果入栈；
-
-   3）往返几次后得到结果；
-
-   4）后缀表达式：计算的时候，不需要判断运算的优先级
-
-   5）花费的时间：O(N)，顺序出栈和进栈的
-
-2. 中缀（原表达式）转后缀表达式：
-
-   1）读到操作数：立即放到输出；（不放到栈中）
-
-   2）操作符：放在栈中而不是输出中；
-
-   3）操作符弹出：下一个读到的操作符优先级 > 栈顶操作符的优先级时：才弹出
-
-   4）操作符弹出：当遇到“(”时，除非读到“)”,否则操作符一直压栈，不进行弹出。
-
-3. 函数调用
-
-   + 函数的调用和返回：类似于表达式中的开括号和闭括号
-   + 栈空间的检测：是否溢出进行检测
-     + 栈的内存：由高端向下增长
-     + 栈空间的溢出：是很危险的
-
-4. 尾递归的改进
-
-   + 尾递归：在最后一行进行递归调用；
-     + 容易造成栈空间的溢出
-   + goto 跳转到函数的开头，去除递归调用
+1. 堆栈的接口：
+   + push : 新值压入堆栈顶部；
+   + pop：只把顶部元素移出堆栈，不返回值
+   + top：返回顶部元素，不进行元素的移除
+2. 实现堆栈：
+   + push：存储于数组中连续的位置，因此需要考虑empty and full
+3. 堆栈的实现方式：
+   + [静态数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/static_array_stack.c)
+   + [动态分配数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/malloc_array_stack.c)
+   + [动态分配链表实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/link_stack.c)
 
 ## Queue
 
-+ 和栈一样，队列也是一种表。
-
-### queue -- pointer
-
-1. 队列元素的操作在两个方向
-
-   1) 包含两个方向：rear and front
-
-   2) 入队enqueue：用rear(队尾指针)，加1
-
-   3) 出队dequeue：用front(队首指针), 加1
-
 ### queue -- array
 
-1. 队列是否为空
+1. 静态数组实现循环队列麻烦之处：
+
+   ​        a. 判断元素存储在队列循环的位置：(rear = (rear+1) % QUEUE_SIZE)
+
+   ​        b. 判断何时为空，何时为满
+
+   ​            数组中有一个位置空着不用，front出队后比rear大1；
+
+   ​            (rear+1) % QUEUE_SIZE == front      队列为空
+
+   ​            (rear+2) %  QUEUE_SIZE == front     队列为满
+
+   ​        c. a % b :  if(a<b),那么输出的直接是元素a
+
+2. 队列是否为空的方式
 
    + 定义一个标志位 size，判断是否为空，或者满了
 
-2. 队列数组实现：
+   + 再循环数组中，空出一个位置不用
 
-   1）包含两个方向指针，一个queue[] 数组
+     ```
+     数组中有一个位置空着不用；
+     (rear+1) % QUEUE_SIZE == front      队列为空
+     (rear+2) %  QUEUE_SIZE == front     队列为满
+     ```
 
-   2）int q->rear:这个位置是保存着元素的，指向最后一个元素的。
+   {% asset_img queue.jpg %}
 
-   3）当rear and front 一个指向队尾的元素；一个指向队首的元素；front 出完队之后，front 的值，会比rear 大1
+### queue -- pointer
 
-   4）循环数组：当rear and front 在加1超过数组时，则回到数组的第一个位置。
+1. Parameter
 
-## 共性
+   *front: 指向队列的头部； 代表的就是队列
 
-| 类别      | pointer                                                      | array                                                        |
-| --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| List 链表 | 1) header ；<br />2）struct 包含：element + next<br />3）指向结构体的指针 | 结构体数组；下标访问                                         |
-| stack     | 1) header; <br />2）struct 包含：element + next; <br />3) push and pop 从同一方向操作； <br />4）入栈的每个元素：malloc分配存储单元 | 1）将数组和下标都放在结构体中，<br />2）定义一个变量结构体指针变量，访问结构体中的元素<br />3）判断栈数组的空和满：判断数组的方法<br />4）数组和指针的内存空间，malloc创建 |
-| queue     | 1）struct 包含：rear + front + next + element<br />2) q-rear 指向队尾元素；q-front 指向队首元素； | 1）将数组和下标都放在结构体中；外加标志位size记录数组中元素的个数<br />2）定义一个变量结构体指针变量，访问结构体中的元素<br />3）判断栈数组的空和满：判断数组的方法，判断size<br /><br />4）数组和指针的内存空间，malloc创建 |
+   *rear:  指向最后一个元素； 
+
+   *pNext: 用于指向下一个元素
+
+### queue 的实现
+
+- [静态数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/static_array_queue.c)
+- [动态分配数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/malloc_array_queue.c)
+- [动态分配链表实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/link_queue.c)
+
+## Tree 
+
++ [关于树的构建和遍历](https://luckywater.top/2019/05/17/tree/)
 

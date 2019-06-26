@@ -101,6 +101,10 @@ tags: [sword offer]
 
 + [链表中节点的插入](https://luckywater.top/2019/06/15/单链表和双链表插入/#more)
 
+### 树的应用
+
++ [ 树的应用](https://luckywater.top/2019/05/17/tree/)
+
 ## 编程中的知识点
 
 ### 字符串
@@ -127,4 +131,6 @@ tags: [sword offer]
    char string[length] ;   
    strcpy(string, "hello world");
    ```
+
+## 算法和数据操作
 
