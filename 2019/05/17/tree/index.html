@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/17/tree/b_tree.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/17/tree/2_3.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/17/tree/change_b.png">
-<meta property="og:updated_time" content="2019-06-17T14:14:49.010Z">
+<meta property="og:updated_time" content="2019-06-23T01:15:07.718Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tree">
 <meta name="twitter:description" content="Tree1.文件系统：三种访问结构；前中后序访问 2.算术表达式的计算：后缀表达式转化为中缀表达式 3.树的搜索：将最坏的时间上届限制到O(logN)，通过二叉树进行控制. 树的实现 通过递归的方式实现树  树的元素 – 节点 节点的父子关系 1）n(1) –&amp;gt; n(2)：n(1) 是n(2)的祖先； 2）n(1) != n(2);  n(1) 是n(2)的真祖先； 3）parent 、ch">
@@ -424,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-17 22:14:49" itemprop="dateModified" datetime="2019-06-17T22:14:49+08:00">2019-06-17</time>
+                <time title="Updated at: 2019-06-23 09:15:07" itemprop="dateModified" datetime="2019-06-23T09:15:07+08:00">2019-06-23</time>
               
             
           </span>
@@ -787,9 +787,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="二叉树的应用"><a href="#二叉树的应用" class="headerlink" title="二叉树的应用"></a>二叉树的应用</h2><ol>
+<h1 id="树的实现-1"><a href="#树的实现-1" class="headerlink" title="树的实现"></a>树的实现</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><ol>
 <li>树的几种特例<ul>
-<li>二叉搜索树：</li>
+<li>二叉搜索树：左边节点值 &lt; root &lt; 右边节点的值</li>
 <li>二叉堆：任意节点的关键字小于它所有后裔的关键字；<ul>
 <li>完全二叉树的插入：从左边依次插入，所以不用考虑顺序；</li>
 </ul>
@@ -797,9 +797,57 @@
 <li>红黑树：红黑树是具有着色性质的二叉查找树；</li>
 </ul>
 </li>
-<li>树实现的两种方法：递归和循环</li>
+<li>树实现的两种方法：递归和循环；<ul>
+<li>由于递归在尾部的算法出现(尾部递归)，所以使用<strong>迭代</strong>更加有效.</li>
+<li><strong>迭代</strong>：递归是不停的调用自身，迭代是通过叠加旧值产生新值</li>
+</ul>
+</li>
+<li>树的遍历：<ul>
+<li>前序，中序，后序，层次遍历</li>
+</ul>
+</li>
 </ol>
-<h3 id="应用一-：-根据前序遍历和中序遍历，构建一颗二叉树"><a href="#应用一-：-根据前序遍历和中序遍历，构建一颗二叉树" class="headerlink" title="应用一 ： 根据前序遍历和中序遍历，构建一颗二叉树 "></a>应用一 ：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/construct_binary_tree.c" target="_blank" rel="noopener"> 根据前序遍历和中序遍历，构建一颗二叉树 </a></h3><h3 id="应用二：找一颗二叉树，中序遍历的下一个节点，节点有指向父结点的指针"><a href="#应用二：找一颗二叉树，中序遍历的下一个节点，节点有指向父结点的指针" class="headerlink" title="应用二：找一颗二叉树，中序遍历的下一个节点，节点有指向父结点的指针"></a>应用二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/next_binary_tree_node.c" target="_blank" rel="noopener">找一颗二叉树，中序遍历的下一个节点，节点有指向父结点的指针</a></h3>
+<h3 id="二叉搜索树的知识"><a href="#二叉搜索树的知识" class="headerlink" title="二叉搜索树的知识"></a>二叉搜索树的知识</h3><ol>
+<li><p>二叉树中删除节点</p>
+<ul>
+<li><p>代码中没有给出，实现太过复杂</p>
+</li>
+<li><p>情况1：删除没有孩子的节点；</p>
+<ul>
+<li>不存在重新建立连接的问题</li>
+</ul>
+</li>
+<li>情况2：删除只有一个孩子的节点；<ul>
+<li>把这个节点的：双亲和孩子连接就行，仍然保持二叉树的特性；</li>
+</ul>
+</li>
+<li>情况3：删除有两个孩子的节点；<ul>
+<li>不删除这个节点，删除其左子树中值最大的那个节点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>二叉搜索树的插入：</p>
+<ul>
+<li>默认没有重复的节点</li>
+</ul>
+</li>
+<li><p><strong>数组实现二叉搜索树</strong>：</p>
+<ul>
+<li><strong>最重要的条件</strong>：数组元素的下标，应该和树中节点的位置对应<ul>
+<li>对应关系：树的深度为 – depth，树最多能存储 2^(depth + 1) - 1 个节点</li>
+<li>数组的空间大小至少是 2^(depth + 1) - 1 </li>
+</ul>
+</li>
+<li><strong>数组下标</strong><ul>
+<li>数组下标：从0开始，所以我们假定0位置不存节点，从位置1开始存储；</li>
+<li>节点N的双亲节点 N/2；左孩子 2N；右孩子2N+1;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="树的应用"><a href="#树的应用" class="headerlink" title="树的应用"></a>树的应用</h2><h3 id="应用一-：-根据前序遍历和中序遍历，构建一颗二叉树"><a href="#应用一-：-根据前序遍历和中序遍历，构建一颗二叉树" class="headerlink" title="应用一 ： 根据前序遍历和中序遍历，构建一颗二叉树 "></a>应用一 ：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/construct_binary_tree.c" target="_blank" rel="noopener"> 根据前序遍历和中序遍历，构建一颗二叉树 </a></h3><h3 id="应用二：找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针"><a href="#应用二：找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针" class="headerlink" title="应用二：找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针"></a>应用二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/next_binary_tree_node.c" target="_blank" rel="noopener">找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针</a></h3><h3 id="应用三：静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历"><a href="#应用三：静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历" class="headerlink" title="应用三：静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历"></a>应用三：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/static_array_binary_tree.c" target="_blank" rel="noopener">静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历</a></h3><h3 id="应用四：链式构建二叉搜索树-实现节点的插入，搜索，递归遍历"><a href="#应用四：链式构建二叉搜索树-实现节点的插入，搜索，递归遍历" class="headerlink" title="应用四：链式构建二叉搜索树,实现节点的插入，搜索，递归遍历"></a>应用四：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/link_binary_search_tree.c" target="_blank" rel="noopener">链式构建二叉搜索树,实现节点的插入，搜索，递归遍历</a></h3>
       
     </div>
 
@@ -835,8 +883,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/15/table-stack-queue/" rel="next" title="list_stack_queue">
-                <i class="fa fa-chevron-left"></i> list_stack_queue
+              <a href="/2019/05/15/table-stack-queue/" rel="next" title="Abstract Data Type">
+                <i class="fa fa-chevron-left"></i> Abstract Data Type
               </a>
             
           </div>
@@ -919,7 +967,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">83</span>
+                    <span class="site-state-item-count">84</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1072,7 +1120,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">70</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1084,8 +1132,6 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -1269,7 +1315,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tree"><span class="nav-number">1.</span> <span class="nav-text">Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#树的实现"><span class="nav-number">1.1.</span> <span class="nav-text">树的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树的元素-–-节点"><span class="nav-number">1.1.1.</span> <span class="nav-text">树的元素 – 节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的遍历"><span class="nav-number">1.1.2.</span> <span class="nav-text">树的遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树实现"><span class="nav-number">1.2.1.</span> <span class="nav-text">二叉树实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树应用—-表达式树"><span class="nav-number">1.2.2.</span> <span class="nav-text">二叉树应用—-表达式树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树应用—-查找树ADT"><span class="nav-number">1.2.3.</span> <span class="nav-text">二叉树应用—- 查找树ADT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL-树"><span class="nav-number">1.3.</span> <span class="nav-text">AVL 树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新的节点插入树的方式"><span class="nav-number">1.3.1.</span> <span class="nav-text">新的节点插入树的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转"><span class="nav-number">1.3.2.</span> <span class="nav-text">旋转</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伸展树"><span class="nav-number">1.4.</span> <span class="nav-text">伸展树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#展开："><span class="nav-number">1.4.1.</span> <span class="nav-text">展开：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的遍历-1"><span class="nav-number">1.5.</span> <span class="nav-text">树的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树"><span class="nav-number">1.6.</span> <span class="nav-text">B-树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Difference"><span class="nav-number">1.7.</span> <span class="nav-text">Difference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树的应用"><span class="nav-number">1.8.</span> <span class="nav-text">二叉树的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一-：-根据前序遍历和中序遍历，构建一颗二叉树"><span class="nav-number">1.8.1.</span> <span class="nav-text">应用一 ： 根据前序遍历和中序遍历，构建一颗二叉树 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：找一颗二叉树，中序遍历的下一个节点，节点有指向父结点的指针"><span class="nav-number">1.8.2.</span> <span class="nav-text">应用二：找一颗二叉树，中序遍历的下一个节点，节点有指向父结点的指针</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tree"><span class="nav-number">1.</span> <span class="nav-text">Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#树的实现"><span class="nav-number">1.1.</span> <span class="nav-text">树的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树的元素-–-节点"><span class="nav-number">1.1.1.</span> <span class="nav-text">树的元素 – 节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的遍历"><span class="nav-number">1.1.2.</span> <span class="nav-text">树的遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树实现"><span class="nav-number">1.2.1.</span> <span class="nav-text">二叉树实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树应用—-表达式树"><span class="nav-number">1.2.2.</span> <span class="nav-text">二叉树应用—-表达式树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树应用—-查找树ADT"><span class="nav-number">1.2.3.</span> <span class="nav-text">二叉树应用—- 查找树ADT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL-树"><span class="nav-number">1.3.</span> <span class="nav-text">AVL 树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新的节点插入树的方式"><span class="nav-number">1.3.1.</span> <span class="nav-text">新的节点插入树的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转"><span class="nav-number">1.3.2.</span> <span class="nav-text">旋转</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伸展树"><span class="nav-number">1.4.</span> <span class="nav-text">伸展树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#展开："><span class="nav-number">1.4.1.</span> <span class="nav-text">展开：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的遍历-1"><span class="nav-number">1.5.</span> <span class="nav-text">树的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树"><span class="nav-number">1.6.</span> <span class="nav-text">B-树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Difference"><span class="nav-number">1.7.</span> <span class="nav-text">Difference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树的实现-1"><span class="nav-number">2.</span> <span class="nav-text">树的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">2.1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉搜索树的知识"><span class="nav-number">2.1.1.</span> <span class="nav-text">二叉搜索树的知识</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的应用"><span class="nav-number">2.2.</span> <span class="nav-text">树的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一-：-根据前序遍历和中序遍历，构建一颗二叉树"><span class="nav-number">2.2.1.</span> <span class="nav-text">应用一 ： 根据前序遍历和中序遍历，构建一颗二叉树 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针"><span class="nav-number">2.2.2.</span> <span class="nav-text">应用二：找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三：静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历"><span class="nav-number">2.2.3.</span> <span class="nav-text">应用三：静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用四：链式构建二叉搜索树-实现节点的插入，搜索，递归遍历"><span class="nav-number">2.2.4.</span> <span class="nav-text">应用四：链式构建二叉搜索树,实现节点的插入，搜索，递归遍历</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

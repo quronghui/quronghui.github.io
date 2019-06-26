@@ -96,20 +96,20 @@
 
 
 
-  <meta name="description" content="链表的结点插入链表插入的知识点 链表的插入：通过画图   链表的存储空间是不连续的，需要插入新的节点的时候 12#include &amp;lt;stdlib.h&amp;gt;$	malloc  双链表的插入：学会画图理解指针    链表插入的应用情况一 ：单链表节点的插入情况二：双链表节点的插入">
+  <meta name="description" content="链表节点的插入和删除链表插入的知识点 链表的插入：通过画图   链表的存储空间是不连续的，需要插入新的节点的时候 12#include &amp;lt;stdlib.h&amp;gt;$	malloc  双链表的插入：学会画图理解指针   链表出现的错误：指针变量定义，没有初始化 1error：memory access violation；segmentation violation  双等号 1return">
 <meta name="keywords" content="list">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单链表和双链表插入">
 <meta property="og:url" content="http://yoursite.com/2019/06/15/单链表和双链表插入/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="链表的结点插入链表插入的知识点 链表的插入：通过画图   链表的存储空间是不连续的，需要插入新的节点的时候 12#include &amp;lt;stdlib.h&amp;gt;$	malloc  双链表的插入：学会画图理解指针    链表插入的应用情况一 ：单链表节点的插入情况二：双链表节点的插入">
+<meta property="og:description" content="链表节点的插入和删除链表插入的知识点 链表的插入：通过画图   链表的存储空间是不连续的，需要插入新的节点的时候 12#include &amp;lt;stdlib.h&amp;gt;$	malloc  双链表的插入：学会画图理解指针   链表出现的错误：指针变量定义，没有初始化 1error：memory access violation；segmentation violation  双等号 1return">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/06/15/单链表和双链表插入/one_list.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/15/单链表和双链表插入/twolist.png">
-<meta property="og:updated_time" content="2019-06-15T14:19:04.210Z">
+<meta property="og:updated_time" content="2019-06-20T02:10:00.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单链表和双链表插入">
-<meta name="twitter:description" content="链表的结点插入链表插入的知识点 链表的插入：通过画图   链表的存储空间是不连续的，需要插入新的节点的时候 12#include &amp;lt;stdlib.h&amp;gt;$	malloc  双链表的插入：学会画图理解指针    链表插入的应用情况一 ：单链表节点的插入情况二：双链表节点的插入">
+<meta name="twitter:description" content="链表节点的插入和删除链表插入的知识点 链表的插入：通过画图   链表的存储空间是不连续的，需要插入新的节点的时候 12#include &amp;lt;stdlib.h&amp;gt;$	malloc  双链表的插入：学会画图理解指针   链表出现的错误：指针变量定义，没有初始化 1error：memory access violation；segmentation violation  双等号 1return">
 <meta name="twitter:image" content="http://yoursite.com/2019/06/15/单链表和双链表插入/one_list.png">
 
 
@@ -402,12 +402,24 @@
                 
               
 
-              <time title="Post created: 2019-06-15 21:25:43 / Updated at: 22:19:04" itemprop="dateCreated datePublished" datetime="2019-06-15T21:25:43+08:00">2019-06-15</time>
+              <time title="Post created: 2019-06-15 21:25:43" itemprop="dateCreated datePublished" datetime="2019-06-15T21:25:43+08:00">2019-06-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-06-20 10:10:00" itemprop="dateModified" datetime="2019-06-20T10:10:00+08:00">2019-06-20</time>
               
             
           </span>
@@ -494,7 +506,7 @@
       
 
       
-        <h1 id="链表的结点插入"><a href="#链表的结点插入" class="headerlink" title="链表的结点插入"></a>链表的结点插入</h1><h2 id="链表插入的知识点"><a href="#链表插入的知识点" class="headerlink" title="链表插入的知识点"></a>链表插入的知识点</h2><ol>
+        <h1 id="链表节点的插入和删除"><a href="#链表节点的插入和删除" class="headerlink" title="链表节点的插入和删除"></a>链表节点的插入和删除</h1><h2 id="链表插入的知识点"><a href="#链表插入的知识点" class="headerlink" title="链表插入的知识点"></a>链表插入的知识点</h2><ol>
 <li><p>链表的插入：通过画图</p>
 <img src="/2019/06/15/单链表和双链表插入/one_list.png">
 </li>
@@ -503,6 +515,12 @@
 </li>
 <li><p>双链表的插入：学会画图理解指针</p>
 <img src="/2019/06/15/单链表和双链表插入/twolist.png">
+</li>
+<li><p>链表出现的错误：指针变量定义，没有初始化</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error</span>：<span class="keyword">memory</span> access violation；segmentation violation</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>双等号</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> s-&gt;<span class="keyword">Next</span> == <span class="keyword">NULL</span>; <span class="comment">// 这个 == 表示比较的意思；比较两个的值，返回值是0/1</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="链表插入的应用"><a href="#链表插入的应用" class="headerlink" title="链表插入的应用"></a>链表插入的应用</h2><h3 id="情况一-：单链表节点的插入"><a href="#情况一-：单链表节点的插入" class="headerlink" title="情况一 ：单链表节点的插入"></a>情况一 ：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/06_List/one_list.c" target="_blank" rel="noopener">单链表节点的插入</a></h3><h3 id="情况二：双链表节点的插入"><a href="#情况二：双链表节点的插入" class="headerlink" title="情况二：双链表节点的插入"></a>情况二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/06_List/double_list.c" target="_blank" rel="noopener">双链表节点的插入</a></h3>
@@ -625,7 +643,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">83</span>
+                    <span class="site-state-item-count">84</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -778,7 +796,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">70</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -790,8 +808,6 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -975,7 +991,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#链表的结点插入"><span class="nav-number">1.</span> <span class="nav-text">链表的结点插入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#链表插入的知识点"><span class="nav-number">1.1.</span> <span class="nav-text">链表插入的知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表插入的应用"><span class="nav-number">1.2.</span> <span class="nav-text">链表插入的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#情况一-：单链表节点的插入"><span class="nav-number">1.2.1.</span> <span class="nav-text">情况一 ：单链表节点的插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#情况二：双链表节点的插入"><span class="nav-number">1.2.2.</span> <span class="nav-text">情况二：双链表节点的插入</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#链表节点的插入和删除"><span class="nav-number">1.</span> <span class="nav-text">链表节点的插入和删除</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#链表插入的知识点"><span class="nav-number">1.1.</span> <span class="nav-text">链表插入的知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表插入的应用"><span class="nav-number">1.2.</span> <span class="nav-text">链表插入的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#情况一-：单链表节点的插入"><span class="nav-number">1.2.1.</span> <span class="nav-text">情况一 ：单链表节点的插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#情况二：双链表节点的插入"><span class="nav-number">1.2.2.</span> <span class="nav-text">情况二：双链表节点的插入</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

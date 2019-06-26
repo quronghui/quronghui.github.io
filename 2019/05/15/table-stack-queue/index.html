@@ -96,18 +96,20 @@
 
 
 
-  <meta name="description" content="Abstract Data Type 理解数据结构的三种类型：看代码实现的细微差别  Link_list 数组存储数据  插入和删除，时间成本很昂贵  简单数组一般不用来实现表这种结构    链表数据结构 1）数据存储在一组结构体中，每一个结构体包含数据以及指向下一结构体的指针 2）链表操作的时候，先查找元素的前驱元素 –&amp;gt; leftprevious 3）链表包含一个头指针，作为元素的开头；">
-<meta name="keywords" content="list,stack,queue">
+  <meta name="description" content="Abstract Data Type 理解数据结构的三种类型：看代码实现的细微差别  内存分配 所有的ADT都需要确定，如何获取内存存储值； 静态数组：结构长度固定 动态分配的数组结构：重新构建一个数组，复制原先数组到新数组，并删除原先数组 动态分配：考虑创建，以及销毁 为了避免内存泄露   动态分配的链式结构：每个元素单独分配内存空间    Link_list 数组存储数据  插入和删除，时间成">
+<meta name="keywords" content="ADT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="list_stack_queue">
+<meta property="og:title" content="Abstract Data Type">
 <meta property="og:url" content="http://yoursite.com/2019/05/15/table-stack-queue/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="Abstract Data Type 理解数据结构的三种类型：看代码实现的细微差别  Link_list 数组存储数据  插入和删除，时间成本很昂贵  简单数组一般不用来实现表这种结构    链表数据结构 1）数据存储在一组结构体中，每一个结构体包含数据以及指向下一结构体的指针 2）链表操作的时候，先查找元素的前驱元素 –&amp;gt; leftprevious 3）链表包含一个头指针，作为元素的开头；">
+<meta property="og:description" content="Abstract Data Type 理解数据结构的三种类型：看代码实现的细微差别  内存分配 所有的ADT都需要确定，如何获取内存存储值； 静态数组：结构长度固定 动态分配的数组结构：重新构建一个数组，复制原先数组到新数组，并删除原先数组 动态分配：考虑创建，以及销毁 为了避免内存泄露   动态分配的链式结构：每个元素单独分配内存空间    Link_list 数组存储数据  插入和删除，时间成">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-04T07:18:03.532Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/15/table-stack-queue/queue.jpg">
+<meta property="og:updated_time" content="2019-06-23T01:17:55.851Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="list_stack_queue">
-<meta name="twitter:description" content="Abstract Data Type 理解数据结构的三种类型：看代码实现的细微差别  Link_list 数组存储数据  插入和删除，时间成本很昂贵  简单数组一般不用来实现表这种结构    链表数据结构 1）数据存储在一组结构体中，每一个结构体包含数据以及指向下一结构体的指针 2）链表操作的时候，先查找元素的前驱元素 –&amp;gt; leftprevious 3）链表包含一个头指针，作为元素的开头；">
+<meta name="twitter:title" content="Abstract Data Type">
+<meta name="twitter:description" content="Abstract Data Type 理解数据结构的三种类型：看代码实现的细微差别  内存分配 所有的ADT都需要确定，如何获取内存存储值； 静态数组：结构长度固定 动态分配的数组结构：重新构建一个数组，复制原先数组到新数组，并删除原先数组 动态分配：考虑创建，以及销毁 为了避免内存泄露   动态分配的链式结构：每个元素单独分配内存空间    Link_list 数组存储数据  插入和删除，时间成">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/15/table-stack-queue/queue.jpg">
 
 
 
@@ -124,7 +126,7 @@
   };
 </script>
 
-  <title>list_stack_queue | Lucky Boy</title>
+  <title>Abstract Data Type | Lucky Boy</title>
   
 
 
@@ -373,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">list_stack_queue
+          <h1 class="post-title" itemprop="name headline">Abstract Data Type
 
               
             
@@ -416,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+                <time title="Updated at: 2019-06-23 09:17:55" itemprop="dateModified" datetime="2019-06-23T09:17:55+08:00">2019-06-23</time>
               
             
           </span>
@@ -499,181 +501,84 @@
         <h1 id="Abstract-Data-Type"><a href="#Abstract-Data-Type" class="headerlink" title="Abstract Data Type"></a>Abstract Data Type</h1><ul>
 <li>理解数据结构的三种类型：看代码实现的细微差别</li>
 </ul>
+<h2 id="内存分配"><a href="#内存分配" class="headerlink" title="内存分配"></a>内存分配</h2><ol>
+<li>所有的ADT都需要确定，如何获取内存存储值；<ul>
+<li>静态数组：结构长度固定</li>
+<li>动态分配的数组结构：重新构建一个数组，复制原先数组到新数组，并删除原先数组<ul>
+<li><strong>动态分配</strong>：考虑创建，以及销毁</li>
+<li>为了避免内存泄露</li>
+</ul>
+</li>
+<li>动态分配的链式结构：每个元素单独分配内存空间</li>
+</ul>
+</li>
+</ol>
 <h2 id="Link-list"><a href="#Link-list" class="headerlink" title="Link_list"></a>Link_list</h2><ol>
 <li><p>数组存储数据</p>
 <ul>
-<li><p>插入和删除，时间成本很昂贵</p>
-</li>
-<li><p>简单数组一般不用来实现表这种结构</p>
-</li>
-</ul>
-</li>
-<li><p>链表数据结构</p>
-<p>1）数据存储在一组结构体中，每一个结构体包含数据以及指向下一结构体的指针</p>
-<p>2）链表操作的时候，先查找元素的前驱元素 –&gt; leftprevious</p>
-<p>3）链表包含一个头指针，作为元素的开头；指针不能为空，才能指向下一个元素</p>
-</li>
-<li><p>链表出现的错误</p>
-<ul>
-<li><p>指针变量定义，没有初始化；</p>
-<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error</span>：<span class="keyword">memory</span> access violation；segmentation violation</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>malloc 函数申请一个新的单元</p>
-</li>
-<li><p>链表删除后，要对存储单元进行释放 free()</p>
-</li>
-</ul>
-</li>
-<li><p>循环链表</p>
-<ul>
-<li>循环链表节省空间，但是要花费时间代价</li>
-</ul>
-</li>
-<li><p>link_list.c </p>
-<p>*   1) 结构体数组中的数据在链表中怎么存储；是不是只能一个个的读入</p>
-<p>*   2) malloc(sizeof(struct node))创建元素的存储空间；如果是malloc(sizeof(pointer) 只是指针的存储空间</p>
-<p>*   4) 删除整个链表,释放链表的每一个元素,将List 置Null；此时定义另外一个指针完成每个元素释放的工作</p>
-</li>
-<li><p>双等号</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> s-&gt;<span class="keyword">Next</span> == <span class="keyword">NULL</span>; <span class="comment">// 这个 == 表示比较的意思；比较两个的值，返回值是0/1</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h2><ul>
-<li>栈：被定义为指向一个结构体的指针</li>
-</ul>
-<h3 id="stack-——-pointer"><a href="#stack-——-pointer" class="headerlink" title="stack —— pointer"></a>stack —— pointer</h3><ol>
-<li><p>栈：是限制插入和删除只能在一个位置进行的表，该位置是表的末端，表示栈顶。</p>
-<ul>
-<li>栈的ADT错误：对空栈进行pop and top 操作<ul>
-<li>top是取出栈顶元素，类似于出栈</li>
-</ul>
-</li>
-<li>实现错误，不是ADT错误：push时空间用尽</li>
-</ul>
-</li>
-<li><p>栈的实现</p>
-<ul>
-<li>和链表一样：可以通过指针实现，同样可以通过数组实现</li>
-</ul>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">判断栈是否为空的<span class="built_in">code</span></span><br><span class="line"><span class="keyword">return</span> s-&gt;Next == <span class="built_in">NULL</span>; <span class="comment">// 这个 == 表示比较的意思；比较两个的值，返回值是0/1</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>栈的指针实现:</p>
-<ul>
-<li><p>1) 入栈和出栈：都是在栈顶进行操作的；</p>
-<ul>
-<li>pop 出栈：free 释放存储空间</li>
-</ul>
-</li>
-<li><p>2）入栈：新元素加入，malloc分配存储空间；</p>
-</li>
-<li><p>3）top 指向栈顶的，栈顶都是header 空指针，元素的操作都是检查第二个栈；</p>
-</li>
-</ul>
-</li>
-<li><p>栈指针的缺点</p>
-<ul>
-<li>缺点是：malloc and free 调用的开销很昂贵</li>
+<li>插入和删除，时间成本很昂贵</li>
 </ul>
 </li>
 </ol>
-<h3 id="stack-——-array"><a href="#stack-——-array" class="headerlink" title="stack —— array"></a>stack —— array</h3><ol>
-<li><p>栈的数组实现：array_stack.h</p>
 <ul>
-<li>数据的操作是通过数组的形式：下标进行访问元素</li>
+<li>简单数组一般不用来实现表这种结构</li>
 </ul>
-<p>*   1) 数组定义：定义到结构体中，定义成指针数组；</p>
-<p>*   2) 数组做右值的时候，自动转换成指针；数组取元素，其实也是地址取元素</p>
-<p>*   3)int TopOfStack; //表示数组的下标地址；int型能够自加；类似于next </p>
-</li>
-<li><p>函数定义 ：array_stack.c</p>
-<p>*   1) 数组大小，通过变量传进去；和malloc 创建的内存单元</p>
-<p>*   2) s-&gt;TopOfStack 表示的是下标，数组下标的错误应该是负数; 判断栈数组是空的还是满的；通过下标判断</p>
-<p>*   3)s-&gt;array[ ++s-&gt;TopOfStack ] 通过数组的方式：进行出栈和进栈</p>
-</li>
+<ol start="2">
+<li><a href="https://luckywater.top/2019/06/15/单链表和双链表插入/" target="_blank" rel="noopener"><strong>链表节点的插入和删除</strong></a></li>
 </ol>
-<h3 id="栈的运用"><a href="#栈的运用" class="headerlink" title="栈的运用"></a>栈的运用</h3><ol>
-<li><p>后缀表达式：算数运算–通过栈实现</p>
-<p>1）将数和运算符，按照先后顺序读入栈；</p>
-<p>2）计算的时候弹出，计算的结果入栈；</p>
-<p>3）往返几次后得到结果；</p>
-<p>4）后缀表达式：计算的时候，不需要判断运算的优先级</p>
-<p>5）花费的时间：O(N)，顺序出栈和进栈的</p>
-</li>
-<li><p>中缀（原表达式）转后缀表达式：</p>
-<p>1）读到操作数：立即放到输出；（不放到栈中）</p>
-<p>2）操作符：放在栈中而不是输出中；</p>
-<p>3）操作符弹出：下一个读到的操作符优先级 &gt; 栈顶操作符的优先级时：才弹出</p>
-<p>4）操作符弹出：当遇到“(”时，除非读到“)”,否则操作符一直压栈，不进行弹出。</p>
-</li>
-<li><p>函数调用</p>
-<ul>
-<li>函数的调用和返回：类似于表达式中的开括号和闭括号</li>
-<li>栈空间的检测：是否溢出进行检测<ul>
-<li>栈的内存：由高端向下增长</li>
-<li>栈空间的溢出：是很危险的</li>
+<h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h2><ol>
+<li>堆栈的接口：<ul>
+<li>push : 新值压入堆栈顶部；</li>
+<li>pop：只把顶部元素移出堆栈，不返回值</li>
+<li>top：返回顶部元素，不进行元素的移除</li>
 </ul>
 </li>
+<li>实现堆栈：<ul>
+<li>push：存储于数组中连续的位置，因此需要考虑empty and full</li>
 </ul>
 </li>
-<li><p>尾递归的改进</p>
-<ul>
-<li>尾递归：在最后一行进行递归调用；<ul>
-<li>容易造成栈空间的溢出</li>
-</ul>
-</li>
-<li>goto 跳转到函数的开头，去除递归调用</li>
+<li>堆栈的实现方式：<ul>
+<li><a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/static_array_stack.c" target="_blank" rel="noopener">静态数组实现</a></li>
+<li><a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/malloc_array_stack.c" target="_blank" rel="noopener">动态分配数组实现</a></li>
+<li><a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/link_stack.c" target="_blank" rel="noopener">动态分配链表实现</a></li>
 </ul>
 </li>
 </ol>
-<h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h2><ul>
-<li>和栈一样，队列也是一种表。</li>
+<h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h2><h3 id="queue-–-array"><a href="#queue-–-array" class="headerlink" title="queue – array"></a>queue – array</h3><ol>
+<li><p>静态数组实现循环队列麻烦之处：</p>
+<p>​        a. 判断元素存储在队列循环的位置：(rear = (rear+1) % QUEUE_SIZE)</p>
+<p>​        b. 判断何时为空，何时为满</p>
+<p>​            数组中有一个位置空着不用，front出队后比rear大1；</p>
+<p>​            (rear+1) % QUEUE_SIZE == front      队列为空</p>
+<p>​            (rear+2) %  QUEUE_SIZE == front     队列为满</p>
+<p>​        c. a % b :  if(a&lt;b),那么输出的直接是元素a</p>
+</li>
+<li><p>队列是否为空的方式</p>
+<ul>
+<li><p>定义一个标志位 size，判断是否为空，或者满了</p>
+</li>
+<li><p>再循环数组中，空出一个位置不用</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">数组中有一个位置空着不用；</span><br><span class="line">(rear+<span class="number">1</span>) % QUEUE_SIZE == <span class="keyword">front</span>      队列为空</span><br><span class="line">(rear+<span class="number">2</span>) %  QUEUE_SIZE == <span class="keyword">front</span>     队列为满</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<img src="/2019/05/15/table-stack-queue/queue.jpg">
+</li>
+</ol>
 <h3 id="queue-–-pointer"><a href="#queue-–-pointer" class="headerlink" title="queue – pointer"></a>queue – pointer</h3><ol>
-<li><p>队列元素的操作在两个方向</p>
-<p>1) 包含两个方向：rear and front</p>
-<p>2) 入队enqueue：用rear(队尾指针)，加1</p>
-<p>3) 出队dequeue：用front(队首指针), 加1</p>
+<li><p>Parameter</p>
+<p>*front: 指向队列的头部； 代表的就是队列</p>
+<p>*rear:  指向最后一个元素； </p>
+<p>*pNext: 用于指向下一个元素</p>
 </li>
 </ol>
-<h3 id="queue-–-array"><a href="#queue-–-array" class="headerlink" title="queue – array"></a>queue – array</h3><ol>
-<li><p>队列是否为空</p>
-<ul>
-<li>定义一个标志位 size，判断是否为空，或者满了</li>
+<h3 id="queue-的实现"><a href="#queue-的实现" class="headerlink" title="queue 的实现"></a>queue 的实现</h3><ul>
+<li><a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/static_array_queue.c" target="_blank" rel="noopener">静态数组实现</a></li>
+<li><a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/malloc_array_queue.c" target="_blank" rel="noopener">动态分配数组实现</a></li>
+<li><a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/link_queue.c" target="_blank" rel="noopener">动态分配链表实现</a></li>
 </ul>
-</li>
-<li><p>队列数组实现：</p>
-<p>1）包含两个方向指针，一个queue[] 数组</p>
-<p>2）int q-&gt;rear:这个位置是保存着元素的，指向最后一个元素的。</p>
-<p>3）当rear and front 一个指向队尾的元素；一个指向队首的元素；front 出完队之后，front 的值，会比rear 大1</p>
-<p>4）循环数组：当rear and front 在加1超过数组时，则回到数组的第一个位置。</p>
-</li>
-</ol>
-<h2 id="共性"><a href="#共性" class="headerlink" title="共性"></a>共性</h2><table>
-<thead>
-<tr>
-<th>类别</th>
-<th>pointer</th>
-<th>array</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>List 链表</td>
-<td>1) header ；<br>2）struct 包含：element + next<br>3）指向结构体的指针</td>
-<td>结构体数组；下标访问</td>
-</tr>
-<tr>
-<td>stack</td>
-<td>1) header; <br>2）struct 包含：element + next; <br>3) push and pop 从同一方向操作； <br>4）入栈的每个元素：malloc分配存储单元</td>
-<td>1）将数组和下标都放在结构体中，<br>2）定义一个变量结构体指针变量，访问结构体中的元素<br>3）判断栈数组的空和满：判断数组的方法<br>4）数组和指针的内存空间，malloc创建</td>
-</tr>
-<tr>
-<td>queue</td>
-<td>1）struct 包含：rear + front + next + element<br>2) q-rear 指向队尾元素；q-front 指向队首元素；</td>
-<td>1）将数组和下标都放在结构体中；外加标志位size记录数组中元素的个数<br>2）定义一个变量结构体指针变量，访问结构体中的元素<br>3）判断栈数组的空和满：判断数组的方法，判断size<br><br>4）数组和指针的内存空间，malloc创建</td>
-</tr>
-</tbody>
-</table>
+<h2 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h2><ul>
+<li><a href="https://luckywater.top/2019/05/17/tree/" target="_blank" rel="noopener">关于树的构建和遍历</a></li>
+</ul>
 
       
     </div>
@@ -697,11 +602,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/list/" rel="tag"># list</a>
-          
-            <a href="/tags/stack/" rel="tag"># stack</a>
-          
-            <a href="/tags/queue/" rel="tag"># queue</a>
+            <a href="/tags/ADT/" rel="tag"># ADT</a>
           
         </div>
       
@@ -798,7 +699,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">83</span>
+                    <span class="site-state-item-count">84</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -951,7 +852,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">70</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -963,8 +864,6 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
                     
                       
                     
@@ -1148,7 +1047,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract-Data-Type"><span class="nav-number">1.</span> <span class="nav-text">Abstract Data Type</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Link-list"><span class="nav-number">1.1.</span> <span class="nav-text">Link_list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack"><span class="nav-number">1.2.</span> <span class="nav-text">Stack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stack-——-pointer"><span class="nav-number">1.2.1.</span> <span class="nav-text">stack —— pointer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack-——-array"><span class="nav-number">1.2.2.</span> <span class="nav-text">stack —— array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈的运用"><span class="nav-number">1.2.3.</span> <span class="nav-text">栈的运用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue"><span class="nav-number">1.3.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#queue-–-pointer"><span class="nav-number">1.3.1.</span> <span class="nav-text">queue – pointer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#queue-–-array"><span class="nav-number">1.3.2.</span> <span class="nav-text">queue – array</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共性"><span class="nav-number">1.4.</span> <span class="nav-text">共性</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract-Data-Type"><span class="nav-number">1.</span> <span class="nav-text">Abstract Data Type</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存分配"><span class="nav-number">1.1.</span> <span class="nav-text">内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Link-list"><span class="nav-number">1.2.</span> <span class="nav-text">Link_list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack"><span class="nav-number">1.3.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue"><span class="nav-number">1.4.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#queue-–-array"><span class="nav-number">1.4.1.</span> <span class="nav-text">queue – array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#queue-–-pointer"><span class="nav-number">1.4.2.</span> <span class="nav-text">queue – pointer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#queue-的实现"><span class="nav-number">1.4.3.</span> <span class="nav-text">queue 的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree"><span class="nav-number">1.5.</span> <span class="nav-text">Tree</span></a></li></ol></li></ol></div>
             
 
           </div>
