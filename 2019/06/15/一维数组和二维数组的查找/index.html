@@ -104,10 +104,13 @@
 <meta property="og:site_name" content="Lucky Boy">
 <meta property="og:description" content="数组中元素的查找数组方法的应用 缺点  空间效率应用差   优点  内存连续：根据下标在O(1)时间读写任意元素； 数组实现简单的哈希表   一维数组  解决问题：在一个长度为n的数组里的所有数字都在0到n-1的范围内。找出重复的数字 和面试官交流的问题：  数组是否排序；  数组是够可以改变；          数组的情况 方法 时间 空间     数组排序 遍历下标和数组元素值 O(n) O(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-27T13:42:54.787Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/15/一维数组和二维数组的查找/array_story.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/15/一维数组和二维数组的查找/TwoD.png">
+<meta property="og:updated_time" content="2019-07-02T13:13:51.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一维数组和二维数组的查找">
 <meta name="twitter:description" content="数组中元素的查找数组方法的应用 缺点  空间效率应用差   优点  内存连续：根据下标在O(1)时间读写任意元素； 数组实现简单的哈希表   一维数组  解决问题：在一个长度为n的数组里的所有数字都在0到n-1的范围内。找出重复的数字 和面试官交流的问题：  数组是否排序；  数组是够可以改变；          数组的情况 方法 时间 空间     数组排序 遍历下标和数组元素值 O(n) O(">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/15/一维数组和二维数组的查找/array_story.png">
 
 
 
@@ -416,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-27 21:42:54" itemprop="dateModified" datetime="2019-06-27T21:42:54+08:00">2019-06-27</time>
+                <time title="Updated at: 2019-07-02 21:13:51" itemprop="dateModified" datetime="2019-07-02T21:13:51+08:00">2019-07-02</time>
               
             
           </span>
@@ -643,9 +646,114 @@
 <li>array [N] : 访问不到</li>
 </ul>
 </li>
+<li><p>%p</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf(<span class="string">"%p\t"</span>, (<span class="name">&amp;numbers</span>)[col])<span class="comment">; //printf函数族中对于%p一般以十六进制整数方式输出指针的值，附加前缀0x</span></span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h2 id="数组应用一：找出数组中重复的数字"><a href="#数组应用一：找出数组中重复的数字" class="headerlink" title="数组应用一：找出数组中重复的数字"></a>数组应用一：找出数组中重复的数字</h2><h3 id="问题一：-一维数组-可以修改数组的情况下"><a href="#问题一：-一维数组-可以修改数组的情况下" class="headerlink" title="问题一： 一维数组: 可以修改数组的情况下 "></a>问题一：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/tree/master/SwordOffer/03_Array/duplicate_array.c" target="_blank" rel="noopener"> 一维数组: 可以修改数组的情况下 </a></h3><h3 id="问题二：一维数组-不可修改数组的情况下"><a href="#问题二：一维数组-不可修改数组的情况下" class="headerlink" title="问题二：一维数组 :不可修改数组的情况下"></a>问题二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/03_Array/duplicate_no_edit_array.c" target="_blank" rel="noopener">一维数组 :不可修改数组的情况下</a></h3><h3 id="问题三：二维数组中元素的查找"><a href="#问题三：二维数组中元素的查找" class="headerlink" title="问题三：二维数组中元素的查找"></a>问题三：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/tree/master/SwordOffer/04_FindInpartialySortMatrix" target="_blank" rel="noopener">二维数组中元素的查找</a></h3><h2 id="数组应用二："><a href="#数组应用二：" class="headerlink" title="数组应用二："></a>数组应用二：</h2><h3 id="应用一：面试题21：调整数组顺序使奇数位于偶数前面"><a href="#应用一：面试题21：调整数组顺序使奇数位于偶数前面" class="headerlink" title="应用一：面试题21：调整数组顺序使奇数位于偶数前面"></a>应用一：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/03_Array/reorder_OddEven_array.c" target="_blank" rel="noopener">面试题21：调整数组顺序使奇数位于偶数前面</a></h3><ol>
+<h2 id="数组和指针"><a href="#数组和指针" class="headerlink" title="数组和指针"></a>数组和指针</h2><h3 id="一位数组"><a href="#一位数组" class="headerlink" title="一位数组"></a>一位数组</h3><ol>
+<li><p>数组名的概念：</p>
+<ul>
+<li><p>下表和数组名一起使用，用于标示该集合的某个特定值；</p>
+</li>
+<li><p><strong>数组名的值</strong>：是一个指针常量，也就是数组第一个元素的地址；</p>
+<ul>
+<li>常量：是不允许修改的</li>
+</ul>
+</li>
+<li><p>错误：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>]; <span class="keyword">int</span> b[<span class="number">10</span>];	a=b 	<span class="comment">// 错误的，数组元素的复制要通过循环；数组名是一个指针常量</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>下表引用</p>
+<ul>
+<li><p>下标应用 <---> 间接访问 :相互等价的；</---></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">array</span>[subscript];		</span><br><span class="line">*(<span class="built_in">array</span> + (subscript))	<span class="comment">// 首元素的地址，加上一个偏移量，间接访问某一个元素</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在使用下标的地方，可以使用对等的指针表达式来替代；</p>
+</li>
+</ul>
+</li>
+<li><p>效率问题</p>
+<ul>
+<li><p>在正确使用的前提下：下标绝不会比指针更有效率，但是指针有时会比下标有效率；</p>
+</li>
+<li><p>可读性 &gt; 细微的时间效率；</p>
+</li>
+</ul>
+</li>
+<li><p><strong>数组和指针</strong></p>
+<ul>
+<li>数组声明：编译器将根据声明的元素数量，为数组保留内存空间；然后在创建数组名，指向这段空间的起始位置；</li>
+<li>指针声明：只为指针本身保留内存空间，并不为任何整形值分配内存空间；<ul>
+<li>在未被初始化之前：指针变量并未初始化指向任何现有的内存空间，</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>作为函数参数的数组名</p>
+<ul>
+<li>传递给函数的参数：传值调用—- 通过传递值的方式进行；</li>
+<li>传址调用：传递一个指针，通过指针进行间接访问，实现对数据的操作；</li>
+</ul>
+</li>
+<li><p>字符数组的初始化</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> message1[] = <span class="string">"hello"</span>;	<span class="comment">// 字符数组的初始化</span></span><br><span class="line"><span class="keyword">char</span> *message2 = <span class="string">"hello"</span>;	<span class="comment">// 表示字符串常量，指针指向其存储位置；</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h3><ol>
+<li><p>多维数组：</p>
+<ul>
+<li>int array[3] [4] : 一维数组的一维数组；包含3行元素，每行包含4个元素</li>
+</ul>
+</li>
+<li><p>存储顺序</p>
+<ul>
+<li><strong>行主序存储</strong>：按照最右边下标率先变化的原则；</li>
+</ul>
+<img src="/2019/06/15/一维数组和二维数组的查找/array_story.png">
+</li>
+<li><p>数组名：</p>
+<ul>
+<li><p>一位数组名：值是一个指针常量，类型：是指向元素类型(int)的指针；int *p = array;</p>
+</li>
+<li><p>二维数组名：多维数组第一维的元素实际上是另外一个数组；</p>
+<ul>
+<li>matrix: 数组名表示一维中的第一个元素 </li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int matrix[<span class="string">3</span>][<span class="symbol">3</span>];	// matrix</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>下标</p>
+<ul>
+<li><p>int matrix[3] [3]</p>
+</li>
+<li><p>第一维元素的地址和值表示：第一维其实是每一行数组的<strong>首地址</strong></p>
+</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">matrix;		//表示一维中的第一个元素的地址，指向包含3个整形元素的数组的指针 </span><br><span class="line">(matrix + 1);	// 表示一维中的第二个元素的首地址；</span><br><span class="line">*(matrix + 1) -- &gt; matrix[<span class="string">1</span>] ---&gt; matrix[<span class="string">1</span>][<span class="symbol">0</span>]; 间接访问第一维的元素，表示的是每行中首元素</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>第二维元素的地址和值的表示：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*(matrix + 1) + 2 ---&gt; matrix[1] + 2 ---&gt; ;	// 表示的是第一行第二列元素的地址</span><br><span class="line"><span class="emphasis">*(*</span>(matrix + 1) + 2) ---&gt;*(matrix[<span class="string">1</span>] + 2) ----&gt;  matrix[<span class="string">1</span>][<span class="symbol">2</span>];	// 间接访问：表示的是元素</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<img src="/2019/06/15/一维数组和二维数组的查找/TwoD.png">
+</li>
+<li><p>指向数组的指针</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int matrix[<span class="string">3</span>][<span class="symbol">10</span>];</span><br><span class="line">int (*p)[10] = matrix;	// 二维数组的表示；逐行访问；</span><br><span class="line">(<span class="emphasis">*p)[10] --&gt; ( (*</span>p) + 10) // 表示的是首行的地址</span><br></pre></td></tr></table></figure>
+<ul>
+<li>二维数组的列下标：必须是确定的</li>
+</ul>
+</li>
+</ol>
+<h2 id="一维数组应用："><a href="#一维数组应用：" class="headerlink" title="一维数组应用："></a>一维数组应用：</h2><h3 id="应用一：-一维数组-可以修改数组的情况下-，找出数组中重复的数字"><a href="#应用一：-一维数组-可以修改数组的情况下-，找出数组中重复的数字" class="headerlink" title="应用一： 一维数组: 可以修改数组的情况下 ，找出数组中重复的数字"></a>应用一：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/tree/master/SwordOffer/03_Array/duplicate_array.c" target="_blank" rel="noopener"> 一维数组: 可以修改数组的情况下 ，找出数组中重复的数字</a></h3><h3 id="应用二：一维数组-不可修改数组的情况下，找出数组中重复的数字"><a href="#应用二：一维数组-不可修改数组的情况下，找出数组中重复的数字" class="headerlink" title="应用二：一维数组 :不可修改数组的情况下，找出数组中重复的数字"></a>应用二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/03_Array/duplicate_no_edit_array.c" target="_blank" rel="noopener">一维数组 :不可修改数组的情况下，找出数组中重复的数字</a></h3><h3 id="应用三：面试题21：调整数组顺序使奇数位于偶数前面"><a href="#应用三：面试题21：调整数组顺序使奇数位于偶数前面" class="headerlink" title="应用三：面试题21：调整数组顺序使奇数位于偶数前面"></a>应用三：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/03_Array/reorder_OddEven_array.c" target="_blank" rel="noopener">面试题21：调整数组顺序使奇数位于偶数前面</a></h3><ol>
 <li>将数组中的元素，分成性质不同的两部分</li>
+</ol>
+<h2 id="二维数组应用："><a href="#二维数组应用：" class="headerlink" title="二维数组应用："></a>二维数组应用：</h2><h3 id="应用一：题目：如何动态申请二维数组空间"><a href="#应用一：题目：如何动态申请二维数组空间" class="headerlink" title="应用一：题目：如何动态申请二维数组空间"></a>应用一：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/04_FindInpartialySortMatrix/mallocTwoD_array.c" target="_blank" rel="noopener">题目：如何动态申请二维数组空间</a></h3><p>​    1. 三种方式动态申请二维数组空间，并进行初始化，打印地址</p>
+<h3 id="应用一：面试题-4：-二维数组中元素的查找，数组中重复的数字"><a href="#应用一：面试题-4：-二维数组中元素的查找，数组中重复的数字" class="headerlink" title="应用一：面试题 4： 二维数组中元素的查找，数组中重复的数字"></a>应用一：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/tree/master/SwordOffer/04_FindInpartialySortMatrix/find_in_matrix.c" target="_blank" rel="noopener">面试题 4： 二维数组中元素的查找，数组中重复的数字</a></h3><h3 id="应用二：面试题29：顺时针打印矩阵。题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字"><a href="#应用二：面试题29：顺时针打印矩阵。题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字" class="headerlink" title="应用二：面试题29：顺时针打印矩阵。题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字"></a>应用二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/04_FindInpartialySortMatrix/PrintMatrixClockwisely.c" target="_blank" rel="noopener">面试题29：顺时针打印矩阵。题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字</a></h3><ol>
+<li>考察边界条件的判断：全部梳理出来之后；就是顺序书写代码；</li>
+<li>题目扩展： 逆时针打印呢？</li>
 </ol>
 
       
@@ -1117,7 +1225,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数组中元素的查找"><span class="nav-number">1.</span> <span class="nav-text">数组中元素的查找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组方法的应用"><span class="nav-number">1.1.</span> <span class="nav-text">数组方法的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组注意事项"><span class="nav-number">1.2.</span> <span class="nav-text">数组注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组应用一：找出数组中重复的数字"><span class="nav-number">1.3.</span> <span class="nav-text">数组应用一：找出数组中重复的数字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一：-一维数组-可以修改数组的情况下"><span class="nav-number">1.3.1.</span> <span class="nav-text">问题一： 一维数组: 可以修改数组的情况下 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题二：一维数组-不可修改数组的情况下"><span class="nav-number">1.3.2.</span> <span class="nav-text">问题二：一维数组 :不可修改数组的情况下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题三：二维数组中元素的查找"><span class="nav-number">1.3.3.</span> <span class="nav-text">问题三：二维数组中元素的查找</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组应用二："><span class="nav-number">1.4.</span> <span class="nav-text">数组应用二：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题21：调整数组顺序使奇数位于偶数前面"><span class="nav-number">1.4.1.</span> <span class="nav-text">应用一：面试题21：调整数组顺序使奇数位于偶数前面</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数组中元素的查找"><span class="nav-number">1.</span> <span class="nav-text">数组中元素的查找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组方法的应用"><span class="nav-number">1.1.</span> <span class="nav-text">数组方法的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组注意事项"><span class="nav-number">1.2.</span> <span class="nav-text">数组注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组和指针"><span class="nav-number">1.3.</span> <span class="nav-text">数组和指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一位数组"><span class="nav-number">1.3.1.</span> <span class="nav-text">一位数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多维数组"><span class="nav-number">1.3.2.</span> <span class="nav-text">多维数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一维数组应用："><span class="nav-number">1.4.</span> <span class="nav-text">一维数组应用：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：-一维数组-可以修改数组的情况下-，找出数组中重复的数字"><span class="nav-number">1.4.1.</span> <span class="nav-text">应用一： 一维数组: 可以修改数组的情况下 ，找出数组中重复的数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：一维数组-不可修改数组的情况下，找出数组中重复的数字"><span class="nav-number">1.4.2.</span> <span class="nav-text">应用二：一维数组 :不可修改数组的情况下，找出数组中重复的数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三：面试题21：调整数组顺序使奇数位于偶数前面"><span class="nav-number">1.4.3.</span> <span class="nav-text">应用三：面试题21：调整数组顺序使奇数位于偶数前面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维数组应用："><span class="nav-number">1.5.</span> <span class="nav-text">二维数组应用：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：题目：如何动态申请二维数组空间"><span class="nav-number">1.5.1.</span> <span class="nav-text">应用一：题目：如何动态申请二维数组空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题-4：-二维数组中元素的查找，数组中重复的数字"><span class="nav-number">1.5.2.</span> <span class="nav-text">应用一：面试题 4： 二维数组中元素的查找，数组中重复的数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：面试题29：顺时针打印矩阵。题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字"><span class="nav-number">1.5.3.</span> <span class="nav-text">应用二：面试题29：顺时针打印矩阵。题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
