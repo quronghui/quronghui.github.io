@@ -96,25 +96,29 @@
 
 
 
-  <meta name="description" content="TCP / IP 协议TCP/IP 协议栈 协议栈的划分   TCP/IP 通信的过程  传输层及其以下：的机制由内核提供；处理通信细节 应用层：由用户进程提供；对通讯数据的含义进行解释（处理应用程序细节）   TCP/IP 数据包的封装  应用层数据通过协议栈发到网络上时，每层协议都要加上一个数据首部(header),称为封装    数据包称呼：不同的协议层对数据包有不同的称谓 在传输层叫做段(">
+  <meta name="description" content="TCP / IP 协议网络基础知识 计算机网络的作用? 提供一种网络形态, 将单用户工作模式,转化为多用户信息共享 互联模式;   分时系统 通过多个终端与同一计算机相连, 允许多个用户同时操作一台计算机; 通过分时系统, 虚拟的实现了”一人一机”; 特性: 独占性 实现: 多任务调度   协议 不同计算机之间通信的基本要求; 举例: 人与人交流的语言 – 中文/ 英语   电路交换和分组交换 网">
 <meta name="keywords" content="TCP&#x2F;IP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tcp Ip">
+<meta property="og:title" content="Tcp&#x2F;IP">
 <meta property="og:url" content="http://yoursite.com/2019/05/06/TcpIp/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="TCP / IP 协议TCP/IP 协议栈 协议栈的划分   TCP/IP 通信的过程  传输层及其以下：的机制由内核提供；处理通信细节 应用层：由用户进程提供；对通讯数据的含义进行解释（处理应用程序细节）   TCP/IP 数据包的封装  应用层数据通过协议栈发到网络上时，每层协议都要加上一个数据首部(header),称为封装    数据包称呼：不同的协议层对数据包有不同的称谓 在传输层叫做段(">
+<meta property="og:description" content="TCP / IP 协议网络基础知识 计算机网络的作用? 提供一种网络形态, 将单用户工作模式,转化为多用户信息共享 互联模式;   分时系统 通过多个终端与同一计算机相连, 允许多个用户同时操作一台计算机; 通过分时系统, 虚拟的实现了”一人一机”; 特性: 独占性 实现: 多任务调度   协议 不同计算机之间通信的基本要求; 举例: 人与人交流的语言 – 中文/ 英语   电路交换和分组交换 网">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/protocol_stack.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/data_pack.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/multiplexing.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/RFC.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/ARP.png">
-<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/tcp_communication.png">
-<meta property="og:updated_time" content="2019-06-04T07:18:03.348Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/first.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/data.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/MAC.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/macfirst.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/IPandMac.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/UDP_DATA.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/tcp_data.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/ipv4_first.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/ipv6.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/ipv6_first.png">
+<meta property="og:updated_time" content="2019-07-13T01:07:53.795Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tcp Ip">
-<meta name="twitter:description" content="TCP / IP 协议TCP/IP 协议栈 协议栈的划分   TCP/IP 通信的过程  传输层及其以下：的机制由内核提供；处理通信细节 应用层：由用户进程提供；对通讯数据的含义进行解释（处理应用程序细节）   TCP/IP 数据包的封装  应用层数据通过协议栈发到网络上时，每层协议都要加上一个数据首部(header),称为封装    数据包称呼：不同的协议层对数据包有不同的称谓 在传输层叫做段(">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/06/TcpIp/protocol_stack.png">
+<meta name="twitter:title" content="Tcp&#x2F;IP">
+<meta name="twitter:description" content="TCP / IP 协议网络基础知识 计算机网络的作用? 提供一种网络形态, 将单用户工作模式,转化为多用户信息共享 互联模式;   分时系统 通过多个终端与同一计算机相连, 允许多个用户同时操作一台计算机; 通过分时系统, 虚拟的实现了”一人一机”; 特性: 独占性 实现: 多任务调度   协议 不同计算机之间通信的基本要求; 举例: 人与人交流的语言 – 中文/ 英语   电路交换和分组交换 网">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/06/TcpIp/first.png">
 
 
 
@@ -131,7 +135,7 @@
   };
 </script>
 
-  <title>Tcp Ip | Lucky Boy</title>
+  <title>Tcp/IP | Lucky Boy</title>
   
 
 
@@ -380,7 +384,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Tcp Ip
+          <h1 class="post-title" itemprop="name headline">Tcp/IP
 
               
             
@@ -423,7 +427,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+                <time title="Updated at: 2019-07-13 09:07:53" itemprop="dateModified" datetime="2019-07-13T09:07:53+08:00">2019-07-13</time>
               
             
           </span>
@@ -439,13 +443,6 @@
               
                 <span class="post-meta-item-text">in</span>
               
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux-system-complie/" itemprop="url" rel="index"><span itemprop="name">Linux system complie</span></a></span>
-
-                
-                
-                  . 
-                
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/TCP-IP/" itemprop="url" rel="index"><span itemprop="name">TCP/IP</span></a></span>
 
@@ -510,255 +507,575 @@
       
 
       
-        <h1 id="TCP-IP-协议"><a href="#TCP-IP-协议" class="headerlink" title="TCP / IP 协议"></a>TCP / IP 协议</h1><h2 id="TCP-IP-协议栈"><a href="#TCP-IP-协议栈" class="headerlink" title="TCP/IP 协议栈"></a>TCP/IP 协议栈</h2><ol>
-<li><p>协议栈的划分</p>
-<img src="/2019/05/06/TcpIp/protocol_stack.png">
-</li>
-<li><p>TCP/IP 通信的过程</p>
-<ul>
-<li>传输层及其以下：的机制由内核提供；处理通信细节</li>
-<li>应用层：由用户进程提供；对通讯数据的含义进行解释（处理应用程序细节）</li>
+        <h1 id="TCP-IP-协议"><a href="#TCP-IP-协议" class="headerlink" title="TCP / IP 协议"></a>TCP / IP 协议</h1><h2 id="网络基础知识"><a href="#网络基础知识" class="headerlink" title="网络基础知识"></a>网络基础知识</h2><ol>
+<li>计算机网络的作用?<ul>
+<li>提供一种网络形态, 将单用户工作模式,转化为多用户信息共享 互联模式;</li>
 </ul>
 </li>
-<li><p>TCP/IP 数据包的封装</p>
-<ul>
-<li>应用层数据通过协议栈发到网络上时，每层协议都要加上一个数据首部(header),称为封装</li>
-</ul>
-<img src="/2019/05/06/TcpIp/data_pack.png">
-<ul>
-<li>数据包称呼：不同的协议层对数据包有不同的称谓<ul>
-<li>在传输层叫做段(segment)</li>
-<li>在网络层叫做数据报(datagram)</li>
-<li>链路层叫做帧（frame）</li>
+<li>分时系统<ul>
+<li>通过多个终端与同一计算机相连, 允许多个用户同时操作一台计算机; 通过分时系统, 虚拟的实现了”一人一机”;</li>
+<li>特性: 独占性</li>
+<li>实现: 多任务调度</li>
 </ul>
 </li>
-<li>数据封装成帧后发到传输介质上，到达目的主机后每层协议再剥掉相应的首部,最后将应用层数据交给应用程序处理。</li>
+<li>协议<ul>
+<li>不同计算机之间通信的基本要求;</li>
+<li>举例: 人与人交流的语言 – 中文/ 英语</li>
 </ul>
 </li>
-<li><p>数据包的通讯</p>
-<ul>
-<li><p>经过多个路由器才能到达目的主机</p>
-</li>
-<li><p>物理层： —  传输</p>
-<ul>
-<li>是电信号的传递</li>
-<li>物理层：决定了最大传输速率、传输距离、抗干扰性等</li>
-<li>集线器(Hub)：将衰减信号放大；广播通信</li>
+<li>电路交换和分组交换<ul>
+<li>网络通信的方式</li>
+<li>电路交换：通信双方独占一条线路进行数据传输，其与用户只能等待；</li>
+<li>分组交换：通信双方将数组包分组，在一条通信线路上实现多组用户通信；</li>
 </ul>
 </li>
-<li>链路层：—  通道检测<ul>
-<li>负责网卡设备的驱动、帧同步、冲突检测</li>
-<li>交换机：可以在不同的链路层网络之间转发数据帧；<ul>
-<li>记录MAC地址表，Mac查找通信</li>
+<li>接收端的数量进行分析<ul>
+<li>单播；</li>
+<li>广播: 同一个链路中相互链接主机间通信</li>
+<li>多播：特定组内进行的通信; (一年级一班)</li>
+<li>任播：特定组内任意一台主机；(一年级一班小李)</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>网络层：IP<ul>
-<li>Internet上的主机通过IP地址来标识</li>
-<li>路由器：根据IP地址选择合适的路径转发数据包<ul>
-<li>兼有交换机的功能：不同的链路层接口之间转发数据包</li>
-<li>IP协议不保证传输的可靠性</li>
-</ul>
-</li>
-<li>网络层：负责点到点(point-to-point)的传输(这里的“点”指主机或路由器)</li>
-</ul>
-</li>
-<li>传输层：TCP/UDP<ul>
-<li>传输层负责端到端(end-to-end)的传输：(这里的“端”指源主机和目的主机)</li>
-<li>TCP：传输的双方需要首先建立连接，数据传输有序</li>
-<li>UDP：UDP协议不面向连接,也不保证可靠性,</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>目的主机对数据包的解析</p>
-<ul>
-<li>以太网驱动程序：确定<strong>数据帧</strong>的归属</li>
-<li>网络层的IP协议：确定<strong>数据报</strong>的归属</li>
-<li>传输层的TCP或UDP协议：确定<strong>端口号</strong>的归属</li>
-</ul>
-<img src="/2019/05/06/TcpIp/multiplexing.png">
-</li>
-</ol>
-<h2 id="以太网（RFC）帧格式"><a href="#以太网（RFC）帧格式" class="headerlink" title="以太网（RFC）帧格式"></a>以太网（RFC）帧格式</h2><ol>
-<li><p>以太网的首部：14 byte</p>
-<ul>
-<li><strong>先是</strong>目的地址：6 byte</li>
-<li><strong>后是</strong>源地址：6 byte</li>
-<li>类型：2byte –  0x0800表示IP</li>
-</ul>
-</li>
-<li><p>以太网的帧格式</p>
-<ul>
-<li><p>源地址和目的地址是指网卡的硬件地址(也叫MAC地址)，长度是48位</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> ifconfig	<span class="comment">// 查看“HWaddr 00:15:F2:14:9E:3F”部分就是硬件地址。</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>以太网帧中的数据长度规定最小46字节,最大1500字节</p>
-<ul>
-<li>ifconfig 中的 “MTU:1500”。</li>
-</ul>
-</li>
-<li><p>ARP和RARP数据包的长度不够46字节,要在后面补填充位。</p>
-</li>
-</ul>
-<img src="/2019/05/06/TcpIp/RFC.png">
-</li>
-</ol>
-<h3 id="ARP-数据报文格式"><a href="#ARP-数据报文格式" class="headerlink" title="ARP 数据报文格式"></a>ARP 数据报文格式</h3><ol>
-<li><p>ARP的作用</p>
-<ul>
-<li>报文的解析是一层层往上的，在网络通讯时，源主机的应用程序知道目的主机的IP地址和端口号，却不知道目的主机的硬件地址。</li>
-<li>ARP的作用便是：广播 询问 IP 地址对应的硬件地址是多少</li>
-<li>ARP请求的广播帧无法穿过路由器，同一个局域网才能起作用</li>
-<li>每台主机都维护一个ARP缓存表,可以用arp -a命令查看。  </li>
-</ul>
-</li>
-<li><p>ARP报文格式</p>
-<img src="/2019/05/06/TcpIp/ARP.png">
-<ul>
-<li>以太网规定最小数据长度为46字节,ARP帧长度只有28字节,因此有18字节填充位，填充位的内容没有定义</li>
-<li>以太网首部：上层协议类型0x0806表示ARP</li>
-<li>ARP帧：<ul>
-<li>硬件类型0x0001表示以太网,</li>
-<li>协议类型0x0800表示IP协议,</li>
-<li>硬件地址(MAC地址)；协议地址(IP地址)</li>
-<li>op为0x0001表示请求目的主机的MAC地址</li>
+<li>传输速率和吞吐量<ul>
+<li>传输速率：单位时间内传输的数据量，单位是bps；也称之为带宽；</li>
+<li>吞吐量：主机间通信过程中实际的传输速率；<ul>
+<li>衡量CPU处理能力和网络拥塞程度</li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
-<h2 id="IP-数据报"><a href="#IP-数据报" class="headerlink" title="IP 数据报"></a>IP 数据报</h2><h3 id="IP数据报文格式"><a href="#IP数据报文格式" class="headerlink" title="IP数据报文格式"></a>IP数据报文格式</h3><ol>
-<li>数据包的首部长度最小是20 byte；最大是60 byte</li>
-<li>从后往前数：源、目的IP地址 各占4byte</li>
-<li>数据报文的格式：十六进制表示；<ul>
-<li>IP地址表示：十进制</li>
+<h2 id="OSI-7层参考模型（Open-System-Interconnection-Reference-Model）"><a href="#OSI-7层参考模型（Open-System-Interconnection-Reference-Model）" class="headerlink" title="OSI 7层参考模型（Open System Interconnection Reference Model）"></a>OSI 7层参考模型（Open System Interconnection Reference Model）</h2><ol>
+<li><p>计算机通信的前提：能上网</p>
+<ul>
+<li>网卡：计算机连网的设备</li>
+</ul>
+</li>
+<li><p>OSI 参考模型的作用？</p>
+<ul>
+<li>OSI协议的作用：让异构计算机之间能互相通信；</li>
+<li>OSI 分层的作用：抽象出每一层的接口，让网络间通信更简单；</li>
+<li>同一层之间的通信: 遵循相同的协议; 上下层之间: 调用接口</li>
 </ul>
 </li>
 </ol>
-<h3 id="IP地址与路由"><a href="#IP地址与路由" class="headerlink" title="IP地址与路由"></a>IP地址与路由</h3><ol>
-<li><p>IP地址</p>
-<ul>
-<li>32位的IP地址：划分网络号和主机号</li>
-<li>分位5类（每增加一位 – 首位固定值，主机号的字节将减少1byte）</li>
-</ul>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IP <span class="number">140.252</span><span class="number">.20</span><span class="number">.68</span>/<span class="number">24</span>		<span class="comment">// 表示网络号是24位，全为1 255.255.255.0</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>loopback</p>
-<ul>
-<li>loopback是系统中一种特殊的网络设备<ul>
-<li>如果发送数据包的目的地址是环回地址</li>
-<li>或者与本机其它网络设备的IP地址相同，则数据包不会发送到网络介质上</li>
-</ul>
-</li>
-<li>127.* 的IP地址用于本机回环：127.0.0.1</li>
-</ul>
-</li>
-<li><p>不能用作主机IP地址的特殊地址</p>
-<ul>
-<li>示本网络内部广播：255.255.255.255</li>
-<li>主机号全为0的地址只表示网络而不能表示某个主机：192.168.10.0</li>
-<li>目的地址的主机号为全1,表示广播至某个网络的所有主机：192.168.10.255</li>
-</ul>
-</li>
-<li><p>ifconfig and route</p>
-<ul>
-<li>同一个网络中：可以直接发到目的主机,不需要经路由器转发。</li>
-<li>不同网络：首先发到路由器，再让路由器根据它的路由表决定下一跳地址。</li>
-</ul>
-</li>
-</ol>
-<h2 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP / UDP"></a>TCP / UDP</h2><h3 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h3><ol>
-<li><p>UDP段格式</p>
-<ul>
-<li>源端口号、目的端口号：各  2 byte</li>
-<li>长度和校验和：各  2 byte</li>
-</ul>
-</li>
-<li><p>TFTP是基于文本的协议</p>
-<ul>
-<li>各字段之间用字节0分隔</li>
-<li>开头的0x 00 01表示请求读取一个文件</li>
-</ul>
-</li>
-<li><p>网络通信</p>
-<ul>
-<li>像TFTP协议这样<ul>
-<li>Client</li>
-<li>Server</li>
-</ul>
-</li>
-<li>IP/port：表示对应的进程</li>
-<li>Client：通信开始的时候需要知道server 的IP/port</li>
+<table>
+<thead>
+<tr>
+<th>分层</th>
+<th>功能</th>
+<th>硬件设备</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用层</td>
+<td>针对特定应用的协议<br>邮件协议–&gt;电子邮件</td>
+<td></td>
+</tr>
+<tr>
+<td>表示层</td>
+<td>数据格式转换：转化为网络标准格式</td>
+<td>网关：转换协议的设备；对数据进行转换；代理服务器</td>
+</tr>
+<tr>
+<td>会话层</td>
+<td>通信管理：<strong>决定</strong>何时建立断开同行连接<br>决定采用何种连接方式</td>
+<td></td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>管理两个通信节点之间的数据传输；<br>实际建立<strong>逻辑</strong>上的通道</td>
+<td>4-7层交换机：分析收发数据，进行特定处理<br>负载均衡器</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td><strong>完整</strong>数据包发送，进行数据链路转换(完整行程列表)</td>
+<td>网桥/３层交换机：分组数据转换<br>路由器</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>负责一个<strong>数据段</strong>帧的发送</td>
+<td>网桥/２层交换机：连接两个网络<br>以太网使用：交换集线器</td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>将0/1数据转换为不同介质间的信号量进行传送</td>
+<td>中继器：信号整形放大；<br>延长网络</td>
+</tr>
+</tbody>
+</table>
+<h2 id="TCP-IP-基础知识"><a href="#TCP-IP-基础知识" class="headerlink" title="TCP/IP 基础知识"></a>TCP/IP 基础知识</h2><ol>
+<li>TCP/IP协议<ul>
+<li>ARPANET 指定的协议</li>
+<li>网际协议族: 通信必须用到的协议群统称;</li>
 </ul>
 </li>
-<li><p>服务的端口号</p>
-<ul>
-<li>HTTP服务默认TCP协议的80端口</li>
-<li>FTP服务默认TCP协议的21端口</li>
-<li>TFTP服务默认UDP协议的69端口</li>
-</ul>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> man ftp	<span class="comment">// 指定端口号</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><ol>
-<li><p>TCP的段格式</p>
-<ul>
-<li>源端口号、目的端口号：各  2 byte</li>
-<li>序列号 和 确认序列号：各 4 byte</li>
-<li>TCP 4位首部长度和IP协议头类似,表示TCP协议头的长度；TCP协议头20 – 60字节,</li>
-</ul>
-</li>
-<li><p>TCP 通讯时序</p>
-<img src="/2019/05/06/TcpIp/tcp_communication.png">
-<ul>
-<li><p>建立连接</p>
-<ul>
-<li>SYN：占一位，表示连接请求</li>
-<li>mss：允许的最大字节数 </li>
-<li>三个段：三次握手<ul>
-<li>client：请求段和应答段</li>
-<li>server：请求和应答在一个段中发出</li>
-</ul>
-</li>
-<li>telnet ip port</li>
-</ul>
-</li>
-<li><p>数据传输</p>
-<ul>
-<li>ACK和确认序号是非常重要的</li>
-<li>client：先发数据；确认server的ACK </li>
-<li>server: 确认client的ACK 和 数据是一起发送</li>
-</ul>
-</li>
-<li><p>关闭连接</p>
-<ul>
-<li><p>FIN ：占一位，FIN位表示关闭连接的请求</p>
-</li>
-<li><p>建立连接的过程是三方握手,而关闭连接通常需要4个段</p>
-</li>
-<li><p>client：请求FIN；确认server的ACK</p>
-</li>
-<li><p>server：应答ACK 和 关闭连接FIN请求通常不合并在一个段中</p>
-<ul>
-<li>连接半关闭的情况</li>
+<li>RFC概念 Request for Comment<ul>
+<li>TCP/IP 由IETF讨论制定, 需要标准化的协议, 被列入RFC文档并在互联网上公布;</li>
+<li>标准化流程<ul>
+<li>互联网草案阶段 - - RFC提议标准 – 草案标准 – 整整的标准</li>
 </ul>
 </li>
 </ul>
 </li>
+<li>互联网 The Internet  /  网际网 Internet<ul>
+<li>ISP Internet server provider : 不同的区域网ISP, 相互连接称互联网</li>
+<li>NOC network operation connect : 同一个ISP 中不同网络之间的连接</li>
+<li>IX Internet Exchange: 不同的ISP区域网之间的链接</li>
 </ul>
 </li>
 </ol>
-<ol start="3">
-<li><p>滑动窗口</p>
+<h3 id="TCP-IP-协议分层模型"><a href="#TCP-IP-协议分层模型" class="headerlink" title="TCP/IP 协议分层模型"></a>TCP/IP 协议分层模型</h3><ol>
+<li><p>OSI 模型和TCP/IP模型区别</p>
 <ul>
-<li>解决数据丢失的问题</li>
-<li>TCP协议是面向流的协议，应用程序所看到的数据是一个整体，可以是几K数据，也可以是几个字节数据</li>
-<li>而UDP是面向消息的协议，每个UDP段都是一条消息,应用程序必须以消息为单位提取数据,不能一次提取任意字节的数据,这一点和TCP是很不同的。</li>
+<li>OSI模型: 注重<strong>通信协议具备的功能是什么</strong>;</li>
+<li>TCP/IP : 注重<strong>计算机上实现协议应该开发哪些程序</strong></li>
+</ul>
+<p>{ % asset_img tcpip.png %}</p>
+</li>
+<li><p>模式和使用的协议</p>
+<ul>
+<li>Client –&gt; Server : 使用TCP/IP协议</li>
+<li>Wed –&gt; Server: 使用HTTP协议</li>
 </ul>
 </li>
 </ol>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>分层</th>
+<th>功能 / 协议</th>
+<th>数据单位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用程序</td>
+<td>应用层(会话层以上)</td>
+<td>HTTP: 万维网(WWW) web;   数据格式 – HTML</td>
+<td>消息</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>SMTP: Email使用(simple mail transfer protocol)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>FTP: 文件传输(file…); <strong>建立两个TCP连接</strong>– 控制和数据</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>TELENT  SSH 远程连接 (secure shell)(更安全)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>SNMP 网络管理: (simple network management)</td>
+<td></td>
+</tr>
+<tr>
+<td>操作系统</td>
+<td>传输层</td>
+<td>根据端口号: 让应用程序实现通信;</td>
+<td>段</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>TCP : 面向连接的传输协议; 有重传机制</td>
+<td>TCP数据流</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>UDP: 面向无连接; 主要用于多播, 广播和视频</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>互联网层(网络层)</td>
+<td>通过路由器: 实现数据包的分组转发, 实现IP协议</td>
+<td>数据报</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>IP协议:根据IP地址进行转发分包数据, 不具备重发机制</td>
+<td>(IP UDP)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>ICMP: IP数据包出故障时, 发送异常通知给发送端</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>ARP: 从IP地址中解析MAC地址</td>
+<td></td>
+</tr>
+<tr>
+<td>设备驱动程序<br>与网络接口</td>
+<td>网络接口层<br>(数据链路层) 网卡层</td>
+<td>根据MAC地址, 通过以太网中的数据链路进行通信<br>驱动程序: 在操作系统和硬件起桥梁作用</td>
+<td>帧</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>WLAN : 无线局域网</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>PPP: 点对点协议</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>物理层</td>
+<td>负责数据传输</td>
+</tr>
+</tbody>
+</table>
+<h3 id="数据封装"><a href="#数据封装" class="headerlink" title="数据封装"></a>数据封装</h3><ol>
+<li><p>每一层都会加一个首部:</p>
+<img src="/2019/05/06/TcpIp/first.png">
+</li>
+<li><p>数据链路层: 除了加首部, 在尾部加包尾, 循环冗余检测</p>
+<img src="/2019/05/06/TcpIp/data.png">
+</li>
+<li><p>数据包处理</p>
+<ul>
+<li>数据链路层和网络层: 根据协议进行转发;</li>
+<li>TCP处理: 先检查校验和 – 序列号 – 端口号; <ul>
+<li>确认数据无误: 发送确认回执</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="TCP-IP抽象"><a href="#TCP-IP抽象" class="headerlink" title="TCP/IP抽象"></a>TCP/IP抽象</h3><ul>
+<li>抽象为一个送快递模型. 云南到北京</li>
+</ul>
+<ol>
+<li><p>网络层</p>
+<ul>
+<li>从云南到北京 : 要经过哪些其他省份;</li>
+<li>相当于一个行程表</li>
+</ul>
+</li>
+<li><p>数据链路层:  </p>
+<ul>
+<li>根据不同的省份划分的区间; </li>
+<li>每个区间采用货车大小不同: 最大传输单元MTU(maximum transmission union)</li>
+</ul>
+</li>
+</ol>
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><ol>
+<li><p>提供直连两个设备之间的通信功能;</p>
+</li>
+<li><p>网络拓扑结构</p>
+<ul>
+<li>网络连接和构成的形态</li>
+<li>总线型 ，环形，星型，混合型；</li>
+</ul>
+</li>
+<li><p>MAC地址 48bit</p>
+<ul>
+<li>第一位 和 第二位 </li>
+</ul>
+<img src="/2019/05/06/TcpIp/MAC.png">
+</li>
+<li><p>介质型网络传输</p>
+<ul>
+<li>共享介质中传递方式: 多个用户采用一条传输线<ul>
+<li>争用方式: CSMA/CD 载波监听多路访问 + 碰撞检测</li>
+<li>令牌传递方式: 每一个用户能占有一段时间</li>
+</ul>
+</li>
+<li>非共享介质: <ul>
+<li>通过2层交换机: 与交换机直连, 构建每个用户的独享;</li>
+<li>缺点: 交换机故障,所有用户不能通信</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="以太网"><a href="#以太网" class="headerlink" title="以太网"></a>以太网</h3><ol>
+<li><p>以太网: 最具兼容性的一种数据链路;</p>
+</li>
+<li><p>介质模式: 非共享介质, 冲突检测不在必要, 让网路变得更加高速;</p>
+</li>
+<li><p>传输速度: 1K = 1000 ,并非二进制的1024;</p>
+</li>
+<li><p>协议: IEEE 802.11</p>
+</li>
+<li><p>以太网帧格式</p>
+<ul>
+<li>类型(2byte): 代表上一层协议</li>
+<li>FCS(frame check sequence): 数据帧在传输过程中,收到电子干扰,导致0/1错码, 需要进行检测;</li>
+</ul>
+<img src="/2019/05/06/TcpIp/macfirst.png">
+</li>
+</ol>
+<h3 id="无线通信"><a href="#无线通信" class="headerlink" title="无线通信"></a>无线通信</h3><ol>
+<li><p>使用介质: 电磁波</p>
+</li>
+<li><p>几种类型:</p>
+<p>| 分类                        | 技术     |<br>| ————————— | ——– |<br>| 短距离无线                  | RFID     |<br>| 无线PAN Person Area Network | Bletooth |<br>| 无线LAN Local Area Network  | Wifi     |<br>| 无线WAN  Wide Area Network  | 3G, 4G   |</p>
+</li>
+<li><p>使用协议</p>
+<ul>
+<li>IEEE802.11 : 定义了无线LAN协议与数据了链路层的一部分;</li>
+<li>介质上采用CSMA/CA </li>
+</ul>
+</li>
+</ol>
+<h3 id="PPP-协议"><a href="#PPP-协议" class="headerlink" title="PPP 协议"></a>PPP 协议</h3><ol>
+<li>与以太网的区别:<ul>
+<li>纯数据链路层, 与物理层没有任何关系;</li>
+<li>仅有PPP协议是无法通信, 需要物理层的支持</li>
+</ul>
+</li>
+<li>PPP协议的数据发送:<ul>
+<li>建立PPP级的连接, 建立以后进行身份认证, 加密 和压缩</li>
+<li>LCP: link control protocol, 负责建立和断开连接;</li>
+<li>NCP: network control protocol.  负责IP地址的设置以及TCP/IP首部压缩;</li>
+<li>PAP: password authentication protocol, 用户身份的认证协议, <ul>
+<li>两次握手进行验证, 密码明文传输</li>
+</ul>
+</li>
+<li>CHAP: challenge handshake authentication protocol, <ul>
+<li>一次性密码,建立连接后定期换密码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据包大小: 0-1500 byte</li>
+</ol>
+<h3 id="FDDI-fiber-distributed-data-interface"><a href="#FDDI-fiber-distributed-data-interface" class="headerlink" title="FDDI fiber distributed data interface"></a>FDDI fiber distributed data interface</h3><ol>
+<li>FDDI: 分布式光纤数据接口;</li>
+<li>采用令牌环进行通信</li>
+</ol>
+<h3 id="ATM"><a href="#ATM" class="headerlink" title="ATM"></a>ATM</h3><ol>
+<li>ATM: asynchronous(异步) transfer mode : 以信元为单位进行数据连接;</li>
+<li>特点:<ul>
+<li>面向连接的数据链路;</li>
+<li>允许同时与多个对端建立通信连接</li>
+</ul>
+</li>
+</ol>
+<h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><ul>
+<li>提供没有直连的两个网络通信</li>
+<li>提尽力服务, 没有数据包丢失检测</li>
+</ul>
+<ol>
+<li><p>网络层和数据链路层关系:</p>
+<ul>
+<li>数据链路层: 相当于每一站的车票;</li>
+<li>网络层: 从起点到终点的行程安排;</li>
+</ul>
+<img src="/2019/05/06/TcpIp/IPandMac.png">
+</li>
+<li><p>IP三个模块</p>
+<ul>
+<li>IP寻址: IP地址, 唯一性和层次性</li>
+<li>路由控制: 将分组数据发送到最终目标地址的功能;</li>
+<li>IP的分包和组包</li>
+</ul>
+</li>
+</ol>
+<h3 id="IP-地址"><a href="#IP-地址" class="headerlink" title="IP 地址"></a>IP 地址</h3><ol>
+<li><p>作用: 标识主机和路由器, 使用不同的主机之间通信;</p>
+</li>
+<li><p>早期 IP地址由两部分组成</p>
+<ul>
+<li>网络地址: 在数据链路的每个段配置不同的值;<ul>
+<li>互联的每个段地址不能重复;</li>
+<li>路由器: 包含不同段的网络地址, 数据在不同的网段之间传播</li>
+</ul>
+</li>
+<li>主机地址: 标识不同的主机;</li>
+</ul>
+</li>
+<li><p>引入子网掩码的IP地址</p>
+<ul>
+<li>IP地址本身 + 表示网络的子网掩码</li>
+<li>CIDR: 将多个C类地址聚合成一个大的地址, 减少一位网络地址,增加一位主机地址;<ul>
+<li>路由聚合, 减小路由控制表</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>IP地址分类: 4类地址</p>
+<ul>
+<li>注意他们的区间</li>
+<li>D类地址: 没有主机标识, 全部用于多播(某些组内)</li>
+<li>主机地址全为1: 用作同一个链路之间的广播地址;</li>
+</ul>
+</li>
+<li><p>IP多播实现:</p>
+<ul>
+<li><p>D类地址 + IGMP(组内控制协议)</p>
+</li>
+<li><p>224.0.0.0 - 223.255.255.255 多播地址可用范围</p>
+</li>
+</ul>
+</li>
+<li><p>全局地址和私有地址</p>
+<ul>
+<li>私有地址分为三类: 其主机数 /8 /10 /12;</li>
+<li>全局地址: 由ISP进行管理</li>
+</ul>
+</li>
+</ol>
+<h3 id="路由控制"><a href="#路由控制" class="headerlink" title="路由控制"></a>路由控制</h3><ul>
+<li>路由协议 – 生成路由控制表 – 控制数据包的下一跳 – 实现IP通信</li>
+</ul>
+<ol>
+<li><p>Hop 一跳</p>
+<ul>
+<li>IP数据包在一个链路区间的传递; </li>
+<li>到达的应该是下一个路由器;</li>
+</ul>
+</li>
+<li><p>路由控制表</p>
+<ul>
+<li>从源主机到目的主机的路由控制表</li>
+<li>也就是下一个路由到哪里;</li>
+</ul>
+<p>| 路由     | 地址                           | 功能                                    |<br>| ——– | —————————— | ————————————— |<br>| 默认路由 | 0.0.0.0/0  /0 不是表示的主机IP | 路由表中任一地址都能匹配                |<br>| 主机路由 | IP地址/32                      | 整个IP地址都参与路由,不通过网络地址路由 |<br>| 环回路由 | 127.0.0.1  localhost           | 主机内部路由                            |</p>
+</li>
+</ol>
+<h3 id="IP-数据报分割与重组"><a href="#IP-数据报分割与重组" class="headerlink" title="IP 数据报分割与重组"></a>IP 数据报分割与重组</h3><ol>
+<li><p>IP数据报为什么要进行分包?</p>
+<ul>
+<li>不同的数据链路有不同的传输单元MTU;</li>
+<li>以太网:1500; byte</li>
+<li>FDDI : 4352; byte</li>
+<li>ATM: 9180 byte</li>
+</ul>
+</li>
+<li><p>IP数据包分割与重组</p>
+<ul>
+<li>IP/UDP 数据分割: 路由器完成</li>
+<li>IP/UDP 数据片重组: 目标主机</li>
+<li>TCP的数据分割和重组: 由TCP层自己完成;</li>
+</ul>
+<img src="/2019/05/06/TcpIp/UDP_DATA.png">
+<img src="/2019/05/06/TcpIp/tcp_data.png">
+</li>
+</ol>
+<h3 id="IPV4-首部"><a href="#IPV4-首部" class="headerlink" title="IPV4 首部"></a>IPV4 首部</h3><ol>
+<li><p>地址格式含义</p>
+<img src="/2019/05/06/TcpIp/ipv4_first.png">
+<p>| 名称 ( 32bit一组)                 | 长度 bit               | 值                                                           |<br>| ——————————— | ———————- | ———————————————————— |<br>| 版本号                            | 0-3(4bit)              | 4 = 0100                                                     |<br>| 首部长度 : 首部字节数 5<em>4 =20     | 4-7(4bit)              | 5 = 0101                                                     |<br>| 区分服务: 网络状况                | 8-13 (DSCP) 14-15(ECN) | DSCP: 表示优先度;<br>ECN: 表示网络拥塞                     |<br>| 总长度: IP数据包的总长度          | 16-31 (16bit)          | 2^16 = 65535字节; <strong>包含首部长度</strong>                           |<br>| <strong>32bit一组</strong>                     |                        |                                                              |<br>| 标识:用于分片重建, 记录分片的顺序 | 0-15(16bit)            | 2^16 大小, 分片就递增加1                                     |<br>| 标志: 是否可以分片/ 最后一个分片  | 16-18 (3bit)           | 16bit: 0;  <br>17bit: 0–分片; 1–不能分片<br>18bit: 0–最后一个包; 1–中间的包 |<br>| 片偏移: 表示IP数据包中的位置      | 19-31(13bit)           | 2^13 = 8192</em>8 = 65536; 单位是8byte                           |<br>| <strong>32bit一组</strong>                     |                        |                                                              |<br>| 生存周期: 经过路由器个数          | 0-7 (8bit)             | 2^8:= 255 每经过一个路由器, TTL减1                           |<br>| 协议: 表示上层协议TCP/UDP         | 8-15 (16bit)           | TCP = 6 ; UDP = 17                                           |<br>| 首部校验和                        | 16-31 (16bit)          | 校验数据包的首部,不校验数据                                  |<br>| <strong>32bit一组</strong>                     |                        |                                                              |<br>| 源地址                            | 0-31                   |                                                              |<br>| 目标地址                          | 0-31                   |                                                              |</p>
+</li>
+</ol>
+<h3 id="IPV6"><a href="#IPV6" class="headerlink" title="IPV6"></a>IPV6</h3><ol>
+<li><p>IPV6地址大小</p>
+<ul>
+<li>128bits</li>
+<li>8个 16bit 的字节进行表示;</li>
+<li>:: 双冒号表示省略0, 只能用一次</li>
+</ul>
+</li>
+<li><p>包首部</p>
+<ul>
+<li>首部40 bytes</li>
+<li>路由器不参与分片处理, 直接以最小MTU 1280字节进行发出</li>
+</ul>
+</li>
+<li><p>地址结构</p>
+<img src="/2019/05/06/TcpIp/ipv6.png">
+</li>
+</ol>
+<h3 id="ipv6-首部"><a href="#ipv6-首部" class="headerlink" title="ipv6 首部"></a>ipv6 首部</h3><ol>
+<li><p>地址格式</p>
+<img src="/2019/05/06/TcpIp/ipv6_first.png">
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>名称(32bit一组)</th>
+<th>长度 bit</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>版本: 6</td>
+<td>0-3</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>通信量类 = 区分服务</td>
+<td>4-11(8bit)</td>
+<td>占时没用</td>
+</tr>
+<tr>
+<td>流标号:  + 源/目的地址  == <strong>判断是同一个数据流</strong></td>
+<td>12-31(20bit)</td>
+<td>进行服务质量时, 设置为随机数</td>
+</tr>
+<tr>
+<td><strong>32bit一组</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>有效负载长度: 能包含的数据包长度 <strong>不包含首部长度</strong></td>
+<td>0-15</td>
+<td>2^15=65535 bytes: 不包含首部</td>
+</tr>
+<tr>
+<td>下一个首部 = 协议</td>
+<td>16-23(8bit)</td>
+<td>表示上一层协议</td>
+</tr>
+<tr>
+<td>调数限制 = TTL</td>
+<td>24-31(8bit)</td>
+<td>可经过的路由器个数, 每进过一个减一</td>
+</tr>
+<tr>
+<td><strong>32bit一组</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>源地址</td>
+<td>4个32bit</td>
+<td></td>
+</tr>
+<tr>
+<td>目的地址</td>
+<td>4个32bit</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>32bit一组</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>IPV6的首部是可以扩展的</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -1193,7 +1510,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                    <span class="site-state-item-count">76</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1229,7 +1548,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP-协议"><span class="nav-number">1.</span> <span class="nav-text">TCP / IP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP-协议栈"><span class="nav-number">1.1.</span> <span class="nav-text">TCP/IP 协议栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以太网（RFC）帧格式"><span class="nav-number">1.2.</span> <span class="nav-text">以太网（RFC）帧格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP-数据报文格式"><span class="nav-number">1.2.1.</span> <span class="nav-text">ARP 数据报文格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-数据报"><span class="nav-number">1.3.</span> <span class="nav-text">IP 数据报</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP数据报文格式"><span class="nav-number">1.3.1.</span> <span class="nav-text">IP数据报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址与路由"><span class="nav-number">1.3.2.</span> <span class="nav-text">IP地址与路由</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-UDP"><span class="nav-number">1.4.</span> <span class="nav-text">TCP / UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP"><span class="nav-number">1.4.1.</span> <span class="nav-text">UDP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">1.4.2.</span> <span class="nav-text">TCP</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP-协议"><span class="nav-number">1.</span> <span class="nav-text">TCP / IP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络基础知识"><span class="nav-number">1.1.</span> <span class="nav-text">网络基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI-7层参考模型（Open-System-Interconnection-Reference-Model）"><span class="nav-number">1.2.</span> <span class="nav-text">OSI 7层参考模型（Open System Interconnection Reference Model）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP-基础知识"><span class="nav-number">1.3.</span> <span class="nav-text">TCP/IP 基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP-协议分层模型"><span class="nav-number">1.3.1.</span> <span class="nav-text">TCP/IP 协议分层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据封装"><span class="nav-number">1.3.2.</span> <span class="nav-text">数据封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP抽象"><span class="nav-number">1.3.3.</span> <span class="nav-text">TCP/IP抽象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据链路层"><span class="nav-number">1.4.</span> <span class="nav-text">数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以太网"><span class="nav-number">1.4.1.</span> <span class="nav-text">以太网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无线通信"><span class="nav-number">1.4.2.</span> <span class="nav-text">无线通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PPP-协议"><span class="nav-number">1.4.3.</span> <span class="nav-text">PPP 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FDDI-fiber-distributed-data-interface"><span class="nav-number">1.4.4.</span> <span class="nav-text">FDDI fiber distributed data interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ATM"><span class="nav-number">1.4.5.</span> <span class="nav-text">ATM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP协议"><span class="nav-number">1.5.</span> <span class="nav-text">IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-地址"><span class="nav-number">1.5.1.</span> <span class="nav-text">IP 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由控制"><span class="nav-number">1.5.2.</span> <span class="nav-text">路由控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-数据报分割与重组"><span class="nav-number">1.5.3.</span> <span class="nav-text">IP 数据报分割与重组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPV4-首部"><span class="nav-number">1.5.4.</span> <span class="nav-text">IPV4 首部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPV6"><span class="nav-number">1.5.5.</span> <span class="nav-text">IPV6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipv6-首部"><span class="nav-number">1.5.6.</span> <span class="nav-text">ipv6 首部</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

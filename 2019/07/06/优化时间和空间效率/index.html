@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="优化时间和空间效率 Introduction 数据结构：对大量数据的组织和研究 算法分析：对算法运行时间的评估 运行时间最坏的计算。  数学知识 指数 和 对数之间的转换  级数公式  当 i 趋近于无穷时，得出一个公式的表达式    模运算  除法需要很高的时间复杂度 归纳法证明： base case  成立 k成立 – &amp;gt; (k+1)成立   反证法证明   递归实现    Algori">
+<meta name="keywords" content="O(N)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="优化时间和空间效率">
+<meta property="og:url" content="http://yoursite.com/2019/07/06/优化时间和空间效率/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="优化时间和空间效率 Introduction 数据结构：对大量数据的组织和研究 算法分析：对算法运行时间的评估 运行时间最坏的计算。  数学知识 指数 和 对数之间的转换  级数公式  当 i 趋近于无穷时，得出一个公式的表达式    模运算  除法需要很高的时间复杂度 归纳法证明： base case  成立 k成立 – &amp;gt; (k+1)成立   反证法证明   递归实现    Algori">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/06/优化时间和空间效率/series.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/06/优化时间和空间效率/Recursive.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/06/优化时间和空间效率/increase.png">
+<meta property="og:updated_time" content="2019-07-13T01:06:47.440Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="优化时间和空间效率">
+<meta name="twitter:description" content="优化时间和空间效率 Introduction 数据结构：对大量数据的组织和研究 算法分析：对算法运行时间的评估 运行时间最坏的计算。  数学知识 指数 和 对数之间的转换  级数公式  当 i 趋近于无穷时，得出一个公式的表达式    模运算  除法需要很高的时间复杂度 归纳法证明： base case  成立 k成立 – &amp;gt; (k+1)成立   反证法证明   递归实现    Algori">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/06/优化时间和空间效率/series.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/06/优化时间和空间效率/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>优化时间和空间效率 | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/06/优化时间和空间效率/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">优化时间和空间效率
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-07-06 11:15:59" itemprop="dateCreated datePublished" datetime="2019-07-06T11:15:59+08:00">2019-07-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-07-13 09:06:47" itemprop="dateModified" datetime="2019-07-13T09:06:47+08:00">2019-07-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/data-struct-algorithm/" itemprop="url" rel="index"><span itemprop="name">data_struct_algorithm</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="优化时间和空间效率"><a href="#优化时间和空间效率" class="headerlink" title="优化时间和空间效率"></a>优化时间和空间效率</h1><ul>
+<li>Introduction</li>
+<li>数据结构：对大量数据的组织和研究</li>
+<li>算法分析：对算法运行时间的评估</li>
+<li>运行时间最坏的计算。</li>
+</ul>
+<h2 id="数学知识"><a href="#数学知识" class="headerlink" title="数学知识"></a>数学知识</h2><ol>
+<li><p>指数 和 对数之间的转换</p>
+</li>
+<li><p>级数公式</p>
+<ul>
+<li>当 i 趋近于无穷时，得出一个公式的表达式</li>
+</ul>
+<img src="/2019/07/06/优化时间和空间效率/series.png">
+</li>
+<li><p>模运算</p>
+<ul>
+<li>除法需要很高的时间复杂度</li>
+<li>归纳法证明：<ul>
+<li>base case  成立</li>
+<li>k成立 – &gt; (k+1)成立</li>
+</ul>
+</li>
+<li>反证法证明</li>
+</ul>
+</li>
+<li><p>递归实现</p>
+<img src="/2019/07/06/优化时间和空间效率/Recursive.png">
+</li>
+</ol>
+<h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><ul>
+<li>对于一个问题：给定某种算法并且确定其是正确的</li>
+<li>最重要的一步便是：计算时间和空间资源</li>
+</ul>
+<h3 id="相对增长率"><a href="#相对增长率" class="headerlink" title="相对增长率"></a>相对增长率</h3><ol>
+<li><p>四种增长关系的定义</p>
+<ul>
+<li>将其放在坐标上表示：<ul>
+<li>1）常数：是直线</li>
+<li>2）乘级：直线方程</li>
+</ul>
+</li>
+</ul>
+<img src="/2019/07/06/优化时间和空间效率/increase.png">
+<ul>
+<li>四种定义：在坐标上理解其含义<ul>
+<li>1) 大O： &lt;=  的关系；是上限值</li>
+<li>2) 小o : &lt;的关系</li>
+<li>3) omega: &gt;= 的关系；是下限值</li>
+<li>4) theta: = 的关系 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>相对增长率</p>
+<ul>
+<li>算法分析中，相对增长率是很重要的度量</li>
+</ul>
+</li>
+<li><p>关系表达式中</p>
+<ul>
+<li><p>大O：精度表示的时候</p>
+<p>1）各种简化的方式都是可能发生的</p>
+<p>2）低阶项可以忽略；常数项可以省略</p>
+</li>
+<li><p>取 lim [ f(N) / g(N) ] 极限的值，便能得到增长率的关系式  </p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="运行时间的计算"><a href="#运行时间的计算" class="headerlink" title="运行时间的计算"></a>运行时间的计算</h3><ol>
+<li><p>算法的时间复杂度：针对的是大量数据的计算，小量数据不用花费时间设计算法</p>
+<p>1）考虑数据读入的时间效率；</p>
+<p>2）低效的算法：虽然算法复杂度低，但是对数据的处理基本上处于停滞状态</p>
+<p>2）算法足够有效，也不产生其他问题，这样的算法才是好的</p>
+</li>
+<li><p>最大O时间单元的计算：</p>
+<ul>
+<li>大O：是上限值</li>
+</ul>
+<p>1）一次赋值：一个时间单元</p>
+<p>2）一次return value ：一个时间单元</p>
+<p>3）+ - × / ：一种运算算一个时间单元</p>
+<p>4）包括循环里面的：赋值，比较运算–&gt;一次一个时间单元</p>
+<p>5）省去低阶和常数</p>
+</li>
+<li><p>计算时间成本：将O( ) 作为上限后，有几种简化的法则，不用一步步去加</p>
+<p>1）for(;;)  –&gt; 时间=测试语句 × 迭代次数;化简为O(N);</p>
+<p>2）for(;;)嵌套 –&gt;  O(N^2);</p>
+<p>3) 计算任何一件事，都不要超过一次</p>
+</li>
+<li><p>最大子序列：只能顺序取一个序列，中间不能有跳过</p>
+</li>
+</ol>
+<h3 id="几种常见算法的时间复杂度"><a href="#几种常见算法的时间复杂度" class="headerlink" title="几种常见算法的时间复杂度"></a>几种常见算法的时间复杂度</h3><ol>
+<li>对分查找：<ul>
+<li>在排好序的数组中进行的这半查找</li>
+<li>它提供了在 O(log N)的时间内进行查找</li>
+</ul>
+</li>
+<li>幂运算<ul>
+<li>还是利用指数折半进行计算</li>
+</ul>
+</li>
+<li>线性程序：顺序执行的程序 O(N)</li>
+<li>非线性程序：O( N * log(N) )</li>
+</ol>
+<h2 id="时间效率"><a href="#时间效率" class="headerlink" title="时间效率"></a>时间效率</h2><h3 id="优化时间效率编程习惯"><a href="#优化时间效率编程习惯" class="headerlink" title="优化时间效率编程习惯"></a>优化时间效率编程习惯</h3><ol>
+<li>传递复杂参数：使用指针；<ul>
+<li>值传递：需要产生一次复制的操作</li>
+</ul>
+</li>
+<li>循环和递归<ul>
+<li>循环：当递归中有大量的重复时，使用循环；</li>
+</ul>
+</li>
+<li>各类查找算法</li>
+</ol>
+<h3 id="应用一：-面试题39：数组中出现次数超过一半的数字-题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字"><a href="#应用一：-面试题39：数组中出现次数超过一半的数字-题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字" class="headerlink" title="应用一： 面试题39：数组中出现次数超过一半的数字. 题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字"></a>应用一：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/tree/master/SwordOffer/10_find_and_sort/moreHalfNum.c" target="_blank" rel="noopener"> 面试题39：数组中出现次数超过一半的数字. 题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字</a></h3><ol>
+<li>存在三种解题思路；<ul>
+<li>快速排序数组；改变数组值</li>
+<li>考虑数组下标的特性；改变数组值</li>
+<li>考虑数字超过一半这个特性，并且只遍历一边数组，不改动数组；</li>
+</ul>
+</li>
+</ol>
+<h3 id="应用二：面试题40：最小的k个数。题目：输入n个整数，找出其中最小的k个数"><a href="#应用二：面试题40：最小的k个数。题目：输入n个整数，找出其中最小的k个数" class="headerlink" title="应用二：面试题40：最小的k个数。题目：输入n个整数，找出其中最小的k个数"></a>应用二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/tree/master/SwordOffer/10_find_and_sort/getLeastNumber.c" target="_blank" rel="noopener">面试题40：最小的k个数。题目：输入n个整数，找出其中最小的k个数</a></h3><h3 id="应用三：面试题41：数据流中的中位数。题目：如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么-中位数就是所有数值排序之后位于中间的数值"><a href="#应用三：面试题41：数据流中的中位数。题目：如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么-中位数就是所有数值排序之后位于中间的数值" class="headerlink" title="应用三：面试题41：数据流中的中位数。题目：如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么 中位数就是所有数值排序之后位于中间的数值"></a>应用三：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/data_StreamMedian.c" target="_blank" rel="noopener">面试题41：数据流中的中位数。题目：如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么 中位数就是所有数值排序之后位于中间的数值</a></h3><ol>
+<li><p>题目注意：数据流中读出，数目随时间变化而增加；需要考虑数据容器。</p>
+</li>
+<li><p>数据结构的选择</p>
+<p>​    a. 数组：进行插入排序，需要移动O(n)个数, O(1)得到中位数；</p>
+<p>​    b. 排序链表：和插入排序数组一样；</p>
+<p>​    c. 二叉搜索树：插入 – 平均O(log(N))，最差O(N); 查找O(logN),最差O(N)</p>
+<p>​    d. AVL树：让左右子树的高度差不超过1，插入O(logN), 查找O(1);  接口很难实现</p>
+<p>​    e. 最大堆和最小堆：保证数据平均分配到两个堆中；</p>
+<p>​        最大堆：保存着小于中位数的那些数；</p>
+<p>​        最小堆：保存着大于中位数的那些数；、</p>
+</li>
+</ol>
+<p>​    3. 代码没有实现</p>
+<h3 id="应用四：面试题42：连续子数组的最大和-求所有子数组的和的最大值-并输出子数组"><a href="#应用四：面试题42：连续子数组的最大和-求所有子数组的和的最大值-并输出子数组" class="headerlink" title="应用四：面试题42：连续子数组的最大和. 求所有子数组的和的最大值,并输出子数组"></a>应用四：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/tree/master/SwordOffer/03_Array/maxSum_continueArray.c" target="_blank" rel="noopener">面试题42：连续子数组的最大和. 求所有子数组的和的最大值,并输出子数组</a></h3><ol>
+<li>解题思路二：分析数组规律<ul>
+<li>连续子数组的最大和： 当前面的和小于0时，删除啊前面的序列，从当前位置开始；</li>
+</ul>
+</li>
+</ol>
+<h3 id="应用五：面试题43：从1到n整数中1出现的次数。题目：输入一个整数n，求从1到n这n个整数的十进制表示中1出现的次数"><a href="#应用五：面试题43：从1到n整数中1出现的次数。题目：输入一个整数n，求从1到n这n个整数的十进制表示中1出现的次数" class="headerlink" title="应用五：面试题43：从1到n整数中1出现的次数。题目：输入一个整数n，求从1到n这n个整数的十进制表示中1出现的次数"></a>应用五：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/tree/master/SwordOffer/05_String/numberOf_one.c" target="_blank" rel="noopener">面试题43：从1到n整数中1出现的次数。题目：输入一个整数n，求从1到n这n个整数的十进制表示中1出现的次数</a></h3><ol>
+<li>解题思路：字符串的应用<ul>
+<li>将整数转换为字符串进行处理</li>
+<li>将大数进行分段处理的实现</li>
+</ul>
+</li>
+</ol>
+<h3 id="应用六-面试题44：数字序列中某一位的数字-题目：数字以0123456789101112131415…的格式序列化到一个字符序列中"><a href="#应用六-面试题44：数字序列中某一位的数字-题目：数字以0123456789101112131415…的格式序列化到一个字符序列中" class="headerlink" title="应用六:面试题44：数字序列中某一位的数字. 题目：数字以0123456789101112131415…的格式序列化到一个字符序列中"></a>应用六:<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/tree/master/SwordOffer/05_String/digitSequence.c" target="_blank" rel="noopener">面试题44：数字序列中某一位的数字. 题目：数字以0123456789101112131415…的格式序列化到一个字符序列中</a></h3><ol>
+<li>解题思路：对大数的位数进行区分；<ul>
+<li>通过对数字位数进行区分得到规律;</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/O-N/" rel="tag"># O(N)</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/26/String/" rel="next" title="String">
+                <i class="fa fa-chevron-left"></i> String
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">86</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">76</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#优化时间和空间效率"><span class="nav-number">1.</span> <span class="nav-text">优化时间和空间效率</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数学知识"><span class="nav-number">1.1.</span> <span class="nav-text">数学知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.2.</span> <span class="nav-text">Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相对增长率"><span class="nav-number">1.2.1.</span> <span class="nav-text">相对增长率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时间的计算"><span class="nav-number">1.2.2.</span> <span class="nav-text">运行时间的计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几种常见算法的时间复杂度"><span class="nav-number">1.2.3.</span> <span class="nav-text">几种常见算法的时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间效率"><span class="nav-number">1.3.</span> <span class="nav-text">时间效率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优化时间效率编程习惯"><span class="nav-number">1.3.1.</span> <span class="nav-text">优化时间效率编程习惯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：-面试题39：数组中出现次数超过一半的数字-题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字"><span class="nav-number">1.3.2.</span> <span class="nav-text">应用一： 面试题39：数组中出现次数超过一半的数字. 题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：面试题40：最小的k个数。题目：输入n个整数，找出其中最小的k个数"><span class="nav-number">1.3.3.</span> <span class="nav-text">应用二：面试题40：最小的k个数。题目：输入n个整数，找出其中最小的k个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三：面试题41：数据流中的中位数。题目：如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么-中位数就是所有数值排序之后位于中间的数值"><span class="nav-number">1.3.4.</span> <span class="nav-text">应用三：面试题41：数据流中的中位数。题目：如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么 中位数就是所有数值排序之后位于中间的数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用四：面试题42：连续子数组的最大和-求所有子数组的和的最大值-并输出子数组"><span class="nav-number">1.3.5.</span> <span class="nav-text">应用四：面试题42：连续子数组的最大和. 求所有子数组的和的最大值,并输出子数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用五：面试题43：从1到n整数中1出现的次数。题目：输入一个整数n，求从1到n这n个整数的十进制表示中1出现的次数"><span class="nav-number">1.3.6.</span> <span class="nav-text">应用五：面试题43：从1到n整数中1出现的次数。题目：输入一个整数n，求从1到n这n个整数的十进制表示中1出现的次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用六-面试题44：数字序列中某一位的数字-题目：数字以0123456789101112131415…的格式序列化到一个字符序列中"><span class="nav-number">1.3.7.</span> <span class="nav-text">应用六:面试题44：数字序列中某一位的数字. 题目：数字以0123456789101112131415…的格式序列化到一个字符序列中</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

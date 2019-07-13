@@ -96,13 +96,13 @@
 
 
 
-  <meta name="description" content="Tree1.文件系统：三种访问结构；前中后序访问 2.算术表达式的计算：后缀表达式转化为中缀表达式 3.树的搜索：将最坏的时间上届限制到O(logN)，通过二叉树进行控制. 树的实现 通过递归的方式实现树  树的元素 – 节点 节点的父子关系 1）n(1) –&amp;gt; n(2)：n(1) 是n(2)的祖先； 2）n(1) != n(2);  n(1) 是n(2)的真祖先； 3）parent 、ch">
+  <meta name="description" content="Tree 文件系统：三种访问结构；前中后序访问 树的操作基本时间：O(logN) 通过递归的方式实现树  树的实现树的元素 – 节点 树中节点的关系 1）n(1) –&amp;gt; n(2)：n(1) 是n(2)的祖先； 2）n(1) != n(2);  n(1) 是n(2)的真祖先； 3）parent 、child、sibling、leaf、grandparents、grandchild  节点数的长">
 <meta name="keywords" content="tree">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tree">
 <meta property="og:url" content="http://yoursite.com/2019/05/17/tree/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="Tree1.文件系统：三种访问结构；前中后序访问 2.算术表达式的计算：后缀表达式转化为中缀表达式 3.树的搜索：将最坏的时间上届限制到O(logN)，通过二叉树进行控制. 树的实现 通过递归的方式实现树  树的元素 – 节点 节点的父子关系 1）n(1) –&amp;gt; n(2)：n(1) 是n(2)的祖先； 2）n(1) != n(2);  n(1) 是n(2)的真祖先； 3）parent 、ch">
+<meta property="og:description" content="Tree 文件系统：三种访问结构；前中后序访问 树的操作基本时间：O(logN) 通过递归的方式实现树  树的实现树的元素 – 节点 树中节点的关系 1）n(1) –&amp;gt; n(2)：n(1) 是n(2)的祖先； 2）n(1) != n(2);  n(1) 是n(2)的真祖先； 3）parent 、child、sibling、leaf、grandparents、grandchild  节点数的长">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/05/17/tree/firstchild.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/17/tree/expression.png">
@@ -111,10 +111,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/17/tree/b_tree.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/17/tree/2_3.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/17/tree/change_b.png">
-<meta property="og:updated_time" content="2019-07-05T12:28:58.063Z">
+<meta property="og:updated_time" content="2019-07-08T02:17:13.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tree">
-<meta name="twitter:description" content="Tree1.文件系统：三种访问结构；前中后序访问 2.算术表达式的计算：后缀表达式转化为中缀表达式 3.树的搜索：将最坏的时间上届限制到O(logN)，通过二叉树进行控制. 树的实现 通过递归的方式实现树  树的元素 – 节点 节点的父子关系 1）n(1) –&amp;gt; n(2)：n(1) 是n(2)的祖先； 2）n(1) != n(2);  n(1) 是n(2)的真祖先； 3）parent 、ch">
+<meta name="twitter:description" content="Tree 文件系统：三种访问结构；前中后序访问 树的操作基本时间：O(logN) 通过递归的方式实现树  树的实现树的元素 – 节点 树中节点的关系 1）n(1) –&amp;gt; n(2)：n(1) 是n(2)的祖先； 2）n(1) != n(2);  n(1) 是n(2)的真祖先； 3）parent 、child、sibling、leaf、grandparents、grandchild  节点数的长">
 <meta name="twitter:image" content="http://yoursite.com/2019/05/17/tree/firstchild.png">
 
 
@@ -424,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-05 20:28:58" itemprop="dateModified" datetime="2019-07-05T20:28:58+08:00">2019-07-05</time>
+                <time title="Updated at: 2019-07-08 10:17:13" itemprop="dateModified" datetime="2019-07-08T10:17:13+08:00">2019-07-08</time>
               
             
           </span>
@@ -504,14 +504,13 @@
       
 
       
-        <h1 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h1><p>1.文件系统：三种访问结构；前中后序访问</p>
-<p>2.算术表达式的计算：后缀表达式转化为中缀表达式</p>
-<p>3.树的搜索：将最坏的时间上届限制到O(logN)，通过二叉树进行控制.</p>
-<h2 id="树的实现"><a href="#树的实现" class="headerlink" title="树的实现"></a>树的实现</h2><ul>
+        <h1 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h1><ol>
+<li>文件系统：三种访问结构；前中后序访问</li>
+<li>树的操作基本时间：O(logN)</li>
 <li>通过递归的方式实现树</li>
-</ul>
-<h3 id="树的元素-–-节点"><a href="#树的元素-–-节点" class="headerlink" title="树的元素 – 节点"></a>树的元素 – 节点</h3><ol>
-<li><p>节点的父子关系</p>
+</ol>
+<h2 id="树的实现"><a href="#树的实现" class="headerlink" title="树的实现"></a>树的实现</h2><h3 id="树的元素-–-节点"><a href="#树的元素-–-节点" class="headerlink" title="树的元素 – 节点"></a>树的元素 – 节点</h3><ol>
+<li><p>树中节点的关系</p>
 <p>1）n(1) –&gt; n(2)：n(1) 是n(2)的祖先；</p>
 <p>2）n(1) != n(2);  n(1) 是n(2)的真祖先；</p>
 <p>3）parent 、child、sibling、leaf、grandparents、grandchild</p>
@@ -535,17 +534,15 @@
 </ul>
 <p>2）后序遍历：先左儿子节点，然后右儿子，在父节点。</p>
 <ul>
-<li>打印出每个文件占的块block大小</li>
+<li>打印出每个文件占的块block大小（文件最小单位：<strong>块</strong>）</li>
 </ul>
-</li>
-<li><p>所谓的驱动程序：是将硬件设备和内核之间建立连接，调用的时候相当于驱动？</p>
 </li>
 </ol>
 <h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ul>
 <li><p>二叉树：是一棵树，每个节点的child，不能多于两个。</p>
 </li>
 <li><p>平均深度的计算：</p>
-<p>1）平均二叉树：depth = O(节点数开根)</p>
+<p>1）平均二叉树：depth = O( sqrt(N) )</p>
 <p>2）二叉查找树：depth = O(logN)</p>
 </li>
 </ul>
@@ -562,7 +559,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="二叉树应用—-表达式树"><a href="#二叉树应用—-表达式树" class="headerlink" title="二叉树应用—-表达式树"></a>二叉树应用—-表达式树</h3><ol>
+<h3 id="二叉树应用–表达式树"><a href="#二叉树应用–表达式树" class="headerlink" title="二叉树应用–表达式树"></a>二叉树应用–表达式树</h3><ol>
 <li><p>编译器的设计领域，计算表达式的应用：</p>
 <ul>
 <li><p>中序遍历策略：中缀表达式；</p>
@@ -601,13 +598,11 @@
 <img src="/2019/05/17/tree/expression.png">
 </li>
 </ol>
-<h3 id="二叉树应用—-查找树ADT"><a href="#二叉树应用—-查找树ADT" class="headerlink" title="二叉树应用—- 查找树ADT"></a>二叉树应用—- 查找树ADT</h3><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/* </span><br><span class="line"><span class="bullet">*   </span>tree.c</span><br><span class="line"><span class="bullet">*   </span>二叉查找树：用关键字表示</span><br><span class="line"><span class="bullet">*   </span>1)find tree:查找到叶子节点，还没的话，返回NULL</span><br><span class="line"><span class="bullet">*   </span>2)find<span class="emphasis">_min _</span>max: 递归和非递归的方式进行实现；</span><br><span class="line"><span class="bullet">*       </span>非递归：考虑base基准情况</span><br><span class="line"><span class="bullet">*   </span>3) insert: 插入元素的关键字时：考虑tree是否为空；tree不为空时，元素是否已存在</span><br><span class="line"><span class="bullet">*   </span>4) delete<span class="emphasis">_x: 遍历得到元素位置，还得考虑该位置包含两个child和一个child的情况。</span></span><br><span class="line"><span class="emphasis">*/</span></span><br></pre></td></tr></table></figure>
-<ol>
+<h2 id="查找树-一-：-二叉查找树ADT"><a href="#查找树-一-：-二叉查找树ADT" class="headerlink" title="查找树 一 ： 二叉查找树ADT"></a>查找树 一 ： 二叉查找树ADT</h2><ol>
 <li><p>二叉查找树：</p>
 <p>1）每个节点：指定一个关键字值；</p>
-<p>2）关键字互异；</p>
-<p>3) 关键字：左子树的 &lt; 小于X节点 &lt; 右子树的</p>
-<p>4）元素关键字的排列是按照某种顺序进行</p>
+<p>2）关键字互异，没有重复值；</p>
+<p>3)  关键字：左子树的 &lt; 小于X节点 &lt; 右子树的</p>
 </li>
 <li><p>二叉树的创建</p>
 <ul>
@@ -627,9 +622,10 @@
 </ul>
 </li>
 </ol>
-<h2 id="AVL-树"><a href="#AVL-树" class="headerlink" title="AVL 树"></a>AVL 树</h2><ol>
-<li>AVL树：是带有平衡条件的二叉查找树<ul>
-<li>平衡条件：一棵AVL树是其<strong>每个节点</strong>的左子树和右子树的高度最多差1的二叉查找树</li>
+<h3 id="AVL-树：是带有平衡条件的二叉查找树"><a href="#AVL-树：是带有平衡条件的二叉查找树" class="headerlink" title="AVL 树：是带有平衡条件的二叉查找树"></a>AVL 树：是带有平衡条件的二叉查找树</h3><ol>
+<li>AVL树的平衡条件<ul>
+<li>平衡条件1：每个节点的左右子树具有相同高度</li>
+<li>平衡条件2（最终）：一棵AVL树是其<strong>每个节点</strong>的左子树和右子树的高度最多差1的二叉查找树</li>
 </ul>
 </li>
 <li>AVL 特性破坏：插入新的节点后，破坏了原来的AVL树特性<ul>
@@ -638,7 +634,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="新的节点插入树的方式"><a href="#新的节点插入树的方式" class="headerlink" title="新的节点插入树的方式"></a>新的节点插入树的方式</h3><ol>
+<h4 id="新的节点插入树的方式"><a href="#新的节点插入树的方式" class="headerlink" title="新的节点插入树的方式"></a>新的节点插入树的方式</h4><ol>
 <li><p>四中插入方式：</p>
 <img src="/2019/05/17/tree/insert_node.png">
 </li>
@@ -653,7 +649,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h3><ol>
+<h4 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h4><ol>
 <li><p>单旋转发生的操作：</p>
 <ul>
 <li><p>插入节点n的：父节点p往上升一级，n的祖父节点g往下降一级；</p>
@@ -678,7 +674,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="伸展树"><a href="#伸展树" class="headerlink" title="伸展树"></a>伸展树</h2><ol>
+<h3 id="伸展树"><a href="#伸展树" class="headerlink" title="伸展树"></a>伸展树</h3><ol>
 <li>伸展树的思想：<ul>
 <li>当一个节点被访问后，节点就要经过一系列AVL树的旋转到达根节点。</li>
 <li>不需要考虑存储的花费</li>
@@ -700,43 +696,40 @@
 <li>情形二：一字形 zig-zig</li>
 </ol>
 <img src="/2019/05/17/tree/one_tree.png">
-<h2 id="树的遍历-1"><a href="#树的遍历-1" class="headerlink" title="树的遍历"></a>树的遍历</h2><ol>
-<li><p>总的运行时间是 O（logN）</p>
-<ul>
-<li>每个节点进行以此判断：NULL;</li>
-<li>执行函数是：printelement；</li>
-<li>运行时间是O(N)</li>
-</ul>
-</li>
-<li><p>便利的应用</p>
-<ul>
-<li><p>中序遍历：进行关键字的排序</p>
-</li>
-<li><p>后序遍历：计算出树的高度</p>
-</li>
-<li><p>先序遍历：计算出树的深度</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="B-树"><a href="#B-树" class="headerlink" title="B-树"></a>B-树</h2><ol>
+<h2 id="查找树二：B-树"><a href="#查找树二：B-树" class="headerlink" title="查找树二：B-树"></a>查找树二：B-树</h2><ol>
 <li><p>阶为M的B-树具备下列的结构</p>
 <img src="/2019/05/17/tree/b_tree.png">
 <ul>
-<li>儿子数 和 每个叶子节点包含的关键字数目 （M/2 – M）</li>
-<li>所有的关键字包含在叶子节点上；其他的节点包含关键字的判断信息</li>
+<li>非root 和 非叶子节点：包含的儿子数 （M/2 – M）</li>
+<li>所有节点的<strong>高度</strong>是一样的；</li>
+<li><strong>所有的关键字</strong>包含在叶子节点上；</li>
+<li>内部节点：只包含判断信息；</li>
 </ul>
 </li>
-<li><p>3 阶 B-树</p>
+<li><p>内部节点：</p>
 <ul>
-<li>2-3 B树</li>
+<li><p>以圆圈作为边框，</p>
+</li>
+<li><p>判断信息形式：( A : B ：C …)</p>
+<ul>
+<li>具有的儿子数目：(  child &lt; A ) and ( A &lt; child &lt; B ) and ( B &lt; child &lt; C ) …</li>
+</ul>
+</li>
+<li>判断信息的形式：( A: - )<ul>
+<li>儿子数目：两个儿子，( child &lt; A ) and ( A &lt; child  )</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3 阶 B-树 : 2-3 B树</p>
+<ul>
+<li>非root 和 非叶子节点：包含的儿子数 （1 – 3）</li>
 </ul>
 <img src="/2019/05/17/tree/2_3.png">
 </li>
 <li><p>M=3阶 B树 插入新的关键字</p>
 <ul>
-<li>如何进行调整</li>
-<li>不停的分裂出节点：节点包含的关键字在 （M/2 – M）之间</li>
+<li>增加内部节点：其儿子数目在 （M/2 – M）之间</li>
 <li>同一层调整不成功的话：增加树的深度（保证叶子节点在同一深度）</li>
 </ul>
 <img src="/2019/05/17/tree/change_b.png">
@@ -757,23 +750,23 @@
 <td></td>
 </tr>
 <tr>
-<td>查找树</td>
+<td>查找树一： – 二叉查找树</td>
 <td>递归实现查找</td>
-<td></td>
+<td>O(logN)</td>
 </tr>
 <tr>
-<td>AVL树</td>
+<td>AVL树– 带有平衡条件的二叉查找树</td>
 <td>要求每个节点的左右子树：height 差 &lt; 1<br>插入关键字后：进行新的平衡–通过旋转</td>
 <td>O(logN)</td>
 </tr>
 <tr>
-<td>伸展树</td>
+<td>伸展树–不带平衡条件的二叉查找树</td>
 <td>节点的深度：不做限制<br>节点就要经过一系列AVL树的旋转到达根节点。</td>
 <td>O(M logN)</td>
 </tr>
 <tr>
-<td>B-树</td>
-<td>平衡M-路树，很好的匹配磁盘<br>平衡的条件：（除根节点）非叶子节点的儿子数；<br>                 叶子节点的关键字数 – (M/2 – M)</td>
+<td>查找树二：B-树</td>
+<td>平衡M-路树，很好的匹配磁盘<br>平衡的条件：内部节点的儿子数 (M/2 – M)；</td>
 <td></td>
 </tr>
 <tr>
@@ -783,7 +776,7 @@
 </tr>
 <tr>
 <td>平衡树方案</td>
-<td>AVL 和 B-树；<br>没有二叉树的省时</td>
+<td>AVL 和 B-树</td>
 </tr>
 </tbody>
 </table>
@@ -1396,7 +1389,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                    <span class="site-state-item-count">76</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1432,7 +1427,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tree"><span class="nav-number">1.</span> <span class="nav-text">Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#树的实现"><span class="nav-number">1.1.</span> <span class="nav-text">树的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树的元素-–-节点"><span class="nav-number">1.1.1.</span> <span class="nav-text">树的元素 – 节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的遍历"><span class="nav-number">1.1.2.</span> <span class="nav-text">树的遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树实现"><span class="nav-number">1.2.1.</span> <span class="nav-text">二叉树实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树应用—-表达式树"><span class="nav-number">1.2.2.</span> <span class="nav-text">二叉树应用—-表达式树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树应用—-查找树ADT"><span class="nav-number">1.2.3.</span> <span class="nav-text">二叉树应用—- 查找树ADT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVL-树"><span class="nav-number">1.3.</span> <span class="nav-text">AVL 树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新的节点插入树的方式"><span class="nav-number">1.3.1.</span> <span class="nav-text">新的节点插入树的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转"><span class="nav-number">1.3.2.</span> <span class="nav-text">旋转</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伸展树"><span class="nav-number">1.4.</span> <span class="nav-text">伸展树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#展开："><span class="nav-number">1.4.1.</span> <span class="nav-text">展开：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的遍历-1"><span class="nav-number">1.5.</span> <span class="nav-text">树的遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树"><span class="nav-number">1.6.</span> <span class="nav-text">B-树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Difference"><span class="nav-number">1.7.</span> <span class="nav-text">Difference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树的实现-1"><span class="nav-number">2.</span> <span class="nav-text">树的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">2.1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉搜索树的知识"><span class="nav-number">2.1.1.</span> <span class="nav-text">二叉搜索树的知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化和反序列化二叉树"><span class="nav-number">2.1.2.</span> <span class="nav-text">序列化和反序列化二叉树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建二叉树-用的同一个接口"><span class="nav-number">2.2.</span> <span class="nav-text">构建二叉树 (用的同一个接口)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一-：-面试题-7-：根据前序遍历和中序遍历，构建一颗二叉树"><span class="nav-number">2.2.1.</span> <span class="nav-text">应用一 ： 面试题 7 ：根据前序遍历和中序遍历，构建一颗二叉树 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用："><span class="nav-number">2.2.2.</span> <span class="nav-text">应用：[]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历"><span class="nav-number">2.2.3.</span> <span class="nav-text">应用二：静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三：链式构建二叉搜索树-实现节点的插入，搜索，递归遍历"><span class="nav-number">2.2.4.</span> <span class="nav-text">应用三：链式构建二叉搜索树,实现节点的插入，搜索，递归遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找出中序遍历的下一个节点"><span class="nav-number">2.3.</span> <span class="nav-text">找出中序遍历的下一个节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题-8：找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针"><span class="nav-number">2.3.1.</span> <span class="nav-text">应用一：面试题 8：找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对称树判断"><span class="nav-number">2.4.</span> <span class="nav-text">对称树判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一-面试题26：树的子结构-题目：输入两棵二叉树A和B，判断B是不是A的子结构"><span class="nav-number">2.4.1.</span> <span class="nav-text">应用一: 面试题26：树的子结构   题目：输入两棵二叉树A和B，判断B是不是A的子结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：面试题27：二叉树的镜像-。题目：-请完成一个函数，输入一个二叉树，该函数输出它的镜像"><span class="nav-number">2.4.2.</span> <span class="nav-text">应用二：面试题27：二叉树的镜像  。题目： 请完成一个函数，输入一个二叉树，该函数输出它的镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三：面试题28：对称的二叉树。题目请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的"><span class="nav-number">2.4.3.</span> <span class="nav-text">应用三：面试题28：对称的二叉树。题目请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树和队列"><span class="nav-number">2.5.</span> <span class="nav-text">树和队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题32（一）：不分行从上往下打印二叉树。-层级遍历二叉树"><span class="nav-number">2.5.1.</span> <span class="nav-text">应用一：面试题32（一）：不分行从上往下打印二叉树。 层级遍历二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：面试题32（二）：分行从上到下打印二叉树。-每层打印之后换行"><span class="nav-number">2.5.2.</span> <span class="nav-text">应用二：面试题32（二）：分行从上到下打印二叉树。 每层打印之后换行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树和栈"><span class="nav-number">2.6.</span> <span class="nav-text">树和栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题32（三）：之字形打印二叉树"><span class="nav-number">2.6.1.</span> <span class="nav-text">应用一：面试题32（三）：之字形打印二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：面试题34：二叉树中和为某一值的路径-题目：输入一棵二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。"><span class="nav-number">2.6.2.</span> <span class="nav-text">应用二：面试题34：二叉树中和为某一值的路径. 题目：输入一棵二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树后遍历的判断"><span class="nav-number">2.7.</span> <span class="nav-text">二叉树后遍历的判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：-面试题33：二叉搜索树的后序遍历序列。输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果"><span class="nav-number">2.7.1.</span> <span class="nav-text">应用一： 面试题33：二叉搜索树的后序遍历序列。输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树和链表"><span class="nav-number">2.8.</span> <span class="nav-text">树和链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题36：二叉搜索树与双向链表-输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表"><span class="nav-number">2.8.1.</span> <span class="nav-text">应用一：面试题36：二叉搜索树与双向链表.输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tree"><span class="nav-number">1.</span> <span class="nav-text">Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#树的实现"><span class="nav-number">1.1.</span> <span class="nav-text">树的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树的元素-–-节点"><span class="nav-number">1.1.1.</span> <span class="nav-text">树的元素 – 节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的遍历"><span class="nav-number">1.1.2.</span> <span class="nav-text">树的遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树实现"><span class="nav-number">1.2.1.</span> <span class="nav-text">二叉树实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树应用–表达式树"><span class="nav-number">1.2.2.</span> <span class="nav-text">二叉树应用–表达式树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找树-一-：-二叉查找树ADT"><span class="nav-number">1.3.</span> <span class="nav-text">查找树 一 ： 二叉查找树ADT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AVL-树：是带有平衡条件的二叉查找树"><span class="nav-number">1.3.1.</span> <span class="nav-text">AVL 树：是带有平衡条件的二叉查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新的节点插入树的方式"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">新的节点插入树的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#旋转"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">旋转</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伸展树"><span class="nav-number">1.3.2.</span> <span class="nav-text">伸展树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#展开："><span class="nav-number">1.3.3.</span> <span class="nav-text">展开：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找树二：B-树"><span class="nav-number">1.4.</span> <span class="nav-text">查找树二：B-树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Difference"><span class="nav-number">1.5.</span> <span class="nav-text">Difference</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树的实现-1"><span class="nav-number">2.</span> <span class="nav-text">树的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">2.1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉搜索树的知识"><span class="nav-number">2.1.1.</span> <span class="nav-text">二叉搜索树的知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化和反序列化二叉树"><span class="nav-number">2.1.2.</span> <span class="nav-text">序列化和反序列化二叉树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建二叉树-用的同一个接口"><span class="nav-number">2.2.</span> <span class="nav-text">构建二叉树 (用的同一个接口)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一-：-面试题-7-：根据前序遍历和中序遍历，构建一颗二叉树"><span class="nav-number">2.2.1.</span> <span class="nav-text">应用一 ： 面试题 7 ：根据前序遍历和中序遍历，构建一颗二叉树 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用："><span class="nav-number">2.2.2.</span> <span class="nav-text">应用：[]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历"><span class="nav-number">2.2.3.</span> <span class="nav-text">应用二：静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三：链式构建二叉搜索树-实现节点的插入，搜索，递归遍历"><span class="nav-number">2.2.4.</span> <span class="nav-text">应用三：链式构建二叉搜索树,实现节点的插入，搜索，递归遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找出中序遍历的下一个节点"><span class="nav-number">2.3.</span> <span class="nav-text">找出中序遍历的下一个节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题-8：找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针"><span class="nav-number">2.3.1.</span> <span class="nav-text">应用一：面试题 8：找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对称树判断"><span class="nav-number">2.4.</span> <span class="nav-text">对称树判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一-面试题26：树的子结构-题目：输入两棵二叉树A和B，判断B是不是A的子结构"><span class="nav-number">2.4.1.</span> <span class="nav-text">应用一: 面试题26：树的子结构   题目：输入两棵二叉树A和B，判断B是不是A的子结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：面试题27：二叉树的镜像-。题目：-请完成一个函数，输入一个二叉树，该函数输出它的镜像"><span class="nav-number">2.4.2.</span> <span class="nav-text">应用二：面试题27：二叉树的镜像  。题目： 请完成一个函数，输入一个二叉树，该函数输出它的镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三：面试题28：对称的二叉树。题目请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的"><span class="nav-number">2.4.3.</span> <span class="nav-text">应用三：面试题28：对称的二叉树。题目请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树和队列"><span class="nav-number">2.5.</span> <span class="nav-text">树和队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题32（一）：不分行从上往下打印二叉树。-层级遍历二叉树"><span class="nav-number">2.5.1.</span> <span class="nav-text">应用一：面试题32（一）：不分行从上往下打印二叉树。 层级遍历二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：面试题32（二）：分行从上到下打印二叉树。-每层打印之后换行"><span class="nav-number">2.5.2.</span> <span class="nav-text">应用二：面试题32（二）：分行从上到下打印二叉树。 每层打印之后换行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树和栈"><span class="nav-number">2.6.</span> <span class="nav-text">树和栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题32（三）：之字形打印二叉树"><span class="nav-number">2.6.1.</span> <span class="nav-text">应用一：面试题32（三）：之字形打印二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：面试题34：二叉树中和为某一值的路径-题目：输入一棵二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。"><span class="nav-number">2.6.2.</span> <span class="nav-text">应用二：面试题34：二叉树中和为某一值的路径. 题目：输入一棵二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树后遍历的判断"><span class="nav-number">2.7.</span> <span class="nav-text">二叉树后遍历的判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：-面试题33：二叉搜索树的后序遍历序列。输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果"><span class="nav-number">2.7.1.</span> <span class="nav-text">应用一： 面试题33：二叉搜索树的后序遍历序列。输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树和链表"><span class="nav-number">2.8.</span> <span class="nav-text">树和链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题36：二叉搜索树与双向链表-输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表"><span class="nav-number">2.8.1.</span> <span class="nav-text">应用一：面试题36：二叉搜索树与双向链表.输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

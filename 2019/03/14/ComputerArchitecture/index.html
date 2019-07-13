@@ -96,20 +96,20 @@
 
 
 
-  <meta name="description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  内存和地址 地址 CPU通过address找到存储单元，每个存储单元只能存一个byte，将数据放入存储单元中。   内存 内存的大小：却绝育CPU的地址空间； 32位：0x0000 0000 - 0xffff">
-<meta name="keywords" content="Linux,C">
+  <meta name="description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  操作系统 程序运行流程 fetch（取址）– decode（解码） – excuse（执行）   操作系统作用：确保系统易于使用且高效运行； 如何高效运行：虚拟化 将物理资源虚拟化，好像有多个备用资源；(内存">
+<meta name="keywords" content="OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Computer Architecture">
 <meta property="og:url" content="http://yoursite.com/2019/03/14/ComputerArchitecture/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  内存和地址 地址 CPU通过address找到存储单元，每个存储单元只能存一个byte，将数据放入存储单元中。   内存 内存的大小：却绝育CPU的地址空间； 32位：0x0000 0000 - 0xffff">
+<meta property="og:description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  操作系统 程序运行流程 fetch（取址）– decode（解码） – excuse（执行）   操作系统作用：确保系统易于使用且高效运行； 如何高效运行：虚拟化 将物理资源虚拟化，好像有多个备用资源；(内存">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/14/ComputerArchitecture/AddressBus.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/14/ComputerArchitecture/memory.png">
-<meta property="og:updated_time" content="2019-06-04T07:18:03.228Z">
+<meta property="og:updated_time" content="2019-07-08T08:00:56.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Computer Architecture">
-<meta name="twitter:description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  内存和地址 地址 CPU通过address找到存储单元，每个存储单元只能存一个byte，将数据放入存储单元中。   内存 内存的大小：却绝育CPU的地址空间； 32位：0x0000 0000 - 0xffff">
+<meta name="twitter:description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  操作系统 程序运行流程 fetch（取址）– decode（解码） – excuse（执行）   操作系统作用：确保系统易于使用且高效运行； 如何高效运行：虚拟化 将物理资源虚拟化，好像有多个备用资源；(内存">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/14/ComputerArchitecture/AddressBus.png">
 
 
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+                <time title="Updated at: 2019-07-08 16:00:56" itemprop="dateModified" datetime="2019-07-08T16:00:56+08:00">2019-07-08</time>
               
             
           </span>
@@ -443,14 +443,7 @@
                   . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Emededded/" itemprop="url" rel="index"><span itemprop="name">Emededded</span></a></span>
-
-                
-                
-                  . 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Operate-System/" itemprop="url" rel="index"><span itemprop="name">Operate System</span></a></span>
 
                 
                 
@@ -517,6 +510,37 @@
 <li>Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch ) </li>
 <li>数据的存储，访问和管理</li>
 </ul>
+<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><ol>
+<li>程序运行流程<ul>
+<li>fetch（取址）– decode（解码） – excuse（执行）</li>
+</ul>
+</li>
+<li>操作系统作用：确保系统易于使用且高效运行；</li>
+<li>如何高效运行：<strong>虚拟化</strong><ul>
+<li>将物理资源虚拟化，好像有多个备用资源；(内存管理机制)</li>
+<li>虚拟化CPU: 决定执行哪个程序；</li>
+<li>虚拟化内存：数据结构的保存；</li>
+</ul>
+</li>
+<li><strong>并发</strong><ul>
+<li>在同一个内存空间中：运行的多个函数；</li>
+<li>每次都有多个线程处于活动状态；</li>
+</ul>
+</li>
+<li><strong>持久性</strong><ul>
+<li>通过文件系统，对数据进行持久的保存</li>
+</ul>
+</li>
+<li>操作系统设计的目标<ul>
+<li>建立抽象：方便系统的调用；</li>
+<li>高效性能：减少开销</li>
+<li>提供保护：在应用程序之间，以及OS和应用程序之间提供保护<ul>
+<li>使用的方法：隔离</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
 <h2 id="内存和地址"><a href="#内存和地址" class="headerlink" title="内存和地址"></a>内存和地址</h2><ol>
 <li>地址<ul>
 <li>CPU通过address找到存储单元，每个存储单元只能存一个byte，将数据放入存储单元中。</li>
@@ -655,9 +679,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
-          
-            <a href="/tags/C/" rel="tag"># C</a>
+            <a href="/tags/OS/" rel="tag"># OS</a>
           
         </div>
       
@@ -1068,7 +1090,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                    <span class="site-state-item-count">76</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1104,7 +1128,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Computer-Architecture"><span class="nav-number">1.</span> <span class="nav-text">Computer Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存和地址"><span class="nav-number">1.1.</span> <span class="nav-text">内存和地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU"><span class="nav-number">1.2.</span> <span class="nav-text">CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU-包含功能单元"><span class="nav-number">1.2.1.</span> <span class="nav-text">CPU 包含功能单元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备"><span class="nav-number">1.3.</span> <span class="nav-text">设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总线"><span class="nav-number">1.3.1.</span> <span class="nav-text">总线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Management-Unit"><span class="nav-number">1.4.</span> <span class="nav-text">Memory Management Unit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟内存管理-VIrtual-Memory-Management"><span class="nav-number">1.4.1.</span> <span class="nav-text">虚拟内存管理 VIrtual Memory Management</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理地址和虚拟地址"><span class="nav-number">1.4.2.</span> <span class="nav-text">物理地址和虚拟地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MMU-内存保护机制"><span class="nav-number">1.4.3.</span> <span class="nav-text">MMU 内存保护机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Hierachy"><span class="nav-number">1.5.</span> <span class="nav-text">Memory Hierachy</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Computer-Architecture"><span class="nav-number">1.</span> <span class="nav-text">Computer Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存和地址"><span class="nav-number">1.2.</span> <span class="nav-text">内存和地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU"><span class="nav-number">1.3.</span> <span class="nav-text">CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU-包含功能单元"><span class="nav-number">1.3.1.</span> <span class="nav-text">CPU 包含功能单元</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备"><span class="nav-number">1.4.</span> <span class="nav-text">设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总线"><span class="nav-number">1.4.1.</span> <span class="nav-text">总线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Management-Unit"><span class="nav-number">1.5.</span> <span class="nav-text">Memory Management Unit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟内存管理-VIrtual-Memory-Management"><span class="nav-number">1.5.1.</span> <span class="nav-text">虚拟内存管理 VIrtual Memory Management</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理地址和虚拟地址"><span class="nav-number">1.5.2.</span> <span class="nav-text">物理地址和虚拟地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MMU-内存保护机制"><span class="nav-number">1.5.3.</span> <span class="nav-text">MMU 内存保护机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Hierachy"><span class="nav-number">1.6.</span> <span class="nav-text">Memory Hierachy</span></a></li></ol></li></ol></div>
             
 
           </div>

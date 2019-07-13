@@ -105,7 +105,7 @@
 <meta property="og:description" content="LinuxC Gdb Code link – Gdb的相关代码  Gdb调试方式 程序中除了一目了然的Bug之外都需要一定的调试手段来分析到底错在哪   根据程序执行时的出错现象假设错误原因,然后在代码中适当的位置插入printf , 强大的调试工具gdb,可以完全操控程序的运行。  调试思想 分析现象 –&amp;gt; 假设错误原因 –&amp;gt; 产生新的现象去验证假设  单步执行和跟踪函数调用开始调试">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/04/LinuxCGdb/GdbBacktrace.png">
-<meta property="og:updated_time" content="2019-06-04T07:18:03.312Z">
+<meta property="og:updated_time" content="2019-07-11T13:15:10.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LinuxC Gdb">
 <meta name="twitter:description" content="LinuxC Gdb Code link – Gdb的相关代码  Gdb调试方式 程序中除了一目了然的Bug之外都需要一定的调试手段来分析到底错在哪   根据程序执行时的出错现象假设错误原因,然后在代码中适当的位置插入printf , 强大的调试工具gdb,可以完全操控程序的运行。  调试思想 分析现象 –&amp;gt; 假设错误原因 –&amp;gt; 产生新的现象去验证假设  单步执行和跟踪函数调用开始调试">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+                <time title="Updated at: 2019-07-11 21:15:10" itemprop="dateModified" datetime="2019-07-11T21:15:10+08:00">2019-07-11</time>
               
             
           </span>
@@ -622,6 +622,10 @@
 <h3 id="汇编调试"><a href="#汇编调试" class="headerlink" title="汇编调试"></a>汇编调试</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) disassemble			<span class="comment">//可以反汇编当前函数或者指定的函数</span></span><br><span class="line">(gdb) si 					<span class="comment">//step 命令可以一行代码一行代码地单步调试,而这里用到的si命令可以一条指令一条指令地单步调试。</span></span><br><span class="line">(gdb) info registers 		<span class="comment">//可以显示所有寄存器的当前值。</span></span><br><span class="line">(gdb) <span class="selector-tag">p</span> <span class="variable">$esp</span>				<span class="comment">//打印esp寄存器的值,</span></span><br><span class="line"><span class="comment">// 在上例中esp 寄存器的值是0xbff1c3f4,所以x/20 $esp 命令查看内存中从0xbff1c3f4地址开始的20个32位数。</span></span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
 <li>学C语言不可能不去了解底层计算机体系结构和操作系统的原理，不了解底层原理连一个scanf函数都没办法用好，更没有办法保证写出正确的程序。</li>
+<li><a href="https://www.jianshu.com/p/a967b0bd61b8" target="_blank" rel="noopener">工具二: valgrind</a><ul>
+<li>查找程序中内存泄露和其他隐藏的内存问题;</li>
+</ul>
+</li>
 </ol>
 
       
@@ -1059,7 +1063,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                    <span class="site-state-item-count">76</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
