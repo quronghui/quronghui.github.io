@@ -96,20 +96,20 @@
 
 
 
-  <meta name="description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  操作系统 程序运行流程 fetch（取址）– decode（解码） – excuse（执行）   操作系统作用：确保系统易于使用且高效运行； 如何高效运行：虚拟化 将物理资源虚拟化，好像有多个备用资源；(内存">
+  <meta name="description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  操作系统 程序运行的过程: 执行指令 内存中fetch（取址）– decode（解码） – excuse（执行）具体的操作 冯诺依曼计算机模型   操作系统作用： 程序运行需要内存调度, 设备交互; OS 作">
 <meta name="keywords" content="OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Computer Architecture">
 <meta property="og:url" content="http://yoursite.com/2019/03/14/ComputerArchitecture/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  操作系统 程序运行流程 fetch（取址）– decode（解码） – excuse（执行）   操作系统作用：确保系统易于使用且高效运行； 如何高效运行：虚拟化 将物理资源虚拟化，好像有多个备用资源；(内存">
+<meta property="og:description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  操作系统 程序运行的过程: 执行指令 内存中fetch（取址）– decode（解码） – excuse（执行）具体的操作 冯诺依曼计算机模型   操作系统作用： 程序运行需要内存调度, 设备交互; OS 作">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/14/ComputerArchitecture/AddressBus.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/14/ComputerArchitecture/memory.png">
-<meta property="og:updated_time" content="2019-07-08T08:00:56.243Z">
+<meta property="og:updated_time" content="2019-07-15T07:07:49.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Computer Architecture">
-<meta name="twitter:description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  操作系统 程序运行流程 fetch（取址）– decode（解码） – excuse（执行）   操作系统作用：确保系统易于使用且高效运行； 如何高效运行：虚拟化 将物理资源虚拟化，好像有多个备用资源；(内存">
+<meta name="twitter:description" content="Computer Architecture Von Neumann 体系结构主要由CPU(processor) + Memory ( data + fetch )  数据的存储，访问和管理  操作系统 程序运行的过程: 执行指令 内存中fetch（取址）– decode（解码） – excuse（执行）具体的操作 冯诺依曼计算机模型   操作系统作用： 程序运行需要内存调度, 设备交互; OS 作">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/14/ComputerArchitecture/AddressBus.png">
 
 
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-08 16:00:56" itemprop="dateModified" datetime="2019-07-08T16:00:56+08:00">2019-07-08</time>
+                <time title="Updated at: 2019-07-15 15:07:49" itemprop="dateModified" datetime="2019-07-15T15:07:49+08:00">2019-07-15</time>
               
             
           </span>
@@ -511,15 +511,35 @@
 <li>数据的存储，访问和管理</li>
 </ul>
 <h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><ol>
-<li>程序运行流程<ul>
-<li>fetch（取址）– decode（解码） – excuse（执行）</li>
+<li>程序运行的过程: 执行指令<ul>
+<li>内存中fetch（取址）– decode（解码） – excuse（执行）具体的操作</li>
+<li>冯诺依曼计算机模型</li>
 </ul>
 </li>
-<li>操作系统作用：确保系统易于使用且高效运行；</li>
-<li>如何高效运行：<strong>虚拟化</strong><ul>
-<li>将物理资源虚拟化，好像有多个备用资源；(内存管理机制)</li>
+<li>操作系统作用：<ul>
+<li>程序运行需要内存调度, 设备交互;</li>
+<li>OS 作用: 确保系统易于使用且高效运行；</li>
+</ul>
+</li>
+<li>OS 如何实现程序的高效运行：<ul>
+<li><strong>虚拟化</strong>: 将物理资源(CPU, 内存, 磁盘)转换为更通用, 更强大的虚拟形式;</li>
+<li>标准库API: 用户与OS交互的接口, 告诉操作系统执行哪些功能;</li>
+<li>资源管理器: OS充当的角色, 合理高效的分配资源</li>
 <li>虚拟化CPU: 决定执行哪个程序；</li>
 <li>虚拟化内存：数据结构的保存；</li>
+</ul>
+</li>
+<li><strong>虚拟化</strong><ul>
+<li>虚拟化CPU<ul>
+<li>硬件资源 + OS : 虚拟化实现多个CPU, 可移执行多个进程;</li>
+<li>多进程的调度: OS有一定的<strong>机制 + 策略</strong></li>
+</ul>
+</li>
+<li>虚拟化内存<ul>
+<li>程序的执行过程: 指令 和 数据都是保存在内存中的;</li>
+<li>OS将内存映射的足够: 程序执行的整个过程;</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>并发</strong><ul>
@@ -776,7 +796,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">86</span>
+                    <span class="site-state-item-count">87</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1092,7 +1112,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">76</span>
+                      
+                    
+                    <span class="site-state-item-count">77</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
