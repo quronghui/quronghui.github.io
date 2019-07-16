@@ -108,7 +108,9 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/15/OS虚拟化/mlfq.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/15/OS虚拟化/mcpu.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/15/OS虚拟化/os_Dynamic_relocation.jpg">
-<meta property="og:updated_time" content="2019-07-15T14:08:47.925Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/15/OS虚拟化/TLB.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/15/OS虚拟化/PDE.jpg">
+<meta property="og:updated_time" content="2019-07-16T08:10:48.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS虚拟化">
 <meta name="twitter:description" content="操作系统导论操作系统 程序运行的过程: 执行指令 内存中fetch（取址）– decode（解码） – excuse（执行）具体的操作 冯诺依曼计算机模型   操作系统作用： 程序运行需要内存调度, 设备交互; OS 作用: 确保系统易于使用且高效运行；   OS 如何实现程序的高效运行： 虚拟化: 将物理资源(CPU, 内存, 磁盘)转换为更通用, 更强大的虚拟形式; 标准库API: 用户与OS">
@@ -404,12 +406,24 @@
                 
               
 
-              <time title="Post created: 2019-07-15 15:08:42 / Updated at: 22:08:47" itemprop="dateCreated datePublished" datetime="2019-07-15T15:08:42+08:00">2019-07-15</time>
+              <time title="Post created: 2019-07-15 15:08:42" itemprop="dateCreated datePublished" datetime="2019-07-15T15:08:42+08:00">2019-07-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-07-16 16:10:48" itemprop="dateModified" datetime="2019-07-16T16:10:48+08:00">2019-07-16</time>
               
             
           </span>
@@ -753,6 +767,10 @@
 <li>用户程序生成的每个地址(能够看见的)都是虚拟地址;</li>
 </ul>
 </li>
+<li>分页`错误?<ul>
+<li>页错误: VA -&gt; PA 时找不到PFN 物理内存帧;( 找不到具体的物理地址 )</li>
+</ul>
+</li>
 </ol>
 <h3 id="地址空间"><a href="#地址空间" class="headerlink" title="地址空间"></a>地址空间</h3><ol>
 <li>地址空间的概念?<ul>
@@ -832,7 +850,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="机制-地址转换-实现方式-基址-界限"><a href="#机制-地址转换-实现方式-基址-界限" class="headerlink" title="机制 : 地址转换 ( 实现方式:  基址/界限)"></a>机制 : 地址转换 ( 实现方式:  基址/界限)</h3><ol>
+<h3 id="机制-地址转换-实现方式-单基址-界限"><a href="#机制-地址转换-实现方式-单基址-界限" class="headerlink" title="机制 : 地址转换 ( 实现方式:  单基址/界限)"></a>机制 : 地址转换 ( 实现方式:  单基址/界限)</h3><ol>
 <li><p>虚拟内存达到的目标</p>
 <ul>
 <li>高效性: 通过硬件的支持( 寄存器, TLB , 页表 ), 实现快速读取;</li>
@@ -861,7 +879,7 @@
 </li>
 </ul>
 </li>
-<li><p>内存管理单元<strong>(MMU)</strong></p>
+<li><p><strong>内存管理单元(MMU)</strong></p>
 <ul>
 <li>负责地址转换的部分: 也就是 <strong>基址/界限</strong>的地址转换;</li>
 </ul>
@@ -885,6 +903,317 @@
 <li>解决方式: 分段的概念;</li>
 </ul>
 </li>
+</ol>
+<h3 id="机制-分段-多基址-界限"><a href="#机制-分段-多基址-界限" class="headerlink" title="机制: 分段(多基址/界限)"></a>机制: 分段(多基址/界限)</h3><ol>
+<li><p>泛化的基址/界限</p>
+<ul>
+<li>地址空间中保存了三个段: 代码段, 堆段, 栈段</li>
+<li><strong>每一个段</strong>:  包含一对base/bound; ( 动态重定位是三个段: 只包含一对 )</li>
+<li>OS :将不同的段, 放到不同的物理内存中, 避免了内部碎片的产生; </li>
+</ul>
+</li>
+<li><p>段寄存器的概念？</p>
+<ul>
+<li>段寄存器: 每个段中含有一对基址/界限 寄存器</li>
+<li>段错误: 虚拟地址转化为内存地址时, 越过了界限值;</li>
+</ul>
+</li>
+<li><p><strong>分段后: 如何进行地址转换</strong>?</p>
+<ul>
+<li><p>虚拟地址: 转化为nbit 二进制形式;</p>
+<ul>
+<li>前2bit: 表示那一个段;  <ul>
+<li>00- code</li>
+<li>01 – heap</li>
+</ul>
+</li>
+<li>后面的(n-2)bit: 表示偏移量</li>
+</ul>
+</li>
+<li><p>地址转换  – code and heap</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">physical</span> <span class="keyword">adress </span>= <span class="keyword">base[segment] </span>+ offset</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>地址转换 – stack</p>
+<ul>
+<li>栈: 反向增长的;</li>
+<li>确保反向偏移量的绝对值小于段的界限;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>分段有哪些优势?</p>
+<ul>
+<li>减少动态重定位中造成的内部碎片, 更好的支持稀疏地址空间;</li>
+<li>代码共享: 增加<strong>段</strong>保护位, 这个段可以被映射到多个虚拟空间, 实现共享;</li>
+</ul>
+</li>
+<li><p>分段造成的问题?</p>
+<ul>
+<li>由于段的稀疏分布, 造成地址空间中含有多个小的已分配的内存空间;</li>
+<li><strong>外部碎片</strong>: 无法找到一个连续大的空闲的地址空间;</li>
+</ul>
+</li>
+</ol>
+<h3 id="空闲空间管理"><a href="#空闲空间管理" class="headerlink" title="空闲空间管理"></a>空闲空间管理</h3><ul>
+<li>这里不思考虚拟化, 思考空闲的内存管理.</li>
+</ul>
+<ol>
+<li>针对外部碎片: 如何减少外部碎片的产生, 更好的维护空间内存?</li>
+<li>底层机制:  <ul>
+<li>分割与合并: <ul>
+<li>对空闲内存的基本操作, 满足用户的空间需求;</li>
+</ul>
+</li>
+<li>追踪已分配的内存空间<ul>
+<li>在用户malloc申请堆内存时: 分配一个头部(记录了空间大小) + 用户空间;</li>
+<li>在用户free()时, 根据这个头部指针能快速定位: 释放了头部 + 用户控件;</li>
+</ul>
+</li>
+<li>嵌入空闲列表<ul>
+<li>通过 头部 + 剩余空间数目：描述堆中空闲的内存块；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基本策略（在满足用户需求下，减少外部碎片）<ul>
+<li>需要额外的查找开销：最优/最差匹配　</li>
+<li>首次匹配：找到一个足够大的就返回给用户；</li>
+<li>下次匹配：维护一个指针，指向上次查找位置；</li>
+</ul>
+</li>
+<li>伙伴系统<ul>
+<li>通过 2^N 进行分割合并;</li>
+<li>其分配的空间大小: 按照一分为二的原则进行;</li>
+</ul>
+</li>
+</ol>
+<h3 id="机制-分页"><a href="#机制-分页" class="headerlink" title="机制: 分页"></a>机制: 分页</h3><ol>
+<li><p>分段: 将一个进程的地址空间, 分割成长度不一的逻辑段(代码, 堆, 栈);</p>
+<ul>
+<li>代码 , 堆, 栈: 各自映射为一个虚拟内存;</li>
+</ul>
+</li>
+<li><p>分页: 将一个内存地址空间, 分割成固定大小的单元, 这个单元称为页;</p>
+<ul>
+<li>每一个页 –&gt; 称为页帧; 物理内存</li>
+<li>每一个页帧 –&gt; 映射为一个虚拟内存</li>
+<li>页的大小 : 16 bytes</li>
+</ul>
+</li>
+<li><p><strong>分页后: 如何进行地址转换?</strong></p>
+<ul>
+<li><p>页表:  page table</p>
+<ul>
+<li>记录虚拟页放在物理内存中的位置;</li>
+<li>是每个进程的数据结构;</li>
+<li><strong>保存在物理内存</strong>中的: 需要访问内存才能实现地址转换;</li>
+</ul>
+</li>
+<li><p>虚拟地址包含两个部分</p>
+<ul>
+<li>虚拟页面号VPN: virtual page number</li>
+<li>页内偏移量offset:</li>
+</ul>
+</li>
+<li><p>地址转换</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">64</span><span class="keyword">byte</span>的地址空间 : 转换为二进制 <span class="number">2</span>^<span class="number">6</span>; 表示六个页单元, 每个页是<span class="number">16</span><span class="keyword">byte</span>;</span><br><span class="line">				 因此<span class="number">2</span>位表示VPN, <span class="number">4</span>位表示offset</span><br></pre></td></tr></table></figure>
+<ul>
+<li>虚拟地址为21: 010101</li>
+</ul>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用物理帧号PFN是 <span class="number">111</span> = <span class="number">7</span>; 代替虚拟页面号VPN <span class="number">01</span></span><br><span class="line">phyadress = <span class="number">1110101</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="分页优化-快速地址转换-TLB"><a href="#分页优化-快速地址转换-TLB" class="headerlink" title="分页优化: 快速地址转换(TLB)"></a>分页优化: 快速地址转换(TLB)</h3><ol>
+<li><p>对内存地址分页后, 存在哪些问题?</p>
+<ul>
+<li>记录单元页的地址映射信息, 保存在物理内存中的;</li>
+<li><strong>问题一:</strong>   VA-&gt;PA  , 需要一次内存的访问, 会增加时间开销;</li>
+</ul>
+</li>
+<li><p>解决的方法</p>
+<ul>
+<li><p>增加硬件: 地址转换缓存TLB (地址转换旁路缓冲存储器)</p>
+<ul>
+<li><p>TLB: 记录VPN地址映射信息</p>
+</li>
+<li><p>TLB记录包含的内容: </p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VPN |<span class="string"> PFN </span>|<span class="string"> 其他位</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>分页 + TLB 模式</p>
+</li>
+</ul>
+</li>
+<li><p>分页 + TLB 模式 : <strong>如何实现地址转换</strong></p>
+<ul>
+<li>VA :　先从VA中得到VPN 虚拟页号;</li>
+<li><strong>TLB命中</strong> 中查找含有 VPN :  PFN 组合 offset –&gt; PA –&gt; 访问内存;</li>
+<li><strong>TLB未命中</strong> 查找TLB的记录没有VPN: <ul>
+<li>RISC 精简指令集, 软件管理TLB处理: </li>
+<li>a) 硬件 : 抛出异常</li>
+<li>b) OS : 提升为内核模式, 跳转到陷阱处理程序, 完成页表的映射转换, 更新TLB, 从陷阱返回;</li>
+<li>c) 硬件: 再次查找, 此时TLB命中;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>上下文切换时</strong> – TLB的处理</p>
+<ul>
+<li>问题: <ul>
+<li>TLB 包含的物理地址映射只对当前进程有效(除非标识共享), 对其他进程无效( vaild 有效位标识);</li>
+</ul>
+</li>
+<li>解决方式 : 增加地址空间标识ASID<ul>
+<li>TLB就可以记录不同进程的地址转换;</li>
+<li>在上下文切换时, 根据ASID进行查找</li>
+</ul>
+</li>
+<li>TLB 替换策略<ul>
+<li>缓存替换</li>
+<li>脏位 dirty_bit : 记录了被修改的记录, 不进行替换的, 因为要写入发到缓存;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>TLB 包含的内容</p>
+<img src="/2019/07/15/OS虚拟化/TLB.jpg">
+</li>
+</ol>
+<h3 id="页表优化-多级页表"><a href="#页表优化-多级页表" class="headerlink" title="页表优化: 多级页表"></a>页表优化: 多级页表</h3><ol>
+<li><p><strong>问题二</strong> : 分页过多, 造成页表记录太大的问题?</p>
+</li>
+<li><p>解决的问题: 如何降低页表的大小?</p>
+</li>
+<li><p>方法一: 分段 + 分页</p>
+<ul>
+<li>虚拟地址解析组成 :</li>
+</ul>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">seg</span><span class="params">(<span class="number">2</span>bit)</span> + VPN<span class="params">(页的个数)</span> + <span class="title">offset</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>存在分段: 因此空间分配不是那么灵活, 会造成外部碎片</li>
+</ul>
+</li>
+<li><p>方法二: 多级页表</p>
+<ul>
+<li><p>实现方式</p>
+<ul>
+<li>将页表分配成页大小的单元;</li>
+<li>整页的页表无效, 就不分配页表;</li>
+<li>页目录结构PDE(page directory entries)包含<ul>
+<li>有效位valid bit : 记录整页页表是否有效</li>
+<li>页帧号PFN</li>
+</ul>
+</li>
+</ul>
+<img src="/2019/07/15/OS虚拟化/PDE.jpg">
+</li>
+<li><p>虚拟地址解析三部分</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(VPN = )<span class="string">[页目录PDE + 页表索引]</span> + offset</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多级页表的缺陷</p>
+<ul>
+<li>多级页表可以尽可能提供较小的表</li>
+<li>但是当TLB未命中时, 需要从内存<strong>加载两次</strong>, 才能获取正确的地址转换信息;<ul>
+<li>一次用于页目录;(PDE)</li>
+<li>一次用于页表索引(PTE) </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="超越物理内存-机制"><a href="#超越物理内存-机制" class="headerlink" title="超越物理内存 : 机制"></a>超越物理内存 : 机制</h3><ol>
+<li><p>上面的地址空间, 我们一直假设: 能全部放入物理内存?</p>
+<ul>
+<li>内存层级: <ul>
+<li>用到的地址空间: 保存在物理内存中;</li>
+<li>未用到的地址空间: 保存在硬盘上;</li>
+</ul>
+</li>
+<li>如何实现虚拟内存 : 物理内存 + 硬盘</li>
+</ul>
+</li>
+<li><p>交换空间定义:</p>
+<ul>
+<li>在硬盘上开辟出一块空间用于<strong>物理页PFN</strong> 的移入和移出;</li>
+</ul>
+</li>
+<li><p><strong>两个概念</strong></p>
+<ul>
+<li><p>TLB:  地址转换缓存TLB (地址转换旁路缓冲存储器)</p>
+<ul>
+<li><p>保存的是: 已经经过VA –&gt; PA 映射的记录; </p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VPN |<span class="string"> PFN </span>|<span class="string"> 其他位</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>PTE : 页表, 存储于物理内存 / 硬盘上的 列表</p>
+<ul>
+<li>保存的是: 虚拟页VPN 和 物理页PFN 的对应关系;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>物理页放在交换空间, 如何处理TLB未命中的情况?</strong></p>
+<ul>
+<li>存在位 valild bit<ul>
+<li>1 : 存在与物理内存中的PTE页表中;</li>
+<li>0:  不存在物理内存中, 触发<strong>页错误</strong>;</li>
+</ul>
+</li>
+<li>页错误的处理<ul>
+<li>OS 进入内核模式: 发送请求给 交换空间的PTE页表</li>
+<li>如果PFN 存在于PTE页表中: 将其物理页交换到内存中, 并将地址转换记录更新到TLB中; 然后硬件重新执行</li>
+<li>如果PFN 不存在于PTE: OS kill杀死进程;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>为了减少页错误的产生?</p>
+<ul>
+<li>OS 存在一部分的空闲内存;<ul>
+<li>将空闲空间中的PFN 交换到物理内存中;</li>
+</ul>
+</li>
+<li>OS 不存在空闲内存<ul>
+<li>踢出物理内存中的页, 用于和空闲空间的PFN交换;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="超越物理内存-策略"><a href="#超越物理内存-策略" class="headerlink" title="超越物理内存 : 策略"></a>超越物理内存 : 策略</h3><ol>
+<li>最优策略的目的是什么?<ul>
+<li>使得总体未命中的比例最小;</li>
+</ul>
+</li>
+<li>TLB缓存未命中的三种情况<ul>
+<li>强制性: 缓存一开始为空, 第一次引用;</li>
+<li>容量: TLB空间不足, 需要踢出一些记录, 更换新的记录</li>
+<li>冲突: 出现在硬件中;</li>
+</ul>
+</li>
+<li>策略<ul>
+<li>先入先出FIFO</li>
+<li>随机踢出</li>
+<li>最少最近使用LRU(Least-Recently used)</li>
+</ul>
+</li>
+<li>如何实现LRU策略<ul>
+<li>增加一个使用位 use bit</li>
+<li>时钟算法: 当找到一个use bit 为0 的记录, 就将其踢出替换;</li>
+<li>注意:<ul>
+<li>脏页: 通过使用一个dirty bit 记录;</li>
+<li>脏页: 是不进行替换的, 它改变的值要写入磁盘;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>频繁分页到硬盘, 成本太高; 所以过度分页最好的办法 : 购买更多的内存;</li>
 </ol>
 
       
@@ -1356,7 +1685,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统导论"><span class="nav-number">1.</span> <span class="nav-text">操作系统导论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟化CPU"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟化CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程"><span class="nav-number">1.2.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程API-–-用户如何使用"><span class="nav-number">1.2.2.</span> <span class="nav-text">进程API – 用户如何使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-受限直接执行"><span class="nav-number">1.2.3.</span> <span class="nav-text">机制 受限直接执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#策略-进程调度"><span class="nav-number">1.2.4.</span> <span class="nav-text">策略 进程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-多级反馈队列"><span class="nav-number">1.2.5.</span> <span class="nav-text">调度: 多级反馈队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-比例份额"><span class="nav-number">1.2.6.</span> <span class="nav-text">调度: 比例份额</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-多处理器调度"><span class="nav-number">1.2.7.</span> <span class="nav-text">调度 :多处理器调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟化内存"><span class="nav-number">1.3.</span> <span class="nav-text">虚拟化内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址空间"><span class="nav-number">1.3.1.</span> <span class="nav-text">地址空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存操作API"><span class="nav-number">1.3.2.</span> <span class="nav-text">内存操作API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-地址转换-实现方式-基址-界限"><span class="nav-number">1.3.3.</span> <span class="nav-text">机制 : 地址转换 ( 实现方式:  基址/界限)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统导论"><span class="nav-number">1.</span> <span class="nav-text">操作系统导论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟化CPU"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟化CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程"><span class="nav-number">1.2.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程API-–-用户如何使用"><span class="nav-number">1.2.2.</span> <span class="nav-text">进程API – 用户如何使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-受限直接执行"><span class="nav-number">1.2.3.</span> <span class="nav-text">机制 受限直接执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#策略-进程调度"><span class="nav-number">1.2.4.</span> <span class="nav-text">策略 进程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-多级反馈队列"><span class="nav-number">1.2.5.</span> <span class="nav-text">调度: 多级反馈队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-比例份额"><span class="nav-number">1.2.6.</span> <span class="nav-text">调度: 比例份额</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-多处理器调度"><span class="nav-number">1.2.7.</span> <span class="nav-text">调度 :多处理器调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟化内存"><span class="nav-number">1.3.</span> <span class="nav-text">虚拟化内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址空间"><span class="nav-number">1.3.1.</span> <span class="nav-text">地址空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存操作API"><span class="nav-number">1.3.2.</span> <span class="nav-text">内存操作API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-地址转换-实现方式-单基址-界限"><span class="nav-number">1.3.3.</span> <span class="nav-text">机制 : 地址转换 ( 实现方式:  单基址/界限)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-分段-多基址-界限"><span class="nav-number">1.3.4.</span> <span class="nav-text">机制: 分段(多基址/界限)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空闲空间管理"><span class="nav-number">1.3.5.</span> <span class="nav-text">空闲空间管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-分页"><span class="nav-number">1.3.6.</span> <span class="nav-text">机制: 分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分页优化-快速地址转换-TLB"><span class="nav-number">1.3.7.</span> <span class="nav-text">分页优化: 快速地址转换(TLB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页表优化-多级页表"><span class="nav-number">1.3.8.</span> <span class="nav-text">页表优化: 多级页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超越物理内存-机制"><span class="nav-number">1.3.9.</span> <span class="nav-text">超越物理内存 : 机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超越物理内存-策略"><span class="nav-number">1.3.10.</span> <span class="nav-text">超越物理内存 : 策略</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
