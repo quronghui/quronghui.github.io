@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="操作系统的并发并发的基础知识 并发的基本抽象  问题:  多个用户要快速的抓取并吃掉多个桃子; 实现方式: 多线程的应用程序(表示多个用户), 访问内存节点数据(多个桃子) OS的支持: OS使用锁(lock) 和条件变量(condition variable), 支持多线程应用程序;   线程和进程  线程: 单个运行进程提供的抽象.       区别 进程 线程     运行时 完成相应的指令">
+<meta name="keywords" content="并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OS并发">
+<meta property="og:url" content="http://yoursite.com/2019/07/18/OS并发/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="操作系统的并发并发的基础知识 并发的基本抽象  问题:  多个用户要快速的抓取并吃掉多个桃子; 实现方式: 多线程的应用程序(表示多个用户), 访问内存节点数据(多个桃子) OS的支持: OS使用锁(lock) 和条件变量(condition variable), 支持多线程应用程序;   线程和进程  线程: 单个运行进程提供的抽象.       区别 进程 线程     运行时 完成相应的指令">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/OS并发/mutex.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/OS并发/semaphore.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/OS并发/semphore_cond.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/18/OS并发/deadlock.jpg">
+<meta property="og:updated_time" content="2019-07-20T03:09:02.641Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OS并发">
+<meta name="twitter:description" content="操作系统的并发并发的基础知识 并发的基本抽象  问题:  多个用户要快速的抓取并吃掉多个桃子; 实现方式: 多线程的应用程序(表示多个用户), 访问内存节点数据(多个桃子) OS的支持: OS使用锁(lock) 和条件变量(condition variable), 支持多线程应用程序;   线程和进程  线程: 单个运行进程提供的抽象.       区别 进程 线程     运行时 完成相应的指令">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/18/OS并发/mutex.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/18/OS并发/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>OS并发 | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/OS并发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OS并发
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-07-18 10:57:22" itemprop="dateCreated datePublished" datetime="2019-07-18T10:57:22+08:00">2019-07-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-07-20 11:09:02" itemprop="dateModified" datetime="2019-07-20T11:09:02+08:00">2019-07-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Operate-System/" itemprop="url" rel="index"><span itemprop="name">Operate System</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="操作系统的并发"><a href="#操作系统的并发" class="headerlink" title="操作系统的并发"></a>操作系统的并发</h1><h2 id="并发的基础知识"><a href="#并发的基础知识" class="headerlink" title="并发的基础知识"></a>并发的基础知识</h2><ol>
+<li><p>并发的基本抽象</p>
+<ul>
+<li><strong>问题:</strong>  <strong>多个用户</strong>要快速的抓取并吃掉<strong>多个桃子</strong>;</li>
+<li><strong>实现方式:</strong> 多线程的应用程序(<em>表示多个用户</em>), 访问内存节点数据(<em>多个桃子</em>)</li>
+<li><strong>OS的支持:</strong> OS使用锁(lock) 和条件变量(condition variable), 支持多线程应用程序;</li>
+</ul>
+</li>
+<li><p>线程和进程</p>
+<ul>
+<li>线程: <strong>单个运行</strong>进程提供的抽象.</li>
+</ul>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>区别</th>
+<th>进程</th>
+<th>线程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运行时</td>
+<td>完成相应的指令</td>
+<td>每个线程就像独立的进程, 但是<strong>共享地址空间, 访问相同的数据</strong></td>
+</tr>
+<tr>
+<td>保存状态信息</td>
+<td>PCB</td>
+<td>TCB Thread control block</td>
+</tr>
+<tr>
+<td>页表</td>
+<td>地址空间改变, 切换当前页表</td>
+<td>地址空间不变, 不用切换页表</td>
+</tr>
+<tr>
+<td>stack</td>
+<td>只有一个栈段</td>
+<td>多个栈段</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>单线程和多线程</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>区别</th>
+<th>单线程</th>
+<th>多线程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>执行点</td>
+<td>一个执行点(一个程序计数器, 用于存放执行的指令)</td>
+<td>多个执行点(多个计数器)</td>
+</tr>
+<tr>
+<td>临界区互斥</td>
+<td></td>
+<td>通过锁实现</td>
+</tr>
+<tr>
+<td>线程交互(减少线程)</td>
+<td></td>
+<td>通过条件变量发送信号</td>
+</tr>
+<tr>
+<td>共享数据的位置</td>
+<td></td>
+<td>heap 或者全局位置</td>
+</tr>
+</tbody>
+</table>
+<h3 id="线程的创建和执行顺序"><a href="#线程的创建和执行顺序" class="headerlink" title="线程的创建和执行顺序"></a><a href="https://github.com/quronghui/OSIntroduction/tree/master/1_thread_create/thread_create.c" target="_blank" rel="noopener">线程的创建和执行顺序</a></h3><ol>
+<li><strong>问题一:</strong> 多线程的创建和执行?<ul>
+<li>记住: <strong>先创建的不一定先执行;</strong></li>
+<li>情况一: 父线程创建子线程后, 父线程自己先运行(单CPU), 然后子线程才运行;</li>
+<li>情况二: 父线程创建子线程后, 子线程先运行(单CPU);然后父线程才运行</li>
+</ul>
+</li>
+<li><strong>问题二</strong>: 线程的创建和函数调用之间的关系?<ul>
+<li>并不是先执行函数, 然后返回给调用者;</li>
+<li>而是 被调用的例程(进程)创建一个新的执行线程, 它独立于调用者运行;</li>
+</ul>
+</li>
+</ol>
+<h3 id="多线程之间存在的问题"><a href="#多线程之间存在的问题" class="headerlink" title="多线程之间存在的问题"></a><a href="https://github.com/quronghui/OSIntroduction/tree/master/1_thread_create/share_data.c" target="_blank" rel="noopener">多线程之间存在的问题</a></h3><ol>
+<li><p>同步原语</p>
+<img src="/2019/07/18/OS并发/mutex.jpg">
+</li>
+<li><p><strong>问题一:</strong> 多数据之间数据共享?</p>
+<ul>
+<li>问题: 线程在执行指令过程中, <strong>时钟中断</strong>的产生, 操作系统将当前线程的状态保存在TCB中, 切换到另外的线程;</li>
+<li>解决方式: 通过同步原语, 将<strong>临界区指令</strong>构造成<strong>原子性</strong>的执行块</li>
+</ul>
+</li>
+<li><p><strong>问题二</strong>: 线程之间睡眠/唤醒的交互机制</p>
+<ul>
+<li>问题: 一个线程继续执行之前, 要等待另外一个线程完成某些操作;</li>
+<li>解决方式: 条件变量和锁</li>
+</ul>
+</li>
+</ol>
+<h2 id="线程的API"><a href="#线程的API" class="headerlink" title="线程的API"></a>线程的API</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">man</span> -k pthread	<span class="comment">// 查询线程所有的API</span></span><br></pre></td></tr></table></figure>
+<h3 id="线程的创建和线程完成"><a href="#线程的创建和线程完成" class="headerlink" title="线程的创建和线程完成"></a>线程的创建和线程完成</h3><ol>
+<li><p>线程的创建函数分析</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int pthread_create(pthread_t *thread, <span class="keyword">const</span> pthread_attr_t *attr,  void *<span class="comment">(*start_routine) (void *)</span>, void *arg);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pthread_t *thread : 与线程的交互</li>
+<li>const pthread_attr_t *attr : 指定线程的属性<ul>
+<li>栈属性: 栈的大小;</li>
+<li>优先级属性</li>
+<li><strong>使用前要进行初始化</strong>: pthread_attr_init()</li>
+</ul>
+</li>
+<li>void <em> ( </em>start_routine) (void *) : 指针函数<ul>
+<li><strong>线程需要完成的指令</strong>: 包括所有的临界区 </li>
+</ul>
+</li>
+<li>void *arg: 传递给指针函数的参数</li>
+</ul>
+</li>
+<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/1_thread_create/thread_join.c" target="_blank" rel="noopener">线程完成</a></p>
+<ul>
+<li><p>等待线程的完成, 需要调用函数pthread_join()</p>
+</li>
+<li><p>能够保证在退出或者进入下一个阶段时, join等待的线程能完成所有的工作;</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread, <span class="keyword">void</span> **retval)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pthread_t thread: 表示需要等待的线程</p>
+</li>
+<li><p>void **retval: 希望得到的返回值;</p>
+<ul>
+<li>必须小心如何从线程得到的返回值; 永远不要返回一个指针;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="锁的API-接口"><a href="#锁的API-接口" class="headerlink" title="锁的API 接口"></a><a href="https://github.com/quronghui/OSIntroduction/tree/master/2_mutex_cond/mutex_api.c" target="_blank" rel="noopener">锁的API 接口</a></h3><ol>
+<li><p>锁的作用:</p>
+<ul>
+<li>保护临界区的代码向单原子式的执行, 不受中断的影响;</li>
+</ul>
+</li>
+<li><p>锁的定义和初始化</p>
+<ul>
+<li>没有检测是否初始化成功</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    pthread_mutex_t look = PTHREAD_MUTEX_INITIALIZER<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>加断言函数, 检测是否初始化成功</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      pthread_mutex_t look<span class="comment">;</span></span><br><span class="line">      int rc = pthread_mutex_init(<span class="name">&amp;lock</span>, NULL)<span class="comment">;</span></span><br><span class="line">      assert(<span class="name">rc</span> == <span class="number">0</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>获取锁和释放锁时, 应该检测是否获取成功</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取锁的函数接口</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pthread_mutex_lock</span><span class="params">( <span class="keyword">pthread_mutex_t</span> *mutex )</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> rc = pthread_mutex_lock(mutex);</span><br><span class="line">	assert(rc==<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>锁使用完之后, 要摧毁</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pthread_mutex_destroy()<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他方式获取锁 : <strong>解决死锁问题</strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">pthread_mutex_trylock</span><span class="params">()</span></span>  <span class="comment">// 尝试获取锁, 如果由程序占用, 则失败</span></span><br><span class="line"><span class="function"><span class="title">pthread_mutex_timelock</span><span class="params">()</span></span>	<span class="comment">// 在超时或者获取到锁后返回</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="条件变量-API"><a href="#条件变量-API" class="headerlink" title="条件变量 API"></a><a href="https://github.com/quronghui/OSIntroduction/tree/master/2_mutex_cond/cond_api.c" target="_blank" rel="noopener">条件变量 API</a></h3><ol>
+<li><p>条件变量的作用</p>
+<ul>
+<li>解决: 线程之间睡眠/唤醒的交互机制</li>
+</ul>
+</li>
+<li><p>条件变量的创建和初始化</p>
+<ul>
+<li>使用条件变量时, 必须使用与此条件相关的锁</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER<span class="comment">;</span></span><br><span class="line">pthread_cond_t cond = PTHREAD_COND_INITIALIZER<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>条件变量的使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_wait</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond,  <span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;	<span class="comment">// 进入等待时,会释放锁的;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">pthread_cond_signal</span><span class="params">(<span class="keyword">pthread_cond_t</span> *cond)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="实现锁"><a href="#实现锁" class="headerlink" title="实现锁"></a>实现锁</h2><ul>
+<li>锁是一个变量, 互斥量(0/1);</li>
+</ul>
+<ol>
+<li>锁的实现<ul>
+<li>纯硬件的实现;</li>
+<li>硬件原语 + OS原语</li>
+</ul>
+</li>
+<li>评价一把锁的效果?<ul>
+<li>互斥性: 最基本的功能, 锁是否优先, 能够阻止多个线程进入临界区;</li>
+<li>公平性: 当锁可用时, 每一个线程都能公平的获得锁;</li>
+<li>性能: 加锁之后的时间花费;</li>
+</ul>
+</li>
+</ol>
+<h3 id="基于硬件原语实现锁-不基于线程库"><a href="#基于硬件原语实现锁-不基于线程库" class="headerlink" title="基于硬件原语实现锁(不基于线程库)"></a>基于硬件原语实现锁(不基于线程库)</h3><ol>
+<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/2_mutex_cond/spin_lock.c" target="_blank" rel="noopener">基于硬件原语实现锁, 优缺点</a></p>
+<ul>
+<li>属于自旋式, 永不放弃CPU, 等待的线程一直浪费CPU的时间片</li>
+</ul>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>硬件原语</th>
+<th>实现</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>控制中断</td>
+<td>在进入临界区时, 关闭中断</td>
+<td>关闭中断, OS就不能有效介入</td>
+</tr>
+<tr>
+<td>TestAndSet<br><strong>自旋锁</strong></td>
+<td>将互斥量(0/1)在获取锁和释放锁交换</td>
+<td>将测试和设置合并为一个原子操作<br>等待线程会一直自旋, 永不放弃CPU<br>不保证公平性: 对锁是一种抢占式的</td>
+</tr>
+<tr>
+<td>比较和交换</td>
+<td>通过和期望值进行比较</td>
+<td>无等待同步, 自旋式</td>
+</tr>
+<tr>
+<td>链式加载和条件式存取</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>获取并增加</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="硬件原语-OS原语-实现锁"><a href="#硬件原语-OS原语-实现锁" class="headerlink" title="硬件原语 + OS原语 实现锁"></a>硬件原语 + OS原语 实现锁</h3><ol>
+<li><p>OS原语实现</p>
+<ul>
+<li><p>当线程竞争锁失败, 要进入自旋状态时(spin), 放弃CPU.(进行上下文的切换)</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">yield</span>();	<span class="comment">//OS 原语</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>但是这样的上下文切换, 成本很高; 一直竞争不到, 就得一直切换;</p>
+</li>
+</ul>
+</li>
+<li><p>使用队列: 休眠替代自旋</p>
+<ul>
+<li>当线程竞争不到锁时, 通过一个队列保存他们的TID;</li>
+<li>通过 park() / unpark() 睡眠和唤醒;</li>
+</ul>
+</li>
+<li><p>Linux 支持的软件原语</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">futex<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="条件变量-–-另外的开发原语"><a href="#条件变量-–-另外的开发原语" class="headerlink" title="条件变量 – 另外的开发原语"></a>条件变量 – 另外的开发原语</h2><ol>
+<li>条件变量的作用?<ul>
+<li>线程可以使用使用条件变量, 来等待一个条件变成真; (不是自旋等待)</li>
+<li>条件变量: 是一个显示队列<ul>
+<li>当某些<strong>执行状态</strong>不满足时, 线程可以把自己加入队列, <strong>等待</strong>该条件;</li>
+<li>当执行状态满足时, 就可以通过唤醒线程, 让其运行;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="条件变量的定义和程序"><a href="#条件变量的定义和程序" class="headerlink" title="条件变量的定义和程序"></a>条件变量的定义和程序</h3><ol>
+<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/2_mutex_cond/condition_vailable.c" target="_blank" rel="noopener">编写代码的几个要求?</a></p>
+<ul>
+<li>共享变量: 共享变量的重要性, 用于判断某些状态的;</li>
+<li>锁: 在使用<strong>条件变量</strong>(睡眠和唤醒机制)时, 必须加锁;</li>
+</ul>
+</li>
+<li><p>问题一:  done 共享变量, 是否有存在的必要?</p>
+<ul>
+<li><p>睡眠, 唤醒, 锁都离不开共享变量</p>
+</li>
+<li><p>a. 情况一: 父线程创建子线程后, 自己运行(单CPU), 调用thr_join()函数. </p>
+</li>
+</ul>
+<p>​                这种情况下 父线程先获得lock, done==0, 子线程还在运行, 调用wait()进入睡眠; </p>
+<p>​                子线程得以运行,  调用thr_exit()函数发送signal 信号唤醒父线程;</p>
+<p>​                父线程从wait中返回, 释放锁;</p>
+<ul>
+<li>b.  情况二: 父线程创建子线程后,子线程立即运行, 并且设置 done =1; </li>
+</ul>
+<p>​                调用signal唤醒其他线程(线程队列为空), 然后结束;</p>
+<p>​                父线程运行后, 调用thr_join(), 发现done = 1, 所以释放锁返回;</p>
+</li>
+<li><p>问题二:  唤醒和睡眠状态都不加锁?</p>
+<ul>
+<li>会被中断信号打断</li>
+</ul>
+</li>
+</ol>
+<h3 id="典型模型-生产者和消费者-存在界缓冲区"><a href="#典型模型-生产者和消费者-存在界缓冲区" class="headerlink" title="典型模型: 生产者和消费者(存在界缓冲区)"></a>典型模型: 生产者和消费者(存在界缓冲区)</h3><ol>
+<li><p>Producter / Consumer 问题</p>
+<ul>
+<li>Producter 产生数据, 并将数据放在buffer;</li>
+<li>Consumer 从buffer中获取数据</li>
+<li>Condition: <ul>
+<li>只有buffer为空时, producter才能写入数据;</li>
+<li>只有buffer满时, Consumer才能得到数据;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>grep 正则匹配</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grep</span>  foo	<span class="keyword">file</span>.txt | wc -l	<span class="comment">// Producter / Consumer 的问题; 而我们充当了用户</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>grep 在file.txt 中查找与”foo”字符相同的值; — Producter</p>
+</li>
+<li><p>shell 把输出重定向到pipe, pipe的另一端是wc进程的标准输出</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l	<span class="comment">// wc统计foo出现在文件中的次数</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>他们之间的交互:通过内核中的有界缓冲区, 共享资源;</p>
+</li>
+</ul>
+</li>
+<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/2_mutex_cond/producter_comsumer.c" target="_blank" rel="noopener">代码编写注意三点</a></p>
+<ul>
+<li><p>a. 共享变量进行标识: 何时producter能进入buffer?    何时consumer能进入buffer?</p>
+</li>
+<li><p>b. Mesa语义:    关于条件变量的使用, 总是使用while loop 代替if</p>
+</li>
+<li><p>c. 条件变量:要具有指向性:</p>
+<ul>
+<li>消费者不能指向消费者, 只能指向生产者;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="覆盖条件"><a href="#覆盖条件" class="headerlink" title="覆盖条件"></a>覆盖条件</h3><ol>
+<li><p>问题: 关于内存分配的问题?</p>
+<ul>
+<li>当出现空闲内存时, 唤醒哪一个等待的线程?</li>
+</ul>
+</li>
+<li><p>解决方式:  覆盖条件</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">pthread_cond_broadcast</span>() ;	<span class="comment">// 唤醒所有等待的线程</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>覆盖条件: 它能覆盖所有需要唤醒的线程场景,  广播进行全部唤醒; </li>
+</ul>
+</li>
+</ol>
+<h2 id="信号量-–-同步原语"><a href="#信号量-–-同步原语" class="headerlink" title="信号量 – 同步原语"></a>信号量 – 同步原语</h2><ol>
+<li><p>信号量 : 是一个<strong>整数值</strong>的对象;</p>
+<ul>
+<li>信号量作为同步原语, 可以<strong>替换</strong>锁和条件变量的;</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;semaphore.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sem_init</span><span class="params">(<span class="keyword">sem_t</span> *sem, <span class="keyword">int</span> pshared, <span class="keyword">unsigned</span> <span class="keyword">int</span> value)</span></span>;	<span class="comment">// 信号量的声明和初始化</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>int pshared: 表示信号量可以在多个线程 , 或者进程<strong>实现同步</strong><ul>
+<li>0: 表示在多个线程之间进行同步;</li>
+<li>other value: 表示在进程间同步</li>
+</ul>
+</li>
+<li>unsigned int value <strong>信号量的初始化的值</strong><ul>
+<li>value = 1;     表示二值信号量(锁)</li>
+<li>value = 0;   表示条件变量, 用于线程之间的等待和唤醒;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>信号量 :  可以使用两个函数来操作它. <strong>通过这两个函数进行唤醒和睡眠</strong></p>
+<ul>
+<li>sem_wait():     将信号量的值<strong>减一</strong>, 和0比较, 小于0就进入等待状态;</li>
+<li>sem_post():    将信号量的值<strong>增加一</strong>, 产生数值变化就唤醒信号量的线程</li>
+</ul>
+</li>
+</ol>
+<h3 id="二值信号量-锁"><a href="#二值信号量-锁" class="headerlink" title="二值信号量 (锁)"></a>二值信号量 (锁)</h3><ol>
+<li><p>问题一: 信号量的初始值是多少?</p>
+<ul>
+<li><p>初值为1, 当(sem&lt;0) 进入睡眠, 放弃CPU;</p>
+</li>
+<li><p>情景一:  只有一个线程</p>
+<ul>
+<li>线程A调用sem_wait(), 使得信号量减一, 值为0; 从sem_wait()返回;</li>
+<li>线程A进入临界区;没有其他线程获取锁;</li>
+<li>线程A调用sem_post(), 使得信号量增加一;</li>
+</ul>
+</li>
+<li><p>情景二: 两个线程</p>
+<img src="/2019/07/18/OS并发/semaphore.jpg">
+</li>
+</ul>
+</li>
+<li><p><a href="(https://github.com/quronghui/OSIntroduction/tree/master/3_semaphore/semaphore_mutex.c">代码使用</a>)</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Sem_wait(<span class="name">&amp;sem</span>)<span class="comment">;</span></span><br><span class="line">// code</span><br><span class="line">Sem_post(<span class="name">&amp;sem</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="信号量实现-条件变量"><a href="#信号量实现-条件变量" class="headerlink" title="信号量实现: 条件变量"></a>信号量实现: 条件变量</h3><ol>
+<li><p>信号量作为条件变量: 实现线程间的等待和唤醒?</p>
+<ul>
+<li><p>初始值value = 0;</p>
+</li>
+<li><p>情景一:  父线程 创建子线程后, 子线程先运行</p>
+<img src="/2019/07/18/OS并发/semphore_cond.jpg">
+</li>
+<li><p>情景一:  父线程 创建子线程后, 父线程先运行</p>
+</li>
+</ul>
+</li>
+<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/3_semaphore/semaphore_cond.c" target="_blank" rel="noopener">实现方式code</a></p>
+<ul>
+<li>父进程调用sem_wait(), 将sem值减一, sem&lt;0 进入睡眠模式</li>
+<li>子进程调用sem_post(), 将sem值加一, sem=0, 唤醒父进程</li>
+</ul>
+</li>
+</ol>
+<h3 id="信号量实现生产者和消费者"><a href="#信号量实现生产者和消费者" class="headerlink" title="信号量实现生产者和消费者"></a>信号量实现生产者和消费者</h3><ol>
+<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/3_semaphore/sem_ProductAndConsume.c" target="_blank" rel="noopener">解题思路注意 :</a></p>
+<ul>
+<li><p>a. 信号量的初始值进行标识: 何时producter能进入buffer?    何时consumer能进入buffer?</p>
+</li>
+<li><p>b. 信号量:要具有指向性:</p>
+<ul>
+<li>消费者不能指向消费者, 只能指向生产者;</li>
+</ul>
+</li>
+<li><p>c. 全局变量: 存放在程序代码区(静态)</p>
+</li>
+<li><p>d. 还要加一个二值信号量 : 锁 (应对多生产者的情况)</p>
+</li>
+<li><p>e. 二值信号量放置的位置, 会造成死锁的状况;</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Sem_wait(<span class="name">&amp;empty</span>)<span class="comment">;</span></span><br><span class="line">Sem_wait(<span class="name">&amp;mutex</span>)<span class="comment">;	// 锁的信号量处的位置, 放在类似于条件变量之前的位置</span></span><br><span class="line">put(<span class="name">i</span>)<span class="comment">;</span></span><br><span class="line">Sem_post(<span class="name">&amp;mutex</span>)<span class="comment">;</span></span><br><span class="line">Sem_post(<span class="name">&amp;full</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><strong>问题一</strong>: 信号量实现的生产者和消费者为什么会产生死锁问题?</p>
+<ul>
+<li>信号量实现的模型<ul>
+<li><strong>先进入函数</strong> : Sem_wait() </li>
+<li><strong>后比较</strong>比较: 进入睡眠模式(sem&lt;0)不会释放锁</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Sem_wait(<span class="meta">&amp;mutex);		<span class="comment">// 已经获得锁了</span></span></span><br><span class="line">Sem_wait(<span class="meta">&amp;empty);  		<span class="comment">// 进入等待的时候**不会释放锁**</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>条件变量实现的模型: </p>
+<ul>
+<li><strong>先比较</strong> : 有一个全局的共享变量, 进行标识buffer值的大小;</li>
+<li><strong>后进入函数</strong>: while 判断, 决定是否要进入 Pthread_cond_wait函数</li>
+</ul>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Pthread_mutex_lock(<span class="name">&amp;mutex</span>)<span class="comment">;		// 已经获得锁了</span></span><br><span class="line">while( <span class="name">count</span> == <span class="number">0</span> )</span><br><span class="line">            Pthread_cond_wait(<span class="name">&amp;full</span>, <span class="symbol">&amp;mutex</span>)<span class="comment">;   // 进入等待时,会释放锁的;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="信号量解决的问题"><a href="#信号量解决的问题" class="headerlink" title="信号量解决的问题"></a>信号量解决的问题</h3><ol>
+<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/3_semaphore/sem_read_write.c" target="_blank" rel="noopener">读者–写者锁实现方式?</a></p>
+<ul>
+<li>读者锁: 一旦一个读者获得读锁, 其他读者也能获得该锁;</li>
+<li>写者锁: 但是想要获得写者锁, 必须等待所有的读者结束; </li>
+</ul>
+<ol start="2">
+<li><a href="https://github.com/quronghui/OSIntroduction/tree/master/3_semaphore/sem_fork.c" target="_blank" rel="noopener">哲学家就餐问题?</a></li>
+</ol>
+<ul>
+<li><p>问题: 哲学家只有同时拿到左手边和右手边的参叉, 才能吃到东西? 如何进行同步;</p>
+</li>
+<li><p>解决:  防止出现死锁的状况, 在最后一个哲学家哪里, 调换一次拿叉子顺序</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void getfork()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>( <span class="selector-tag">p</span> == MAX-<span class="number">1</span> )&#123;       <span class="comment">// 换一下拿叉子的顺序</span></span><br><span class="line">        Sem_wait( &amp;fork[ <span class="attribute">right</span>(p) ] );</span><br><span class="line">        Sem_wait( &amp;fork[ <span class="attribute">left</span>(p) ] );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        Sem_wait( &amp;fork[ <span class="attribute">left</span>(p) ] );        </span><br><span class="line">        Sem_wait( &amp;fork[ <span class="attribute">right</span>(p) ] );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="通过锁和条件变量-实现信号量"><a href="#通过锁和条件变量-实现信号量" class="headerlink" title="通过锁和条件变量 实现信号量"></a>通过锁和条件变量 实现信号量</h3><ol>
+<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/3_semaphore/achieve_semaphore.c" target="_blank" rel="noopener">实现方式code:</a></p>
+<ul>
+<li><p>通过一把锁, 一个条件变量, 一个状态变量 来<strong>记录信号量的值</strong>;</p>
+</li>
+<li><p>a. 锁实现时: 共享变量是 0和1之间切换;</p>
+<ul>
+<li>semaphore 实现时, 是通过wait() 和post() 加1和减1</li>
+</ul>
+</li>
+<li>b. 唤醒机制<ul>
+<li>使用条件变量实现</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="常见的并发问题"><a href="#常见的并发问题" class="headerlink" title="常见的并发问题"></a>常见的并发问题</h2><h3 id="并发缺陷-非死锁"><a href="#并发缺陷-非死锁" class="headerlink" title="并发缺陷(非死锁)"></a>并发缺陷(非死锁)</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>原因</th>
+<th>解决</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>违反原子性</td>
+<td>代码执行时, 被中断打断</td>
+<td>加锁, 实现互斥</td>
+</tr>
+<tr>
+<td>违反顺序性</td>
+<td>先使用, 后初始化</td>
+<td>添加一个条件变量, 锁, 状态变量( <strong>或者信号量</strong> )</td>
+</tr>
+</tbody>
+</table>
+<h3 id="死锁缺陷"><a href="#死锁缺陷" class="headerlink" title="死锁缺陷"></a>死锁缺陷</h3><ol>
+<li><p>什么是死锁?</p>
+<ul>
+<li>线程之间相互依赖, 相互等待对方释放;</li>
+</ul>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thread_1:	do_something( <span class="keyword">lock</span>(L1), <span class="keyword">lock</span>(L2) )	<span class="comment">// 线程各自持有一个锁, 等待对方释放锁</span></span><br><span class="line">thread_2:	do_something( <span class="keyword">lock</span>(L2), <span class="keyword">lock</span>(L1) )</span><br></pre></td></tr></table></figure>
+<img src="/2019/07/18/OS并发/deadlock.jpg">
+</li>
+<li><p>死所发生的原因和解决的方法</p>
+
+</li>
+<li><p>死锁情况一: 循环等待</p>
+<ul>
+<li><p>解决: 通过一个比较, 让其按照摸个顺序访问.(类似于哲学家就餐问题)</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span><span class="comment">( m1&gt;m2 )</span>&#123;       <span class="comment">// 换一下拿叉子的顺序</span></span><br><span class="line">   pthread_mutex_lock<span class="comment">(m1)</span>;</span><br><span class="line">   pthread_mutex_lock<span class="comment">(m2)</span>;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">   pthread_mutex_lock<span class="comment">(m2)</span>;</span><br><span class="line">   pthread_mutex_lock<span class="comment">(m1)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>死锁情况二: 持有并等待</p>
+<ul>
+<li>解决: 通过原子性的抢锁;</li>
+<li>通过设计一个全局锁;</li>
+</ul>
+</li>
+<li><p>死锁情况三: 非抢占</p>
+<ul>
+<li>解决: pthread_mutex_trylock()  // 尝试获取锁, 如果由程序占用, 则失败</li>
+</ul>
+</li>
+<li><p>死锁情况四: 互斥</p>
+<ul>
+<li>很难解决, 代码存在临界区;</li>
+</ul>
+</li>
+<li><p>解决死锁方式:</p>
+<ul>
+<li>通过调度避免死锁;</li>
+<li>在MapReduce (Google)系统中, 可以完成一些并行计算, 无需使用锁;</li>
+</ul>
+</li>
+</ol>
+<h2 id="基于事件的并发"><a href="#基于事件的并发" class="headerlink" title="基于事件的并发"></a>基于事件的并发</h2><ol>
+<li>基于事件的并发解决哪些问题?<ul>
+<li>多线程中并发中, 存在并发缺陷的问题;</li>
+<li>开发者无法控制某一个时刻的调度, 程序员创建线程后, 依赖操作系统的合理调度;</li>
+</ul>
+</li>
+<li>应用地方? <ul>
+<li>图形用户界面的应用</li>
+<li>某些网络服务器, socket</li>
+</ul>
+</li>
+<li>阻塞和非阻塞?<ul>
+<li>阻塞(同步): 在返回给调用者之前完成所有的工作;</li>
+<li>非阻塞:  接口开始一些工作后, 立即返回(将控制权让出), 让所 需要完成的工作都在后台进行;</li>
+</ul>
+</li>
+</ol>
+<h3 id="其如何工作的"><a href="#其如何工作的" class="headerlink" title="其如何工作的?"></a>其如何工作的?</h3><ol>
+<li><p>事件循环</p>
+<ul>
+<li>主程序等待某些事件的发生;</li>
+<li>event handle(事件处理程序): 依次处理事件;</li>
+<li>显示调度: 决定处理哪一个事件</li>
+</ul>
+</li>
+<li><p>API: select() and poll()</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int <span class="keyword">select</span>(<span class="built_in">int</span> nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds,  <span class="keyword">struct</span> timeval *<span class="keyword">timeout</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>select: 会依次检查文件描述符 0- ( nfds-1), 中满足后面三个条件的fds;</li>
+<li>返回所有集合中就绪描述符的总数;</li>
+</ul>
+</li>
+<li><p>FD_ISSET()</p>
+<ul>
+<li>时间服务器可以查看哪些描述符已准备好数据并处理传入的数据;</li>
+</ul>
+</li>
+</ol>
+<h3 id="基于事件的并发要求"><a href="#基于事件的并发要求" class="headerlink" title="基于事件的并发要求"></a>基于事件的并发要求</h3><ol>
+<li>无须锁:<ul>
+<li>基于单个CPU和事件的应用程序, 一次只处理一个时间, </li>
+<li>属于单线程, 不存在并发问题;</li>
+</ul>
+</li>
+<li>要求一: 不允许使用阻塞调用<ul>
+<li><strong>问题一</strong>: I/O请求会阻塞程序?</li>
+<li>解决阻塞问题方法:<ul>
+<li>通过异步I/O进行处理</li>
+<li>使用的接口: AIO control block</li>
+<li>作用: 接口在接到I/O请求后, 在I/O完成之前, 将控制权返回在调用者;<ul>
+<li>另外的接口可以查询是否完成;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>问题二: 状态管理<ul>
+<li>收官栈管理;</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并发/" rel="tag"># 并发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/15/OS虚拟化/" rel="next" title="OS虚拟化">
+                <i class="fa fa-chevron-left"></i> OS虚拟化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">88</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">78</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统的并发"><span class="nav-number">1.</span> <span class="nav-text">操作系统的并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的基础知识"><span class="nav-number">1.1.</span> <span class="nav-text">并发的基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的创建和执行顺序"><span class="nav-number">1.1.1.</span> <span class="nav-text">线程的创建和执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程之间存在的问题"><span class="nav-number">1.1.2.</span> <span class="nav-text">多线程之间存在的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的API"><span class="nav-number">1.2.</span> <span class="nav-text">线程的API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的创建和线程完成"><span class="nav-number">1.2.1.</span> <span class="nav-text">线程的创建和线程完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁的API-接口"><span class="nav-number">1.2.2.</span> <span class="nav-text">锁的API 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量-API"><span class="nav-number">1.2.3.</span> <span class="nav-text">条件变量 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现锁"><span class="nav-number">1.3.</span> <span class="nav-text">实现锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于硬件原语实现锁-不基于线程库"><span class="nav-number">1.3.1.</span> <span class="nav-text">基于硬件原语实现锁(不基于线程库)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件原语-OS原语-实现锁"><span class="nav-number">1.3.2.</span> <span class="nav-text">硬件原语 + OS原语 实现锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件变量-–-另外的开发原语"><span class="nav-number">1.4.</span> <span class="nav-text">条件变量 – 另外的开发原语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量的定义和程序"><span class="nav-number">1.4.1.</span> <span class="nav-text">条件变量的定义和程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型模型-生产者和消费者-存在界缓冲区"><span class="nav-number">1.4.2.</span> <span class="nav-text">典型模型: 生产者和消费者(存在界缓冲区)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#覆盖条件"><span class="nav-number">1.4.3.</span> <span class="nav-text">覆盖条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量-–-同步原语"><span class="nav-number">1.5.</span> <span class="nav-text">信号量 – 同步原语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二值信号量-锁"><span class="nav-number">1.5.1.</span> <span class="nav-text">二值信号量 (锁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量实现-条件变量"><span class="nav-number">1.5.2.</span> <span class="nav-text">信号量实现: 条件变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量实现生产者和消费者"><span class="nav-number">1.5.3.</span> <span class="nav-text">信号量实现生产者和消费者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量解决的问题"><span class="nav-number">1.5.4.</span> <span class="nav-text">信号量解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过锁和条件变量-实现信号量"><span class="nav-number">1.5.5.</span> <span class="nav-text">通过锁和条件变量 实现信号量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的并发问题"><span class="nav-number">1.6.</span> <span class="nav-text">常见的并发问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发缺陷-非死锁"><span class="nav-number">1.6.1.</span> <span class="nav-text">并发缺陷(非死锁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁缺陷"><span class="nav-number">1.6.2.</span> <span class="nav-text">死锁缺陷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于事件的并发"><span class="nav-number">1.7.</span> <span class="nav-text">基于事件的并发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#其如何工作的"><span class="nav-number">1.7.1.</span> <span class="nav-text">其如何工作的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于事件的并发要求"><span class="nav-number">1.7.2.</span> <span class="nav-text">基于事件的并发要求</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
