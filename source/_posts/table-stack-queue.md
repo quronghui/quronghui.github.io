@@ -9,7 +9,10 @@ tags: ADT
 
 # Abstract Data Type
 
++ [数据结构与算法教程，数据结构C语言版教程](http://data.biancheng.net/view/174.html)
+
 + 理解数据结构的三种类型：看代码实现的细微差别
++ 函数设计，我就只给一个接口，外部看不到设计，保留头指针与否，取决于自己设计的习惯
 
 ## 内存分配
 
@@ -35,12 +38,30 @@ tags: ADT
    + push : 新值压入堆栈顶部；
    + pop：只把顶部元素移出堆栈，不返回值
    + top：返回顶部元素，不进行元素的移除
+   
 2. 实现堆栈：
+   
    + push：存储于数组中连续的位置，因此需要考虑empty and full
+   
 3. 堆栈的实现方式：
-   + [静态数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/static_array_stack.c)
-   + [动态分配数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/malloc_array_stack.c)
-   + [动态分配链表实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/link_stack.c)
+   + ### [动态分配数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/array_malloc_stack.c)
+   
+   + ### [动态分配链表实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/link_stack.c)
+   
+   + [静态数组实现-- 我修改了头文件，先不使用](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/static_array_stack.c)
+   
+
+### 栈的应用
+
+#### 应用一：[包含min函数的栈:题目：定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的min函数](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/min_inStack.c)
+
+ 	1. 有几个难点：
+     + 和链表一样，一开始没有code栈的操作，导致这道题目没有思路；
+     + 栈和队列的数据结构：将会用于树的操作
+
+#### 应用二：[面试题31：栈的压入、弹出序列. 题目：输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/is_stackPopOrder.c)
+
+
 
 ## Queue
 
@@ -70,25 +91,20 @@ tags: ADT
      数组中有一个位置空着不用；
      (rear+1) % QUEUE_SIZE == front      队列为空
      (rear+2) %  QUEUE_SIZE == front     队列为满
+     数组的初始化
+  rear = 0;
+     front = 1;	// 空出下标为0的位置
      ```
-
+   
    {% asset_img queue.jpg %}
-
-### queue -- pointer
-
-1. Parameter
-
-   *front: 指向队列的头部； 代表的就是队列
-
-   *rear:  指向最后一个元素； 
-
-   *pNext: 用于指向下一个元素
 
 ### queue 的实现
 
-- [静态数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/static_array_queue.c)
-- [动态分配数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/malloc_array_queue.c)
+- [静态数组实现 , 现在还没有用](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/static_array_queue.c)
+- [动态分配数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/array_malloc_queue.c)
 - [动态分配链表实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/link_queue.c)
+
+### queue 的应用--> 用于树的操作
 
 ## Tree 
 

@@ -3,7 +3,7 @@ layout: post
 title: RidingBicycle
 date: 2019-04-29 18:57:25
 categories: 
-- [RidingBicycle]
+- [Riding]
 tags: RidingBicycle
 ---
 

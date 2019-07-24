@@ -2,9 +2,7 @@
 layout: post
 title: 阿里AI安全讲座
 date: 2019-03-22 21:42:55
-categories: 
- - [work]
- - [AI cathedra]
+categories: [work]
 tags: 
  - [work]
 ---

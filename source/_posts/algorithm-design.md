@@ -32,7 +32,7 @@ tags: algorithm
 
 ### 应用一：[面试题：斐波那契数列，青蛙跳台阶](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/09_recursion_and_loop/fibonacci.c)
 
-## 排序和查找
+## [排序和查找](https://luckywater.top/2019/05/22/Sort-ways/)
 
 | 查找排序算法           | 适用场合                                                     |
 | ---------------------- | ------------------------------------------------------------ |
@@ -43,6 +43,8 @@ tags: algorithm
 ### 		应用一：[快速排序算法的实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/quick_sort.c)
 
 ### 		应用二：[面试题11：旋转数组的最小数字](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/rotating_array.c)
+
+### 应用三: 归并排序 [ 面试题51：数组中的逆序对](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/inversePair_mergeSort.c)
 
 ## 回溯算法
 
@@ -97,6 +99,10 @@ tags: algorithm
 
    ### 动态规划应用一: [ 剪绳子 :给你一根长度为n绳子，请把绳子剪成m段](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/12_DynamicProgramming_GreedyAlogithm/Dynamic_maxProduct.c)
 
+   ### 动态规划应用二: [面试题47：礼物的最大价值. 题目：在一个m×n的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于0）](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/12_DynamicProgramming_GreedyAlogithm/get_MaxValue_inMatrix.c)
+   
+   ### 动态规划应用三: [面试题48：最长不含重复字符的子字符串.  扩展: 将这个长的字符串打印出来?](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/12_DynamicProgramming_GreedyAlogithm/longSubstring_withoutDup.c)
+   
    ### 贪婪算法应用一：[剪绳子 :给你一根长度为n绳子，请把绳子剪成m段](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/12_DynamicProgramming_GreedyAlogithm/Greedy_maxProduct.c)
 
 ## 位运算
@@ -122,34 +128,8 @@ tags: algorithm
    n = n >> 1; 	// 不能只写 n >> 1
    ```
 
-   
 
 ### 应用一： [计算一个整数转换为二进制后，1的个数](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/13_bit_opreation/one_count.c)
-
-1. 方法1：将整数n循环右移
-
-   + 每进行一次运算：n & 1，整数n右移一位：n>>1 
-   + 缺点：当n为负数时后，循环右移导致n的二进制数全为1；判断会进入死循环
-
-2. 方法2：整数n不移动，1循环左移
-
-   + 每进行一次 : n & 1，与位 1 左移一位：1 << 1;  --> 10
-   + 缺点：32位的整数，需要循环32次
-
-3. 方法3：
-
-   + 整数 n > 0; 那么其二进制数中至少有一个1；
-
-   + 整数 n 的二进制有多少个1，就能进行多少次运算
-
-     ```
-     while(n){
-     	++count;
-     	n = (n-1) & n;	// 将整数n与(n-1)按位与运算；
-     }
-     ```
-
-   + 一个数减去 1 之后和原来的数进行**位与运算**：相当于把整数二进制表示中最右边的1变成0；
 
 ## 分治算法
 

@@ -1,64 +1,139 @@
 ---
 layout: post
-title: OpenLink
+title: 毕设的方向
 date: 2019-06-22 10:03:19
-categories: [ open source link ]
-tags: OpenLink
+categories: 毕业设技
+tags: 毕设
 ---
 
-# Open source link
 
-## 开源
 
-1. [为何要为开源做贡献](https://linux.cn/article-8653-1.html)
-2. [怎么查找开源项目](https://www.zhihu.com/question/20084458)
+## 毕设的方向
 
-## Open Link
+- 基于物联网设备的边缘计算系统的搭建
 
-1. **IT Community**
-   1. [stackoverflow](https://stackoverflow.com/)  ：IT与程序相关的IT技术问答网站
-   2. [element](https://www.element14.com/community/welcome) :  IT的互助社群
-2. **China IT Community **
-   1. [CSDN](https://www.csdn.net/)  ：国内IT的博客分享平台
-   2. [开源中国](https://www.oschina.net/)  ：中国最大的开源IT社区
-3. **UI Design**
-   1. [UI dribbble ](https://dribbble.com/justui)  
-   2. [UI Behance ]() 
-4. **Vector ICONS**
-   1. [FlatIcon](https://www.flaticon.com/)  : 有版权限制的矢量图标
-   2. [iconfont](https://www.iconfont.cn/)  : 矢量图标
-5. **Security Community**
-   1. [看雪论坛](https://bbs.pediy.com/) : 致力于PC、移动、智能设备安全研究及逆向工程的开发者社区
-   2. [吾爱破解](https://www.52pojie.cn/)：论坛致力于软件安全与病毒分析的前沿,丰富的技术版块交相辉映,由无数热衷于软件加密解密及反病毒爱好者共同维护
-   3. [ i 春秋 ]注网络安全、信息安全、白帽子技术的在线学习,教育、培训的平台
-6. **Emebadded Community**
-   1. [hackaday](https://hackaday.com)  ： Hardware open source items
-   2. [hackster](https://www.hackster.io/)    ：Hardware open source store
-   3. [Cadlab.io ](https://cadlab.io/) ： 可以使用github push 的可视化图形软件
-7. **Crowdfunding Community **
-   1. [kickstarter](https://www.kickstarter.com/)  ：众筹项目
-   2. [indiegogo](https://www.indiegogo.com/)   :  众筹项目
-   3. [modian](https://www.modian.com/)       :  中国的众筹项目
-8. [Hacker New](https://news.ycombinator.com/news)  ：世界的重要新闻
-9. **RSS**  (Really Simple Syndication)
-   1. [inoreader](https://www.inoreader.com/)  :  RSS订阅是站点用来和其他站点之间共享内容的一种简易方式，即Really Simple Syndication（简易信息聚合）。
-   2. [feedly](https://feedly.com/)  :  Feedly是一款第三方RSS阅读器，在经过了几次更新后，已经有比较多的忠实的使用者。
-      - 第一次访问*Feedly*的用户，*Feedly*会自动提示接入 Google Reader的访问权限，无需注册新会员.
-      - 能够增加我们之前的Open Source
-10. PDF Transform Doc
-    1. https://pdf2doc.com/
-11. Algorithm  visualization*
-    1. https://visualgo.net/zh : 算法可视化的工具，用于展示算法的好工具
-12. UART HMI
-    1. 通过串口发送，就之间显示出对应的图形和数据
-    2. 在显示屏上显示二维码就可以用。
-13. 与非网：一些嵌入式的前沿
-    1. 可能你已修炼成资深行业观察家，如[何小庆](https://www.eefocus.com/article/tag/%E6%98%BE%E5%BE%AE%E9%95%9C%E4%B8%8B%E7%9A%84%E5%B5%8C%E5%85%A5%E5%BC%8F%E4%BA%A7%E4%B8%9A)老师那样真知灼见；
-    2. 可能你善于分析行业趋势，如[飞翔的鸭子](https://www.eefocus.com/article/tag/%E9%A3%9E%E9%B8%AD%E8%B0%88%E8%8A%AF)侃侃而谈；
-    3. 可能你精通某一项技术，如[加菲](https://www.eefocus.com/article/tag/verilog%E4%BC%A0%E5%A5%87)那样精讲技术而不失幽默；
-    4. 可能你善于发现身边的工程师故事，如[骆驼](https://www.eefocus.com/article/tag/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%B6%A3%E4%BA%8B%E4%B8%80%E7%AE%A9%E7%AD%90)般娓娓道来。
-14. awesome 项目
-    + [github 上搜索 awesome-xxxx](https://github.com/sindresorhus/awesome)
-15. typing lesson
-    - [打字练习](https://www.typing.com/student/lesson/337/advanced-wrap-up)
+### 研究背景
 
+​	随着大数据、云计算、物联网、人工智能等技术的快速发展，万物互联时代加速到来，连接到网络的设备数量和数据量都呈现快速增长态势。
+
+​	如果按照传统的方式，将嵌入式设备采集到的数组一起发送到云平台，将会造成网络的严重负载。云计算模式的缺陷日益突出，而边缘计算为解决工业互联网智能制造过程中数据分析和实时控制提供了有效手段。
+
+​	在健康监测等领域，边缘计算可以让需要针对用户进行无监督机器学习的可穿戴设备获益颇多。此外，在未经事先学习的情况下，定制的应用程序若要实现迅速推理，通常需要极高的数据处理能力作为支撑，而这正是边缘人工智能的专长所在。
+
+### 研究内容
+
+1. **边缘人工智能化**：嵌入式设备方案 + 物联网云平台 + 边缘计算框架的搭建和部署
+
+2. 嵌入式设备方案 (嵌入式方案可以更换)
+
+   - [看物联网如何颠覆传统设计，这十个方案给你答案！](https://www.cirmall.com/articles/389181)
+   - 题目一：基于STM32单片机的物联网远程数据监控系统
+
+3. 物联网云平台
+
+   - 通过WIFI无线通讯技术将数据上传到物联网云平台，通过物联网云平台将数据可视化，
+   - 可进行远程监控和计算
+
+4. 边缘计算框架的搭建和部署
+
+   - 研究边缘计算的相关框架，以及如何将模型迁移到物联网的基础设备上
+   - 将一部分的计算放在嵌入式设备上，减少云平台和嵌入式设备间的直接交互；
+   - 通过嵌入式设备本地的计算，发送控制信号；
+
+   
+
+5. 物联网 + 边缘计算 ：是一种理论的研究。仿真或者是
+
+   - [边缘智能或将打通物联网应用之路的最后一公里](https://www.eefocus.com/communication/442608)
+   - 物联网+边缘计算：减少物联网设备中数据的发送，在边缘进行处理
+
+### 我们能得到什么
+
+1. 计算的迁移
+   - 我们手机端 或者后台的算法可以迁移到嵌入式设备上；
+   - 嵌入式设备就不需要一直与后台交互才能得到指令；
+     - 我们的睡眠监测，如果用户不想打开手机的话；
+     - 我们就需要将数据的计算放在嵌入式设备上，让其计算后得到报警指令；
+2. 当我们嵌入式设备量很多的时候
+   - 比如：我们的空中检测仪，当数量很庞大时，一起使用是，必然造成蓝牙传输的阻塞，导致我们APP上波形显示延迟度高
+   - 我们就可以在嵌入式设备上，进行数据的筛选，将需要的数据发送到手机端后者后台，后台在用**已选择的数据**进行计算；
+3. 边缘计算
+   - 让嵌入式设备：不在只做数据的采集端和搬运工；
+   - 让嵌入式设备，在原有的基础上智能化；这也是5G商用后，物联网设备需要进行的革命
+4. 这次研究后
+   - 结合物联网平台的使用：在嵌入式设备采集到数据后，不是一直需要Android进行收集，而是通过物联网平台进行展示，通过物联网平台进行数据处理，从而缩短研发成本；
+   - 结合边缘计算：
+     - 将计算嵌入到物联网设备中，而不是脱离网络后，嵌入式设备就不能工作；
+     - 当嵌入式设备量很大时：我们能有效降低能耗，减小延迟
+
+## [无线睡眠全态监视系统电路设计](https://www.cirmall.com/circuit/11403#/details)
+
+### 设计背景
+
+1. 眠呼吸暂停症是一种很常见的睡眠呼吸疾病，根据研究调查，在美国约有 24%的成年男性及9%成年女性或超过 200 万人口患有此疾病，在中国台湾至少有 35 万人也有此问题。一般在诊断患者是否罹患睡眠呼吸暂停症是指患者在睡眠中出现呼吸暂停和低通气的总次数超过每小时 5 次。
+
+### 采集模块
+
+1. 心率和血氧采集 ：Max30102;
+2. 鼾声感测电路：检测呼吸暂停，呼吸阻塞时的声音
+3. 睡眠姿态检测电路：身体是否平躺；
+
+### 判断和处理机制
+
+1. 通过三方面的数据判断用户是否处于呼吸暂停状态；
+2. 唤醒方式：
+   + 硬件唤醒：震动加蜂鸣器
+   + 软件唤醒：手机APP短信；
+3. 数据保存：
+   + 外挂FLASH进行保存；
+   + 蓝牙发送到手机；
+
+### 应用
+
+1. 是关于睡眠呼吸暂停检测的；他的新方法是加了呼吸暂停时鼾声的检测；
+
+## [GLO：物联网智能灯](https://www.cirmall.com/circuit/10648#/details)
+
+### 设计背景
+
+1. GLO 不仅仅是一种灯，您可以将其改变成您喜欢的任何颜色。
+2. 而 GLO也可以在您不在的时候充当您家中的安全监控器。
+   + 当任何人进入房间时，GLO 将自动打开灯。
+3. 当房间变暗时，GLO 可以自动打开灯。
+
+### 应用场景
+
+1. 睡眠模式状态，或者工作模式下灯管的颜色切换；
+
+2. 当任何人进入房间时，GLO 将自动打开灯；
+
+3. ```
+   （1）是一个比较新的GLO物联网灯，这个灯可以根据RGB混合出喜欢的颜色，以及作为自动开关的灯；（2）也可以作为室内预警检测；（3）是否能作为睡眠呼吸暂停的辅助设计，变成一个呼吸灯；
+   ```
+
+### 其他
+
+1. 加一个磁铁在底部，制作成悬浮的智能灯
+2. 制作一个[迷你雷达](https://www.cirmall.com/circuit/11647#/details)，检测周围是否存在人；
+
+
+
+## [室内环境传感器装置](https://www.cirmall.com/circuit/12111#/details)
+
+### 设计背景
+
+1. 如今，人们更关心他们居住的室内质量，因为这与他们的健康息息相关。拥有更好的生活质量的重要性包括知道您的生活条件得到改善。 
+2. 一些办公室可能安装了自己的室内环境传感器，以便为员工提供更好的工作环境。但我怎么知道我住的楼宇甚至是我租的房间都能提供良好的生活条件？ 
+
+### 采集模块
+
+1.  温湿度传感器 SHT31
+2.  气压和海拔高度 BMP280
+3.  空气质量传感器 CCS811
+4.  光传感器
+5.  响度传感器
+6.  带适配器的 PM2.5 传感器（PM1.0，PM2.5，PM10）
+
+### 应用场景
+
+1. 室内环境传感器装置，主要就是能够实时、便携的检测除室内的环境；

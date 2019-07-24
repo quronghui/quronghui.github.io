@@ -302,9 +302,97 @@ $ make CFLAGS=-g	/*在编译中增加调试选项*/
 
 2. 假想可执行文件
 
-   + 为了通过一个Makefile生成多个可执行问价
+   + 为了通过一个Makefile生成多个可执行文件
 
    ```
    在Makefile开始时输入
    	all: main mymain
    ```
+
+## 多目录下的Makefile 文件编写
+
+### [在文件夹下包含一个Makefile](https://github.com/quronghui/DataStructAndAlogrithmCode/tree/master/SwordOffer/15_Include_makefile)
+
+1. 文件目录
+
+   {% asset_img includeMakefile.png %}
+
+2. 子目录下的Makefile
+
+   + 编译该子目录下的文件，并保存到一个函数库中，再将该库文件复制到上一级主目录当中。
+
+   ```
+   # 编译条件
+   CC	=	gcc
+   INCLUDE = -I.		# 子目录下的Makefile文件编译
+   CFLAGS =	-g -Wall
+   
+   # 要使用Tab键: 将文件定义为lib.a库
+   array_malloc_queue	=	array_malloc_queue.a
+   
+   $(array_malloc_queue):	$(array_malloc_queue)(array_malloc_queue.o)	
+   	(cp $(array_malloc_queue) ../)	
+       (cp $(linkQueueInterface) ../array_queue_interface/)	# 复制到不同目录
+   
+   ################# .o 文件编译################
+   array_malloc_queue.o: array_malloc_queue.c array_queue_interface.h
+   	$(CC) $(CFLAGS) -c $(INCLUDE) $< -o $@
+   
+   clean:	
+   	@echo "cleaning project"
+   	-rm $(array_malloc_queue)
+   	-rm *.o 
+   	@echo "cleaning complie"
+   .PHONY:	clean
+   ```
+
+3. 调用函数的目录 Makefile
+
+   ```
+   #Objs
+   all:	array_queue
+   ############编译条件################
+   CC	=	gcc
+   CFLAGS =	-g -Wall
+   INCLUDE = -I. -Iarray	# 不同目录下文件
+   array_malloc_queue	=	array_malloc_queue.a		# 子目录下最后生成的文件名
+   
+   ################# OBjs目标文件的编译################
+   array_queue:	main.o $(array_malloc_queue)
+   	$(CC)  $^ -o $@
+   
+   ################# 目标.o 文件的编译################
+   $(array_malloc_queue):		# 子目录下Make编译文件
+   	(cd array;$(MAKE))
+   
+   # 不用加array_queue_interface.h文件，我们在生成目标文件时进行链接
+   main.o: main.c 
+   	$(CC) $(CFLAGS) -c $(INCLUDE) $< -o $@
+   
+   #clean
+   clean:	
+   	@echo "cleaning project"
+   	-rm  array_queue $(array_malloc_queue)
+   	-rm *.o 
+   	@echo "cleaning complie"
+   .PHONY:	clean
+   ```
+
+4. 执行编译过程
+
+   ```
+   $ make	// 在调用函数的目录下执行
+   ```
+
+   {% asset_img moreDirect.png %}
+
+   ```
+   $ make clean	// 在主目录下执行，不能clean子目录的；
+   $ cd array		// 进入子目录；
+   $ make clean	// 子目录下的clean
+   ```
+
+5. 问题：
+
+   + 每次子节点目录下文件的改变，需要进入目录去修改；
+   + 并且重新生成

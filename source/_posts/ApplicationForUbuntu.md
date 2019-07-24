@@ -328,3 +328,13 @@ $ sudo dpkg -i google-chrome*
 $ sudo apt-get -f install
 ```
 
+## Ubuntu 查看目录
+
+```
+$ sudo snap install tree	// 安装tree应用
+$ tree -a	// 像树一样显示目录结构
+$ tree -d 	#仅显示目录
+$ tree -L n 	#n代表数字..表示要显示几层...
+$ tree -f 	#显示完整路径..
+```
+

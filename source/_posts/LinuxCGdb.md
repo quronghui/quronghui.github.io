@@ -215,6 +215,30 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
 
 
 
+## [valgrind](https://blog.csdn.net/tao_627/article/details/38304903)
+
++ 查找程序中内存泄露和其他隐藏的内存问题;
+
+1. 安装教程
+
+   ```
+   sudo apt-get install valgrind
+   ```
+
+2. 使用教程
+
+   ```
+   // 编译:  gcc  -Wall -g valgrind_demo.c -o valgrind_demo
+   //  执行条件 : valgrind --tool=memcheck --leak-check=full ./valgrind_demo
+   // 将错误写进日志: valgrind --tool=memcheck --leak-check=full --log-file=mem_leak.log ./valgrind_demo
+   // 和gdb一起调试: valgrind --tool=memcheck --leak-check=full --log-file=mem_leak.log gdb valgrind_demo
+   ```
+
+3. [具体代码和调试结果](https://github.com/quronghui/OSIntroduction/tree/master/valgrind/valgrind_demo.c)
+
+   
+
 ## 总结
 
 1. 学C语言不可能不去了解底层计算机体系结构和操作系统的原理，不了解底层原理连一个scanf函数都没办法用好，更没有办法保证写出正确的程序。
+

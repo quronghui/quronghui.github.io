@@ -2,8 +2,7 @@
 layout: post
 title: CBIB Item
 date: 2019-03-14 10:40:26
-categories: 
- - [CBIB Item]
+categories:  [project]
 tags: cbib
 ---
 
