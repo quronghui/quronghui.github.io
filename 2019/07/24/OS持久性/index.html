@@ -107,7 +107,11 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/file_system.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/system.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/disk.jpg">
-<meta property="og:updated_time" content="2019-07-24T14:15:15.957Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/dirtree.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/vsfs.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/inode.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/question.jpg">
+<meta property="og:updated_time" content="2019-07-25T14:09:21.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS持久性">
 <meta name="twitter:description" content="持久性 抽象模型 采用什么样的方式, 让数据(桃子)保存的时间长久;   持久性针对的对象: 数据   硬件中断的实现过程:  设备准备好自身的工作 —&amp;gt;  发出硬件中断 —&amp;gt; CPU 执行OS 中预先定义的中断服务例程ISR(interrupt server routine) / 中断处理程序(interrupt handler) —&amp;gt; 返回唤醒等待的I/O进程继续执行.">
@@ -403,12 +407,24 @@
                 
               
 
-              <time title="Post created: 2019-07-24 15:29:42 / Updated at: 22:15:15" itemprop="dateCreated datePublished" datetime="2019-07-24T15:29:42+08:00">2019-07-24</time>
+              <time title="Post created: 2019-07-24 15:29:42" itemprop="dateCreated datePublished" datetime="2019-07-24T15:29:42+08:00">2019-07-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-07-25 22:09:21" itemprop="dateModified" datetime="2019-07-25T22:09:21+08:00">2019-07-25</time>
               
             
           </span>
@@ -576,7 +592,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="硬件存储设备"><a href="#硬件存储设备" class="headerlink" title="硬件存储设备"></a>硬件存储设备</h2><ul>
+<h2 id="硬件-–-数据存储设备"><a href="#硬件-–-数据存储设备" class="headerlink" title="硬件 – 数据存储设备"></a>硬件 – 数据存储设备</h2><ul>
 <li>设备: 长久的保存数据, 用户更关心的是数据</li>
 <li>内存: 断电后内容会丢失;</li>
 </ul>
@@ -665,6 +681,268 @@
 </tr>
 </tbody>
 </table>
+<h2 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h2><ul>
+<li>文件和目录的用途:  便于用户识别以及查找</li>
+<li>文件系统: 通过对磁盘的管理, 便于文件和目录的存储</li>
+</ul>
+<ol>
+<li><p><strong>OS虚拟化</strong>另一个模块:</p>
+<ul>
+<li>CPU和内存的虚拟化<ul>
+<li>进程: 虚拟化的CPU;</li>
+<li>地址空间: 虚拟化的物理内存;</li>
+</ul>
+</li>
+<li>持久存储的虚拟化<ul>
+<li>文件和目录: 保持数据掉电不丢失;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>文件的概念</strong>搭建</p>
+<ul>
+<li><strong>数据的存储</strong>: 是一个线性数组, 每个字节都可以读取或者写入;</li>
+<li><strong>元数据 </strong>: 包含了文件其余的信息,(比如– inode number (低级名字))</li>
+<li>文件系统: 将数据永久的保存在磁盘上;</li>
+</ul>
+</li>
+<li><p><strong>目录的概念</strong>搭建</p>
+<ul>
+<li>目录: 对应我们常说的文件件;</li>
+<li>文件的存储位置: 存放文件的空间;</li>
+<li><strong>包含</strong> : 包含一个列表, 列表的信息( 用户刻度名字, inode )</li>
+<li><strong>结构:</strong> 根目录只是一个 – “ / “;  子目录通过<strong>分隔符</strong> 隔开</li>
+</ul>
+<img src="/2019/07/24/OS持久性/dirtree.jpg">
+</li>
+</ol>
+<h3 id="文件的相关操作"><a href="#文件的相关操作" class="headerlink" title="文件的相关操作"></a>文件的相关操作</h3><ol>
+<li><p>文件相关API接口</p>
+<ul>
+<li>open(); write(); read(); close();</li>
+<li>下面介绍的系统调用, 将上面的接口进行封装;</li>
+</ul>
+</li>
+<li><p><strong>工具</strong>使用</p>
+<ul>
+<li><strong>strace</strong>追踪系统调用</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> strace cat <span class="keyword">file</span>;  <span class="comment">// strace追踪cat命令对文件的操作过程;</span></span><br><span class="line"><span class="symbol">$</span> dd <span class="keyword">if</span>=<span class="keyword">file</span>;			<span class="comment">// dd 实用追踪</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>stat/fstat</strong>文件信息的查看</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>	stat	<span class="keyword">file</span>;	<span class="comment">// 查看文件的相关信息</span></span><br><span class="line"><span class="symbol">$</span>	ls -a/-al 			; <span class="comment">// 列出目录下文件</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件的<strong>创建</strong> – 文件描述符</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fd = <span class="keyword">open</span>();  <span class="comment">// fd--文件描述符</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>文件描述符</strong>: 指向文件的指针, 用于访问读写;</p>
+</li>
+<li><p>第一次创建文件: fd==3</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">运行的进程已经打开了三个文件</span><br><span class="line">fd=<span class="number">0</span> / <span class="number">1</span> / <span class="number">2</span> --&gt; 	<span class="built_in">stdin</span>; <span class="built_in">stdout</span>; <span class="built_in">stderr</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>文件的创建</strong>做了两件事</p>
+<ul>
+<li>inode: 创建一个数据结构inode, 跟踪文件的全部信息;</li>
+<li>link: 将用户可读名链接到该文件, 并将该链接放入目录中;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>文件的<strong>读写</strong></p>
+<ul>
+<li><p>顺序的读写</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> strace	echo	hello	&gt;	<span class="keyword">file</span>;	<span class="comment">// echo将hello重定向到文件file中;</span></span><br><span class="line"><span class="symbol">$</span>	strace	cat	<span class="keyword">file</span>;							<span class="comment">// 获取file中的文件内容;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过偏移量的读取</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$	<span class="keyword">off_t</span> lseek(<span class="keyword">int</span> fd, <span class="keyword">off_t</span> offset, <span class="keyword">int</span> whence);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>强制写入磁盘, 而非buffer</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">$	<span class="title">fsync</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;		<span class="comment">// 强制写入磁盘</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>文件的其余操作</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>	strace	mv	<span class="keyword">file</span>	foo;	<span class="comment">// 文件的重命名, rename;</span></span><br><span class="line"><span class="symbol">$</span>	strace	rm	*;					<span class="comment">// 文件删除, 删除当前目录下文件</span></span><br><span class="line"><span class="symbol">$</span>	strace	rm -rf	*;				<span class="comment">// 递归删除目录下的: **所有文件和目录**</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>文件的链接</strong> </p>
+<ul>
+<li><p>硬链接</p>
+<ul>
+<li>创建链接后, unlink()其中一个用户可读名file, 对另外的没有影响;</li>
+<li>缺陷:  (1)不能创建目录的硬链接(成环); (2)只能在当前磁盘分区创建</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>	ln	<span class="keyword">file</span>	file2;	<span class="comment">// link在创建链接的目录中创建了另外一个名称, 该文件不以任何方式复制</span></span><br><span class="line"><span class="symbol">$</span>	ls	-i	<span class="keyword">file</span>	file2;		<span class="comment">// 查看两个文件的inode</span></span><br><span class="line"><span class="symbol">$</span>	stat	file2;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>符号链接 symbolic link (软链接)</p>
+<ul>
+<li>创建软连接后, unlink() file, 会使得file2指向不存在的路径</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>	ln -s <span class="keyword">file</span> file2;	<span class="comment">// 将链接指向文件的**路径名 file**作为链接文件的数据, 链接到一个名为file的数据;	</span></span><br><span class="line"><span class="symbol">$</span>	ls	-al	<span class="keyword">file</span>	file2;	<span class="comment">// 查看</span></span><br><span class="line"><span class="symbol">$</span>	stat	<span class="keyword">file</span>	;		查看</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="目录的相关操作"><a href="#目录的相关操作" class="headerlink" title="目录的相关操作"></a>目录的相关操作</h3><ol>
+<li><p>目录的相关API接口</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$	<span class="keyword">opendir</span>();	<span class="keyword">readdir</span>();	closedir();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目录的<strong>创建</strong></p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$	strace	<span class="built_in">mkdir</span>	foo	;	<span class="comment">// 创建目录(文件夹) 空目录foo</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>读取</strong>:  创建的目录中不为空, 包含两个条目</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$	<span class="keyword">ls</span>	-a/-al	foo		<span class="string">//</span> 目录的读取, 包含两个条目;  <span class="string">" . "</span></span><br><span class="line"><span class="string">./</span>		: 引用自身的条目</span><br><span class="line"><span class="string">../</span>		: 引用其父目录的条目;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目录的删除</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$	strace	<span class="built_in">rmdir</span>	foo;	<span class="comment">// 只有当目录foo为空(只包含./ ../ 两个条目), 删除才能成功</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><h3 id="VSFS-Very-Simple-File-System"><a href="#VSFS-Very-Simple-File-System" class="headerlink" title="VSFS(Very Simple File System)"></a>VSFS(Very Simple File System)</h3><ol>
+<li><p>文件系统的创建和挂载</p>
+<ul>
+<li>将众多底层文件系统创建成完整的目录树;</li>
+<li><strong>mkfs</strong>: 文件系统的创建工具</li>
+<li><strong>mount</strong> 文件挂在工具;</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mount	-t	<span class="regexp">/dev/</span>sda1	<span class="regexp">/home/u</span>ser;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="问题一-文件系统如何实现存储"><a href="#问题一-文件系统如何实现存储" class="headerlink" title="问题一: 文件系统如何实现存储?"></a>问题一: 文件系统如何实现存储?</h4><ul>
+<li>磁盘上用那些数据结构存储文件系统的<strong>数据和元数据</strong>;</li>
+</ul>
+<ol>
+<li><p>磁盘的存储:</p>
+<ul>
+<li>磁盘分块:    一个block的大小是4KB</li>
+<li>数据:  user Data + inode(256 byte)</li>
+<li>空间空间管理: Ibit (inode bit) + Dbit(inode bit)</li>
+<li>Superblock: 包含文件的特定信息, data和inode有多少个块使用;<ul>
+<li>mount 挂在文件系统时, OS将superblock加载到文件树中;</li>
+</ul>
+</li>
+</ul>
+<img src="/2019/07/24/OS持久性/vsfs.jpg">
+</li>
+<li><p>iNode的数据结构:</p>
+<ul>
+<li>iNode的作用: 能有效存储数据块信息,并可以提供有效的访问; (指向数据块的位置)</li>
+<li>4k大小的inode : 由256byte构成的一个iNode block;</li>
+<li>数据结构: 可以使用指针, 链表, 树 …. </li>
+</ul>
+</li>
+<li><p>目录组织</p>
+<ul>
+<li>目录只包含一个二元组列表( 条目名称, inode号 )</li>
+<li>每个目录还有两个额外的条目</li>
+</ul>
+<img src="/2019/07/24/OS持久性/inode.jpg">
+</li>
+</ol>
+<h4 id="问题二-文件系统是如何实现磁盘数据的读写"><a href="#问题二-文件系统是如何实现磁盘数据的读写" class="headerlink" title="问题二: 文件系统是如何实现磁盘数据的读写?"></a>问题二: 文件系统是如何实现磁盘数据的读写?</h4><ul>
+<li>假设此时的文件系统已经<strong>挂载</strong>, superblock已经包含在内存中;</li>
+</ul>
+<ol>
+<li>访问路径: /foo/bar<ul>
+<li>文件系统 –&gt; 读取i-number –&gt; 访问inode –&gt; 递归遍历路径名, 找到文件;</li>
+</ul>
+</li>
+<li>写入磁盘<ul>
+<li>首先: 分配一个磁盘间块(allocate)</li>
+<li>然后: 5次的I/O读取<ul>
+<li>读data bit(查看可分配) , 写 data bit (跟新位图)</li>
+<li>读 inode bit,  写 inode bit</li>
+<li>写入data</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缓存和缓冲 – 缩短时间<ul>
+<li>系统内存(DRAM)</li>
+<li>在第一次读取的时候, 保存访问路径和条目, 后面访问就很快;</li>
+</ul>
+</li>
+</ol>
+<h3 id="快速文件系统FFS-fast-file-system"><a href="#快速文件系统FFS-fast-file-system" class="headerlink" title="快速文件系统FFS( fast file system)"></a>快速文件系统FFS( fast file system)</h3><ol>
+<li>VSFS 与 FFS 之间 – 对磁盘的处理方式:<ul>
+<li>VSFS 文件系统<ul>
+<li>磁盘: 将磁盘分块4KB</li>
+<li>内部碎片的问题: 将磁盘当做<strong>随机存储</strong>的内存;</li>
+</ul>
+</li>
+<li>FFS 文件系统<ul>
+<li>磁盘: 将磁盘划分为分组, 称为柱面组(块组)</li>
+<li>处理方式: 相关的东西放在一起, 将<strong>磁盘当做磁盘</strong>;</li>
+<li>优点: 减少寻道时间;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>后续文件系统的宗旨: 将<strong>磁盘当做磁盘</strong><ul>
+<li>Linux 中的文件系统 : ext2 和ext3;</li>
+</ul>
+</li>
+</ol>
+<h3 id="FSCK-和-日志"><a href="#FSCK-和-日志" class="headerlink" title="FSCK 和 日志"></a>FSCK 和 日志</h3><ol>
+<li><p>文件系统的数据结构必须<strong>持久</strong>的<strong>保存</strong>在数据设备上(SSD);</p>
+</li>
+<li><p>工作负载: 以某种形式更新磁盘的文件系统;</p>
+</li>
+<li><p><strong>问题:</strong> 当设备遇到断电和崩溃时, 文件系统和磁盘实际存储记录不一致的问题?</p>
+<ul>
+<li>组合为六种情况: inode元数据,  bit位图, data数据 </li>
+</ul>
+<img src="/2019/07/24/OS持久性/question.jpg">
+</li>
+<li><p><strong>处理方式一</strong>: Fsck (file system checker )</p>
+<ul>
+<li>Fsck 是一个工具</li>
+<li>抽象模型: 搜索整个房子找钥匙;</li>
+<li>方式 : 遍历文件系统的三部分,  inode元数据,  bit位图, data数据 部分</li>
+<li>缺点: 很慢</li>
+</ul>
+</li>
+<li><p><strong>处理方式二</strong>: 日志(预写日志)</p>
+<ul>
+<li><p>处理方式: 在更新磁盘时, 加入一个小注记(预写), 并组织成日志</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类似于: git <span class="keyword">commit</span> -m <span class="string">"注记"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>日志: 要写入文件系统中的, journalblock日志超级块;</p>
+</li>
+<li><p>修复: 文件系统利用日志记录的内容, 堆其进行修复</p>
+</li>
+<li><p>用的最多的日志: <strong>有序元数据日志</strong></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="日志结构的文件系统"><a href="#日志结构的文件系统" class="headerlink" title="日志结构的文件系统"></a>日志结构的文件系统</h3><ul>
+<li>LFS log-structured file system: 另外的一种文件系统</li>
+</ul>
+<ol>
+<li>LFS磁盘更新的方式:<ul>
+<li>将<strong>所有要更新</strong>的data + inode 缓存在内存段中; 当段满的时候, 它会一次长时间的<strong>顺序写入</strong>到磁盘未使用的空间;</li>
+<li>LFS核心: <strong>顺序写入 + 永不覆盖</strong>(旧空间的回收)</li>
+</ul>
+</li>
+<li><strong>问题一</strong>: 每次都会产生新的 inode, 那么如何进行查找呢?<ul>
+<li>inode 映射: <ul>
+<li>建立 inode number 和 inode(元数据) 间接层, </li>
+<li>每次通过 inode number , 生成最新版本的<strong>磁盘地址</strong>;</li>
+</ul>
+</li>
+<li>inode 映射存储在哪里呢?<ul>
+<li>LFS 在磁盘上<strong>只有这样一个固定</strong>的位置, 检查点区域CR(checkpoint region);</li>
+<li>CR: 指向最新的inode映射片段</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>问题二:</strong> LSR会产生很多垃圾空间, 如何对这些空间进行回收?<ul>
+<li>数据库中的方法<strong>影子分页</strong> : 永不覆盖, 旧空间的回收;</li>
+<li>策略: 旧空间回收的策略?</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -1131,7 +1409,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#持久性"><span class="nav-number">1.</span> <span class="nav-text">持久性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O-设备-–-数据交互"><span class="nav-number">1.1.</span> <span class="nav-text">I/O 设备 – 数据交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一-OS-如何与I-O设备进行交互的"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题一: OS 如何与I/O设备进行交互的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准硬件"><span class="nav-number">1.1.2.</span> <span class="nav-text">标准硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准协议"><span class="nav-number">1.1.3.</span> <span class="nav-text">标准协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件存储设备"><span class="nav-number">1.2.</span> <span class="nav-text">硬件存储设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘驱动器"><span class="nav-number">1.2.1.</span> <span class="nav-text">磁盘驱动器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-廉价冗余磁盘阵列"><span class="nav-number">1.2.2.</span> <span class="nav-text">RAID (廉价冗余磁盘阵列)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#持久性"><span class="nav-number">1.</span> <span class="nav-text">持久性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O-设备-–-数据交互"><span class="nav-number">1.1.</span> <span class="nav-text">I/O 设备 – 数据交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一-OS-如何与I-O设备进行交互的"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题一: OS 如何与I/O设备进行交互的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准硬件"><span class="nav-number">1.1.2.</span> <span class="nav-text">标准硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准协议"><span class="nav-number">1.1.3.</span> <span class="nav-text">标准协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件-–-数据存储设备"><span class="nav-number">1.2.</span> <span class="nav-text">硬件 – 数据存储设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘驱动器"><span class="nav-number">1.2.1.</span> <span class="nav-text">磁盘驱动器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-廉价冗余磁盘阵列"><span class="nav-number">1.2.2.</span> <span class="nav-text">RAID (廉价冗余磁盘阵列)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和目录"><span class="nav-number">1.3.</span> <span class="nav-text">文件和目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的相关操作"><span class="nav-number">1.3.1.</span> <span class="nav-text">文件的相关操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录的相关操作"><span class="nav-number">1.3.2.</span> <span class="nav-text">目录的相关操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">1.4.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VSFS-Very-Simple-File-System"><span class="nav-number">1.4.1.</span> <span class="nav-text">VSFS(Very Simple File System)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题一-文件系统如何实现存储"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">问题一: 文件系统如何实现存储?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题二-文件系统是如何实现磁盘数据的读写"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">问题二: 文件系统是如何实现磁盘数据的读写?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速文件系统FFS-fast-file-system"><span class="nav-number">1.4.2.</span> <span class="nav-text">快速文件系统FFS( fast file system)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FSCK-和-日志"><span class="nav-number">1.4.3.</span> <span class="nav-text">FSCK 和 日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志结构的文件系统"><span class="nav-number">1.4.4.</span> <span class="nav-text">日志结构的文件系统</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
