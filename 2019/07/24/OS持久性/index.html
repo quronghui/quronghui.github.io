@@ -111,7 +111,9 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/vsfs.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/inode.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/question.jpg">
-<meta property="og:updated_time" content="2019-07-26T01:56:55.716Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/mod2.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/CRC.png">
+<meta property="og:updated_time" content="2019-07-26T01:59:45.839Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS持久性">
 <meta name="twitter:description" content="持久性 抽象模型 采用什么样的方式, 让数据(桃子)保存的时间长久;   持久性针对的对象: 数据   硬件中断的实现过程:  设备准备好自身的工作 —&amp;gt;  发出硬件中断 —&amp;gt; CPU 执行OS 中预先定义的中断服务例程ISR(interrupt server routine) / 中断处理程序(interrupt handler) —&amp;gt; 返回唤醒等待的I/O进程继续执行.">
@@ -424,7 +426,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-26 09:56:55" itemprop="dateModified" datetime="2019-07-26T09:56:55+08:00">2019-07-26</time>
+                <time title="Updated at: 2019-07-26 09:59:45" itemprop="dateModified" datetime="2019-07-26T09:59:45+08:00">2019-07-26</time>
               
             
           </span>
@@ -1003,7 +1005,7 @@
 <ul>
 <li><p><strong>本质</strong>: 模二运算, 相当于是<strong>异或</strong></p>
 </li>
-<li>
+<li><img src="/2019/07/24/OS持久性/mod2.png">
 </li>
 </ul>
 </li>
@@ -1012,9 +1014,11 @@
 </li>
 <li><p><strong>发送端</strong>: 计算得到该帧的CRC校验码( FCS帧校验序列）</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">假设数据帧 : 10110011 <span class="params">---</span>&gt;  计算时后面补** k** 个0; 得到k位的CRC码进行替换</span><br><span class="line">CRC多项式二进制: 11001<span class="params">(<span class="attr">k</span>=4)</span></span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>把上步计算得到的CRC校验<strong>0100</strong>替换原始帧10110011<strong>0000</strong>后面的四个“0”，得到新帧10110011<strong>0100</strong>。再把这个新帧发送到接收端。</li>
+<li><img src="/2019/07/24/OS持久性/CRC.png">
+</li>
+<li><p>把上步计算得到的CRC校验<strong>0100</strong>替换原始帧10110011<strong>0000</strong>后面的四个“0”，得到新帧10110011<strong>0100</strong>。再把这个新帧发送到接收端。</p>
+</li>
 </ul>
 </li>
 <li><p><strong>接收端 : </strong></p>
