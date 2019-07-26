@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/vsfs.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/inode.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/question.jpg">
-<meta property="og:updated_time" content="2019-07-25T14:09:21.666Z">
+<meta property="og:updated_time" content="2019-07-26T01:50:52.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS持久性">
 <meta name="twitter:description" content="持久性 抽象模型 采用什么样的方式, 让数据(桃子)保存的时间长久;   持久性针对的对象: 数据   硬件中断的实现过程:  设备准备好自身的工作 —&amp;gt;  发出硬件中断 —&amp;gt; CPU 执行OS 中预先定义的中断服务例程ISR(interrupt server routine) / 中断处理程序(interrupt handler) —&amp;gt; 返回唤醒等待的I/O进程继续执行.">
@@ -424,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-25 22:09:21" itemprop="dateModified" datetime="2019-07-25T22:09:21+08:00">2019-07-25</time>
+                <time title="Updated at: 2019-07-26 09:50:52" itemprop="dateModified" datetime="2019-07-26T09:50:52+08:00">2019-07-26</time>
               
             
           </span>
@@ -943,6 +943,88 @@
 </ul>
 </li>
 </ol>
+<h3 id="数据完整性和保护"><a href="#数据完整性和保护" class="headerlink" title="数据完整性和保护"></a>数据完整性和保护</h3><ul>
+<li>保护 和 花费(时间和空间) 总是成正比关系的;</li>
+</ul>
+<ol>
+<li><strong>问题</strong> : 磁盘并不完美, 可能会发生故障, 如何才能保证有效的数据?<ul>
+<li>磁盘故障模型: <ul>
+<li>故障 – 停止 模型 :  构建RAID磁盘</li>
+<li>故障 – 部分 模型;</li>
+</ul>
+</li>
+<li>完整性: 通过对数据的校验完成;</li>
+</ul>
+</li>
+<li><strong>故障一</strong> : 潜在扇区错误LSE(latent sector error)<ul>
+<li>故障原因: 磁盘内部<strong>数据位</strong>出现错误;</li>
+<li><strong>检测方式</strong>: 磁盘内纠错码ECC(error correcting code)<ul>
+<li>确定块中的磁盘位是够良好;</li>
+</ul>
+</li>
+<li><strong>解决方法</strong>: 冗余机制</li>
+</ul>
+</li>
+<li><strong>故障二</strong>: 磁盘块出现讹误(corrupt)<ul>
+<li>故障原因: 磁盘块出现错误, ECC检测不出来, 用户得到的却是其他的数据块</li>
+<li><strong>检测方法</strong>:  校验和</li>
+</ul>
+</li>
+<li><p><strong>校验和函数的计算方法:</strong></p>
+<ul>
+<li>异或 XOR : 通过对所有数据的二进制形式求异或  <ul>
+<li>缺陷:    相同位置的两位发生变化(0/1), 检测不出来;</li>
+</ul>
+</li>
+<li>加法: 每个数据块执行二进制补码加法, 忽略溢出;<ul>
+<li>缺陷: 数据被移位, 也检测不出来;</li>
+</ul>
+</li>
+<li><a href="https://blog.51cto.com/winda/1063951" target="_blank" rel="noopener">循环冗余校验CRC: ( Cyclic Redundancy Check )</a><ul>
+<li>计算方式: 数据块 % 校验位</li>
+<li>缺陷: 除法计算太花时间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://blog.51cto.com/winda/1063951" target="_blank" rel="noopener">CRC计算方法</a></p>
+<ul>
+<li><p><strong>抽象模型</strong>: </p>
+<ul>
+<li>发送端和接收端: 选定的某个特定数( CRC多项式二进制形式)做<strong>模2除法</strong></li>
+<li>发送端: 要在原始的数据帧<strong>后面附加一个数</strong>（计算得到的CRC校验码），生成一个新帧发送给接收端。</li>
+<li>接收端: 接收到的新帧 % 特定数, 如果余数为0, 则数据正确;</li>
+</ul>
+</li>
+<li><p><strong>模2除法</strong></p>
+<ul>
+<li><strong>宗旨</strong>: 既不向上借位, 也不产生进位</li>
+</ul>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">模<span class="number">2</span>加法运算为：<span class="number">1</span>+<span class="number">1</span>=<span class="number">0</span>，<span class="number">0</span>+<span class="number">1</span>=<span class="number">1</span>，<span class="number">0</span>+<span class="number">0</span>=<span class="number">0</span>，无进位，也无借位</span><br><span class="line">模<span class="number">2</span>减法运算为：<span class="number">1</span><span class="number">-1</span>=<span class="number">0</span>，<span class="number">0</span><span class="number">-1</span>=<span class="number">1</span>，<span class="number">1</span><span class="number">-0</span>=<span class="number">1</span>，<span class="number">0</span><span class="number">-0</span>=<span class="number">0</span>，也无进位，无借位</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>本质</strong>: 模二运算, 相当于是<strong>异或</strong></li>
+</ul>
+
+</li>
+<li><p><strong>CRC多项式</strong> 的选取</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">假设: G（X） = X<span class="number">4</span> + X<span class="number">3</span> + <span class="number">1</span>; 		<span class="comment">// 二进制形式 11001</span></span><br><span class="line">多项式 G<span class="comment">(X)</span> = x^k + ... + <span class="number">1</span>			<span class="comment">// 总共 ( k + 1 )位</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>发送端</strong>: 计算得到该帧的CRC校验码( FCS帧校验序列）</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">假设数据帧 : 10110011 <span class="params">---</span>&gt;  计算时后面补** k** 个0; 得到k位的CRC码进行替换</span><br><span class="line">CRC多项式二进制: 11001<span class="params">(<span class="attr">k</span>=4)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>把上步计算得到的CRC校验<strong>0100</strong>替换原始帧10110011<strong>0000</strong>后面的四个“0”，得到新帧10110011<strong>0100</strong>。再把这个新帧发送到接收端。</li>
+</ul>
+</li>
+<li><p><strong>接收端 : </strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">新的数据帧: 101100110100</span></span><br><span class="line"><span class="section">CRC多项式: （X） = X4 + X3 + 1; ( k = 4)</span></span><br><span class="line"><span class="section">进行模2除法: 101100110100 % 11001</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>余数为0 , 计算正确;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -1409,7 +1491,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#持久性"><span class="nav-number">1.</span> <span class="nav-text">持久性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O-设备-–-数据交互"><span class="nav-number">1.1.</span> <span class="nav-text">I/O 设备 – 数据交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一-OS-如何与I-O设备进行交互的"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题一: OS 如何与I/O设备进行交互的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准硬件"><span class="nav-number">1.1.2.</span> <span class="nav-text">标准硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准协议"><span class="nav-number">1.1.3.</span> <span class="nav-text">标准协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件-–-数据存储设备"><span class="nav-number">1.2.</span> <span class="nav-text">硬件 – 数据存储设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘驱动器"><span class="nav-number">1.2.1.</span> <span class="nav-text">磁盘驱动器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-廉价冗余磁盘阵列"><span class="nav-number">1.2.2.</span> <span class="nav-text">RAID (廉价冗余磁盘阵列)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和目录"><span class="nav-number">1.3.</span> <span class="nav-text">文件和目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的相关操作"><span class="nav-number">1.3.1.</span> <span class="nav-text">文件的相关操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录的相关操作"><span class="nav-number">1.3.2.</span> <span class="nav-text">目录的相关操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">1.4.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VSFS-Very-Simple-File-System"><span class="nav-number">1.4.1.</span> <span class="nav-text">VSFS(Very Simple File System)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题一-文件系统如何实现存储"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">问题一: 文件系统如何实现存储?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题二-文件系统是如何实现磁盘数据的读写"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">问题二: 文件系统是如何实现磁盘数据的读写?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速文件系统FFS-fast-file-system"><span class="nav-number">1.4.2.</span> <span class="nav-text">快速文件系统FFS( fast file system)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FSCK-和-日志"><span class="nav-number">1.4.3.</span> <span class="nav-text">FSCK 和 日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志结构的文件系统"><span class="nav-number">1.4.4.</span> <span class="nav-text">日志结构的文件系统</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#持久性"><span class="nav-number">1.</span> <span class="nav-text">持久性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O-设备-–-数据交互"><span class="nav-number">1.1.</span> <span class="nav-text">I/O 设备 – 数据交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一-OS-如何与I-O设备进行交互的"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题一: OS 如何与I/O设备进行交互的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准硬件"><span class="nav-number">1.1.2.</span> <span class="nav-text">标准硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准协议"><span class="nav-number">1.1.3.</span> <span class="nav-text">标准协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件-–-数据存储设备"><span class="nav-number">1.2.</span> <span class="nav-text">硬件 – 数据存储设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘驱动器"><span class="nav-number">1.2.1.</span> <span class="nav-text">磁盘驱动器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-廉价冗余磁盘阵列"><span class="nav-number">1.2.2.</span> <span class="nav-text">RAID (廉价冗余磁盘阵列)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和目录"><span class="nav-number">1.3.</span> <span class="nav-text">文件和目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的相关操作"><span class="nav-number">1.3.1.</span> <span class="nav-text">文件的相关操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录的相关操作"><span class="nav-number">1.3.2.</span> <span class="nav-text">目录的相关操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">1.4.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VSFS-Very-Simple-File-System"><span class="nav-number">1.4.1.</span> <span class="nav-text">VSFS(Very Simple File System)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题一-文件系统如何实现存储"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">问题一: 文件系统如何实现存储?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题二-文件系统是如何实现磁盘数据的读写"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">问题二: 文件系统是如何实现磁盘数据的读写?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速文件系统FFS-fast-file-system"><span class="nav-number">1.4.2.</span> <span class="nav-text">快速文件系统FFS( fast file system)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FSCK-和-日志"><span class="nav-number">1.4.3.</span> <span class="nav-text">FSCK 和 日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志结构的文件系统"><span class="nav-number">1.4.4.</span> <span class="nav-text">日志结构的文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据完整性和保护"><span class="nav-number">1.4.5.</span> <span class="nav-text">数据完整性和保护</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
