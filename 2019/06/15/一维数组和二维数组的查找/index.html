@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/06/15/一维数组和二维数组的查找/array_story.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/15/一维数组和二维数组的查找/TwoD.png">
-<meta property="og:updated_time" content="2019-07-25T09:26:44.491Z">
+<meta property="og:updated_time" content="2019-07-30T00:14:16.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一维数组和二维数组的查找">
 <meta name="twitter:description" content="数组中元素的查找数组方法的应用 缺点  空间效率应用差   优点  内存连续：根据下标在O(1)时间读写任意元素； 数组实现简单的哈希表   一维数组  解决问题：在一个长度为n的数组里的所有数字都在0到n-1的范围内。找出重复的数字 和面试官交流的问题：  数组是否排序；  数组是够可以改变；          数组的情况 方法 时间 空间     数组排序 遍历下标和数组元素值 O(n) O(">
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-25 17:26:44" itemprop="dateModified" datetime="2019-07-25T17:26:44+08:00">2019-07-25</time>
+                <time title="Updated at: 2019-07-30 08:14:16" itemprop="dateModified" datetime="2019-07-30T08:14:16+08:00">2019-07-30</time>
               
             
           </span>
@@ -650,6 +650,15 @@
 <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf(<span class="string">"%p\t"</span>, (<span class="name">&amp;numbers</span>)[col])<span class="comment">; //printf函数族中对于%p一般以十六进制整数方式输出指针的值，附加前缀0x</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<ol start="8">
+<li><p>数组作为形参传递后, 不能通过sizeof(array) / sizeof(int) 计算长度?</p>
+<ul>
+<li>a. 函数数组名作为参数传递后, 从数组的首地址退化为了一般的指针</li>
+<li>b. 使用动态分配的数组; 这样就可行</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a. 数组作为形参传递</span></span><br><span class="line">    <span class="comment">// int array[] = &#123;4, 5&#125;;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// b. 动态分配数组</span></span><br><span class="line">    <span class="keyword">int</span> *<span class="built_in">array</span> =  <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * <span class="number">2</span>);</span><br><span class="line">    <span class="built_in">array</span>[<span class="number">0</span>] = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <h2 id="数组和指针"><a href="#数组和指针" class="headerlink" title="数组和指针"></a>数组和指针</h2><h3 id="一位数组"><a href="#一位数组" class="headerlink" title="一位数组"></a>一位数组</h3><ol>
 <li><p>数组名的概念：</p>
 <ul>
@@ -875,7 +884,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">92</span>
+                    <span class="site-state-item-count">95</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1193,7 +1202,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">80</span>
+                      
+                    
+                    <span class="site-state-item-count">81</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
