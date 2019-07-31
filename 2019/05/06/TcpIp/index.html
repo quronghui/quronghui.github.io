@@ -104,11 +104,13 @@
 <meta property="og:site_name" content="Lucky Boy">
 <meta property="og:description" content="TCP / IP 协议网络基础知识 计算机网络的作用? 提供一种网络形态, 将单用户工作模式,转化为多用户信息共享, 互联模式;   分时系统 通过多个终端与同一计算机相连, 允许多个用户同时操作一台计算机; 通过分时系统, 虚拟的实现了”一人一机”; 特性: 独占性 实现方式: 多任务调度   协议 不同计算机之间通信的基本要求; 举例: 人与人交流的语言 – 中文/ 英语   电路交换和分组交">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/tcpip.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/first.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/data.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/MAC.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/macfirst.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/IPandMac.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/IPadress.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/UDP_DATA.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/tcp_data.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/ipv4_first.png">
@@ -121,11 +123,11 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/udp_first.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/ssh.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/uri.png">
-<meta property="og:updated_time" content="2019-07-22T14:17:39.745Z">
+<meta property="og:updated_time" content="2019-07-31T14:01:15.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tcp&#x2F;IP">
 <meta name="twitter:description" content="TCP / IP 协议网络基础知识 计算机网络的作用? 提供一种网络形态, 将单用户工作模式,转化为多用户信息共享, 互联模式;   分时系统 通过多个终端与同一计算机相连, 允许多个用户同时操作一台计算机; 通过分时系统, 虚拟的实现了”一人一机”; 特性: 独占性 实现方式: 多任务调度   协议 不同计算机之间通信的基本要求; 举例: 人与人交流的语言 – 中文/ 英语   电路交换和分组交">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/06/TcpIp/first.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/06/TcpIp/tcpip.png">
 
 
 
@@ -434,7 +436,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-22 22:17:39" itemprop="dateModified" datetime="2019-07-22T22:17:39+08:00">2019-07-22</time>
+                <time title="Updated at: 2019-07-31 22:01:15" itemprop="dateModified" datetime="2019-07-31T22:01:15+08:00">2019-07-31</time>
               
             
           </span>
@@ -537,10 +539,10 @@
 </ul>
 </li>
 <li>接收端的数量进行分析<ul>
-<li>单播；</li>
-<li>广播: 同一个链路中相互链接主机间通信</li>
-<li>多播：特定组内进行的通信; (一年级一班)</li>
-<li>任播：特定组内任意一台主机；(一年级一班小李)</li>
+<li>单播: (一年级, 一班的小李)</li>
+<li>广播: 同一个链路中相互链接主机间通信( 一年级所有同学 )</li>
+<li>多播：特定组内进行的通信; (一年级一班, 一班的所有同学)</li>
+<li>任播：特定组内任意一台主机；(一年级一班, 任意一个同学)</li>
 </ul>
 </li>
 <li>传输速率和吞吐量<ul>
@@ -639,7 +641,7 @@
 <li>OSI模型: 注重<strong>通信协议具备的功能是什么</strong>;</li>
 <li>TCP/IP : 注重<strong>计算机上实现协议应该开发哪些程序</strong></li>
 </ul>
-<p>{ % asset_img  tcpip.png %}</p>
+<img src="/2019/05/06/TcpIp/tcpip.png">
 </li>
 <li><p>模式和使用的协议</p>
 <ul>
@@ -648,9 +650,6 @@
 </ul>
 </li>
 </ol>
-<ul>
-<li><strong>改到这里</strong></li>
-</ul>
 <table>
 <thead>
 <tr>
@@ -776,7 +775,11 @@
 </li>
 </ol>
 <h3 id="TCP-IP-抽象模型"><a href="#TCP-IP-抽象模型" class="headerlink" title="TCP/IP 抽象模型"></a>TCP/IP 抽象模型</h3><ul>
-<li>抽象为一个送快递模型.: 从云南的小李 运送到 北京的张先生</li>
+<li>抽象为一个送快递模型<ul>
+<li>发货方:     云南的小李 </li>
+<li>接收方:    北京的张先生</li>
+</ul>
+</li>
 <li>通信双方都会通过TCP/IP的这个过程, 一个是封装数据, 一个是解压数据</li>
 </ul>
 <ol>
@@ -891,7 +894,10 @@
 </ul>
 </li>
 <li>PPP协议的数据发送:<ul>
-<li>建立PPP级的连接, 建立以后进行身份认证, 加密 和压缩</li>
+<li>建立PPP级的连接, 建立以后进行身份认证, 加密 和压缩<ul>
+<li>应用: 用户使用拨号接入英特网;</li>
+</ul>
+</li>
 <li>LCP: link control protocol, 负责建立和断开连接;</li>
 <li>NCP: network control protocol.  负责IP地址的设置以及TCP/IP首部压缩;</li>
 <li>PAP: password authentication protocol, 用户身份的认证协议, <ul>
@@ -914,19 +920,19 @@
 <li>ATM: asynchronous(异步) transfer mode : 以信元为单位进行数据连接;</li>
 <li>特点:<ul>
 <li>面向连接的数据链路;</li>
-<li>允许同时与多个对端建立通信连接</li>
+<li>允许同时与多个对端建立通信连接, 时分多路复用技术</li>
 </ul>
 </li>
 </ol>
 <h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><ul>
-<li>提供没有直连的两个网络通信</li>
-<li>提尽力服务, 没有数据包丢失检测</li>
+<li>提供<strong>尽力服务</strong>, 没有数据包重传机制</li>
 </ul>
 <ol>
 <li><p>网络层和数据链路层关系:</p>
 <ul>
 <li>数据链路层: 相当于每一站的车票;</li>
 <li>网络层: 从起点到终点的行程安排;</li>
+<li>抽象: 只有同时拥有行程表 和每一站的车票, 才能达到终点;</li>
 </ul>
 <img src="/2019/05/06/TcpIp/IPandMac.png">
 </li>
@@ -934,37 +940,46 @@
 <ul>
 <li>IP寻址: IP地址, 唯一性和层次性</li>
 <li>路由控制: 将分组数据发送到最终目标地址的功能;</li>
-<li>IP的分包和组包</li>
+<li>数据报: 分包和组包( 路由器进行 )</li>
 </ul>
 </li>
 </ol>
 <h3 id="IP-地址"><a href="#IP-地址" class="headerlink" title="IP 地址"></a>IP 地址</h3><ol>
 <li><p>作用: 标识主机和路由器, 使用不同的主机之间通信;</p>
 </li>
-<li><p>早期 IP地址由两部分组成</p>
+<li><p>IP地址由两部分组成</p>
 <ul>
-<li>网络地址: 在数据链路的每个段配置不同的值;<ul>
-<li>互联的每个段地址不能重复;</li>
+<li>网络地址: <ul>
+<li>互联的每个<strong>段地址</strong>(不同的数据链路)不能重复;</li>
 <li>路由器: 包含不同段的网络地址, 数据在不同的网段之间传播</li>
 </ul>
 </li>
-<li>主机地址: 标识不同的主机;</li>
+<li>主机地址: 标识<strong>同一个段地址</strong>中的不同主机;</li>
 </ul>
 </li>
 <li><p>引入子网掩码的IP地址</p>
 <ul>
-<li>IP地址本身 + 表示网络的子网掩码</li>
-<li>CIDR: 将多个C类地址聚合成一个大的地址, 减少一位网络地址,增加一位主机地址;<ul>
-<li>路由聚合, 减小路由控制表</li>
+<li><p>子网掩码: 由1组成的一个序列, 用于表示网络地址的位数</p>
+</li>
+<li><p>IP地址 /  网络地址的位数</p>
+</li>
+<li>CIDR: 路由聚合<ul>
+<li>减少一位网络地址,增加一位主机地址;</li>
+<li>作用: 可以减小路由控制表;</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><p>IP地址分类: 4类地址</p>
 <ul>
-<li>注意他们的区间</li>
-<li>D类地址: 没有主机标识, 全部用于多播(某些组内)</li>
-<li>主机地址全为1: 用作同一个链路之间的广播地址;</li>
+<li><p>注意四类中<strong>网络地址</strong>的区间</p>
+<img src="/2019/05/06/TcpIp/IPadress.png">
+</li>
+<li><p>D类地址: 没有主机标识, 全部用于多播(某些组内)</p>
+</li>
+<li><p>每一类地址的<strong>主机地址个数</strong> </p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IP个数 = 2^n - 2 </span><br><span class="line"><span class="section">主机地址全为0: 用作的是网络地址, </span></span><br><span class="line"><span class="section">主机地址全为1: 用作同一个链路之间的广播地址;</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 <li><p>IP多播实现:</p>
@@ -983,7 +998,7 @@
 </li>
 </ol>
 <h3 id="路由控制"><a href="#路由控制" class="headerlink" title="路由控制"></a>路由控制</h3><ul>
-<li>路由协议 – 生成路由控制表 – 控制数据包的下一跳 – 实现IP通信</li>
+<li>路由协议 : 生成路由控制表 , 控制数据包的下一跳, 最终实现IP通信</li>
 </ul>
 <ol>
 <li><p>Hop 一跳</p>
@@ -1029,7 +1044,8 @@
 <li><p>IP数据报为什么要进行分包?</p>
 <ul>
 <li>不同的数据链路有不同的传输单元MTU;</li>
-<li>以太网:1500; byte</li>
+<li>以太网: (46 - 1500)byte</li>
+<li>PPP : 1500byte</li>
 <li>FDDI : 4352; byte</li>
 <li>ATM: 9180 byte</li>
 </ul>
@@ -1066,7 +1082,7 @@
 <tr>
 <td>首部长度 : 首部字节数 5*4 =20</td>
 <td>4-7(4bit)</td>
-<td>5 = 0101</td>
+<td>5 = 0101  前20个字节代表首部</td>
 </tr>
 <tr>
 <td>区分服务: 网络状况</td>
@@ -1096,7 +1112,7 @@
 <tr>
 <td>片偏移: 表示IP数据包中的位置</td>
 <td>19-31(13bit)</td>
-<td>2^13 = 8192*8 = 65536; 单位是8byte</td>
+<td>2^13 (8192)*8 = 65536; 单位是8byte</td>
 </tr>
 <tr>
 <td><strong>32bit一组</strong></td>
@@ -1139,7 +1155,7 @@
 <ul>
 <li>128bits</li>
 <li>8个 16bit 的字节进行表示;</li>
-<li>:: 双冒号表示省略0, 只能用一次</li>
+<li><strong>::</strong> 双冒号 : 表示省略多个0, 只能用一次</li>
 </ul>
 </li>
 <li><p>包首部</p>
@@ -1189,7 +1205,7 @@
 <tr>
 <td>有效负载长度: 能包含的数据包长度 <strong>不包含首部长度</strong></td>
 <td>0-15</td>
-<td>2^15=65535 bytes: 不包含首部</td>
+<td>2^16=65535 bytes: 不包含首部</td>
 </tr>
 <tr>
 <td>下一个首部 = 协议</td>
@@ -1264,15 +1280,15 @@
 </li>
 <li><p>DNS解析情况</p>
 <ul>
-<li>主机名 –&gt; 检索IP地址: A类 , 正常的DNS解析</li>
-<li>IP地址 –&gt; 检索主机名: PTR类 IP地址的反向解析</li>
+<li>主机名 –&gt; 检索IP地址: “A类” —  正常的DNS解析</li>
+<li>IP地址 –&gt; 检索主机名: “PTR类” —  IP地址的反向解析</li>
 </ul>
 </li>
 </ol>
 <h3 id="ARP-Adress-resolution-protocol"><a href="#ARP-Adress-resolution-protocol" class="headerlink" title="ARP Adress resolution protocol"></a>ARP Adress resolution protocol</h3><ol>
-<li>ARP协议:  – IPv4   IPv6 (ICMPv6)<ul>
-<li>以目标IP地址地址为线索, 定位<strong>下一个</strong>接收数据包的网络设备对应的MAC地址;</li>
-<li>下一个接受数据包的: 目的主机, 或者路由器</li>
+<li>IPv4  – ARP协议:   IPv6 (ICMPv6)<ul>
+<li>以目标IP地址地址为线索, 定位<strong>下一个</strong>接收数据包的<strong>网络设备</strong>对应的MAC地址;</li>
+<li>网络设备: 目的主机, 或者路由器</li>
 </ul>
 </li>
 <li>ARP工作机制, 如何获得MAC?<ul>
@@ -1285,19 +1301,15 @@
 <li>例子: 嵌入式设备接入网络得到IP地址</li>
 </ul>
 </li>
-<li>DHCP: dynamic host configuration protocal<ul>
-<li>通过DHCP自动分配获取IP地址;</li>
-</ul>
-</li>
 </ol>
 <h3 id="ICMP-Internet-control-message-protocol"><a href="#ICMP-Internet-control-message-protocol" class="headerlink" title="ICMP  Internet control message protocol"></a>ICMP  Internet control message protocol</h3><ol>
 <li><p>ICMP :消息协议</p>
 <ul>
 <li><p>ICMP的通知消息会使用IP进行发送;</p>
 </li>
-<li><p>一类: 通知出错原因的错误消息;</p>
+<li><p>一类: 通知出错原因的 <strong>错误消息</strong>;</p>
 </li>
-<li>另一类: 用于诊断的查询消息;</li>
+<li>另一类: 用于诊断的 <strong>查询消息</strong>;</li>
 </ul>
 </li>
 <li><p>主要的ICMP消息</p>
@@ -1305,16 +1317,13 @@
 <li><p>traceroute应用软件 : 显示数据发送过程中经过了多少个路由</p>
 </li>
 <li><p>ICMP目标不可达消息</p>
+<p>| 错误号 | 错误消息                       | 原因                                          |<br>| —— | —————————— | ——————————————— |<br>| 0      | Network Unreachable 网络不可达 | TTL生存周期减到0时, 经过了2^8个路由器, 有错误 |<br>| 1      | Host  Unreachable  主机不可达  | 目标主机的IP地址不存在                        |</p>
 </li>
 </ul>
 </li>
 </ol>
-<pre><code>| 错误号 | 错误消息                       | 原因                                          |
-| ------ | ------------------------------ | --------------------------------------------- |
-| 0      | Network Unreachable 网络不可达 | TTL生存周期减到0时, 经过了2^8个路由器, 有错误 |
-| 1      | Host  Unreachable  主机不可达  | 目标主机的IP地址不存在                        |
-</code></pre><ul>
-<li>ICMP回送消息<ul>
+<ul>
+<li>ICMP回送消息(本地消息)<ul>
 <li>用途: 用于正在进行通信的主机之间 或者 路由器之间;</li>
 <li>作用: 判断数据包是否发送到对端;</li>
 <li>command: ping IP</li>
@@ -1333,6 +1342,10 @@
 </li>
 </ol>
 <h3 id="DHCP-dynamic-host-configure-protocol"><a href="#DHCP-dynamic-host-configure-protocol" class="headerlink" title="DHCP dynamic host configure protocol"></a>DHCP dynamic host configure protocol</h3><ol>
+<li>DHCP: dynamic host configuration protocal<ul>
+<li>通过DHCP自动分配获取IP地址</li>
+</ul>
+</li>
 <li>DHCP 功能:<ul>
 <li>实现用互上网的即插即用, 自动获取相应的IP地址;</li>
 </ul>
@@ -1345,8 +1358,8 @@
 </ul>
 </li>
 <li>DHCP client server具备的 功能:<ul>
-<li>server: 在分配IP之前, 发送ICMP回送请求包</li>
-<li>client : 正对获取的IP地址, 发送ARP请求包;</li>
+<li>server: 在分配IP之前, 发送ICMP<strong>回送请求包</strong></li>
+<li>client : 针对获取的IP地址, 发送ARP请求包;</li>
 </ul>
 </li>
 <li>DHCP 中继代理<ul>
@@ -1371,7 +1384,8 @@
 <li>IGMP: 实现多播技术</li>
 </ol>
 <h2 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h2><ul>
-<li>网络层使用路由器: 传输数据报</li>
+<li>网络层路由器使用的协议: 传输数据报</li>
+<li>网路层存在两个网络设备: 主机 + 路由器</li>
 </ul>
 <ol>
 <li>路由协议的作用: <ul>
@@ -1379,7 +1393,7 @@
 </ul>
 </li>
 <li>路由控制的定义?<ul>
-<li>根据目的<strong>IP</strong>地址, 根据构成的<strong>路由控制转发表</strong>, 按照<strong>正确的方向</strong>转发数据;</li>
+<li>根据目的<strong>IP</strong>地址, 构成目的可达的<strong>路由控制转发表</strong>,  使得数据包能按照<strong>正确的方向</strong>转发数据;</li>
 </ul>
 </li>
 <li>路由的分类<ul>
@@ -1395,7 +1409,7 @@
 </li>
 <li>路由控制范围?<ul>
 <li>分为内部和外部: IGP (Interior Gateway protocal) 和 EGP(Exterior Gateway protocal)</li>
-<li>类似于:  IP地址中的: 主机IP地址 + 网络IP地址 </li>
+<li><strong>抽象对比</strong>:   主机IP地址 + 网络IP地址 </li>
 <li>原因: 只有一种存在, 是无法完成数据传递的;</li>
 </ul>
 </li>
@@ -1408,9 +1422,8 @@
 <h3 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h3><ol>
 <li><p>距离向量算法</p>
 <ul>
-<li>根据<strong>距离</strong>和<strong>转发方向</strong>决定目标主机</li>
+<li>根据<strong>距离( hop 数量)</strong>和<strong>转发方向</strong>决定下一跳的网络设备, 目的是经过<strong>较少路由器</strong>的个数</li>
 <li>代价: 不同的转发方向, 决定了不同的距离; </li>
-<li><strong>经过较少路由器的个数</strong></li>
 </ul>
 </li>
 <li><p>链路状态算法</p>
@@ -1433,27 +1446,27 @@
 <li>RIP的特点<ul>
 <li>距离向量型的路由协议: 最少路由器为选择</li>
 <li><strong>定期</strong> 和 <strong>广播</strong>交换路由信息;(即使网络状态稳定)</li>
-<li>不予子网掩码进行交互;</li>
-<li>链路出问题时, 不确定是哪一个链路出问题就进行路由控制, 稳定周期很长</li>
+<li>不与子网掩码进行交互;</li>
+<li>链路出问题时处理方式:  不确定是哪一个链路出问题就进行<strong>路由控制</strong>, 稳定周期很长</li>
 </ul>
 </li>
 <li>RIP如何生成路由控制信息表?<ul>
-<li>首先: 路由器每30秒广播已知的路由信息; 等待6次后没有反馈则断开网络;</li>
-<li>然后: 从距离向量数据库中, 抽出距离短的作为新的控制向量表;</li>
+<li>首先: 路由器每30秒为一个周期, 广播已知的路由信息; 等待6个周期后没有反馈则断开网络;</li>
+<li>然后: 从距离向量数据库中, 抽出<strong>距离短</strong>的作为新的控制向量表;</li>
 </ul>
 </li>
 <li>路由变更的时候,如何更新?<ul>
 <li>定期进行广播, 下一个路由在原基础上加1后, 传给下一个路由; ( 要传回发送路由, 不然6个周期认为断开 )</li>
 </ul>
 </li>
-<li>无限计数的问题?<ul>
+<li>RIP如何解决无限计数的问题?<ul>
 <li>方法一: 定义最长条跳数为16, 超过后还未达到, 认为链路处于断开状态;</li>
-<li>方法二: 水平分割, 路由器不在把收到的信息返回给发送端;</li>
+<li>方法二: 水平分割, 接收端不把收到的信息返回给发送端;</li>
 </ul>
 </li>
 <li>环路问题的解决?<ul>
-<li>毒性逆转: 当链路中有断开时, 不是不在发送信息, 而是将这个无法传播的消息发送出去(发送距离为16的消息)</li>
-<li>触发更新: 当链路变化时, 不再是定期广播, 而是立刻发送, 使得链路尽快收敛;</li>
+<li>毒性逆转: 当链路中有断开时, 发送距离为16的消息(网络不可达)</li>
+<li>触发更新: 当链路变化时,  为了链路尽快收敛, 不再是定期广播, 而是立刻发送;</li>
 </ul>
 </li>
 <li>RIP2<ul>
@@ -1464,21 +1477,23 @@
 <h3 id="OSPF-open-shortest-path-first"><a href="#OSPF-open-shortest-path-first" class="headerlink" title="OSPF open shortest path first"></a>OSPF open shortest path first</h3><ol>
 <li><p>OSPF 的特点?</p>
 <ul>
-<li>链路状态算法型的路由协议: 以最小权重代价为选择;</li>
-<li>每个路由器都包含整个网络的拓扑结构, 得到最优路劲;</li>
-<li>与中心路由交互得到控制信息;</li>
+<li>链路状态算法型的路由协议: 以<strong>最小权重代价</strong>进行选择;</li>
+<li>路由控制表实现生成: 路由与中心路由交互得到控制信息;<ul>
+<li>每个路由器都包含整个网络的拓扑结构, 得到最优路径;</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>OSPF 如何得到路由控制表?</p>
 <ul>
-<li>首先发送HELLO协议: LAN每10秒发送hello包, 却是是否处于连接状态<ul>
+<li>首先发送HELLO协议: LAN每10秒发送<strong>hello包</strong>, 确认链路是否处于连接状态<ul>
 <li>未收到链路状态确认包, 空等3次, 第4次还未收到则确认断开</li>
 </ul>
 </li>
 <li>然后: 链路变化, 如何更新?<ul>
-<li>发送链路状态更新包, 更新包两种</li>
+<li>发送链路状态<strong>请求包和 更新包</strong></li>
 <li>NLSA network link state advertisement : 以网络为中心生成的信息, 与那些路由器相连;</li>
-<li>RLSA</li>
+<li>RLSA  Routing : 以路由器为中心</li>
 </ul>
 </li>
 <li>最后: 生成网络结构的链路状态信息库;</li>
@@ -1493,15 +1508,13 @@
 </ol>
 <h3 id="BGP-border-gateway-protocol"><a href="#BGP-border-gateway-protocol" class="headerlink" title="BGP border gateway protocol"></a>BGP border gateway protocol</h3><ol>
 <li>BGP的特点?<ul>
-<li>边界网管协议;</li>
-<li>连接不同的AS 自治系统</li>
+<li>路径向量的协议;</li>
+<li>边界网管协议, 连接不同的AS 自治系统</li>
 </ul>
 </li>
 <li>AS路径信息访问列表<ul>
-<li>包含转发方向和距离, 还涵盖途经所有AS编号;</li>
-</ul>
-</li>
-<li>路由控指标的生成?<ul>
+<li>包含转发方向和距离(RIP), 还涵盖途经所有AS编号;</li>
+<li>BGP路由控制表生成?</li>
 <li>通过BGP扬声器, 创建BGP链接, 在AS之间交换信息;</li>
 <li>得到一个经过AS数量最少的路径</li>
 </ul>
@@ -1583,7 +1596,7 @@
 </li>
 <li><p>段数据发送 , 如何增加<strong>吞吐量</strong>?</p>
 <ul>
-<li>滑动窗口: 将n个段一起发送, 收到某个段的应答是, 互动窗口下移;</li>
+<li>滑动窗口: 将n个段一起发送, 收到某个段的应答时, 滑动窗口下移;</li>
 </ul>
 </li>
 <li><p>窗口控制和重发控制?</p>
@@ -1595,19 +1608,19 @@
 </li>
 <li>b) 拥塞控制:<ul>
 <li>先设置窗口为1, 当收到ACK确认后, 递增窗口大小;</li>
-<li>遇到超时重发时, 设置满期慢启动阀值, 将拥塞窗口减小为一半;</li>
+<li>遇到超时重发时, 设置慢启动阀值, 将拥塞窗口减小为一半;</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>重发控制: 明白重发的两种情况<ul>
+<li>重发控制: 重发的两种情况<ul>
 <li>ACK确认应答丢失, 此时数据收到; <ul>
 <li>无需重发, 只需要确认下一个序列号就行</li>
 </ul>
 </li>
-<li>数据包丢失, server 3次发送重复确认<ul>
+<li>数据包丢失:  server 重复三次发送同一数据段的确认消息<ul>
 <li>高速重发机制: client 收到3次确认应答时, 重发数据;</li>
-<li>超时重发机制: 以重发超时时间进行等待;</li>
+<li>超时重发机制: 以<strong>重发超时</strong>时间进行等待;</li>
 </ul>
 </li>
 </ul>
@@ -1617,9 +1630,9 @@
 <li><p>提高网络<strong>利用率</strong>?</p>
 <ul>
 <li>Nagle 算法: 针对 <strong>发送方</strong><ul>
-<li>机制: 当发送端数据很少时, 延迟发送数据;</li>
+<li>机制: 当发送端数据很少时, <strong>延迟发送</strong></li>
 <li>何时进行数据发送?<ul>
-<li>已发送数据都收到应答时;</li>
+<li>已发送数据<strong>都</strong>收到应答时;</li>
 <li>发送消息发到最大的MSS;</li>
 </ul>
 </li>
@@ -1690,7 +1703,7 @@
 <td>0 还未用</td>
 </tr>
 <tr>
-<td>控制大小</td>
+<td>控制位</td>
 <td>2^8</td>
 <td>每一位使用的时候设置为1<br>ACK = 1 : 用于确认时一直为1<br>SYN = 1: 确认建立连接<br>FIN = 1: 断开连接</td>
 </tr>
@@ -1759,7 +1772,10 @@
 </table>
 <ol>
 <li><strong>校验和</strong>的计算需要<strong>UDP伪首部</strong><ul>
-<li>UDP的位首部概念: 标识一个TCP/IP通信需要5各部分, udp中只包含两个端口号, 其余的在TCP中;</li>
+<li>UDP的伪首部概念: 标识一个TCP/IP通信需要5各部分, IP(源/目的) + port(源/目的) + 协议;<ul>
+<li>udp中只包含两个端口号, 其余的在IP中;</li>
+</ul>
+</li>
 <li>实现UDP在IP首部并不可靠的情况下, 仍能提供可靠的通信传输 </li>
 </ul>
 </li>
@@ -1804,19 +1820,19 @@
 <li>应用: 加密的远程登录系统;</li>
 <li>端口转发: 将收到的消息发送给特定的IP地址和端口号码的一种机制</li>
 <li>TCP连接: 建立三条, 一条加密, 两条不加密</li>
-<li>TCP22</li>
+<li>SSH的端口号: TCP22</li>
 </ul>
 <img src="/2019/05/06/TcpIp/ssh.png">
 </li>
 </ol>
-<h3 id="文件传输FTP"><a href="#文件传输FTP" class="headerlink" title="文件传输FTP"></a>文件传输FTP</h3><ol>
+<h3 id="FTP-File-transfer-protocol-文件传输"><a href="#FTP-File-transfer-protocol-文件传输" class="headerlink" title="FTP (File transfer protocol) 文件传输"></a>FTP (File transfer protocol) 文件传输</h3><ol>
 <li>FTP传输的需求<ul>
-<li>先在远程登录的情况下, 计算机之间进行文件传输的协议;</li>
+<li>先在<strong>远程登录</strong>的前提下:  计算机之间进行文件传输的协议;</li>
 </ul>
 </li>
 <li>FTP工作机制<ul>
 <li>建立两条TCP连接; TCP21</li>
-<li>数据传输的TCP 和 控制的TCP按照相反的方向建立连接</li>
+<li><strong>数据传输</strong>的TCP 和 <strong>控制</strong>的TCP按照相反的方向建立连接</li>
 </ul>
 </li>
 <li>FTP连接断开机制<ul>
@@ -2382,7 +2398,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP-协议"><span class="nav-number">1.</span> <span class="nav-text">TCP / IP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络基础知识"><span class="nav-number">1.1.</span> <span class="nav-text">网络基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI-7层参考模型（Open-System-Interconnection-Reference-Model）"><span class="nav-number">1.2.</span> <span class="nav-text">OSI 7层参考模型（Open System Interconnection Reference Model）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP-基础知识"><span class="nav-number">1.3.</span> <span class="nav-text">TCP/IP 基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP-协议分层模型"><span class="nav-number">1.3.1.</span> <span class="nav-text">TCP/IP 协议分层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据封装"><span class="nav-number">1.3.2.</span> <span class="nav-text">数据封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP-抽象模型"><span class="nav-number">1.3.3.</span> <span class="nav-text">TCP/IP 抽象模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据链路层"><span class="nav-number">1.4.</span> <span class="nav-text">数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以太网"><span class="nav-number">1.4.1.</span> <span class="nav-text">以太网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无线通信"><span class="nav-number">1.4.2.</span> <span class="nav-text">无线通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PPP-协议"><span class="nav-number">1.4.3.</span> <span class="nav-text">PPP 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FDDI-fiber-distributed-data-interface"><span class="nav-number">1.4.4.</span> <span class="nav-text">FDDI fiber distributed data interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ATM"><span class="nav-number">1.4.5.</span> <span class="nav-text">ATM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP协议"><span class="nav-number">1.5.</span> <span class="nav-text">IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-地址"><span class="nav-number">1.5.1.</span> <span class="nav-text">IP 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由控制"><span class="nav-number">1.5.2.</span> <span class="nav-text">路由控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-数据报分割与重组"><span class="nav-number">1.5.3.</span> <span class="nav-text">IP 数据报分割与重组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv4-首部"><span class="nav-number">1.5.4.</span> <span class="nav-text">IPv4 首部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv6"><span class="nav-number">1.5.5.</span> <span class="nav-text">IPv6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv6-首部"><span class="nav-number">1.5.6.</span> <span class="nav-text">IPv6 首部</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-协议相关技术"><span class="nav-number">1.6.</span> <span class="nav-text">IP 协议相关技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-Domain-域-name-System"><span class="nav-number">1.6.1.</span> <span class="nav-text">DNS Domain(域) name System</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP-Adress-resolution-protocol"><span class="nav-number">1.6.2.</span> <span class="nav-text">ARP Adress resolution protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICMP-Internet-control-message-protocol"><span class="nav-number">1.6.3.</span> <span class="nav-text">ICMP  Internet control message protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP-dynamic-host-configure-protocol"><span class="nav-number">1.6.4.</span> <span class="nav-text">DHCP dynamic host configure protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NAT-network-address-translator"><span class="nav-number">1.6.5.</span> <span class="nav-text">NAT network address translator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#other"><span class="nav-number">1.6.6.</span> <span class="nav-text">other</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由协议"><span class="nav-number">1.7.</span> <span class="nav-text">路由协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态路由基础"><span class="nav-number">1.7.1.</span> <span class="nav-text">动态路由基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由算法"><span class="nav-number">1.7.2.</span> <span class="nav-text">路由算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RIP-Routing-Information-Protocol"><span class="nav-number">1.7.3.</span> <span class="nav-text">RIP Routing Information Protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSPF-open-shortest-path-first"><span class="nav-number">1.7.4.</span> <span class="nav-text">OSPF open shortest path first</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BGP-border-gateway-protocol"><span class="nav-number">1.7.5.</span> <span class="nav-text">BGP border gateway protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPLS-multi-protocol-label-switching"><span class="nav-number">1.7.6.</span> <span class="nav-text">MPLS multi protocol label switching</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层-TCP-UDP"><span class="nav-number">1.8.</span> <span class="nav-text">传输层 TCP/UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口号"><span class="nav-number">1.8.1.</span> <span class="nav-text">端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-transfer-control-protocol"><span class="nav-number">1.8.2.</span> <span class="nav-text">TCP transfer control protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-连接和断开"><span class="nav-number">1.8.3.</span> <span class="nav-text">TCP 连接和断开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-首部"><span class="nav-number">1.8.4.</span> <span class="nav-text">TCP 首部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP-user-datagram-protocal"><span class="nav-number">1.8.5.</span> <span class="nav-text">UDP user datagram protocal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输层其他协议"><span class="nav-number">1.8.6.</span> <span class="nav-text">传输层其他协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层协议"><span class="nav-number">1.9.</span> <span class="nav-text">应用层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#远程登录"><span class="nav-number">1.9.1.</span> <span class="nav-text">远程登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件传输FTP"><span class="nav-number">1.9.2.</span> <span class="nav-text">文件传输FTP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电子邮件协议"><span class="nav-number">1.9.3.</span> <span class="nav-text">电子邮件协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WWW-world-wide-web"><span class="nav-number">1.9.4.</span> <span class="nav-text">WWW  world wide web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多媒体通信实现"><span class="nav-number">1.9.5.</span> <span class="nav-text">多媒体通信实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问目录的协议"><span class="nav-number">1.9.6.</span> <span class="nav-text">访问目录的协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络安全方式"><span class="nav-number">1.10.</span> <span class="nav-text">网络安全方式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP-协议"><span class="nav-number">1.</span> <span class="nav-text">TCP / IP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络基础知识"><span class="nav-number">1.1.</span> <span class="nav-text">网络基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI-7层参考模型（Open-System-Interconnection-Reference-Model）"><span class="nav-number">1.2.</span> <span class="nav-text">OSI 7层参考模型（Open System Interconnection Reference Model）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP-基础知识"><span class="nav-number">1.3.</span> <span class="nav-text">TCP/IP 基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP-协议分层模型"><span class="nav-number">1.3.1.</span> <span class="nav-text">TCP/IP 协议分层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据封装"><span class="nav-number">1.3.2.</span> <span class="nav-text">数据封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP-抽象模型"><span class="nav-number">1.3.3.</span> <span class="nav-text">TCP/IP 抽象模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据链路层"><span class="nav-number">1.4.</span> <span class="nav-text">数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以太网"><span class="nav-number">1.4.1.</span> <span class="nav-text">以太网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无线通信"><span class="nav-number">1.4.2.</span> <span class="nav-text">无线通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PPP-协议"><span class="nav-number">1.4.3.</span> <span class="nav-text">PPP 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FDDI-fiber-distributed-data-interface"><span class="nav-number">1.4.4.</span> <span class="nav-text">FDDI fiber distributed data interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ATM"><span class="nav-number">1.4.5.</span> <span class="nav-text">ATM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP协议"><span class="nav-number">1.5.</span> <span class="nav-text">IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-地址"><span class="nav-number">1.5.1.</span> <span class="nav-text">IP 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由控制"><span class="nav-number">1.5.2.</span> <span class="nav-text">路由控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-数据报分割与重组"><span class="nav-number">1.5.3.</span> <span class="nav-text">IP 数据报分割与重组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv4-首部"><span class="nav-number">1.5.4.</span> <span class="nav-text">IPv4 首部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv6"><span class="nav-number">1.5.5.</span> <span class="nav-text">IPv6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv6-首部"><span class="nav-number">1.5.6.</span> <span class="nav-text">IPv6 首部</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-协议相关技术"><span class="nav-number">1.6.</span> <span class="nav-text">IP 协议相关技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-Domain-域-name-System"><span class="nav-number">1.6.1.</span> <span class="nav-text">DNS Domain(域) name System</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP-Adress-resolution-protocol"><span class="nav-number">1.6.2.</span> <span class="nav-text">ARP Adress resolution protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICMP-Internet-control-message-protocol"><span class="nav-number">1.6.3.</span> <span class="nav-text">ICMP  Internet control message protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP-dynamic-host-configure-protocol"><span class="nav-number">1.6.4.</span> <span class="nav-text">DHCP dynamic host configure protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NAT-network-address-translator"><span class="nav-number">1.6.5.</span> <span class="nav-text">NAT network address translator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#other"><span class="nav-number">1.6.6.</span> <span class="nav-text">other</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由协议"><span class="nav-number">1.7.</span> <span class="nav-text">路由协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态路由基础"><span class="nav-number">1.7.1.</span> <span class="nav-text">动态路由基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由算法"><span class="nav-number">1.7.2.</span> <span class="nav-text">路由算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RIP-Routing-Information-Protocol"><span class="nav-number">1.7.3.</span> <span class="nav-text">RIP Routing Information Protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSPF-open-shortest-path-first"><span class="nav-number">1.7.4.</span> <span class="nav-text">OSPF open shortest path first</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BGP-border-gateway-protocol"><span class="nav-number">1.7.5.</span> <span class="nav-text">BGP border gateway protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPLS-multi-protocol-label-switching"><span class="nav-number">1.7.6.</span> <span class="nav-text">MPLS multi protocol label switching</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层-TCP-UDP"><span class="nav-number">1.8.</span> <span class="nav-text">传输层 TCP/UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口号"><span class="nav-number">1.8.1.</span> <span class="nav-text">端口号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-transfer-control-protocol"><span class="nav-number">1.8.2.</span> <span class="nav-text">TCP transfer control protocol</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-连接和断开"><span class="nav-number">1.8.3.</span> <span class="nav-text">TCP 连接和断开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-首部"><span class="nav-number">1.8.4.</span> <span class="nav-text">TCP 首部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP-user-datagram-protocal"><span class="nav-number">1.8.5.</span> <span class="nav-text">UDP user datagram protocal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输层其他协议"><span class="nav-number">1.8.6.</span> <span class="nav-text">传输层其他协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层协议"><span class="nav-number">1.9.</span> <span class="nav-text">应用层协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#远程登录"><span class="nav-number">1.9.1.</span> <span class="nav-text">远程登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FTP-File-transfer-protocol-文件传输"><span class="nav-number">1.9.2.</span> <span class="nav-text">FTP (File transfer protocol) 文件传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电子邮件协议"><span class="nav-number">1.9.3.</span> <span class="nav-text">电子邮件协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WWW-world-wide-web"><span class="nav-number">1.9.4.</span> <span class="nav-text">WWW  world wide web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多媒体通信实现"><span class="nav-number">1.9.5.</span> <span class="nav-text">多媒体通信实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问目录的协议"><span class="nav-number">1.9.6.</span> <span class="nav-text">访问目录的协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络安全方式"><span class="nav-number">1.10.</span> <span class="nav-text">网络安全方式</span></a></li></ol></li></ol></div>
             
 
           </div>
