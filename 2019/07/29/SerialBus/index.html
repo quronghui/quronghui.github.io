@@ -96,20 +96,20 @@
 
 
 
-  <meta name="description" content="串行总线通信方式总线之间的区别和联系? 三大总线     类型 SPI I2C UART     信号线 SCLK, MOSI, MISO, SS SDA, SCL TXD, RXD   全/半双工 全双工通信 半双工 全双工通信   同/异步总线 同步总线 同步总线 异步总线   距离 主从设备 IC之间,短 长距离   各自特点 实现简单, 有自己时钟协议 需要上拉电阻进行抗干扰 固定的波特率">
+  <meta name="description" content="串行总线通信方式总线之间的区别和联系? 三大总线     类型 SPI I2C UART USB     信号线 SCLK, MOSI, MISO, SS SDA, SCL TXD, RXD 4线VCC(5V)/GND/D+/D-(3.3V)   全/半双工 全双工通信 半双工 全双工通信 半双工   同/异步总线 同步总线 同步总线 异步总线 同步总线   距离 主从设备(近) IC之间,短 远">
 <meta name="keywords" content="Bus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SerialBus">
 <meta property="og:url" content="http://yoursite.com/2019/07/29/SerialBus/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="串行总线通信方式总线之间的区别和联系? 三大总线     类型 SPI I2C UART     信号线 SCLK, MOSI, MISO, SS SDA, SCL TXD, RXD   全/半双工 全双工通信 半双工 全双工通信   同/异步总线 同步总线 同步总线 异步总线   距离 主从设备 IC之间,短 长距离   各自特点 实现简单, 有自己时钟协议 需要上拉电阻进行抗干扰 固定的波特率">
+<meta property="og:description" content="串行总线通信方式总线之间的区别和联系? 三大总线     类型 SPI I2C UART USB     信号线 SCLK, MOSI, MISO, SS SDA, SCL TXD, RXD 4线VCC(5V)/GND/D+/D-(3.3V)   全/半双工 全双工通信 半双工 全双工通信 半双工   同/异步总线 同步总线 同步总线 异步总线 同步总线   距离 主从设备(近) IC之间,短 远">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/i2c_time.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/Uart_data.png">
-<meta property="og:updated_time" content="2019-07-29T12:27:07.017Z">
+<meta property="og:updated_time" content="2019-08-02T10:52:11.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SerialBus">
-<meta name="twitter:description" content="串行总线通信方式总线之间的区别和联系? 三大总线     类型 SPI I2C UART     信号线 SCLK, MOSI, MISO, SS SDA, SCL TXD, RXD   全/半双工 全双工通信 半双工 全双工通信   同/异步总线 同步总线 同步总线 异步总线   距离 主从设备 IC之间,短 长距离   各自特点 实现简单, 有自己时钟协议 需要上拉电阻进行抗干扰 固定的波特率">
+<meta name="twitter:description" content="串行总线通信方式总线之间的区别和联系? 三大总线     类型 SPI I2C UART USB     信号线 SCLK, MOSI, MISO, SS SDA, SCL TXD, RXD 4线VCC(5V)/GND/D+/D-(3.3V)   全/半双工 全双工通信 半双工 全双工通信 半双工   同/异步总线 同步总线 同步总线 异步总线 同步总线   距离 主从设备(近) IC之间,短 远">
 <meta name="twitter:image" content="http://yoursite.com/2019/07/29/SerialBus/i2c_time.png">
 
 
@@ -402,12 +402,24 @@
                 
               
 
-              <time title="Post created: 2019-07-29 20:26:33 / Updated at: 20:27:07" itemprop="dateCreated datePublished" datetime="2019-07-29T20:26:33+08:00">2019-07-29</time>
+              <time title="Post created: 2019-07-29 20:26:33" itemprop="dateCreated datePublished" datetime="2019-07-29T20:26:33+08:00">2019-07-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-08-02 18:52:11" itemprop="dateModified" datetime="2019-08-02T18:52:11+08:00">2019-08-02</time>
               
             
           </span>
@@ -497,6 +509,7 @@
 <th>SPI</th>
 <th>I2C</th>
 <th>UART</th>
+<th>USB</th>
 </tr>
 </thead>
 <tbody>
@@ -505,53 +518,63 @@
 <td>SCLK, MOSI, MISO, SS</td>
 <td>SDA, SCL</td>
 <td>TXD, RXD</td>
+<td>4线VCC(5V)/GND/D+/D-(3.3V)</td>
 </tr>
 <tr>
 <td>全/半双工</td>
 <td>全双工通信</td>
 <td>半双工</td>
 <td>全双工通信</td>
+<td>半双工</td>
 </tr>
 <tr>
 <td>同/异步总线</td>
 <td>同步总线</td>
 <td>同步总线</td>
 <td>异步总线</td>
+<td>同步总线</td>
 </tr>
 <tr>
 <td>距离</td>
-<td>主从设备</td>
+<td>主从设备(近)</td>
 <td>IC之间,<strong>短</strong></td>
-<td>长距离</td>
+<td>远(1200m)</td>
+<td>近</td>
 </tr>
 <tr>
 <td>各自特点</td>
 <td>实现简单, 有自己<strong>时钟协议</strong></td>
 <td>需要<strong>上拉电阻</strong>进行抗干扰</td>
 <td><strong>固定</strong>的波特率</td>
+<td></td>
 </tr>
 <tr>
 <td>传输速度</td>
-<td>spi &gt; i2c &gt; uart</td>
+<td>spi &gt;uart &gt;  i2c &gt; uart</td>
 <td></td>
 <td></td>
+<td>快</td>
 </tr>
 <tr>
 <td>可靠性</td>
 <td>不可靠(无效验)</td>
 <td></td>
 <td>可靠(校验位)</td>
+<td></td>
 </tr>
 <tr>
 <td>数据发送</td>
 <td></td>
 <td>边缘触发</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
+<td>总线拓扑结构</td>
+<td>环形</td>
+<td>总线型（特殊的树形）</td>
+<td>RS485支持总线式、</td>
+<td>星形</td>
 </tr>
 </tbody>
 </table>
@@ -593,9 +616,6 @@
 <tr>
 <td>MAX23芯片</td>
 <td>TTL电平与RS232电平的专用双向转换芯片</td>
-</tr>
-<tr>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -817,7 +837,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">96</span>
+                    <span class="site-state-item-count">98</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1137,7 +1157,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">81</span>
+                      
+                    
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>

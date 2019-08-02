@@ -96,18 +96,21 @@
 
 
 
-  <meta name="description" content="嵌入式的笔试总结诺瓦科技 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?      指令集 名字     LDR (load data ) 字数据加载指令   LDRB 字节数据加载指令   LDRH 半字数据加载指令   STR 字数据存储指令   STRB 字节数据存储指令   STRH 半字数据存储指令     内核裁剪的方式?  增加需要的，去除不需要的 make menuco">
+  <meta name="description" content="嵌入式的笔试总结2019.7.30诺瓦科技 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?  ARM体系结构中的工作状态?  ARM 和EEPROM之间的通信方式是什么?当时有两个电阻没有焊接出错, 后面焊接完成就正确了?  两个电阻属于上拉电阻; I2C的通信方式   Linux的用户态与内核态 ?  Linux的用户态与内核态 定义? Linux的用户态与内核态 如何切换的?">
 <meta name="keywords" content="Emebedded Electronic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="嵌入式笔试总结">
 <meta property="og:url" content="http://yoursite.com/2019/07/29/嵌入式笔试总结/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="嵌入式的笔试总结诺瓦科技 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?      指令集 名字     LDR (load data ) 字数据加载指令   LDRB 字节数据加载指令   LDRH 半字数据加载指令   STR 字数据存储指令   STRB 字节数据存储指令   STRH 半字数据存储指令     内核裁剪的方式?  增加需要的，去除不需要的 make menuco">
+<meta property="og:description" content="嵌入式的笔试总结2019.7.30诺瓦科技 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?  ARM体系结构中的工作状态?  ARM 和EEPROM之间的通信方式是什么?当时有两个电阻没有焊接出错, 后面焊接完成就正确了?  两个电阻属于上拉电阻; I2C的通信方式   Linux的用户态与内核态 ?  Linux的用户态与内核态 定义? Linux的用户态与内核态 如何切换的?">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-02T03:09:59.178Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/嵌入式笔试总结/big-small-endian.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/嵌入式笔试总结/Cobject_link.png">
+<meta property="og:updated_time" content="2019-08-02T14:20:33.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式笔试总结">
-<meta name="twitter:description" content="嵌入式的笔试总结诺瓦科技 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?      指令集 名字     LDR (load data ) 字数据加载指令   LDRB 字节数据加载指令   LDRH 半字数据加载指令   STR 字数据存储指令   STRB 字节数据存储指令   STRH 半字数据存储指令     内核裁剪的方式?  增加需要的，去除不需要的 make menuco">
+<meta name="twitter:description" content="嵌入式的笔试总结2019.7.30诺瓦科技 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?  ARM体系结构中的工作状态?  ARM 和EEPROM之间的通信方式是什么?当时有两个电阻没有焊接出错, 后面焊接完成就正确了?  两个电阻属于上拉电阻; I2C的通信方式   Linux的用户态与内核态 ?  Linux的用户态与内核态 定义? Linux的用户态与内核态 如何切换的?">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/29/嵌入式笔试总结/big-small-endian.png">
 
 
 
@@ -416,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-02 11:09:59" itemprop="dateModified" datetime="2019-08-02T11:09:59+08:00">2019-08-02</time>
+                <time title="Updated at: 2019-08-02 22:20:33" itemprop="dateModified" datetime="2019-08-02T22:20:33+08:00">2019-08-02</time>
               
             
           </span>
@@ -496,70 +499,121 @@
       
 
       
-        <h1 id="嵌入式的笔试总结"><a href="#嵌入式的笔试总结" class="headerlink" title="嵌入式的笔试总结"></a>嵌入式的笔试总结</h1><h2 id="诺瓦科技"><a href="#诺瓦科技" class="headerlink" title="诺瓦科技"></a>诺瓦科技</h2><ol>
+        <h1 id="嵌入式的笔试总结"><a href="#嵌入式的笔试总结" class="headerlink" title="嵌入式的笔试总结"></a>嵌入式的笔试总结</h1><h2 id="2019-7-30诺瓦科技"><a href="#2019-7-30诺瓦科技" class="headerlink" title="2019.7.30诺瓦科技"></a>2019.7.30诺瓦科技</h2><ol>
 <li><p><a href="https://luckywater.top/2019/07/29/SerialBus/" target="_blank" rel="noopener">总线之间的区别和联系?</a></p>
 </li>
-<li><p>ARM 指令集可以分为哪六大类?</p>
+<li><p><a href>ARM 指令集可以分为哪六大类?</a></p>
 </li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>指令集</th>
-<th>名字</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LDR (load data )</td>
-<td><strong>字</strong>数据加载指令</td>
-</tr>
-<tr>
-<td>LDRB</td>
-<td><strong>字节</strong>数据加载指令</td>
-</tr>
-<tr>
-<td>LDRH</td>
-<td><strong>半字</strong>数据加载指令</td>
-</tr>
-<tr>
-<td>STR</td>
-<td><strong>字</strong>数据存储指令</td>
-</tr>
-<tr>
-<td>STRB</td>
-<td><strong>字节</strong>数据存储指令</td>
-</tr>
-<tr>
-<td>STRH</td>
-<td><strong>半字</strong>数据存储指令</td>
-</tr>
-</tbody>
-</table>
-<ol start="3">
-<li><p><strong>内核裁剪</strong>的方式?</p>
+<li><p><a href>ARM体系结构中的工作状态?</a></p>
+</li>
+<li><p>ARM 和EEPROM之间的通信方式是什么?当时有两个电阻没有焊接出错, 后面焊接完成就正确了?</p>
+<ul>
+<li>两个电阻属于上拉电阻; I2C的通信方式</li>
+</ul>
+</li>
+<li><p><a href>Linux的<strong>用户态与内核态 </strong>?</a></p>
+<ul>
+<li>Linux的用户态与内核态 定义?</li>
+<li><p>Linux的用户态与内核态 <strong>如何切换</strong>的? </p>
+</li>
+<li><p>Linux的用户态与内核态的<strong>通信</strong>方式?</p>
+</li>
+</ul>
+</li>
+<li><p><strong>linux内核裁剪</strong>的方式?</p>
 <ul>
 <li>增加需要的，去除不需要的</li>
 <li>make menuconfig / xconfig`是裁剪的其中一种手段</li>
 </ul>
 </li>
-<li><p><a href>为什么进程间通信需要<strong>内核</strong>?</a></p>
-</li>
-<li><p><a href>进程间通信有哪几种方式?</a></p>
-</li>
-<li><p>ARM 和EEPROM之间的通信方式是什么?当时有两个电阻没有焊接出错, 后面焊接完成就正确了?</p>
-</li>
-<li><p>32位的系统中, 各自的字节数是多少?</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>), <span class="keyword">sizeof</span>(<span class="keyword">char</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>最后的类型输出是啥?</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>*<span class="keyword">int</span> + (<span class="keyword">float</span>-<span class="keyword">float</span>)</span><br></pre></td></tr></table></figure>
+<li><p><a href="https://luckywater.top/2019/08/02/进程间通信的几种方式/" target="_blank" rel="noopener">进程间通信有哪几种方式?</a></p>
+<ol>
+<li>为什么进程间通信需要<strong>内核</strong>?</li>
+<li>编程题: 进程间通信通过管道pipe实现?</li>
+</ol>
 </li>
 <li><p>英文翻译: 关于时钟发生器的英文翻译?</p>
-</li>
-<li><p>编程题: 进程间通信通过管道pipe实现?</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A<span class="built_in"> clock </span>generator is a<span class="built_in"> type </span>of circuit that produces acontinuous, sychronized electrical signal <span class="keyword">for</span> timing purposes <span class="keyword">in</span> a widevarity of devices work together <span class="keyword">in</span> an efficient manner,<span class="built_in"> clock </span>generators are often a necessary component <span class="keyword">in</span> many devices <span class="keyword">in</span> order toensuure that all other components work harmoniously.</span><br><span class="line"></span><br><span class="line">时钟发生器是一种电路，其产生连续的，同步的电信号用于定时目的，在广泛的设备中以有效的方式协同工作，时钟发生器通常是许多设备中的必要组件，以便确保所有其他组件协调地工作。</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>编程题: 线程间的通信实现, 通过互斥量?</p>
+</li>
+</ol>
+<h2 id="大疆嵌入式的笔试题"><a href="#大疆嵌入式的笔试题" class="headerlink" title="大疆嵌入式的笔试题"></a><a href="https://blog.csdn.net/qq_38410730/article/details/80951443" target="_blank" rel="noopener">大疆嵌入式的笔试题</a></h2><ol start="2">
+<li><p><a href="https://luckywater.top/2019/05/06/TcpIp/" target="_blank" rel="noopener">TCP与UDP的区别?</a></p>
+</li>
+<li><p>linux<strong>目录结构</strong>，选项是/usr、/tmp、/etc目录的作用?</p>
+<p>| 目录结构                      | 功能                                                         |<br>| —————————– | ———————————————————— |<br>| /usr (Unix Software Resource) | Unix操作系统<strong>软件资源</strong>放置的目录(而<strong>不是用户的数据</strong>)     |<br>| /tmp                          | <strong>一般使用者</strong>或者是正在<strong>执行的程序</strong>: 暂时放置档案的地方; <br>FHS甚至建议在开机时，应该要将/tmp下的资料都<strong>删除</strong> |<br>| /etc                          | 系统<strong>主要的设定档</strong>几乎都放置在这个目录内; 帐号<strong>密码档</strong>、各种服务的<strong>启始档</strong> |<br>| /mnt                          | <strong>mount 挂载</strong>某些额外的装置                                 |<br>| /opt                          | 第三方协力软体放置的目录                                     |<br>| /sbin                         | <strong>设定系统环境</strong>，这些指令只有<strong>root</strong>才能够利用来设定系统   |<br>| /bin                          | 重要执行档                                                   |</p>
+</li>
+<li><p><a href><strong>内存字节对齐</strong> pragma pack()用法详解?</a></p>
+<ul>
+<li>32位/64位的系统中, 各自的sizeof()是多少?</li>
+<li>数据类型间的混合运算, 最后的输出?</li>
+</ul>
+</li>
+<li><p><strong>大端和小端问题</strong>?</p>
+<ol>
+<li><p>大端和小端定义</p>
+<ul>
+<li>大端模式（BE big-endian），是指数据的低位保存在内存的高地址中，而数据的高位，保存在内存的低地址中（<strong>低地址 对 高位，高地址 对 低位</strong>）；</li>
+<li>小端模式（LE little-endian），是指数据的低位保存在内存的低地址中，而数据的高位保存在内存的高地址中（<strong>低地址对低位，高地址对高位</strong>）。</li>
+</ul>
+</li>
+<li><p>题目: 四个整数在内存中的存储情况，请选择其中最大的一个。</p>
+<img src="/2019/07/29/嵌入式笔试总结/big-small-endian.png">
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">A</span>：<span class="number">12345678</span>、B：<span class="number">56781234</span>、C：<span class="number">12785634</span>、D：<span class="number">56341278</span>。</span><br><span class="line">// 每个字节内部的顺序不变<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>C语言的<strong>各种变量的存取区域</strong>，给你一段小程序，让你分析各个变量的存储区域?</p>
+<ul>
+<li>堆：堆允许程序在运行时动态地申请某个大小的内存。一般由程序员分配释放；</li>
+<li>栈：由编译器自动分配释放，存放函数的参数值，局部变量等值；</li>
+<li><p>静态存储区：一定会存在且不会消失，这样的数据包括常量、常变量（const 变量）、静态变量、全局变量等；</p>
+</li>
+<li><p>常量存储区：常量占用内存，只读状态，决不可修改，常量字符串就是放在这里的。</p>
+</li>
+</ul>
+</li>
+<li><p>C中使用memcpy()系列函数时要足够小心?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">memcpy</span> <span class="params">( <span class="keyword">void</span> * destination, <span class="keyword">const</span> <span class="keyword">void</span> * source, <span class="keyword">size_t</span> num )</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意最后一个参数是 <strong>字节</strong>数  == <strong>sizeof(size_t)</strong></li>
+</ul>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int main() &#123;</span><br><span class="line">	int a[<span class="number">10</span>] = &#123; <span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span> &#125;;</span><br><span class="line">	memcpy(a + <span class="number">3</span>, a, <span class="number">5</span>);		<span class="comment">// 想实现5个int类型的数复制 ; 修改 为 memcpy(a + 3, a, 5*sizeof(int));</span></span><br><span class="line">	for (int i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)&#123;</span><br><span class="line">		printf(<span class="string">"%d "</span>, a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解答：0 1 2 0 1 5 6 7 8 9</li>
+</ul>
+</li>
+<li><p>C语言<strong>编译执行</strong>的四个阶段？</p>
+<img src="/2019/07/29/嵌入式笔试总结/Cobject_link.png">
+<ol>
+<li>预编译:<ul>
+<li>“#” 相关的语句: 进行展开;</li>
+<li>例如: #define : 宏定义展开</li>
+</ul>
+</li>
+<li>编译: 翻译<ul>
+<li>分析代码的语法和语义, 将<strong>变量和关键字</strong> <strong>翻译</strong>成中间代码或者汇编代码;</li>
+</ul>
+</li>
+<li>汇编: 翻译<ul>
+<li>将汇编语言<strong>翻译</strong>为机器可识别的二进制代码</li>
+</ul>
+</li>
+<li>链接: <ul>
+<li>将目标文件所需的<strong>库, 文件</strong>进行链接</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>volatile应该是在<strong>编译阶段</strong>，extern在<strong>链接阶段</strong>。</li>
+</ul>
+</li>
+<li><p>linux系统打开设备文件，进程可能处于三种基本状态?如果多次打开设备文件，驱动程序应该实现什么？</p>
+<ul>
+<li>运行 , 就绪, 阻塞</li>
+<li>实现设备共享区域数据的同步和互斥访问;</li>
+</ul>
 </li>
 </ol>
 
@@ -676,7 +730,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">96</span>
+                    <span class="site-state-item-count">98</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -996,7 +1050,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">81</span>
+                      
+                    
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1032,7 +1088,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#嵌入式的笔试总结"><span class="nav-number">1.</span> <span class="nav-text">嵌入式的笔试总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#诺瓦科技"><span class="nav-number">1.1.</span> <span class="nav-text">诺瓦科技</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#嵌入式的笔试总结"><span class="nav-number">1.</span> <span class="nav-text">嵌入式的笔试总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019-7-30诺瓦科技"><span class="nav-number">1.1.</span> <span class="nav-text">2019.7.30诺瓦科技</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大疆嵌入式的笔试题"><span class="nav-number">1.2.</span> <span class="nav-text">大疆嵌入式的笔试题</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/02/进程间通信的几种方式/signal.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/进程间通信的几种方式/linux_signal.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/进程间通信的几种方式/share_message.png">
-<meta property="og:updated_time" content="2019-08-02T03:05:39.997Z">
+<meta property="og:updated_time" content="2019-08-02T06:57:55.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程间通信的几种方式">
 <meta name="twitter:description" content="进程间通信的几种方式 为什么进程间通信需要内核?  IPC (InterProcess Communication) 通信机制 进程各自有不同的用户地址空间, 任何一个进程的全局变量在另一个进程中都看不到 进程之间要交换数据必须通过内核，在内核中开辟一块缓存区      进程间通信方式的总结      类型 属性 / 存在地方 通信要求 数据流向     传统的通信方式      匿名管道(pip">
@@ -404,7 +404,7 @@
                 
               
 
-              <time title="Post created: 2019-08-02 08:55:26 / Updated at: 11:05:39" itemprop="dateCreated datePublished" datetime="2019-08-02T08:55:26+08:00">2019-08-02</time>
+              <time title="Post created: 2019-08-02 08:55:26 / Updated at: 14:57:55" itemprop="dateCreated datePublished" datetime="2019-08-02T08:55:26+08:00">2019-08-02</time>
             
 
             
@@ -626,7 +626,7 @@
 </li>
 <li><p><strong>signal 阻塞</strong></p>
 <ul>
-<li>信号被阻塞时, <strong>内核</strong>先保留信号量, 直到解除阻塞的状态后, 信号继续传递;</li>
+<li>信号被阻塞时, <strong>内核</strong>先保留信号, 直到解除阻塞的状态后, 信号继续传递;</li>
 </ul>
 </li>
 <li><p>linux_signal</p>
@@ -641,7 +641,7 @@
 </li>
 <li><strong>数据流向:</strong> FIFO的数据写入, 支持消息的<strong>随机查询</strong>, 支持<strong>偏移访问</strong></li>
 <li><strong>优势: </strong><ul>
-<li>克服: <strong>信号量</strong>承载的信息少;  </li>
+<li>克服: <strong>信号</strong>承载的信息少;  </li>
 <li>克服:  pipe 承载的数据是<strong>无格式</strong>的字节流, 缓存大小<strong>受限</strong>;</li>
 </ul>
 </li>
@@ -675,7 +675,7 @@
 </ul>
 </li>
 <li><p><strong>同步和互斥的概念</strong></p>
-<p>| 区别之处   | 互斥                                     | 同步                                 |<br>| ———- | —————————————- | ———————————— |<br>| 定义       | 某一资源, 同一时间, 只能由一个访问者访问 | 在互斥的基础上, 机制使访问者有序访问 |<br>| 特性       | 唯一性和排它性, <strong>访问者无序</strong>           | 互斥特性 + <strong>有序访问  </strong>            |<br>| 本质区别   | 用于线程间互斥                           | 用于线程见得同步                     |<br>| 初始值     | 二值信号量（0 / 1）                      | 非零整数值( value &gt;= 0 )             |<br>| 操作线程数 | 同一线程 : lock , unlock                 | Ａ线程: 释放;  B 线程: 获取;         |</p>
+<p>| 区别之处   | 互斥                                     | 同步                                         |<br>| ———- | —————————————- | ——————————————– |<br>| 定义       | 某一资源, 同一时间, 只能由一个访问者访问 | 在互斥的基础上, 机制使访问者有序访问         |<br>| 特性       | 唯一性和排它性, <strong>访问者无序</strong>           | 互斥特性 + <strong>有序访问  </strong>                    |<br>| 本质区别   | 用于线程间互斥                           | 用于线程见得同步                             |<br>| 初始值     | 二值信号量（0 / 1）                      | 非零整数值( value &gt;= 0 )                     |<br>| 操作线程数 | 同一线程 : lock , unlock                 | Ａ线程: 释放sem_post;  B 线程: 获取sem_wait; |</p>
 </li>
 </ul>
 <h2 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h2><h3 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h3><ul>
@@ -759,6 +759,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/08/02/OnlineJudge/" rel="prev" title="代码编写注意">
+                代码编写注意 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -829,7 +833,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">96</span>
+                    <span class="site-state-item-count">98</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1149,7 +1153,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">81</span>
+                      
+                    
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
