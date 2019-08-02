@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="嵌入式的笔试总结 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?  内核裁剪的方式?  进程间通信有哪几种方式?  ARM 和EEPROM之间的通信方式是什么?当时有两个电阻没有焊接出错, 后面焊接完成就正确了?  32位的系统中, 各自的字节数是多少? 1sizeof(int), sizeof(char)  最后的类型输出是啥? 1char*int + (float-float)">
+  <meta name="description" content="嵌入式的笔试总结诺瓦科技 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?      指令集 名字     LDR (load data ) 字数据加载指令   LDRB 字节数据加载指令   LDRH 半字数据加载指令   STR 字数据存储指令   STRB 字节数据存储指令   STRH 半字数据存储指令     内核裁剪的方式?  增加需要的，去除不需要的 make menuco">
 <meta name="keywords" content="Emebedded Electronic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="嵌入式笔试总结">
 <meta property="og:url" content="http://yoursite.com/2019/07/29/嵌入式笔试总结/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="嵌入式的笔试总结 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?  内核裁剪的方式?  进程间通信有哪几种方式?  ARM 和EEPROM之间的通信方式是什么?当时有两个电阻没有焊接出错, 后面焊接完成就正确了?  32位的系统中, 各自的字节数是多少? 1sizeof(int), sizeof(char)  最后的类型输出是啥? 1char*int + (float-float)">
+<meta property="og:description" content="嵌入式的笔试总结诺瓦科技 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?      指令集 名字     LDR (load data ) 字数据加载指令   LDRB 字节数据加载指令   LDRH 半字数据加载指令   STR 字数据存储指令   STRB 字节数据存储指令   STRH 半字数据存储指令     内核裁剪的方式?  增加需要的，去除不需要的 make menuco">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-30T05:31:54.528Z">
+<meta property="og:updated_time" content="2019-08-02T03:09:59.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式笔试总结">
-<meta name="twitter:description" content="嵌入式的笔试总结 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?  内核裁剪的方式?  进程间通信有哪几种方式?  ARM 和EEPROM之间的通信方式是什么?当时有两个电阻没有焊接出错, 后面焊接完成就正确了?  32位的系统中, 各自的字节数是多少? 1sizeof(int), sizeof(char)  最后的类型输出是啥? 1char*int + (float-float)">
+<meta name="twitter:description" content="嵌入式的笔试总结诺瓦科技 总线之间的区别和联系?  ARM 指令集可以分为哪六大类?      指令集 名字     LDR (load data ) 字数据加载指令   LDRB 字节数据加载指令   LDRH 半字数据加载指令   STR 字数据存储指令   STRB 字节数据存储指令   STRH 半字数据存储指令     内核裁剪的方式?  增加需要的，去除不需要的 make menuco">
 
 
 
@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-30 13:31:54" itemprop="dateModified" datetime="2019-07-30T13:31:54+08:00">2019-07-30</time>
+                <time title="Updated at: 2019-08-02 11:09:59" itemprop="dateModified" datetime="2019-08-02T11:09:59+08:00">2019-08-02</time>
               
             
           </span>
@@ -496,14 +496,56 @@
       
 
       
-        <h1 id="嵌入式的笔试总结"><a href="#嵌入式的笔试总结" class="headerlink" title="嵌入式的笔试总结"></a>嵌入式的笔试总结</h1><ol>
-<li><p><a href>总线之间的区别和联系?</a></p>
+        <h1 id="嵌入式的笔试总结"><a href="#嵌入式的笔试总结" class="headerlink" title="嵌入式的笔试总结"></a>嵌入式的笔试总结</h1><h2 id="诺瓦科技"><a href="#诺瓦科技" class="headerlink" title="诺瓦科技"></a>诺瓦科技</h2><ol>
+<li><p><a href="https://luckywater.top/2019/07/29/SerialBus/" target="_blank" rel="noopener">总线之间的区别和联系?</a></p>
 </li>
 <li><p>ARM 指令集可以分为哪六大类?</p>
 </li>
-<li><p>内核裁剪的方式?</p>
+</ol>
+<table>
+<thead>
+<tr>
+<th>指令集</th>
+<th>名字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LDR (load data )</td>
+<td><strong>字</strong>数据加载指令</td>
+</tr>
+<tr>
+<td>LDRB</td>
+<td><strong>字节</strong>数据加载指令</td>
+</tr>
+<tr>
+<td>LDRH</td>
+<td><strong>半字</strong>数据加载指令</td>
+</tr>
+<tr>
+<td>STR</td>
+<td><strong>字</strong>数据存储指令</td>
+</tr>
+<tr>
+<td>STRB</td>
+<td><strong>字节</strong>数据存储指令</td>
+</tr>
+<tr>
+<td>STRH</td>
+<td><strong>半字</strong>数据存储指令</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li><p><strong>内核裁剪</strong>的方式?</p>
+<ul>
+<li>增加需要的，去除不需要的</li>
+<li>make menuconfig / xconfig`是裁剪的其中一种手段</li>
+</ul>
 </li>
-<li><p>进程间通信有哪几种方式?</p>
+<li><p><a href>为什么进程间通信需要<strong>内核</strong>?</a></p>
+</li>
+<li><p><a href>进程间通信有哪几种方式?</a></p>
 </li>
 <li><p>ARM 和EEPROM之间的通信方式是什么?当时有两个电阻没有焊接出错, 后面焊接完成就正确了?</p>
 </li>
@@ -634,7 +676,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">95</span>
+                    <span class="site-state-item-count">96</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -990,7 +1032,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#嵌入式的笔试总结"><span class="nav-number">1.</span> <span class="nav-text">嵌入式的笔试总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#嵌入式的笔试总结"><span class="nav-number">1.</span> <span class="nav-text">嵌入式的笔试总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#诺瓦科技"><span class="nav-number">1.1.</span> <span class="nav-text">诺瓦科技</span></a></li></ol></li></ol></div>
             
 
           </div>
