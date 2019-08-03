@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/22/Sort-ways/shell_sort.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/05/22/Sort-ways/Decision.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/22/Sort-ways/de_tree.png">
-<meta property="og:updated_time" content="2019-06-04T07:18:03.344Z">
+<meta property="og:updated_time" content="2019-08-03T06:32:02.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sort_ways">
 <meta name="twitter:description" content="Sort ways 数据结构：考虑数据的存储方式，数据的快速查找和取出  排序前提 假设： 1）数组中元素类型为整数； 2）内部排序：整个排序工作在主存中完成 3）外部排序：在磁盘上完成排序  算法： 1）每个算法都将接受一个含有元素的数组和一个包含元素个数的整数。   内部排序插入排序 算法：  每次取后一个元素，和前面已排好序的数组进行比较；  1）每次都是取后一个元素p，和前面的数组进行比较">
@@ -228,7 +228,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
 
   </li>
         
@@ -262,7 +262,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
 
   </li>
         
@@ -279,7 +279,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -290,7 +290,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>recherche</a>
         </li>
       
     </ul>
@@ -396,7 +396,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-06-04 15:18:03" itemprop="dateModified" datetime="2019-06-04T15:18:03+08:00">2019-06-04</time>
+                <time title="Updated at: 2019-08-03 14:32:02" itemprop="dateModified" datetime="2019-08-03T14:32:02+08:00">2019-08-03</time>
               
             
           </span>
@@ -434,7 +434,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/data-struct-algorithm/" itemprop="url" rel="index"><span itemprop="name">data_struct_algorithm</span></a></span>
@@ -528,8 +528,11 @@
 <li>正序输入：O(N) – 元素不需要排序，将元素输入到数组需要花时间</li>
 </ul>
 </li>
+<li><p>插入函数的接口</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* insert_sort   */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertionSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>  tmp;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; i++)&#123;</span><br><span class="line">        tmp = a[i];         <span class="comment">// 下一个需要插入的元素</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 前面已排好序的 ( i-1 ) 个元素;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j&gt;<span class="number">0</span> &amp;&amp; a[j<span class="number">-1</span>]&gt;tmp; j--)  </span><br><span class="line">            a[ j ] = a[j<span class="number">-1</span>];                                    <span class="comment">// 前面的大于 tmp, 则移动覆盖</span></span><br><span class="line">        </span><br><span class="line">        a[ j ] = tmp;                                          <span class="comment">// 最后一个位置处理</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h3 id="逆序"><a href="#逆序" class="headerlink" title="逆序"></a>逆序</h3><ol>
+<h3 id="逆序对的性质"><a href="#逆序对的性质" class="headerlink" title="逆序对的性质"></a>逆序对的性质</h3><ol>
 <li>逆序性质<ul>
 <li>当 i &lt; j,  a[ i ] &gt; a[ j ] ：这边是一个逆序对（  a[ i ] ， a[ j ] ）</li>
 <li>I = 是数组中的逆序对数；</li>
@@ -566,6 +569,9 @@
 <li>使用 hibbard 的希尔增量最坏情况 O(N ^ (3/2))</li>
 <li>sedgewick 增量排序：其他的几种增量形式，降低运行时间；</li>
 </ul>
+</li>
+<li><p>希尔排序的接口</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* shell sort</span></span><br><span class="line"><span class="comment">*   1)希尔排序：缩小增量排序</span></span><br><span class="line"><span class="comment">*   2)元素之间的比较：a[i + h(k)] &lt; a[i - h(k)]，对应元素之间的比较</span></span><br><span class="line"><span class="comment">*   3)每次删除的逆序对，不止一个逆序对；</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shell_Sort</span><span class="params">(<span class="keyword">int</span>  a[], <span class="keyword">int</span> N)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j, increment;</span><br><span class="line">    <span class="keyword">int</span>  tmp;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* h(k) = N/2 ; 每次一半进行递减*/</span></span><br><span class="line">    <span class="keyword">for</span>(increment = N/<span class="number">2</span>; increment &gt; <span class="number">0</span>; increment /= <span class="number">2</span>)</span><br><span class="line">        <span class="comment">/* 循环：完后后半部分（N/2）每个元素，和前半部分元素之间的比较*/</span></span><br><span class="line">        <span class="keyword">for</span>(i = increment; i &lt; N; i++)&#123;</span><br><span class="line">            tmp = a[i];     <span class="comment">/* 后半部分数组 */</span></span><br><span class="line">            <span class="keyword">for</span>(j = i; j &gt;= increment; j -= increment)</span><br><span class="line">                <span class="comment">/* 包含在fork循环中的，if-else是一条语句 */</span></span><br><span class="line">                <span class="keyword">if</span>(tmp &lt; a[j-increment])</span><br><span class="line">                    a[j] = a[j - increment];</span><br><span class="line">                <span class="keyword">else</span> </span><br><span class="line">                    <span class="keyword">break</span>;  <span class="comment">/* 这里break后，就不执行 j -= increment 这条语句 */</span></span><br><span class="line">            a[j] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><ol>
@@ -863,10 +869,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table Des Matières
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Ensemble
           </li>
         </ul>
       
@@ -889,7 +895,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">98</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">articles</span>
                   </a>
                 </div>
               
@@ -1034,7 +1040,7 @@
                       
                     
                     <span class="site-state-item-count">66</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -1211,7 +1217,7 @@
                       
                     
                     <span class="site-state-item-count">82</span>
-                    <span class="site-state-item-name">Tags</span>
+                    <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
               
@@ -1246,7 +1252,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sort-ways"><span class="nav-number">1.</span> <span class="nav-text">Sort ways</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序前提"><span class="nav-number">1.1.</span> <span class="nav-text">排序前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部排序"><span class="nav-number">1.2.</span> <span class="nav-text">内部排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">1.2.1.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逆序"><span class="nav-number">1.2.2.</span> <span class="nav-text">逆序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序"><span class="nav-number">1.2.3.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">1.2.4.</span> <span class="nav-text">堆排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">1.2.5.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序"><span class="nav-number">1.2.6.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序的下界-–-决策树"><span class="nav-number">1.2.7.</span> <span class="nav-text">排序的下界 – 决策树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桶式排序"><span class="nav-number">1.2.8.</span> <span class="nav-text">桶式排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外部排序"><span class="nav-number">1.3.</span> <span class="nav-text">外部排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sort-ways"><span class="nav-number">1.</span> <span class="nav-text">Sort ways</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序前提"><span class="nav-number">1.1.</span> <span class="nav-text">排序前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部排序"><span class="nav-number">1.2.</span> <span class="nav-text">内部排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">1.2.1.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逆序对的性质"><span class="nav-number">1.2.2.</span> <span class="nav-text">逆序对的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序"><span class="nav-number">1.2.3.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">1.2.4.</span> <span class="nav-text">堆排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">1.2.5.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序"><span class="nav-number">1.2.6.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序的下界-–-决策树"><span class="nav-number">1.2.7.</span> <span class="nav-text">排序的下界 – 决策树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桶式排序"><span class="nav-number">1.2.8.</span> <span class="nav-text">桶式排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外部排序"><span class="nav-number">1.3.</span> <span class="nav-text">外部排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1292,7 +1298,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -1300,7 +1306,7 @@
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
 
 
 
