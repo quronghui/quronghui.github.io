@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Lucky Boy">
 <meta property="og:description" content="Pragma Pack(n)32位/64位的系统中, 各自的sizeof()是多少 32位的寻址空间是2^32, 即32个bit，也就是4个字节; 64bit同理  基本类型没有变化: 包括int、char、short、double等，在32bit和64bit中没哟区别;  64位相对于32位的提升，一个要素是在于地址的变化.  在C++中，sizeof(空类或空结构体) = 1，在C语言中，si">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-04T02:13:17.759Z">
+<meta property="og:updated_time" content="2019-08-05T01:26:43.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pragma Pack()">
 <meta name="twitter:description" content="Pragma Pack(n)32位/64位的系统中, 各自的sizeof()是多少 32位的寻址空间是2^32, 即32个bit，也就是4个字节; 64bit同理  基本类型没有变化: 包括int、char、short、double等，在32bit和64bit中没哟区别;  64位相对于32位的提升，一个要素是在于地址的变化.  在C++中，sizeof(空类或空结构体) = 1，在C语言中，si">
@@ -224,7 +224,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
 
   </li>
         
@@ -258,7 +258,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
 
   </li>
         
@@ -275,7 +275,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -286,7 +286,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>recherche</a>
         </li>
       
     </ul>
@@ -392,7 +392,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-04 10:13:17" itemprop="dateModified" datetime="2019-08-04T10:13:17+08:00">2019-08-04</time>
+                <time title="Updated at: 2019-08-05 09:26:43" itemprop="dateModified" datetime="2019-08-05T09:26:43+08:00">2019-08-05</time>
               
             
           </span>
@@ -430,7 +430,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Operate-System/" itemprop="url" rel="index"><span itemprop="name">Operate System</span></a></span>
@@ -521,6 +521,7 @@
 <thead>
 <tr>
 <th>数据类型</th>
+<th>同等类型: 给出占的bit</th>
 <th>32位 byte</th>
 <th>64位 byte</th>
 <th>备注</th>
@@ -529,60 +530,105 @@
 <tbody>
 <tr>
 <td>char</td>
+<td>__int8_t</td>
+<td>1</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>unsigned char</td>
+<td>__uint8_t</td>
 <td>1</td>
 <td>1</td>
 <td></td>
 </tr>
 <tr>
 <td>bool</td>
+<td></td>
 <td>1</td>
 <td>1</td>
 <td></td>
 </tr>
 <tr>
-<td>short</td>
+<td>short int</td>
+<td>__int16_t</td>
 <td>2</td>
 <td>2</td>
 <td>unsigned short =  2bute</td>
 </tr>
 <tr>
 <td>int</td>
+<td>__int32_t</td>
 <td>4</td>
 <td>4</td>
 <td></td>
 </tr>
 <tr>
 <td>unsigned int</td>
+<td>__uint32_t</td>
 <td>4</td>
 <td>4</td>
 <td></td>
 </tr>
 <tr>
 <td>float</td>
+<td></td>
 <td>4</td>
 <td>4</td>
 <td></td>
 </tr>
 <tr>
 <td>double</td>
+<td></td>
 <td>8</td>
 <td>8</td>
 <td></td>
+</tr>
+<tr>
+<td><strong>long</strong></td>
+<td></td>
+<td>4</td>
+<td>8</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>long int</strong></td>
+<td><strong>__int64_t</strong></td>
+<td>8</td>
+<td>8</td>
+<td><strong>同等类型</strong>: 基本的数据类型, char , int ; 没哟double</td>
 </tr>
 <tr>
 <td>long long</td>
+<td></td>
 <td>8</td>
 <td>8</td>
 <td></td>
 </tr>
 <tr>
-<td>指针</td>
+<td><strong>指针</strong></td>
+<td></td>
 <td>4</td>
 <td>8</td>
 <td>(1)所有的指针类型; (2)函数指针</td>
 </tr>
 <tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>long double</td>
+<td></td>
 <td>10/12</td>
 <td>10/16</td>
 <td>有效位10字节。32位为了对齐实际分配12字节；64位分配16字节</td>
@@ -640,16 +686,10 @@
 <li><p>对齐规则的文字总结</p>
 <ul>
 <li>对于结构体的各个成员，第一个成员的偏移量是0，排列在后面的成员其当前偏移量必须是当前成员类型的整数倍；</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>结构体内所有数据成员各自内存对齐后，结构体本身还要进行一次内存对齐，保证整个结构体占用内存大小是结构体内最大数据成员的最小整数倍；<ul>
+<li>结构体内所有数据成员各自内存对齐后，结构体本身还要进行一次内存对齐，保证整个结构体占用内存大小是结构体内最大数据成员的最小整数倍；</li>
 <li>如程序中有#pragma pack(n)预编译指令，则所有成员对齐以n字节为准(即偏移量是n的整数倍)，不再考虑当前类型以及最大结构体内类型。</li>
 </ul>
 </li>
-</ul>
-<ol start="5">
 <li><p>三个例子</p>
 <ul>
 <li>#pragma pack( 4 )</li>
@@ -663,6 +703,45 @@
 <li>#pragma pack(1)</li>
 </ul>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#pragma pack(<span class="number">1</span>)</span><br><span class="line"> </span><br><span class="line">struct <span class="function"><span class="keyword">fun</span>&#123;</span></span><br><span class="line">	int i;					<span class="comment">// 0x00 - 0x03</span></span><br><span class="line">	double d;		<span class="comment">// 0x04 - 0x011;		// 顺序存储, 这里不进行补齐</span></span><br><span class="line">	char c;				<span class="comment">// 0x12</span></span><br><span class="line">&#125;;</span><br><span class="line">min( sizeof(<span class="function"><span class="keyword">fun</span>), 1 ) = <span class="params">(<span class="number">13</span>, <span class="number">1</span>)</span></span> =<span class="number">13</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="结构体和联合体的内存对齐"><a href="#结构体和联合体的内存对齐" class="headerlink" title="结构体和联合体的内存对齐"></a>结构体和联合体的内存对齐</h3><ol>
+<li><p>联合体的定义:</p>
+<ul>
+<li><strong>内存占用</strong>: 使几个不同类型的变量<strong>共占</strong>一段内存 (相互覆盖 )<ul>
+<li>每次存放一种:  共同体每次只能存放一种</li>
+<li>相互覆盖: 共同体变量中起作用的成员是<strong>最后一次</strong>存放的成员，在存入新的成员后原有的成员失去了作用！</li>
+</ul>
+</li>
+<li><strong>联合体长度</strong>: 编译程序自动地产生一个变量，其长度为联合中<strong>最大的变量长度</strong>。</li>
+<li>用途: </li>
+</ul>
+</li>
+<li><p>结构体</p>
+<ol>
+<li>结构体的定义: <ul>
+<li>把不同类型的数据<strong>组合</strong>成一个整体;</li>
+</ul>
+</li>
+<li>内存占用:<ul>
+<li>结构体变量所占内存长度是各成员占的内存长度的<strong>总和</strong>;</li>
+<li>需要进行内存对齐;</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>联合体和结构体共同使用:</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">myun</span></span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="class"><span class="keyword">struct</span> &#123; <span class="title">int</span> <span class="title">x</span>;</span> int y; int z; &#125;u;</span><br><span class="line">     int k;</span><br><span class="line">&#125;a;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">     a.u.x =<span class="number">4</span>;</span><br><span class="line">     a.u.y =<span class="number">5</span>;</span><br><span class="line">     a.u.z =<span class="number">6</span>;</span><br><span class="line">     a.k = <span class="number">0</span>;</span><br><span class="line">     printf(<span class="string">"%d %d %d\n"</span>,a.u.x,a.u.y,a.u.z);</span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">/<span class="regexp">/ 输出结果: 0, 5, 6</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>union类型是共享内存:  myun这个结构就包含<strong>u这个结构体</strong></li>
+<li>在内存中:  就是<em>x</em>的位置放置<em>4</em>，<em>y</em>的位置放置<em>5</em>，<em>z</em>的位置放置<em>6</em><ul>
+<li>现在对<em>k</em>赋值:  对<em>k</em>的赋值因为是<em>union</em>，要共享内存，所以从<em>union</em>的<strong>首地址</strong>开始放置</li>
+<li>首地址开始的位置其实是<em>x</em>的位置: 这样原来内存中<em>x</em>的位置就被<em>k</em>所赋的值代替了，就变为<em>0</em>了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/CompanyWrite/1_Dji/sizeofStructUnion.c" target="_blank" rel="noopener">大疆的题目: 结构体和联合体的内存字节对齐计算?</a></p>
 </li>
 </ol>
 
@@ -754,10 +833,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table Des Matières
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Ensemble
           </li>
         </ul>
       
@@ -780,7 +859,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">98</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">articles</span>
                   </a>
                 </div>
               
@@ -925,7 +1004,7 @@
                       
                     
                     <span class="site-state-item-count">66</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -1102,7 +1181,7 @@
                       
                     
                     <span class="site-state-item-count">82</span>
-                    <span class="site-state-item-name">Tags</span>
+                    <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
               
@@ -1137,7 +1216,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pragma-Pack-n"><span class="nav-number">1.</span> <span class="nav-text">Pragma Pack(n)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#32位-64位的系统中-各自的sizeof-是多少"><span class="nav-number">1.1.</span> <span class="nav-text">32位/64位的系统中, 各自的sizeof()是多少</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型间的混合运算-最后的输出"><span class="nav-number">1.2.</span> <span class="nav-text">数据类型间的混合运算, 最后的输出?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存地址对齐-pragma-pack-n-用法详解"><span class="nav-number">1.3.</span> <span class="nav-text">内存地址对齐 pragma pack(n)用法详解?</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pragma-Pack-n"><span class="nav-number">1.</span> <span class="nav-text">Pragma Pack(n)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#32位-64位的系统中-各自的sizeof-是多少"><span class="nav-number">1.1.</span> <span class="nav-text">32位/64位的系统中, 各自的sizeof()是多少</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型间的混合运算-最后的输出"><span class="nav-number">1.2.</span> <span class="nav-text">数据类型间的混合运算, 最后的输出?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存地址对齐-pragma-pack-n-用法详解"><span class="nav-number">1.3.</span> <span class="nav-text">内存地址对齐 pragma pack(n)用法详解?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体和联合体的内存对齐"><span class="nav-number">1.3.1.</span> <span class="nav-text">结构体和联合体的内存对齐</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1183,7 +1262,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -1191,7 +1270,7 @@
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
 
 
 

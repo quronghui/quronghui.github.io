@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="数据结构–字符串字符串 feature  末尾有一个’\0’，内存覆盖要有警惕；   解决问题  a. 字符串中空格的替换  b. 两个数组，将B数组插入A数组        字符串的情况 方法 时间 空间     数组未有递增的规律； 复制到新的空间 O(N) O(N)   不允许使用新的空间 原数组保证足够的空间大小 从后往前进行查找替换空格 O(N) O(1)    字符串相关知识 字符串">
+  <meta name="description" content="数据结构–字符串字符串相关知识 字符串赋值给数组  字符串结尾影藏 ‘\0’;  字符串赋值给数组：数组要分配内存空间存储 1char str[100] = &quot;fdslajfk&quot;;		// 数组的内从空间可以使动态分配,或者直接分配一个足够大的空间就行  字符串赋值给指针：指针指向字符串地址，不分配内存空间    网络编程中，URL参数含有 #，空格，则不能正常访问  将特殊字符进行替换 替换规则">
 <meta name="keywords" content="string">
 <meta property="og:type" content="article">
 <meta property="og:title" content="String">
 <meta property="og:url" content="http://yoursite.com/2019/06/26/String/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="数据结构–字符串字符串 feature  末尾有一个’\0’，内存覆盖要有警惕；   解决问题  a. 字符串中空格的替换  b. 两个数组，将B数组插入A数组        字符串的情况 方法 时间 空间     数组未有递增的规律； 复制到新的空间 O(N) O(N)   不允许使用新的空间 原数组保证足够的空间大小 从后往前进行查找替换空格 O(N) O(1)    字符串相关知识 字符串">
+<meta property="og:description" content="数据结构–字符串字符串相关知识 字符串赋值给数组  字符串结尾影藏 ‘\0’;  字符串赋值给数组：数组要分配内存空间存储 1char str[100] = &quot;fdslajfk&quot;;		// 数组的内从空间可以使动态分配,或者直接分配一个足够大的空间就行  字符串赋值给指针：指针指向字符串地址，不分配内存空间    网络编程中，URL参数含有 #，空格，则不能正常访问  将特殊字符进行替换 替换规则">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-31T06:27:44.887Z">
+<meta property="og:updated_time" content="2019-08-07T10:40:58.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="String">
-<meta name="twitter:description" content="数据结构–字符串字符串 feature  末尾有一个’\0’，内存覆盖要有警惕；   解决问题  a. 字符串中空格的替换  b. 两个数组，将B数组插入A数组        字符串的情况 方法 时间 空间     数组未有递增的规律； 复制到新的空间 O(N) O(N)   不允许使用新的空间 原数组保证足够的空间大小 从后往前进行查找替换空格 O(N) O(1)    字符串相关知识 字符串">
+<meta name="twitter:description" content="数据结构–字符串字符串相关知识 字符串赋值给数组  字符串结尾影藏 ‘\0’;  字符串赋值给数组：数组要分配内存空间存储 1char str[100] = &quot;fdslajfk&quot;;		// 数组的内从空间可以使动态分配,或者直接分配一个足够大的空间就行  字符串赋值给指针：指针指向字符串地址，不分配内存空间    网络编程中，URL参数含有 #，空格，则不能正常访问  将特殊字符进行替换 替换规则">
 
 
 
@@ -224,7 +224,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
 
   </li>
         
@@ -258,7 +258,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
 
   </li>
         
@@ -275,7 +275,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
 
@@ -286,7 +286,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>recherche</a>
         </li>
       
     </ul>
@@ -392,7 +392,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-31 14:27:44" itemprop="dateModified" datetime="2019-07-31T14:27:44+08:00">2019-07-31</time>
+                <time title="Updated at: 2019-08-07 18:40:58" itemprop="dateModified" datetime="2019-08-07T18:40:58+08:00">2019-08-07</time>
               
             
           </span>
@@ -430,7 +430,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/data-struct/" itemprop="url" rel="index"><span itemprop="name">data struct</span></a></span>
@@ -496,51 +496,16 @@
       
 
       
-        <h1 id="数据结构–字符串"><a href="#数据结构–字符串" class="headerlink" title="数据结构–字符串"></a>数据结构–字符串</h1><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ol>
-<li><p>feature</p>
+        <h1 id="数据结构–字符串"><a href="#数据结构–字符串" class="headerlink" title="数据结构–字符串"></a>数据结构–字符串</h1><h2 id="字符串相关知识"><a href="#字符串相关知识" class="headerlink" title="字符串相关知识"></a>字符串相关知识</h2><ol>
+<li><p>字符串赋值给数组</p>
 <ul>
-<li>末尾有一个’\0’，内存覆盖要有警惕；</li>
-</ul>
+<li><p>字符串结尾影藏 ‘\0’;</p>
 </li>
-<li><p>解决问题</p>
-<ul>
-<li><p>a. 字符串中空格的替换</p>
+<li><p>字符串赋值给数组：<strong>数组</strong>要分配内存空间存储</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> <span class="keyword">str</span>[<span class="number">100</span>] = <span class="string">"fdslajfk"</span>;		<span class="comment">// 数组的内从空间可以使动态分配,或者直接分配一个足够大的空间就行</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>b. 两个数组，将B数组插入A数组</p>
+<li><p>字符串赋值给指针：指针<strong>指向</strong>字符串地址，不分配内存空间</p>
 </li>
-</ul>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>字符串的情况</th>
-<th>方法</th>
-<th>时间</th>
-<th>空间</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>数组未有递增的规律；</td>
-<td>复制到新的空间</td>
-<td>O(N)</td>
-<td>O(N)</td>
-</tr>
-<tr>
-<td>不允许使用新的空间 原数组保证足够的空间大小</td>
-<td>从后往前进行查找替换空格</td>
-<td>O(N)</td>
-<td>O(1)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="字符串相关知识"><a href="#字符串相关知识" class="headerlink" title="字符串相关知识"></a>字符串相关知识</h2><ol>
-<li><p>字符串 赋值给数组</p>
-<ul>
-<li>字符串结尾影藏 ‘\0’;</li>
-<li>字符串赋值给数组：数组要分配内存空间存储</li>
-<li>字符串赋值给指针：指针指向字符串地址，不分配内存空间</li>
 </ul>
 </li>
 <li><p>网络编程中，URL参数含有 #，空格，则不能正常访问</p>
@@ -548,24 +513,21 @@
 <li>将特殊字符进行替换</li>
 <li>替换规则 ： % + ASCII(十六进制表示)</li>
 </ul>
-
 </li>
-<li><p>字符串赋值数组</p>
+<li><p><strong>字符串表示一个大数的方式：</strong></p>
 <ul>
-<li>*使用变量定义长度时，不可在定义时同时进行初始化赋值，需要在之后进行赋值</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> length = <span class="number">100</span>; </span><br><span class="line"><span class="keyword">char</span> <span class="built_in">string</span>[length] ;   </span><br><span class="line"><span class="built_in">strcpy</span>(<span class="built_in">string</span>, <span class="string">"hello world"</span>);</span><br></pre></td></tr></table></figure>
+<li><p>将大数转化为一个字符串: </p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">char<span class="built_in"> string</span>[<span class="number">50</span>];</span><br><span class="line">int<span class="built_in"> number</span> = <span class="number">21345</span>;</span><br><span class="line">sprintf<span class="built_in">(string</span>, <span class="meta">%d</span>,<span class="built_in"> number</span>);  // 将大<span class="built_in">数number</span>, 转化为字符串后, 保存<span class="built_in">在string</span>中</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>字符串：</p>
-<ul>
-<li>是一种简单，有效表示大数的方法</li>
 </ul>
 </li>
-<li><p>字符串的赋值</p>
+</ol>
+<ol start="5">
+<li><p><strong>字符串赋值和指针的关系</strong></p>
 <ul>
-<li><p>同一个字符赋值给两个指针；</p>
+<li><p>(1) 同一个字符赋值给两个指针；这两个指针保存的地址是一样的，所以改变其中一个的值，另外一个也会变</p>
 </li>
-<li><p>这两个指针保存的地址是一样的，所以改变其中一个的值，另外一个也会变</p>
+<li><p>(2) 打印字符的首地址: 通过 %p的形式;</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">char name = <span class="string">'a'</span>;</span><br><span class="line">char *str = &amp;name;</span><br><span class="line">char *pbeg = &amp;name;</span><br><span class="line">     </span><br><span class="line"><span class="keyword">printf</span>(<span class="string">"str adress is %p value is %c:\n"</span>, str, *str);</span><br><span class="line"><span class="keyword">printf</span>(<span class="string">"pbeg adress is %p value is %c:\n"</span>,pbeg, *pbeg);</span><br><span class="line">     </span><br><span class="line">char temp = <span class="string">'b'</span> ;</span><br><span class="line">*str = temp;		<span class="regexp">//</span> 注意，这里赋值的是值；不能是地址</span><br><span class="line">     </span><br><span class="line"><span class="keyword">printf</span>(<span class="string">"str adress is %p value is %c:\n"</span>, str, *str);</span><br><span class="line"><span class="keyword">printf</span>(<span class="string">"pbeg adress is %p value is %c:\n"</span>,pbeg, *pbeg);</span><br></pre></td></tr></table></figure>
 <figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str adress <span class="keyword">is</span> <span class="number">0</span>x<span class="number">7f</span>fda<span class="number">0</span>eefe<span class="number">36</span> <span class="keyword">value</span> <span class="keyword">is</span> a:</span><br><span class="line">pbeg adress <span class="keyword">is</span> <span class="number">0</span>x<span class="number">7f</span>fda<span class="number">0</span>eefe<span class="number">36</span> <span class="keyword">value</span> <span class="keyword">is</span> a:</span><br><span class="line">str adress <span class="keyword">is</span> <span class="number">0</span>x<span class="number">7f</span>fda<span class="number">0</span>eefe<span class="number">36</span> <span class="keyword">value</span> <span class="keyword">is</span> b:</span><br><span class="line">pbeg adress <span class="keyword">is</span> <span class="number">0</span>x<span class="number">7f</span>fda<span class="number">0</span>eefe<span class="number">36</span> <span class="keyword">value</span> <span class="keyword">is</span> b:</span><br></pre></td></tr></table></figure>
 </li>
@@ -575,16 +537,13 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *number = <span class="built_in">malloc</span>(<span class="built_in">strlen</span>(str) + <span class="number">1</span>); <span class="comment">//字符串不使用sizeof()</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="非面试题"><a href="#非面试题" class="headerlink" title="非面试题"></a>非面试题</h2><h3 id="应用一：题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换"><a href="#应用一：题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换" class="headerlink" title="应用一：题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换"></a>应用一：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/Atio.c" target="_blank" rel="noopener">题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换</a></h3><h3 id="应用二：-题目：Int型整数，转化为字符串"><a href="#应用二：-题目：Int型整数，转化为字符串" class="headerlink" title="应用二： 题目：Int型整数，转化为字符串"></a>应用二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/Itoa.c" target="_blank" rel="noopener"> 题目：Int型整数，转化为字符串</a></h3><ol>
-<li><p>还可以通过一个函数：sprintf</p>
-<ul>
-<li><p>直接将整数写到字符串中；</p>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> <span class="keyword">str</span>[<span class="number">50</span>];</span><br><span class="line"><span class="keyword">int</span> n = <span class="number">21345</span>;</span><br><span class="line">sprintf(<span class="keyword">str</span>, %d, n);</span><br></pre></td></tr></table></figure>
+<h2 id="字符串的相关笔试题目"><a href="#字符串的相关笔试题目" class="headerlink" title="字符串的相关笔试题目"></a>字符串的相关笔试题目</h2><ol>
+<li><p>应用一：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/string_replace.c" target="_blank" rel="noopener">面试题5：<strong>替换</strong>字符串中的空格 (通过特殊字符替换字符串中的 “#”, “ “)</a></p>
 </li>
-</ul>
+<li><p>应用二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/print_oneToMaxBit_number.c" target="_blank" rel="noopener">面试题17：打印1到最大的<strong>n位数</strong>(n==2 打印1-99)</a></p>
 </li>
 </ol>
-<h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><h3 id="应用一：面试题5：替换字符串中的空格"><a href="#应用一：面试题5：替换字符串中的空格" class="headerlink" title="应用一：面试题5：替换字符串中的空格"></a>应用一：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/string_replace.c" target="_blank" rel="noopener">面试题5：替换字符串中的空格</a></h3><h3 id="应用二：面试题17：打印1到最大的n位数"><a href="#应用二：面试题17：打印1到最大的n位数" class="headerlink" title="应用二：面试题17：打印1到最大的n位数"></a>应用二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/14_CodeQuality_Integrity/print_oneToMaxBit_number.c" target="_blank" rel="noopener">面试题17：打印1到最大的n位数</a></h3><h3 id="应用三：面试题19：正则表达式匹配"><a href="#应用三：面试题19：正则表达式匹配" class="headerlink" title="应用三：面试题19：正则表达式匹配"></a>应用三：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/match_string.c" target="_blank" rel="noopener">面试题19：正则表达式匹配</a></h3><ol>
+<h3 id="应用三：面试题19：正则表达式匹配"><a href="#应用三：面试题19：正则表达式匹配" class="headerlink" title="应用三：面试题19：正则表达式匹配"></a>应用三：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/match_string.c" target="_blank" rel="noopener">面试题19：正则表达式匹配</a></h3><ol>
 <li>根据题目的要求：举例子后找出规律；</li>
 </ol>
 <h3 id="应用四：面试题20：表示数值的字符串。判断字符串，是不是数值"><a href="#应用四：面试题20：表示数值的字符串。判断字符串，是不是数值" class="headerlink" title="应用四：面试题20：表示数值的字符串。判断字符串，是不是数值"></a>应用四：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/represent_number_string.c" target="_blank" rel="noopener">面试题20：表示数值的字符串。判断字符串，是不是数值</a></h3><h3 id="应用五：面试题38：字符串的排列-。题目：输入一个字符串，打印出该字符串中字符的所有排列"><a href="#应用五：面试题38：字符串的排列-。题目：输入一个字符串，打印出该字符串中字符的所有排列" class="headerlink" title="应用五：面试题38：字符串的排列 。题目：输入一个字符串，打印出该字符串中字符的所有排列"></a>应用五：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/permutation_ofStrings.c" target="_blank" rel="noopener">面试题38：字符串的排列 。题目：输入一个字符串，打印出该字符串中字符的所有排列</a></h3><ol>
@@ -597,7 +556,7 @@
 <li><p>字符串的组合：</p>
 </li>
 </ol>
-<h3 id="应用六-面试题58（一）：翻转单词顺序-题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。"><a href="#应用六-面试题58（一）：翻转单词顺序-题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。" class="headerlink" title="应用六: 面试题58（一）：翻转单词顺序.  题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。"></a>应用六: <a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/reverseSentence.c" target="_blank" rel="noopener">面试题58（一）：翻转单词顺序.  题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。</a></h3><h3 id="应用七-面试题58（二）：左旋转字符串-题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。"><a href="#应用七-面试题58（二）：左旋转字符串-题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。" class="headerlink" title="应用七: 面试题58（二）：左旋转字符串.  题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。"></a>应用七: <a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/leftRotateString.c" target="_blank" rel="noopener">面试题58（二）：左旋转字符串.  题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。</a></h3>
+<h3 id="应用六-面试题58（一）：翻转单词顺序-题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。"><a href="#应用六-面试题58（一）：翻转单词顺序-题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。" class="headerlink" title="应用六: 面试题58（一）：翻转单词顺序.  题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。"></a>应用六: <a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/reverseSentence.c" target="_blank" rel="noopener">面试题58（一）：翻转单词顺序.  题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。</a></h3><h3 id="应用七-面试题58（二）：左旋转字符串-题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。"><a href="#应用七-面试题58（二）：左旋转字符串-题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。" class="headerlink" title="应用七: 面试题58（二）：左旋转字符串.  题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。"></a>应用七: <a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/leftRotateString.c" target="_blank" rel="noopener">面试题58（二）：左旋转字符串.  题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。</a></h3><h3 id="应用一：题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换"><a href="#应用一：题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换" class="headerlink" title="应用一：题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换"></a>应用一：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/Atio.c" target="_blank" rel="noopener">题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换</a></h3><h3 id="应用二：-题目：Int型整数，转化为字符串"><a href="#应用二：-题目：Int型整数，转化为字符串" class="headerlink" title="应用二： 题目：Int型整数，转化为字符串"></a>应用二：<a href="https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/Itoa.c" target="_blank" rel="noopener"> 题目：Int型整数，转化为字符串</a></h3>
       
     </div>
 
@@ -692,10 +651,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table Des Matières
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Ensemble
           </li>
         </ul>
       
@@ -718,7 +677,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">98</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">articles</span>
                   </a>
                 </div>
               
@@ -863,7 +822,7 @@
                       
                     
                     <span class="site-state-item-count">66</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -1040,7 +999,7 @@
                       
                     
                     <span class="site-state-item-count">82</span>
-                    <span class="site-state-item-name">Tags</span>
+                    <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
               
@@ -1075,7 +1034,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构–字符串"><span class="nav-number">1.</span> <span class="nav-text">数据结构–字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">1.1.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串相关知识"><span class="nav-number">1.2.</span> <span class="nav-text">字符串相关知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非面试题"><span class="nav-number">1.3.</span> <span class="nav-text">非面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换"><span class="nav-number">1.3.1.</span> <span class="nav-text">应用一：题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：-题目：Int型整数，转化为字符串"><span class="nav-number">1.3.2.</span> <span class="nav-text">应用二： 题目：Int型整数，转化为字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题"><span class="nav-number">1.4.</span> <span class="nav-text">面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：面试题5：替换字符串中的空格"><span class="nav-number">1.4.1.</span> <span class="nav-text">应用一：面试题5：替换字符串中的空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：面试题17：打印1到最大的n位数"><span class="nav-number">1.4.2.</span> <span class="nav-text">应用二：面试题17：打印1到最大的n位数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三：面试题19：正则表达式匹配"><span class="nav-number">1.4.3.</span> <span class="nav-text">应用三：面试题19：正则表达式匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用四：面试题20：表示数值的字符串。判断字符串，是不是数值"><span class="nav-number">1.4.4.</span> <span class="nav-text">应用四：面试题20：表示数值的字符串。判断字符串，是不是数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用五：面试题38：字符串的排列-。题目：输入一个字符串，打印出该字符串中字符的所有排列"><span class="nav-number">1.4.5.</span> <span class="nav-text">应用五：面试题38：字符串的排列 。题目：输入一个字符串，打印出该字符串中字符的所有排列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用六-面试题58（一）：翻转单词顺序-题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。"><span class="nav-number">1.4.6.</span> <span class="nav-text">应用六: 面试题58（一）：翻转单词顺序.  题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用七-面试题58（二）：左旋转字符串-题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。"><span class="nav-number">1.4.7.</span> <span class="nav-text">应用七: 面试题58（二）：左旋转字符串.  题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构–字符串"><span class="nav-number">1.</span> <span class="nav-text">数据结构–字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串相关知识"><span class="nav-number">1.1.</span> <span class="nav-text">字符串相关知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串的相关笔试题目"><span class="nav-number">1.2.</span> <span class="nav-text">字符串的相关笔试题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三：面试题19：正则表达式匹配"><span class="nav-number">1.2.1.</span> <span class="nav-text">应用三：面试题19：正则表达式匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用四：面试题20：表示数值的字符串。判断字符串，是不是数值"><span class="nav-number">1.2.2.</span> <span class="nav-text">应用四：面试题20：表示数值的字符串。判断字符串，是不是数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用五：面试题38：字符串的排列-。题目：输入一个字符串，打印出该字符串中字符的所有排列"><span class="nav-number">1.2.3.</span> <span class="nav-text">应用五：面试题38：字符串的排列 。题目：输入一个字符串，打印出该字符串中字符的所有排列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用六-面试题58（一）：翻转单词顺序-题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。"><span class="nav-number">1.2.4.</span> <span class="nav-text">应用六: 面试题58（一）：翻转单词顺序.  题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用七-面试题58（二）：左旋转字符串-题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。"><span class="nav-number">1.2.5.</span> <span class="nav-text">应用七: 面试题58（二）：左旋转字符串.  题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换"><span class="nav-number">1.2.6.</span> <span class="nav-text">应用一：题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：-题目：Int型整数，转化为字符串"><span class="nav-number">1.2.7.</span> <span class="nav-text">应用二： 题目：Int型整数，转化为字符串</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1121,7 +1080,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -1129,7 +1088,7 @@
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
 
 
 
