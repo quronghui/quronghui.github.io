@@ -110,7 +110,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/15/OS虚拟化/os_Dynamic_relocation.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/15/OS虚拟化/TLB.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/15/OS虚拟化/PDE.jpg">
-<meta property="og:updated_time" content="2019-07-18T05:40:17.493Z">
+<meta property="og:updated_time" content="2019-08-10T10:39:35.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS虚拟化">
 <meta name="twitter:description" content="操作系统导论操作系统 程序运行的过程: 执行指令  内存中fetch（取址）– decode（解码） – excuse（执行）具体的操作 冯诺依曼计算机模型   操作系统作用：  程序运行需要内存调度, 设备交互; OS 作用: 确保系统易于使用且高效运行；   OS 如何实现程序的高效运行：  虚拟化: 将物理资源(CPU, 内存, 磁盘)转换为更通用, 更强大的虚拟形式; 标准库API: 用户">
@@ -231,7 +231,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -265,7 +265,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
 
   </li>
         
@@ -282,7 +282,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
 
@@ -293,7 +293,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>recherche</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -399,7 +399,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -423,7 +423,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-18 13:40:17" itemprop="dateModified" datetime="2019-07-18T13:40:17+08:00">2019-07-18</time>
+                <time title="Updated at: 2019-08-10 18:39:35" itemprop="dateModified" datetime="2019-08-10T18:39:35+08:00">2019-08-10</time>
               
             
           </span>
@@ -437,7 +437,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Operate-System/" itemprop="url" rel="index"><span itemprop="name">Operate System</span></a></span>
@@ -539,7 +539,7 @@
 <ul>
 <li>虚拟化CPU :  机制 + 策略<ul>
 <li>硬件资源 + OS : 虚拟化实现多个CPU, 可执行多个进程;</li>
-<li>采用<strong>多级反馈队列</strong>的调度方式, 在<strong>同级优先度</strong>的情况下采用<strong>轮转</strong>策略, 和<strong>上下文切换</strong>的机制, 完成进程的调度</li>
+<li>实现方式: 采用<strong>多级反馈队列</strong>的调度方式, 在<strong>同级优先度</strong>的情况下采用<strong>轮转</strong>策略, 和<strong>上下文切换</strong>的机制, 完成进程的调度</li>
 </ul>
 </li>
 <li>虚拟化内存<ul>
@@ -547,7 +547,7 @@
 <li>用户程序生成的每个地址(能够看见的)都是虚拟地址;</li>
 </ul>
 </li>
-<li>使用最少最近使用<strong>LRU缓存替换</strong>策略, 使得总体TLB<strong>未命中</strong>的比例最小;采用<strong>分页</strong>的机制, 快速的从虚拟地址中得到物理地址</li>
+<li>实现方式: 通过最少最近使用<strong>LRU缓存替换</strong>策略, 使得总体TLB<strong>未命中</strong>的比例最小;采用<strong>分页</strong>的机制, 快速的从虚拟地址中得到物理地址;</li>
 </ul>
 </li>
 </ul>
@@ -568,12 +568,40 @@
 </li>
 </ol>
 <h2 id="虚拟化CPU"><a href="#虚拟化CPU" class="headerlink" title="虚拟化CPU"></a>虚拟化CPU</h2><ol>
-<li>机制的理解: 如何(how) 提供答案?<ul>
+<li><p>机制的理解: 如何(how) 提供答案?</p>
+<ul>
 <li>时分分享机制: 上下文切换</li>
 </ul>
 </li>
-<li>策略的理解: 那个(which) 问题?<ul>
+<li><p>策略的理解: 那个(which) 问题?</p>
+<ul>
 <li>轮转: RR时间片进行上下文的切换</li>
+</ul>
+</li>
+<li><p><strong>调度策略存在为了优化机制的?</strong></p>
+<ul>
+<li><p>虚拟化CPU的机制</p>
+<ul>
+<li>SJF / STCF : 周转时间;</li>
+<li>RR 时间片轮转: 响应时间</li>
+<li>MLFQ : 优化周转时间和响应时间的指标</li>
+</ul>
+</li>
+<li><p>虚拟化内存的机制 </p>
+<ul>
+<li><p>base/bound : 内部碎片</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">physical</span> <span class="keyword">adress </span>= virtual <span class="keyword">adress </span>+ <span class="keyword">base	</span>// 地址转换</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分段: 外部碎片</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">physical</span> <span class="keyword">adress </span>= <span class="keyword">base[segment] </span>+ offset</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分割和合并: 减少内外碎片;</p>
+</li>
+<li><p>分页 + TLB: 实现快速的虚拟地址转换</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">phyadress</span> = PFN 组合 <span class="literal">off</span>set; (位连接)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
@@ -645,7 +673,7 @@
 <li>内核模式: 系统调用时, 进程执行前必须执行陷阱(trap) 指令和陷阱处理程序</li>
 </ul>
 </li>
-<li>问题二: 如何实现进程间的切换?<ul>
+<li><strong>问题二: 如何实现进程间的切换</strong>?<ul>
 <li>a) 首先: OS 获取CPU的控制权<ul>
 <li>协作方式: 当进程在进行系统调用是, 将CPU的控制权转交给OS</li>
 <li>非协作方式: 重启 / 时钟中断</li>
@@ -663,7 +691,7 @@
 <h3 id="策略-进程调度"><a href="#策略-进程调度" class="headerlink" title="策略 进程调度"></a>策略 进程调度</h3><ol>
 <li><p>概念: 工作负载的概念?</p>
 <ul>
-<li>进程运行过程中,: </li>
+<li>进程运行过程中: </li>
 <li>既有运行时间短, 响应时间快, 频繁放弃CPU的交互型I/O工作;</li>
 <li>也存在需要很多CPU时间, 响应时间并不是很重要的长时间计算型工作.</li>
 </ul>
@@ -728,7 +756,7 @@
 </li>
 <li><p>MLFQ 如何实现调度?</p>
 <ul>
-<li>通过观察工作运行给出对应的优先级;<ul>
+<li>通过观察工作运行状态调整其对应的优先级;<ul>
 <li>对于不断放弃CPU等待键盘输入的工作, 保持其高优先级</li>
 <li>对于长时间占用CPU的工作, 不断降低其优先级;</li>
 </ul>
@@ -778,9 +806,8 @@
 </li>
 </ol>
 <h2 id="虚拟化内存"><a href="#虚拟化内存" class="headerlink" title="虚拟化内存"></a>虚拟化内存</h2><ol>
-<li><p>为什么要虚拟化内存?</p>
-<ul>
-<li>OS让没一个程序员觉得, 它是有用一个很大的连续地址存储空间, 用来存放其代码和数据;</li>
+<li>为什么要虚拟化内存?<ul>
+<li>OS让每一个程序员觉得, 它是有用一个很大的连续地址存储空间, 用来存放其代码和数据;</li>
 <li>隔离和保护: 不希望错误的程序读写或者覆盖其他程序的内存;</li>
 </ul>
 </li>
@@ -798,6 +825,7 @@
 <li>使用最少最近使用LRU缓存替换策略, 使得总体未命中的比例最小;</li>
 </ul>
 </li>
+<li></li>
 </ul>
 </li>
 </ol>
@@ -833,11 +861,15 @@
 <ul>
 <li>程序员不主动释放, 即使进程关闭, 堆内存也会一直存在, 只不过会出现<strong>内存泄露</strong>问题</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *x = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>))	<span class="comment">// 栈和堆的分配在同一行</span></span><br><span class="line"><span class="keyword">char</span> *<span class="built_in">string</span> = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">strlen</span>(<span class="built_in">string</span>)) + <span class="number">1</span>); 字符串一定要加<span class="number">1</span>, 存在<span class="string">'\0'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *x = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>))	<span class="comment">// 栈和堆的分配在同一行</span></span><br><span class="line"><span class="keyword">int</span> *x  : 申请一个整形指针栈空间;</span><br><span class="line"> <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)): 在堆上请求整数的空间, 成功返回一个整数地址, 并**存储在栈**上供程序调用;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ <span class="keyword">int</span> *x  : 申请一个整形指针栈空间;</span><br><span class="line">+ <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)): 在堆上请求整数的空间, 成功返回一个整数地址, 并**存储在栈**上供程序调用;</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<pre><code>+ 字符串的动态申请
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *<span class="built_in">string</span> = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(<span class="built_in">string</span>) + <span class="number">1</span>); 字符串一定要加<span class="number">1</span>, 存在<span class="string">'\0'</span></span><br></pre></td></tr></table></figure>
+</code></pre><ol start="3">
 <li><p>为什么<strong>堆内存</strong>要进行释放free(), 栈内存不进行释放?</p>
 <ul>
 <li><p>系统中存在两级内存管理</p>
@@ -954,11 +986,15 @@
 </ul>
 </li>
 </ol>
-<h3 id="空闲空间管理"><a href="#空闲空间管理" class="headerlink" title="空闲空间管理"></a>空闲空间管理</h3><ul>
+<h3 id="空闲空间管理MMU"><a href="#空闲空间管理MMU" class="headerlink" title="空闲空间管理MMU"></a>空闲空间管理MMU</h3><ul>
 <li>这里不思考虚拟化, 思考空闲的内存管理MMU.</li>
 </ul>
 <ol>
-<li>针对外部碎片: 如何减少外部碎片的产生, 更好的维护空间内存?</li>
+<li>针对外部碎片: 如何减少外部碎片的产生, 更好的维护空间内存?<ul>
+<li>内部碎片: 地址空间分给了进程后, 一部分未使用;</li>
+<li>外部碎片: 地址空间没有分配给进程, 但是被分配的段空间隔成非连续的空间;</li>
+</ul>
+</li>
 <li>底层机制:  <ul>
 <li>分割与合并: <ul>
 <li>对空闲内存的基本操作, 满足用户的空间需求;</li>
@@ -1019,7 +1055,7 @@
 </ol>
 <pre><code>+ 页内偏移量offset: 
 
-  <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">offset(<span class="built_in">bit</span>) = 总的(<span class="built_in">bit</span>) - VPN(<span class="built_in">bit</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">offset(<span class="built_in">bit</span>) = 总的(<span class="built_in">bit</span>) - VPN(<span class="built_in">bit</span>)</span><br></pre></td></tr></table></figure>
 </code></pre><ul>
 <li><p><strong>地址转换</strong></p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">通过VPN找到物理内存中的PFN<span class="comment">;</span></span><br><span class="line"><span class="attribute">phyadress</span> = PFN 组合 offset<span class="comment">; (位连接)</span></span><br></pre></td></tr></table></figure>
@@ -1295,10 +1331,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table Des Matières
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Ensemble
+            Übersicht
           </li>
         </ul>
       
@@ -1320,8 +1356,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">98</span>
-                    <span class="site-state-item-name">articles</span>
+                    <span class="site-state-item-count">97</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -1466,7 +1502,7 @@
                       
                     
                     <span class="site-state-item-count">66</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -1642,8 +1678,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">82</span>
-                    <span class="site-state-item-name">tags</span>
+                      
+                    
+                    <span class="site-state-item-count">83</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -1678,7 +1716,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统导论"><span class="nav-number">1.</span> <span class="nav-text">操作系统导论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟化CPU"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟化CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程"><span class="nav-number">1.2.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程API-–-用户如何调用进程"><span class="nav-number">1.2.2.</span> <span class="nav-text">进程API – 用户如何调用进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-受限直接执行"><span class="nav-number">1.2.3.</span> <span class="nav-text">机制 受限直接执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#策略-进程调度"><span class="nav-number">1.2.4.</span> <span class="nav-text">策略 进程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-多级反馈队列"><span class="nav-number">1.2.5.</span> <span class="nav-text">调度: 多级反馈队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-比例份额"><span class="nav-number">1.2.6.</span> <span class="nav-text">调度: 比例份额</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-多处理器调度"><span class="nav-number">1.2.7.</span> <span class="nav-text">调度 :多处理器调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟化内存"><span class="nav-number">1.3.</span> <span class="nav-text">虚拟化内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址空间"><span class="nav-number">1.3.1.</span> <span class="nav-text">地址空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存操作API"><span class="nav-number">1.3.2.</span> <span class="nav-text">内存操作API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-地址转换-实现方式-单基址-界限"><span class="nav-number">1.3.3.</span> <span class="nav-text">机制 : 地址转换 ( 实现方式:  单基址/界限)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-分段-多基址-界限"><span class="nav-number">1.3.4.</span> <span class="nav-text">机制: 分段(多基址/界限)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空闲空间管理"><span class="nav-number">1.3.5.</span> <span class="nav-text">空闲空间管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-分页"><span class="nav-number">1.3.6.</span> <span class="nav-text">机制: 分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分页优化-快速地址转换-TLB"><span class="nav-number">1.3.7.</span> <span class="nav-text">分页优化: 快速地址转换(TLB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页表优化-多级页表"><span class="nav-number">1.3.8.</span> <span class="nav-text">页表优化: 多级页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超越物理内存-机制"><span class="nav-number">1.3.9.</span> <span class="nav-text">超越物理内存 : 机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超越物理内存-策略"><span class="nav-number">1.3.10.</span> <span class="nav-text">超越物理内存 : 策略</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统导论"><span class="nav-number">1.</span> <span class="nav-text">操作系统导论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟化CPU"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟化CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程"><span class="nav-number">1.2.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程API-–-用户如何调用进程"><span class="nav-number">1.2.2.</span> <span class="nav-text">进程API – 用户如何调用进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-受限直接执行"><span class="nav-number">1.2.3.</span> <span class="nav-text">机制 受限直接执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#策略-进程调度"><span class="nav-number">1.2.4.</span> <span class="nav-text">策略 进程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-多级反馈队列"><span class="nav-number">1.2.5.</span> <span class="nav-text">调度: 多级反馈队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-比例份额"><span class="nav-number">1.2.6.</span> <span class="nav-text">调度: 比例份额</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度-多处理器调度"><span class="nav-number">1.2.7.</span> <span class="nav-text">调度 :多处理器调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟化内存"><span class="nav-number">1.3.</span> <span class="nav-text">虚拟化内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址空间"><span class="nav-number">1.3.1.</span> <span class="nav-text">地址空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存操作API"><span class="nav-number">1.3.2.</span> <span class="nav-text">内存操作API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-地址转换-实现方式-单基址-界限"><span class="nav-number">1.3.3.</span> <span class="nav-text">机制 : 地址转换 ( 实现方式:  单基址/界限)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-分段-多基址-界限"><span class="nav-number">1.3.4.</span> <span class="nav-text">机制: 分段(多基址/界限)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空闲空间管理MMU"><span class="nav-number">1.3.5.</span> <span class="nav-text">空闲空间管理MMU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机制-分页"><span class="nav-number">1.3.6.</span> <span class="nav-text">机制: 分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分页优化-快速地址转换-TLB"><span class="nav-number">1.3.7.</span> <span class="nav-text">分页优化: 快速地址转换(TLB)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页表优化-多级页表"><span class="nav-number">1.3.8.</span> <span class="nav-text">页表优化: 多级页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超越物理内存-机制"><span class="nav-number">1.3.9.</span> <span class="nav-text">超越物理内存 : 机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超越物理内存-策略"><span class="nav-number">1.3.10.</span> <span class="nav-text">超越物理内存 : 策略</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1724,7 +1762,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -1732,7 +1770,7 @@
 
 
 
-  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
 
 
 
