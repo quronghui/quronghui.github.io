@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/18/OS并发/semphore_cond.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/OS并发/deadlock.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/OS并发/deadlock_reason.jpg">
-<meta property="og:updated_time" content="2019-07-20T03:09:02.641Z">
+<meta property="og:updated_time" content="2019-08-11T13:38:17.203Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS并发">
 <meta name="twitter:description" content="操作系统的并发并发的基础知识 并发的基本抽象  问题:  多个用户要快速的抓取并吃掉多个桃子; 实现方式: 多线程的应用程序(表示多个用户), 访问内存节点数据(多个桃子) OS的支持: OS使用锁(lock) 和条件变量(condition variable), 支持多线程应用程序;   线程和进程  线程: 单个运行进程提供的抽象.       区别 进程 线程     运行时 完成相应的指令">
@@ -230,7 +230,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -264,7 +264,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
 
   </li>
         
@@ -281,7 +281,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
 
@@ -292,7 +292,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -398,14 +398,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-18 10:57:22" itemprop="dateCreated datePublished" datetime="2019-07-18T10:57:22+08:00">2019-07-18</time>
+              <time title="Post created: 2019-07-18 10:57:22" itemprop="dateCreated datePublished" datetime="2019-07-18T10:57:22+08:00">2019-07-18</time>
             
 
             
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-20 11:09:02" itemprop="dateModified" datetime="2019-07-20T11:09:02+08:00">2019-07-20</time>
+                <time title="Updated at: 2019-08-11 21:38:17" itemprop="dateModified" datetime="2019-08-11T21:38:17+08:00">2019-08-11</time>
               
             
           </span>
@@ -436,7 +436,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Operate-System/" itemprop="url" rel="index"><span itemprop="name">Operate System</span></a></span>
@@ -581,6 +581,63 @@
 </tr>
 </tbody>
 </table>
+<ol start="4">
+<li><strong>实现线程间的同步方法的比较</strong></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>实现方法</th>
+<th>锁</th>
+<th>条件变量</th>
+<th>信号量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>特点</td>
+<td>二值信号量 (0/1)</td>
+<td>队列(需要记录队列为空还是满)</td>
+<td>是一个整数值(初始化赋值)</td>
+</tr>
+<tr>
+<td>需要参数</td>
+<td>1)共享变量<br>(while自旋的条件);</td>
+<td>1)共享变量<br>(while 进入等待的条件)</td>
+<td>sem</td>
+</tr>
+<tr>
+<td></td>
+<td>2) mutex</td>
+<td>2)mutex (实现线程间互斥)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>3)cond(实线线程间同步)</td>
+<td></td>
+</tr>
+<tr>
+<td>函数</td>
+<td>lock() ; unlock()</td>
+<td>cond_wait(); <br><strong>线程进入等待状态会释放锁</strong></td>
+<td>sem_init()<br>1)  int pshared: 0 线程间同步;1-进程<br>2) int value : 信号量初始化的值</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>cond_signal(); 唤醒线程</td>
+<td>sem_wait() :<strong>不释放锁, 死锁问题</strong> <br>信号量减一, (与初始值比较)进入等待状态</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>sem_post();<br>信号量加一, (与初始值比较)唤醒线程</td>
+</tr>
+</tbody>
+</table>
 <h3 id="线程的创建和执行顺序"><a href="#线程的创建和执行顺序" class="headerlink" title="线程的创建和执行顺序"></a><a href="https://github.com/quronghui/OSIntroduction/tree/master/1_thread_create/thread_create.c" target="_blank" rel="noopener">线程的创建和执行顺序</a></h3><ol>
 <li><strong>问题一:</strong> 多线程的创建和执行?<ul>
 <li>记住: <strong>先创建的不一定先执行;</strong></li>
@@ -616,21 +673,21 @@
 <li><p>线程的创建函数分析</p>
 <figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int pthread_create(pthread_t *thread, <span class="keyword">const</span> pthread_attr_t *attr,  void *<span class="comment">(*start_routine) (void *)</span>, void *arg);</span><br></pre></td></tr></table></figure>
 <ul>
-<li>pthread_t *thread : 与线程的交互</li>
+<li>pthread_t *thread : 与线程交互的参数</li>
 <li>const pthread_attr_t *attr : 指定线程的属性<ul>
 <li>栈属性: 栈的大小;</li>
 <li>优先级属性</li>
 <li><strong>使用前要进行初始化</strong>: pthread_attr_init()</li>
 </ul>
 </li>
-<li>void <em> ( </em>start_routine) (void *) : 指针函数<ul>
+<li>void <em>  (  </em>start_routine) (void *) : 函数指针<ul>
 <li><strong>线程需要完成的指令</strong>: 包括所有的临界区 </li>
 </ul>
 </li>
-<li>void *arg: 传递给指针函数的参数</li>
+<li>void *arg: 传递给函数指针的参数</li>
 </ul>
 </li>
-<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/1_thread_create/thread_join.c" target="_blank" rel="noopener">线程完成</a></p>
+<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/1_thread_create/thread_join.c" target="_blank" rel="noopener">如何等待线程函数完成</a></p>
 <ul>
 <li><p>等待线程的完成, 需要调用函数pthread_join()</p>
 </li>
@@ -788,22 +845,29 @@
 </li>
 <li><p>问题一:  done 共享变量, 是否有存在的必要?</p>
 <ul>
-<li><p>睡眠, 唤醒, 锁都离不开共享变量</p>
+<li>睡眠, 唤醒, 锁都离不开共享变量</li>
+</ul>
 </li>
-<li><p>a. 情况一: 父线程创建子线程后, 自己运行(单CPU), 调用thr_join()函数. </p>
+</ol>
+<ul>
+<li>a. 情况一: 父线程创建子线程后, 自己运行(单CPU), 调用thr_join()函数. <ul>
+<li>这种情况下 父线程先获得lock, done==0, 子线程还在运行, 调用wait()进入睡眠; <ul>
+<li>子线程得以运行,  调用thr_exit()函数发送signal 信号唤醒父线程;</li>
+</ul>
+</li>
+<li>父线程从wait中返回, 释放锁;</li>
+</ul>
+</li>
+<li>b.  情况二: 父线程创建子线程后,子线程立即运行, 并且设置 done =1; <ul>
+<li>调用signal唤醒其他线程(线程队列为空), 然后结束;<ul>
+<li>父线程运行后, 调用thr_join(), 发现done = 1, 所以释放锁返回;</li>
+</ul>
 </li>
 </ul>
-<p>​                这种情况下 父线程先获得lock, done==0, 子线程还在运行, 调用wait()进入睡眠; </p>
-<p>​                子线程得以运行,  调用thr_exit()函数发送signal 信号唤醒父线程;</p>
-<p>​                父线程从wait中返回, 释放锁;</p>
-<ul>
-<li>b.  情况二: 父线程创建子线程后,子线程立即运行, 并且设置 done =1; </li>
-</ul>
-<p>​                调用signal唤醒其他线程(线程队列为空), 然后结束;</p>
-<p>​                父线程运行后, 调用thr_join(), 发现done = 1, 所以释放锁返回;</p>
 </li>
-<li><p>问题二:  唤醒和睡眠状态都不加锁?</p>
-<ul>
+</ul>
+<ol start="3">
+<li>问题二:  唤醒和睡眠状态都不加锁?<ul>
 <li>会被中断信号打断</li>
 </ul>
 </li>
@@ -859,6 +923,9 @@
 </ul>
 </li>
 </ol>
+<h2 id="基于锁的并发数据结构"><a href="#基于锁的并发数据结构" class="headerlink" title="基于锁的并发数据结构"></a>基于锁的并发数据结构</h2><ul>
+<li>还没有看</li>
+</ul>
 <h2 id="信号量-–-同步原语"><a href="#信号量-–-同步原语" class="headerlink" title="信号量 – 同步原语"></a>信号量 – 同步原语</h2><ol>
 <li><p>信号量 : 是一个<strong>整数值</strong>的对象;</p>
 <ul>
@@ -914,7 +981,7 @@
 <li><p>情景一:  父线程 创建子线程后, 子线程先运行</p>
 <img src="/2019/07/18/OS并发/semphore_cond.jpg">
 </li>
-<li><p>情景一:  父线程 创建子线程后, 父线程先运行</p>
+<li><p>情景二:  父线程 创建子线程后, 父线程先运行</p>
 </li>
 </ul>
 </li>
@@ -946,14 +1013,13 @@
 </li>
 <li><p><strong>问题一</strong>: 信号量实现的生产者和消费者为什么会产生死锁问题?</p>
 <ul>
-<li>信号量实现的模型<ul>
+<li><p>信号量实现的模型</p>
+<ul>
 <li><strong>先进入函数</strong> : Sem_wait() </li>
 <li><strong>后比较</strong>比较: 进入睡眠模式(sem&lt;0)不会释放锁</li>
 </ul>
-</li>
-</ul>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Sem_wait(<span class="meta">&amp;mutex);		<span class="comment">// 已经获得锁了</span></span></span><br><span class="line">Sem_wait(<span class="meta">&amp;empty);  		<span class="comment">// 进入等待的时候**不会释放锁**</span></span></span><br></pre></td></tr></table></figure>
-<ul>
+</li>
 <li><p>条件变量实现的模型: </p>
 <ul>
 <li><strong>先比较</strong> : 有一个全局的共享变量, 进行标识buffer值的大小;</li>
@@ -1218,10 +1284,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -1244,7 +1310,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">97</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -1389,7 +1455,7 @@
                       
                     
                     <span class="site-state-item-count">66</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -1568,7 +1634,7 @@
                       
                     
                     <span class="site-state-item-count">83</span>
-                    <span class="site-state-item-name">tags</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -1603,7 +1669,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统的并发"><span class="nav-number">1.</span> <span class="nav-text">操作系统的并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的基础知识"><span class="nav-number">1.1.</span> <span class="nav-text">并发的基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的创建和执行顺序"><span class="nav-number">1.1.1.</span> <span class="nav-text">线程的创建和执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程之间存在的问题"><span class="nav-number">1.1.2.</span> <span class="nav-text">多线程之间存在的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的API"><span class="nav-number">1.2.</span> <span class="nav-text">线程的API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的创建和线程完成"><span class="nav-number">1.2.1.</span> <span class="nav-text">线程的创建和线程完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁的API-接口"><span class="nav-number">1.2.2.</span> <span class="nav-text">锁的API 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量-API"><span class="nav-number">1.2.3.</span> <span class="nav-text">条件变量 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现锁"><span class="nav-number">1.3.</span> <span class="nav-text">实现锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于硬件原语实现锁-不基于线程库"><span class="nav-number">1.3.1.</span> <span class="nav-text">基于硬件原语实现锁(不基于线程库)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件原语-OS原语-实现锁"><span class="nav-number">1.3.2.</span> <span class="nav-text">硬件原语 + OS原语 实现锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件变量-–-另外的开发原语"><span class="nav-number">1.4.</span> <span class="nav-text">条件变量 – 另外的开发原语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量的定义和程序"><span class="nav-number">1.4.1.</span> <span class="nav-text">条件变量的定义和程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型模型-生产者和消费者-存在界缓冲区"><span class="nav-number">1.4.2.</span> <span class="nav-text">典型模型: 生产者和消费者(存在界缓冲区)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#覆盖条件"><span class="nav-number">1.4.3.</span> <span class="nav-text">覆盖条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量-–-同步原语"><span class="nav-number">1.5.</span> <span class="nav-text">信号量 – 同步原语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二值信号量-锁"><span class="nav-number">1.5.1.</span> <span class="nav-text">二值信号量 (锁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量实现-条件变量"><span class="nav-number">1.5.2.</span> <span class="nav-text">信号量实现: 条件变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量实现生产者和消费者"><span class="nav-number">1.5.3.</span> <span class="nav-text">信号量实现生产者和消费者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量解决的问题"><span class="nav-number">1.5.4.</span> <span class="nav-text">信号量解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过锁和条件变量-实现信号量"><span class="nav-number">1.5.5.</span> <span class="nav-text">通过锁和条件变量 实现信号量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的并发问题"><span class="nav-number">1.6.</span> <span class="nav-text">常见的并发问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发缺陷-非死锁"><span class="nav-number">1.6.1.</span> <span class="nav-text">并发缺陷(非死锁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁缺陷"><span class="nav-number">1.6.2.</span> <span class="nav-text">死锁缺陷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于事件的并发"><span class="nav-number">1.7.</span> <span class="nav-text">基于事件的并发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#其如何工作的"><span class="nav-number">1.7.1.</span> <span class="nav-text">其如何工作的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于事件的并发要求"><span class="nav-number">1.7.2.</span> <span class="nav-text">基于事件的并发要求</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统的并发"><span class="nav-number">1.</span> <span class="nav-text">操作系统的并发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发的基础知识"><span class="nav-number">1.1.</span> <span class="nav-text">并发的基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的创建和执行顺序"><span class="nav-number">1.1.1.</span> <span class="nav-text">线程的创建和执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程之间存在的问题"><span class="nav-number">1.1.2.</span> <span class="nav-text">多线程之间存在的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的API"><span class="nav-number">1.2.</span> <span class="nav-text">线程的API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的创建和线程完成"><span class="nav-number">1.2.1.</span> <span class="nav-text">线程的创建和线程完成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁的API-接口"><span class="nav-number">1.2.2.</span> <span class="nav-text">锁的API 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量-API"><span class="nav-number">1.2.3.</span> <span class="nav-text">条件变量 API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现锁"><span class="nav-number">1.3.</span> <span class="nav-text">实现锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于硬件原语实现锁-不基于线程库"><span class="nav-number">1.3.1.</span> <span class="nav-text">基于硬件原语实现锁(不基于线程库)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件原语-OS原语-实现锁"><span class="nav-number">1.3.2.</span> <span class="nav-text">硬件原语 + OS原语 实现锁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件变量-–-另外的开发原语"><span class="nav-number">1.4.</span> <span class="nav-text">条件变量 – 另外的开发原语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量的定义和程序"><span class="nav-number">1.4.1.</span> <span class="nav-text">条件变量的定义和程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#典型模型-生产者和消费者-存在界缓冲区"><span class="nav-number">1.4.2.</span> <span class="nav-text">典型模型: 生产者和消费者(存在界缓冲区)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#覆盖条件"><span class="nav-number">1.4.3.</span> <span class="nav-text">覆盖条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于锁的并发数据结构"><span class="nav-number">1.5.</span> <span class="nav-text">基于锁的并发数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量-–-同步原语"><span class="nav-number">1.6.</span> <span class="nav-text">信号量 – 同步原语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二值信号量-锁"><span class="nav-number">1.6.1.</span> <span class="nav-text">二值信号量 (锁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量实现-条件变量"><span class="nav-number">1.6.2.</span> <span class="nav-text">信号量实现: 条件变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量实现生产者和消费者"><span class="nav-number">1.6.3.</span> <span class="nav-text">信号量实现生产者和消费者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量解决的问题"><span class="nav-number">1.6.4.</span> <span class="nav-text">信号量解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过锁和条件变量-实现信号量"><span class="nav-number">1.6.5.</span> <span class="nav-text">通过锁和条件变量 实现信号量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的并发问题"><span class="nav-number">1.7.</span> <span class="nav-text">常见的并发问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并发缺陷-非死锁"><span class="nav-number">1.7.1.</span> <span class="nav-text">并发缺陷(非死锁)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#死锁缺陷"><span class="nav-number">1.7.2.</span> <span class="nav-text">死锁缺陷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于事件的并发"><span class="nav-number">1.8.</span> <span class="nav-text">基于事件的并发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#其如何工作的"><span class="nav-number">1.8.1.</span> <span class="nav-text">其如何工作的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于事件的并发要求"><span class="nav-number">1.8.2.</span> <span class="nav-text">基于事件的并发要求</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1649,7 +1715,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 

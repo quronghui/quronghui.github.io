@@ -96,13 +96,13 @@
 
 
 
-  <meta name="description" content="持久性 抽象模型 采用什么样的方式, 让数据(桃子)保存的时间长久;   持久性针对的对象: 数据   硬件中断的实现过程:  设备准备好自身的工作 —&amp;gt;  发出硬件中断 —&amp;gt; CPU 执行OS 中预先定义的中断服务例程ISR(interrupt server routine) / 中断处理程序(interrupt handler) —&amp;gt; 返回唤醒等待的I/O进程继续执行.">
+  <meta name="description" content="持久性 抽象模型 采用什么样的方式, 让数据(桃子)保存的时间长久;   持久性完成工作: 数据的有效存储;   硬件中断的实现过程:  设备准备好自身的工作 —&amp;gt;  发出硬件中断 —&amp;gt; CPU 执行OS 中预先定义的中断服务例程ISR(interrupt server routine) / 中断处理程序(interrupt handler) —&amp;gt; 返回唤醒等待的I/O进程继续执">
 <meta name="keywords" content="持久性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OS持久性">
 <meta property="og:url" content="http://yoursite.com/2019/07/24/OS持久性/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="持久性 抽象模型 采用什么样的方式, 让数据(桃子)保存的时间长久;   持久性针对的对象: 数据   硬件中断的实现过程:  设备准备好自身的工作 —&amp;gt;  发出硬件中断 —&amp;gt; CPU 执行OS 中预先定义的中断服务例程ISR(interrupt server routine) / 中断处理程序(interrupt handler) —&amp;gt; 返回唤醒等待的I/O进程继续执行.">
+<meta property="og:description" content="持久性 抽象模型 采用什么样的方式, 让数据(桃子)保存的时间长久;   持久性完成工作: 数据的有效存储;   硬件中断的实现过程:  设备准备好自身的工作 —&amp;gt;  发出硬件中断 —&amp;gt; CPU 执行OS 中预先定义的中断服务例程ISR(interrupt server routine) / 中断处理程序(interrupt handler) —&amp;gt; 返回唤醒等待的I/O进程继续执">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/file_system.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/system.jpg">
@@ -114,10 +114,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/mod2.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/CRC.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/sunNFS.jpg">
-<meta property="og:updated_time" content="2019-07-28T08:24:16.011Z">
+<meta property="og:updated_time" content="2019-08-11T13:50:19.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS持久性">
-<meta name="twitter:description" content="持久性 抽象模型 采用什么样的方式, 让数据(桃子)保存的时间长久;   持久性针对的对象: 数据   硬件中断的实现过程:  设备准备好自身的工作 —&amp;gt;  发出硬件中断 —&amp;gt; CPU 执行OS 中预先定义的中断服务例程ISR(interrupt server routine) / 中断处理程序(interrupt handler) —&amp;gt; 返回唤醒等待的I/O进程继续执行.">
+<meta name="twitter:description" content="持久性 抽象模型 采用什么样的方式, 让数据(桃子)保存的时间长久;   持久性完成工作: 数据的有效存储;   硬件中断的实现过程:  设备准备好自身的工作 —&amp;gt;  发出硬件中断 —&amp;gt; CPU 执行OS 中预先定义的中断服务例程ISR(interrupt server routine) / 中断处理程序(interrupt handler) —&amp;gt; 返回唤醒等待的I/O进程继续执">
 <meta name="twitter:image" content="http://yoursite.com/2019/07/24/OS持久性/file_system.jpg">
 
 
@@ -235,7 +235,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -269,7 +269,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
 
   </li>
         
@@ -286,7 +286,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
 
@@ -297,7 +297,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -403,14 +403,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-24 15:29:42" itemprop="dateCreated datePublished" datetime="2019-07-24T15:29:42+08:00">2019-07-24</time>
+              <time title="Post created: 2019-07-24 15:29:42" itemprop="dateCreated datePublished" datetime="2019-07-24T15:29:42+08:00">2019-07-24</time>
             
 
             
@@ -427,7 +427,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-28 16:24:16" itemprop="dateModified" datetime="2019-07-28T16:24:16+08:00">2019-07-28</time>
+                <time title="Updated at: 2019-08-11 21:50:19" itemprop="dateModified" datetime="2019-08-11T21:50:19+08:00">2019-08-11</time>
               
             
           </span>
@@ -441,7 +441,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Operate-System/" itemprop="url" rel="index"><span itemprop="name">Operate System</span></a></span>
@@ -512,8 +512,8 @@
 <li>采用什么样的方式, 让数据(<strong>桃子</strong>)保存的时间长久;</li>
 </ul>
 </li>
-<li>持久性针对的对象:<ul>
-<li>数据</li>
+<li>持久性完成工作:<ul>
+<li>数据的有效存储;</li>
 </ul>
 </li>
 <li>硬件中断的实现过程: <ul>
@@ -521,12 +521,12 @@
 </ul>
 </li>
 <li>调度策略<ul>
-<li>调度策略有哪些: 对影响因素的不同侧重和形成的;</li>
-<li>不用去记忆调度策略, 反而应该知道影响因素; </li>
+<li>调度策略的形成: 侧重于不同的影响因素而造成的;</li>
+<li>因此: 不用去记忆调度策略, 反而应该知道影响因素; </li>
 </ul>
 </li>
 </ol>
-<h2 id="I-O-设备-–-数据交互"><a href="#I-O-设备-–-数据交互" class="headerlink" title="I/O 设备 – 数据交互"></a>I/O 设备 – 数据交互</h2><h3 id="问题一-OS-如何与I-O设备进行交互的"><a href="#问题一-OS-如何与I-O设备进行交互的" class="headerlink" title="问题一: OS 如何与I/O设备进行交互的?"></a><strong>问题一:</strong> OS 如何与I/O设备进行交互的?</h3><ol>
+<h2 id="I-O-设备-–-数据交互"><a href="#I-O-设备-–-数据交互" class="headerlink" title="I/O 设备 – 数据交互"></a>I/O 设备 – 数据交互</h2><h3 id="问题一-OS-如何与I-O设备进行交互的"><a href="#问题一-OS-如何与I-O设备进行交互的" class="headerlink" title="问题一: OS 如何与I/O设备进行交互的?"></a>问题一: OS 如何与I/O设备进行交互的?</h3><ol>
 <li><p>将设备的硬件接口纳入到OS;</p>
 <ul>
 <li><strong>封装</strong>设备驱动程序(OS中的一部分软件): 完成底层操作;</li>
@@ -1266,10 +1266,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -1292,7 +1292,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">97</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -1437,7 +1437,7 @@
                       
                     
                     <span class="site-state-item-count">66</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -1616,7 +1616,7 @@
                       
                     
                     <span class="site-state-item-count">83</span>
-                    <span class="site-state-item-name">tags</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -1697,7 +1697,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 

@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Lucky Boy">
 <meta property="og:description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义? Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     Linux的用户态与内核态 如何切换的? 系统调用: 用户态的进程通过系统调用申请使用操作系统提供">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-02T13:22:48.095Z">
+<meta property="og:updated_time" content="2019-08-11T11:18:37.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux用户和内核">
 <meta name="twitter:description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义? Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     Linux的用户态与内核态 如何切换的? 系统调用: 用户态的进程通过系统调用申请使用操作系统提供">
@@ -224,7 +224,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -258,7 +258,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
 
   </li>
         
@@ -275,7 +275,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
 
@@ -286,7 +286,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -392,19 +392,31 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-08-02 21:18:12 / Modified: 21:22:48" itemprop="dateCreated datePublished" datetime="2019-08-02T21:18:12+08:00">2019-08-02</time>
+              <time title="Post created: 2019-08-02 21:18:12" itemprop="dateCreated datePublished" datetime="2019-08-02T21:18:12+08:00">2019-08-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-08-11 19:18:37" itemprop="dateModified" datetime="2019-08-11T19:18:37+08:00">2019-08-11</time>
               
             
           </span>
@@ -418,7 +430,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Operate-System/" itemprop="url" rel="index"><span itemprop="name">Operate System</span></a></span>
@@ -493,14 +505,14 @@
 <li>Linux的<strong>用户态与内核态 </strong>如何切换的?<ul>
 <li><strong>系统调用</strong>:<ul>
 <li>用户态的进程通过系统调用申请使用操作系统提供的<strong>系统调用服务例程</strong>来处理任务</li>
-<li><strong>机制:</strong> 了操作系统为用户特别开发的一个中断机制来实现的，即软中断</li>
+<li><strong>机制:</strong> 操作系统为用户特别开发的一个中断机制来实现的，即软中断</li>
 </ul>
 </li>
-<li><strong>产生异常时</strong><ul>
+<li><strong>内存产生异常时</strong><ul>
 <li>如缺页异常</li>
 </ul>
 </li>
-<li><strong>外设产生中断时</strong><ul>
+<li><strong>外设产生中断</strong><ul>
 <li>比如硬盘读写操作的完成，系统会切换到硬盘读写的中断处理程序中执行后续操作等。   </li>
 </ul>
 </li>
@@ -618,10 +630,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -644,7 +656,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">97</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -789,7 +801,7 @@
                       
                     
                     <span class="site-state-item-count">66</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -968,7 +980,7 @@
                       
                     
                     <span class="site-state-item-count">83</span>
-                    <span class="site-state-item-name">tags</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -1049,7 +1061,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
