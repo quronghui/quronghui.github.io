@@ -96,21 +96,24 @@
 
 
 
-  <meta name="description" content="串行总线通信方式总线之间的区别和联系? 三大总线     类型 SPI I2C UART USB     信号线 SCLK, MOSI, MISO, SS SDA, SCL TXD, RXD 4线VCC(5V)/GND/D+/D-(3.3V)   全/半双工 全双工通信 半双工 全双工通信 半双工   同/异步总线 同步总线 同步总线 异步总线 同步总线   距离 主从设备(近) IC之间,短 远">
+  <meta name="description" content="串行总线通信方式嵌入式总线和接口总线概述 总线是一组线路, 或者是接口的总称;  总线的功能:   任何一个微处理器(MCU) 都要与一定数量的部件和外围设备连接，常用一组线路，配置以适当的接口电路，与各部件和外围设备连接，这组共用的连接线路被称为总线。   总线的分类 | 总线类型     | 总线   | 功能">
 <meta name="keywords" content="Bus">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SerialBus">
 <meta property="og:url" content="http://yoursite.com/2019/07/29/SerialBus/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="串行总线通信方式总线之间的区别和联系? 三大总线     类型 SPI I2C UART USB     信号线 SCLK, MOSI, MISO, SS SDA, SCL TXD, RXD 4线VCC(5V)/GND/D+/D-(3.3V)   全/半双工 全双工通信 半双工 全双工通信 半双工   同/异步总线 同步总线 同步总线 异步总线 同步总线   距离 主从设备(近) IC之间,短 远">
+<meta property="og:description" content="串行总线通信方式嵌入式总线和接口总线概述 总线是一组线路, 或者是接口的总称;  总线的功能:   任何一个微处理器(MCU) 都要与一定数量的部件和外围设备连接，常用一组线路，配置以适当的接口电路，与各部件和外围设备连接，这组共用的连接线路被称为总线。   总线的分类 | 总线类型     | 总线   | 功能">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/SPI_data.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/i2c_time.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/I2c_data.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/Uart_data.png">
-<meta property="og:updated_time" content="2019-08-11T10:54:17.078Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/rs232.png">
+<meta property="og:updated_time" content="2019-08-13T12:50:13.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SerialBus">
-<meta name="twitter:description" content="串行总线通信方式总线之间的区别和联系? 三大总线     类型 SPI I2C UART USB     信号线 SCLK, MOSI, MISO, SS SDA, SCL TXD, RXD 4线VCC(5V)/GND/D+/D-(3.3V)   全/半双工 全双工通信 半双工 全双工通信 半双工   同/异步总线 同步总线 同步总线 异步总线 同步总线   距离 主从设备(近) IC之间,短 远">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/29/SerialBus/i2c_time.png">
+<meta name="twitter:description" content="串行总线通信方式嵌入式总线和接口总线概述 总线是一组线路, 或者是接口的总称;  总线的功能:   任何一个微处理器(MCU) 都要与一定数量的部件和外围设备连接，常用一组线路，配置以适当的接口电路，与各部件和外围设备连接，这组共用的连接线路被称为总线。   总线的分类 | 总线类型     | 总线   | 功能">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/29/SerialBus/SPI_data.png">
 
 
 
@@ -419,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-11 18:54:17" itemprop="dateModified" datetime="2019-08-11T18:54:17+08:00">2019-08-11</time>
+                <time title="Updated at: 2019-08-13 20:50:13" itemprop="dateModified" datetime="2019-08-13T20:50:13+08:00">2019-08-13</time>
               
             
           </span>
@@ -499,10 +502,19 @@
       
 
       
-        <h1 id="串行总线通信方式"><a href="#串行总线通信方式" class="headerlink" title="串行总线通信方式"></a>串行总线通信方式</h1><h2 id="总线之间的区别和联系"><a href="#总线之间的区别和联系" class="headerlink" title="总线之间的区别和联系?"></a>总线之间的区别和联系?</h2><ol>
-<li>三大总线</li>
+        <h1 id="串行总线通信方式"><a href="#串行总线通信方式" class="headerlink" title="串行总线通信方式"></a>串行总线通信方式</h1><h1 id="嵌入式总线和接口"><a href="#嵌入式总线和接口" class="headerlink" title="嵌入式总线和接口"></a>嵌入式总线和接口</h1><h2 id="总线概述"><a href="#总线概述" class="headerlink" title="总线概述"></a><a href="https://www.crifan.com/summary_embedded_system_various_peripherals/" target="_blank" rel="noopener">总线概述</a></h2><ol>
+<li><p>总线是一组线路, 或者是接口的总称;</p>
+</li>
+<li><p>总线的功能: </p>
+<ul>
+<li>任何一个<strong>微处理器(MCU)</strong> 都要与一定数量的部件和外围设备连接，常用一组线路，配置以适当的接口电路，与各部件和外围设备连接，这组共用的连接线路被称为总线。</li>
+</ul>
+</li>
+<li><p><a href="https://blog.csdn.net/zmc1216/article/details/21377949" target="_blank" rel="noopener">总线的分类</a></p>
+<p>| 总线类型     | 总线   | 功能                                                         |<br>| ———— | —— | ———————————————————— |<br>| <strong>内部总线</strong> | I2C    | 同步两线; <strong>半</strong>双工通信, 近距离;  通过<strong>地址识别</strong>多个设备(一对多连接); |<br>| (近距离)     | SPI    | 同步四线<strong>全</strong>双工通信;                                      |<br>|              | SCI    | 通用异步通信接口UART(全)，与MCS-51的<strong>异步</strong>通信功能基本相同 |<br>| <strong>外部总线</strong> | RS-232 | 全双工; 25针的信号接口; <strong>限于PC串口和点对点通信</strong>;  20m 串行<strong> |<br>| (远距离)     | RS-485 | </strong>半<strong>双工; 多用于</strong>多点互连<strong>; </strong>传输速率最远<strong>(几十米到上千米); </strong>并行<strong> |<br>|              | USB    | </strong>半<strong>双工; </strong>传输速率最快的总线12Mbps<strong>                     |<br>| 现场总线     | Can    | 不分主从; 单点, 多点广播通信; 自助关闭错误总线;(</strong>CAN 是所有总线中最为可靠的**) |</p>
+</li>
 </ol>
-<table>
+<h2 id="串行内部总线"><a href="#串行内部总线" class="headerlink" title="串行内部总线"></a>串行内部总线</h2><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -550,10 +562,10 @@
 </tr>
 <tr>
 <td>传输速度</td>
-<td>spi &gt;uart &gt;  i2c &gt; uart</td>
 <td></td>
 <td></td>
-<td>快</td>
+<td></td>
+<td><strong>最快的总线</strong>: 12Mbps</td>
 </tr>
 <tr>
 <td>可靠性</td>
@@ -573,34 +585,43 @@
 <td>总线拓扑结构</td>
 <td>环形</td>
 <td>总线型（特殊的树形）</td>
-<td>RS485支持总线式、</td>
+<td></td>
 <td>星形</td>
 </tr>
 </tbody>
 </table>
-<h3 id="SPI-串行外设接口"><a href="#SPI-串行外设接口" class="headerlink" title="SPI 串行外设接口"></a>SPI 串行外设接口</h3><ol>
-<li>SPI(Serial Peripheral Interface)<ul>
+<h3 id="SPI-串行外设接口"><a href="#SPI-串行外设接口" class="headerlink" title="SPI 串行外设接口"></a><a href="https://blog.csdn.net/ce123_zhouwei/article/details/6897293" target="_blank" rel="noopener">SPI 串行外设接口</a></h3><ol>
+<li><p>SPI(Serial Peripheral Interface)</p>
+<ul>
 <li>全双工的通信, <strong>同步</strong>总线</li>
-<li>四条信号线: 串行时钟(SCLK)、串行数据输出(MOSI)、串行数据输入(MISO) ，SS(slave 从设备选择线)<ul>
-<li><strong>主设备</strong> :提供串行时钟(SCLK)</li>
-</ul>
-</li>
+<li>四条信号线: 串行时钟(SCLK)、串行数据输出(MOSI)、串行数据输入(MISO) ，SS(slave 从设备选择线)</li>
 <li>IO口模拟SPI总线: 必须要有一个输出口(SDO)，一个输入口(SDI)</li>
 </ul>
 </li>
-<li>SPI主要的应用<ul>
+<li><p>SPI 通信描述</p>
+<ul>
+<li>主从模式架构: 支持多slave模式应用，一般仅支持单Master</li>
+<li><strong>主设备</strong> :提供串行时钟(SCLK)</li>
+<li>数据传输: 数据按位传输，高位在前，低位在后（MSB first）; 传输的数据为8位</li>
+<li>通过移位寄存器实现主从设备的数据交换;</li>
+</ul>
+<img src="/2019/07/29/SerialBus/SPI_data.png">
+</li>
+<li><p>SPI主要的应用</p>
+<ul>
 <li>应用在EEPROM,FLASH,实时时钟,AD转换器,还有数字信号处理器和数字信号解码器之间</li>
 </ul>
 </li>
-<li>缺点<ul>
-<li>缺点：没有指定的流控制,没有应答机制确认是否接收到数据。</li>
+<li><p>缺点</p>
+<ul>
+<li>缺点：没有指定的流控制,<strong>没有应答机制</strong>确认是否接收到数据。</li>
 </ul>
 </li>
 </ol>
 <h3 id="I2C-同步总线"><a href="#I2C-同步总线" class="headerlink" title="I2C 同步总线"></a>I2C 同步总线</h3><ol>
 <li><p>I2C(INTER IC BUS)</p>
 <ul>
-<li>信号线: 双向、两线(SCL、SDA)、串行、多主控（multi-master）接口标准， <strong>同步</strong>总线</li>
+<li>信号线: 两线(SCL、SDA)、串行、多主控（multi-master）接口标准， <strong>同步</strong>总线</li>
 <li>特点: 具有<strong>总线仲裁机制</strong>，非常适合在器件之间进行<strong>近距离</strong>、非经常性的数据通信</li>
 <li>协议:  传输数据时都会带上<strong>目的设备</strong>的设备地址，因此可以实现<strong>设备组网</strong></li>
 <li>IO口模拟I2C总线:   并实现双向传输，则需一个输入输出口(SDA)，另外还需一个输出口(SCL)</li>
@@ -608,6 +629,36 @@
 </li>
 <li><p>时序状态</p>
 <img src="/2019/07/29/SerialBus/i2c_time.png">
+<ul>
+<li>三种类型的信号，分别是：开始信号、结束信号和应答信号</li>
+<li>开始信号：处理器让SCL时钟保持高电平，然后让SDA数据信号由高变低就表示一个开始信号。</li>
+<li>停止信号：处理器让SCL时钟保持高电平，然后让SDA数据信号由低变高就表示一个停止信号。</li>
+</ul>
+</li>
+<li><p><strong>问题一:  </strong>数据传输中, 如何保持SDA上传输的数据的稳定?</p>
+<ul>
+<li>当<strong>SCL为高电平</strong>期间, SDA 发送的数据才能保持稳定;</li>
+<li>外接IIC设备在SCL为高电平的期间 : 采集数据方知SDA是高或低电平</li>
+</ul>
+</li>
+<li><p><strong>问题二: </strong> SDA数据在什么时候进行翻转?</p>
+<ul>
+<li>只能在<strong>SCL为低电平</strong>期间翻转变化</li>
+<li>(如果当scl为高进行翻转的话, 代表停止和开始)</li>
+</ul>
+</li>
+<li><p><strong>问题三</strong>: 处理器把数据发给外接IIC设备，如何知道IIC设备数据已经收到呢？</p>
+<ul>
+<li>IIC设备向处理器发送<strong>响应信号</strong>（ACK）;</li>
+<li>处理器: 发完8bit数据后就不再驱动总线了（SDA引脚变输入）, 而SDA和SDL硬件设计时都有<strong>上拉电阻</strong>，所以这时候SDA变成高电平。</li>
+<li>外接IIC设备能收到信号: 在第9个周期拉低SDA，处理器检测到<strong>SDA拉低</strong>就能知道外接IIC设备数据已经收到。</li>
+</ul>
+<img src="/2019/07/29/SerialBus/I2c_data.png">
+</li>
+<li><p>上拉电阻起作用的情况?</p>
+<ul>
+<li>只有当SDA为输入脚时, 外部上拉的高电平才起作用;</li>
+</ul>
 </li>
 </ol>
 <h3 id="UART-通用异步收发器"><a href="#UART-通用异步收发器" class="headerlink" title="UART 通用异步收发器"></a>UART 通用异步收发器</h3><ol>
@@ -621,23 +672,83 @@
 <img src="/2019/07/29/SerialBus/Uart_data.png">
 </li>
 </ol>
-<h3 id="RS232"><a href="#RS232" class="headerlink" title="RS232"></a>RS232</h3><ol>
-<li>应用:<ul>
-<li>个人计算机上的通讯接口之一</li>
+<h2 id="外部总线"><a href="#外部总线" class="headerlink" title="外部总线"></a>外部总线</h2><h3 id="RS-232"><a href="#RS-232" class="headerlink" title="RS - 232"></a>RS - 232</h3><ol>
+<li><p>RS-232 接口形式</p>
+<ul>
+<li>以9个引脚 (DB-9) ; 25个引脚 (DB-25) </li>
+<li><strong>串行</strong>物理接口标准</li>
+<li>个人计算机上: <strong>两组</strong> RS-232 接口，分别称为 COM1 和 COM2.</li>
+</ul>
+<img src="/2019/07/29/SerialBus/rs232.png">
+</li>
+<li><p>传输距离短的原因:</p>
+<ul>
+<li>RS-232-C标准规定，驱动器允许有2500pF的电容负载，通信距离将受此电容限制;</li>
+<li>是RS-232属<strong>单端信号传送</strong>(点对点)，存在共地噪声和不能抑制共模干扰等问题，因此一般用于20m以内的通信。</li>
 </ul>
 </li>
-<li>RS-232 接口以9个引脚 (DB-9) 或是25个引脚 (DB-25) 的型态出现，一般个人计算机上会有两组 RS-232 接口，分别称为 COM1 和 COM2.</li>
-</ol>
-<h3 id="Can"><a href="#Can" class="headerlink" title="Can"></a>Can</h3><ol>
-<li>应用于: <ul>
-<li>制造厂中连接现场设备传感器、执行器、控制器等）、面向广播的串行总线系统，</li>
+<li><p>信号线</p>
+<ul>
+<li>RS-232-C总线标准设有<strong>25条信号线</strong>，包括一个主通道和一个辅助通道，在多数情况下主要使用<strong>主通道</strong></li>
+<li>对于一般<strong>双工通信</strong>，仅需几条信号线就可实现，如一条发送线、一条接收线及一条地线</li>
+</ul>
+</li>
+<li><p><a href="https://blog.csdn.net/mrdingjie/article/details/8126062" target="_blank" rel="noopener">RS232 通信协议</a></p>
+<ul>
+<li>负逻辑电平:  信号电平与通常的TTL电平也不兼容，“1”(-5V～-15V)，“0”(+5V～+15V)</li>
+<li>实现OSI参考模型的: 物理层</li>
 </ul>
 </li>
 </ol>
-<h3 id="串口、COM口、TTL、RS232、RS485区别详解"><a href="#串口、COM口、TTL、RS232、RS485区别详解" class="headerlink" title="串口、COM口、TTL、RS232、RS485区别详解"></a>串口、COM口、TTL、RS232、RS485区别详解</h3><table>
+<h3 id="RS-485"><a href="#RS-485" class="headerlink" title="RS - 485"></a><a href="https://www.diangon.com/wenku/rd/danpianji/201501/00017891.html" target="_blank" rel="noopener">RS - 485</a></h3><ol>
+<li>通信方式<ul>
+<li>RS-485采用<strong>平衡发送和差分接收</strong>，因此具有抑制共模干扰的能力。</li>
+<li>加上总线收发器具有高灵敏度，能检测低至200mV的电压，故传输信号能在<strong>千米以外</strong>得到恢复。</li>
+<li>RS-485采用<strong>半双工</strong>，任何时候只能有一点处于发送状态，因此，发送电路须由<strong>使能信号加以控制</strong></li>
+</ul>
+</li>
+<li>应用地方:<ul>
+<li>RS-485用于<strong>多点互连</strong>时非常方便，可以省掉许多信号线。</li>
+<li>应用RS-485可以<strong>联网构成分布式系统</strong>，其允许最多<strong>并联32</strong>台驱动器和32台接收器。</li>
+</ul>
+</li>
+</ol>
+<h3 id="USB"><a href="#USB" class="headerlink" title="USB"></a>USB</h3><ol>
+<li>USB总线的优势<ul>
+<li>它可以为外设<strong>提供电源</strong>，而不像普通的使用串、并口的设备需要单独的供电系统;</li>
+<li>USB的<strong>最高传输率</strong>可达12Mbps比串口快100倍，比并口快近10倍，而且USB还能支持多媒体</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>不能通过USB进行计算机的<strong>互连</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="现场总线"><a href="#现场总线" class="headerlink" title="现场总线"></a>现场总线</h2><h3 id="Can"><a href="#Can" class="headerlink" title="Can"></a>Can</h3><ol>
+<li>CAN 是控制器局域网络(Controller Area NetWork)的简称.</li>
+<li>CAN 协议也遵循 ISO/OSI 模型，采用了其中的物理层、数据链路层与应用层。</li>
+<li>工作方式:<ul>
+<li>CAN 采用<strong>多主</strong>工作方式，节点之间不分主从;</li>
+<li>但节点之间有<strong>优先级</strong>之分，通信方式灵活;</li>
+<li>可实现<strong>点对点</strong>、<strong>一点对多</strong>及<strong>广播方式</strong>传输数据，无需调度;</li>
+</ul>
+</li>
+<li>传输介质和距离<ul>
+<li>CAN 总线可采用双绞线，同轴电缆或光纤作力传输介质</li>
+<li>通信速率可达 1Mbps/40m，直接通信距离最远可达 10km/5Kbps。可挂接设备数最多可达<strong>110 </strong>个。</li>
+</ul>
+</li>
+<li>CAN总线的可靠性<ul>
+<li>CAN 的信号传输采用<strong>短帧结构</strong>，每帧有效字节为 8 个，传输距离短，受干扰的概率低。</li>
+<li>当节点严重错误时，具有<strong>自动关闭功能</strong>，以切断该节点与总线的联系，使总线上的其它节点及通信不受影响。</li>
+<li><strong>可见，CAN 是所有总线中最为可靠的。</strong></li>
+</ul>
+</li>
+</ol>
+<table>
 <thead>
 <tr>
-<th></th>
+<th>信号和硬件接口关系</th>
 <th></th>
 </tr>
 </thead>
@@ -656,11 +767,7 @@
 </tr>
 <tr>
 <td></td>
-<td>RS-232标准是正电平为0，负电平为1（±15V电平）</td>
-</tr>
-<tr>
-<td></td>
-<td>RS485 正负电平不适应TTL</td>
+<td>RS-232标准是负逻辑(5-15v)</td>
 </tr>
 <tr>
 <td>PL2303、CP2102芯片</td>
@@ -1156,7 +1263,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#串行总线通信方式"><span class="nav-number">1.</span> <span class="nav-text">串行总线通信方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总线之间的区别和联系"><span class="nav-number">1.1.</span> <span class="nav-text">总线之间的区别和联系?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SPI-串行外设接口"><span class="nav-number">1.1.1.</span> <span class="nav-text">SPI 串行外设接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I2C-同步总线"><span class="nav-number">1.1.2.</span> <span class="nav-text">I2C 同步总线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UART-通用异步收发器"><span class="nav-number">1.1.3.</span> <span class="nav-text">UART 通用异步收发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RS232"><span class="nav-number">1.1.4.</span> <span class="nav-text">RS232</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Can"><span class="nav-number">1.1.5.</span> <span class="nav-text">Can</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#串口、COM口、TTL、RS232、RS485区别详解"><span class="nav-number">1.1.6.</span> <span class="nav-text">串口、COM口、TTL、RS232、RS485区别详解</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#串行总线通信方式"><span class="nav-number">1.</span> <span class="nav-text">串行总线通信方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#嵌入式总线和接口"><span class="nav-number">2.</span> <span class="nav-text">嵌入式总线和接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总线概述"><span class="nav-number">2.1.</span> <span class="nav-text">总线概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#串行内部总线"><span class="nav-number">2.2.</span> <span class="nav-text">串行内部总线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SPI-串行外设接口"><span class="nav-number">2.2.1.</span> <span class="nav-text">SPI 串行外设接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I2C-同步总线"><span class="nav-number">2.2.2.</span> <span class="nav-text">I2C 同步总线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UART-通用异步收发器"><span class="nav-number">2.2.3.</span> <span class="nav-text">UART 通用异步收发器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外部总线"><span class="nav-number">2.3.</span> <span class="nav-text">外部总线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RS-232"><span class="nav-number">2.3.1.</span> <span class="nav-text">RS - 232</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RS-485"><span class="nav-number">2.3.2.</span> <span class="nav-text">RS - 485</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#USB"><span class="nav-number">2.3.3.</span> <span class="nav-text">USB</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现场总线"><span class="nav-number">2.4.</span> <span class="nav-text">现场总线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Can"><span class="nav-number">2.4.1.</span> <span class="nav-text">Can</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

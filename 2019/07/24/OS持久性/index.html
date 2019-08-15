@@ -114,7 +114,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/mod2.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/CRC.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/24/OS持久性/sunNFS.jpg">
-<meta property="og:updated_time" content="2019-08-11T13:50:19.520Z">
+<meta property="og:updated_time" content="2019-08-12T09:03:32.117Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OS持久性">
 <meta name="twitter:description" content="持久性 抽象模型 采用什么样的方式, 让数据(桃子)保存的时间长久;   持久性完成工作: 数据的有效存储;   硬件中断的实现过程:  设备准备好自身的工作 —&amp;gt;  发出硬件中断 —&amp;gt; CPU 执行OS 中预先定义的中断服务例程ISR(interrupt server routine) / 中断处理程序(interrupt handler) —&amp;gt; 返回唤醒等待的I/O进程继续执">
@@ -427,7 +427,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-11 21:50:19" itemprop="dateModified" datetime="2019-08-11T21:50:19+08:00">2019-08-11</time>
+                <time title="Updated at: 2019-08-12 17:03:32" itemprop="dateModified" datetime="2019-08-12T17:03:32+08:00">2019-08-12</time>
               
             
           </span>
@@ -533,7 +533,7 @@
 </ul>
 <img src="/2019/07/24/OS持久性/file_system.jpg">
 <ul>
-<li>驱动程序中充满了内核;</li>
+<li>驱动程序充满了整个内核;</li>
 </ul>
 </li>
 </ol>
@@ -546,7 +546,7 @@
 </li>
 <li><p>标准硬件</p>
 <ul>
-<li>硬件接口: 寄存器 ( status + data + command register )<ul>
+<li>硬件接口: 寄存器 ( { status ,  data ,  command } +  register )<ul>
 <li>操作系统控制设备工作的接口</li>
 </ul>
 </li>
@@ -570,17 +570,15 @@
 <li><strong>硬件中断实现:</strong></li>
 <li>优势: 中断允许计算与I/O重叠; (CPU可以执行其他进程)</li>
 <li><strong>中断改进</strong><ul>
-<li>polling + interrupt: 先轮询一段时间, 时间过程的话就进行中断; ( CPU/IO 交换很快 )</li>
+<li>polling + interrupt: 先轮询一段时间, 时间超过某一个阈值, 选择进行中断; ( 防止有些CPU/IO 交换很快, 此时使用中断造成资源浪费 )</li>
 <li>合并: 抛出中断时, 等待一段时间;</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><strong>问题二</strong>: 如何实现高效的数据传输?<ul>
-<li>增加硬件设备:  DMA (direct memory access) <ul>
-<li>协调内存和设备间的数据交互, 不许哦啊CPU介入;</li>
-</ul>
-</li>
+<li>增加硬件设备:  DMA (direct memory access) </li>
+<li>DMA作用: 协调内存和设备间的数据交互, 无需CPU介入;</li>
 </ul>
 </li>
 <li><strong>问题三</strong>: OS的交互指令是什么?<ul>
@@ -599,7 +597,7 @@
 <li>设备: 长久的保存数据, 用户更关心的是数据</li>
 <li>内存: 断电后内容会丢失;</li>
 </ul>
-<h3 id="磁盘驱动器"><a href="#磁盘驱动器" class="headerlink" title="磁盘驱动器"></a>磁盘驱动器</h3><ol>
+<h3 id="磁盘驱动器-I-O操作太慢"><a href="#磁盘驱动器-I-O操作太慢" class="headerlink" title="磁盘驱动器  (I/O操作太慢)"></a>磁盘驱动器  (I/O操作太慢)</h3><ol>
 <li><p>硬件接口:</p>
 <ul>
 <li>大量的<strong>扇区块</strong>( 512 byte ), 每个块可以进行读取和写入;</li>
@@ -610,7 +608,7 @@
 <li>磁性: 对磁盘引入磁性, 进行数据永久保存</li>
 <li>磁道: 一个同心圆;</li>
 <li>磁头: 用于在磁道上读取或者写入数据的;</li>
-<li>: 磁道 <strong>逆时针</strong>旋转, 到了磁头下面, 进行数据操作</li>
+<li>数据读取过程: 磁道 <strong>逆时针</strong>旋转, 到了磁头下面, 进行数据操作</li>
 </ul>
 </li>
 <li><p>磁盘的特性</p>
@@ -643,24 +641,24 @@
 <h3 id="RAID-廉价冗余磁盘阵列"><a href="#RAID-廉价冗余磁盘阵列" class="headerlink" title="RAID (廉价冗余磁盘阵列)"></a>RAID (廉价冗余磁盘阵列)</h3><ol>
 <li><p>RAID (Redundant Array of Inexpensive Disks)</p>
 <ul>
-<li>将大量的独立磁盘扩充称更大, 更可靠的单一实体;</li>
-<li><strong>透明性:</strong> 使用RAID替换磁盘, 不用考虑跟换软件驱动;</li>
+<li>将大量的独立磁盘扩充为更大, 更可靠的单一实体;</li>
+<li><strong>透明性:</strong> 使用RAID替换磁盘, 不用考虑更换软件驱动;</li>
 </ul>
 </li>
 <li><p>RAID 的特性</p>
 <ul>
 <li>性能: 加快I/O读取时间;</li>
 <li>容量: 扩充磁盘</li>
-<li>可靠性: 冗余进行数据的物理备份</li>
+<li>可靠性: <strong>冗余</strong>进行数据的物理备份</li>
 </ul>
 </li>
 <li><p>硬件接口和内部</p>
 <ul>
-<li>硬件接口: 线性的块数组, 每个块都可以通过文件系统进行读取和写入;</li>
+<li>硬件接口: 线性的数组块, 每个块都可以通过文件系统进行读取和写入;</li>
 <li>内部: 专业的计算机, 有一个CPU + Memory + 磁盘</li>
 </ul>
 </li>
-<li><p><strong>问题一</strong> 如何设计RAID?</p>
+<li><p><strong>问题一</strong>: 如何设计RAID?</p>
 <ul>
 <li>方法: 根据对RAID的特性的不同偏重, 设计不同的RAID;</li>
 </ul>
@@ -682,6 +680,10 @@
 <td>RAID 1 级: 镜像</td>
 <td>对每个逻辑块, 保留两个物理副本; 只有一半的容量, 但是更可靠了</td>
 </tr>
+<tr>
+<td>RAID 4 级: 奇偶校验</td>
+<td>容量是(N-1); 需要一个块保存奇偶校验位</td>
+</tr>
 </tbody>
 </table>
 <h2 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h2><ul>
@@ -691,11 +693,7 @@
 <ol>
 <li><p><strong>OS虚拟化</strong>另一个模块:</p>
 <ul>
-<li>CPU和内存的虚拟化<ul>
-<li>进程: 虚拟化的CPU;</li>
-<li>地址空间: 虚拟化的物理内存;</li>
-</ul>
-</li>
+<li>进程: 虚拟化的CPU;地址空间: 虚拟化的物理内存;</li>
 <li>持久存储的虚拟化<ul>
 <li>文件和目录: 保持数据掉电不丢失;</li>
 </ul>
@@ -711,9 +709,9 @@
 </li>
 <li><p><strong>目录的概念</strong>搭建</p>
 <ul>
-<li>目录: 对应我们常说的文件件;</li>
+<li>目录: 对应我们常说的文件夹;</li>
 <li>文件的存储位置: 存放文件的空间;</li>
-<li><strong>包含</strong> : 包含一个列表, 列表的信息( 用户刻度名字, inode )</li>
+<li><strong>包含</strong> : 包含一个列表, 列表的信息( 用户可读名字, inode元数据 )</li>
 <li><strong>结构:</strong> 根目录只是一个 – “ / “;  子目录通过<strong>分隔符</strong> 隔开</li>
 </ul>
 <img src="/2019/07/24/OS持久性/dirtree.jpg">
@@ -1651,7 +1649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#持久性"><span class="nav-number">1.</span> <span class="nav-text">持久性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O-设备-–-数据交互"><span class="nav-number">1.1.</span> <span class="nav-text">I/O 设备 – 数据交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一-OS-如何与I-O设备进行交互的"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题一: OS 如何与I/O设备进行交互的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准硬件"><span class="nav-number">1.1.2.</span> <span class="nav-text">标准硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准协议"><span class="nav-number">1.1.3.</span> <span class="nav-text">标准协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件-–-数据存储设备"><span class="nav-number">1.2.</span> <span class="nav-text">硬件 – 数据存储设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘驱动器"><span class="nav-number">1.2.1.</span> <span class="nav-text">磁盘驱动器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-廉价冗余磁盘阵列"><span class="nav-number">1.2.2.</span> <span class="nav-text">RAID (廉价冗余磁盘阵列)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和目录"><span class="nav-number">1.3.</span> <span class="nav-text">文件和目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的相关操作"><span class="nav-number">1.3.1.</span> <span class="nav-text">文件的相关操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录的相关操作"><span class="nav-number">1.3.2.</span> <span class="nav-text">目录的相关操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">1.4.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VSFS-Very-Simple-File-System"><span class="nav-number">1.4.1.</span> <span class="nav-text">VSFS(Very Simple File System)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题一-文件系统如何实现存储"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">问题一: 文件系统如何实现存储?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题二-文件系统是如何实现磁盘数据的读写"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">问题二: 文件系统是如何实现磁盘数据的读写?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速文件系统FFS-fast-file-system"><span class="nav-number">1.4.2.</span> <span class="nav-text">快速文件系统FFS( fast file system)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FSCK-和-日志"><span class="nav-number">1.4.3.</span> <span class="nav-text">FSCK 和 日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志结构的文件系统"><span class="nav-number">1.4.4.</span> <span class="nav-text">日志结构的文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据完整性和保护"><span class="nav-number">1.4.5.</span> <span class="nav-text">数据完整性和保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CRC计算方法"><span class="nav-number">1.4.6.</span> <span class="nav-text">CRC计算方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式系统-由多个机器构成"><span class="nav-number">1.5.</span> <span class="nav-text">分布式系统 ( 由多个机器构成 )</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式系统的核心-–-通信"><span class="nav-number">1.5.1.</span> <span class="nav-text">分布式系统的核心  – 通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sun的网络文件系统NFS"><span class="nav-number">1.5.2.</span> <span class="nav-text">Sun的网络文件系统NFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Andrew-文件系统AFS"><span class="nav-number">1.5.3.</span> <span class="nav-text">Andrew 文件系统AFS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟监视器-virtual-machine-monitor"><span class="nav-number">1.6.</span> <span class="nav-text">虚拟监视器(virtual machine monitor)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#持久性"><span class="nav-number">1.</span> <span class="nav-text">持久性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O-设备-–-数据交互"><span class="nav-number">1.1.</span> <span class="nav-text">I/O 设备 – 数据交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一-OS-如何与I-O设备进行交互的"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题一: OS 如何与I/O设备进行交互的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准硬件"><span class="nav-number">1.1.2.</span> <span class="nav-text">标准硬件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准协议"><span class="nav-number">1.1.3.</span> <span class="nav-text">标准协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件-–-数据存储设备"><span class="nav-number">1.2.</span> <span class="nav-text">硬件 – 数据存储设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘驱动器-I-O操作太慢"><span class="nav-number">1.2.1.</span> <span class="nav-text">磁盘驱动器  (I/O操作太慢)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAID-廉价冗余磁盘阵列"><span class="nav-number">1.2.2.</span> <span class="nav-text">RAID (廉价冗余磁盘阵列)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和目录"><span class="nav-number">1.3.</span> <span class="nav-text">文件和目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的相关操作"><span class="nav-number">1.3.1.</span> <span class="nav-text">文件的相关操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录的相关操作"><span class="nav-number">1.3.2.</span> <span class="nav-text">目录的相关操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">1.4.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VSFS-Very-Simple-File-System"><span class="nav-number">1.4.1.</span> <span class="nav-text">VSFS(Very Simple File System)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题一-文件系统如何实现存储"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">问题一: 文件系统如何实现存储?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题二-文件系统是如何实现磁盘数据的读写"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">问题二: 文件系统是如何实现磁盘数据的读写?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速文件系统FFS-fast-file-system"><span class="nav-number">1.4.2.</span> <span class="nav-text">快速文件系统FFS( fast file system)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FSCK-和-日志"><span class="nav-number">1.4.3.</span> <span class="nav-text">FSCK 和 日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志结构的文件系统"><span class="nav-number">1.4.4.</span> <span class="nav-text">日志结构的文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据完整性和保护"><span class="nav-number">1.4.5.</span> <span class="nav-text">数据完整性和保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CRC计算方法"><span class="nav-number">1.4.6.</span> <span class="nav-text">CRC计算方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式系统-由多个机器构成"><span class="nav-number">1.5.</span> <span class="nav-text">分布式系统 ( 由多个机器构成 )</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式系统的核心-–-通信"><span class="nav-number">1.5.1.</span> <span class="nav-text">分布式系统的核心  – 通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sun的网络文件系统NFS"><span class="nav-number">1.5.2.</span> <span class="nav-text">Sun的网络文件系统NFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Andrew-文件系统AFS"><span class="nav-number">1.5.3.</span> <span class="nav-text">Andrew 文件系统AFS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟监视器-virtual-machine-monitor"><span class="nav-number">1.6.</span> <span class="nav-text">虚拟监视器(virtual machine monitor)</span></a></li></ol></li></ol></div>
             
 
           </div>
