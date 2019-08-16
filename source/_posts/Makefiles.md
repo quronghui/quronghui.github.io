@@ -308,6 +308,37 @@ $ make CFLAGS=-g	/*在编译中增加调试选项*/
    在Makefile开始时输入
    	all: main mymain
    ```
+   
+3. Makefile 的一种编写方式, 但是没有成功, 保留原格式
+
+   ```
+   # specify all source files here
+   SRCS	=	double_list.c 	
+   
+   # specify target here (name of executable)
+   TARG	=	double_list		
+   
+   # specify compiler, compile flags, and needed libs
+   CC	=	gcc
+   CFLAGS = -g -Wall
+   LIBS 	=	-lm 
+   
+   # this translates	.c	file	in	src	list to .o's
+   OBJS	=	$(SRCS:	.c=.o)
+   
+   #	all is not really	needed	, but is used to generate the target
+   all:	$(TARG)
+   
+   # this generates the target executable
+   $(TARG):	$(OBJS)
+   	$(CC)	$(OBJS)		-o 	$(TARG)	
+   
+   # this is a generic rule for .o files
+   %.o:	%.c 
+   	$(CC)	$(CFLAGS)	-c 	$<	$@
+   ```
+
+   
 
 ## 多目录下的Makefile 文件编写
 

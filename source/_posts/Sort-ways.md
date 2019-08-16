@@ -27,6 +27,25 @@ tags: sort
 
 ## 内部排序
 
+### 冒泡排序
+
+```
+/* 冒泡排序 */
+void	BubbleSort(int *array, int length)
+{
+	for(int i = 0; i < length - 1; i++){
+        // 注意j是从后往前的
+        for(int j = length - 1; j >= i; j--){
+            if( array[j] > array[j+1] ){     /*前者大于后者*/
+                int tmp = array[j];
+                array[j]    =   array[j+1];
+                array[j+1]  =   tmp;                
+            }
+        }
+    }
+}
+```
+
 ### 插入排序
 
 1. 算法：
@@ -42,8 +61,28 @@ tags: sort
 2. 插入排序的运行时间
    + 反序输入：O(N^2)
    + 正序输入：O(N) -- 元素不需要排序，将元素输入到数组需要花时间
+   
+3. 插入函数的接口
 
-### 逆序
+   ```
+   /* insert_sort   */
+   void insertionSort(int a[], int N)
+   {
+       int  tmp;
+       int j;
+       for ( int i = 1; i < N; i++){
+           tmp = a[i];         // 下一个需要插入的元素
+   
+           // 前面已排好序的 ( i-1 ) 个元素;
+           for(int j = i; j>0 && a[j-1]>tmp; j--)  
+               a[ j ] = a[j-1];                                    // 前面的大于 tmp, 则移动覆盖
+           
+           a[ j ] = tmp;                                          // 最后一个位置处理
+       }
+   }
+   ```
+
+### 逆序对的性质
 
 1. 逆序性质
    + 当 i < j,  a[ i ] > a[ j ] ：这边是一个逆序对（  a[ i ] ， a[ j ] ）
@@ -77,17 +116,50 @@ tags: sort
    + 使用 shell 的希尔增量最坏情况 O(N^2)，类似插入排序
    + 使用 hibbard 的希尔增量最坏情况 O(N ^ (3/2))
    + sedgewick 增量排序：其他的几种增量形式，降低运行时间；
+   
+5. 希尔排序的接口
 
-### 堆排序
+   ```
+   /* shell sort
+   *   1)希尔排序：缩小增量排序
+   *   2)元素之间的比较：a[i + h(k)] < a[i - h(k)]，对应元素之间的比较
+   *   3)每次删除的逆序对，不止一个逆序对；
+   */
+   void shell_Sort(int  a[], int N)
+   {
+       int i, j, increment;
+       int  tmp;
+   
+       /* h(k) = N/2 ; 每次一半进行递减*/
+       for(increment = N/2; increment > 0; increment /= 2)
+           /* 循环：完后后半部分（N/2）每个元素，和前半部分元素之间的比较*/
+           for(i = increment; i < N; i++){
+               tmp = a[i];     /* 后半部分数组 */
+               for(j = i; j >= increment; j -= increment)
+                   /* 包含在fork循环中的，if-else是一条语句 */
+                   if( a[j-increment] > tmp )
+                       a[j] = a[j - increment];
+                   else 
+                       break;  /* 这里break后，就不执行 j -= increment 这条语句 */
+               a[j] = tmp;
+           }
+   }
+   ```
+
+   
+
+### [堆排序](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/sort.c)
 
 1. 算法：
 
    + 通过优先队列方式：进行delete_min，得到排序数组；
    + 优先队列花费时间O(N * log N)，只是需要附加数组
 
+   {% asset_img heap_sort.png %}
+
 2. delete_min 实现
 
-   + 每次将最后的单元，存放刚刚删除的元素，得到从小到大的排序数组
+   + 每次将最后的单元的值放到堆顶, 位置用来存放刚刚删除的元素; 得到从小到大的排序数组
 
      1）delete_min 删除最后的元素后，整个堆以递减的顺序得到数组--max 堆；
 
@@ -95,13 +167,23 @@ tags: sort
 
      3）delete_min：得到从小到大的排序数组
 
-   + 和二叉堆不同的是：0位置包含元素
+   + 和**二叉堆**不同的是：0位置包含元素
 
-### 归并排序
+3. 堆排序的复杂度分析
+
+   + 本质: 利用完全二叉树的深度特性, 构建堆结构比较复杂;
+   + 时间消耗: 初始建立堆和在重建堆时的反复筛选上;
+   + 两种类型的堆: 最大堆和最小堆;
+
+
+
+### [归并排序](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/sort.c)
 
 1. 算法
 
-   + 合并两个已经排序的表，将两个表插入到第三个表中完成排序
+   + 本质: 是一颗倒着的完全二叉树, 涉及到完全二叉树的结构, 效率一般都不低;
+
+   + 方法: 合并两个已经排序的表，将两个表插入到第三个表中完成排序
 
    + N 为元素的总数：
 
@@ -111,12 +193,14 @@ tags: sort
 
      3）得到一个排序数组
 
+   {% asset_img mergingsort.png %}
+
 2. 归并排序
 
    + 运行时间：O(N * log N)
    + 归并排序：递归排序
 
-### 快速排序
+### [快速排序](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/quick_sort.c)
 
 1. 快速排序
    + 当枢纽元位于中间，平均时间 = O(N log N);

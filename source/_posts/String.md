@@ -9,61 +9,40 @@ tags: [string]
 
 # 数据结构--字符串
 
-## 字符串
-
-1. feature
-
-   - 末尾有一个’\0’，内存覆盖要有警惕；
-
-2. 解决问题
-
-   - a. 字符串中空格的替换
-
-   - b. 两个数组，将B数组插入A数组
-
-     
-
-   | 字符串的情况                                | 方法                     | 时间 | 空间 |
-   | ------------------------------------------- | ------------------------ | ---- | ---- |
-   | 数组未有递增的规律；                        | 复制到新的空间           | O(N) | O(N) |
-   | 不允许使用新的空间 原数组保证足够的空间大小 | 从后往前进行查找替换空格 | O(N) | O(1) |
-
-
-
 ## 字符串相关知识
 
-1. 字符串 赋值给数组
+1. 字符串赋值给数组
 
    - 字符串结尾影藏 '\0';
-   - 字符串赋值给数组：数组要分配内存空间存储
-   - 字符串赋值给指针：指针指向字符串地址，不分配内存空间
+
+   - 字符串赋值给数组：**数组**要分配内存空间存储
+
+     ```
+     char str[100] = "fdslajfk";		// 数组的内从空间可以使动态分配,或者直接分配一个足够大的空间就行
+     ```
+
+   - 字符串赋值给指针：指针**指向**字符串地址，不分配内存空间
 
 2. 网络编程中，URL参数含有 #，空格，则不能正常访问
 
    - 将特殊字符进行替换
    - 替换规则 ： % + ASCII(十六进制表示)
 
-   {% asset_img URL.png %}
-
-3. 字符串赋值数组
-
-   - *使用变量定义长度时，不可在定义时同时进行初始化赋值，需要在之后进行赋值
-
-   ```
-   const int length = 100; 
-   char string[length] ;   
-   strcpy(string, "hello world");
-   ```
-
-4. 字符串：
+4. **字符串表示一个大数的方式：**
    
-   - 是一种简单，有效表示大数的方法
+   - 将大数转化为一个字符串: 
    
-5. 字符串的赋值
+     ```
+     char string[50];
+     int number = 21345;
+     sprintf(string, %d, number);  // 将大数number, 转化为字符串后, 保存在string中
+     ```
+   
+5. **字符串赋值和指针的关系**
 
-   + 同一个字符赋值给两个指针；
+   + (1) 同一个字符赋值给两个指针；这两个指针保存的地址是一样的，所以改变其中一个的值，另外一个也会变
 
-   + 这两个指针保存的地址是一样的，所以改变其中一个的值，另外一个也会变
+   + (2) 打印字符的首地址: 通过 %p的形式;
 
      ```
          char name = 'a';
@@ -95,29 +74,11 @@ tags: [string]
 
    
 
-## 非面试题
+## 字符串的相关笔试题目
 
-### 应用一：[题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/Atio.c)
+1. 应用一：[面试题5：**替换**字符串中的空格 (通过特殊字符替换字符串中的 "#", " ")](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/string_replace.c)
 
-### 应用二：[ 题目：Int型整数，转化为字符串](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/Itoa.c)
-
-1. 还可以通过一个函数：sprintf
-
-   + 直接将整数写到字符串中；
-
-     ```
-     char str[50];
-     int n = 21345;
-     sprintf(str, %d, n);
-     ```
-
-     
-
-## 面试题
-
-### 应用一：[面试题5：替换字符串中的空格](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/string_replace.c)
-
-### 应用二：[面试题17：打印1到最大的n位数](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/14_CodeQuality_Integrity/print_oneToMaxBit_number.c)
+2. 应用二：[面试题17：打印1到最大的**n位数**(n==2 打印1-99)](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/print_oneToMaxBit_number.c)
 
 ### 应用三：[面试题19：正则表达式匹配](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/match_string.c)
 
@@ -138,3 +99,13 @@ tags: [string]
    ​        d. 直到后面的字符为 '\0' 打印
 
 2. 字符串的组合：
+
+### 应用六: [面试题58（一）：翻转单词顺序.  题目：输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/reverseSentence.c)
+
+### 应用七: [面试题58（二）：左旋转字符串.  题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/leftRotateString.c)
+
+
+
+### 应用一：[题目：字符串转换到int类型，使用atoi函数可以轻松完成类型转换](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/Atio.c)
+
+### 应用二：[ 题目：Int型整数，转化为字符串](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/05_String/Itoa.c)

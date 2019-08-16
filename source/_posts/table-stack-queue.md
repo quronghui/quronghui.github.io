@@ -53,7 +53,7 @@ tags: ADT
 
 ### 栈的应用
 
-#### 应用一：[包含min函数的栈:题目：定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的min函数](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/min_inStack.c)
+#### 应用一：[面试题30: 包含min函数的栈:题目：定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的min函数](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_stack/min_inStack.c)
 
  	1. 有几个难点：
      + 和链表一样，一开始没有code栈的操作，导致这道题目没有思路；
@@ -92,7 +92,7 @@ tags: ADT
      (rear+1) % QUEUE_SIZE == front      队列为空
      (rear+2) %  QUEUE_SIZE == front     队列为满
      数组的初始化
-  rear = 0;
+    rear = 0;
      front = 1;	// 空出下标为0的位置
      ```
    
@@ -102,7 +102,7 @@ tags: ADT
 
 - [静态数组实现 , 现在还没有用](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/static_array_queue.c)
 - [动态分配数组实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/array_malloc_queue.c)
-- [动态分配链表实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/link_queue.c)
+- [链表实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/08_queue/link_queue.c)
 
 ### queue 的应用--> 用于树的操作
 

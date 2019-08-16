@@ -39,6 +39,22 @@ tags: 并发
    | 临界区互斥         |                                                | 通过锁实现             |
    | 线程交互(减少线程) |                                                | 通过条件变量发送信号   |
    | 共享数据的位置     |                                                | heap 或者全局位置      |
+   
+4. **实现线程间的同步方法的比较**
+
+   
+
+   | 实现方法 | 锁                                 | 条件变量                                        | 信号量                                                       |
+   | -------- | ---------------------------------- | ----------------------------------------------- | ------------------------------------------------------------ |
+   | 特点     | 二值信号量 (0/1)                   | 队列(需要记录队列为空还是满)                    | 是一个整数值(初始化赋值)                                     |
+   | 需要参数 | 1)共享变量<br />(while自旋的条件); | 1)共享变量<br />(while 进入等待的条件)          | sem                                                          |
+   |          | 2) mutex                           | 2)mutex (实现线程间互斥)                        |                                                              |
+   |          |                                    | 3)cond(实线线程间同步)                          |                                                              |
+   | 函数     | lock() ; unlock()                  | cond_wait(); <br />**线程进入等待状态会释放锁** | sem_init()<br />1)  int pshared: 0 线程间同步;1-进程<br />2) int value : 信号量初始化的值 |
+   |          |                                    | cond_signal(); 唤醒线程                         | sem_wait() :**不释放锁, 死锁问题** <br />信号量减一, (与初始值比较)进入等待状态 |
+   |          |                                    |                                                 | sem_post();<br />信号量加一, (与初始值比较)唤醒线程          |
+
+   
 
 ### [线程的创建和执行顺序](https://github.com/quronghui/OSIntroduction/tree/master/1_thread_create/thread_create.c)
 
@@ -80,16 +96,16 @@ man -k pthread	// 查询线程所有的API
    int pthread_create(pthread_t *thread, const pthread_attr_t *attr,  void *(*start_routine) (void *), void *arg);
    ```
 
-   + pthread_t *thread : 与线程的交互
+   + pthread_t *thread : 与线程交互的参数
    + const pthread_attr_t *attr : 指定线程的属性
      + 栈属性: 栈的大小;
      + 优先级属性
      + **使用前要进行初始化**: pthread_attr_init()
-   + void * ( *start_routine) (void *) : 指针函数
+   + void *  (  *start_routine) (void *) : 函数指针
      + **线程需要完成的指令**: 包括所有的临界区 
-   + void *arg: 传递给指针函数的参数
+   + void *arg: 传递给函数指针的参数
 
-2. [线程完成](https://github.com/quronghui/OSIntroduction/tree/master/1_thread_create/thread_join.c)
+2. [如何等待线程函数完成](https://github.com/quronghui/OSIntroduction/tree/master/1_thread_create/thread_join.c)
 
    + 等待线程的完成, 需要调用函数pthread_join()
 
@@ -241,24 +257,16 @@ man -k pthread	// 查询线程所有的API
 2. 问题一:  done 共享变量, 是否有存在的必要?
 
    + 睡眠, 唤醒, 锁都离不开共享变量
++ a. 情况一: 父线程创建子线程后, 自己运行(单CPU), 调用thr_join()函数. 
+     + 这种情况下 父线程先获得lock, done==0, 子线程还在运行, 调用wait()进入睡眠; 
+  + 子线程得以运行,  调用thr_exit()函数发送signal 信号唤醒父线程;
+     + 父线程从wait中返回, 释放锁;
++ b.  情况二: 父线程创建子线程后,子线程立即运行, 并且设置 done =1; 
+     +   调用signal唤醒其他线程(线程队列为空), 然后结束;
+  +  父线程运行后, 调用thr_join(), 发现done = 1, 所以释放锁返回;
 
-   + a. 情况一: 父线程创建子线程后, 自己运行(单CPU), 调用thr_join()函数. 
-
-   ​                这种情况下 父线程先获得lock, done==0, 子线程还在运行, 调用wait()进入睡眠; 
-
-   ​                子线程得以运行,  调用thr_exit()函数发送signal 信号唤醒父线程;
-
-   ​                父线程从wait中返回, 释放锁;
-
-   + b.  情况二: 父线程创建子线程后,子线程立即运行, 并且设置 done =1; 
-
-   ​                调用signal唤醒其他线程(线程队列为空), 然后结束;
-
-   ​                父线程运行后, 调用thr_join(), 发现done = 1, 所以释放锁返回;
-
-3.  问题二:  唤醒和睡眠状态都不加锁?
-
-   +  会被中断信号打断
+3. 问题二:  唤醒和睡眠状态都不加锁?
+   + 会被中断信号打断
 
 ### 典型模型: 生产者和消费者(存在界缓冲区)
 
@@ -308,6 +316,10 @@ man -k pthread	// 查询线程所有的API
    ```
 
    + 覆盖条件: 它能覆盖所有需要唤醒的线程场景,  广播进行全部唤醒; 
+
+## 基于锁的并发数据结构
+
++ 还没有看
 
 ## 信号量 -- 同步原语
 
@@ -366,7 +378,7 @@ man -k pthread	// 查询线程所有的API
 
      {% asset_img semphore_cond.jpg %}
 
-   + 情景一:  父线程 创建子线程后, 父线程先运行
+   + 情景二:  父线程 创建子线程后, 父线程先运行
 
 2. [实现方式code](https://github.com/quronghui/OSIntroduction/tree/master/3_semaphore/semaphore_cond.c)
 
@@ -402,11 +414,11 @@ man -k pthread	// 查询线程所有的API
    + 信号量实现的模型
      + **先进入函数** : Sem_wait() 
      + **后比较**比较: 进入睡眠模式(sem<0)不会释放锁
-
-   ```
-   Sem_wait(&mutex);		// 已经获得锁了
-   Sem_wait(&empty);  		// 进入等待的时候**不会释放锁**
-   ```
+  
+     ```
+     Sem_wait(&mutex);		// 已经获得锁了
+     Sem_wait(&empty);  		// 进入等待的时候**不会释放锁**
+     ```
 
    + 条件变量实现的模型: 
 

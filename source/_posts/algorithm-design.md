@@ -30,7 +30,13 @@ tags: algorithm
 3. 递归引起的问题：
    + 调用栈溢出，每个进程的栈容量优先。
 
-### 应用一：[面试题：斐波那契数列，青蛙跳台阶](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/09_recursion_and_loop/fibonacci.c)
+### 应用一：[面试题10：斐波那契数列，青蛙跳台阶](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/09_recursion_and_loop/fibonacci.c)
+
+### 应用二: [面试题60：n个骰子的点数的概率](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/09_recursion_and_loop/dicesProbability.c)
+
+### 应用三: [面试题61：扑克牌的顺子判断](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/09_recursion_and_loop/continueCard.c)
+
+
 
 ## [排序和查找](https://luckywater.top/2019/05/22/Sort-ways/)
 
@@ -40,11 +46,22 @@ tags: algorithm
 | 哈希表<br />二叉排序树 | 考察重点在数据结构，不是算法                                 |
 | 快速排序               | 最后得到的就是两个已排序的数组，加一个枢纽元                 |
 
-### 		应用一：[快速排序算法的实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/quick_sort.c)
+1. [二分查找法的实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/binary_search.c)
+2. [quick_sort算法的实现](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/quick_sort.c)
 
-### 		应用二：[面试题11：旋转数组的最小数字](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/rotating_array.c)
+### 		应用一：[面试题11：旋转数组的最小数字](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/rotating_array.c)
 
-### 应用三: 归并排序 [ 面试题51：数组中的逆序对](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/inversePair_mergeSort.c)
+### 应用二: 归并排序 [ 面试题51：数组中的逆序对](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/inversePair_mergeSort.c)
+
+
+
+## 二分查找
+
+### 应用一: [二分查找 -- 面试题53（一）：数字在排序数组中出现的次数](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/numberOfK_InSortArray.c)
+
+### 应用二: [二分查找 --  面试题53（二）：0到n-1中缺失的数字数](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/missingNumber_increasingArray.c)
+
+### 应用三: [二分查找 -- 面试题53（三）：数组中数值和下标相等的元素](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/value_incArray.c)
 
 ## 回溯算法
 
@@ -97,13 +114,13 @@ tags: algorithm
    	$(CC) $^ -o $@ -lm						// 在链接成目标文件时，加上动态链接库函数 -lm
    ```
 
-   ### 动态规划应用一: [ 剪绳子 :给你一根长度为n绳子，请把绳子剪成m段](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/12_DynamicProgramming_GreedyAlogithm/Dynamic_maxProduct.c)
+   ### 动态规划应用一: [ 面试题14: 剪绳子 :给你一根长度为n绳子，请把绳子剪成m段](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/12_DynamicProgramming_GreedyAlogithm/Dynamic_maxProduct.c)
 
    ### 动态规划应用二: [面试题47：礼物的最大价值. 题目：在一个m×n的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于0）](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/12_DynamicProgramming_GreedyAlogithm/get_MaxValue_inMatrix.c)
    
    ### 动态规划应用三: [面试题48：最长不含重复字符的子字符串.  扩展: 将这个长的字符串打印出来?](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/12_DynamicProgramming_GreedyAlogithm/longSubstring_withoutDup.c)
    
-   ### 贪婪算法应用一：[剪绳子 :给你一根长度为n绳子，请把绳子剪成m段](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/12_DynamicProgramming_GreedyAlogithm/Greedy_maxProduct.c)
+   ### 贪婪算法应用一：[面试题14: 剪绳子 :给你一根长度为n绳子，请把绳子剪成m段](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/12_DynamicProgramming_GreedyAlogithm/Greedy_maxProduct.c)
 
 ## 位运算
 
@@ -128,8 +145,11 @@ tags: algorithm
    n = n >> 1; 	// 不能只写 n >> 1
    ```
 
+### 应用一： [面试题15: 计算一个整数转换为二进制后，1的个数](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/13_bit_opreation/one_count.c)
 
-### 应用一： [计算一个整数转换为二进制后，1的个数](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/13_bit_opreation/one_count.c)
+### 应用二： [面试题56（一）：数组中只出现一次的两个数字.题目：一个整型数组里除了两个数字之外，其他的数字都出现了两次。](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/13_bit_opreation/findNumsOnce.c)
+
+### 应用三： [面试题56（一）：数组中只出现一次的两个数字. 题目：在一个数组中除了一个数字只出现一次之外，其他数字都出现了三次。](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/13_bit_opreation/findAppearOnce.c)
 
 ## 分治算法
 
@@ -148,6 +168,12 @@ tags: algorithm
 3. 非分治算法：只使用一次递归
 
    + dijkstra 算法
+
+
+
+
+
+
 
 
 

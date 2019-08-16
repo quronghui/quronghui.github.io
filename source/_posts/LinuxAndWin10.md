@@ -2,8 +2,8 @@
 layout: '[layout]'
 title: Ubuntu18 And Win10
 date: 2019-02-18 11:25:12
-tags: linux win10 双系统
-categories: System
+tags: System
+categories:  skill
 ---
 
 # Win10 + Ubuntu 双系统

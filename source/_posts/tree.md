@@ -302,7 +302,7 @@ tags: [tree]
 2. 反序列化：
 
    + 由前序和中序 **序列**：反序列化二叉树；
-   + 应用：面试题7
+   + 应用：面试题37
 
 3. 前序和中序 的反序列化 -- **缺点**
 
@@ -319,26 +319,15 @@ tags: [tree]
 
    + 反序列化：只根据前序遍历得到的序列构建二叉树；
 
-## 构建二叉树 (用的同一个接口)
+## 二叉树 (用的同一个接口)
 
-### 	应用一 ：[ 面试题 7 ：根据前序遍历和中序遍历，构建一颗二叉树 ](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/construct_binary_tree.c)
-
-### 应用：[]
-
-### 应用二：[静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/static_array_binary_tree.c)
-
-### 应用三：[链式构建二叉搜索树,实现节点的插入，搜索，递归遍历](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/link_binary_search_tree.c)
-
-1. 这是C和指针上面的内容；实现节点插入，构建二叉搜索树
-2. 应用二相当于数组的实现；应用三相当于链表的实现
-
-
-
-## 找出中序遍历的下一个节点
-
-### 	应用一：[面试题 8：找一颗二叉树中序遍历的下一个节点，节点有指向父结点的指针](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/next_binary_tree_node.c)
-
-1. 多了一个指针，指向父节点；
+1. [静态数组实现二叉搜索树，能实现节点的插入，搜索，前序遍历](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/static_array_binary_tree.c)
+2. [链式构建二叉搜索树,实现节点的插入，递归遍历](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/link_binary_search_tree.c)
+   + 这是C和指针上面的内容；实现节点插入，构建二叉搜索树
+   + 应用二相当于数组的实现；
+   + 应用三相当于链表的实现 
+3. [面试题 7 ：根据前序遍历和中序遍历，构建一颗二叉树 ](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/construct_binary_tree.c)
+4. [面试题 8：二叉树中序遍历的下一个节点(节点有指向父结点的指针)](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/next_binary_tree_node.c)
 
 ## 对称树判断
 
@@ -448,3 +437,12 @@ tags: [tree]
 
 1. 不能创建新的任何节点：意味着我们在遍历的时候，就需要对每一个节点进行转换（节点需要动态分配，指针初始化一个地址）
 2. 转换为的转换为的链表是排序：选择中序遍历
+
+## 树的深度
+
+###  应用一: [ 面试题55（一）：二叉树的深度](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/depth_tree.c)
+
+### 应用二: [ 面试题55（二）：平衡二叉树](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/07_tree/balance_tree.c)
+
+
+

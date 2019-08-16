@@ -338,3 +338,26 @@ $ tree -L n 	#n代表数字..表示要显示几层...
 $ tree -f 	#显示完整路径..
 ```
 
+
+
+## [生成 GitHub README.md 目录](https://sleepeatcode.com/articles/15/generating-the-github-readme-directory)
+
+1. `gh-md-toc` 项目在 Ubuntu 和 macOS 上测试过。如果要在 Windows 上使用，使用基于 golang 的实现：[github-markdown-toc.go](https://github.com/ekalinin/github-markdown-toc.go)。而且很重要的一点是，它不需要安装额外的依赖。
+
+   ```
+   $ wget https://raw.githubusercontent.com/ekalinin/github-markdown-toc/master/gh-md-toc
+   $ chmod a+x gh-md-toc
+   ```
+
+2. 使用方式: 通过本地输出后复制到README.md
+
+   ```
+   $	/gh-md-toc	 ~/projects/Dockerfile.vim/README.md 
+   Table of Contents
+   =================
+      * [Embedded-written-reference](#embedded-written-reference)
+         * [Contents](#contents)
+         * [7.30诺瓦科技](#730诺瓦科技)
+         * [8.1大疆嵌入式参考](#81大疆嵌入式参考)
+         * [8.3网易笔试](#83网易笔试)
+   ```
