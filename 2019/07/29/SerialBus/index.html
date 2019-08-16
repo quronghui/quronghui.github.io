@@ -105,11 +105,13 @@
 <meta property="og:description" content="串行总线通信方式嵌入式总线和接口总线概述 总线是一组线路, 或者是接口的总称;  总线的功能:   任何一个微处理器(MCU) 都要与一定数量的部件和外围设备连接，常用一组线路，配置以适当的接口电路，与各部件和外围设备连接，这组共用的连接线路被称为总线。   总线的分类 | 总线类型     | 总线   | 功能">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/SPI_data.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/SPI_time.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/i2c_time.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/I2c_data.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/Uart_data.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/uart.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/SerialBus/rs232.png">
-<meta property="og:updated_time" content="2019-08-13T12:50:13.106Z">
+<meta property="og:updated_time" content="2019-08-16T08:47:07.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SerialBus">
 <meta name="twitter:description" content="串行总线通信方式嵌入式总线和接口总线概述 总线是一组线路, 或者是接口的总称;  总线的功能:   任何一个微处理器(MCU) 都要与一定数量的部件和外围设备连接，常用一组线路，配置以适当的接口电路，与各部件和外围设备连接，这组共用的连接线路被称为总线。   总线的分类 | 总线类型     | 总线   | 功能">
@@ -422,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-13 20:50:13" itemprop="dateModified" datetime="2019-08-13T20:50:13+08:00">2019-08-13</time>
+                <time title="Updated at: 2019-08-16 16:47:07" itemprop="dateModified" datetime="2019-08-16T16:47:07+08:00">2019-08-16</time>
               
             
           </span>
@@ -543,7 +545,7 @@
 <td>同/异步总线</td>
 <td>同步总线</td>
 <td>同步总线</td>
-<td>异步总线</td>
+<td><strong>异步</strong>总线</td>
 <td>同步总线</td>
 </tr>
 <tr>
@@ -555,8 +557,8 @@
 </tr>
 <tr>
 <td>各自特点</td>
-<td>实现简单, 有自己<strong>时钟协议</strong></td>
-<td>需要<strong>上拉电阻</strong>进行抗干扰</td>
+<td>有自己<strong>时钟协议</strong></td>
+<td>1) 先发送目的设备的地址;</td>
 <td><strong>固定</strong>的波特率</td>
 <td></td>
 </tr>
@@ -576,9 +578,16 @@
 </tr>
 <tr>
 <td>数据发送</td>
-<td></td>
+<td>空闲状态跳变</td>
 <td>边缘触发</td>
+<td>起始位= 0</td>
 <td></td>
+</tr>
+<tr>
+<td>数据帧</td>
+<td>从高bit–低bit ; 8bit(data)</td>
+<td>从高–低; <br>1) 7(adress) + 1(ack);  2)8(data) + 1ack</td>
+<td><strong>从低bit–高</strong>;  10bit / 11 bit<br>1bit(起始 0) + 8bit(data) + 1(校验) + 1bit(停止 1)</td>
 <td></td>
 </tr>
 <tr>
@@ -587,6 +596,40 @@
 <td>总线型（特殊的树形）</td>
 <td></td>
 <td>星形</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -602,27 +645,23 @@
 <ul>
 <li>主从模式架构: 支持多slave模式应用，一般仅支持单Master</li>
 <li><strong>主设备</strong> :提供串行时钟(SCLK)</li>
-<li>数据传输: 数据按位传输，高位在前，低位在后（MSB first）; 传输的数据为8位</li>
-<li>通过移位寄存器实现主从设备的数据交换;</li>
+<li>通过<strong>移位寄存器</strong>实现主从设备的数据交换;</li>
 </ul>
 <img src="/2019/07/29/SerialBus/SPI_data.png">
 </li>
-<li><p>SPI主要的应用</p>
+<li><p><strong>数据输出</strong></p>
 <ul>
-<li>应用在EEPROM,FLASH,实时时钟,AD转换器,还有数字信号处理器和数字信号解码器之间</li>
+<li>空闲状态:  由时钟极性(CPOL)进行确定;  CPOL=0(同步时钟的空闲状态为低电平); PCOL=1(高)</li>
+<li>数据<strong>按位</strong>传输，<strong>从高 – 低</strong>; 传输的数据为8位</li>
 </ul>
-</li>
-<li><p>缺点</p>
-<ul>
-<li>缺点：没有指定的流控制,<strong>没有应答机制</strong>确认是否接收到数据。</li>
-</ul>
+<img src="/2019/07/29/SerialBus/SPI_time.png">
 </li>
 </ol>
 <h3 id="I2C-同步总线"><a href="#I2C-同步总线" class="headerlink" title="I2C 同步总线"></a>I2C 同步总线</h3><ol>
 <li><p>I2C(INTER IC BUS)</p>
 <ul>
-<li>信号线: 两线(SCL、SDA)、串行、多主控（multi-master）接口标准， <strong>同步</strong>总线</li>
-<li>特点: 具有<strong>总线仲裁机制</strong>，非常适合在器件之间进行<strong>近距离</strong>、非经常性的数据通信</li>
+<li>信号线: 两线(SCL、SDA)、 <strong>同步</strong>总线</li>
+<li>特点: 具有<strong>总线仲裁机制</strong>，非常适合在器件之间进行<strong>近距离</strong></li>
 <li>协议:  传输数据时都会带上<strong>目的设备</strong>的设备地址，因此可以实现<strong>设备组网</strong></li>
 <li>IO口模拟I2C总线:   并实现双向传输，则需一个输入输出口(SDA)，另外还需一个输出口(SCL)</li>
 </ul>
@@ -632,6 +671,10 @@
 <ul>
 <li>三种类型的信号，分别是：开始信号、结束信号和应答信号</li>
 <li>开始信号：处理器让SCL时钟保持高电平，然后让SDA数据信号由高变低就表示一个开始信号。</li>
+<li>发送adress: 7bit (目的地址) + 读/ 写(bit);  等待ACK</li>
+<li>接受: 设备发送的ACK</li>
+<li>发送数据:  <strong>8bit (由高bit–低) </strong></li>
+<li>接受:  设备发送的ACK</li>
 <li>停止信号：处理器让SCL时钟保持高电平，然后让SDA数据信号由低变高就表示一个停止信号。</li>
 </ul>
 </li>
@@ -661,7 +704,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="UART-通用异步收发器"><a href="#UART-通用异步收发器" class="headerlink" title="UART 通用异步收发器"></a>UART 通用异步收发器</h3><ol>
+<h3 id="UART-通用异步收发器"><a href="#UART-通用异步收发器" class="headerlink" title="UART 通用异步收发器"></a><a href="https://www.cnblogs.com/liujinggang/p/9535366.html" target="_blank" rel="noopener">UART 通用异步收发器</a></h3><ol>
 <li><p>UART  (Universal Asynchronous Receiver Transmitter)</p>
 <ul>
 <li>特点:<strong>异步</strong>串口，因此一般比前两种同步串口的结构要复杂很多;</li>
@@ -669,7 +712,40 @@
 </ul>
 </li>
 <li><p>UART 数据格式</p>
+<ul>
+<li>一个数据帧:   10bit / 11bit(有校验)<ul>
+<li>起始位: 1bit 为0</li>
+<li>data : 8bit , 从<strong>低地址到高地址</strong>;</li>
+<li>校验位 和 停止位(1) </li>
+</ul>
+</li>
+</ul>
 <img src="/2019/07/29/SerialBus/Uart_data.png">
+</li>
+<li><p>数据发送和接收</p>
+<ul>
+<li>数据发送时: <strong>一位位的进行发送</strong></li>
+<li>发送过程 : <ul>
+<li>空闲状态，线路处于高电位; 当收到发送数据指令后，拉低线路一个<strong>数据位的时间T</strong>;</li>
+<li>接着数据从<strong>低–高</strong>位依次发送(8bit); 接着发送奇偶校验位和停止位, 一帧资料发送结束;</li>
+</ul>
+</li>
+<li>接受过程<ul>
+<li>空闲状态，线路处于高电位; 当<strong>检测</strong>到线路的下降沿, 时说明线路有数据传输;</li>
+<li>按照约定的<strong>波特率</strong> , <strong>从低 – 高</strong>位接收数据; 接着接收并<strong>比较奇偶校验位</strong>是否正确</li>
+</ul>
+</li>
+</ul>
+<img src="/2019/07/29/SerialBus/uart.png">
+</li>
+<li><p>保证数据正确性</p>
+<ul>
+<li>UART采用<strong>16倍数据波特率</strong>的时钟进行采样; </li>
+<li>每个数据有16个时钟采样，取<strong>中间</strong>的采样值，以保证采样不会滑码或误码。</li>
+</ul>
+</li>
+<li><p>发送数据时间计算</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">波特率: <span class="number">115200</span> bps    ;  Time <span class="comment">(1bit)</span>  = <span class="comment">(1/115200)</span>=<span class="number">8.7</span>us;</span><br><span class="line">一帧数据: <span class="comment">(不考虑奇偶bit)</span> : <span class="comment">( 8 + 2 )</span> * <span class="number">8.7</span> = <span class="number">87</span>us;</span><br><span class="line"><span class="number">1</span>s<span class="comment">(1000000us)</span> : 字节数<span class="comment">(1000000/87)</span> = <span class="number">11494</span>bit;  -- &gt; <span class="number">11.5</span>KB/s</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="外部总线"><a href="#外部总线" class="headerlink" title="外部总线"></a>外部总线</h2><h3 id="RS-232"><a href="#RS-232" class="headerlink" title="RS - 232"></a>RS - 232</h3><ol>
@@ -690,7 +766,7 @@
 <li><p>信号线</p>
 <ul>
 <li>RS-232-C总线标准设有<strong>25条信号线</strong>，包括一个主通道和一个辅助通道，在多数情况下主要使用<strong>主通道</strong></li>
-<li>对于一般<strong>双工通信</strong>，仅需几条信号线就可实现，如一条发送线、一条接收线及一条地线</li>
+<li>对于一般<strong>双工通信</strong>，仅需几条信号线就可实现，如一条RXD、一条TXD及一条地线</li>
 </ul>
 </li>
 <li><p><a href="https://blog.csdn.net/mrdingjie/article/details/8126062" target="_blank" rel="noopener">RS232 通信协议</a></p>
