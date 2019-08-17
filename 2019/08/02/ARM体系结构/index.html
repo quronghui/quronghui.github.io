@@ -96,18 +96,21 @@
 
 
 
-  <meta name="description" content="ARM体系结构ARM 指令集可以分为哪六大类?   指令集 名字     LDR (load data ) 字数据加载指令   LDRB 字节数据加载指令   LDRH 半字数据加载指令   STR 字数据存储指令   STRB 字节数据存储指令   STRH 半字数据存储指令     位, 比特, 字节, 字四这之间的关系? 位 : bit, 计算自内部数据存储最小的单位; 字节:  B,  计">
+  <meta name="description" content="ARM体系结构ARM处理器的7种模式   处理器模式 描述     用户模式(User) 正常程序执行模式; ARM指令地址加4byte, Thumb指令地址加2byte   快速中断(FIQ) 高速数据传输和通道处理   外部中断(IRQ) 通常的中断处理   特权模式(Supervisor, sev) 供操作系统使用的一种保护模式   数据访问中止(Abort, abt) 用于虚拟存储及存储保">
 <meta name="keywords" content="Emebedded Electronic">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ARM体系结构">
 <meta property="og:url" content="http://yoursite.com/2019/08/02/ARM体系结构/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="ARM体系结构ARM 指令集可以分为哪六大类?   指令集 名字     LDR (load data ) 字数据加载指令   LDRB 字节数据加载指令   LDRH 半字数据加载指令   STR 字数据存储指令   STRB 字节数据存储指令   STRH 半字数据存储指令     位, 比特, 字节, 字四这之间的关系? 位 : bit, 计算自内部数据存储最小的单位; 字节:  B,  计">
+<meta property="og:description" content="ARM体系结构ARM处理器的7种模式   处理器模式 描述     用户模式(User) 正常程序执行模式; ARM指令地址加4byte, Thumb指令地址加2byte   快速中断(FIQ) 高速数据传输和通道处理   外部中断(IRQ) 通常的中断处理   特权模式(Supervisor, sev) 供操作系统使用的一种保护模式   数据访问中止(Abort, abt) 用于虚拟存储及存储保">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-11T11:12:23.374Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/ARM体系结构/ARM_Interupt.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/ARM体系结构/armC_CPP.jpg">
+<meta property="og:updated_time" content="2019-08-17T07:48:41.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ARM体系结构">
-<meta name="twitter:description" content="ARM体系结构ARM 指令集可以分为哪六大类?   指令集 名字     LDR (load data ) 字数据加载指令   LDRB 字节数据加载指令   LDRH 半字数据加载指令   STR 字数据存储指令   STRB 字节数据存储指令   STRH 半字数据存储指令     位, 比特, 字节, 字四这之间的关系? 位 : bit, 计算自内部数据存储最小的单位; 字节:  B,  计">
+<meta name="twitter:description" content="ARM体系结构ARM处理器的7种模式   处理器模式 描述     用户模式(User) 正常程序执行模式; ARM指令地址加4byte, Thumb指令地址加2byte   快速中断(FIQ) 高速数据传输和通道处理   外部中断(IRQ) 通常的中断处理   特权模式(Supervisor, sev) 供操作系统使用的一种保护模式   数据访问中止(Abort, abt) 用于虚拟存储及存储保">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/02/ARM体系结构/ARM_Interupt.jpg">
 
 
 
@@ -416,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-11 19:12:23" itemprop="dateModified" datetime="2019-08-11T19:12:23+08:00">2019-08-11</time>
+                <time title="Updated at: 2019-08-17 15:48:41" itemprop="dateModified" datetime="2019-08-17T15:48:41+08:00">2019-08-17</time>
               
             
           </span>
@@ -496,7 +499,177 @@
       
 
       
-        <h1 id="ARM体系结构"><a href="#ARM体系结构" class="headerlink" title="ARM体系结构"></a>ARM体系结构</h1><h2 id="ARM-指令集可以分为哪六大类"><a href="#ARM-指令集可以分为哪六大类" class="headerlink" title="ARM 指令集可以分为哪六大类?"></a>ARM 指令集可以分为哪六大类?</h2><table>
+        <h1 id="ARM体系结构"><a href="#ARM体系结构" class="headerlink" title="ARM体系结构"></a>ARM体系结构</h1><h2 id="ARM处理器的7种模式"><a href="#ARM处理器的7种模式" class="headerlink" title="ARM处理器的7种模式"></a>ARM处理器的7种模式</h2><table>
+<thead>
+<tr>
+<th>处理器模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户模式(User)</td>
+<td>正常程序执行模式; ARM指令地址加4byte, Thumb指令地址加2byte</td>
+</tr>
+<tr>
+<td>快速中断(FIQ)</td>
+<td>高速数据传输和通道处理</td>
+</tr>
+<tr>
+<td>外部中断(IRQ)</td>
+<td>通常的中断处理</td>
+</tr>
+<tr>
+<td>特权模式(Supervisor, sev)</td>
+<td>供操作系统使用的一种保护模式</td>
+</tr>
+<tr>
+<td>数据访问中止(Abort, abt)</td>
+<td>用于虚拟存储及存储保护</td>
+</tr>
+<tr>
+<td>未定义指令中止模式(Undefined, und)</td>
+<td>支持通用软件方针硬件的协处理器</td>
+</tr>
+<tr>
+<td>系统模式(System, sys)</td>
+<td>运行特权级的操作系统任务</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>具体的区别:<ul>
+<li>特权模式(Privileged Modes): 除了用户模式之外的其他6种;</li>
+<li>异常模式:  除了用户 和 系统模式,</li>
+</ul>
+</li>
+<li>系统模式 :<ul>
+<li>系统模式<strong>不是</strong>通过异常进入, 它和用户模式具有完全一样的寄存器;</li>
+</ul>
+</li>
+</ol>
+<h3 id="寄存器介绍"><a href="#寄存器介绍" class="headerlink" title="寄存器介绍"></a>寄存器介绍</h3><ol>
+<li>ARM处理器有37个寄存器<ul>
+<li>31个通用寄存器, 包含<strong>程序计数器(PC)</strong>, 都是32bit</li>
+<li>6个状态寄存器</li>
+</ul>
+</li>
+<li>程序计数器(PC)的作用?<ul>
+<li>是用于<strong>存放执行指令</strong>的地方;</li>
+<li>当执行指令时，CPU将自动修改PC的内容，即每执行一条指令PC增加一个量，这个量等于指令所含的字节数，以便使其<strong>保持的总是将要执行的下一条指令的地址</strong></li>
+</ul>
+</li>
+<li>程序状态寄存器(CPSR)<ul>
+<li>包含条件标识位, 中断禁止位, 当前处理器模式标志位以及其他的控制位;</li>
+</ul>
+</li>
+</ol>
+<h3 id="寄存器移位方式-知道前三种"><a href="#寄存器移位方式-知道前三种" class="headerlink" title="寄存器移位方式 : 知道前三种"></a>寄存器移位方式 : 知道前三种</h3><table>
+<thead>
+<tr>
+<th>移位方式</th>
+<th>名称</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ASR</td>
+<td>算数右移</td>
+<td></td>
+</tr>
+<tr>
+<td>LSL</td>
+<td>逻辑左移</td>
+<td></td>
+</tr>
+<tr>
+<td>LSR</td>
+<td>逻辑右移</td>
+<td></td>
+</tr>
+<tr>
+<td>ROR</td>
+<td>循环右移</td>
+<td></td>
+</tr>
+<tr>
+<td>RRX</td>
+<td>扩展的循环右移</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ARM-处理器异常中断"><a href="#ARM-处理器异常中断" class="headerlink" title="ARM 处理器异常中断"></a>ARM 处理器异常中断</h3><ol>
+<li><p>异常中断类型和优先级</p>
+<img src="/2019/08/02/ARM体系结构/ARM_Interupt.jpg">
+</li>
+<li><p>中断响应和返回</p>
+<ul>
+<li>保存处理器当前状态;</li>
+<li>设置CPSR中的位;</li>
+<li>将寄存器lr_mode设置为返回地址</li>
+<li><p>将计数器值(PC)设置为中断的向量地址;</p>
+</li>
+<li><p>返回到中断情况的下一条指令;</p>
+</li>
+</ul>
+</li>
+<li><p>FIQ和IRQ 异常中断?</p>
+<ul>
+<li>用于<strong>外部设备</strong>向CPU请求中断服务</li>
+<li>引脚低电平有效</li>
+<li>同时发生时: 先处理FIQ</li>
+</ul>
+</li>
+</ol>
+<h2 id="ARM-指令集可以分为哪六大类"><a href="#ARM-指令集可以分为哪六大类" class="headerlink" title="ARM 指令集可以分为哪六大类?"></a>ARM 指令集可以分为哪六大类?</h2><table>
+<thead>
+<tr>
+<th>指令集 (6类)</th>
+<th>功能</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>跳转指令</td>
+<td>直接向PC寄存器写入目的地址值;</td>
+<td></td>
+</tr>
+<tr>
+<td>数据处理指令</td>
+<td>对数据的处理</td>
+<td></td>
+</tr>
+<tr>
+<td>程序状态寄存器(PSR)传输指令</td>
+<td>读取–修改–写回;</td>
+<td></td>
+</tr>
+<tr>
+<td>Load/Store 指令</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>协处理器指令</td>
+<td>支持16个协处理器</td>
+<td></td>
+</tr>
+<tr>
+<td>异常中断产生指令</td>
+<td>软中断SWI; 断点中断指令BKPT</td>
+</tr>
+</tbody>
+</table>
+<h3 id="数据处理指令分类"><a href="#数据处理指令分类" class="headerlink" title="数据处理指令分类"></a>数据处理指令分类</h3><ol>
+<li>数据传送指令:<ul>
+<li>MOV 算数逻辑运算指令:  ADD(加法), SUB(减法), AND(逻辑与), MUL(乘法)</li>
+</ul>
+</li>
+<li>比较指令: TST</li>
+</ol>
+<h3 id="load-store-指令"><a href="#load-store-指令" class="headerlink" title="load/store 指令"></a>load/store 指令</h3><table>
 <thead>
 <tr>
 <th>指令集</th>
@@ -542,6 +715,12 @@
 </ul>
 </li>
 </ol>
+<h3 id="立即数寻址的方式"><a href="#立即数寻址的方式" class="headerlink" title="立即数寻址的方式"></a>立即数寻址的方式</h3><ol>
+<li>立即数组成<ul>
+<li>每个立即数由一个8bit常数, <strong>循环右移</strong>偶数位得到;</li>
+</ul>
+</li>
+</ol>
 <h2 id="ARM体系结构中的工作状态"><a href="#ARM体系结构中的工作状态" class="headerlink" title="ARM体系结构中的工作状态?"></a>ARM体系结构中的工作状态?</h2><ol>
 <li><p>ARM体系结构有四种工作状态</p>
 <ul>
@@ -567,6 +746,107 @@
 <li>Thumb-2技术: ARM处理器<strong>无需</strong>再ARM状态和Thumb-2状态间进行切换了，因为thumb-2具有32位指令功能;</li>
 </ul>
 </li>
+<li><p>ARPCS 的作用?</p>
+<ul>
+<li>是ARM程序和Thumb程序中<strong>子程序</strong>调用的基本规则</li>
+</ul>
+</li>
+</ol>
+<h2 id="ARM汇编"><a href="#ARM汇编" class="headerlink" title="ARM汇编"></a>ARM汇编</h2><ol>
+<li>ARM 中的伪指令?<ul>
+<li>伪指令在汇编编译器对源程序进行<strong>汇编处理</strong>时, 被<strong>替换成</strong>对应的ARM或者Thumb指令(序列)</li>
+</ul>
+</li>
+<li>AMR汇编语言中的符号?<ul>
+<li>符号可以代表地址, 变量和数字变量;</li>
+</ul>
+</li>
+<li>ARM 汇编程序的格式<ul>
+<li>以<strong>段</strong>为单位组织源文件(.c / .h);<ul>
+<li>段: 具有相对独立, 特定名称, 不可分割的指令或者数据序列</li>
+</ul>
+</li>
+<li>分为: 代码段和数据段</li>
+</ul>
+</li>
+</ol>
+<h2 id="存储器管理单元MMU"><a href="#存储器管理单元MMU" class="headerlink" title="存储器管理单元MMU"></a>存储器管理单元MMU</h2><h3 id="MMU-作用"><a href="#MMU-作用" class="headerlink" title="MMU 作用"></a>MMU 作用</h3><ol>
+<li>作用一: 完成虚拟空间到物理空间的映射;<ul>
+<li>把虚拟地址空间分成一个个固定大小的块, 把物理内存的地址空间也分成同样大小的页;</li>
+<li>页的大小分为粗粒度和细粒度两种;</li>
+</ul>
+</li>
+<li>作用二: 存储器访问权限控制</li>
+<li>作用三: 设置虚拟存储空间的缓冲特性;</li>
+</ol>
+<h3 id="ARM中支持存储快大小"><a href="#ARM中支持存储快大小" class="headerlink" title="ARM中支持存储快大小"></a>ARM中支持存储快大小</h3><ol>
+<li>段(Section): 大小为1M的存储块</li>
+<li>大页(Large Pages): 大小为64KB的存储块</li>
+<li>小页(small pages): 大小为 4KB的存储块</li>
+<li>极小页(Tiny Pages): 大小为1KB的存储块</li>
+</ol>
+<h2 id="AMR-中的源文件"><a href="#AMR-中的源文件" class="headerlink" title="AMR 中的源文件"></a>AMR 中的源文件</h2><h3 id="ARM是C-C-编译器和连接器"><a href="#ARM是C-C-编译器和连接器" class="headerlink" title="ARM是C/C++编译器和连接器"></a>ARM是C/C++编译器和连接器</h3><img src="/2019/08/02/ARM体系结构/armC_CPP.jpg">
+<ol>
+<li>ARM的连接器<ul>
+<li>armlink</li>
+</ul>
+</li>
+</ol>
+<h3 id="ARM-映像文件"><a href="#ARM-映像文件" class="headerlink" title="ARM 映像文件"></a>ARM 映像文件</h3><ol>
+<li><p>映像文件(image)生成</p>
+<ul>
+<li>目标文件生成: ARM中各种源文件(.c, .s), 经过<strong>编译器</strong>生成ELF格式的目标文件</li>
+<li>目标文件 + 运行的库, 通过<strong>ARM连接器</strong>处理后 生成ELF格式的映像文件(image)</li>
+</ul>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ armcc -g  -O<span class="number">1</span> -<span class="keyword">c</span> main.<span class="keyword">c</span>		// ARM 中.<span class="keyword">c</span>文件编译</span><br><span class="line">$ tcc	-g	 -O<span class="number">1</span>	-<span class="keyword">c</span> main.<span class="keyword">c</span>		// Thumb 中 .<span class="keyword">c</span>文件编译</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>映像文件(image)组成</p>
+<ul>
+<li>一个或者多个<strong>域</strong>(region)</li>
+<li>每个域包含一个或多个<strong>输出段</strong></li>
+<li>每个输出段包含一个或多个<strong>输入段</strong></li>
+<li>各输入段包含目标文件中的<strong>代码和数据</strong></li>
+</ul>
+</li>
+<li><p>ARM映像文件的入口点</p>
+<ul>
+<li>a) 运行时入口点, <strong>初始化入口点</strong>;<ul>
+<li>地址: 0x0 为嵌入式应用系统入口点</li>
+<li><strong>唯一</strong> 的一个入口点</li>
+</ul>
+</li>
+<li>b) 普通入口点entry point;<ul>
+<li><strong>多个</strong>entry point</li>
+<li>包含各种异常中断的入口点</li>
+</ul>
+</li>
+<li>如果一个映像文件只有一个普通入口点, 就是初始入口点;</li>
+</ul>
+</li>
+</ol>
+<h3 id="ARM-系统复位"><a href="#ARM-系统复位" class="headerlink" title="ARM 系统复位"></a>ARM 系统复位</h3><ol>
+<li><p>系统复位时, 地址0x0是从ROM开始? </p>
+<ul>
+<li><p>ARM体系结构中, 系统复位后跳转到地址0x0处执行, 存放的是复位异常中断的中断向量;</p>
+</li>
+<li><p>系统复位时: RAM中不存在代码和数据;</p>
+</li>
+<li><p>地址0x0处: 应该是从ROM中开始指向;</p>
+</li>
+</ul>
+</li>
+<li><p>系统正常运行时, 地址0x0处为RAM</p>
+</li>
+</ol>
+<h3 id="ARM-体系中的调试"><a href="#ARM-体系中的调试" class="headerlink" title="ARM 体系中的调试"></a>ARM 体系中的调试</h3><ol>
+<li>基于Angel的调试系统<ul>
+<li>主机上的调试器(debugger)</li>
+<li>位于目标主机上的Angel调试监控程序</li>
+</ul>
+</li>
+<li>基于JTAG的调试系统</li>
 </ol>
 
       
@@ -1042,7 +1322,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ARM体系结构"><span class="nav-number">1.</span> <span class="nav-text">ARM体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ARM-指令集可以分为哪六大类"><span class="nav-number">1.1.</span> <span class="nav-text">ARM 指令集可以分为哪六大类?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARM体系结构中的工作状态"><span class="nav-number">1.2.</span> <span class="nav-text">ARM体系结构中的工作状态?</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ARM体系结构"><span class="nav-number">1.</span> <span class="nav-text">ARM体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ARM处理器的7种模式"><span class="nav-number">1.1.</span> <span class="nav-text">ARM处理器的7种模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器介绍"><span class="nav-number">1.1.1.</span> <span class="nav-text">寄存器介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器移位方式-知道前三种"><span class="nav-number">1.1.2.</span> <span class="nav-text">寄存器移位方式 : 知道前三种</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARM-处理器异常中断"><span class="nav-number">1.1.3.</span> <span class="nav-text">ARM 处理器异常中断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARM-指令集可以分为哪六大类"><span class="nav-number">1.2.</span> <span class="nav-text">ARM 指令集可以分为哪六大类?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据处理指令分类"><span class="nav-number">1.2.1.</span> <span class="nav-text">数据处理指令分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#load-store-指令"><span class="nav-number">1.2.2.</span> <span class="nav-text">load/store 指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#立即数寻址的方式"><span class="nav-number">1.2.3.</span> <span class="nav-text">立即数寻址的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARM体系结构中的工作状态"><span class="nav-number">1.3.</span> <span class="nav-text">ARM体系结构中的工作状态?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARM汇编"><span class="nav-number">1.4.</span> <span class="nav-text">ARM汇编</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器管理单元MMU"><span class="nav-number">1.5.</span> <span class="nav-text">存储器管理单元MMU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MMU-作用"><span class="nav-number">1.5.1.</span> <span class="nav-text">MMU 作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARM中支持存储快大小"><span class="nav-number">1.5.2.</span> <span class="nav-text">ARM中支持存储快大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AMR-中的源文件"><span class="nav-number">1.6.</span> <span class="nav-text">AMR 中的源文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARM是C-C-编译器和连接器"><span class="nav-number">1.6.1.</span> <span class="nav-text">ARM是C/C++编译器和连接器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARM-映像文件"><span class="nav-number">1.6.2.</span> <span class="nav-text">ARM 映像文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARM-系统复位"><span class="nav-number">1.6.3.</span> <span class="nav-text">ARM 系统复位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARM-体系中的调试"><span class="nav-number">1.6.4.</span> <span class="nav-text">ARM 体系中的调试</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

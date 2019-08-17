@@ -96,18 +96,29 @@
 
 
 
-  <meta name="description" content="TheLinuxCommandLine 夺回计算机管理权 只有知道计算机正在做什么你才能够拥有这种“自由”">
+  <meta name="description" content="TheLinuxCommandLine 夺回计算机管理权 只有知道计算机正在做什么你才能够拥有这种“自由”    什么是shell shell 和 Termial关系  shell : 是一个程序, 接受从键盘输入的指令, 然后将其传递到OS执行;  Termial : 可以输入命令行;    交互关系  人和Tremial 进行交互  Termial  用于和shell 交互;  shell 用">
 <meta name="keywords" content="CommandLine">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TheLinuxCommandLine">
 <meta property="og:url" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="TheLinuxCommandLine 夺回计算机管理权 只有知道计算机正在做什么你才能够拥有这种“自由”">
+<meta property="og:description" content="TheLinuxCommandLine 夺回计算机管理权 只有知道计算机正在做什么你才能够拥有这种“自由”    什么是shell shell 和 Termial关系  shell : 是一个程序, 接受从键盘输入的指令, 然后将其传递到OS执行;  Termial : 可以输入命令行;    交互关系  人和Tremial 进行交互  Termial  用于和shell 交互;  shell 用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-10T08:41:21.361Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/ls_l.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/ls_l_file.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/less_command.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/通配符.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/cp_file.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/移动光标.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/修改文本.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/vi_command.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/chmod.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/chmod_user.png">
+<meta property="og:updated_time" content="2019-08-17T14:19:12.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TheLinuxCommandLine">
-<meta name="twitter:description" content="TheLinuxCommandLine 夺回计算机管理权 只有知道计算机正在做什么你才能够拥有这种“自由”">
+<meta name="twitter:description" content="TheLinuxCommandLine 夺回计算机管理权 只有知道计算机正在做什么你才能够拥有这种“自由”    什么是shell shell 和 Termial关系  shell : 是一个程序, 接受从键盘输入的指令, 然后将其传递到OS执行;  Termial : 可以输入命令行;    交互关系  人和Tremial 进行交互  Termial  用于和shell 交互;  shell 用">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/ls_l.png">
 
 
 
@@ -416,7 +427,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-10 16:41:21" itemprop="dateModified" datetime="2019-08-10T16:41:21+08:00">2019-08-10</time>
+                <time title="Updated at: 2019-08-17 22:19:12" itemprop="dateModified" datetime="2019-08-17T22:19:12+08:00">2019-08-17</time>
               
             
           </span>
@@ -499,6 +510,538 @@
         <h1 id="TheLinuxCommandLine"><a href="#TheLinuxCommandLine" class="headerlink" title="TheLinuxCommandLine"></a>TheLinuxCommandLine</h1><ol>
 <li>夺回计算机管理权<ul>
 <li>只有知道计算机正在做什么你才能够拥有这种“自由”</li>
+</ul>
+</li>
+</ol>
+<h2 id="什么是shell"><a href="#什么是shell" class="headerlink" title="什么是shell"></a>什么是shell</h2><ol>
+<li><p>shell 和 Termial关系</p>
+<ul>
+<li><p>shell : 是一个程序, 接受从键盘输入的指令, 然后将其传递到OS执行;</p>
+</li>
+<li><p>Termial : 可以输入命令行;</p>
+</li>
+</ul>
+</li>
+<li><p>交互关系</p>
+<ul>
+<li><p>人和Tremial 进行交互</p>
+</li>
+<li><p>Termial  用于和shell 交互;</p>
+</li>
+<li><p>shell 用于和操作系统交互</p>
+</li>
+</ul>
+</li>
+<li><p>什么是命令</p>
+<ul>
+<li>是一个可执行程序;</li>
+<li>是 一 个 内 建 于 shell 自 身 的 命 令。</li>
+<li>是一个 shell 函数。</li>
+<li>是一个命令别名。我们可以定义自己的命令,建立在其它命令之上。</li>
+</ul>
+</li>
+</ol>
+<h3 id="shell-命令"><a href="#shell-命令" class="headerlink" title="shell 命令"></a>shell 命令</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">显示作用</th>
+<th>shell命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">日期</td>
+<td>date</td>
+<td>令显示系统当前时间和日期, 输出一行</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>cal</td>
+<td>输出整个月的日期</td>
+</tr>
+<tr>
+<td style="text-align:center">空间磁盘</td>
+<td>df</td>
+<td>查看磁盘所有的dev剩余空间的数量</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>free</td>
+<td>只显示剩余空间和使用空间</td>
+</tr>
+<tr>
+<td style="text-align:center">终止</td>
+<td>exit</td>
+<td>终止终端会话</td>
+</tr>
+<tr>
+<td style="text-align:center">目录显示</td>
+<td>pwd</td>
+<td>显示当前工作目录 print current working directory</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>cd</td>
+<td>更改目录; 相对和绝对路径</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>cd -</td>
+<td>返回工作目录到先前目录</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>ls  / ls -a</td>
+<td>列出目录下的文件名 /  包含两个目录文件</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>ls -l  /  ls -al</strong></td>
+<td>当前目录下文件的详细信息 / 包含<strong>两个目录文件</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">文本类型</td>
+<td>file name</td>
+<td>输出文件所属的类型</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>less</strong>  name</td>
+<td>less 命令是一个用来<strong>浏览文本文件</strong>的程序。</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>双击 + 鼠标中键</td>
+<td>命令行文件名的复制和粘贴</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>操作文件</strong></td>
+<td>cp</td>
+<td>复制文件和目录</td>
+</tr>
+<tr>
+<td style="text-align:center">(通配符)</td>
+<td>mv</td>
+<td>移动/重命名文件和目录</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>mkdir</td>
+<td>创建目录</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>rm</td>
+<td>—删除文件和目录;  <strong>小心使用命令</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>ln / ln -s</td>
+<td>—创建硬链接和符号链接</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>命令操作</strong></td>
+<td>type command</td>
+<td>显示命令的类别,给出一个特定的命令名</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>which</td>
+<td>显示一个命令的位置</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>help</td>
+<td>得到 shell 内部命令的帮助文档</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>man</td>
+<td>一个特殊的叫做 man 的分页程序,可用来浏览他们</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>whatis</td>
+<td>显示非常简洁的命令说明</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>info</td>
+<td>显示程序 Info 条目</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>重定向</strong></td>
+<td>cat</td>
+<td>cat 命令读取一个或多个文件,然后复制它们到标准输出</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>less</td>
+<td>将内容显示在标准输出</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong>sort</strong></td>
+<td>排序文本内容;</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>\</td>
+<td></td>
+<td>通过管道线: <strong>将多个命令结合使用</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>wc</td>
+<td>打印行,字和字节数</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>grep</td>
+<td>打印匹配行; 用作正则表达式</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>head / tail -n</td>
+<td>打印文件开头部分/结尾部分</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>unip</td>
+<td>忽略重复行</td>
+</tr>
+<tr>
+<td style="text-align:center">文本操作</td>
+<td>echo</td>
+<td>显示一行文本</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>echo + 通配符</td>
+<td>实现路径名展开</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>{ }; “ “; ‘’</td>
+<td>引用和展开是相反的</td>
+</tr>
+<tr>
+<td style="text-align:center">键盘操作</td>
+<td>clear</td>
+<td>-清空屏幕</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>history</td>
+<td>显示历史列表内容</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>其他的光标移动命令</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">权限</td>
+<td>chmod</td>
+<td>更改文件模式</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>chown</td>
+<td>更改文件所有者</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>su/sudo</td>
+<td>有区别的</td>
+</tr>
+<tr>
+<td style="text-align:center">进程</td>
+<td>ps / ps x</td>
+<td>查看进程信息 / 查看所有进行信息 pid</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>top</td>
+<td>动态查看进程状态</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>bg / &amp;</td>
+<td>让进程处于后台</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>fg %1</td>
+<td>让进程返回前台;跟随着一个百分号和工作序号</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>kill all</td>
+<td>杀死进程</td>
+</tr>
+<tr>
+<td style="text-align:center">线程</td>
+<td>cat /proc/pid/status</td>
+<td>// 查询对应pid 的线程数量</td>
+</tr>
+<tr>
+<td style="text-align:center">环境变量</td>
+<td>printenv</td>
+<td>–打印部分或所有的环境变量</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>set</td>
+<td>设置环境变量</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>export</td>
+<td>导出环境变量,让随后执行的程序知道</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>source</td>
+<td>激活设置</td>
+</tr>
+<tr>
+<td style="text-align:center">文本编辑器</td>
+<td>nano</td>
+<td>第一个基于文本的文本编辑器,nano。</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>gedit</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>vi</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="绝对路径-相对路径"><a href="#绝对路径-相对路径" class="headerlink" title="绝对路径 / 相对路径"></a>绝对路径 / 相对路径</h3><ol>
+<li>绝对路径 : 从根目录开始, 直到它的目的地</li>
+<li>相对路径 : 相对与当前目录<ul>
+<li>一对特殊符号表示相对位置<ul>
+<li>“ . “ : 指的是工作目录</li>
+<li>“ .. “: 工作目录的父目录;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="ls-l-长格式输出"><a href="#ls-l-长格式输出" class="headerlink" title="ls -l 长格式输出"></a>ls -l 长格式输出</h3><img src="/2019/08/05/TheLinuxCommandLine/ls_l.png">
+<ol>
+<li><p><strong>第一个字段 d/-rw-r–r–</strong>  的含义</p>
+<ul>
+<li>第一个字母 : <strong>文件类型</strong><ul>
+<li>是 “ d “ : 表示目录</li>
+<li>是 “ - “ : 表示普通文件</li>
+</ul>
+</li>
+<li>后面三个字段: <strong>文件权限</strong><ul>
+<li>文件所有者权限</li>
+<li>文件所属组成员权限</li>
+<li>其他所有人访问权限</li>
+</ul>
+</li>
+<li>read / write / exec(执行)</li>
+</ul>
+</li>
+<li><p>后面的字段</p>
+<img src="/2019/08/05/TheLinuxCommandLine/ls_l_file.png">
+</li>
+</ol>
+<h3 id="文本的定义"><a href="#文本的定义" class="headerlink" title="文本的定义"></a>文本的定义</h3><ol>
+<li><p>less : 浏览文本文件的程序</p>
+<ul>
+<li>less 就是 more(禅语:色即是空)</li>
+<li>文本 : 是简单的字符与数字之间的一对一映射。</li>
+</ul>
+</li>
+<li><p>less 常用的键盘命令</p>
+<img src="/2019/08/05/TheLinuxCommandLine/less_command.png">
+</li>
+</ol>
+<h2 id="操作文件的5个命令"><a href="#操作文件的5个命令" class="headerlink" title="操作文件的5个命令"></a>操作文件的5个命令</h2><h3 id="通配符-快速匹配文件名"><a href="#通配符-快速匹配文件名" class="headerlink" title="通配符: 快速匹配文件名"></a>通配符: 快速匹配文件名</h3><ol>
+<li><p>shell 提供了特殊字符来帮助你快速指定一组文件名</p>
+<img src="/2019/08/05/TheLinuxCommandLine/通配符.png">
+</li>
+</ol>
+<h3 id="CP-复制命令"><a href="#CP-复制命令" class="headerlink" title="CP 复制命令"></a>CP 复制命令</h3><ol>
+<li><p>cp复制的两种方式</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> cp file1 file2	<span class="comment">// 复制单个文件或目录 “item1” 到文件或目录”item2”</span></span><br><span class="line"><span class="symbol">$</span>  cp 	<span class="keyword">file</span>...	directory	<span class="comment">//	赋值多个项目到同一个目录</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cp 的附加属性</p>
+<ul>
+<li>赋值目录中的文件到另外的目录下时: 目的目录需要存在</li>
+</ul>
+<img src="/2019/08/05/TheLinuxCommandLine/cp_file.png">
+</li>
+</ol>
+<h3 id="mv移动"><a href="#mv移动" class="headerlink" title="mv移动"></a>mv移动</h3><ol>
+<li>mv的属性和cp基本类似, 只是mv移动后, 源目录下的文件会被删除;</li>
+</ol>
+<h3 id="硬链接和软链接"><a href="#硬链接和软链接" class="headerlink" title="硬链接和软链接"></a>硬链接和软链接</h3><ol>
+<li><p>硬链接的缺陷</p>
+<ul>
+<li>一个硬链接 : <strong>不能</strong>关联它所在<strong>文件系统</strong>之外的文件</li>
+<li>一个硬链接不能关联一个目录。</li>
+</ul>
+</li>
+<li><p>硬链接的特性</p>
+<ul>
+<li>你要记得一个文件至少有一个硬链接, 因为文件名就是由链接创建的</li>
+</ul>
+</li>
+<li><p>符号链接特性</p>
+<ul>
+<li>如果你往一个符号链接里面写入东西, 那么相关联的文件也被写入;</li>
+<li>符号链接删除:  链接仍然存在,但是不指向任何东西, ls 呈现红色</li>
+</ul>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  ln -s ../<span class="function"><span class="keyword">fun</span> <span class="title">dir2</span></span>/<span class="function"><span class="keyword">fun</span><span class="title">-</span></span>sym	/<span class="regexp">/ 不同文件下的目录链接</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="重定向操作-I-O"><a href="#重定向操作-I-O" class="headerlink" title="重定向操作(I/O)"></a>重定向操作(I/O)</h2><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><ol>
+<li><p>标准输入,输出,和错误:  <strong>默认情况下</strong></p>
+<ul>
+<li>标准输出(fd=1)和标准错误(fd=2) : 都<strong>连接到屏幕</strong></li>
+<li>标准输入(fd =0) : 连接到键盘</li>
+</ul>
+</li>
+<li><p>重定向<strong>标准输出</strong></p>
+<ul>
+<li>I/O 重定向允许我们来重定义标准输出送到哪里。</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo hello &gt; <span class="keyword">file</span>		//   <span class="string">"&gt;"</span> 将字符hello重定向到文件<span class="keyword">FILE</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把重定向结果追加</p>
+<ul>
+<li>重定向文件: 从开头重写文件;</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> echo word &gt;&gt; <span class="keyword">file</span>		<span class="comment">//" &gt;&gt; " 使用这个进行追加</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重定向标准错误</p>
+<ul>
+<li>文件描述符 “2”,紧挨着放在重定向操作符之前</li>
+<li>当文件不存在的时候就报错</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> ls -l <span class="keyword">file</span> <span class="number">2</span>&gt; <span class="built-in">log</span>.txt		<span class="comment">// 将文件FILE的信息输出到文件.txt中</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重定向标准输出和标准错误 到同一文件</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">echo</span> hello &gt; file 2&gt;&amp;1		<span class="string">//</span> 通过 <span class="string">" 2&gt;&amp;1	 "</span></span><br><span class="line">$ <span class="keyword">echo</span> hello &amp;&gt; dile				<span class="string">//</span> 通过 <span class="string">" &amp;&gt; "</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="cat-命令"><a href="#cat-命令" class="headerlink" title="cat 命令"></a>cat 命令</h3><ol>
+<li><p>只输入cat</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> cat		<span class="comment">// 等待键盘标准输入, 将用户输入的结果, 通过屏幕显示;</span></span><br><span class="line"><span class="symbol">$</span> cat 	&gt;	<span class="keyword">file</span>.txt		<span class="comment">// 等待键盘标准输入, 将用户输入的结果, 重定向到文件</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>们把标准输入源从键盘改到文件输入</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> cat &lt; <span class="keyword">file</span>.txt		<span class="comment">// 将文件内容作为标准输入, 然后将其内容屏幕显示;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="管道线"><a href="#管道线" class="headerlink" title="管道线"></a>管道线</h3><ol>
+<li><p>管道线: 命令可以从标准输入读取数据,然后再把数据输送到标准输出</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> ls -l <span class="keyword">file</span> | less		<span class="comment">// 将文件内容进行标注输出</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过管道线将多个命令综合输出</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls 	 <span class="regexp">/usr/</span>bin 	| <span class="keyword">sort</span> 	| uniq 	| <span class="keyword">grep</span> zip	<span class="comment">// 匹配zip出现的位置</span></span><br><span class="line">$ ls 	<span class="regexp">/usr/</span>bin | <span class="keyword">sort</span> | uniq | wc -l		<span class="comment">// 显示次数</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="文本操作"><a href="#文本操作" class="headerlink" title="文本操作"></a>文本操作</h3><ol>
+<li><p>echo 操作 + 通配符?</p>
+<ul>
+<li>实现路径名展开</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> echo *		<span class="comment">// 通配符展开</span></span><br><span class="line"><span class="symbol">$</span> echo ~ 		<span class="comment">// 显示当前用户目录</span></span><br><span class="line"><span class="symbol">$</span> echo <span class="symbol">$</span>USER	<span class="comment">// 用户展开</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进行算数操作</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> echo <span class="symbol">$</span>((<span class="number">2</span> + <span class="number">2</span>))		<span class="comment">// 算术表达式展开使用这种格式:$((expression))</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>花括号展开</p>
+<ul>
+<li>花括号展开模式可能包含一个开头部分叫做报头,一个结尾部分叫做附言。</li>
+</ul>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  <span class="keyword">echo</span> &#123;Z.<span class="string">.A</span>&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>用于创建一系列的目录, 或者文件</li>
+</ul>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir &#123;<span class="number">2007.</span><span class="number">.2009</span>&#125;<span class="number">-0</span>&#123;<span class="number">1.</span><span class="number">.9</span>&#125; &#123;<span class="number">2007.</span><span class="number">.2009</span>&#125;-&#123;<span class="number">10.</span><span class="number">.12</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>双引号</p>
+<ul>
+<li>意味着单词分割,路径名展开,波浪线展开,和花括号展开都被禁止</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span>  ls -l <span class="string">"two words.txt"</span>		<span class="comment">// 直接显示文件名的详细信息</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>,除了 $,\ (反斜杠),和 ‘(倒引号)之外, 其他字符则失去它们的特殊含义,</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$USER</span> <span class="variable">$((2+2)</span>) <span class="variable">$(cal)</span>"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单引号 </p>
+<ul>
+<li>禁止所有的展开</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"> $</span><span class="bash"> <span class="built_in">echo</span> text ~/*.txt &#123;a,b&#125; $(<span class="built_in">echo</span> foo) $((2+2)) <span class="variable">$USER</span></span></span><br><span class="line">// 直接输出文本内容, 不进行展开</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="键盘操作"><a href="#键盘操作" class="headerlink" title="键盘操作"></a>键盘操作</h3><ol>
+<li><p>移动光标</p>
+<img src="/2019/08/05/TheLinuxCommandLine/移动光标.png">
+</li>
+<li><p>修改文本</p>
+<img src="/2019/08/05/TheLinuxCommandLine/修改文本.png">
+</li>
+</ol>
+<h3 id="vi编辑"><a href="#vi编辑" class="headerlink" title="vi编辑"></a>vi编辑</h3><img src="/2019/08/05/TheLinuxCommandLine/vi_command.png">
+<h2 id="权限操作"><a href="#权限操作" class="headerlink" title="权限操作"></a>权限操作</h2><h3 id="chmod-文件权限"><a href="#chmod-文件权限" class="headerlink" title="chmod 文件权限"></a>chmod 文件权限</h3><ol>
+<li><p>用 3 个八进制数字,我们能够设置文件所有者,用户组,和其他人的权限:</p>
+<img src="/2019/08/05/TheLinuxCommandLine/chmod.png">
+<ul>
+<li>:7 (rwx),6 (rw-),5 (r-x),4 (r–),and 0 (-–)</li>
+<li>“600”,我们能够设置文件所有者的权限为读写权限, 而删除用户组和其他人的所有权限。</li>
+</ul>
+</li>
+<li><p>用户标识</p>
+<img src="/2019/08/05/TheLinuxCommandLine/chmod_user.png">
+</li>
+</ol>
+<h3 id="su-sudo"><a href="#su-sudo" class="headerlink" title="su/sudo"></a>su/sudo</h3><ol>
+<li>su 和 sudo 之间的一个重要区别<ul>
+<li>sudo 不会重新启动一个 shell,也不会加载另一个用户的 shell 运行环境。</li>
 </ul>
 </li>
 </ol>
@@ -978,7 +1521,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TheLinuxCommandLine"><span class="nav-number">1.</span> <span class="nav-text">TheLinuxCommandLine</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TheLinuxCommandLine"><span class="nav-number">1.</span> <span class="nav-text">TheLinuxCommandLine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是shell"><span class="nav-number">1.1.</span> <span class="nav-text">什么是shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shell-命令"><span class="nav-number">1.1.1.</span> <span class="nav-text">shell 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绝对路径-相对路径"><span class="nav-number">1.1.2.</span> <span class="nav-text">绝对路径 / 相对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls-l-长格式输出"><span class="nav-number">1.1.3.</span> <span class="nav-text">ls -l 长格式输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本的定义"><span class="nav-number">1.1.4.</span> <span class="nav-text">文本的定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作文件的5个命令"><span class="nav-number">1.2.</span> <span class="nav-text">操作文件的5个命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符-快速匹配文件名"><span class="nav-number">1.2.1.</span> <span class="nav-text">通配符: 快速匹配文件名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CP-复制命令"><span class="nav-number">1.2.2.</span> <span class="nav-text">CP 复制命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv移动"><span class="nav-number">1.2.3.</span> <span class="nav-text">mv移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬链接和软链接"><span class="nav-number">1.2.4.</span> <span class="nav-text">硬链接和软链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向操作-I-O"><span class="nav-number">1.3.</span> <span class="nav-text">重定向操作(I/O)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">1.3.1.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat-命令"><span class="nav-number">1.3.2.</span> <span class="nav-text">cat 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道线"><span class="nav-number">1.3.3.</span> <span class="nav-text">管道线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本操作"><span class="nav-number">1.3.4.</span> <span class="nav-text">文本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷键"><span class="nav-number">1.4.</span> <span class="nav-text">快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#键盘操作"><span class="nav-number">1.4.1.</span> <span class="nav-text">键盘操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi编辑"><span class="nav-number">1.4.2.</span> <span class="nav-text">vi编辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限操作"><span class="nav-number">1.5.</span> <span class="nav-text">权限操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chmod-文件权限"><span class="nav-number">1.5.1.</span> <span class="nav-text">chmod 文件权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#su-sudo"><span class="nav-number">1.5.2.</span> <span class="nav-text">su/sudo</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
