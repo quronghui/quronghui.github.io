@@ -114,7 +114,9 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/vi_command.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/chmod.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/chmod_user.png">
-<meta property="og:updated_time" content="2019-08-17T14:19:12.241Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/debian.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/05/TheLinuxCommandLine/dpkg.png">
+<meta property="og:updated_time" content="2019-08-20T10:46:01.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TheLinuxCommandLine">
 <meta name="twitter:description" content="TheLinuxCommandLine 夺回计算机管理权 只有知道计算机正在做什么你才能够拥有这种“自由”    什么是shell shell 和 Termial关系  shell : 是一个程序, 接受从键盘输入的指令, 然后将其传递到OS执行;  Termial : 可以输入命令行;    交互关系  人和Tremial 进行交互  Termial  用于和shell 交互;  shell 用">
@@ -427,7 +429,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-17 22:19:12" itemprop="dateModified" datetime="2019-08-17T22:19:12+08:00">2019-08-17</time>
+                <time title="Updated at: 2019-08-20 18:46:01" itemprop="dateModified" datetime="2019-08-20T18:46:01+08:00">2019-08-20</time>
               
             
           </span>
@@ -601,6 +603,11 @@
 <td>当前目录下文件的详细信息 / 包含<strong>两个目录文件</strong></td>
 </tr>
 <tr>
+<td style="text-align:center"></td>
+<td>stat &gt; ls (作用比较)</td>
+<td>显示文件的修改时间信息,     包括文件的元数据;</td>
+</tr>
+<tr>
 <td style="text-align:center">文本类型</td>
 <td>file name</td>
 <td>输出文件所属的类型</td>
@@ -709,7 +716,8 @@
 <tr>
 <td style="text-align:center"></td>
 <td>unip</td>
-<td>忽略重复行</td>
+<td>忽略重复行   sort foo.txt \</td>
+<td>uuip</td>
 </tr>
 <tr>
 <td style="text-align:center">文本操作</td>
@@ -814,41 +822,88 @@
 <tr>
 <td style="text-align:center"></td>
 <td>gedit</td>
-<td></td>
+<td>图形化编辑器</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
 <td>vi</td>
-<td></td>
+<td>命令行编辑</td>
+</tr>
+<tr>
+<td style="text-align:center">存储媒介</td>
+<td>mount / umount</td>
+<td>挂载 / 卸载 一个文件系统</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
-<td></td>
-<td></td>
+<td>mksf</td>
+<td>创建文件系统</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
-<td></td>
-<td></td>
+<td>dd</td>
+<td>—把面向块的数据直接写入设备</td>
+</tr>
+<tr>
+<td style="text-align:center">网络系统</td>
+<td>ping</td>
+<td>- 发送 ICMP ECHO REQUEST 软件包到网络主机</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
-<td></td>
-<td></td>
+<td>traceroute</td>
+<td>打印到一台网络主机的路由数据包</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
-<td></td>
-<td></td>
+<td>wget</td>
+<td>非交互式网络下载器</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
-<td></td>
-<td></td>
+<td>netstat</td>
+<td>程序被用来检查各种各样的网络设置和统计数据。</td>
 </tr>
 <tr>
 <td style="text-align:center"></td>
-<td></td>
+<td>ssh</td>
+<td>SSH 解决了这两个基本的和远端主机安全交流的问题</td>
+</tr>
+<tr>
+<td style="text-align:center">查找文件</td>
+<td>locate</td>
+<td>–通过名字来查找文件  locate zip \</td>
+<td>grep bin</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>find</td>
+<td>程序能基于各种各样的属性, 查找文件</td>
+</tr>
+<tr>
+<td style="text-align:center">归档和备份</td>
+<td>gzip / bzip2</td>
+<td>是文件压缩程序:</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>tar / zip</td>
+<td>归档程序:</td>
+</tr>
+<tr>
+<td style="text-align:center">格式化输出</td>
+<td>fmt</td>
+<td>一个简单的文本格式转换器</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td>printf</td>
+<td>–一个文件格式系统</td>
+</tr>
+<tr>
+<td style="text-align:center">编译程序</td>
+<td>make</td>
+<td>只是构建需要的部分,不是重新构建所有的内容。</td>
 </tr>
 </tbody>
 </table>
@@ -1017,6 +1072,11 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"> $</span><span class="bash"> <span class="built_in">echo</span> text ~/*.txt &#123;a,b&#125; $(<span class="built_in">echo</span> foo) $((2+2)) <span class="variable">$USER</span></span></span><br><span class="line">// 直接输出文本内容, 不进行展开</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>grep 正则表达式</p>
+<ul>
+<li>一个连行符 : 由一个斜杠字符其后紧跟一个回车符组成。它们之间不允许有空白字符。</li>
+</ul>
+</li>
 </ol>
 <h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><h3 id="键盘操作"><a href="#键盘操作" class="headerlink" title="键盘操作"></a>键盘操作</h3><ol>
 <li><p>移动光标</p>
@@ -1027,6 +1087,123 @@
 </li>
 </ol>
 <h3 id="vi编辑"><a href="#vi编辑" class="headerlink" title="vi编辑"></a>vi编辑</h3><img src="/2019/08/05/TheLinuxCommandLine/vi_command.png">
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>VI的基本命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先按Esc</td>
+<td></td>
+<td>退出插入模式之后才能使用</td>
+</tr>
+<tr>
+<td>行编辑</td>
+<td>k - j - h - l</td>
+<td>上 - 下 - 左 - 右</td>
+</tr>
+<tr>
+<td></td>
+<td>number + j</td>
+<td>向下移动多少行</td>
+</tr>
+<tr>
+<td></td>
+<td>0(零按键)</td>
+<td>移动到当前行行首</td>
+</tr>
+<tr>
+<td></td>
+<td>$</td>
+<td>移动至当前行行尾</td>
+</tr>
+<tr>
+<td></td>
+<td>o</td>
+<td>在当前行下方打开一行</td>
+</tr>
+<tr>
+<td></td>
+<td>O</td>
+<td>在当前行上方打开一行</td>
+</tr>
+<tr>
+<td>文本编辑</td>
+<td>gg</td>
+<td>移动至文本的第一行</td>
+</tr>
+<tr>
+<td></td>
+<td>G</td>
+<td>移动至文本的<strong>最后</strong>一行</td>
+</tr>
+<tr>
+<td></td>
+<td>numberG</td>
+<td>移动至某一行</td>
+</tr>
+<tr>
+<td>页编辑</td>
+<td>Ctrl + f</td>
+<td>向下翻一页</td>
+</tr>
+<tr>
+<td></td>
+<td>Ctrl + b</td>
+<td>向上翻一页</td>
+</tr>
+<tr>
+<td>撤销</td>
+<td>u</td>
+<td>撤销最后一次的编辑</td>
+</tr>
+<tr>
+<td>删除文本</td>
+<td>x / number + x(一起按)</td>
+<td>删除当前字符 / number个字符</td>
+</tr>
+<tr>
+<td></td>
+<td>dd</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td></td>
+<td>dG / d+ numbger + G</td>
+<td>删除当前行到文本末尾 / 删除当前行到文本末尾</td>
+</tr>
+<tr>
+<td>复制和粘贴</td>
+<td>yy / p</td>
+<td>复制和粘</td>
+</tr>
+<tr>
+<td>链接行</td>
+<td>J</td>
+<td>上下行连接</td>
+</tr>
+<tr>
+<td>查找</td>
+<td>/line</td>
+<td>查找</td>
+</tr>
+</tbody>
+</table>
+<p>文本操作</p>
+<ul>
+<li>d: 剪切文本</li>
+<li>p:  复制文本到光标位置</li>
+</ul>
+<ol>
+<li>查找替换<ul>
+<li>/  : 用于文本查找</li>
+</ul>
+</li>
+</ol>
 <h2 id="权限操作"><a href="#权限操作" class="headerlink" title="权限操作"></a>权限操作</h2><h3 id="chmod-文件权限"><a href="#chmod-文件权限" class="headerlink" title="chmod 文件权限"></a>chmod 文件权限</h3><ol>
 <li><p>用 3 个八进制数字,我们能够设置文件所有者,用户组,和其他人的权限:</p>
 <img src="/2019/08/05/TheLinuxCommandLine/chmod.png">
@@ -1044,6 +1221,35 @@
 <li>sudo 不会重新启动一个 shell,也不会加载另一个用户的 shell 运行环境。</li>
 </ul>
 </li>
+</ol>
+<h2 id="软件包管理"><a href="#软件包管理" class="headerlink" title="软件包管理"></a>软件包管理</h2><ul>
+<li><p>Debian 的 “.deb”,和红帽的”.rpm”</p>
+<img src="/2019/08/05/TheLinuxCommandLine/debian.png">
+</li>
+</ul>
+<ol>
+<li><p>软件包管理工具</p>
+<img src="/2019/08/05/TheLinuxCommandLine/dpkg.png">
+</li>
+</ol>
+<h2 id="编写一个shell脚本"><a href="#编写一个shell脚本" class="headerlink" title="编写一个shell脚本"></a>编写一个shell脚本</h2><h3 id="基本脚本的编写"><a href="#基本脚本的编写" class="headerlink" title="基本脚本的编写"></a>基本脚本的编写</h3><ol>
+<li><p>脚本的格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># This is our first script.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'Hello World!'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置权限, 让脚本可与运行</p>
+<ul>
+<li>注意为了能够执行脚本,脚本必须是可读的。</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> chmod <span class="number">777</span> <span class="keyword">file</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>脚本文件的执行</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> ./<span class="keyword">file</span>		 <span class="comment">// 基本的执行方式</span></span><br><span class="line"><span class="symbol">$</span> <span class="keyword">file</span>			<span class="comment">// 如果将脚本放在 /bin 目录下, 那么不需要指定脚本的路径, 就可以直接执行;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="自顶向下设计"><a href="#自顶向下设计" class="headerlink" title="自顶向下设计"></a>自顶向下设计</h3><ol>
+<li>自顶向下设计是一种常见的程序设计方法,尤其适合 shell 编程。</li>
+<li>shell 可以使用数据结构: 字符串, 数组</li>
+<li>shell 可以使用一些控制流程: if while</li>
 </ol>
 
       
@@ -1090,6 +1296,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/19/uC-OS-III/" rel="prev" title="uC/OS-III">
+                uC/OS-III <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -1161,7 +1371,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">97</span>
+                    <span class="site-state-item-count">98</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1485,7 +1695,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">83</span>
+                      
+                    
+                    <span class="site-state-item-count">84</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1521,7 +1733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TheLinuxCommandLine"><span class="nav-number">1.</span> <span class="nav-text">TheLinuxCommandLine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是shell"><span class="nav-number">1.1.</span> <span class="nav-text">什么是shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shell-命令"><span class="nav-number">1.1.1.</span> <span class="nav-text">shell 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绝对路径-相对路径"><span class="nav-number">1.1.2.</span> <span class="nav-text">绝对路径 / 相对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls-l-长格式输出"><span class="nav-number">1.1.3.</span> <span class="nav-text">ls -l 长格式输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本的定义"><span class="nav-number">1.1.4.</span> <span class="nav-text">文本的定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作文件的5个命令"><span class="nav-number">1.2.</span> <span class="nav-text">操作文件的5个命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符-快速匹配文件名"><span class="nav-number">1.2.1.</span> <span class="nav-text">通配符: 快速匹配文件名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CP-复制命令"><span class="nav-number">1.2.2.</span> <span class="nav-text">CP 复制命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv移动"><span class="nav-number">1.2.3.</span> <span class="nav-text">mv移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬链接和软链接"><span class="nav-number">1.2.4.</span> <span class="nav-text">硬链接和软链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向操作-I-O"><span class="nav-number">1.3.</span> <span class="nav-text">重定向操作(I/O)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">1.3.1.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat-命令"><span class="nav-number">1.3.2.</span> <span class="nav-text">cat 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道线"><span class="nav-number">1.3.3.</span> <span class="nav-text">管道线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本操作"><span class="nav-number">1.3.4.</span> <span class="nav-text">文本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷键"><span class="nav-number">1.4.</span> <span class="nav-text">快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#键盘操作"><span class="nav-number">1.4.1.</span> <span class="nav-text">键盘操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi编辑"><span class="nav-number">1.4.2.</span> <span class="nav-text">vi编辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限操作"><span class="nav-number">1.5.</span> <span class="nav-text">权限操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chmod-文件权限"><span class="nav-number">1.5.1.</span> <span class="nav-text">chmod 文件权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#su-sudo"><span class="nav-number">1.5.2.</span> <span class="nav-text">su/sudo</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TheLinuxCommandLine"><span class="nav-number">1.</span> <span class="nav-text">TheLinuxCommandLine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是shell"><span class="nav-number">1.1.</span> <span class="nav-text">什么是shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shell-命令"><span class="nav-number">1.1.1.</span> <span class="nav-text">shell 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绝对路径-相对路径"><span class="nav-number">1.1.2.</span> <span class="nav-text">绝对路径 / 相对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls-l-长格式输出"><span class="nav-number">1.1.3.</span> <span class="nav-text">ls -l 长格式输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本的定义"><span class="nav-number">1.1.4.</span> <span class="nav-text">文本的定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作文件的5个命令"><span class="nav-number">1.2.</span> <span class="nav-text">操作文件的5个命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符-快速匹配文件名"><span class="nav-number">1.2.1.</span> <span class="nav-text">通配符: 快速匹配文件名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CP-复制命令"><span class="nav-number">1.2.2.</span> <span class="nav-text">CP 复制命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv移动"><span class="nav-number">1.2.3.</span> <span class="nav-text">mv移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬链接和软链接"><span class="nav-number">1.2.4.</span> <span class="nav-text">硬链接和软链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重定向操作-I-O"><span class="nav-number">1.3.</span> <span class="nav-text">重定向操作(I/O)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">1.3.1.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat-命令"><span class="nav-number">1.3.2.</span> <span class="nav-text">cat 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道线"><span class="nav-number">1.3.3.</span> <span class="nav-text">管道线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本操作"><span class="nav-number">1.3.4.</span> <span class="nav-text">文本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷键"><span class="nav-number">1.4.</span> <span class="nav-text">快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#键盘操作"><span class="nav-number">1.4.1.</span> <span class="nav-text">键盘操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi编辑"><span class="nav-number">1.4.2.</span> <span class="nav-text">vi编辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限操作"><span class="nav-number">1.5.</span> <span class="nav-text">权限操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chmod-文件权限"><span class="nav-number">1.5.1.</span> <span class="nav-text">chmod 文件权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#su-sudo"><span class="nav-number">1.5.2.</span> <span class="nav-text">su/sudo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件包管理"><span class="nav-number">1.6.</span> <span class="nav-text">软件包管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写一个shell脚本"><span class="nav-number">1.7.</span> <span class="nav-text">编写一个shell脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本脚本的编写"><span class="nav-number">1.7.1.</span> <span class="nav-text">基本脚本的编写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自顶向下设计"><span class="nav-number">1.7.2.</span> <span class="nav-text">自顶向下设计</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
