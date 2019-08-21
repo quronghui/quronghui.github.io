@@ -118,12 +118,13 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/ipv6_first.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/routing.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/ospf.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/TCP_MSL.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/tcp_client.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/tcp_first.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/udp_first.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/ssh.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/06/TcpIp/uri.png">
-<meta property="og:updated_time" content="2019-08-12T00:05:38.881Z">
+<meta property="og:updated_time" content="2019-08-21T04:18:16.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tcp&#x2F;IP">
 <meta name="twitter:description" content="TCP / IP 协议网络基础知识 计算机网络的作用? 提供一种网络形态, 将单用户工作模式,转化为多用户信息共享, 互联模式;   分时系统 通过多个终端与同一计算机相连, 允许多个用户同时操作一台计算机; 通过分时系统, 虚拟的实现了”一人一机”; 特性: 独占性 实现方式: 多任务调度   协议 不同计算机之间通信的基本要求; 举例: 人与人交流的语言 – 中文/ 英语   电路交换和分组交">
@@ -436,7 +437,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-12 08:05:38" itemprop="dateModified" datetime="2019-08-12T08:05:38+08:00">2019-08-12</time>
+                <time title="Updated at: 2019-08-21 12:18:16" itemprop="dateModified" datetime="2019-08-21T12:18:16+08:00">2019-08-21</time>
               
             
           </span>
@@ -1644,9 +1645,25 @@
 <li><strong>第三次握手</strong>:  确认了TCP数据的最大消息长度MSS;</li>
 </ul>
 </li>
-<li>断开: 4次握手</li>
+<li>断开: 4次握手<ul>
+<li>断开的时候, 客户端要等待2MSL才关闭</li>
+</ul>
+</li>
 </ul>
 <ol>
+<li><p>TCP第4次挥手为何要等待2MSL才关闭？</p>
+<ul>
+<li><p>MSL(Maximum Segment Lifetime)报文最大生存时间</p>
+<ul>
+<li>任何报文在网络上存活的最大时间，一旦超过该时间，报文就会被丢弃。</li>
+<li>TIME_WAIT = 2MSL也就是指的2倍MSL的时间。</li>
+</ul>
+</li>
+<li><p>保证客户端最后一次挥手的报文能够到达服务器，若第4次挥手的报文段丢失了，服务器就会超时重传第3次挥手的报文段, client是保持TIME_WAIT</p>
+<img src="/2019/05/06/TcpIp/TCP_MSL.png">
+</li>
+</ul>
+</li>
 <li><p>建立连接目的</p>
 <ul>
 <li>以<strong>段</strong>为单位: 确认最大消息长度MSS  maximum segment size</li>

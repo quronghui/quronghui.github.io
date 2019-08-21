@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/02/进程间通信的几种方式/signal.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/进程间通信的几种方式/linux_signal.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/进程间通信的几种方式/share_message.png">
-<meta property="og:updated_time" content="2019-08-02T06:57:55.830Z">
+<meta property="og:updated_time" content="2019-08-21T13:17:43.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程间通信的几种方式">
 <meta name="twitter:description" content="进程间通信的几种方式 为什么进程间通信需要内核?  IPC (InterProcess Communication) 通信机制 进程各自有不同的用户地址空间, 任何一个进程的全局变量在另一个进程中都看不到 进程之间要交换数据必须通过内核，在内核中开辟一块缓存区      进程间通信方式的总结      类型 属性 / 存在地方 通信要求 数据流向     传统的通信方式      匿名管道(pip">
@@ -404,12 +404,24 @@
                 
               
 
-              <time title="Post created: 2019-08-02 08:55:26 / Updated at: 14:57:55" itemprop="dateCreated datePublished" datetime="2019-08-02T08:55:26+08:00">2019-08-02</time>
+              <time title="Post created: 2019-08-02 08:55:26" itemprop="dateCreated datePublished" datetime="2019-08-02T08:55:26+08:00">2019-08-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-08-21 21:17:43" itemprop="dateModified" datetime="2019-08-21T21:17:43+08:00">2019-08-21</time>
               
             
           </span>
@@ -675,7 +687,60 @@
 </ul>
 </li>
 <li><p><strong>同步和互斥的概念</strong></p>
-<p>| 区别之处   | 互斥                                     | 同步                                         |<br>| ———- | —————————————- | ——————————————– |<br>| 定义       | 某一资源, 同一时间, 只能由一个访问者访问 | 在互斥的基础上, 机制使访问者有序访问         |<br>| 特性       | 唯一性和排它性, <strong>访问者无序</strong>           | 互斥特性 + <strong>有序访问  </strong>                    |<br>| 本质区别   | 用于线程间互斥                           | 用于线程见得同步                             |<br>| 初始值     | 二值信号量（0 / 1）                      | 非零整数值( value &gt;= 0 )                     |<br>| 操作线程数 | 同一线程 : lock , unlock                 | Ａ线程: 释放sem_post;  B 线程: 获取sem_wait; |</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>区别之处</th>
+<th>互斥</th>
+<th>同步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义</td>
+<td>某一资源, 同一时间, 只能由一个访问者访问</td>
+<td>在互斥的基础上, 机制使访问者有序访问</td>
+</tr>
+<tr>
+<td>特性</td>
+<td>唯一性和排它性, <strong>访问者无序</strong></td>
+<td>互斥特性 + <strong>有序访问  </strong></td>
+</tr>
+<tr>
+<td>本质区别</td>
+<td>用于线程间互斥</td>
+<td>用于线程见得同步</td>
+</tr>
+<tr>
+<td>初始值</td>
+<td>二值信号量（0 / 1）</td>
+<td>非零整数值( value &gt;= 0 )</td>
+</tr>
+<tr>
+<td>操作线程数</td>
+<td>同一线程 : lock , unlock</td>
+<td>Ａ线程: 释放sem_post;  B 线程: 获取sem_wait;</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><a href="https://github.com/quronghui/OSIntroduction/tree/master/3_semaphore/sem_ProductAndConsume.c" target="_blank" rel="noopener">信号量实现生产者和消费者模式</a></p>
+<ul>
+<li>a. 信号量的初始值进行标识: 何时producter能进入buffer?    何时consumer能进入buffer?<ul>
+<li>定义两个信号量: empty , full</li>
+<li>定义一个互斥锁, 用于保护临界区代码</li>
+</ul>
+</li>
+<li>b. 信号量:要具有指向性:<ul>
+<li>消费者不能指向消费者, 只能指向生产者;</li>
+</ul>
+</li>
+<li>c. 全局变量: 存放在程序代码区(静态)</li>
+<li>d. 还要加一个二值信号量 : 锁 (应对多生产者的情况)</li>
+<li>e. 二值信号量放置的位置, 会造成死锁的状况;(先判断buffer是否为空, 在获取一个锁)</li>
+</ul>
 </li>
 </ul>
 <h2 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h2><h3 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h3><ul>
