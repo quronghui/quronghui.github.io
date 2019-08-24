@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/19/uC-OS-III/TASK_SEM.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/19/uC-OS-III/双向任务.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/19/uC-OS-III/flag.png">
-<meta property="og:updated_time" content="2019-08-20T08:59:57.670Z">
+<meta property="og:updated_time" content="2019-08-24T00:03:20.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="uC&#x2F;OS-III">
 <meta name="twitter:description" content="嵌入式实时操作系统实时系统 和 实时内核 实时系统的概念? 系统要求: 对任务 处理结果的正确性 和 处理过程的实时性 都有严格要求的系统. 硬实时和软实时系统的区别:  对处理过程超时及超时带来的后果的容忍度; 硬实时: 不允许处理过程超时     前后台系统的分类 前台结构(中断级): 中断服务程序(ISR)用于处理系统的异步事件; 后台结构(任务级): 应用程序是一个无限的循环, 循环中调用">
@@ -424,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-20 16:59:57" itemprop="dateModified" datetime="2019-08-20T16:59:57+08:00">2019-08-20</time>
+                <time title="Updated at: 2019-08-24 08:03:20" itemprop="dateModified" datetime="2019-08-24T08:03:20+08:00">2019-08-24</time>
               
             
           </span>
@@ -550,7 +550,7 @@
 <li>出错检验:  err = OS_ERR_NONE</li>
 <li>防止死锁: 通过超时检测机制;</li>
 <li>时钟节拍处理: 通过时钟节拍进行处理;</li>
-<li>中断服务程序: 函数内部不能有阻塞(等待), 中断处理的时间总是很短;</li>
+<li>中断服务程序: 函数内部不能有<strong>阻塞</strong>(等待), 中断处理的时间总是很短;</li>
 </ul>
 </li>
 <li>本书命名规则<ul>
@@ -1072,7 +1072,7 @@
 </ul>
 </li>
 <li>阻塞/非阻塞<ul>
-<li>阻塞: 任务会一直等待事件的发生;<ul>
+<li><strong>阻塞:  等同于 – 任务会一直等待事件的发生; </strong><ul>
 <li>调度器就会介入, CPU会执行另外一个优先级高的就绪任务;</li>
 </ul>
 </li>
