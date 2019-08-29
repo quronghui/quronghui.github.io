@@ -1,0 +1,2791 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Linux设备驱动的开发详解 如何学习驱动 驱动的框架 和 代码框架   硬盘镜像下载 m6a1 globalmem、globalfifo等代码目录 /home/baohua/develop/training/kernel/drivers   其他相关参考  设备驱动的概念 设备驱动的作用?  对设备驱动最通俗的解释就是“驱使硬件设备行动”。 驱动与底层硬件直接打交道, 按照硬件设备的具体工作方式">
+<meta name="keywords" content="驱动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux设备驱动的开发详解">
+<meta property="og:url" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="Linux设备驱动的开发详解 如何学习驱动 驱动的框架 和 代码框架   硬盘镜像下载 m6a1 globalmem、globalfifo等代码目录 /home/baohua/develop/training/kernel/drivers   其他相关参考  设备驱动的概念 设备驱动的作用?  对设备驱动最通俗的解释就是“驱使硬件设备行动”。 驱动与底层硬件直接打交道, 按照硬件设备的具体工作方式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/no_os_driver.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/os_driver.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/linux_driver.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/store.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/linux_kernel.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/vfs_driver.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/signal_async.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/asynchronous_io.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/kernel_memory.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/core_driver.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/block_io.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/netdev.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/socket_buffer.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/net_device_open_realease.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/data_transform.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/data_receive.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/iic_struct.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/usb_bus.jpg">
+<meta property="og:updated_time" content="2019-08-29T14:22:22.956Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux设备驱动的开发详解">
+<meta name="twitter:description" content="Linux设备驱动的开发详解 如何学习驱动 驱动的框架 和 代码框架   硬盘镜像下载 m6a1 globalmem、globalfifo等代码目录 /home/baohua/develop/training/kernel/drivers   其他相关参考  设备驱动的概念 设备驱动的作用?  对设备驱动最通俗的解释就是“驱使硬件设备行动”。 驱动与底层硬件直接打交道, 按照硬件设备的具体工作方式">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/no_os_driver.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Linux设备驱动的开发详解 | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux设备驱动的开发详解
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-08-24 19:48:34" itemprop="dateCreated datePublished" datetime="2019-08-24T19:48:34+08:00">2019-08-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-08-29 22:22:22" itemprop="dateModified" datetime="2019-08-29T22:22:22+08:00">2019-08-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/驱动/" itemprop="url" rel="index"><span itemprop="name">驱动</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux设备驱动的开发详解"><a href="#Linux设备驱动的开发详解" class="headerlink" title="Linux设备驱动的开发详解"></a>Linux设备驱动的开发详解</h1><ol>
+<li>如何学习驱动<ul>
+<li>驱动的框架 和 代码框架</li>
+</ul>
+</li>
+<li><a href="https://pan.baidu.com/s/1huaRl8S" target="_blank" rel="noopener">硬盘镜像下载</a> m6a1</li>
+<li>globalmem、globalfifo等代码目录<ul>
+<li>/home/baohua/develop/training/kernel/drivers</li>
+</ul>
+</li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAwMDUwNDgxOA==&amp;mid=214353671&amp;idx=1&amp;sn=50d4b64d9a2d7368c99b0e372428c37c&amp;chksm=13d5819a24a2088ca362f1d8b8e66d1e7ceba8ec81a92ce4da4bddbbda1e8fe741c774445c07&amp;mpshare=1&amp;scene=1&amp;srcid=0824KL4iF6nTJfzW12VWBkdW&amp;sharer_sharetime=1566651975360&amp;sharer_shareid=39fc8872838381471f750b646fdbf5e4#rd" target="_blank" rel="noopener">其他相关参考</a></li>
+</ol>
+<h2 id="设备驱动的概念"><a href="#设备驱动的概念" class="headerlink" title="设备驱动的概念"></a>设备驱动的概念</h2><ol>
+<li><p>设备驱动的作用?</p>
+<ul>
+<li>对设备驱动最通俗的解释就是“驱使硬件设备行动”。</li>
+<li>驱动与底层硬件直接打交道, 按照硬件设备的具体工作方式,读写设备的寄存器,完成设备的轮询、中断处理、DMA 通信,进行物理内存向虚拟内存的映射等,</li>
+<li>最终让 通信设备能收发数据, 让显示设备能显示文字和画面, 让存储设备能记录文件和数据。</li>
+</ul>
+</li>
+<li>设备驱动的分类和特点<ul>
+<li>驱动的对象: 存储器 + 外设 (包括CPU内部)</li>
+</ul>
+</li>
+<li><strong>Linux 三大设备驱动?</strong><ul>
+<li>字符设备: 必须以<strong>串行数据依次</strong>访问的设备<ul>
+<li>触摸屏, 磁带驱动, 鼠标</li>
+</ul>
+</li>
+<li>块设备: 可以按照<strong>任意顺序</strong>进行访问, 以块为单位(512bytes)访问<ul>
+<li>硬盘, emmc</li>
+</ul>
+</li>
+<li>网络设备: 面向数据包的接受和发送设计, 并不倾向于文件系统的节点;<ul>
+<li>使用套接字编程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="无OS的设备驱动"><a href="#无OS的设备驱动" class="headerlink" title="无OS的设备驱动"></a>无OS的设备驱动</h3><ol>
+<li><p>无操作系统的设备驱动</p>
+<ul>
+<li>单任务框架</li>
+<li>通过一个无限循环 + 中断检测 / 轮询检测完成 ( 有相应的代码框架)</li>
+<li>连接 应用程序 和硬件的桥梁</li>
+<li>驱动程序, 需要由<strong>应用软件</strong>直接完成</li>
+</ul>
+</li>
+<li><p>无操作系统的串口驱动</p>
+<img src="/2019/08/24/Linux设备驱动的开发详解/no_os_driver.png">
+</li>
+</ol>
+<h3 id="有OS的设备驱动"><a href="#有OS的设备驱动" class="headerlink" title="有OS的设备驱动"></a>有OS的设备驱动</h3><ol>
+<li><p>有OS的设备驱动</p>
+<ul>
+<li>需要将驱动融入进内核;</li>
+<li>驱动: 操作系统和硬件的桥梁</li>
+<li>应用程序只与OS的API打交道</li>
+</ul>
+<img src="/2019/08/24/Linux设备驱动的开发详解/os_driver.png">
+</li>
+<li><p>OS 给设备驱动带来了哪些麻烦?</p>
+<ul>
+<li>操作系统通过给驱动制造麻烦, 来达到给上层应用提供<strong>便利</strong>的目的</li>
+<li>麻烦: 需要按照OS的框架编写驱动代码; 还需要挂载到OS上; 实现驱动和内核接口的代码</li>
+</ul>
+</li>
+</ol>
+<h3 id="Linux-设备驱动和软硬件的关系"><a href="#Linux-设备驱动和软硬件的关系" class="headerlink" title="Linux 设备驱动和软硬件的关系"></a>Linux 设备驱动和软硬件的关系</h3><ol>
+<li><p>Linux对字符和块设备的处理</p>
+<p>+　将其映射为文件和目录;<br>+　应用程序通过调用OS的API调用字符设备和块设备</p>
+</li>
+<li><p>应用程序如何使用硬件设备?</p>
+<ul>
+<li>直接使用Linux api进行编程<ul>
+<li>open(), write(), read(), close()</li>
+</ul>
+</li>
+<li>使用C库函数调用Linux的API, 便于代码移植<ul>
+<li>fopen(), fwrite()</li>
+</ul>
+</li>
+</ul>
+<img src="/2019/08/24/Linux设备驱动的开发详解/linux_driver.png">
+</li>
+<li><p>LED驱动</p>
+<ul>
+<li>GPIO寄存器 :控制寄存器和数据寄存器</li>
+</ul>
+</li>
+</ol>
+<h2 id="驱动设计的硬件基础"><a href="#驱动设计的硬件基础" class="headerlink" title="驱动设计的硬件基础"></a>驱动设计的硬件基础</h2><h3 id="处理器"><a href="#处理器" class="headerlink" title="处理器"></a>处理器</h3><ol>
+<li>通用处理器<ul>
+<li>冯·诺依曼结构 : 程序指令存储地址和数据存储地址指向同一个存储器的不同物理位置</li>
+<li>哈佛结构: 程序指令和数据分开存储,指令和数据可以有不同的数据宽度<ul>
+<li>哈佛结构还采用了独立的程序总线和数据总线</li>
+</ul>
+</li>
+<li>指令集划分: RISC 和CISC</li>
+</ul>
+</li>
+<li>数字信号处理器<ul>
+<li>数字信号处理器(DSP)针对通信、图像、语音和视频处理等领域的算法而设计。</li>
+<li>相关矩阵运算等算法中的大量重复乘法。</li>
+</ul>
+</li>
+</ol>
+<h3 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h3><img src="/2019/08/24/Linux设备驱动的开发详解/store.png">
+<h3 id="总线SerialBus"><a href="#总线SerialBus" class="headerlink" title="总线SerialBus"></a><a href="https://luckywater.top/2019/07/29/SerialBus/" target="_blank" rel="noopener">总线SerialBus</a></h3><h2 id="Linux-内核及内核编译"><a href="#Linux-内核及内核编译" class="headerlink" title="Linux 内核及内核编译"></a>Linux 内核及内核编译</h2><h3 id="内核目录的分析"><a href="#内核目录的分析" class="headerlink" title="内核目录的分析"></a>内核目录的分析</h3><ol>
+<li><p><strong>linux 内核目录</strong></p>
+<ul>
+<li>arch :包含和硬件体系结构相关的代码,每种平台占一个相应的目录</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>drivers : 设 备 驱 动 程 序, 每 个 不 同 的 驱 动 占 用 一 个 子 目 录</li>
+</ul>
+<ol start="2">
+<li><p>内核中目录的总结</p>
+<ul>
+<li>内核: drivers 与arch 的软件架构分离, 驱动不包含板级信息, 让驱动跨平台;</li>
+<li>内核通用部分和具体硬件剥离</li>
+</ul>
+</li>
+<li><p><strong>Linux内核的五部分, 之间的依赖关系</strong></p>
+<img src="/2019/08/24/Linux设备驱动的开发详解/linux_kernel.png">
+</li>
+</ol>
+<h3 id="内核的编译和加载"><a href="#内核的编译和加载" class="headerlink" title="内核的编译和加载"></a>内核的编译和加载</h3><ol>
+<li><p>内核配置的三个部分</p>
+<ul>
+<li>Makefile</li>
+<li>Kconfig: 用户进行配置选择;</li>
+<li>配置工具: 命令解释器和配置用的用户界面</li>
+</ul>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">make menuconfig</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目标代码是否编译的选项</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj - y += foo<span class="selector-class">.c</span>	<span class="comment">// 将函数编译进内核; 内核编译</span></span><br><span class="line">obj - m += foo<span class="selector-class">.c</span>	<span class="comment">// 将函数编译成 .ko文件; 模块编译</span></span><br><span class="line">obj - n += foo<span class="selector-class">.c</span>	<span class="comment">//  函数不变异</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Linux代码的编译风格"><a href="#Linux代码的编译风格" class="headerlink" title="Linux代码的编译风格"></a>Linux代码的编译风格</h3><ol>
+<li><p>GNU C 预定义两个标识符保存: 当前函数名字</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__func__  </span><br><span class="line">__PRETTY_FUNCTION__ ;</span><br><span class="line">$ <span class="built_in">printf</span>(<span class="string">"this funcation name is : %s\n"</span>,__func__  );  <span class="comment">// 可以代替函数的名字, 打印出来</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>宏定义: do{} while(0) 用法</p>
+<figure class="highlight flix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#<span class="function"><span class="keyword">def</span> <span class="title">ine</span> <span class="title">SAFE_FREE</span></span>(p) do&#123; free(p); p = NULL;&#125; while(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>goto 跳转到错误代码</p>
+</li>
+<li><p>arm Linux 工具链</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arm-linux-gnueabihf-gcc; <span class="comment">// 工具链</span></span><br><span class="line">armcc 										<span class="comment">// 进行编译</span></span><br><span class="line">objdump;							<span class="comment">// 反汇编</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Linux 下串口工具</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minicom	<span class="comment">// 设置其波特率</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Linux-内核模块的编写"><a href="#Linux-内核模块的编写" class="headerlink" title="Linux 内核模块的编写"></a>Linux 内核模块的编写</h2><ol>
+<li><p>如何将驱动包含入内核中?</p>
+<ul>
+<li>obj - y : 直接编译进内核<ul>
+<li>缺点: 造成内核模块太大</li>
+</ul>
+</li>
+<li>obj - m : 编译成.ko模块, <ul>
+<li>需要的时候, 动态加载到内核; </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>驱动代码的编写(按照内核框架) – &gt;  编译成模块 – &gt; 加载到内核中 – &gt; 卸载模块  </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ insmod  hello<span class="selector-class">.ko</span>  <span class="comment">// 模块加载函数 , 只加载hello.ko模块;</span></span><br><span class="line">$ modprobe  -r hello<span class="selector-class">.ko</span>	<span class="comment">// 模块加载函数,  将加载hello.ko 依赖的所有模块;</span></span><br><span class="line"></span><br><span class="line">$ rmmod hello<span class="selector-class">.ko</span>		<span class="comment">// 模块卸载函数 , 只卸载hello.ko模块;</span></span><br><span class="line"></span><br><span class="line">$ lsmod 				<span class="comment">// 查询模块之间的依赖关系;  == cat /proc/modules</span></span><br><span class="line"><span class="variable">$modinfo</span> hello<span class="selector-class">.ko</span>	<span class="comment">// 得到模块相关参数信息</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Linux内核中的<strong>打印函数</strong></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">printk</span>(KERN_INFO <span class="string">"hello world\n"</span>);		<span class="comment">// 使用printk进行打印</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>相关的信息, 通过查看内核日志得到内核输出</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">vim</span>  /var/<span class="built_in">log</span>/<span class="keyword">messages</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Linux内核模块程序结构"><a href="#Linux内核模块程序结构" class="headerlink" title="Linux内核模块程序结构"></a>Linux内核模块程序结构</h3><ol>
+<li><p>模块<strong>加载</strong>函数:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function"><span class="keyword">int</span> <span class="title">initialization_funcation</span><span class="params">(<span class="keyword">void</span>)</span>		<span class="comment">// __init : 模块加载函数的声明</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">module_init(initialization_funcation);					<span class="comment">// 模块函数通过这样的方式进行指定; 使用这个函数的方法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>模块<strong>卸载</strong>函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function"><span class="built_in">exit</span>  <span class="title">cleanup_funcation</span><span class="params">(<span class="keyword">void</span>)</span>		<span class="comment">// __exit : 模块卸载函数的声明</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">module_init(cleanup_funcation);					<span class="comment">// 模块函数通过这样的方式进行指定; 使用这个函数的方法</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>模块的参数</strong></p>
+<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span><span class="number">_p</span>aram(参数名, 参数类型, 参数读写权限);		<span class="comment">// 定义一个模块参数声明</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在/sys 目录下, 查看模块参数</li>
+</ul>
+</li>
+<li><p>导出符号</p>
+<ul>
+<li>linux的 /proc/kallsyms 文件对应着内核符号表</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">EXPORT_SYMBOL</span><span class="params">(符号名)</span></span></span><br><span class="line"><span class="function"><span class="title">EXPORT_SYMBOL_GPL</span><span class="params">(符号名)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>模块的声明和描述</p>
+<ul>
+<li>表明模块的作者, 版本号, 设备号, <strong>模块支持的所有设备</strong></li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">MODULE_DEVICE_TABLE</span><span class="params">(table_info)</span></span>		<span class="comment">//对于支持USB, PCI的设备:  表示模块支持的设备</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Linux文件系统和设备文件"><a href="#Linux文件系统和设备文件" class="headerlink" title="Linux文件系统和设备文件"></a>Linux文件系统和设备文件</h2><ol>
+<li><p>linux : 一切都是文件 – 设备即文件;</p>
+</li>
+<li><p>设备驱动是如何被访问的?</p>
+<ul>
+<li>通过与文件操作相关的<strong>系统调用或C库函数</strong>(本质也是系统调用)被访问</li>
+<li>设备驱动结构: 为了迎合应用程序而设计的API;</li>
+</ul>
+</li>
+<li><p>文件的属性</p>
+<ul>
+<li><p>文件打开的标志 : </p>
+</li>
+<li><p>文件的权限 : 分三类用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mode + <span class="built_in">umask</span>  : 一起决定文件的权限</span><br><span class="line"><span class="built_in">umask</span>: 只影响 r w x</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Linux 文件的权限通过5个数字表示</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; [<span class="string">用户ID</span>](<span class="link">0/1</span>) ;  [<span class="string">组ID</span>](<span class="link">0/1</span>); [<span class="string">读权限</span>](<span class="link">3bit的八进制数</span>);  [写权限]; [执行权限]&#125;</span><br><span class="line">1 0 705;  用户组权限; 文件所有者rwx; 文件组0; 其他用户rx;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="系统调用和C库函数的文件操作"><a href="#系统调用和C库函数的文件操作" class="headerlink" title="系统调用和C库函数的文件操作"></a>系统调用和C库函数的文件操作</h3><table>
+<thead>
+<tr>
+<th>区别</th>
+<th>系统调用</th>
+<th>C库函数调用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件操作函数</td>
+<td>全是 int型</td>
+<td>存在不同的类型</td>
+</tr>
+<tr>
+<td>文件的打开标志</td>
+<td>O_EDONLY (以大写O开头)</td>
+<td>r / w / a(追加)</td>
+</tr>
+<tr>
+<td>文件的权限</td>
+<td>S_IRUSR(以S_I开头)</td>
+<td></td>
+</tr>
+<tr>
+<td>操作的数据类型</td>
+<td>int</td>
+<td>字符和字符串</td>
+</tr>
+<tr>
+<td>推荐使用</td>
+<td></td>
+<td>便于移植</td>
+</tr>
+<tr>
+<td>与驱动关系</td>
+<td>应用程序 – 系统调用 – 驱动</td>
+<td>应用程序 – C库 – 系统调用 – 驱动</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>C库函数使用时, 内部包含了系统调用函数</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>系统调用: 文件操作</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>	<span class="title">create</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *filename,  <span class="keyword">mode_t</span> mode)</span></span>;		<span class="comment">// 创建, 由mode + umask决定权限; </span></span><br><span class="line"><span class="function"><span class="keyword">int</span>	<span class="title">open</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *filename,  <span class="keyword">int</span> flag, <span class="keyword">mode_t</span> mode)</span></span>;		<span class="comment">// 打开文件,  存在打开标志和打开权限;  返回 int fd;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> length)</span></span>;			<span class="comment">// 读buf; 返回实际读出来的字节数	</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">write</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> length)</span></span>;			<span class="comment">// 写buf; 返回实际写入的字节数	</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;																		<span class="comment">//  关闭;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lseek</span> <span class="params">(<span class="keyword">int</span> fd, <span class="keyword">offset_t</span> offset, <span class="keyword">int</span> whence)</span></span>;			<span class="comment">// 文件读写时的相对位置;  offset,偏移量, 可取负值; whence: 相对位置</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>C库函数的文件操作</strong></p>
+<ul>
+<li>推荐使用库函数进行操作, 方便移植;  </li>
+<li>实现字符流的操作;</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FILE *<span class="title">fopen</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path,  <span class="keyword">const</span> <span class="keyword">char</span> *mode)</span></span>;	<span class="comment">// 文件打开, mode为打开标志</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span> <span class="params">(File *stream)</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>读写: 以字符 和 字符串为单位进行读写; <strong>可以实现从流中读取n个字段</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">fgetc</span><span class="params">(FILE *stream)</span></span>;</span><br><span class="line"> <span class="function"><span class="keyword">char</span> *<span class="title">fgets</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">int</span> size, FILE *stream)</span></span>;			<span class="comment">// 类型比较特殊, 为char*</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fputc</span><span class="params">(<span class="keyword">int</span> c, FILE *stream)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fputs</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s, FILE *stream)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fprintf</span><span class="params">(FILE *stream, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;	<span class="comment">// 用法不太会</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fscanf</span><span class="params">(FILE *stream, <span class="keyword">const</span> <span class="keyword">char</span> *format, ...)</span></span>;	</span><br><span class="line"></span><br><span class="line"><span class="keyword">size_t</span> fread(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> nmemb, FILE *stream);</span><br><span class="line"><span class="keyword">size_t</span> fwrite(<span class="keyword">const</span> <span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> nmemb, FILE *stream);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定位功能</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fseek</span><span class="params">(FILE *stream, <span class="keyword">long</span> offset, <span class="keyword">int</span> whence)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fgetpos</span><span class="params">(FILE *stream, <span class="keyword">fpos_t</span> *pos)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fsetpos</span><span class="params">(FILE *stream, <span class="keyword">const</span> <span class="keyword">fpos_t</span> *pos)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="linux文件系统"><a href="#linux文件系统" class="headerlink" title="linux文件系统"></a>linux文件系统</h3><h4 id="linxu-文件系统目录结构"><a href="#linxu-文件系统目录结构" class="headerlink" title="linxu 文件系统目录结构"></a>linxu 文件系统目录结构</h4><ol>
+<li>/proc 目录<ul>
+<li>进行以及内核信息(包括PCU, 硬盘, 内存信息)存放的位置;</li>
+<li><strong>伪</strong>文件系统, 存在与内存之中</li>
+<li>包含进程和线程的相关信息</li>
+</ul>
+</li>
+<li>/var<ul>
+<li>/var/log 存放系统日志</li>
+</ul>
+</li>
+<li><strong>/sys</strong><ul>
+<li>内核支持的<strong>文件系统</strong>映射到此目录上;</li>
+<li>linux设备驱动模型中的总线, 设备, 驱动; 在sysfs文件系统中找到对应的节点;</li>
+</ul>
+</li>
+</ol>
+<h4 id="虚拟文件系统和设备驱动的关系"><a href="#虚拟文件系统和设备驱动的关系" class="headerlink" title="虚拟文件系统和设备驱动的关系"></a>虚拟文件系统和设备驱动的关系</h4><img src="/2019/08/24/Linux设备驱动的开发详解/vfs_driver.png">
+<h3 id="结构体-file-and-inode"><a href="#结构体-file-and-inode" class="headerlink" title="结构体 : file and inode"></a>结构体 : file and inode</h3><table>
+<thead>
+<tr>
+<th>设备驱动的两个模块</th>
+<th>包含内容</th>
+<th>目录查看</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>file</td>
+<td>private data</td>
+<td></td>
+</tr>
+<tr>
+<td>inode</td>
+<td>i_cdev : 记录设备号 (32bit) ;  主(12bit)次设备号(20bit)</td>
+<td>/proc/devices</td>
+</tr>
+<tr>
+<td></td>
+<td>块设备 : block_device ; 字符设备: i_cdev</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>struct file</p>
+<ul>
+<li>在内核打开文件时创建, 并传递给在文件上进行操作的任何函数, 在文件的所有实例关闭后, 释放这个结构体;</li>
+<li>命名: file or filp(file pointer)</li>
+<li><strong>private data: </strong> 私有数据在设备驱动中广泛使用;</li>
+</ul>
+</li>
+<li><p>struct inode : 元数据</p>
+<ul>
+<li><strong>Linux 管理文件的最基本单位</strong></li>
+<li>文件系统连接子目录的桥梁</li>
+</ul>
+</li>
+<li><p>inode 中的设备号的获取</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">iminor</span><span class="params">(struct inode *innode)</span></span>;		<span class="comment">// 主设备号的获取;  minor -- 表示位数较少</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">imajor</span><span class="params">(struct inode *innode)</span></span>;		<span class="comment">// 次设备号的获取; major --  位数较多</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="devfs-and-udev"><a href="#devfs-and-udev" class="headerlink" title="devfs and udev"></a>devfs and udev</h3><table>
+<thead>
+<tr>
+<th>devfs</th>
+<th>udev</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设备文件系统</td>
+<td>用户空间设备管理</td>
+</tr>
+<tr>
+<td>策略包含在内核中(受限)</td>
+<td>策略: 处于用户空间; 内核只提供机制</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>模型抽象</p>
+<ul>
+<li>devfs : 内核不仅要提供恋爱的机制, 还需要规定和谁恋爱</li>
+<li>udev: 内核只提供恋爱的机制, 和谁谈恋爱由用户决定</li>
+</ul>
+</li>
+<li><p>udev的工作原理</p>
+<ul>
+<li>利用设备加入和移除时<strong>内核所通过netlink套接字, 发出的热插拔式事件uevent</strong>来工作;</li>
+</ul>
+</li>
+<li><p>udev 如何处理设备的热插拔和冷插拔?</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>热插拔</th>
+<th>冷插拔</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>udev 已经启动, 才插入设备</td>
+<td>udev还未启动</td>
+</tr>
+<tr>
+<td>设备信息由内核, 通过netlink套接字发送, 叫做<strong>uevent</strong>;</td>
+<td>内核提供的sysfs下面的uevent节点, 给该节点写一个add</td>
+</tr>
+<tr>
+<td>udev从内核收到的信息来进行创建设备文件节点;</td>
+<td>导致内核<strong>重新发送</strong>netlink; udev启动后就可以处理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sysfs文件系统"><a href="#sysfs文件系统" class="headerlink" title="sysfs文件系统"></a>sysfs文件系统</h3><ol>
+<li><p>sysfs文件系统的特点</p>
+<ul>
+<li>虚拟文件系统;</li>
+<li>将连接在系统上的<strong>设备和总线</strong>组织成为一个分级的文件</li>
+<li>目录: 来源于bus_type  ; device   ;  device_driver</li>
+<li>文件: 来源于具体的attribute</li>
+</ul>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> dump		<span class="comment">//打印出总线, 设备和驱动信息;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/sys/bus/pci</p>
+<ul>
+<li>在划分出drivers 和devices目录</li>
+</ul>
+</li>
+<li><p>Linux内核中描述<strong>总线, 设备, 驱动</strong>的三个结构体</p>
+<ul>
+<li>bus_type  ; device   ;  device_driver</li>
+<li>模型抽象:  红尘中的男女+月老<ul>
+<li><strong>设备和驱动分开注册;  </strong></li>
+<li>bus_type: match()进行匹配, 匹配成功后, xxx_driver的probe()被执行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>attribute属性文件</p>
+<ul>
+<li>伴随着show()和store()函数, 分别用于读写该attribute对应的sysfs文件</li>
+</ul>
+</li>
+</ol>
+<h2 id="字符设备驱动"><a href="#字符设备驱动" class="headerlink" title="字符设备驱动"></a>字符设备驱动</h2><ol>
+<li>Linux字符设备驱动的关键数据结构<ul>
+<li>cdev: 设备号的注册</li>
+<li>file_operations结构体:  文件操作具体功能函数</li>
+</ul>
+</li>
+<li>globalmem 虚拟字符设备驱动的编写方法<ul>
+<li>读写函数, seek()函数和I/O控制函数;</li>
+<li>私有数据的作用;</li>
+</ul>
+</li>
+</ol>
+<h3 id="Linux字符设备驱动"><a href="#Linux字符设备驱动" class="headerlink" title="Linux字符设备驱动"></a>Linux字符设备驱动</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cdev</span>&#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span>	*<span class="title">ops</span>	;</span>	<span class="comment">//文件操作的结构体</span></span><br><span class="line">	<span class="keyword">dev_t</span>	dev;										<span class="comment">// 设备号</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>cdev操作函数</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cdev_init</span>(<span class="params"> <span class="keyword">struct</span> cdev *cdev, <span class="keyword">struct</span> file_operations *ops </span>)</span>;	<span class="comment">// 初始化cdev成员, 建立cdev和file_operations之间连接</span></span><br><span class="line"><span class="keyword">struct</span> cdev *cdev_alloc(<span class="keyword">void</span>);		<span class="comment">// 动态申请cdev的内存</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cdev_add</span>(<span class="params"><span class="keyword">struct</span> cdev *, dev_t , unsigned </span>)</span>;		<span class="comment">// 字符设备的注册</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cdev_del</span>(<span class="params"><span class="keyword">struct</span> cdev *</span>)</span>;										<span class="comment">//  字符设备的注销</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cdev分配和释放设备号</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>)在cdev_add()之前, 先调用函数, 向系统申请设备号;</span><br><span class="line">		register_chrdev_region();	<span class="comment">// 申请自己知道的设备号</span></span><br><span class="line">		alloc_chrdev_region();			<span class="comment">// 设备号未知,动态申请</span></span><br><span class="line">(<span class="number">2</span>) 在cdev_del()之后, 调用函数</span><br><span class="line">		unregister_chrdev_region(); 		<span class="comment">//释放设备号</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>file_operations文件操作结构体</p>
+<ul>
+<li><p>使用的是<strong>函数指针</strong></p>
+</li>
+<li><p>三个操作</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> xxx_read();		<span class="comment">// 用户空间和内核之间的读写; copy_to_user()</span></span><br><span class="line"><span class="keyword">ssize_t</span> xxx_write();	<span class="comment">// copy_from_user</span></span><br><span class="line"><span class="keyword">ssize_t</span> xxx_ioctl();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用户空间 – 内核空间  的读写</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">copy_to_user<span class="comment">()</span>;	<span class="comment">// 内核空间到用户空间缓存区的复制</span></span><br><span class="line">copy_from_user<span class="comment">()</span>;	<span class="comment">//用户空间到内核空间的复制</span></span><br><span class="line">access_ok<span class="comment">()</span>;			<span class="comment">// 检测用户控件缓存区的合法性, 才能进行读写;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="globalmem-虚拟设备驱动"><a href="#globalmem-虚拟设备驱动" class="headerlink" title="globalmem()虚拟设备驱动"></a>globalmem()虚拟设备驱动</h3><ol>
+<li><p>globalmem字符设备驱动会分配一片大小为GLOABLEMEM_SIZE(4KB)的<strong>内存空间</strong></p>
+<ul>
+<li>在该区域内进行读写, 控制函数实现</li>
+</ul>
+</li>
+<li><p>globalmem()的结构体</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">globalmem_dev</span>&#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">cdev</span> <span class="title">cdev</span>;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> mem[GLOABLEMEM_SIZE];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>globalmem中模块的加载和释放函数</p>
+<ul>
+<li>和linux设备驱动中的一样</li>
+</ul>
+</li>
+<li><p>globalmem文件的操作</p>
+<ul>
+<li>使得设备结构体中的mem[]数组 – &gt; 用户控件交互数据</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> ssizet_t <span class="title">globalmeme_read</span><span class="params">()</span></span>;			<span class="comment">//读数据</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> ssizet_t <span class="title">globalmeme_write</span><span class="params">()</span></span>;			<span class="comment">// 写数据</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> ssizet_t <span class="title">globalmeme_llseek</span><span class="params">()</span></span>;		<span class="comment">// 数据偏移</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> ssizet_t <span class="title">globalmeme_ioctl</span><span class="params">()</span></span>;			<span class="comment">// I / O控制函数</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>私有数据的使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">global_open</span><span class="params">()</span></span>;		<span class="comment">// 进行私有数据的设置</span></span><br><span class="line">&#123;</span><br><span class="line">	file-&gt;private_data	=	globalmem_devp;		<span class="comment">// 私有数据先设置, 后使用;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用私有数据后, 就可以实现同时包含多个设备; 但是只使用一套文件操作函数;</li>
+</ul>
+</li>
+<li><p>globalmem模块的查看</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat <span class="regexp">/proc/</span>devices		<span class="regexp">//</span> 查看字符设备的驱动</span><br><span class="line">$  mknod <span class="regexp">/dev/g</span>lobalmem  c <span class="number">230</span> <span class="number">0</span> 	<span class="regexp">//</span>创建设备节点;  主设备号 和次设备号;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Linux设备驱动中的并发控制"><a href="#Linux设备驱动中的并发控制" class="headerlink" title="Linux设备驱动中的并发控制"></a>Linux设备驱动中的并发控制</h2><ol>
+<li>linux设备驱动中必须解决的一个问题?<ul>
+<li>多个进程对共享资源的并发访问, 并发的访问会导致竞态;</li>
+</ul>
+</li>
+</ol>
+<h3 id="设备驱动中的并发"><a href="#设备驱动中的并发" class="headerlink" title="设备驱动中的并发"></a>设备驱动中的并发</h3><ol>
+<li>并发和竞态的概念?<ul>
+<li>并发: 多个执行单元同时, 并行被执行;</li>
+<li>竞态: 并发的执行单元对共享资源的访问, 导致了竞态的发生;</li>
+</ul>
+</li>
+<li>linux驱动中竞态问题的产生原因?<ul>
+<li>多处理器SMP的多个CPU</li>
+<li>单CPU的进程抢 </li>
+<li>中断发生(默认不进行中断嵌套)</li>
+</ul>
+</li>
+</ol>
+<h3 id="解决并发和竞态"><a href="#解决并发和竞态" class="headerlink" title="解决并发和竞态"></a>解决并发和竞态</h3><ol>
+<li>Linux中为何会存在编译乱序?<ul>
+<li><strong>编译器</strong>的行为: 对内存访问时, 为了<strong>提高</strong>cache的<strong>命中率</strong>和CPU的Load/Store单元的工作效率;</li>
+<li>再发开编译器优化时, 汇编代码并没有严格按照代码的逻辑顺序;</li>
+</ul>
+</li>
+<li>Linux中执行乱序?<ul>
+<li><strong>处理器运行的行为</strong>: CPU执行的时候是乱序执行的, 但是这一个乱序对于单核的程序是<strong>不可见</strong>的, 当碰到<strong>依赖点</strong>(需要后面指令结果)时会<strong>等待</strong>;</li>
+</ul>
+</li>
+<li>解决互斥的方法?<ul>
+<li>中断屏蔽(中断屏蔽指令): 很少单独使用</li>
+<li>原子操作: 只能针对整数进行;</li>
+<li>自旋锁和互斥体: 应用的最广泛;</li>
+</ul>
+</li>
+</ol>
+<h3 id="自旋锁和互斥体"><a href="#自旋锁和互斥体" class="headerlink" title="自旋锁和互斥体"></a>自旋锁和互斥体</h3><table>
+<thead>
+<tr>
+<th>区别</th>
+<th>自旋锁</th>
+<th>互斥体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>锁被占用时</td>
+<td>自旋等待的时间</td>
+<td>上下文切换的时间</td>
+</tr>
+<tr>
+<td>阻塞/非阻塞</td>
+<td>非阻塞访问的内存区</td>
+<td><strong>进程级:</strong> 多个进程对资源的互斥; 阻塞访问</td>
+</tr>
+<tr>
+<td>应用</td>
+<td>访问时间较短;中断和软中断情况</td>
+<td>访问时间较长, 存在<strong>上下文切换;</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="gobalmem增加并发"><a href="#gobalmem增加并发" class="headerlink" title="gobalmem增加并发"></a>gobalmem增加并发</h3><ol>
+<li><p>gobalmem 只能使用互斥体, 不能使用自旋锁</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">copy_from_user</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="title">copy_to_user</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>导致阻塞的函数存在, 只能使用互斥体;    </li>
+</ul>
+</li>
+</ol>
+<h2 id="Linux设备驱动中阻塞和非阻塞I-O"><a href="#Linux设备驱动中阻塞和非阻塞I-O" class="headerlink" title="Linux设备驱动中阻塞和非阻塞I/O"></a>Linux设备驱动中阻塞和非阻塞I/O</h2><table>
+<thead>
+<tr>
+<th>实现</th>
+<th>阻塞</th>
+<th>非阻塞</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方法</td>
+<td><strong>等待队列</strong>中进行进程的唤醒</td>
+<td>轮训函数实现</td>
+</tr>
+<tr>
+<td>实现函数</td>
+<td>sleep_on(); wake_up()</td>
+<td>poll(); select(); epoll()</td>
+</tr>
+<tr>
+<td>虚拟字符设备</td>
+<td>globalfifo()</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>非阻塞方式中的poll函数?<ul>
+<li>设别驱动中的poll()函数不会阻塞;</li>
+<li>但是与  poll(); select(); epoll()相关的系统调用会阻塞的等待至少一个文件描述集合可访问或超时;</li>
+</ul>
+</li>
+</ol>
+<h2 id="Linux设备驱动中的异步通知与异步IO"><a href="#Linux设备驱动中的异步通知与异步IO" class="headerlink" title="Linux设备驱动中的异步通知与异步IO"></a>Linux设备驱动中的异步通知与异步IO</h2><h3 id="异步通知"><a href="#异步通知" class="headerlink" title="异步通知"></a>异步通知</h3><ol>
+<li><p>设备驱动: 异步通知的概念</p>
+<ul>
+<li>一旦设备<strong>就绪</strong>, 则<strong>主动通知</strong>应用程序, 这样应用程序就不用查询设备的状态; </li>
+<li>机制: 信号驱动的异步I/O;</li>
+<li>信号: 在<strong>软件层</strong>次上对中断机制的模拟, 信号是异步的;<ul>
+<li>一个<strong>进程</strong>收到一个<strong>信号</strong>, 与<strong>处理器</strong>收到一个<strong>中断请求</strong>可以说是一样的; </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>进程能捕获的SIGIO信号?</p>
+<ul>
+<li>除了SIGSTOP和SIGKILL两个信号外, 进程能够忽略或捕获其他的全部信号;</li>
+</ul>
+</li>
+<li><p><strong>设备驱动与用户程序之间的异步通知</strong></p>
+<ul>
+<li>用户空间: 设置文件的拥有者(设置进程) , FASYNC标志(检查信号的变更), 捕获信号</li>
+<li>内核空间: 响应文件的拥有者,  FASYNC标志的设置, 资源可获得时<strong>释放信号</strong></li>
+</ul>
+<img src="/2019/08/24/Linux设备驱动的开发详解/signal_async.png">
+</li>
+<li><p>在globalfifo驱动中增加异步通知</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">用户空间</span><br><span class="line">	fcntl();	设置文件的拥有者, 设置FASYNC变更机制</span><br><span class="line">	signal();	捕获信号</span><br><span class="line">设备驱动: </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fasync_helper</span><span class="params">()</span></span>;	 <span class="comment">// 处理FASYNC标志变更的函数;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kill_fasync</span><span class="params">()</span></span>;			<span class="comment">// 释放信号量;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Linux的异步IO"><a href="#Linux的异步IO" class="headerlink" title="Linux的异步IO"></a>Linux的异步IO</h3><ol>
+<li><p>Linux常用的输入/输出模型</p>
+<ul>
+<li>同步IO(Synchronization): 当请求发出之后, 应用程序就会<strong>阻塞</strong>, 直到请求满足为止;</li>
+<li><strong>AIO</strong>异步IO(Asynchronous ): 应用程序发起IO请求后, 直接执行, 并不等待IO结束<ul>
+<li>过一段时间查询之前的IO请求完成的情况;</li>
+<li>IO请求完成后会自动调用与IO完成绑定的<strong>回调函数</strong>;</li>
+</ul>
+</li>
+</ul>
+<img src="/2019/08/24/Linux设备驱动的开发详解/asynchronous_io.png">
+</li>
+</ol>
+<h3 id="glibc-提供一个不依赖于内核完成的AIO"><a href="#glibc-提供一个不依赖于内核完成的AIO" class="headerlink" title="glibc 提供一个不依赖于内核完成的AIO"></a>glibc 提供一个不依赖于内核完成的AIO</h3><ol>
+<li><p>glibc中包括的函数</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">aio_read</span>();</span><br><span class="line"><span class="selector-tag">aio_write</span>();</span><br><span class="line"><span class="selector-tag">aio_error</span>();	<span class="comment">//确定请求状态;</span></span><br><span class="line"><span class="selector-tag">aio_return</span>();	<span class="comment">//异步IO需要调用该函数, 实现返回值的读取;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本质: 借用了多线程模型,新的AIO线程与发起AIO的线程通过pthread_cond_signal(), 实现线程间的同步</p>
+</li>
+</ol>
+<h3 id="内核空间实现AIO"><a href="#内核空间实现AIO" class="headerlink" title="内核空间实现AIO"></a>内核空间实现AIO</h3><ol>
+<li><p>libaio实现异步AIO的优点?</p>
+<ul>
+<li>AIO可以<strong>一次性</strong>发出大量的read/write调用, 并且通过通用层的<strong>IO调度</strong>获取更好的性能;</li>
+<li>用户程序可以减少过多的同步负载(多线程同步)</li>
+</ul>
+</li>
+<li><p>内核空间实现的机制</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">io_submit<span class="comment">()</span>;		<span class="comment">//AIO的请求都用io_submit进行下发;</span></span><br><span class="line">gcc aior.c -o aior -laio;	<span class="comment">// 加上laio的库进行编译</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AIO与设备驱动</p>
+<ul>
+<li>用户空间调用io_submit()后, 生成一个iocb结构</li>
+<li>内核对应生成与之对应的: kiocb结构;</li>
+</ul>
+</li>
+</ol>
+<h2 id="中断和时钟"><a href="#中断和时钟" class="headerlink" title="中断和时钟"></a>中断和时钟</h2><ol>
+<li>Linux中断中引入顶半部和底半部分离的机制?<ul>
+<li>ISR的执行并不存在于进程的上下文切换中, 要求ISR要尽可能短;</li>
+</ul>
+</li>
+<li>底半部执行的方法?</li>
+</ol>
+<h3 id="中断的分类"><a href="#中断的分类" class="headerlink" title="中断的分类"></a>中断的分类</h3><ol>
+<li>根据中断的来源?<ul>
+<li>内部中断: 来自于CPU内部(软件中断指令, 溢出, 出发错误);<ul>
+<li>OS从用户态切换到内核态: 借助cpu内部的软件中断</li>
+</ul>
+</li>
+<li>外部中断: 来自于CPU的外设请求;</li>
+</ul>
+</li>
+<li>中断是否可屏蔽?<ul>
+<li>内部中断: 不能屏蔽</li>
+<li>外部中断: 可屏蔽</li>
+</ul>
+</li>
+<li>中断入口的跳转方法不同?<ul>
+<li>向量中断: CPU为不同的中断分配不同的中断号, 当检测到某个中断到来后, 自动跳转到对应中断号的地址执行;<ul>
+<li>不同的中断号有不同的<strong>入口地址</strong> </li>
+</ul>
+</li>
+<li>非向量中断:  多个中断共享一个中断入口地址, 在软件内部判断中断号</li>
+</ul>
+</li>
+<li>嵌入式系统和 X86中的中断? <ul>
+<li>PIC(program interrupt control): 可编程中断控制器;</li>
+<li>MASK寄存器:  中断屏蔽;  PEND寄存器: 中断使能;</li>
+</ul>
+</li>
+<li>ARM多处理器常用的中断?<ul>
+<li>GIC(Generic interrupt control): 通用中断控制器</li>
+<li>支持三种中断<ul>
+<li>SGI(software generated interrupt): 软件产生的中断, 用于多核间通信;</li>
+<li>PPI(private peripheral interrupt): 某个CPU的私有的外设中断, 只能发给特定的CPU</li>
+<li>SPI(Shared peripheral interrupt): 共享外设中断; 中断从CPU0产生, 将中断设定到CPUi上;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Linux-中断编程"><a href="#Linux-中断编程" class="headerlink" title="Linux 中断编程"></a>Linux 中断编程</h3><ol>
+<li><p>中断申请</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">request_ir<span class="string">q()</span>;  free_ir<span class="string">q()</span>;		<span class="regexp">//</span> 内核提供的函数</span><br><span class="line">devm_request_ir<span class="string">q()</span>;				<span class="regexp">//</span> devm开头的API申请的是内核<span class="string">"managed"</span>资源, 一般不需要显示释放</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>中断屏蔽和使能</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">disable_irq</span><span class="params">(<span class="keyword">int</span> irq)</span></span>;		<span class="comment">// 等待目前的中断处理完成;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">disable_irq_nosync</span><span class="params">(<span class="keyword">int</span> irq)</span></span>;	<span class="comment">// 立即返回;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">enable_irq</span><span class="params">(<span class="keyword">int</span> irq)</span></span>;			<span class="comment">// 中断使能</span></span><br><span class="line"></span><br><span class="line">#define_local_irq_save(flags);		<span class="comment">// 禁止所有中断, 保存状态到flag中    #define_local_irq_restore(flags)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">local_irq_disable</span><span class="params">(<span class="keyword">void</span>)</span></span>;		<span class="comment">// 禁止所有中断, 且不保存状态				# void local_irq_enable(void)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>底半步机制实现</strong></p>
+<ul>
+<li><p>tasklet</p>
+<ul>
+<li><p>执行上下文方法: 是软中断, 执行时机通常是<strong>中断顶部返回</strong></p>
+</li>
+<li><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklet_schedule<span class="comment">()</span>;	<span class="comment">// 进行调度</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>工作队列</p>
+<ul>
+<li><p>执行上下文方法: 内核线程, 可以进行调度和睡眠;</p>
+</li>
+<li><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">INIT_WORK</span>();				<span class="comment">//将工作队列和处理函数绑定</span></span><br><span class="line"><span class="selector-tag">schedule_work</span>();		<span class="comment">// 工作队列的调度</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cmwq(Concurrency-managed woekqueues): cmwq维护了工作队列的线程池, 以提高并发性</p>
+</li>
+</ul>
+</li>
+<li><p>软中断</p>
+<ul>
+<li>和tasklet一样运行与中断上下文, 属于原子上下文的一种, 不允许睡眠</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="内核定时器"><a href="#内核定时器" class="headerlink" title="内核定时器"></a>内核定时器</h3><ol>
+<li><p>软件意义上的定时器: </p>
+<ul>
+<li>最终依赖于<strong>硬件定时器</strong>实现, 在内核时钟中断发生后检测各<strong>定时器是否到期</strong>, 到期后的定时器处理函数将作为<strong>软中断</strong>在底半部执行;</li>
+</ul>
+</li>
+<li><p>Linux内核中提供<strong>一组函数和数据结构</strong>来完成定时处罚工作或者完成某周期性的事务;</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">time_list</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定时器的到期时间</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jiffies </span>+ Hz<span class="comment">;		// jiffies 表示定时时间; Hz  表示1s;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>内核中的延时</strong></p>
+<ul>
+<li>忙等待: ndelay(), mdelay() 配合硬件上短延时;</li>
+<li>睡眠等待: msleep()对应于时间精度要求不高的延时;</li>
+</ul>
+</li>
+</ol>
+<h2 id="内存与I-O访问"><a href="#内存与I-O访问" class="headerlink" title="内存与I/O访问"></a>内存与I/O访问</h2><ol>
+<li>内存空间和I/O空间的访问<ul>
+<li>I/O空间: 通过两个指令– in/out</li>
+<li>内存空间: 地址和指针;</li>
+</ul>
+</li>
+</ol>
+<h3 id="MMU"><a href="#MMU" class="headerlink" title="MMU"></a>MMU</h3><ol>
+<li><p>MMU: 内存管理单元, 实现虚拟地址和物理地址的快速转换;</p>
+<ul>
+<li><p>TLB: MMU的核心部件, 他缓存少量的虚拟地址与物理地址的转换关系, 式转换表cache;</p>
+</li>
+<li><p>TTW(translation table walk): 转换漫游表</p>
+<ul>
+<li>当TLB中没有缓冲对应的地址转换关系时, 需要通过内存中的转换表访问得到VA-PA的对应关系</li>
+<li>TTW成功后, 将结果添加到TLB中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Linux中与硬件无关的四级页表目录</p>
+<ul>
+<li>PGD, PUD, PMD, PTE</li>
+</ul>
+</li>
+</ol>
+<h3 id="Linux内存管理"><a href="#Linux内存管理" class="headerlink" title="Linux内存管理"></a>Linux内存管理</h3><ol>
+<li><p>分为用户空间(0-3G)和内存空间(3G-4G)</p>
+<ul>
+<li>每个进程的<strong>用户空间</strong>是完全独立, 互不干涉的, 用户进程各自有不同的页表.</li>
+<li>内存空间: 有内核负责映射, 不会跟着进程改变, 是固定的;内核空间的虚拟地址到物理地址的映射被所有进程共享;</li>
+</ul>
+</li>
+<li><p>内核地址空间, 由低地址 – 高地址</p>
+<img src="/2019/08/24/Linux设备驱动的开发详解/kernel_memory.png">
+</li>
+<li><p>内存存取</p>
+<ul>
+<li><p>用户空间动态分配内存</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">malloc<span class="comment">()</span>, free<span class="comment">()</span>; 		<span class="comment">// 内存申请和释放</span></span><br><span class="line">malloc<span class="comment">()</span> 实现的机制:  通过brk<span class="comment">()</span> 和 mmap<span class="comment">()</span>两个系统调用从内核申请内存</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内核空间动态分配内存</p>
+<p>| kmalloc()    | __get_free_pages() | vmalloc()      |<br>| ———— | —————— | ————– |<br>| 阻塞等待;    | 非阻塞             |                |<br>| 分配页的大小 | 2^n页进行分配      |                |<br>| 物理空间连续 | 物理空间连续       | 物理空间不连续 |</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="DMA-Direct-memory-Access-编程"><a href="#DMA-Direct-memory-Access-编程" class="headerlink" title="DMA (Direct memory Access)编程"></a>DMA (Direct memory Access)编程</h3><ol>
+<li><p>DMA属于内核空间的一块区域, 16MB以下的空间;</p>
+</li>
+<li><p>DMA造成<strong>Cache缓存一致性问题</strong>?</p>
+<ul>
+<li>Cache:  被作用于CPU对内存的缓存, 提高TLB的命中率, 从而避免CPU每次都必须要与相对慢速的内存交互数据来提高数据的访问速率;</li>
+<li>DMA: 作为<strong>内存</strong>与<strong>外设</strong>之间传输数据的方式, 不需要cpu的参与;</li>
+<li>缓存一致性问题:  当DMA内存地址和Cache内存地址访问有<strong>重叠</strong>, 经过DMA操作后数据发生改变, 而CPU并不知道, 认为Cache中的数据就是内存中的数据, 当使用Cache映射内存时, 用的任然是陈旧的数据. </li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">dma_alloc_coherent</span>();	<span class="comment">// 对于DMA缓冲, 使用其申请空间</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>驱动中出现缓存一致性问题</p>
+<ul>
+<li>Cache与内存不一致错误, 导致驱动无法正常运行;</li>
+</ul>
+</li>
+<li><p>DMA的三个概念</p>
+<ul>
+<li>基于DMA硬件使用的是总线地址, 而非物理地址</li>
+</ul>
+<p>| 总线地址                   | 物理地址                | 虚拟地址        |<br>| ————————– | ———————– | ————— |<br>| 从设备的角度看到的内存地址 | 从CPU,MMU看到的内存地址 | CPU核看到的地址 |<br>| 通过总线: 连接芯片         | VA—PA的映射机制       |                 |</p>
+</li>
+</ol>
+<h2 id="Linux设备驱动的软件架构思想"><a href="#Linux设备驱动的软件架构思想" class="headerlink" title="Linux设备驱动的软件架构思想"></a>Linux设备驱动的软件架构思想</h2><ol>
+<li><p>软件架构思想:</p>
+<ul>
+<li>将设备端的信息从驱动中分离出来</li>
+<li>设备 和 驱动分离的思想<ul>
+<li>cdev  和 file_operation : 进行分离</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Linux设备和驱动挂载到同一种总线上?</p>
+<ul>
+<li>对于PCI, USB, IIC, SPI 等总线, 其设备和驱动直接按照对应的总线框架编写驱动</li>
+<li>对于独立的外设: Linux使用一种虚拟总线platform;</li>
+</ul>
+</li>
+<li><p>platform虚拟总线</p>
+<ul>
+<li>bus_type:  结构体中的match() 函数匹配设备和驱动;</li>
+<li>platform_device: 设备注册</li>
+<li>platform_driver:  驱动注册,  结构体中的probe()函数用于绑定驱动和总线</li>
+</ul>
+</li>
+<li><p><strong>如何将globalfifo字符设备, 驱动挂载到platform虚拟总线上?</strong></p>
+<ol>
+<li>将globalfifo移植为platform驱动;</li>
+<li>在板文件中添加globalfifo这个platform_device</li>
+</ol>
+</li>
+<li><p><strong>设备驱动分层思想</strong></p>
+<img src="/2019/08/24/Linux设备驱动的开发详解/core_driver.png">
+</li>
+<li><p>实例: SPI中实现主机驱动和外设驱动分离的思想?</p>
+</li>
+</ol>
+<h1 id="Linux块设备和网络设备"><a href="#Linux块设备和网络设备" class="headerlink" title="Linux块设备和网络设备"></a>Linux块设备和网络设备</h1><h2 id="Linux-字符设备-块设备-网络设备驱动的区别"><a href="#Linux-字符设备-块设备-网络设备驱动的区别" class="headerlink" title="Linux 字符设备, 块设备, 网络设备驱动的区别"></a>Linux 字符设备, 块设备, 网络设备驱动的区别</h2><table>
+<thead>
+<tr>
+<th>区别</th>
+<th>字符设备</th>
+<th>块设备</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据传输单位</td>
+<td>字节为单位</td>
+<td>块为单位 –  block(512bytes)</td>
+</tr>
+<tr>
+<td>有无缓冲区</td>
+<td>无须缓冲且直接读写</td>
+<td>有I/O缓冲</td>
+</tr>
+<tr>
+<td>访问顺序</td>
+<td>顺序读写</td>
+<td>随机读写, 读取不同的扇区</td>
+</tr>
+<tr>
+<td>设备</td>
+<td>鼠标, 键盘…(大多数设备)</td>
+<td>存储设备</td>
+</tr>
+<tr>
+<td>Linux目录</td>
+<td>/dev  一切皆文件</td>
+<td>/dev  一切皆文件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="块设备驱动的结构体"><a href="#块设备驱动的结构体" class="headerlink" title="块设备驱动的结构体"></a>块设备驱动的结构体</h2><ol>
+<li>block_device_operations 文件操作结构体<ul>
+<li>类似于file_operations;</li>
+<li>但是没有读写相关的函数, 只有打开, 释放, 控制 函数</li>
+</ul>
+</li>
+<li>gendisk 磁盘设备结构体<ul>
+<li>使用gendisk(通用磁盘)结构体表示一个独立的磁盘设备(或分区)</li>
+</ul>
+</li>
+</ol>
+<h3 id="块设备的I-O操作"><a href="#块设备的I-O操作" class="headerlink" title="块设备的I/O操作"></a>块设备的I/O操作</h3><ol>
+<li><p>bio, request, request_queue 结构体</p>
+<ul>
+<li>bio: (block IO), 对应上层传递给块层的I/O请求;</li>
+</ul>
+<img src="/2019/08/24/Linux设备驱动的开发详解/block_io.jpg">
+</li>
+<li><p>块设备的I/O操作中:</p>
+<ul>
+<li>贯穿始终的就是”<strong>请求</strong>“;</li>
+<li>块设备的I/O操作会排队和整合;</li>
+</ul>
+</li>
+<li><p><strong>I/O调度算法, 为了完成请求的合并.</strong></p>
+<ul>
+<li><p>一个请求: 可以包含多个I/O</p>
+<p>| I/O调度器             | 作用                                                         |<br>| ——————— | ———————————————————— |<br>| Noop                  | 实现简单的FIFO队列, 进行基本的<strong>合并</strong>, 适合基于flash存储器  |<br>| Anticipatory (预期的) | 推迟I/O请求, 等待更多I/O请求, 进行排序                       |<br>| Deadline              | 将每次请求延迟降到最低, 使用轮训调度器; 适用于读取较多的环境 |<br>| CFQ                   | 为所有任务分配均匀的I/O带宽                                  |</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="块设备驱动的任务"><a href="#块设备驱动的任务" class="headerlink" title="块设备驱动的任务"></a>块设备驱动的任务</h3><ol>
+<li>驱动的任务是处理请求, 队请求的排队和整合由I/O调度算法解决;</li>
+<li><strong>块设备驱动的核心</strong><ul>
+<li>请求处理函数: 需要请求队列的支持, 实现块设备的随机访问</li>
+<li>制造请求: 设备本身支持正真的随机访问</li>
+</ul>
+</li>
+</ol>
+<h2 id="Linux网络设备驱动"><a href="#Linux网络设备驱动" class="headerlink" title="Linux网络设备驱动"></a>Linux网络设备驱动</h2><ol>
+<li>网络设备驱动的作用?<ul>
+<li>完成用户数据包在<strong>网络媒介上</strong>发送和接受的设备, 他将上层协议传递下来的数据包以特定的媒介访问控制方式进行<strong>发送</strong>, 并将接收到的数据包<strong>传递</strong>给上层协议</li>
+<li><strong>数据包</strong>向下为发送, 向上为传递</li>
+</ul>
+</li>
+</ol>
+<h3 id="网络设备驱动的四层结构"><a href="#网络设备驱动的四层结构" class="headerlink" title="网络设备驱动的四层结构"></a>网络设备驱动的四层结构</h3><ol>
+<li><p>Linux层次化设计的作用?</p>
+<ul>
+<li>实现了对上层协议接口的统一</li>
+<li>硬件驱动对下层多样化硬件设备的可适应性;</li>
+</ul>
+<img src="/2019/08/24/Linux设备驱动的开发详解/netdev.jpg">
+</li>
+<li><p>四层结构的作用?</p>
+<p>| 四层结构       | 作用                                                         | 特殊数据结构        |<br>| ————– | ———————————————————— | ——————- |<br>| 网络协议接口层 | 通过<strong>两个函数</strong>实现数据的接受和发送                         | sk_buffer  (socket) |<br>| 网络设备接口层 | 为万千设备<strong>定义</strong>统一, 抽象的数据结构体 net_device          | net_device          |<br>| 设备驱动功能层 | <strong>填充</strong>net_device具体成员, <strong>注册</strong>net_device实现<strong>操作函数与内核</strong>的挂接 |                     |<br>| 网络设备和媒介 | 完成数据包接受和发送的<strong>物理实体</strong>                           | 网络适配器          |</p>
+</li>
+</ol>
+<h3 id="sk-buffer-结构体"><a href="#sk-buffer-结构体" class="headerlink" title="sk_buffer 结构体"></a>sk_buffer 结构体</h3><ol>
+<li><p>sk_buffer 的作用?</p>
+<ul>
+<li>用于Linux网络子系统各层之间传递数据, 是所有数据流动的<strong>载体</strong></li>
+</ul>
+</li>
+<li><p>struct sk_buffer</p>
+<ul>
+<li>head 和 end: 指向缓冲区的头部和尾部</li>
+<li>data 和 tail : 指向数据的头部和尾部</li>
+</ul>
+<img src="/2019/08/24/Linux设备驱动的开发详解/socket_buffer.jpg">
+</li>
+<li><p>Linux套接字缓冲区支持分配, 释放, 变更的<strong>函数</strong></p>
+<ul>
+<li><p>Linux内核中使用的函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct sk_buffer *<span class="title">alloc_skb</span><span class="params">()</span></span>;							<span class="comment">// 分配一个套接字缓冲区和数据缓冲区</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>	<span class="title">kfree_skb</span><span class="params">(struct sk_buffer *skb)</span></span>;	<span class="comment">//释放一个套接字缓冲区和数据缓冲区</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">skb_put</span><span class="params">()</span></span>;							<span class="comment">// 在缓冲区尾部添加数据</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设备驱动中使用的函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">struct sk_buffer *<span class="title">dev_alloc_skb</span><span class="params">()</span></span>;							<span class="comment">// 分配一个套接字缓冲区和数据缓冲区</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>	<span class="title">dev_kfree_skb</span><span class="params">(struct sk_buffer *skb)</span></span>;	<span class="comment">//释放一个套接字缓冲区和数据缓冲区</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> *<span class="title">skb_push</span><span class="params">()</span></span>;							<span class="comment">// 在缓冲区尾部添加数据</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="net-device结构体"><a href="#net-device结构体" class="headerlink" title="net_device结构体"></a>net_device结构体</h3><ol>
+<li>net_device的作用?<ul>
+<li>包含网络设备的属性和操作函数;</li>
+<li>open() , ioctl()</li>
+</ul>
+</li>
+<li>设备驱动中的数据包接收?<ul>
+<li>网络设备驱动: 以<strong>中断</strong>方式接收数据包</li>
+<li>poll_controller(): 采用轮询方式;</li>
+<li>NAPI(new API):<ul>
+<li>接收中断来临 – 关闭接收中断 – 以轮询方式接受所有数据包直到为空 – 开启接收中断 ….</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="网络设备驱动的注册与注销"><a href="#网络设备驱动的注册与注销" class="headerlink" title="网络设备驱动的注册与注销"></a>网络设备驱动的注册与注销</h3><ol>
+<li><p>使用的函数</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">register_netdev</span>()	;	<span class="comment">// 网络设备的注册函数</span></span><br><span class="line"><span class="selector-tag">register_netdev</span>()	;	<span class="comment">// 网络设备的注销函数</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="网络设备"><a href="#网络设备" class="headerlink" title="网络设备"></a>网络设备</h3><ol>
+<li><p>网络设备的初始化</p>
+<ul>
+<li>探测网络设备是否存在, 存在则检测设备所用的硬件资源</li>
+<li>软件接口: 分配net_device结构体对其数据和函数指正成员赋值</li>
+<li>获得设备的私有信息指针并初始化各成员的值;</li>
+</ul>
+</li>
+<li><p>网络设备的打开和释放</p>
+<img src="/2019/08/24/Linux设备驱动的开发详解/net_device_open_realease.png">
+</li>
+<li><p>数据发送流程</p>
+<img src="/2019/08/24/Linux设备驱动的开发详解/data_transform.png">
+</li>
+<li><p>数据接受流程</p>
+<ul>
+<li>主要有<strong>中断</strong>引发设备的中断处理函数;</li>
+</ul>
+<img src="/2019/08/24/Linux设备驱动的开发详解/data_receive.png">
+</li>
+<li><p>网络连接状态</p>
+<ul>
+<li>网络适配器硬件电路可以检测链路上是否有载波;</li>
+<li>载波反映了网络的连接是否正常;</li>
+</ul>
+</li>
+</ol>
+<h3 id="DM9000网卡设备驱动"><a href="#DM9000网卡设备驱动" class="headerlink" title="DM9000网卡设备驱动"></a>DM9000网卡设备驱动</h3><ol>
+<li>DM9000一般挂在外面的内存总线上;      </li>
+</ol>
+<h1 id="I2C、SPI、USB驱动"><a href="#I2C、SPI、USB驱动" class="headerlink" title="I2C、SPI、USB驱动"></a>I2C、SPI、USB驱动</h1><ol>
+<li><p>Linux的理念</p>
+<ul>
+<li>将主机端驱动和外设端分离，通过一个核心层将某种总线的协议进行抽象；</li>
+</ul>
+<img src="/2019/08/24/Linux设备驱动的开发详解/iic_struct.jpg">
+</li>
+<li><p><strong>热插拔能力的总线</strong></p>
+<ul>
+<li>I2C和SPI不具备热插拔能力，所有会有板级信息的描述；</li>
+<li>USB和PCI总线，具有热插拔能力，没有板级信息的描述；当存在USB设备插入后，linux子系统会自动探测；</li>
+</ul>
+</li>
+</ol>
+<h2 id="Linux-I2C驱动"><a href="#Linux-I2C驱动" class="headerlink" title="Linux I2C驱动"></a>Linux I2C驱动</h2><h3 id="I2C驱动体系结构由三部分组成"><a href="#I2C驱动体系结构由三部分组成" class="headerlink" title="I2C驱动体系结构由三部分组成"></a>I2C驱动体系结构由三部分组成</h3><ul>
+<li><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tree /sys/bus/<span class="keyword">i2</span><span class="keyword">c</span>/		// 在sysfs文件系统下，查看<span class="keyword">i2</span><span class="keyword">c</span>设备</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li><p>I2C核心 ：</p>
+<ul>
+<li>是I2C总线驱动和设备驱动<strong>中间枢纽</strong>，提供注册和注销方法，实现I2C的<strong>通信</strong>（Algorithm);</li>
+<li>它以通用的、与平台无关的接口，实现I2C中设备与<strong>I2C适配器</strong>(adapter)的沟通；</li>
+</ul>
+</li>
+<li><p>I2C总线驱动</p>
+<ul>
+<li><p>对I2C硬件体系结构中<strong>适配器</strong>端的<strong>实现</strong></p>
+</li>
+<li><p>I2C总线驱动<strong>填充</strong>：i2c_adapter和i2c_algorithm结构体</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（<span class="number">1</span>）struct  	<span class="keyword">i2</span>c_adapter 	<span class="keyword">and</span> 	<span class="keyword">i2</span>c_algorithm</span><br><span class="line">（<span class="number">2</span>）控制<span class="keyword">i2</span>c_adapter产生通信信号的函数</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>I2C设备驱动（客户驱动）</p>
+<ul>
+<li>对I2C硬件提示西结构中设备端的实现；</li>
+<li>I2C设备驱动<strong>填充</strong>：i2c_driver和i2c_client结构体；</li>
+</ul>
+</li>
+</ol>
+<h3 id="I2C四个结构体的关系"><a href="#I2C四个结构体的关系" class="headerlink" title="I2C四个结构体的关系"></a>I2C四个结构体的关系</h3><ol>
+<li>适配器和通信</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>结构体关系</th>
+<th>i2c_adapter</th>
+<th>i2c_algorithm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>各自作用</td>
+<td>对应物理上的一个适配器</td>
+<td>对应一套通信方法</td>
+</tr>
+<tr>
+<td>函数</td>
+<td></td>
+<td>master_xfer()产生I2c访问周期需要的信号，<br>以i2c_msg为单位</td>
+</tr>
+<tr>
+<td><strong>关系</strong></td>
+<td>适配器需要i2c_algorithm产生通信时序</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>驱动和客户端</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>结构体关系</th>
+<th>i2c_driver</th>
+<th>i2c_client</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>各自作用</td>
+<td>对应一套驱动方法</td>
+<td>对应真实的物理设备</td>
+</tr>
+<tr>
+<td>函数</td>
+<td>probe(), remove(), supend(), resume()</td>
+<td>BSP板级信息：i2c_board_info</td>
+</tr>
+<tr>
+<td><strong>关系</strong></td>
+<td>一个驱动支持多个物理设备；一对多</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li><p>适配器和客户端</p>
+<ul>
+<li>一个适配器：可以被多个client依附；</li>
+</ul>
+</li>
+</ol>
+<h3 id="总线如何实现设备和驱动的绑定"><a href="#总线如何实现设备和驱动的绑定" class="headerlink" title="总线如何实现设备和驱动的绑定"></a>总线如何实现设备和驱动的绑定</h3><ol>
+<li>i2c_bus的函数match()函数检测到device和device_driver匹配时，就会调用driver里的probe()函数，完成初始化适配器硬件，申请适配器需要的内存，时钟，中断等资源，最终完成适配器的注册；</li>
+</ol>
+<h2 id="USB驱动"><a href="#USB驱动" class="headerlink" title="USB驱动"></a>USB驱动</h2><h3 id="USB驱动框架：分主机侧和设备侧"><a href="#USB驱动框架：分主机侧和设备侧" class="headerlink" title="USB驱动框架：分主机侧和设备侧"></a>USB驱动框架：分主机侧和设备侧</h3><ol>
+<li>USB主机侧角度</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>USB主机侧的模块</th>
+<th>作用</th>
+<th>结构体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USB主机控制器驱动程序</td>
+<td>控制插入其中的USB设备</td>
+<td>usb_hcd; hc_driver</td>
+</tr>
+<tr>
+<td>USB设备驱动程序</td>
+<td>控制设备如何作为从设备与主机通信；</td>
+<td>usb_driver</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>USB核心（API）：通过定义一些数据结构和宏，功能函数；向上提供接口，向下提供编程框架；维护USB设备通信；</li>
+</ul>
+<ol start="2">
+<li><p>USB从机角度</p>
+<ul>
+<li>UDC设备控制器：关心底层的硬件操作；</li>
+<li>Funcation驱动：利用通用的API，通过usb_request与底层UDC驱动交互；</li>
+</ul>
+</li>
+</ol>
+<p>​    <img src="/2019/08/24/Linux设备驱动的开发详解/usb_bus.jpg"></p>
+<pre><code>3. USB设备逻辑包含
++ 设备、配置、接口、端点四个层次
++ 每个设备提供不同级别的配置信息，不同配置体现不同的功能；
++ 一个配置由多个接口组成；
++ 一个接口由多个端点组成；
+</code></pre><h3 id="URB-中断的生命周期"><a href="#URB-中断的生命周期" class="headerlink" title="URB 中断的生命周期"></a>URB 中断的生命周期</h3><ol>
+<li>通常包含创建，初始化，提交和被USB核心级USB主机传递，完成后回调函数被调用的过程；</li>
+</ol>
+<h1 id="ARM-Linux-设备树"><a href="#ARM-Linux-设备树" class="headerlink" title="ARM Linux 设备树"></a>ARM Linux 设备树</h1><ol>
+<li><p>板级代码信息的描述</p>
+<ul>
+<li>对于内核来说，板级代码信息的描述是不需要存在的</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arch<span class="regexp">/arm/</span>plat-xxx;		<span class="regexp">//</span> 这两个目录下存在着描述信息</span><br><span class="line">arch<span class="regexp">/arm/m</span>ach-xxx;</span><br><span class="line">platform_device, i2c_board_info, spi_board_info</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设备树的特点</p>
+<ul>
+<li>描述<strong>硬件</strong>的数据结构</li>
+<li>设备树被命名：节点（可包含子节点）和属性（名称和值）</li>
+<li>设备树可以将硬件的细节直接传递给Linux，无需在内核中进行大量的冗余编程；</li>
+</ul>
+</li>
+<li><p>通过设备树<strong>替代</strong>用于注册的板级代码，驱动也以新的方式与.dts中定义的设备节点进行匹配；</p>
+</li>
+</ol>
+<h2 id="设备树的传递和展开"><a href="#设备树的传递和展开" class="headerlink" title="设备树的传递和展开"></a>设备树的传递和展开</h2><ul>
+<li>Bootloader 在启动时，会将设备树.dtb的入口地址传递给内核，内核会将其进行展开出linux内核中的platform_device,i2c_client, spi_device等设备</li>
+<li>设备用到的内存，IRQ等资源，也被传递给了内核，内核会将这些资源绑定给展开的相应设备；</li>
+</ul>
+<h2 id="设备树的组成和结构"><a href="#设备树的组成和结构" class="headerlink" title="设备树的组成和结构"></a>设备树的组成和结构</h2><table>
+<thead>
+<tr>
+<th>结构描述</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DTS</td>
+<td>文件.dts是一位种<strong>ASCII</strong>文本格式的设备树描述;<br>.dtsi：dts中的公共部分，类似于.h文件；(.dts包含.dtsi)</td>
+</tr>
+<tr>
+<td>DTC(device tree compiler)</td>
+<td>是一个工具，将 .dts(ascii文本)  – 编译为 – dtb(二进制文件)</td>
+</tr>
+<tr>
+<td>DTB(device tree binary)</td>
+<td>是.dts被DTC工具编译后的二进制格式的设备树描述</td>
+</tr>
+<tr>
+<td>绑定(Binding)</td>
+<td>对于设备树中的节点和属性，如何描述设备的硬件细节，需要.txt文档</td>
+</tr>
+<tr>
+<td>Bootloader</td>
+<td>Uboot运行 fdt addr命令设置 <strong>.dtb</strong>的地址</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Linux内核移植"><a href="#Linux内核移植" class="headerlink" title="Linux内核移植"></a>Linux内核移植</h1><ol>
+<li>移植Linux到全新的SMP Soc上需要底层硬件提供<ul>
+<li>定时器节拍</li>
+<li>中断控制器</li>
+<li>SMP启动</li>
+<li>GPIO</li>
+<li>时钟</li>
+<li>pinctrl (pin control)</li>
+</ul>
+</li>
+<li>这些底层功能被封装好后，其他设备驱动只能调用内核提供的通用API<ul>
+<li>这些API底层：填充内核规定好的<strong>回调函数</strong></li>
+</ul>
+</li>
+</ol>
+<h1 id="调试工具"><a href="#调试工具" class="headerlink" title="调试工具"></a><a href="https://luckywater.top/2019/03/04/LinuxCGdb/" target="_blank" rel="noopener">调试工具</a></h1>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/驱动/" rel="tag"># 驱动</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/19/uC-OS-III/" rel="next" title="uC/OS-III">
+                <i class="fa fa-chevron-left"></i> uC/OS-III
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">99</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux设备驱动的开发详解"><span class="nav-number">1.</span> <span class="nav-text">Linux设备驱动的开发详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设备驱动的概念"><span class="nav-number">1.1.</span> <span class="nav-text">设备驱动的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无OS的设备驱动"><span class="nav-number">1.1.1.</span> <span class="nav-text">无OS的设备驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有OS的设备驱动"><span class="nav-number">1.1.2.</span> <span class="nav-text">有OS的设备驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-设备驱动和软硬件的关系"><span class="nav-number">1.1.3.</span> <span class="nav-text">Linux 设备驱动和软硬件的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#驱动设计的硬件基础"><span class="nav-number">1.2.</span> <span class="nav-text">驱动设计的硬件基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理器"><span class="nav-number">1.2.1.</span> <span class="nav-text">处理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器"><span class="nav-number">1.2.2.</span> <span class="nav-text">存储器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总线SerialBus"><span class="nav-number">1.2.3.</span> <span class="nav-text">总线SerialBus</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-内核及内核编译"><span class="nav-number">1.3.</span> <span class="nav-text">Linux 内核及内核编译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内核目录的分析"><span class="nav-number">1.3.1.</span> <span class="nav-text">内核目录的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核的编译和加载"><span class="nav-number">1.3.2.</span> <span class="nav-text">内核的编译和加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux代码的编译风格"><span class="nav-number">1.3.3.</span> <span class="nav-text">Linux代码的编译风格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-内核模块的编写"><span class="nav-number">1.4.</span> <span class="nav-text">Linux 内核模块的编写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux内核模块程序结构"><span class="nav-number">1.4.1.</span> <span class="nav-text">Linux内核模块程序结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux文件系统和设备文件"><span class="nav-number">1.5.</span> <span class="nav-text">Linux文件系统和设备文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用和C库函数的文件操作"><span class="nav-number">1.5.1.</span> <span class="nav-text">系统调用和C库函数的文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux文件系统"><span class="nav-number">1.5.2.</span> <span class="nav-text">linux文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linxu-文件系统目录结构"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">linxu 文件系统目录结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟文件系统和设备驱动的关系"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">虚拟文件系统和设备驱动的关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体-file-and-inode"><span class="nav-number">1.5.3.</span> <span class="nav-text">结构体 : file and inode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#devfs-and-udev"><span class="nav-number">1.5.4.</span> <span class="nav-text">devfs and udev</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sysfs文件系统"><span class="nav-number">1.5.5.</span> <span class="nav-text">sysfs文件系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符设备驱动"><span class="nav-number">1.6.</span> <span class="nav-text">字符设备驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux字符设备驱动"><span class="nav-number">1.6.1.</span> <span class="nav-text">Linux字符设备驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#globalmem-虚拟设备驱动"><span class="nav-number">1.6.2.</span> <span class="nav-text">globalmem()虚拟设备驱动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux设备驱动中的并发控制"><span class="nav-number">1.7.</span> <span class="nav-text">Linux设备驱动中的并发控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设备驱动中的并发"><span class="nav-number">1.7.1.</span> <span class="nav-text">设备驱动中的并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决并发和竞态"><span class="nav-number">1.7.2.</span> <span class="nav-text">解决并发和竞态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自旋锁和互斥体"><span class="nav-number">1.7.3.</span> <span class="nav-text">自旋锁和互斥体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gobalmem增加并发"><span class="nav-number">1.7.4.</span> <span class="nav-text">gobalmem增加并发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux设备驱动中阻塞和非阻塞I-O"><span class="nav-number">1.8.</span> <span class="nav-text">Linux设备驱动中阻塞和非阻塞I/O</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux设备驱动中的异步通知与异步IO"><span class="nav-number">1.9.</span> <span class="nav-text">Linux设备驱动中的异步通知与异步IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异步通知"><span class="nav-number">1.9.1.</span> <span class="nav-text">异步通知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux的异步IO"><span class="nav-number">1.9.2.</span> <span class="nav-text">Linux的异步IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#glibc-提供一个不依赖于内核完成的AIO"><span class="nav-number">1.9.3.</span> <span class="nav-text">glibc 提供一个不依赖于内核完成的AIO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核空间实现AIO"><span class="nav-number">1.9.4.</span> <span class="nav-text">内核空间实现AIO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中断和时钟"><span class="nav-number">1.10.</span> <span class="nav-text">中断和时钟</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中断的分类"><span class="nav-number">1.10.1.</span> <span class="nav-text">中断的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-中断编程"><span class="nav-number">1.10.2.</span> <span class="nav-text">Linux 中断编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核定时器"><span class="nav-number">1.10.3.</span> <span class="nav-text">内核定时器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存与I-O访问"><span class="nav-number">1.11.</span> <span class="nav-text">内存与I/O访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MMU"><span class="nav-number">1.11.1.</span> <span class="nav-text">MMU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux内存管理"><span class="nav-number">1.11.2.</span> <span class="nav-text">Linux内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMA-Direct-memory-Access-编程"><span class="nav-number">1.11.3.</span> <span class="nav-text">DMA (Direct memory Access)编程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux设备驱动的软件架构思想"><span class="nav-number">1.12.</span> <span class="nav-text">Linux设备驱动的软件架构思想</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux块设备和网络设备"><span class="nav-number">2.</span> <span class="nav-text">Linux块设备和网络设备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-字符设备-块设备-网络设备驱动的区别"><span class="nav-number">2.1.</span> <span class="nav-text">Linux 字符设备, 块设备, 网络设备驱动的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#块设备驱动的结构体"><span class="nav-number">2.2.</span> <span class="nav-text">块设备驱动的结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#块设备的I-O操作"><span class="nav-number">2.2.1.</span> <span class="nav-text">块设备的I/O操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块设备驱动的任务"><span class="nav-number">2.2.2.</span> <span class="nav-text">块设备驱动的任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux网络设备驱动"><span class="nav-number">2.3.</span> <span class="nav-text">Linux网络设备驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络设备驱动的四层结构"><span class="nav-number">2.3.1.</span> <span class="nav-text">网络设备驱动的四层结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sk-buffer-结构体"><span class="nav-number">2.3.2.</span> <span class="nav-text">sk_buffer 结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#net-device结构体"><span class="nav-number">2.3.3.</span> <span class="nav-text">net_device结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络设备驱动的注册与注销"><span class="nav-number">2.3.4.</span> <span class="nav-text">网络设备驱动的注册与注销</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络设备"><span class="nav-number">2.3.5.</span> <span class="nav-text">网络设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DM9000网卡设备驱动"><span class="nav-number">2.3.6.</span> <span class="nav-text">DM9000网卡设备驱动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I2C、SPI、USB驱动"><span class="nav-number">3.</span> <span class="nav-text">I2C、SPI、USB驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-I2C驱动"><span class="nav-number">3.1.</span> <span class="nav-text">Linux I2C驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#I2C驱动体系结构由三部分组成"><span class="nav-number">3.1.1.</span> <span class="nav-text">I2C驱动体系结构由三部分组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I2C四个结构体的关系"><span class="nav-number">3.1.2.</span> <span class="nav-text">I2C四个结构体的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总线如何实现设备和驱动的绑定"><span class="nav-number">3.1.3.</span> <span class="nav-text">总线如何实现设备和驱动的绑定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#USB驱动"><span class="nav-number">3.2.</span> <span class="nav-text">USB驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#USB驱动框架：分主机侧和设备侧"><span class="nav-number">3.2.1.</span> <span class="nav-text">USB驱动框架：分主机侧和设备侧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URB-中断的生命周期"><span class="nav-number">3.2.2.</span> <span class="nav-text">URB 中断的生命周期</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARM-Linux-设备树"><span class="nav-number">4.</span> <span class="nav-text">ARM Linux 设备树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设备树的传递和展开"><span class="nav-number">4.1.</span> <span class="nav-text">设备树的传递和展开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设备树的组成和结构"><span class="nav-number">4.2.</span> <span class="nav-text">设备树的组成和结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux内核移植"><span class="nav-number">5.</span> <span class="nav-text">Linux内核移植</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调试工具"><span class="nav-number">6.</span> <span class="nav-text">调试工具</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
