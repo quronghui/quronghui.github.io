@@ -96,18 +96,21 @@
 
 
 
-  <meta name="description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义? Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     Linux的用户态与内核态 如何切换的? 系统调用: 用户态的进程通过系统调用申请使用操作系统提供">
+  <meta name="description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义?  Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     用户态和内核态区别？  用户态用printf, 内核态用printk 用户态每个应用程序空间是虚">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux用户和内核">
 <meta property="og:url" content="http://yoursite.com/2019/08/02/linux用户和内核/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义? Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     Linux的用户态与内核态 如何切换的? 系统调用: 用户态的进程通过系统调用申请使用操作系统提供">
+<meta property="og:description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义?  Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     用户态和内核态区别？  用户态用printf, 内核态用printk 用户态每个应用程序空间是虚">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-11T11:18:37.912Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/linux用户和内核/tradition_ways.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/linux用户和内核/memory.png">
+<meta property="og:updated_time" content="2019-08-30T08:46:02.004Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux用户和内核">
-<meta name="twitter:description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义? Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     Linux的用户态与内核态 如何切换的? 系统调用: 用户态的进程通过系统调用申请使用操作系统提供">
+<meta name="twitter:description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义?  Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     用户态和内核态区别？  用户态用printf, 内核态用printk 用户态每个应用程序空间是虚">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/02/linux用户和内核/tradition_ways.png">
 
 
 
@@ -224,7 +227,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-主页"></i> <br>Home</a>
 
   </li>
         
@@ -241,7 +244,7 @@
 
     
 
-    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
+    <a href="/标签" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Tags</a>
 
   </li>
         
@@ -258,7 +261,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
+    <a href="/分类" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
 
   </li>
         
@@ -275,7 +278,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/归档" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Archives</a>
 
   </li>
 
@@ -286,7 +289,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
         </li>
       
     </ul>
@@ -392,14 +395,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-02 21:18:12" itemprop="dateCreated datePublished" datetime="2019-08-02T21:18:12+08:00">2019-08-02</time>
+              <time title="Created: 2019-08-02 21:18:12" itemprop="dateCreated datePublished" datetime="2019-08-02T21:18:12+08:00">2019-08-02</time>
             
 
             
@@ -416,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-11 19:18:37" itemprop="dateModified" datetime="2019-08-11T19:18:37+08:00">2019-08-11</time>
+                <time title="Modified: 2019-08-30 16:46:02" itemprop="dateModified" datetime="2019-08-30T16:46:02+08:00">2019-08-30</time>
               
             
           </span>
@@ -430,7 +433,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Operate-System/" itemprop="url" rel="index"><span itemprop="name">Operate System</span></a></span>
@@ -497,12 +500,20 @@
 
       
         <h1 id="linux用户和内核"><a href="#linux用户和内核" class="headerlink" title="linux用户和内核"></a>linux用户和内核</h1><h2 id="linux用户和内核之间的关系"><a href="#linux用户和内核之间的关系" class="headerlink" title="linux用户和内核之间的关系"></a>linux用户和内核之间的关系</h2><ol>
-<li>Linux的<strong>用户态与内核态 </strong>定义?<ul>
+<li><p>Linux的<strong>用户态与内核态 </strong>定义?</p>
+<ul>
 <li>Intel的X86架构的CPU提供了<strong>0到3四个特权级</strong>: Linux操作系统中则主要采用了<strong>0(内核)</strong>和<strong>3(用户)</strong>两个特权级</li>
 <li>进程寻址空间0~4G , 用户态只能访问0~3G，只有进入<strong>内核态</strong>才能访问3G~4G  </li>
 </ul>
 </li>
-<li>Linux的<strong>用户态与内核态 </strong>如何切换的?<ul>
+<li><p>用户态和内核态区别？</p>
+<ul>
+<li>用户态用printf, 内核态用printk</li>
+<li>用户态每个应用程序空间是虚拟的，相对独立的；内核态中却不是独立的，内存是被<strong>共享</strong>的。</li>
+</ul>
+</li>
+<li><p>Linux的<strong>用户态与内核态 </strong>如何切换的?</p>
+<ul>
 <li><strong>系统调用</strong>:<ul>
 <li>用户态的进程通过系统调用申请使用操作系统提供的<strong>系统调用服务例程</strong>来处理任务</li>
 <li><strong>机制:</strong> 操作系统为用户特别开发的一个中断机制来实现的，即软中断</li>
@@ -518,22 +529,93 @@
 </li>
 </ul>
 </li>
-<li>Linux的用户态与内核态的<strong>通信</strong>方式?<ul>
-<li>Linux下内核空间与用户空间进行通信的方式主要有syscall（system call）、procfs、ioctl和netlink</li>
-<li>syscall（system call）<ul>
+<li><p>传统的方法无法用于实现用户态和内核态通信的原因？</p>
+<img src="/2019/08/02/linux用户和内核/tradition_ways.png">
+</li>
+</ol>
+<h2 id="Linux的用户态与内核态的通信方式？"><a href="#Linux的用户态与内核态的通信方式？" class="headerlink" title="Linux的用户态与内核态的通信方式？"></a>Linux的用户态与内核态的通信方式？</h2><ol>
+<li>使用API接口</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>API接口</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get_user(x，ptr)</td>
+<td>在内核中被调用：获取用户空间指定地址的数值并保存到内核变量x中</td>
+</tr>
+<tr>
+<td>put_user(x，ptr)</td>
+<td>在内核中被调用：将内核空间的变量x的数值保存到到用户空间指定地址处。</td>
+</tr>
+<tr>
+<td>Copy_from_user()<br>copy_to_user()</td>
+<td>主要应用于设备驱动读写函数中，通过系统调用触发</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li><p>使用内核的系统调用?</p>
+<ul>
+<li><p>Linux下内核空间与用户空间进行通信的方式主要有syscall（system call）、/proc、ioctl和netlink</p>
+</li>
+<li><p>syscall（system call）</p>
+<ul>
 <li>Linux内核中设置了一组用于<strong>实现各种系统功能</strong>的子程序</li>
 <li>用户可以通过调用<strong>系统调用接口（SCI）</strong>, 访问linux内核的数据和函数</li>
 </ul>
 </li>
-<li>procfs<ul>
-<li>是一种特殊的伪文件系统 ，是<strong>Linux内核信息的抽象文件接口</strong>, 大量内核中的信息以及可调参数都被作为常规<strong>文件映射</strong>到一个<strong>目录树中</strong></li>
+<li><p>/proc </p>
+<ul>
+<li>是虚拟文件系统，是<strong>Linux内核信息的抽象文件接口</strong>, 大量内核中的信息以及可调参数都被作为常规<strong>文件映射</strong>到一个<strong>目录树中</strong></li>
 <li><strong>echo或cat</strong>这样的文件操作命令对系统信息进行查取</li>
 </ul>
 </li>
-<li>netlink：用户态应用使用标准的<strong>socket API</strong>就可以使用 netlink 提供的强大功能；</li>
-<li>ioctl：函数是文件结构中的一个属性分量，就是说如果你的驱动程序提供了对ioctl的支持，用户就可以在用户程序中使用ioctl函数<strong>控制设备的I/O通道</strong>。</li>
+<li><p>netlink：用户态应用使用标准的<strong>socket API</strong>就可以使用 netlink 提供的强大功能；</p>
+<ul>
+<li><p>使用自定义一种协议完成数据交换，不需要添加一个文件等。2.可以支持多点传送。3.支持内核先发起会话。4.异步通信，支持缓存机制</p>
+</li>
+<li><p>内核空间对netlink的使用：主要是create函数</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">netlink_kernel_create</span>();	<span class="comment">//内核创建；</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
+<li><p>ioctl：函数是文件结构中的一个属性分量，就是说如果你的驱动程序提供了对ioctl的支持，用户就可以在用户程序中使用ioctl函数<strong>控制设备的I/O通道</strong>。</p>
+</li>
+</ul>
+</li>
+<li><p>使用mmap系统调用</p>
+<ul>
+<li>将内核空间的地址<strong>映射</strong>到用户空间</li>
+</ul>
+</li>
+<li><p>信号：从内核空间向进程发送信号。</p>
+<ul>
+<li>这个倒是经常遇到，用户程序出现重大错误，内核发送信号杀死相应进程。</li>
+</ul>
+</li>
+</ol>
+<h2 id="内核空间的划分？"><a href="#内核空间的划分？" class="headerlink" title="内核空间的划分？"></a>内核空间的划分？</h2><ol>
+<li><p>虚拟地址</p>
+<ul>
+<li>即逻辑地址，是指由程序产生的与<strong>段</strong>相关的<strong>偏移地址</strong>部分</li>
+</ul>
+</li>
+<li><p>物理地址 (physical address): 放在寻址总线上的地址。</p>
+<ul>
+<li>物理地址一般与CPU有关系，是给CPU指令使用的</li>
+<li>总线地址主要是给设备使用的，是设备中的一些内存资源</li>
+</ul>
+</li>
+<li><p>高端内存</p>
+<ul>
+<li>地址空间大于1G的内存区域</li>
+</ul>
+<img src="/2019/08/02/linux用户和内核/memory.png"></li>
 </ol>
 
       
@@ -630,10 +712,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -653,10 +735,10 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/archives/">
+                  <a href="/归档">
                 
                     <span class="site-state-item-count">99</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -803,7 +885,7 @@
                       
                     
                     <span class="site-state-item-count">67</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -986,7 +1068,7 @@
                       
                     
                     <span class="site-state-item-count">85</span>
-                    <span class="site-state-item-name">Tags</span>
+                    <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
               
@@ -1021,7 +1103,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux用户和内核"><span class="nav-number">1.</span> <span class="nav-text">linux用户和内核</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux用户和内核之间的关系"><span class="nav-number">1.1.</span> <span class="nav-text">linux用户和内核之间的关系</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux用户和内核"><span class="nav-number">1.</span> <span class="nav-text">linux用户和内核</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux用户和内核之间的关系"><span class="nav-number">1.1.</span> <span class="nav-text">linux用户和内核之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux的用户态与内核态的通信方式？"><span class="nav-number">1.2.</span> <span class="nav-text">Linux的用户态与内核态的通信方式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内核空间的划分？"><span class="nav-number">1.3.</span> <span class="nav-text">内核空间的划分？</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1067,7 +1149,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
