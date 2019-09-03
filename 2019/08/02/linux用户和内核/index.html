@@ -96,20 +96,20 @@
 
 
 
-  <meta name="description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义?  Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     用户态和内核态区别？  用户态用printf, 内核态用printk 用户态每个应用程序空间是虚">
+  <meta name="description" content="linux用户和内核 在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式     区别 用户模式 内核模式     linux系统下 CPU要么处于受信任的内核模式 CPU要么处于受信任的内核模式   进程 用户进程 内核进程   访问所有空间 系统调用向设备驱动程序或其他内核模式的代码发出请求 无限制地访问所有处理器指令集以及全部内存和I/O空间   地址空间 允许发生">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux用户和内核">
 <meta property="og:url" content="http://yoursite.com/2019/08/02/linux用户和内核/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义?  Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     用户态和内核态区别？  用户态用printf, 内核态用printk 用户态每个应用程序空间是虚">
+<meta property="og:description" content="linux用户和内核 在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式     区别 用户模式 内核模式     linux系统下 CPU要么处于受信任的内核模式 CPU要么处于受信任的内核模式   进程 用户进程 内核进程   访问所有空间 系统调用向设备驱动程序或其他内核模式的代码发出请求 无限制地访问所有处理器指令集以及全部内存和I/O空间   地址空间 允许发生">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/linux用户和内核/tradition_ways.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/linux用户和内核/memory.png">
-<meta property="og:updated_time" content="2019-08-30T08:46:02.004Z">
+<meta property="og:updated_time" content="2019-09-02T12:42:01.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux用户和内核">
-<meta name="twitter:description" content="linux用户和内核linux用户和内核之间的关系 Linux的用户态与内核态 定义?  Intel的X86架构的CPU提供了0到3四个特权级: Linux操作系统中则主要采用了0(内核)和3(用户)两个特权级 进程寻址空间0~4G , 用户态只能访问0~3G，只有进入内核态才能访问3G~4G     用户态和内核态区别？  用户态用printf, 内核态用printk 用户态每个应用程序空间是虚">
+<meta name="twitter:description" content="linux用户和内核 在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式     区别 用户模式 内核模式     linux系统下 CPU要么处于受信任的内核模式 CPU要么处于受信任的内核模式   进程 用户进程 内核进程   访问所有空间 系统调用向设备驱动程序或其他内核模式的代码发出请求 无限制地访问所有处理器指令集以及全部内存和I/O空间   地址空间 允许发生">
 <meta name="twitter:image" content="http://yoursite.com/2019/08/02/linux用户和内核/tradition_ways.png">
 
 
@@ -227,7 +227,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-主页"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-主页"></i> <br>Startseite</a>
 
   </li>
         
@@ -261,7 +261,7 @@
 
     
 
-    <a href="/分类" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Categories</a>
+    <a href="/分类" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Kategorien</a>
 
   </li>
         
@@ -278,7 +278,7 @@
 
     
 
-    <a href="/归档" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Archives</a>
+    <a href="/归档" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>Archiv</a>
 
   </li>
 
@@ -289,7 +289,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -395,14 +395,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-08-02 21:18:12" itemprop="dateCreated datePublished" datetime="2019-08-02T21:18:12+08:00">2019-08-02</time>
+              <time title="Post created: 2019-08-02 21:18:12" itemprop="dateCreated datePublished" datetime="2019-08-02T21:18:12+08:00">2019-08-02</time>
             
 
             
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-30 16:46:02" itemprop="dateModified" datetime="2019-08-30T16:46:02+08:00">2019-08-30</time>
+                <time title="Updated at: 2019-09-02 20:42:01" itemprop="dateModified" datetime="2019-09-02T20:42:01+08:00">2019-09-02</time>
               
             
           </span>
@@ -433,7 +433,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Operate-System/" itemprop="url" rel="index"><span itemprop="name">Operate System</span></a></span>
@@ -499,7 +499,45 @@
       
 
       
-        <h1 id="linux用户和内核"><a href="#linux用户和内核" class="headerlink" title="linux用户和内核"></a>linux用户和内核</h1><h2 id="linux用户和内核之间的关系"><a href="#linux用户和内核之间的关系" class="headerlink" title="linux用户和内核之间的关系"></a>linux用户和内核之间的关系</h2><ol>
+        <h1 id="linux用户和内核"><a href="#linux用户和内核" class="headerlink" title="linux用户和内核"></a>linux用户和内核</h1><ul>
+<li>在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>区别</th>
+<th>用户模式</th>
+<th>内核模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linux系统下</td>
+<td>CPU要么处于受信任的内核模式</td>
+<td>CPU要么处于受信任的内核模式</td>
+</tr>
+<tr>
+<td>进程</td>
+<td>用户进程</td>
+<td>内核进程</td>
+</tr>
+<tr>
+<td>访问所有空间</td>
+<td>系统调用向设备驱动程序或其他内核模式的代码发出请求</td>
+<td>无限制地访问<br>所有处理器指令集以及全部内存和I/O空间</td>
+</tr>
+<tr>
+<td>地址空间</td>
+<td><strong>允许发生缺页</strong></td>
+<td>内核模式的代码则不允许</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="linux用户和内核之间的关系"><a href="#linux用户和内核之间的关系" class="headerlink" title="linux用户和内核之间的关系"></a>linux用户和内核之间的关系</h2><ol>
 <li><p>Linux的<strong>用户态与内核态 </strong>定义?</p>
 <ul>
 <li>Intel的X86架构的CPU提供了<strong>0到3四个特权级</strong>: Linux操作系统中则主要采用了<strong>0(内核)</strong>和<strong>3(用户)</strong>两个特权级</li>
@@ -712,10 +750,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -738,7 +776,7 @@
                   <a href="/归档">
                 
                     <span class="site-state-item-count">99</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -885,7 +923,7 @@
                       
                     
                     <span class="site-state-item-count">67</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -1068,7 +1106,7 @@
                       
                     
                     <span class="site-state-item-count">85</span>
-                    <span class="site-state-item-name">tags</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -1149,7 +1187,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
