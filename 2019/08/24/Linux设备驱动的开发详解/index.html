@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/data_receive.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/iic_struct.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/08/24/Linux设备驱动的开发详解/usb_bus.jpg">
-<meta property="og:updated_time" content="2019-08-30T06:44:59.163Z">
+<meta property="og:updated_time" content="2019-09-04T01:15:40.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux设备驱动的开发详解">
 <meta name="twitter:description" content="Linux设备驱动的开发详解 如何学习驱动 驱动的框架 和 代码框架   硬盘镜像下载 m6a1 globalmem、globalfifo等代码目录 /home/baohua/develop/training/kernel/drivers   其他相关参考  设备驱动的概念 设备驱动的作用?  对设备驱动最通俗的解释就是“驱使硬件设备行动”。 驱动与底层硬件直接打交道, 按照硬件设备的具体工作方式">
@@ -243,7 +243,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
 
   </li>
         
@@ -305,7 +305,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>recherche</a>
         </li>
       
     </ul>
@@ -411,14 +411,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-08-24 19:48:34" itemprop="dateCreated datePublished" datetime="2019-08-24T19:48:34+08:00">2019-08-24</time>
+              <time title="Post created: 2019-08-24 19:48:34" itemprop="dateCreated datePublished" datetime="2019-08-24T19:48:34+08:00">2019-08-24</time>
             
 
             
@@ -435,7 +435,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-30 14:44:59" itemprop="dateModified" datetime="2019-08-30T14:44:59+08:00">2019-08-30</time>
+                <time title="Updated at: 2019-09-04 09:15:40" itemprop="dateModified" datetime="2019-09-04T09:15:40+08:00">2019-09-04</time>
               
             
           </span>
@@ -960,7 +960,7 @@
 </ol>
 <h2 id="字符设备驱动"><a href="#字符设备驱动" class="headerlink" title="字符设备驱动"></a>字符设备驱动</h2><ol>
 <li>Linux字符设备驱动的关键数据结构<ul>
-<li>cdev: 设备号的注册</li>
+<li>cdev: 设备号的注册注销</li>
 <li>file_operations结构体:  文件操作具体功能函数</li>
 </ul>
 </li>
@@ -972,8 +972,12 @@
 </ol>
 <h3 id="Linux字符设备驱动"><a href="#Linux字符设备驱动" class="headerlink" title="Linux字符设备驱动"></a>Linux字符设备驱动</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cdev</span>&#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span>	*<span class="title">ops</span>	;</span>	<span class="comment">//文件操作的结构体</span></span><br><span class="line">	<span class="keyword">dev_t</span>	dev;										<span class="comment">// 设备号</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <ol>
-<li><p>cdev操作函数</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cdev_init</span>(<span class="params"> <span class="keyword">struct</span> cdev *cdev, <span class="keyword">struct</span> file_operations *ops </span>)</span>;	<span class="comment">// 初始化cdev成员, 建立cdev和file_operations之间连接</span></span><br><span class="line"><span class="keyword">struct</span> cdev *cdev_alloc(<span class="keyword">void</span>);		<span class="comment">// 动态申请cdev的内存</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cdev_add</span>(<span class="params"><span class="keyword">struct</span> cdev *, dev_t , unsigned </span>)</span>;		<span class="comment">// 字符设备的注册</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cdev_del</span>(<span class="params"><span class="keyword">struct</span> cdev *</span>)</span>;										<span class="comment">//  字符设备的注销</span></span><br></pre></td></tr></table></figure>
+<li><p>cdev结构体的操作函数</p>
+<ul>
+<li><strong>__init ：标志模块的加载</strong></li>
+<li><strong>__exit：标识模块的卸载</strong></li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cdev_init</span>(<span class="params"> <span class="keyword">struct</span> cdev *cdev, <span class="keyword">struct</span> file_operations *ops </span>)</span>;	<span class="comment">// 初始化cdev成员, 建立cdev和file_operations之间连接</span></span><br><span class="line"><span class="keyword">struct</span> cdev *cdev_alloc(<span class="keyword">void</span>);									<span class="comment">// 动态申请cdev的内存</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cdev_add</span>(<span class="params"><span class="keyword">struct</span> cdev *, dev_t , unsigned </span>)</span>;		<span class="comment">// 字符设备的注册</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cdev_del</span>(<span class="params"><span class="keyword">struct</span> cdev *</span>)</span>;										<span class="comment">//  字符设备的注销</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>cdev分配和释放设备号</p>
 <figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>)在cdev_add()之前, 先调用函数, 向系统申请设备号;</span><br><span class="line">		register_chrdev_region();	<span class="comment">// 申请自己知道的设备号</span></span><br><span class="line">		alloc_chrdev_region();			<span class="comment">// 设备号未知,动态申请</span></span><br><span class="line">(<span class="number">2</span>) 在cdev_del()之后, 调用函数</span><br><span class="line">		unregister_chrdev_region(); 		<span class="comment">//释放设备号</span></span><br></pre></td></tr></table></figure>
@@ -986,7 +990,10 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> xxx_read();		<span class="comment">// 用户空间和内核之间的读写; copy_to_user()</span></span><br><span class="line"><span class="keyword">ssize_t</span> xxx_write();	<span class="comment">// copy_from_user</span></span><br><span class="line"><span class="keyword">ssize_t</span> xxx_ioctl();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>用户空间 – 内核空间  的读写</p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">copy_to_user<span class="comment">()</span>;	<span class="comment">// 内核空间到用户空间缓存区的复制</span></span><br><span class="line">copy_from_user<span class="comment">()</span>;	<span class="comment">//用户空间到内核空间的复制</span></span><br><span class="line">access_ok<span class="comment">()</span>;			<span class="comment">// 检测用户控件缓存区的合法性, 才能进行读写;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>access_ok();            // 检测用户控件缓存区的合法性, 才能进行读写;</strong></li>
+</ul>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">copy_to_user<span class="comment">()</span>;	<span class="comment">// 内核空间到用户空间缓存区的复制</span></span><br><span class="line">copy_from_user<span class="comment">()</span>;	<span class="comment">//用户空间到内核空间的复制</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -994,7 +1001,13 @@
 <h3 id="globalmem-虚拟设备驱动"><a href="#globalmem-虚拟设备驱动" class="headerlink" title="globalmem()虚拟设备驱动"></a>globalmem()虚拟设备驱动</h3><ol>
 <li><p>globalmem字符设备驱动会分配一片大小为GLOABLEMEM_SIZE(4KB)的<strong>内存空间</strong></p>
 <ul>
-<li>在该区域内进行读写, 控制函数实现</li>
+<li><p><strong>mem[]数组空间：与用户空间进行数据交换</strong></p>
+</li>
+<li><p><strong>虚拟字符设备：不仅有cdev ,也有了内存空间、</strong></p>
+</li>
+<li><p><strong>私有数据：使得驱动改动小量代码，实现多个设备的支持</strong></p>
+<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">container<span class="number">_</span><span class="keyword">of</span>()	;		<span class="comment">// 通过结构体成员的指针找到对应结构体的指针</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
 <li><p>globalmem()的结构体</p>
@@ -1024,6 +1037,11 @@
 <h2 id="Linux设备驱动中的并发控制"><a href="#Linux设备驱动中的并发控制" class="headerlink" title="Linux设备驱动中的并发控制"></a>Linux设备驱动中的并发控制</h2><ol>
 <li>linux设备驱动中必须解决的一个问题?<ul>
 <li>多个进程对共享资源的并发访问, 并发的访问会导致竞态;</li>
+</ul>
+</li>
+<li>两组概念<ul>
+<li>并发和竞态</li>
+<li>自旋锁和互斥体</li>
 </ul>
 </li>
 </ol>
@@ -1274,7 +1292,7 @@
 </ul>
 </li>
 <li><p>Linux内核中提供<strong>一组函数和数据结构</strong>来完成定时处罚工作或者完成某周期性的事务;</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">time_list</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">time_list</span><span class="params">()</span></span>；	  <span class="comment">// 定时器的结构体，设置到期时间</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>定时器的到期时间</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jiffies </span>+ Hz<span class="comment">;		// jiffies 表示定时时间; Hz  表示1s;</span></span><br></pre></td></tr></table></figure>
@@ -1869,10 +1887,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Table Des Matières
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Ensemble
           </li>
         </ul>
       
@@ -1895,7 +1913,7 @@
                   <a href="/archives">
                 
                     <span class="site-state-item-count">99</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-name">articles</span>
                   </a>
                 </div>
               
@@ -2314,7 +2332,7 @@
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
 
 
 

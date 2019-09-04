@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/19/uC-OS-III/TASK_SEM.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/19/uC-OS-III/双向任务.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/19/uC-OS-III/flag.png">
-<meta property="og:updated_time" content="2019-08-24T00:03:20.196Z">
+<meta property="og:updated_time" content="2019-09-04T03:05:49.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="uC&#x2F;OS-III">
 <meta name="twitter:description" content="嵌入式实时操作系统实时系统 和 实时内核 实时系统的概念? 系统要求: 对任务 处理结果的正确性 和 处理过程的实时性 都有严格要求的系统. 硬实时和软实时系统的区别:  对处理过程超时及超时带来的后果的容忍度; 硬实时: 不允许处理过程超时     前后台系统的分类 前台结构(中断级): 中断服务程序(ISR)用于处理系统的异步事件; 后台结构(任务级): 应用程序是一个无限的循环, 循环中调用">
@@ -232,7 +232,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
 
   </li>
         
@@ -294,7 +294,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>recherche</a>
         </li>
       
     </ul>
@@ -400,14 +400,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-08-19 18:18:12" itemprop="dateCreated datePublished" datetime="2019-08-19T18:18:12+08:00">2019-08-19</time>
+              <time title="Post created: 2019-08-19 18:18:12" itemprop="dateCreated datePublished" datetime="2019-08-19T18:18:12+08:00">2019-08-19</time>
             
 
             
@@ -424,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-24 08:03:20" itemprop="dateModified" datetime="2019-08-24T08:03:20+08:00">2019-08-24</time>
+                <time title="Updated at: 2019-09-04 11:05:49" itemprop="dateModified" datetime="2019-09-04T11:05:49+08:00">2019-09-04</time>
               
             
           </span>
@@ -683,7 +683,7 @@
 <li><p>任务和C函数的区别?</p>
 <ul>
 <li>任务执行过程: 是顺序的无限循环;</li>
-<li>任务执行完后: 不允许返回;</li>
+<li><strong>任务执行完后: 不允许返回;</strong></li>
 <li>任务和c函数: 通过使用参数传递, 实现函数的可重入性;</li>
 </ul>
 </li>
@@ -722,7 +722,7 @@
 </li>
 <li><p><strong>任务的5种状态?</strong></p>
 <ul>
-<li>休眠态<ul>
+<li><strong>休眠态</strong><ul>
 <li>代码已经写入代码空间, 但是uC/OS-III 不知道它的存在;</li>
 <li>任务删除: 并不是删除代码, 而是使其无法获得CPU使用权</li>
 </ul>
@@ -751,7 +751,7 @@
 <li><p>处于uC/OS-III 内部任务的8种状态?</p>
 <ul>
 <li>就绪: 任务实现其功能的唯一途径;</li>
-<li>延时: 任务可以让自己演示等待一段时间</li>
+<li>延时: 任务可以让自己延时等待一段时间</li>
 <li>等待: 任务等待某个事件的发生, 不发生就一直等待;</li>
 <li>带超时检测的等待: 等待超时时才能运行</li>
 <li>被挂起: 运行中的任务被挂起, 在恢复前是不能获得CPU的使用权的<ul>
@@ -765,7 +765,7 @@
 <li>带超时检测的等待且被挂起:</li>
 </ul>
 </li>
-<li><p><strong>系统内部(的五个任务?</strong></p>
+<li><p><strong>系统内部(的五个任务)?</strong></p>
 <ul>
 <li><p><strong>空闲任务</strong>(必须创建)</p>
 <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OS_IdleTask<span class="comment">()</span> , os_core.c;		<span class="comment">// 当其他任务都处于未就绪状态时, 空闲任务运行</span></span><br></pre></td></tr></table></figure>
@@ -1407,10 +1407,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Table Des Matières
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Ensemble
           </li>
         </ul>
       
@@ -1433,7 +1433,7 @@
                   <a href="/archives">
                 
                     <span class="site-state-item-count">99</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-name">articles</span>
                   </a>
                 </div>
               
@@ -1852,7 +1852,7 @@
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
 
 
 
