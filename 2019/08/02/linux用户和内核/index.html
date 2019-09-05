@@ -96,20 +96,20 @@
 
 
 
-  <meta name="description" content="linux用户和内核 在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式     区别 用户模式 内核模式     linux系统下 CPU要么处于受信任的内核模式 CPU要么处于受信任的内核模式   进程 用户进程 内核进程   访问所有空间 系统调用向设备驱动程序或其他内核模式的代码发出请求 无限制地访问所有处理器指令集以及全部内存和I/O空间   地址空间 允许发生">
+  <meta name="description" content="linux用户和内核 在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式     区别 用户模式 内核模式     linux系统下 CPU要么处于受限的用户模式 CPU要么处于受信任的内核模式   进程 用户进程 内核进程   访问所有空间 系统调用向设备驱动程序或其他内核模式的代码发出请求 无限制地访问所有处理器指令集以及全部内存和I/O空间   地址空间 允许发生缺">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux用户和内核">
 <meta property="og:url" content="http://yoursite.com/2019/08/02/linux用户和内核/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="linux用户和内核 在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式     区别 用户模式 内核模式     linux系统下 CPU要么处于受信任的内核模式 CPU要么处于受信任的内核模式   进程 用户进程 内核进程   访问所有空间 系统调用向设备驱动程序或其他内核模式的代码发出请求 无限制地访问所有处理器指令集以及全部内存和I/O空间   地址空间 允许发生">
+<meta property="og:description" content="linux用户和内核 在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式     区别 用户模式 内核模式     linux系统下 CPU要么处于受限的用户模式 CPU要么处于受信任的内核模式   进程 用户进程 内核进程   访问所有空间 系统调用向设备驱动程序或其他内核模式的代码发出请求 无限制地访问所有处理器指令集以及全部内存和I/O空间   地址空间 允许发生缺">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/linux用户和内核/tradition_ways.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/linux用户和内核/memory.png">
-<meta property="og:updated_time" content="2019-09-02T12:42:01.323Z">
+<meta property="og:updated_time" content="2019-09-05T06:20:10.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux用户和内核">
-<meta name="twitter:description" content="linux用户和内核 在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式     区别 用户模式 内核模式     linux系统下 CPU要么处于受信任的内核模式 CPU要么处于受信任的内核模式   进程 用户进程 内核进程   访问所有空间 系统调用向设备驱动程序或其他内核模式的代码发出请求 无限制地访问所有处理器指令集以及全部内存和I/O空间   地址空间 允许发生">
+<meta name="twitter:description" content="linux用户和内核 在Linux机器上，CPU要么处于受信任的内核模式，要么处于受限制的用户模式     区别 用户模式 内核模式     linux系统下 CPU要么处于受限的用户模式 CPU要么处于受信任的内核模式   进程 用户进程 内核进程   访问所有空间 系统调用向设备驱动程序或其他内核模式的代码发出请求 无限制地访问所有处理器指令集以及全部内存和I/O空间   地址空间 允许发生缺">
 <meta name="twitter:image" content="http://yoursite.com/2019/08/02/linux用户和内核/tradition_ways.png">
 
 
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-09-02 20:42:01" itemprop="dateModified" datetime="2019-09-02T20:42:01+08:00">2019-09-02</time>
+                <time title="Updated at: 2019-09-05 14:20:10" itemprop="dateModified" datetime="2019-09-05T14:20:10+08:00">2019-09-05</time>
               
             
           </span>
@@ -513,7 +513,7 @@
 <tbody>
 <tr>
 <td>linux系统下</td>
-<td>CPU要么处于受信任的内核模式</td>
+<td>CPU要么处于受限的用户模式</td>
 <td>CPU要么处于受信任的内核模式</td>
 </tr>
 <tr>
@@ -530,10 +530,6 @@
 <td>地址空间</td>
 <td><strong>允许发生缺页</strong></td>
 <td>内核模式的代码则不允许</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -584,15 +580,15 @@
 <tbody>
 <tr>
 <td>get_user(x，ptr)</td>
-<td>在内核中被调用：获取用户空间指定地址的数值并保存到内核变量x中</td>
+<td>在<strong>内核</strong>中被调用：获取用户空间指定地址的数值并保存到内核变量x中</td>
 </tr>
 <tr>
 <td>put_user(x，ptr)</td>
-<td>在内核中被调用：将内核空间的变量x的数值保存到到用户空间指定地址处。</td>
+<td>在<strong>内核</strong>中被调用：将内核空间的变量x的数值保存到到用户空间指定地址处。</td>
 </tr>
 <tr>
 <td>Copy_from_user()<br>copy_to_user()</td>
-<td>主要应用于设备驱动读写函数中，通过系统调用触发</td>
+<td>主要应用于<strong>设备驱动</strong>读写函数中，通过系统调用触发</td>
 </tr>
 </tbody>
 </table>
@@ -775,7 +771,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">101</span>
+                    <span class="site-state-item-count">102</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -922,9 +918,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">68</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1111,7 +1105,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">87</span>
+                      
+                    
+                    <span class="site-state-item-count">88</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>

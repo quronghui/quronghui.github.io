@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/09/04/linux-camera-driver/V4L2.png">
 <meta property="og:image" content="http://yoursite.com/2019/09/04/linux-camera-driver/V4L2_architeture.png">
 <meta property="og:image" content="http://yoursite.com/2019/09/04/linux-camera-driver/v4l2_realize.png">
-<meta property="og:updated_time" content="2019-09-04T14:04:55.240Z">
+<meta property="og:updated_time" content="2019-09-05T03:12:15.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux_camera_driver">
 <meta name="twitter:description" content="Linux camera driverCamera驱动接口   接口 CSI I2C     接口作用 用于Camera感光器件数据本身的传输 用于控制数据的传输    摄像头感光器件本身数据传输的相关代码 设置曝光时间设置，图像大小设置，白平衡   实体  OV系列的驱动   驱动代码 平台(CPU)一旦确定：这部分的驱动代码就基本确定 根据不同的接口有不同的驱动代码         不同的ca">
@@ -403,12 +403,24 @@
                 
               
 
-              <time title="Post created: 2019-09-04 20:11:43 / Updated at: 22:04:55" itemprop="dateCreated datePublished" datetime="2019-09-04T20:11:43+08:00">2019-09-04</time>
+              <time title="Post created: 2019-09-04 20:11:43" itemprop="dateCreated datePublished" datetime="2019-09-04T20:11:43+08:00">2019-09-04</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-09-05 11:12:15" itemprop="dateModified" datetime="2019-09-05T11:12:15+08:00">2019-09-05</time>
               
             
           </span>
@@ -530,7 +542,7 @@
 <li>不同的摄像头，<strong>设置白平衡等</strong>功能的方式不一样</li>
 </ul>
 </li>
-<li><p>代码主要的职责</p>
+<li><p>CSI代码主要的职责</p>
 <ul>
 <li>按照平台内的CSI控制器的特点，完成CSI控制寄存器的配置</li>
 <li>CSI中断服务例程的实现以及具体数据传输（内存分配,DMA数据传输等）的实现</li>
@@ -574,14 +586,44 @@
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> 		<span class="string">/driver/media/v4l2-core</span>		<span class="string">//</span> 进入v412框架的代码</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>代码目录</p>
-<p>| 模块         |                                                              | 函数                                                  |<br>| ———— | ———————————————————— | —————————————————– |<br>| 核心模块     | 申请字符主设备号，注册class<br>和提供video_device<strong>注册注销</strong>函数 | v4l2-dev.c                                            |<br>| V4L2框架     | 构建V4L2框架                                                 | v4l2-device.c、v4l2-subdev.c、v4l2-fh.c、v4l2-ctrls.c |<br>| Videobuf管理 | 完成<strong>videobuffer</strong>的分配、管理和注销                        |                                                       |<br>| Ioctl框架    | 构建V4L2 <strong>ioctl</strong>的框架                                     | v4l2-ioctl.c                                          |</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th></th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心模块</td>
+<td>申请字符主设备号，注册class<br>和提供video_device<strong>注册注销</strong>函数</td>
+<td>v4l2-dev.c</td>
+</tr>
+<tr>
+<td>V4L2框架</td>
+<td>构建V4L2框架</td>
+<td>v4l2-device.c、v4l2-subdev.c、v4l2-fh.c、v4l2-ctrls.c</td>
+</tr>
+<tr>
+<td>Videobuf管理</td>
+<td>完成<strong>videobuffer</strong>的分配、管理和注销</td>
+<td></td>
+</tr>
+<tr>
+<td>Ioctl框架</td>
+<td>构建V4L2 <strong>ioctl</strong>的框架</td>
+<td>v4l2-ioctl.c</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li><p>Videobuf 函数</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由<span class="selector-tag">videobuf2-core</span><span class="selector-class">.c</span>、<span class="selector-tag">videobuf2-dma-contig</span><span class="selector-class">.c</span>、<span class="selector-tag">videobuf2-dma-sg</span><span class="selector-class">.c</span>、<span class="selector-tag">videobuf2-memops</span><span class="selector-class">.c</span>、<span class="selector-tag">videobuf2-vmalloc</span><span class="selector-class">.c</span>、<span class="selector-tag">v4l2-mem2mem</span><span class="selector-class">.c</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-</ol>
 <h3 id="V4L2-两个结构体"><a href="#V4L2-两个结构体" class="headerlink" title="V4L2 两个结构体"></a>V4L2 两个结构体</h3><table>
 <thead>
 <tr>
@@ -662,8 +704,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/04/LinuxALSA/" rel="next" title="LinuxALSA">
-                <i class="fa fa-chevron-left"></i> LinuxALSA
+              <a href="/2019/09/04/LinuxALSA/" rel="next" title="Linux ALSA">
+                <i class="fa fa-chevron-left"></i> Linux ALSA
               </a>
             
           </div>
@@ -671,6 +713,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/05/BLE/" rel="prev" title="BLE">
+                BLE <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -742,7 +788,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">101</span>
+                    <span class="site-state-item-count">102</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -889,9 +935,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">68</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1078,7 +1122,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">87</span>
+                      
+                    
+                    <span class="site-state-item-count">88</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>

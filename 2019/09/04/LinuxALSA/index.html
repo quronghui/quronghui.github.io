@@ -99,18 +99,19 @@
   <meta name="description" content="Linux ALSA 声卡驱动   驱动框架 ALSA OSS(Open Sound System)     Linux版本支持 2.6 kernel 之后 2.4 kernel 开放的声音系统   总线 I2C    设备类型 字符设备 （ls-l  /dev/snd）     pcm and control     C0D0 –  声卡0的设备0    内核设备驱动层 alsa-driver">
 <meta name="keywords" content="alsa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LinuxALSA">
+<meta property="og:title" content="Linux ALSA">
 <meta property="og:url" content="http://yoursite.com/2019/09/04/LinuxALSA/index.html">
 <meta property="og:site_name" content="Lucky Boy">
 <meta property="og:description" content="Linux ALSA 声卡驱动   驱动框架 ALSA OSS(Open Sound System)     Linux版本支持 2.6 kernel 之后 2.4 kernel 开放的声音系统   总线 I2C    设备类型 字符设备 （ls-l  /dev/snd）     pcm and control     C0D0 –  声卡0的设备0    内核设备驱动层 alsa-driver">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/09/04/LinuxALSA/alsa_user_core.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/04/LinuxALSA/alsa_core.png">
+<meta property="og:image" content="http://yoursite.com/2019/09/04/LinuxALSA/alsa_iic.png">
 <meta property="og:image" content="http://yoursite.com/2019/09/04/LinuxALSA/alsa_device.png">
-<meta property="og:updated_time" content="2019-09-04T12:12:10.405Z">
+<meta property="og:updated_time" content="2019-09-05T02:59:01.389Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LinuxALSA">
+<meta name="twitter:title" content="Linux ALSA">
 <meta name="twitter:description" content="Linux ALSA 声卡驱动   驱动框架 ALSA OSS(Open Sound System)     Linux版本支持 2.6 kernel 之后 2.4 kernel 开放的声音系统   总线 I2C    设备类型 字符设备 （ls-l  /dev/snd）     pcm and control     C0D0 –  声卡0的设备0    内核设备驱动层 alsa-driver">
-<meta name="twitter:image" content="http://yoursite.com/2019/09/04/LinuxALSA/alsa_user_core.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/04/LinuxALSA/alsa_core.png">
 
 
 
@@ -127,7 +128,7 @@
   };
 </script>
 
-  <title>LinuxALSA | Lucky Boy</title>
+  <title>Linux ALSA | Lucky Boy</title>
   
 
 
@@ -376,7 +377,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LinuxALSA
+          <h1 class="post-title" itemprop="name headline">Linux ALSA
 
               
             
@@ -402,12 +403,24 @@
                 
               
 
-              <time title="Post created: 2019-09-04 17:21:47 / Updated at: 20:12:10" itemprop="dateCreated datePublished" datetime="2019-09-04T17:21:47+08:00">2019-09-04</time>
+              <time title="Post created: 2019-09-04 17:21:47" itemprop="dateCreated datePublished" datetime="2019-09-04T17:21:47+08:00">2019-09-04</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-09-05 10:59:01" itemprop="dateModified" datetime="2019-09-05T10:59:01+08:00">2019-09-05</time>
               
             
           </span>
@@ -568,7 +581,12 @@
 </tbody>
 </table>
 
-<h3 id="ALSA从用户空间到DAC采样"><a href="#ALSA从用户空间到DAC采样" class="headerlink" title="ALSA从用户空间到DAC采样"></a>ALSA从用户空间到DAC采样</h3><img src="/2019/09/04/LinuxALSA/alsa_user_core.png">
+<h3 id="ALSA从内核空间到DAC采样"><a href="#ALSA从内核空间到DAC采样" class="headerlink" title="ALSA从内核空间到DAC采样"></a>ALSA从内核空间到DAC采样</h3><img src="/2019/09/04/LinuxALSA/alsa_core.png">
+<h3 id="Hardware-driver"><a href="#Hardware-driver" class="headerlink" title="Hardware driver"></a><a href="https://www.jianshu.com/p/359e150ff517" target="_blank" rel="noopener">Hardware driver</a></h3><ul>
+<li>I2C 是传输数据 ,I2S 是传输音频</li>
+<li><img src="/2019/09/04/LinuxALSA/alsa_iic.png">
+</li>
+</ul>
 <h3 id="ALSA-驱动具体工作"><a href="#ALSA-驱动具体工作" class="headerlink" title="ALSA 驱动具体工作"></a>ALSA 驱动具体工作</h3><table>
 <thead>
 <tr>
@@ -612,13 +630,54 @@
 <ul>
 <li>我们更关心的是pcm和control这两种设备</li>
 </ul>
-<p>| 设备类型     | 设备名字  | 作用                                             |<br>| ———— | ——— | ———————————————— |<br>| <strong>字符设备</strong> | controlC0 | 用于声卡的控制，例如通道选择，混音，麦克风的控制 |<br>|              | midiC0D0  | 用于播放midi音频                                 |<br>| (两组)       | pcmC0D0c  | 用于<strong>录音</strong>的pcm设备；capture                   |<br>|              | pcmC0D0p  | 用于<strong>播放</strong>的pcm设备；playback                  |<br>|              | seq       | 音序器                                           |<br>|              | time      | 定时器                                           |</p>
-<ul>
-<li>C0D0代表的是：声卡0中的设备0</li>
-</ul>
-<img src="/2019/09/04/LinuxALSA/alsa_device.png">
 </li>
 </ol>
+<table>
+<thead>
+<tr>
+<th>设备类型</th>
+<th>设备名字</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>字符设备</strong></td>
+<td>controlC0</td>
+<td>用于声卡的控制，例如通道选择，混音，麦克风的控制</td>
+</tr>
+<tr>
+<td></td>
+<td>midiC0D0</td>
+<td>用于播放midi音频</td>
+</tr>
+<tr>
+<td>(两组)</td>
+<td>pcmC0D0c</td>
+<td>用于<strong>录音</strong>的pcm设备；capture</td>
+</tr>
+<tr>
+<td></td>
+<td>pcmC0D0p</td>
+<td>用于<strong>播放</strong>的pcm设备；playback</td>
+</tr>
+<tr>
+<td></td>
+<td>seq</td>
+<td>音序器</td>
+</tr>
+<tr>
+<td></td>
+<td>time</td>
+<td>定时器</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>C0D0代表的是：声卡0中的设备0</p>
+<img src="/2019/09/04/LinuxALSA/alsa_device.png">
+</li>
+</ul>
 <h3 id="ALSA-驱动目录文件"><a href="#ALSA-驱动目录文件" class="headerlink" title="ALSA 驱动目录文件"></a>ALSA 驱动目录文件</h3><ol>
 <li><p>linux 查询alsa驱动目录</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$	<span class="keyword">ls</span>	-al		<span class="string">/sound</span>			<span class="string">//</span>  将sound</span><br></pre></td></tr></table></figure>
@@ -629,9 +688,58 @@
 <li>ALSA 核心层 ASLA Core</li>
 <li>Audio 设备驱动层 Audio device driver</li>
 </ul>
-<p>| 驱动目录   | 作用                                                         |<br>| ———- | ———————————————————— |<br>| <strong>core</strong>   | 该目录包含了ALSA驱动的中间层，它是整个ALSA驱动的核心部分     |<br>| core/oss   | 包含模拟旧的OSS架构的PCM和Mixer模块                          |<br>| core/seq   | 有关音序器相关的代码                                         |<br>| include    | ALSA驱动的公共头文件目录，该目录的头文件需要导出给用户空间的应用程序使用 |<br>| drivers    | 放置一些与CPU、BUS架构无关的公用代码                         |<br>| <strong>i2c</strong>    | ALSA自己的I2C控制代码                                        |<br>| <strong>pci</strong>    | pci声卡的顶层目录，子目录包含各种pci声卡的代码               |<br>| <strong>isa</strong>    | isa声卡的顶层目录，子目录包含各种isa声卡的代码               |<br>| soc        | 针对system-on-chip体系的中间层代码                           |<br>| soc/codecs | 针对soc体系的各种codec的代码，与平台无关                     |</p>
 </li>
 </ol>
+<table>
+<thead>
+<tr>
+<th>驱动目录</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>core</strong></td>
+<td>该目录包含了ALSA驱动的中间层，它是整个ALSA驱动的核心部分</td>
+</tr>
+<tr>
+<td>core/oss</td>
+<td>包含模拟旧的OSS架构的PCM和Mixer模块</td>
+</tr>
+<tr>
+<td>core/seq</td>
+<td>有关音序器相关的代码</td>
+</tr>
+<tr>
+<td>include</td>
+<td>ALSA驱动的公共头文件目录，该目录的头文件需要导出给用户空间的应用程序使用</td>
+</tr>
+<tr>
+<td>drivers</td>
+<td>放置一些与CPU、BUS架构无关的公用代码</td>
+</tr>
+<tr>
+<td><strong>i2c</strong></td>
+<td>ALSA自己的I2C控制代码</td>
+</tr>
+<tr>
+<td><strong>pci</strong></td>
+<td>pci声卡的顶层目录，子目录包含各种pci声卡的代码</td>
+</tr>
+<tr>
+<td><strong>isa</strong></td>
+<td>isa声卡的顶层目录，子目录包含各种isa声卡的代码</td>
+</tr>
+<tr>
+<td>soc</td>
+<td>针对system-on-chip体系的中间层代码</td>
+</tr>
+<tr>
+<td>soc/codecs</td>
+<td>针对soc体系的各种codec的代码，与平台无关</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -752,7 +860,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">101</span>
+                    <span class="site-state-item-count">102</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -899,9 +1007,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">68</span>
+                    <span class="site-state-item-count">67</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1088,7 +1194,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">87</span>
+                      
+                    
+                    <span class="site-state-item-count">88</span>
                     <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
@@ -1124,7 +1232,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-ALSA-声卡驱动"><span class="nav-number">1.</span> <span class="nav-text">Linux ALSA 声卡驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ALSA-系统架构"><span class="nav-number">1.1.</span> <span class="nav-text">ALSA 系统架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ALSA从用户空间到DAC采样"><span class="nav-number">1.1.1.</span> <span class="nav-text">ALSA从用户空间到DAC采样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALSA-驱动具体工作"><span class="nav-number">1.1.2.</span> <span class="nav-text">ALSA 驱动具体工作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ALSA-Advanced-Linux-Sound-Architecture"><span class="nav-number">1.2.</span> <span class="nav-text">ALSA(Advanced Linux Sound Architecture)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ALSA设备文件结构"><span class="nav-number">1.2.1.</span> <span class="nav-text">ALSA设备文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALSA-驱动目录文件"><span class="nav-number">1.2.2.</span> <span class="nav-text">ALSA 驱动目录文件</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-ALSA-声卡驱动"><span class="nav-number">1.</span> <span class="nav-text">Linux ALSA 声卡驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ALSA-系统架构"><span class="nav-number">1.1.</span> <span class="nav-text">ALSA 系统架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ALSA从内核空间到DAC采样"><span class="nav-number">1.1.1.</span> <span class="nav-text">ALSA从内核空间到DAC采样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hardware-driver"><span class="nav-number">1.1.2.</span> <span class="nav-text">Hardware driver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALSA-驱动具体工作"><span class="nav-number">1.1.3.</span> <span class="nav-text">ALSA 驱动具体工作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ALSA-Advanced-Linux-Sound-Architecture"><span class="nav-number">1.2.</span> <span class="nav-text">ALSA(Advanced Linux Sound Architecture)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ALSA设备文件结构"><span class="nav-number">1.2.1.</span> <span class="nav-text">ALSA设备文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALSA-驱动目录文件"><span class="nav-number">1.2.2.</span> <span class="nav-text">ALSA 驱动目录文件</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
