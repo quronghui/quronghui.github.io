@@ -96,18 +96,20 @@
 
 
 
-  <meta name="description" content="C++ 的预备知识C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序     面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp         面向对象的编程（OOP）  oop不像面向过程那样，试图使问题满足语言的过程性方法；oop试图让语言满足问题的要求； oop程序设计方法首先设计类：">
+  <meta name="description" content="[TOC] C++ 的预备知识C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序    数据+算法=程序 面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp   注释 / / //   头文件 stdio : 标准的I / O io + stream：I/O的输入输出流    .h  （std">
 <meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ Primer Plus">
 <meta property="og:url" content="http://yoursite.com/2019/10/11/C-PrimerPlus/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="C++ 的预备知识C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序     面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp         面向对象的编程（OOP）  oop不像面向过程那样，试图使问题满足语言的过程性方法；oop试图让语言满足问题的要求； oop程序设计方法首先设计类：">
+<meta property="og:description" content="[TOC] C++ 的预备知识C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序    数据+算法=程序 面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp   注释 / / //   头文件 stdio : 标准的I / O io + stream：I/O的输入输出流    .h  （std">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-11T07:07:47.411Z">
+<meta property="og:image" content="http://yoursite.com/2019/10/11/C-PrimerPlus/count.png">
+<meta property="og:updated_time" content="2019-10-31T02:32:40.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ Primer Plus">
-<meta name="twitter:description" content="C++ 的预备知识C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序     面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp         面向对象的编程（OOP）  oop不像面向过程那样，试图使问题满足语言的过程性方法；oop试图让语言满足问题的要求； oop程序设计方法首先设计类：">
+<meta name="twitter:description" content="[TOC] C++ 的预备知识C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序    数据+算法=程序 面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp   注释 / / //   头文件 stdio : 标准的I / O io + stream：I/O的输入输出流    .h  （std">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/11/C-PrimerPlus/count.png">
 
 
 
@@ -399,12 +401,24 @@
                 
               
 
-              <time title="Post created: 2019-10-11 14:43:39 / Updated at: 15:07:47" itemprop="dateCreated datePublished" datetime="2019-10-11T14:43:39+08:00">2019-10-11</time>
+              <time title="Post created: 2019-10-11 14:43:39" itemprop="dateCreated datePublished" datetime="2019-10-11T14:43:39+08:00">2019-10-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-10-31 10:32:40" itemprop="dateModified" datetime="2019-10-31T10:32:40+08:00">2019-10-31</time>
               
             
           </span>
@@ -484,7 +498,8 @@
       
 
       
-        <h2 id="C-的预备知识"><a href="#C-的预备知识" class="headerlink" title="C++ 的预备知识"></a>C++ 的预备知识</h2><h3 id="C-vs-C"><a href="#C-vs-C" class="headerlink" title="C vs C++"></a>C vs C++</h3><table>
+        <p>[TOC]</p>
+<h2 id="C-的预备知识"><a href="#C-的预备知识" class="headerlink" title="C++ 的预备知识"></a>C++ 的预备知识</h2><h3 id="C-vs-C"><a href="#C-vs-C" class="headerlink" title="C vs C++"></a>C vs C++</h3><table>
 <thead>
 <tr>
 <th>区别</th>
@@ -500,7 +515,7 @@
 </tr>
 <tr>
 <td></td>
-<td></td>
+<td>数据+算法=程序</td>
 <td>面向对象的编程OOP：偏重于数据处理</td>
 </tr>
 <tr>
@@ -512,6 +527,46 @@
 <td>源代码</td>
 <td>.c</td>
 <td>.cpp</td>
+</tr>
+<tr>
+<td>注释</td>
+<td>/<em> </em>/</td>
+<td>//</td>
+</tr>
+<tr>
+<td>头文件</td>
+<td>stdio : 标准的I / O</td>
+<td>io + stream：I/O的输入输出流</td>
+</tr>
+<tr>
+<td></td>
+<td>.h  （stdio.h）</td>
+<td>去掉了.h，在前面加上c (cmath)</td>
+</tr>
+<tr>
+<td>输入/输出</td>
+<td>scanf；printf</td>
+<td>cin ; count</td>
+</tr>
+<tr>
+<td></td>
+<td>数组</td>
+<td>vector（实现动态创建）  array （静态分配）</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>char str1[20];</td>
+<td>string str2;</td>
+</tr>
+<tr>
+<td>strcut</td>
+<td>定义和赋值</td>
+<td>定义和赋值：可以省略struct</td>
+</tr>
+<tr>
+<td>pointer</td>
+<td>int  *value;</td>
+<td>int<em>  value;  // </em>的位置不同；</td>
 </tr>
 <tr>
 <td></td>
@@ -539,6 +594,147 @@
 <li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span>.get();	 <span class="comment">// 保证程序运行的界面不关闭，等待键盘键入一个enter；</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+</li>
+</ol>
+<h3 id="cin-and-cout"><a href="#cin-and-cout" class="headerlink" title="cin and cout"></a>cin and cout</h3><ol>
+<li><p>using namespace std </p>
+<ul>
+<li><p>通过名称空间区分不同的版本；</p>
+</li>
+<li><p>引用方式</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello, World!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;		<span class="comment">//endl  表示的是换行；</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>OOP对象之一：count / cin</p>
+<ul>
+<li><p>count作为对象，我们不需要了解其内部情况，只需要知道它的接口，便能直接使用。</p>
+</li>
+<li><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>  &lt;&lt;  <span class="built_in">string</span>;		<span class="comment">// 将string插入到count接口中</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><img src="/2019/10/11/C-PrimerPlus/count.png">
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><h3 id="整形数据的表示"><a href="#整形数据的表示" class="headerlink" title="整形数据的表示"></a>整形数据的表示</h3><ol>
+<li><p>整形数据的三种表示方式：</p>
+<ul>
+<li>第一位数字是1-9，则基数为10（十进制）</li>
+<li>第一位数字是0，第二位是1-7，则基数是8（八进制）</li>
+<li>前两位是0x或0X，则基数是16（十六进制）</li>
+</ul>
+</li>
+<li><p>整形数据，在程序中修改类型的代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;    <span class="comment">// 省略using后，需要使用std::cout</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">    <span class="keyword">int</span> chest = <span class="number">42</span>;     <span class="keyword">int</span> waist = <span class="number">42</span>;     <span class="keyword">int</span> inseam = <span class="number">42</span>；</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"chest = "</span> &lt;&lt; chest &lt;&lt; <span class="built_in">endl</span>;     <span class="built_in">cout</span> &lt;&lt; hex;    <span class="comment">//十六进制</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"waist = "</span> &lt;&lt; waist &lt;&lt; <span class="built_in">endl</span>;     <span class="built_in">cout</span> &lt;&lt; oct;    <span class="comment">//十进制</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"inseam = "</span> &lt;&lt;inseam &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// chest = 42 // waist = 2a // inseam = 52</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>c++ 中OOP的成员函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>.put();	<span class="comment">// 类似于cout 输出；</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用相同的符号进行多种操作叫做运算符重载。</p>
+</li>
+</ol>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ol>
+<li><p>复合类型：基于整形和浮点类型创建的。</p>
+</li>
+<li><p>数组：初始化和复制</p>
+</li>
+<li><p>字符串：空字符’\0’，代表的是字符串的结尾</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> dog[<span class="number">8</span>] = &#123;<span class="string">'b'</span>, <span class="string">'e'</span>, <span class="string">'a'</span>, <span class="string">'u'</span>, <span class="string">'x'</span>, <span class="string">' '</span>, <span class="string">'I'</span>, <span class="string">'l'</span>&#125;	<span class="comment">// not a string</span></span><br><span class="line"><span class="keyword">char</span> cat[<span class="number">8</span>] = &#123;<span class="string">'b'</span>, <span class="string">'e'</span>, <span class="string">'a'</span>, <span class="string">'u'</span>, <span class="string">'x'</span>, <span class="string">' '</span>, <span class="string">'I'</span> , <span class="string">'\0'</span>&#125;	<span class="comment">// is a string</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="4">
+<li><p>string类型字符串和数组字符串的不同点</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (1)string 类型的定义和复制</span></span><br><span class="line"><span class="comment">// 数组不能直接复制，但是字符串可以直接复制</span></span><br><span class="line"><span class="comment">// 字符串的长度 str1.size()</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">string_define_and_copy</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> charr1[<span class="number">20</span>];</span><br><span class="line">    <span class="keyword">char</span> charr2[<span class="number">20</span>] = <span class="string">"hello"</span>;</span><br><span class="line">    <span class="built_in">string</span> str1;</span><br><span class="line">    <span class="built_in">string</span> str2 = <span class="string">"world"</span>;  <span class="comment">// 无需定义空间大小</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 字符串的复制</span></span><br><span class="line">    <span class="built_in">strcpy</span>(charr1, charr2);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"charr1 is: "</span> &lt;&lt; charr1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    str1 = str2;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"str1 is: "</span> &lt;&lt; str1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 字符串的链接，字符串长度计算</span></span><br><span class="line">    <span class="built_in">strcat</span>(charr1, charr2);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"charr1 is: "</span> &lt;&lt; charr1 &lt;&lt; <span class="string">" size = "</span> &lt;&lt; <span class="built_in">strlen</span>(charr1)&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    str1 += str2;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"str1 is: "</span> &lt;&lt; str1  &lt;&lt; <span class="string">" and size = "</span> &lt;&lt; str1.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// (2)string类型的字符串：读入一行</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">string_Input</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> charr1[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">string</span> str1;</span><br><span class="line">    <span class="built_in">cin</span>.getline(charr1, <span class="number">20</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"charr1 is: "</span> &lt;&lt; charr1  &lt;&lt; <span class="string">" and size = "</span> &lt;&lt; <span class="built_in">strlen</span>(charr1) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    getline(<span class="built_in">cin</span>, str1); <span class="comment">// 读入一行</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"str1 is: "</span> &lt;&lt; str1 &lt;&lt; <span class="string">" and size = "</span> &lt;&lt; str1.size() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="getline-and-get-读入一行字符串"><a href="#getline-and-get-读入一行字符串" class="headerlink" title="getline() and get() 读入一行字符串"></a>getline() and get() 读入一行字符串</h3><table>
+<thead>
+<tr>
+<th>区别</th>
+<th>cin.getline(string, size)</th>
+<th>cin.get(string, size)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>特点</td>
+<td>每次读取一行，通过换行符确定行尾；<br>在存储时，用’\0’代<strong>替换</strong>行符’\n’</td>
+<td>对于换行符<strong>不进行读取</strong>，而是放在stdin缓存队列中</td>
+</tr>
+<tr>
+<td>连续的读入行</td>
+<td>cin.getline(string, size) 返回一个cin；<br>cin.getline(string, size).getline();</td>
+<td>cin.get():无参数，读取一个字符；<br>cin.get(string, size).get(); 将’\n’去除</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p>数字和字符串混合读入时的处理？</p>
+<ul>
+<li><p>读完数字后，使用cin.get() 将’\n’去除；</p>
+</li>
+<li><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(cin <span class="meta">&gt;&gt; </span>year).get();    <span class="regexp">//</span> 去除末尾的<span class="string">'\0'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>code</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Getline</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> ArSize = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">char</span> name[ArSize];</span><br><span class="line">    <span class="keyword">char</span> desert[ArSize];</span><br><span class="line">    <span class="built_in">cin</span>.getline(name, ArSize).getline(desert,ArSize);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"You input is: "</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"You desert is: "</span> &lt;&lt; desert &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Get</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> ArSize = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">char</span> name[ArSize];</span><br><span class="line">    <span class="keyword">char</span> desert[ArSize];</span><br><span class="line">    <span class="built_in">cin</span>.get(name,ArSize).get(); 	<span class="comment">// 用于去除第一个字符串留在缓存中的'\n';</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"You name is: "</span> &lt;&lt; name &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cin</span>.get(desert,ArSize).get();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"You name is: "</span> &lt;&lt; desert &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="结构体：实现多种数据的管理"><a href="#结构体：实现多种数据的管理" class="headerlink" title="结构体：实现多种数据的管理"></a>结构体：实现多种数据的管理</h3><ol>
+<li><p>struct 的定义和使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过结构体：实现多个成员的管理</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">inflatable</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">    <span class="keyword">float</span> volume;</span><br><span class="line">    <span class="keyword">double</span> price;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// (1)struct inflatable 结构体的定义：可以省略struct</span></span><br><span class="line">    inflatable guest = &#123;<span class="string">"hello"</span>, <span class="number">1.88</span>, <span class="number">3.33</span>&#125;;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"guest: "</span> &lt;&lt; guest.name &lt;&lt; <span class="string">" "</span> &lt;&lt; guest.volume &lt;&lt; <span class="string">" "</span> &lt;&lt; guest.price &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// (2)结构体的复制</span></span><br><span class="line">    inflatable  pre = guest;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"pre: "</span> &lt;&lt; pre.name &lt;&lt; <span class="string">" "</span> &lt;&lt; pre.volume &lt;&lt; <span class="string">" "</span> &lt;&lt; pre.price &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// (3) 结构数组： 定义和初始化</span></span><br><span class="line">    inflatable <span class="built_in">array</span>[<span class="number">2</span>] = &#123;</span><br><span class="line">            &#123;<span class="string">"Bambi"</span>, <span class="number">0.5</span>, <span class="number">21.99</span>&#125;,</span><br><span class="line">            &#123;<span class="string">"God"</span>, <span class="number">200</span>, <span class="number">55.1</span>&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">array</span>[<span class="number">0</span>].volume &lt;&lt; <span class="string">" and "</span> &lt;&lt; <span class="built_in">array</span>[<span class="number">1</span>].price &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Union的使用：当一个商品的id有两种类型的选择时，可以使用Union</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">widget</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">    <span class="keyword">int</span> type;</span><br><span class="line">    <span class="keyword">union</span> id&#123;		<span class="comment">// 结构体中的联合体：id有两种属性的选择</span></span><br><span class="line">        <span class="keyword">long</span> id_num;</span><br><span class="line">        <span class="keyword">char</span> id_char[<span class="number">20</span>];</span><br><span class="line">    &#125; id_val;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    widget prize;</span><br><span class="line">    prize.type = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(prize.type == <span class="number">1</span>) &#123;		<span class="comment">//  验证不同的类型，存在不同的输出</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter id is long type : "</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; prize.id_val.id_num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter id is char: "</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; prize.id_val.id_char;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>enum 枚举类型：符号变量为整形（默认值是0,1…）</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enum 枚举类型的定义和声明</span></span><br><span class="line"><span class="keyword">void</span> Enum()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// spectrum：枚举名；red...符号常量：对应0,1,2,3...整数</span></span><br><span class="line">    <span class="keyword">enum</span> spectrum&#123;<span class="built_in">red</span>, orange, yellow, <span class="built_in">green</span>, <span class="built_in">blue</span>, violet, indigo, ultraviolet &#125;;</span><br><span class="line">    <span class="comment">// 符号常量可以转化为整形，但是反之不成立</span></span><br><span class="line">    spectrum band;  <span class="comment">// 声明这种类型的变量band</span></span><br><span class="line">    band = <span class="built_in">blue</span>;    <span class="comment">// 正确的赋值</span></span><br><span class="line">    <span class="built_in">int</span> value = <span class="built_in">blue</span>;   <span class="comment">// 符号常量可以转化为整形</span></span><br><span class="line"></span><br><span class="line">    band = <span class="number">2000</span>;    <span class="comment">// 错误：整形不能转化为符号常量</span></span><br><span class="line">    band = <span class="built_in">red</span> + orange; <span class="comment">// 转换为0 + 1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Enum 枚举类型的初始化</span></span><br><span class="line"><span class="keyword">void</span> Enum_Init()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 枚举类型的取值范围有要求</span></span><br><span class="line">    <span class="keyword">enum</span> bits &#123;one = <span class="number">1</span>, two = <span class="number">2</span>, four = <span class="number">4</span>&#125;; <span class="comment">// 显示初始化</span></span><br><span class="line">    bits myflags;</span><br><span class="line">    myflags = bits(<span class="number">3</span>);  <span class="comment">// 成立的</span></span><br><span class="line">    <span class="comment">// 未初始化的第一个符号常量：默认为0；third = 101;</span></span><br><span class="line">    <span class="keyword">enum</span> bigstep&#123;first, <span class="built_in">second</span> = <span class="number">100</span>, third&#125;;</span><br><span class="line">    <span class="comment">// 符号常量可以同时表示一个值: zero=null=0;ze_one=1</span></span><br><span class="line">    <span class="keyword">enum</span> value&#123;zero, <span class="keyword">null</span> = <span class="number">0</span>, ze_one, ze_two=<span class="number">1</span>&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="指针和存储空间"><a href="#指针和存储空间" class="headerlink" title="指针和存储空间"></a>指针和存储空间</h3><ol>
+<li><p>面向对象编程与传统的过程性编程的区别？</p>
+<ul>
+<li>OOP强调的是在运行阶段进行决策，并非编译阶段；</li>
+</ul>
+</li>
+<li><p>指针的注意？</p>
+<ul>
+<li>指针不仅仅是指针（地址），而且还是指向特定类型的指针；</li>
+<li>指针在使用之前，一定要进行初始化；</li>
+</ul>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int *pt<span class="comment">;</span></span><br><span class="line"><span class="attribute">pt</span> = (int *)<span class="number">0</span>xB8000000<span class="comment">; // 将十六进制整数强制转化为int*的指针</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>new 和delete 成对出现？</p>
+<ul>
+<li><p>new分配一个变量的空间</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> <span class="keyword">new</span> 关键字：动态分配typeName类型空间</span><br><span class="line">    typeName * pointer_name = <span class="keyword">new</span> typeName;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">delete</span> pointer_name;    <span class="regexp">//</span> <span class="keyword">delete</span>和<span class="keyword">new</span>成对出现</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>new分配一个数组大小的空间</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// <span class="built_in">new</span> 关键字：动态分配数组空间</span><br><span class="line">    typeName * pointer_name = <span class="built_in">new</span> typeName[<span class="built_in">num</span>];</span><br><span class="line">    ...</span><br><span class="line">    <span class="built_in">delete</span> [] pointer_name;    // <span class="built_in">delete</span>和<span class="built_in">new</span>成对出现</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="类型结合访问"><a href="#类型结合访问" class="headerlink" title="类型结合访问"></a>类型结合访问</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;			// // 题目九：数组，指针，结构体同时结合，实现对结构体的访问；</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">all</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> year;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    all s01, s02, s03;  <span class="comment">// c++定义结构体的时候可以省略struct</span></span><br><span class="line">    s01.year = <span class="number">1998</span>;    <span class="comment">// （1）使用句点访问；</span></span><br><span class="line">    all* pa = &amp;s02;     <span class="comment">// （2）使用指针访问</span></span><br><span class="line">    pa-&gt;year = <span class="number">1999</span>;</span><br><span class="line">    all trio[<span class="number">3</span>];        <span class="comment">// （3）使用数组访问；</span></span><br><span class="line">    trio[<span class="number">0</span>].year = <span class="number">2003</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"trio.year = "</span> &lt;&lt; trio-&gt;year &lt;&lt; <span class="built_in">endl</span>;   <span class="comment">// 只代表首个数组元素吗？</span></span><br><span class="line">    <span class="comment">// (4)使用的是指针数组进行访问</span></span><br><span class="line">    <span class="keyword">const</span> all *arp[<span class="number">3</span>] = &#123;&amp;s01, &amp;s02, &amp;s03&#125;; <span class="comment">// arp是一个常指针数组，每个数组元素都是常指针</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"arp[1].year = "</span> &lt;&lt; arp[<span class="number">1</span>]-&gt;year &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// (5) 指向指针的指针进行访问；</span></span><br><span class="line">    <span class="keyword">const</span> all **ppa = arp;</span><br><span class="line">    <span class="comment">// （6）使用auto进行推测ppb的类型</span></span><br><span class="line">    <span class="keyword">auto</span> ppb   = arp;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"(*ppa)-&gt;year = "</span> &lt;&lt; (*ppa)-&gt;year &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"(*ppb)-&gt;year = "</span> &lt;&lt; (*(ppb + <span class="number">1</span>))-&gt;year &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数组的替代品：数组（数据结构），vector-和-array（和数组不同，array是一个对象）"><a href="#数组的替代品：数组（数据结构），vector-和-array（和数组不同，array是一个对象）" class="headerlink" title="数组的替代品：数组（数据结构），vector  和  array（和数组不同，array是一个对象）"></a>数组的替代品：数组（数据结构），vector  和  array（和数组不同，array是一个对象）</h3><ol>
+<li><p>vector：是一种动态数组，允许在运行的时候创建数组的长度；</p>
+<ul>
+<li>可以再末尾附加新数据，或者在中间插入新数据；</li>
+<li>vector：由new和delete进行管理内存，存储于堆区；</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="built_in">vector</span>&lt;typeName&gt;  vt[num];  <span class="comment">// vd 是一个对象，num是数组的长度，可以是变量</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>array：定义的对象长度也是固定的，存储于栈区；</p>
+<ul>
+<li>同一类型的array对象：可以直接赋值；（数组不允许的）</li>
+<li>和vector不同的是：num是一个常量</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;array&gt;</span></span></span><br><span class="line"><span class="built_in">array</span>&lt;typeName,  num&gt; arr;		<span class="comment">// num是一个常量；arr是一个对象；</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对于元素的访问：采用数组名（对象名）+ 下标</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    double a1[<span class="number">4</span>] = &#123;<span class="number">1.2</span>, <span class="number">2.4</span>, <span class="number">3.6</span>, <span class="number">4.8</span>&#125;;    <span class="comment">//（1）c/c++通用</span></span><br><span class="line">    <span class="type">vector</span>&lt;double &gt; a2(<span class="number">4</span>);               <span class="comment">// (2)C++98 STL</span></span><br><span class="line">    a2[<span class="number">0</span>] = <span class="number">1.0</span>/<span class="number">2.0</span>; a2[<span class="number">1</span>] = <span class="number">1.0</span>/<span class="number">3.0</span>;       <span class="comment">// vector的初始化和数组一样</span></span><br><span class="line">    a2[<span class="number">2</span>] = <span class="number">1.0</span>/<span class="number">4.0</span>; a2[<span class="number">3</span>] = <span class="number">1.0</span>/<span class="number">5.0</span>;</span><br><span class="line">    array&lt;double , <span class="number">4</span>&gt; a3 = &#123;<span class="number">3.14</span>, <span class="number">2.72</span>, <span class="number">1.62</span>, <span class="number">1.41</span>&#125;; <span class="comment">// (3) c++11允许的</span></span><br><span class="line">    array&lt;double , <span class="number">4</span>&gt; a4;</span><br><span class="line">    a4 = a3;         <span class="comment">// 同一对象的array，允许直接复制</span></span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 
@@ -586,10 +782,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/14/毕业生档案户口/" rel="prev" title="毕业生档案户口">
-                毕业生档案户口 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -661,7 +853,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-count">106</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1039,7 +1231,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的预备知识"><span class="nav-number">1.</span> <span class="nav-text">C++ 的预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-vs-C"><span class="nav-number">1.1.</span> <span class="nav-text">C vs C++</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的预备知识"><span class="nav-number">1.</span> <span class="nav-text">C++ 的预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-vs-C"><span class="nav-number">1.1.</span> <span class="nav-text">C vs C++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cin-and-cout"><span class="nav-number">1.2.</span> <span class="nav-text">cin and cout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">2.</span> <span class="nav-text">数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整形数据的表示"><span class="nav-number">2.1.</span> <span class="nav-text">整形数据的表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">2.2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getline-and-get-读入一行字符串"><span class="nav-number">2.3.</span> <span class="nav-text">getline() and get() 读入一行字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体：实现多种数据的管理"><span class="nav-number">2.4.</span> <span class="nav-text">结构体：实现多种数据的管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针和存储空间"><span class="nav-number">2.5.</span> <span class="nav-text">指针和存储空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型结合访问"><span class="nav-number">2.6.</span> <span class="nav-text">类型结合访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的替代品：数组（数据结构），vector-和-array（和数组不同，array是一个对象）"><span class="nav-number">2.7.</span> <span class="nav-text">数组的替代品：数组（数据结构），vector  和  array（和数组不同，array是一个对象）</span></a></li></ol></li></ol></div>
             
 
           </div>
