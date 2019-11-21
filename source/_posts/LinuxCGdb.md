@@ -13,6 +13,17 @@ tags: [Linux, C]
 
 + [Code link](https://github.com/quronghui/LinuxC.git) -- Gdb的相关代码
 
+| gdb的命令             | 含义                                                         |
+| --------------------- | ------------------------------------------------------------ |
+| gcc -g main.c -o main | 编译成可调式文件                                             |
+| list                  | list  <linenum>   显示linenum行周围的源程序<br />list <funcation>  显示函数名为function<br />list    // 显示后面10行的内容<br />list -  // 显示前面的程序 |
+| until （u）           | 直接运行到循环体结束                                         |
+| print                 | x  按照十六进制格式显示变量；                                |
+| info                  | 查看调试是各寄存器...信息                                    |
+| disassemble  <func>   | 用于反汇编                                                   |
+
+
+
 ## Gdb
 
 ### 调试方式
@@ -99,6 +110,10 @@ tags: [Linux, C]
    $ (gdb) set var sum=0	//修改变量的值
    $ (gdb) finish
    ```
+   
+3. print
+
+   {% asset_img print.png %}
 
 ### 调试命令
 
@@ -237,6 +252,50 @@ gcc -S main.c				//只生成汇编代码main.s,而不生成二进制的目标文
 3. [具体代码和调试结果](https://github.com/quronghui/OSIntroduction/tree/master/valgrind/valgrind_demo.c)
 
    
+
+## DDD图形界面调试工具
+
+1. DDD (Data Display Debugger)
+
+   + DDD、GDB和被调试进程之间的关系：通信都是异步进行
+
+   ```
+   ddd --debugger arm-linux-gnueabihf-gdb  <要调试的程序>
+   ```
+
+## Linux 内核调试工具
+
+1. 目标机“插桩”：打上KGDB补丁，主机上的GDB可与目标机的KGDB通过串口或网口通信；
+2. 仿真器：仿真器可直接连接目标机的JTAG/BDM；
+3. 在目标板上通过printk()，Oops，strace 等软件方法进行“观察”调试
+
+### KGDB 
+
+1. 典型的嵌入式系统“插桩”工具，依赖于串口与调试主机通信；
+2. 串口驱动实现：轮询收发
+
+### printk()
+
+1. 将内核信息输出到内核信息缓冲区中；
+2. 内核信息缓冲区：是一个环形缓冲区（Ring Buffer); 如果塞入消息过多，则就会把之前的消息冲刷；
+
+### /proc
+
+1. /proc虚拟文件系统，将内核信息输出给用户；
+2. 使用的命令：ps  : 显示进程pid;  top ：动态显示进行的状态
+3. free ： 用于分析/proc/meminfo 得到的内存信息
+
+### Oops
+
+1. 当内核出现类似于用户空间的Segmentation Fault时，Oops会被打印到控制台和写入内核log缓冲区；
+
+   ```
+   cat		/dev/globalmem		// 读取设备中节点的段错误信息
+   ```
+
+### strace
+
+1. 用于追踪**系统调用**命令的工具
 
 ## 总结
 

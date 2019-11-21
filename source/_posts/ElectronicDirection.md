@@ -11,6 +11,7 @@ tags: Direction
 
 1. [为何要为开源做贡献](https://linux.cn/article-8653-1.html)
 2. [怎么查找开源项目](https://www.zhihu.com/question/20084458)
+3. 网上的资源很多，我们需要一把钥匙，能够将这些资源灵活的用起来
 
 ## Contents
 
@@ -27,8 +28,8 @@ tags: Direction
 | [AutoDesk](https://www.autodesk.com/education/home)          | student 免费使用的软件；                                     |                                                              |
 |                                                              | Eagle : PCB软件，里面含有各大公司的封装库                    |                                                              |
 | Adobe Creative Cloud                                         | Adobe Creative Cloud desk，从而安装 Illustrator (AI的矢量图) |                                                              |
-
-
+| [clion](https://www.jetbrains.com/clion/):                   | 一款调试方便的C/C++代码编写工具<br />通过学校邮箱注册免费使用;(相对于vs code) |                                                              |
+| vsCode                                                       | 增加一个代码显示扩展工具，Monokai Pro(需要进行破解)          |                                                              |
 
 ## 计算机相关书籍
 
@@ -36,66 +37,69 @@ tags: Direction
 + [[**极客侠栈**](https://pymlovelyq.github.io/)]
 + 网页上直接搜索： xxx. epub xxx.pdf
 
-1. 网上的资源很多，我们需要一把钥匙，能够将这些资源灵活的用起来
-
-| 书籍类型                                                     | 书籍名称/介绍                                                | 是否阅读   |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ---------- |
-| 计算机技术                                                   | [计算机科学速成课](https://search.bilibili.com/all?keyword=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6&from_source=banner_search) : 从嵌入式的元件，到计算机的整体架构；推荐 | OK         |
-|                                                              | [嵌入式 面试相关](https://github.com/xiaowenxia/embedded-notes]) |            |
-| [LinuxC](https://tinylab.gitbooks.io/cbook/)                 | [LinuxC 编程一站式学习](http://staff.ustc.edu.cn/~guoyan/os12/LinuxC.pdf) : C 和 linux 的入门书籍 | OK         |
-|                                                              | [C和指针.pdf](https://github.com/tolerious/Programming_learning_resource/tree/master/C-Language)  :和剑指offer一起刷的，指针讲的很好 | 2019. 6.25 |
-|                                                              | [C专家编程.pdf]((https://github.com/tolerious/Programming_learning_resource/blob/master/C-Language/C专家编程 清晰 （有书签索引）.pdf)) |            |
-|                                                              | [C Primer Plus第6版]([https://cloverkits.github.io/2018/08/19/C-Primer-Plus-%E7%AC%AC%E5%85%AD%E7%89%88-%E5%B8%A6%E4%B9%A6%E7%AD%BE%F0%9F%94%96-PDF-%E7%94%B5%E5%AD%90%E4%B9%A6/](https://cloverkits.github.io/2018/08/19/C-Primer-Plus-第六版-带书签🔖-PDF-电子书/)) : 用于在手边查阅 |            |
-|                                                              | [Shell 编程范例](https://legacy.gitbook.com/book/tinylab/shellbook/details) |            |
-|                                                              | [C 语言编程透视](https://tinylab.gitbooks.io/cbook/)         |            |
-| [数据结构算法](https://www.infoq.cn/article/ur1QLockeQ*hXobPm0kI) | [数据结构与算法教程，数据结构C语言版教程](http://data.biancheng.net/) ：这个网址有基础知识和相应的代码； | 2019.6.28  |
-|                                                              | [大话数据结构]([https://www.ebook23.com/forum.php?mod=viewthread&tid=161&highlight=%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84](https://www.ebook23.com/forum.php?mod=viewthread&tid=161&highlight=大话数据结构)) 基础数据结构 |            |
-|                                                              | [ 算法图解 ](https://www.ebook23.com/thread-1439-1-1.html)  基础算法 |            |
-|                                                              | [剑指offer] ( [结合C和指针一起看，可以编写测试代码](https://github.com/quronghui/DataStructAndAlogrithmCode)) | 2019.7.28  |
-|                                                              | [编程之美]  这本书的作者，绝大部分都是微软的工程师，所以质量很有保证。算法题目稍微有点难，也不是很系统，这也是为什么我把它归到面试这一部分的原因。 |            |
-|                                                              | [编程珠玑 2 ](http://www.h5tpl.com/ebook/106) 这本书最大的特色是讲了很多针对海量数据的处理技巧 |            |
-|                                                              | [[数据结构与算法分析：C语言描述_原书第2版_高清版.pdf](https://github.com/Bzhnja/ebooks/blob/master/数据结构与算法分析：C语言描述_原书第2版_高清版.pdf)] | 2019. 5.27 |
-|                                                              | [算法导论原书第3版](https://www.ebook23.com/thread-220-1-1.html) 充斥着各种算法的正确性、复杂度的证明、推导，数学公式比较多 |            |
-|                                                              | [算法](https://pan.baidu.com/s/1c0wBCtU)     更容易看懂，更适合初学者入门。 |            |
-|                                                              | [计算机程序设计艺术](https://www.ebook23.com/thread-173-1-1.html)  殿堂级的 |            |
-|                                                              | [凸优化，算法优化](https://github.com/KeKe-Li/book/tree/master/AI) |            |
-| [操作系统](https://www.jianshu.com/p/01f5d2abfae0)           | [操作系统导论](https://www.epubit.com/)                      | 2019.7.28  |
-|                                                              | [现代操作系统 原书第4版](https://pan.baidu.com/s/1EnlH0saLicZo1uobE7cmBQ): 提取码：j5p9  <br />编程中的线程一直是很难理解的概念，通过理解操作系统的原理，线程的概念就很容易理解了 |            |
-|                                                              | [快乐的Linux命令行]()                                        |            |
-|                                                              | [linux就该这么学 ](https://www.linuxprobe.com/docs/LinuxProbe.pdf) |            |
-|                                                              | [鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf ](http://itbook1234.com/1093.html)  最经典的Linux系统管理和使用教程 |            |
-|                                                              | [Linux内核完全剖析](https://link.jianshu.com/?t=https://book.douban.com/subject/3229243/)  非常细致全面的一本书 |            |
-|                                                              | [linux 程序设计](https://pan.baidu.com/s/1Ugtn8aqjluhGvw7vJrzcWg) |            |
-|                                                              | [深入理解Linux 内核]((https://github.com/lancetw/ebook-1/blob/master/03_operating_system/深入理解linux内核（中文第三版）.pdf)) |            |
-|                                                              | [Orange'S:一个操作系统的实现](https://link.jianshu.com/?t=https://book.douban.com/subject/3735649/) 大神带你实现一个操作系统 |            |
-|                                                              | [UNIX操作系统设计](https://link.jianshu.com/?t=https://book.douban.com/subject/1035710/) 深入浅出 |            |
-| [**嵌入式学习**](https://www.jianshu.com/p/de4fe0420171)     | [FreeRTOS / uCOS]((https://github.com/shornado/mybook/blob/master/任哲-嵌入式实时操作系统μCOS-II原理及应用.pdf)) : 嵌入式实时操作系统； |            |
-|                                                              | [《ARM体系结构与编程》](http://www.xz577.com/e/24901.html#_labeldown)<br />[ARM社区参考资料](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0204ic/Cjacbgca.html) |            |
-|                                                              | 嵌入式系统LINUX / VXWORKS                                    |            |
-|                                                              | 对计算机系统结构（CISC/RISC）了解到                          |            |
-|                                                              | 了解bootload、kernel等启动流程                               |            |
-| IOT                                                          | 先学习《MQTT 协议快速入门》                                  |            |
-|                                                              | 后学习《从 0 开始搭建 IoT 平台》                             |            |
-|                                                              | IOT的安全保卫战 : 区块链与物联网融合，新安防攻略             |            |
-| [计算机网络](http://www.iocoder.cn/Books/Net-books-recommended/) | [图解TCP/IP 第5版 tcpip协议应用分析指导指南 TCP/IP圣经级教材 268张图解轻松入门 | 2019.7.28  |
-|                                                              | [一本书读懂TCP/IP]                                           |            |
-|                                                              | [TCP/IP详解 卷1](https://www.ebook23.com/thread-148-1-1.html) 学习TCP/IP协议的圣经 |            |
-|                                                              | [TCP/IP详解 卷2：实现](https://www.ebook23.com/thread-148-1-1.html) [下载](https://link.jianshu.com/?t=http://download.csdn.net/download/gewwntea/3228639)第一卷讲理论，第二卷讲实践 |            |
-|                                                              | [TCP/IP详解 卷3：TCP事务协议、HTTP、NNTP和UNIX域协议](https://www.ebook23.com/thread-148-1-1.html) [下载](https://link.jianshu.com/?t=http://www.linuxidc.com/Linux/2016-02/128633.htm) |            |
-|                                                              | [计算机网络 系统方法](https://pan.baidu.com/s/1dDvkapN)      |            |
-|                                                              | [计算机网络 自顶向下的方法](https://bbs.hh010.com/thread-525435-1-1.html) |            |
-|                                                              | [UNIX网络编程](https://www.linuxidc.com/Linux/2014-04/100222.htm)  学习套接字编程最好的书籍 |            |
-| python                                                       | [《疯狂Python讲义》](https://mp.weixin.qq.com/s/pixt3b7rKr5AykRIbXjxag)它的课程体系和Python图谱技能体系不谋而合<br />《21天通关Python》 |            |
-| 数据库                                                       |                                                              |            |
-| [设计模式](https://github.com/YunaiV/Blog/blob/master/Books/2019_04_01_设计模式书单整理.md) | [《大话设计模式》](https://www.ebook23.com/thread-181-1-1.html) 本书适合编程初学者或希望在面向对象编程上有所提高的开发人员阅读。 |            |
-|                                                              | [STL 源码剖析]                                               |            |
-|                                                              | [代码大全（第2版）](https://link.jianshu.com/?t=https://book.douban.com/subject/1477390/) [下载](https://www.ebook23.com/thread-191-1-1.html) 程序员必读经典 |            |
-| PCB                                                          | 高质量PCB设计入门 ：[PCB SCH 绘制规则参考ESP32](https://www.espressif.com/zh-hans/company/contact-extra/technical-inquiries-hardware-prologue) | OK         |
-| 其他                                                         | [程序员的自我修养](https://link.jianshu.com/?t=https://book.douban.com/subject/3652388/) [下载](https://link.jianshu.com/?t=http://download.csdn.net/download/gaojiaxing/8370437) |            |
-|                                                              | [**硅谷之火_——个人计算机的故事.pdf**]()                      |            |
-|                                                              | [**硅谷之火——PC从梦想到现实.pdf**]                           |            |
-|                                                              | [黑客与画家]                                                 |            |
-|                                                              | [**浪潮之巅.pdf**]                                           |            |
+| 书籍类型                                                     | 书籍名称/介绍                                                | 是否阅读  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | --------- |
+| 计算机技术                                                   | [计算机科学速成课](https://search.bilibili.com/all?keyword=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6&from_source=banner_search) : 从嵌入式的元件，到计算机的整体架构；推荐 | OK        |
+|                                                              | [嵌入式 面试相关](https://github.com/xiaowenxia/embedded-notes]) |           |
+| 计算机的期刊杂质                                             | 计算机世界                                                   |           |
+|                                                              | [单片机与嵌入式系统应用](https://mp.weixin.qq.com/s?__biz=MzA5NTMwMjIwNA==&mid=2650838290&idx=1&sn=31cdda32fc8091c20265e6e839a54175&chksm=8bb55241bcc2db576f35eed5520131e86d2e8bcbffa992e9c5e9b7ae1e252e331158679717de&scene=21#wechat_redirect) |           |
+| [LinuxC](https://tinylab.gitbooks.io/cbook/)                 | [LinuxC 编程一站式学习](http://staff.ustc.edu.cn/~guoyan/os12/LinuxC.pdf) : C 和 linux 的入门书籍 | OK        |
+|                                                              | [C和指针.pdf](https://github.com/tolerious/Programming_learning_resource/tree/master/C-Language)  :和剑指offer一起刷的，指针讲的很好 | 2019.6.25 |
+|                                                              | [C专家编程.pdf]((https://github.com/tolerious/Programming_learning_resource/blob/master/C-Language/C专家编程 清晰 （有书签索引）.pdf)) |           |
+|                                                              | [C Primer Plus第6版](https://cloverkits.github.io/2018/08/19/C-Primer-Plus-第六版-带书签🔖-PDF-电子书/) : 用于在手边查阅 |           |
+|                                                              | [Shell 编程范例](https://legacy.gitbook.com/book/tinylab/shellbook/details) |           |
+|                                                              | [C 语言编程透视](https://tinylab.gitbooks.io/cbook/)         |           |
+| [数据结构算法](https://www.infoq.cn/article/ur1QLockeQ*hXobPm0kI) | [数据结构与算法教程，数据结构C语言版教程](http://data.biancheng.net/) ：这个网址有基础知识和相应的代码； | 2019.6.28 |
+|                                                              | [大话数据结构]([https://www.ebook23.com/forum.php?mod=viewthread&tid=161&highlight=%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84](https://www.ebook23.com/forum.php?mod=viewthread&tid=161&highlight=大话数据结构)) 基础数据结构 |           |
+|                                                              | [ 算法图解 ](https://www.ebook23.com/thread-1439-1-1.html)  基础算法 |           |
+|                                                              | [剑指offer] ( [结合C和指针一起看，可以编写测试代码](https://github.com/quronghui/DataStructAndAlogrithmCode)) | 2019.7.28 |
+|                                                              | [编程之美]  这本书的作者，绝大部分都是微软的工程师，所以质量很有保证。算法题目稍微有点难，也不是很系统，这也是为什么我把它归到面试这一部分的原因。 |           |
+|                                                              | [编程珠玑 2 ](http://www.h5tpl.com/ebook/106) 这本书最大的特色是讲了很多针对海量数据的处理技巧 |           |
+|                                                              | [[数据结构与算法分析：C语言描述_原书第2版_高清版.pdf](https://github.com/Bzhnja/ebooks/blob/master/数据结构与算法分析：C语言描述_原书第2版_高清版.pdf)] | 2019.5.27 |
+|                                                              | [算法导论原书第3版](https://www.ebook23.com/thread-220-1-1.html) 充斥着各种算法的正确性、复杂度的证明、推导，数学公式比较多 |           |
+|                                                              | [算法](https://pan.baidu.com/s/1c0wBCtU)     更容易看懂，更适合初学者入门。 |           |
+|                                                              | [计算机程序设计艺术](https://www.ebook23.com/thread-173-1-1.html)  殿堂级的 |           |
+|                                                              | [凸优化，算法优化](https://github.com/KeKe-Li/book/tree/master/AI) |           |
+| [操作系统](https://www.jianshu.com/p/01f5d2abfae0)           | [操作系统导论](https://www.epubit.com/)                      | 2019.7.28 |
+|                                                              | [现代操作系统 原书第4版](https://pan.baidu.com/s/1EnlH0saLicZo1uobE7cmBQ): 提取码：j5p9  <br />编程中的线程一直是很难理解的概念，通过理解操作系统的原理，线程的概念就很容易理解了 |           |
+|                                                              | [快乐的Linux命令行]()                                        | 2019.8.18 |
+|                                                              | [linux就该这么学 ](https://www.linuxprobe.com/docs/LinuxProbe.pdf) |           |
+|                                                              | [鸟哥的Linux私房菜-基础学习篇(第四版)高清完整书签PDF版.pdf ](http://itbook1234.com/1093.html)  最经典的Linux系统管理和使用教程 |           |
+|                                                              | [Linux内核完全剖析](https://link.jianshu.com/?t=https://book.douban.com/subject/3229243/)  非常细致全面的一本书 |           |
+|                                                              | [linux 程序设计](https://pan.baidu.com/s/1Ugtn8aqjluhGvw7vJrzcWg) |           |
+|                                                              | [深入理解Linux 内核]((https://github.com/lancetw/ebook-1/blob/master/03_operating_system/深入理解linux内核（中文第三版）.pdf)) |           |
+|                                                              | [Orange'S:一个操作系统的实现](https://link.jianshu.com/?t=https://book.douban.com/subject/3735649/) 大神带你实现一个操作系统 |           |
+|                                                              | [UNIX操作系统设计](https://link.jianshu.com/?t=https://book.douban.com/subject/1035710/) 深入浅出 |           |
+| [**嵌入式学习**](https://www.jianshu.com/p/de4fe0420171)     | [FreeRTOS / uCOS]((https://github.com/shornado/mybook/blob/master/任哲-嵌入式实时操作系统μCOS-II原理及应用.pdf)) : 嵌入式实时操作系统； | 2019.8.20 |
+|                                                              | [《ARM体系结构与编程》](http://www.xz577.com/e/24901.html#_labeldown)<br />[ARM社区参考资料](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0204ic/Cjacbgca.html) |           |
+|                                                              | 嵌入式系统LINUX / VXWORKS                                    |           |
+|                                                              | 对计算机系统结构（CISC/RISC）了解到                          |           |
+|                                                              | 了解bootload、kernel等启动流程                               |           |
+| Linux 驱动                                                   | Linux设备驱动开发详解：基于最新的Linux 4.0内核               |           |
+|                                                              | Linux设备驱动开发详解                                        |           |
+|                                                              | LINUX设备驱动程序第3版完整版                                 |           |
+| IOT                                                          | 先学习《MQTT 协议快速入门》                                  |           |
+|                                                              | 后学习《从 0 开始搭建 IoT 平台》                             |           |
+|                                                              | IOT的安全保卫战 : 区块链与物联网融合，新安防攻略             |           |
+| [计算机网络](http://www.iocoder.cn/Books/Net-books-recommended/) | [图解TCP/IP 第5版 tcpip协议应用分析指导指南 TCP/IP圣经级教材 268张图解轻松入门 | 2019.7.28 |
+|                                                              | [一本书读懂TCP/IP]                                           |           |
+|                                                              | [TCP/IP详解 卷1](https://www.ebook23.com/thread-148-1-1.html) 学习TCP/IP协议的圣经 |           |
+|                                                              | [TCP/IP详解 卷2：实现](https://www.ebook23.com/thread-148-1-1.html) [下载](https://link.jianshu.com/?t=http://download.csdn.net/download/gewwntea/3228639)第一卷讲理论，第二卷讲实践 |           |
+|                                                              | [TCP/IP详解 卷3：TCP事务协议、HTTP、NNTP和UNIX域协议](https://www.ebook23.com/thread-148-1-1.html) [下载](https://link.jianshu.com/?t=http://www.linuxidc.com/Linux/2016-02/128633.htm) |           |
+|                                                              | [计算机网络 系统方法](https://pan.baidu.com/s/1dDvkapN)      |           |
+|                                                              | [计算机网络 自顶向下的方法](https://bbs.hh010.com/thread-525435-1-1.html) |           |
+|                                                              | [UNIX网络编程](https://www.linuxidc.com/Linux/2014-04/100222.htm)  学习套接字编程最好的书籍 |           |
+| python                                                       | [《疯狂Python讲义》](https://mp.weixin.qq.com/s/pixt3b7rKr5AykRIbXjxag)它的课程体系和Python图谱技能体系不谋而合<br />《21天通关Python》 |           |
+| 数据库                                                       |                                                              |           |
+| [设计模式](https://github.com/YunaiV/Blog/blob/master/Books/2019_04_01_设计模式书单整理.md) | [《大话设计模式》](https://www.ebook23.com/thread-181-1-1.html) 本书适合编程初学者或希望在面向对象编程上有所提高的开发人员阅读。 |           |
+|                                                              | [STL 源码剖析]                                               |           |
+|                                                              | [代码大全（第2版）](https://link.jianshu.com/?t=https://book.douban.com/subject/1477390/) [下载](https://www.ebook23.com/thread-191-1-1.html) 程序员必读经典 |           |
+| PCB                                                          | 高质量PCB设计入门 ：[PCB SCH 绘制规则参考ESP32](https://www.espressif.com/zh-hans/company/contact-extra/technical-inquiries-hardware-prologue) | OK        |
+| 其他                                                         | [程序员的自我修养](https://link.jianshu.com/?t=https://book.douban.com/subject/3652388/) [下载](https://link.jianshu.com/?t=http://download.csdn.net/download/gaojiaxing/8370437) |           |
+|                                                              | [**硅谷之火_——个人计算机的故事.pdf**]()                      |           |
+|                                                              | [**硅谷之火——PC从梦想到现实.pdf**]                           |           |
+|                                                              | [黑客与画家]                                                 |           |
+|                                                              | [**浪潮之巅.pdf**]                                           |           |
 
 ### 嵌入式学习方向
 
@@ -153,8 +157,6 @@ tags: Direction
 
 ## Open Link
 
-1. code tools
-   + [clion](https://www.jetbrains.com/clion/): 一款调试方便的C/C++代码编写工具, 通过学校邮箱注册免费使用;(相对于vs code)
 2. IT Community
    1. [stackoverflow](https://stackoverflow.com/)  ：IT与程序相关的IT技术问答网站
    2. [element](https://www.element14.com/community/welcome) :  IT的互助社群
@@ -218,3 +220,5 @@ tags: Direction
 17. typing lesson
 
     - [打字练习](https://www.typing.com/student/lesson/337/advanced-wrap-up)
+18. 贝尔实验室，c/c++的起源
+    + [att](http://www.research.att.com/)

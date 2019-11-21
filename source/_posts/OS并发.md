@@ -389,7 +389,9 @@ man -k pthread	// 查询线程所有的API
 
 1. [解题思路注意 :](https://github.com/quronghui/OSIntroduction/tree/master/3_semaphore/sem_ProductAndConsume.c)
 
-   +  a. 信号量的初始值进行标识: 何时producter能进入buffer?    何时consumer能进入buffer?
+   + a. 信号量的初始值进行标识: 何时producter能进入buffer?    何时consumer能进入buffer?
+
+     +  定义两个信号量: empty , full
 
    + b. 信号量:要具有指向性:
 
@@ -414,7 +416,7 @@ man -k pthread	// 查询线程所有的API
    + 信号量实现的模型
      + **先进入函数** : Sem_wait() 
      + **后比较**比较: 进入睡眠模式(sem<0)不会释放锁
-  
+    
      ```
      Sem_wait(&mutex);		// 已经获得锁了
      Sem_wait(&empty);  		// 进入等待的时候**不会释放锁**

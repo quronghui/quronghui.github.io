@@ -22,8 +22,8 @@ permalink_defaults:
 source_dir: source
 public_dir: public
 tag_dir: tags
-archive_dir: archives
-category_dir: categories
+archive_dir:  archives
+category_dir:  categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
@@ -84,7 +84,7 @@ limit: 20
 theme: next 
 
 # search
-search:
+搜索:
   path: search.xml
   field: post
   format: html

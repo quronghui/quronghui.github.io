@@ -8,7 +8,7 @@ tags:	AIWAC
 
 #  WearableAffectiveRobot
 
-+ [项目在2018年发表到IEEE](https://ieeexplore.ieee.org/document/8506341/citations)
++ [项目在2018年发表到IEEE  (Journal Article)期刊和杂志](https://ieeexplore.ieee.org/document/8506341/citations)
 
 ## 应用场景
 
@@ -32,6 +32,11 @@ tags:	AIWAC
    {% asset_img robot.png %}
 
 ## 嵌入式设计及实现功能
+
+{% asset_img robot_board.png %}
+
++ 难点：各模块的整合，焊接。
++ 获得：单板设计能力，Linux驱动了解
 
 1. AIWAC智能盒硬件设计
 

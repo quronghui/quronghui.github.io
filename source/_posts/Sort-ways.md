@@ -27,19 +27,22 @@ tags: sort
 
 ## 内部排序
 
+{% asset_img sort_summary.png %}
+
++ [代码链接](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/sort.c)
+
 ### 冒泡排序
 
 ```
 /* 冒泡排序 */
 void	BubbleSort(int *array, int length)
 {
-	for(int i = 0; i < length - 1; i++){
-        // 注意j是从后往前的
-        for(int j = length - 1; j >= i; j--){
-            if( array[j] > array[j+1] ){     /*前者大于后者*/
-                int tmp = array[j];
-                array[j]    =   array[j+1];
-                array[j+1]  =   tmp;                
+	for(int i = 0; i < length-1 ; i++){
+        for(int j = i+1; j <length ; j++){
+            if( array[i] > array[j] ){    
+                int tmp = array[i];
+                array[i]    =   array[j];
+                array[j]  =   tmp;                
             }
         }
     }
@@ -66,18 +69,15 @@ void	BubbleSort(int *array, int length)
 
    ```
    /* insert_sort   */
-   void insertionSort(int a[], int N)
+   void InsertSort(int *array, int length)
    {
-       int  tmp;
-       int j;
-       for ( int i = 1; i < N; i++){
-           tmp = a[i];         // 下一个需要插入的元素
-   
-           // 前面已排好序的 ( i-1 ) 个元素;
-           for(int j = i; j>0 && a[j-1]>tmp; j--)  
-               a[ j ] = a[j-1];                                    // 前面的大于 tmp, 则移动覆盖
-           
-           a[ j ] = tmp;                                          // 最后一个位置处理
+       // 从第二个元素才需要插入排序
+       for ( int i = 1; i < length; i++){
+           int tmp = array[i];                      // 设置哨兵元素
+           int j =i;                                           // 前面已经排好序的( i - 1 )个元素
+           for(; j > 0 && array[j-1] > tmp;  j--)  
+               array[ j ] = array[j-1];                                    // 前面的大于 tmp, 则移动覆盖
+           array[ j ] = tmp;                                          // 最后一个位置处理
        }
    }
    ```
@@ -119,33 +119,8 @@ void	BubbleSort(int *array, int length)
    
 5. 希尔排序的接口
 
-   ```
-   /* shell sort
-   *   1)希尔排序：缩小增量排序
-   *   2)元素之间的比较：a[i + h(k)] < a[i - h(k)]，对应元素之间的比较
-   *   3)每次删除的逆序对，不止一个逆序对；
-   */
-   void shell_Sort(int  a[], int N)
-   {
-       int i, j, increment;
-       int  tmp;
    
-       /* h(k) = N/2 ; 每次一半进行递减*/
-       for(increment = N/2; increment > 0; increment /= 2)
-           /* 循环：完后后半部分（N/2）每个元素，和前半部分元素之间的比较*/
-           for(i = increment; i < N; i++){
-               tmp = a[i];     /* 后半部分数组 */
-               for(j = i; j >= increment; j -= increment)
-                   /* 包含在fork循环中的，if-else是一条语句 */
-                   if( a[j-increment] > tmp )
-                       a[j] = a[j - increment];
-                   else 
-                       break;  /* 这里break后，就不执行 j -= increment 这条语句 */
-               a[j] = tmp;
-           }
-   }
-   ```
-
+   
    
 
 ### [堆排序](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/SwordOffer/10_find_and_sort/sort.c)
@@ -267,10 +242,10 @@ void	BubbleSort(int *array, int length)
 
 ## 外部排序
 
-1. 外部排序的限制
+1. **外部排序的限制**
 
-   + 内部排序算法：将数据装入内存，这样数据的访问便可以不按顺序进行；
-   + 外部排序：数据的输入输出是在物理设备上，只能按照顺序访问；
+   + 内部排序算法：将数据装入内存，这样数据的访问便可以**不按顺序进行**；
+   + 外部排序：数据的输入输出是在物理设备上，**只能按照顺序访问**；
 
 2. 外部排序的模型：
 
@@ -282,7 +257,7 @@ void	BubbleSort(int *array, int length)
 
    + 使用归并排序的merge例程；
    + 四个磁带空间：不停地将两个磁带中的数据（顺串）作为输入，另外两个磁带空间作为输出；直到所有的顺串合并为一个长的顺串；
-   + 顺串：将每组排过序的记录叫做顺串；
+   + **顺串：将每组排过序的记录叫做顺串**；
 
 4. merge算法进过的次数
 

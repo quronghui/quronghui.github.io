@@ -52,19 +52,32 @@ tags:
 
 ## 内存地址对齐 pragma pack(n)用法详解?
 
-1. 什么是对齐, 为什么需要对齐?
+1. 什么是对齐?
 
    - 内存空间都是按照**byte**划分的;
    - **对齐**: 按照一定的**规则**在**地址空间**上排列, 而不是顺序的一个接一个的排放
      - 例如: 访问**特定变量**的时候经常在**特定的内存地址**访问
-   - **为什么要对齐: ** 内存对齐基本上是透明的, 由编译器完成,  为了**性能和平台移植**等因素，编译器对数据结构进行了内存对齐。
+   
+2. **为什么要对齐: ** 
 
-2. pragma 的理解?
+   + 提高CPU访问数据的效率问题：CPU访问按照**字**进行访问；
+
+     + ```
+       int a;
+       (1) 不按字节对齐；0x02-0x05;  需要访问两次，并将其组合；
+       (2) 按照字节对其：0x00-0x03;	只需要访问一次；
+       ```
+
+   + 内存对齐基本上是透明的, 由编译器完成,  为了**性能和平台移植**等因素，编译器对数据结构进行了内存对齐。
+
+###  pragma pack(n) 对齐规则
+
+1. pragma 的理解?
 
    - #pragma的实现是与具体平台相关的。
    - 可以简单将其理解为该预处理指令是**开发者和编译器交互**的一个工具
 
-3. #pragma pack(n)内存对齐规则?
+2. #pragma pack(n)内存对齐规则?
 
    - pragma pack(n)中**n的值**
 
@@ -74,7 +87,7 @@ tags:
      (2)  #pragma pack()表示更改当前对齐系数为默认值: n==8
      ```
 
-   - **地址空间的对齐**
+   - **地址空间对齐规则**：先内部对齐，在外部对齐；
 
      ```
      min (sizeof(mumber) , n);		// 取sizeof(mumber) 值, 和 n的整数倍 的最小值
@@ -99,12 +112,13 @@ tags:
 
      - (3)**补足后才是最终的字节数**;
 
-4. 对齐规则的文字总结
+3. 对齐规则的文字总结
 
    + 对于结构体的各个成员，第一个成员的偏移量是0，排列在后面的成员其当前偏移量必须是当前成员类型的整数倍；
    + 结构体内所有数据成员各自内存对齐后，结构体本身还要进行一次内存对齐，保证整个结构体占用内存大小是结构体内最大数据成员的最小整数倍；
    + 如程序中有#pragma pack(n)预编译指令，则所有成员对齐以n字节为准(即偏移量是n的整数倍)，不再考虑当前类型以及最大结构体内类型。
-5. 三个例子
+
+4. 三个例子
 
    - #pragma pack( 4 )
 
@@ -188,4 +202,41 @@ tags:
      + 首地址开始的位置其实是*x*的位置: 这样原来内存中*x*的位置就被*k*所赋的值代替了，就变为*0*了
 
 4. [大疆的题目: 结构体和联合体的内存字节对齐计算?](https://github.com/quronghui/DataStructAndAlogrithmCode/blob/master/CompanyWrite/1_Dji/sizeofStructUnion.c)
+
+### 结构体和联合体相互定义
+
+```
+// (1)struct 和 union结构体，计算sizeof占的空间大小
+// 联合体定义变量时，首地址的对齐：取该联合体的最大值的一个元素；
+
+#include <iostream>
+using namespace std;
+
+#pragma pack(4)
+
+// 联合体所占的地址空间大小；
+typedef union size MAX;
+union size{
+    u_int32_t   array[5];   // sizeof()= 4*5 =  20
+    u_int8_t p;             // sizeof()= 1
+};
+
+// 结合结构体
+// 联合体定义变量时，首地址的对齐：取该联合体的最大值的一个元素；
+struct space{
+    u_int32_t value;        // 0x00-0x03
+    u_int8_t j;             // 0x04 (中间补空字节)
+    MAX i;                  // 0x08-0x27
+};
+
+int main()
+{
+    int union_size = sizeof(union size);
+    int struct_size = sizeof(struct space);
+    cout << "union_size  " <<union_size << endl;
+    cout << "struct_size  " <<struct_size << endl;
+    return 0;
+}
+
+```
 
