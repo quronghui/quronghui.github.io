@@ -96,21 +96,21 @@
 
 
 
-  <meta name="description" content="[TOC] C++ 的预备知识C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序    数据+算法=程序 面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp   注释 / / //   头文件 stdio : 标准的I / O io + stream：I/O的输入输出流    .h  （std">
+  <meta name="description" content="[TOC] C++ 的预备知识 文中的代码查看链接  C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序    数据+算法=程序 面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp   注释 / / //   头文件 stdio : 标准的I / O io + stream：I/O的输入输出流">
 <meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ Primer Plus">
 <meta property="og:url" content="http://yoursite.com/2019/10/11/C-PrimerPlus/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="[TOC] C++ 的预备知识C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序    数据+算法=程序 面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp   注释 / / //   头文件 stdio : 标准的I / O io + stream：I/O的输入输出流    .h  （std">
+<meta property="og:description" content="[TOC] C++ 的预备知识 文中的代码查看链接  C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序    数据+算法=程序 面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp   注释 / / //   头文件 stdio : 标准的I / O io + stream：I/O的输入输出流">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/10/11/C-PrimerPlus/count.png">
 <meta property="og:image" content="http://yoursite.com/2019/10/11/C-PrimerPlus/cin_get.png">
 <meta property="og:image" content="http://yoursite.com/2019/10/11/C-PrimerPlus/cctypes.png">
-<meta property="og:updated_time" content="2020-03-25T12:35:53.123Z">
+<meta property="og:updated_time" content="2020-07-23T13:28:28.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ Primer Plus">
-<meta name="twitter:description" content="[TOC] C++ 的预备知识C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序    数据+算法=程序 面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp   注释 / / //   头文件 stdio : 标准的I / O io + stream：I/O的输入输出流    .h  （std">
+<meta name="twitter:description" content="[TOC] C++ 的预备知识 文中的代码查看链接  C vs C++   区别 C C++     组成 面向过程的C 面向过程的C ：数据+算法=程序    数据+算法=程序 面向对象的编程OOP：偏重于数据处理     泛型编程：侧重于特定的数据类型；   源代码 .c .cpp   注释 / / //   头文件 stdio : 标准的I / O io + stream：I/O的输入输出流">
 <meta name="twitter:image" content="http://yoursite.com/2019/10/11/C-PrimerPlus/count.png">
 
 
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2020-03-25 20:35:53" itemprop="dateModified" datetime="2020-03-25T20:35:53+08:00">2020-03-25</time>
+                <time title="Updated at: 2020-07-23 21:28:28" itemprop="dateModified" datetime="2020-07-23T21:28:28+08:00">2020-07-23</time>
               
             
           </span>
@@ -501,7 +501,10 @@
 
       
         <p>[TOC]</p>
-<h2 id="C-的预备知识"><a href="#C-的预备知识" class="headerlink" title="C++ 的预备知识"></a>C++ 的预备知识</h2><h3 id="C-vs-C"><a href="#C-vs-C" class="headerlink" title="C vs C++"></a>C vs C++</h3><table>
+<h2 id="C-的预备知识"><a href="#C-的预备知识" class="headerlink" title="C++ 的预备知识"></a>C++ 的预备知识</h2><ul>
+<li><a href="https://github.com/quronghui/c-add-prime-plus" target="_blank" rel="noopener">文中的代码查看链接</a></li>
+</ul>
+<h3 id="C-vs-C"><a href="#C-vs-C" class="headerlink" title="C vs C++"></a>C vs C++</h3><table>
 <thead>
 <tr>
 <th>区别</th>
@@ -1128,6 +1131,27 @@
 </ul>
 </li>
 </ol>
+<h2 id="对象和类"><a href="#对象和类" class="headerlink" title="对象和类"></a>对象和类</h2><ol>
+<li>类的作用？<ul>
+<li>将解释抽象、封装、数据隐藏起来；相当于一个大包</li>
+<li>分为private数据，和public的方法——用于访问private的数据；</li>
+</ul>
+</li>
+<li>OOP编程要做什么？<ul>
+<li>首先要考虑的是数据：数据的表示方式，如何使用数据；</li>
+</ul>
+</li>
+<li>内联函数的用法？</li>
+<li>类的构造函数和析构函数？<ul>
+<li>构造函数：为了对类中变量进行初始化；</li>
+<li>析构函数：对过期的对象进行清理；</li>
+</ul>
+</li>
+<li>对象数组的定义？<ul>
+<li>和一般的数组定义方式相同，type类型换成定义的类；</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -1174,8 +1198,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/03/25/hello-world/" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
+              <a href="/2020/05/15/QtCreator/" rel="prev" title="QtCreator">
+                QtCreator <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1248,7 +1272,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">106</span>
+                    <span class="site-state-item-count">107</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -1397,7 +1421,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">68</span>
+                      
+                    
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
@@ -1626,7 +1652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的预备知识"><span class="nav-number">1.</span> <span class="nav-text">C++ 的预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-vs-C"><span class="nav-number">1.1.</span> <span class="nav-text">C vs C++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cin-and-cout"><span class="nav-number">1.2.</span> <span class="nav-text">cin and cout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">2.</span> <span class="nav-text">数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整形数据的表示"><span class="nav-number">2.1.</span> <span class="nav-text">整形数据的表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">2.2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getline-and-get-读入一行字符串"><span class="nav-number">2.3.</span> <span class="nav-text">getline() and get() 读入一行字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体：实现多种数据的管理"><span class="nav-number">2.4.</span> <span class="nav-text">结构体：实现多种数据的管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针和存储空间"><span class="nav-number">2.5.</span> <span class="nav-text">指针和存储空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型结合访问"><span class="nav-number">2.6.</span> <span class="nav-text">类型结合访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的替代品：数组（数据结构），vector-和-array（和数组不同，array是一个对象）"><span class="nav-number">2.7.</span> <span class="nav-text">数组的替代品：数组（数据结构），vector  和  array（和数组不同，array是一个对象）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环和分支"><span class="nav-number">3.</span> <span class="nav-text">循环和分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本循环"><span class="nav-number">3.1.</span> <span class="nav-text">基本循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于while循环实现："><span class="nav-number">3.2.</span> <span class="nav-text">基于while循环实现：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于范围的for循环"><span class="nav-number">3.3.</span> <span class="nav-text">基于范围的for循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cctype字符函数库"><span class="nav-number">3.4.</span> <span class="nav-text">cctype字符函数库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的IO和文本的IO"><span class="nav-number">3.5.</span> <span class="nav-text">文件的IO和文本的IO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">4.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数模块"><span class="nav-number">4.1.</span> <span class="nav-text">函数模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联函数"><span class="nav-number">4.2.</span> <span class="nav-text">内联函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量，引用，指针"><span class="nav-number">4.3.</span> <span class="nav-text">变量，引用，指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象，继承，引用"><span class="nav-number">4.4.</span> <span class="nav-text">对象，继承，引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认参数-与-函数重载"><span class="nav-number">4.5.</span> <span class="nav-text">默认参数 与 函数重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数模板"><span class="nav-number">4.6.</span> <span class="nav-text">函数模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型和名称空间"><span class="nav-number">5.</span> <span class="nav-text">内存模型和名称空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序编译"><span class="nav-number">5.1.</span> <span class="nav-text">程序编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存中存储持续性，作用域和链接性"><span class="nav-number">5.2.</span> <span class="nav-text">内存中存储持续性，作用域和链接性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名称空间"><span class="nav-number">5.3.</span> <span class="nav-text">名称空间</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的预备知识"><span class="nav-number">1.</span> <span class="nav-text">C++ 的预备知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-vs-C"><span class="nav-number">1.1.</span> <span class="nav-text">C vs C++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cin-and-cout"><span class="nav-number">1.2.</span> <span class="nav-text">cin and cout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">2.</span> <span class="nav-text">数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整形数据的表示"><span class="nav-number">2.1.</span> <span class="nav-text">整形数据的表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">2.2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getline-and-get-读入一行字符串"><span class="nav-number">2.3.</span> <span class="nav-text">getline() and get() 读入一行字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体：实现多种数据的管理"><span class="nav-number">2.4.</span> <span class="nav-text">结构体：实现多种数据的管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针和存储空间"><span class="nav-number">2.5.</span> <span class="nav-text">指针和存储空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型结合访问"><span class="nav-number">2.6.</span> <span class="nav-text">类型结合访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的替代品：数组（数据结构），vector-和-array（和数组不同，array是一个对象）"><span class="nav-number">2.7.</span> <span class="nav-text">数组的替代品：数组（数据结构），vector  和  array（和数组不同，array是一个对象）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环和分支"><span class="nav-number">3.</span> <span class="nav-text">循环和分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本循环"><span class="nav-number">3.1.</span> <span class="nav-text">基本循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于while循环实现："><span class="nav-number">3.2.</span> <span class="nav-text">基于while循环实现：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于范围的for循环"><span class="nav-number">3.3.</span> <span class="nav-text">基于范围的for循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cctype字符函数库"><span class="nav-number">3.4.</span> <span class="nav-text">cctype字符函数库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件的IO和文本的IO"><span class="nav-number">3.5.</span> <span class="nav-text">文件的IO和文本的IO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">4.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数模块"><span class="nav-number">4.1.</span> <span class="nav-text">函数模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联函数"><span class="nav-number">4.2.</span> <span class="nav-text">内联函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量，引用，指针"><span class="nav-number">4.3.</span> <span class="nav-text">变量，引用，指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象，继承，引用"><span class="nav-number">4.4.</span> <span class="nav-text">对象，继承，引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认参数-与-函数重载"><span class="nav-number">4.5.</span> <span class="nav-text">默认参数 与 函数重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数模板"><span class="nav-number">4.6.</span> <span class="nav-text">函数模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型和名称空间"><span class="nav-number">5.</span> <span class="nav-text">内存模型和名称空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序编译"><span class="nav-number">5.1.</span> <span class="nav-text">程序编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存中存储持续性，作用域和链接性"><span class="nav-number">5.2.</span> <span class="nav-text">内存中存储持续性，作用域和链接性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名称空间"><span class="nav-number">5.3.</span> <span class="nav-text">名称空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象和类"><span class="nav-number">6.</span> <span class="nav-text">对象和类</span></a></li></ol></div>
             
 
           </div>
