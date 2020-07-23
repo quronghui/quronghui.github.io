@@ -53,9 +53,26 @@
 1. 安装git；
 2. 安装Nodejs和npm；
 3. 使用`git clone git@github.com:WincerChan/WincerChan.github.io.git`将仓库拷贝至本地；
+   + 存在一个问题：通过Clone就会很慢；
 4. 在文件夹内执行以下命令`npm install hexo-cli -g`、`npm install`、`npm install hexo-deployer-git`。
 
-## 
+## 直接通过原来备份的文件进行迁移
+
+1. 先安装git；然后安装Nodejs和npm；
+
+2. 执行命令安装hexo-cli：`npm install hexo-cli -g`
+
+3. 使用Hexo初始化一个blog
+
+   ```
+   $ hexo init HexoBlog	// 初始化一个新项目；
+   ```
+
+4. 在文件夹中切换到分支内容（push到git上的内容），然后将内容全部复制到HexoBlog里面；
+
+5. 然后安装`npm install`、`npm install hexo-deployer-git`
+
+6. 最后就可以正常使用 hexo g 和 hexo d
 
 ## 阿里云域名的绑定
 
