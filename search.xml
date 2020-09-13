@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[MoneyMnanagement]]></title>
+    <url>%2F2020%2F09%2F13%2FMoneyMnanagement%2F</url>
+    <content type="text"><![CDATA[投资理财课]]></content>
+      <categories>
+        <category>Class</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[PyQt5]]></title>
+    <url>%2F2020%2F07%2F23%2FPyQt5%2F</url>
+    <content type="text"><![CDATA[PyQt5 快速开发与实战第一章：认识PyQt5一、QT与PyQt关系 PyQt是Qt框架的Python语言实现； 由于PyQt的核心就是Qt库，也是用C++编写的； 二、PyQt5在Windows环境搭建 Python是解释性编程语言，所以需要解释器将源码翻译成机器语言； Python3的安装 123$ https：www.python.org/downloads/windows/$ 环境变量添加：./python35 ; 和 ./python35/Scripts (解释器)$ Check: cmd中输入 Python；——&gt; print("hello python"); PyQt5 的安装，安装完成后添加Path 123$ pip install PyQt5 -i https://pypi.douban.com/simple // pip install安装时自动的；使用的是豆瓣提供的镜像；$ pip install PyQt5-tools -i https://pypi.douban.com/simple //安装了qt的一些工具$ 环境变量中添加：./PyQt5-tools 的路径 PyQt5 的安装测试代码 12345678910import sysfrom PyQt5.QtWidgets import*if __name__=='__main__': app = QApplication(sys.argv) #创建QApplication实例 w = QWidget() #创建一个窗口 w.resize(300,150) #设置窗口尺寸 w.move(300,300) #移动窗口 w.setWindowTitle('第一个基于PyQt5的桌面应用') #设置窗口标题 w.show() #显示窗口 sys.exit(app.exec_()) #进入程序的主循环，并通过exit函数确保主循环安全结束 安装Python的其他模块 1pip install matplotlib -i https://pypi.tuna.tsinghua.edu.cn/simple // 选择一个国内的镜像源 试用PyQt5的API接口文档 两个内置函数：dir()和help() 12$ from PyQt5.QtWidgets import QWidget$ dir(QWidget) 安装IDE，Eric 中间出了好几次问题：差什么就安装什么 123$ pip install QScintilla -i https://pypi.tuna.tsinghua.edu.cn/simple // 安装QSci模块$ python install.py // 安装eric6$ pip install PyQtWebEngine // 安装过程中缺少的 Eric的配置：设置，首选项 12$ 配置QT的路径：配置pyqt5-tools的路径；$ 配置编辑器的API 安装jedi，代码补全功能 123$ pip install jedi# c:\users\111\appdata\local\programs\python\python38\lib\site-packages (0.17.2)$ 在插件中进行jedi的安装； 第二章 Python 基本语法]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2020%2F07%2F23%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
