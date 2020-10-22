@@ -96,19 +96,20 @@
 
 
 
-  <meta name="description" content="PyQt5 快速开发与实战第一章：认识PyQt5一、QT与PyQt关系 PyQt是Qt框架的Python语言实现； 由于PyQt的核心就是Qt库，也是用C++编写的；  二、PyQt5在Windows环境搭建 Python是解释性编程语言，所以需要解释器将源码翻译成机器语言；   Python3的安装 123$ https：www.python.org/downloads/windows/$ 环境">
-<meta name="keywords" content="Emebedded Electronic">
+  <meta name="description" content="第一章：认识PyQt5一、QT与PyQt关系 PyQt是Qt框架的Python语言实现； 由于PyQt的核心就是Qt库，也是用C++编写的；  二、PyQt5在Windows环境搭建 Python是解释性编程语言，所以需要解释器将源码翻译成机器语言；   Python3的安装 123$ https：www.python.org/downloads/windows/$ 环境变量添加：./python">
+<meta name="keywords" content="Python Qt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PyQt5">
+<meta property="og:title" content="PyQt5 快速开发与实战(一)基本窗口控件">
 <meta property="og:url" content="http://yoursite.com/2020/07/23/PyQt5/index.html">
 <meta property="og:site_name" content="Lucky Boy">
-<meta property="og:description" content="PyQt5 快速开发与实战第一章：认识PyQt5一、QT与PyQt关系 PyQt是Qt框架的Python语言实现； 由于PyQt的核心就是Qt库，也是用C++编写的；  二、PyQt5在Windows环境搭建 Python是解释性编程语言，所以需要解释器将源码翻译成机器语言；   Python3的安装 123$ https：www.python.org/downloads/windows/$ 环境">
+<meta property="og:description" content="第一章：认识PyQt5一、QT与PyQt关系 PyQt是Qt框架的Python语言实现； 由于PyQt的核心就是Qt库，也是用C++编写的；  二、PyQt5在Windows环境搭建 Python是解释性编程语言，所以需要解释器将源码翻译成机器语言；   Python3的安装 123$ https：www.python.org/downloads/windows/$ 环境变量添加：./python">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/07/23/PyQt5/2020.9.16QtDesigner.jpg">
-<meta property="og:updated_time" content="2020-10-19T06:12:03.073Z">
+<meta property="og:image" content="http://yoursite.com/2020/07/23/PyQt5/2020.10.22PyQt基本窗口控件.jpg">
+<meta property="og:updated_time" content="2020-10-22T06:36:22.929Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PyQt5">
-<meta name="twitter:description" content="PyQt5 快速开发与实战第一章：认识PyQt5一、QT与PyQt关系 PyQt是Qt框架的Python语言实现； 由于PyQt的核心就是Qt库，也是用C++编写的；  二、PyQt5在Windows环境搭建 Python是解释性编程语言，所以需要解释器将源码翻译成机器语言；   Python3的安装 123$ https：www.python.org/downloads/windows/$ 环境">
+<meta name="twitter:title" content="PyQt5 快速开发与实战(一)基本窗口控件">
+<meta name="twitter:description" content="第一章：认识PyQt5一、QT与PyQt关系 PyQt是Qt框架的Python语言实现； 由于PyQt的核心就是Qt库，也是用C++编写的；  二、PyQt5在Windows环境搭建 Python是解释性编程语言，所以需要解释器将源码翻译成机器语言；   Python3的安装 123$ https：www.python.org/downloads/windows/$ 环境变量添加：./python">
 <meta name="twitter:image" content="http://yoursite.com/2020/07/23/PyQt5/2020.9.16QtDesigner.jpg">
 
 
@@ -126,7 +127,7 @@
   };
 </script>
 
-  <title>PyQt5 | Lucky Boy</title>
+  <title>PyQt5 快速开发与实战(一)基本窗口控件 | Lucky Boy</title>
   
 
 
@@ -226,7 +227,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -243,7 +244,7 @@
 
     
 
-    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br>Archives</a>
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br>Archiv</a>
 
   </li>
         
@@ -260,7 +261,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br>Kategorien</a>
 
   </li>
         
@@ -288,7 +289,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>recherche</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -375,7 +376,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PyQt5
+          <h1 class="post-title" itemprop="name headline">PyQt5 快速开发与实战(一)基本窗口控件
 
               
             
@@ -394,7 +395,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -418,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2020-10-19 14:12:03" itemprop="dateModified" datetime="2020-10-19T14:12:03+08:00">2020-10-19</time>
+                <time title="Updated at: 2020-10-22 14:36:22" itemprop="dateModified" datetime="2020-10-22T14:36:22+08:00">2020-10-22</time>
               
             
           </span>
@@ -432,10 +433,10 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PyQt5/" itemprop="url" rel="index"><span itemprop="name">PyQt5</span></a></span>
 
                 
                 
@@ -498,7 +499,7 @@
       
 
       
-        <h1 id="PyQt5-快速开发与实战"><a href="#PyQt5-快速开发与实战" class="headerlink" title="PyQt5 快速开发与实战"></a>PyQt5 快速开发与实战</h1><h2 id="第一章：认识PyQt5"><a href="#第一章：认识PyQt5" class="headerlink" title="第一章：认识PyQt5"></a>第一章：认识PyQt5</h2><h3 id="一、QT与PyQt关系"><a href="#一、QT与PyQt关系" class="headerlink" title="一、QT与PyQt关系"></a>一、QT与PyQt关系</h3><ol>
+        <h2 id="第一章：认识PyQt5"><a href="#第一章：认识PyQt5" class="headerlink" title="第一章：认识PyQt5"></a>第一章：认识PyQt5</h2><h3 id="一、QT与PyQt关系"><a href="#一、QT与PyQt关系" class="headerlink" title="一、QT与PyQt关系"></a>一、QT与PyQt关系</h3><ol>
 <li>PyQt是Qt框架的Python语言实现；</li>
 <li>由于PyQt的核心就是Qt库，也是用C++编写的；</li>
 </ol>
@@ -582,7 +583,11 @@
 </ul>
 </li>
 </ol>
-<h2 id="第四章-PyQt5-基本窗口控件"><a href="#第四章-PyQt5-基本窗口控件" class="headerlink" title="第四章 PyQt5 基本窗口控件"></a>第四章 PyQt5 基本窗口控件</h2><h3 id="1-窗口类型介绍"><a href="#1-窗口类型介绍" class="headerlink" title="1. 窗口类型介绍"></a>1. 窗口类型介绍</h3><ol>
+<h2 id="第四章-PyQt5-基本窗口控件"><a href="#第四章-PyQt5-基本窗口控件" class="headerlink" title="第四章 PyQt5 基本窗口控件"></a>第四章 PyQt5 基本窗口控件</h2><ul>
+<li><img src="/2020/07/23/PyQt5/2020.10.22PyQt基本窗口控件.jpg">
+</li>
+</ul>
+<h3 id="1-窗口类型介绍"><a href="#1-窗口类型介绍" class="headerlink" title="1. 窗口类型介绍"></a>1. 窗口类型介绍</h3><ol>
 <li>窗口类型的介绍：<ul>
 <li>QMainWindow：GUI的主窗口，包含菜单栏（menuBar）、工具栏(addToolBar)、状态栏(statusBar)、标题栏；</li>
 <li>QDialog：对话框窗口基类，用来执行短期任务，或者与用户进行互动。没有菜单栏……</li>
@@ -715,7 +720,7 @@
 <li>问题：没有实现布局？解决layout = QVBoxLayout(self)    加入self变量，对其进行布局；</li>
 </ul>
 </li>
-<li>QInputDiadlog：标准对话框，由一个文本框和两个按钮（OK，Cancel）组成；<ul>
+<li>QInputDialog：标准对话框，由一个文本框和两个按钮（OK，Cancel）组成；<ul>
 <li>当用户按下OK或Enter后，父窗口可以收集QInputDiadlog输入的文本信息；</li>
 <li>getInt()，getDouble()：从控件中获得标准整数、浮点数的输入；</li>
 <li>getText()：从控件中获得标准字符串的输入；</li>
@@ -727,6 +732,158 @@
 <li>setFont()：设置需要改变字体的具体格式；</li>
 </ul>
 </li>
+<li>QFileDialog：控件用于打开和保存文件的标准对话框；<ul>
+<li>文件的打开和保存；</li>
+<li>getOpenFileName()调用文件对话框显示图像；<ul>
+<li>self：显示父组件；第二个参数：对话框的标题；第三个参数：对话框显示默认打开的目录；第四个参数：相当于过滤器filter</li>
+<li>QFileDialog()    文件对话框的对象exec_()方法来选择文件，并将文件的内容显示在文本编辑控件中；</li>
+</ul>
+</li>
+<li>Pixmap()函数：加载并呈现本地图像</li>
+</ul>
+</li>
+</ol>
+<h3 id="9-窗口绘图类控件"><a href="#9-窗口绘图类控件" class="headerlink" title="9. 窗口绘图类控件"></a>9. 窗口绘图类控件</h3><ol>
+<li><p>PyQt5实现绘图功能？</p>
+<ul>
+<li>通过QPainter、QPen、QBrush三个类实现绘图功能；</li>
+<li>QPixmap：作用是加载并呈现本地图像，而图像呈现的本质也是通过绘图方式实现的；</li>
+</ul>
+</li>
+<li><p>QPainter：绘制从简单的直线到复杂的饼图；</p>
+<ol>
+<li><p>绘制操作：在QWidget.PaintEvent()中完成；</p>
+<ul>
+<li><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">paintEvent</span><span class="params">(<span class="keyword">self</span>,event)</span></span><span class="symbol">:</span></span><br><span class="line"><span class="comment"># 定义了一个绘制事件： QtGui.QPainter 类负责所有低级别的绘制，所有绘制的事件都在此内（begin—end）</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>绘制方法：必须放在QtGui.QPainter对象的begin()和end()之间；</p>
+<ul>
+<li><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drawText</span><span class="params">(<span class="keyword">self</span>, event, qp)</span></span><span class="symbol">:</span></span><br><span class="line">（<span class="number">1</span>）drawText()方法显示给定坐标处的文字；</span><br><span class="line">（<span class="number">2</span>）setPen()设置画笔的颜色；</span><br><span class="line">（<span class="number">3</span>）setFont()设置字体大小；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>绘制方法和画笔格式：书中有表格展示；</p>
+</li>
+<li><p>通过绘制点实现正弦函数</p>
+<ul>
+<li><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">for</span> i in range(<span class="number">10000</span>):	# 绘制<span class="number">10000</span>个点，可以自己改变</span><br><span class="line">	# [<span class="number">-100</span>, <span class="number">100</span>]两个周期的正弦函数图像</span><br><span class="line">	x = <span class="number">100</span> *(<span class="number">-1</span>+<span class="number">2.0</span>*i/<span class="number">10000</span>)+ <span class="built_in">size</span>.<span class="built_in">width</span>()/<span class="number">2.0</span></span><br><span class="line">	y = <span class="number">-50</span> * math.<span class="built_in">sin</span>((x - <span class="built_in">size</span>.<span class="built_in">width</span>()/<span class="number">2.0</span>)*math.pi/<span class="number">50</span>) + <span class="built_in">size</span>.<span class="built_in">height</span>()/<span class="number">2.0</span></span><br><span class="line">	qp.drawPoint(x, y)		# 绘制点；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>QPen: 是一个基本的图形对象，用于绘制直线、曲线、轮廓画出矩形、椭圆形、多边形和其他形状。</p>
+<ul>
+<li>pen = QPen(Qt.black, 2, Qt.SolidLine)    # 穿件了QPen对象。黑色、2像素、SolidLine预定义线条样式；</li>
+<li>CustomDashLine自定义的线条样式；<ul>
+<li>setDashPattern()方法使用数字列表定义样式：列表中个数必须是偶数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>QBrush：绘制九个不同样式的矩形</p>
+<ul>
+<li>将Qprinter对象的画刷设置成QBrush对象</li>
+<li>调用drawRect()方法绘制矩形</li>
+</ul>
+</li>
+<li><p>QPixmap</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>Pixmap(QPixmap(<span class="string">"./images/python.jpg"</span>))		<span class="comment"># 将图像显示出来；</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="10-拖拽和剪切板"><a href="#10-拖拽和剪切板" class="headerlink" title="10. 拖拽和剪切板"></a>10. 拖拽和剪切板</h3><ol>
+<li><p>Drag与Drop</p>
+<ul>
+<li>拖拽功能是基于MIME类型的拖拽数据传输的，其类型是基于QDrag类；QMimeData对象将关联的数据与其对应的MIME类型相关联；</li>
+<li>MimeData类有相关的函数处理MIME类型的数据：判断函数、设置函数、获取函数；</li>
+<li>QWidget对象支持拖拽动作：允许拖拽数据的控件必须设置QWidget.setDragEnabled()函数为True;</li>
+<li>实例：将左边文本框的输入拖拽到右边的下拉菜单栏中——实现下拉菜单的动态输入；</li>
+</ul>
+</li>
+<li>QClipboard<ul>
+<li>QClipboard 例子: 对系统剪切板的访问，可以在应用程序之间复制和粘贴数据；</li>
+<li>文本数据(Text)、图像数据(Image)、网页数据（HTML）;</li>
+<li>当剪切板内容发生变化的时候，dataChange信号被发射；</li>
+</ul>
+</li>
+</ol>
+<h3 id="11-日历与时间"><a href="#11-日历与时间" class="headerlink" title="11. 日历与时间"></a>11. 日历与时间</h3><ol>
+<li><p>QCalendar：日历控件，提供了一个基于月份的视图，允许用户通过鼠标和键盘<strong>选择日期</strong>；</p>
+<ul>
+<li>QCalendar的对象是通过QCalendarWidget类进行创建的；</li>
+<li>通过QDate()方法设置具体的日期；</li>
+<li>从窗口中选定一个日期，会发射一个QtCore.QDate信号，将此信号连接到用户的槽函数中；</li>
+</ul>
+</li>
+<li><p>QDateTimeEdit：允许用户<strong>编辑日期和时间</strong>的控件；</p>
+<ul>
+<li><p>setDisplayFormat()：设置时间的格式；</p>
+</li>
+<li><p>time()：返回编辑的时间；data()：返回编辑的日期；</p>
+</li>
+<li><p>初始化QDateTimeEdit不指定日期时间时</p>
+<ul>
+<li><p>系统分配一个默认时间2000年1月1日 0时0分0秒；</p>
+</li>
+<li><p>currentDateTime()，设置日期时间为本机此刻的日期和时间；</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dateTimeEdit2 = QDateTimeEdit(<span class="name">QDateTime</span>.currentDateTime(), self)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>setCalendarPopup：设置日期的选择为弹出框内进行选择；</p>
+</li>
+<li><p>两个函数模板：</p>
+<ul>
+<li>信号与槽函数的连接的函数模板：同样分为日期、日期和时间、时间，三种槽函数；</li>
+<li>获取日期、时间的函数模板；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="12-菜单栏和工具栏"><a href="#12-菜单栏和工具栏" class="headerlink" title="12. 菜单栏和工具栏"></a>12. 菜单栏和工具栏</h3><ol>
+<li><p>菜单栏QMenu：分清上一级是谁；</p>
+<ul>
+<li><p>menuBar()：创建一个menuBar菜单栏对象；</p>
+</li>
+<li><p>addMenu(“File”)：在菜单栏中添加一个新的QMenu对象；</p>
+</li>
+<li><p>QAction()：创建一个动作；</p>
+</li>
+<li><p>addSeparator() : 在菜单栏中添加横线，在需要添加横线的动作后面添加；</p>
+</li>
+<li><p>添加QAction两种方式实现：可以使字符串或者是QAction对象；</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 添加第一个动作，基于<span class="keyword">file</span>：两种方式实现</span><br><span class="line"><span class="keyword">New</span> = QAction(<span class="string">"New"</span>, self)	# 方式<span class="number">1</span></span><br><span class="line"><span class="keyword">file</span>.addAction(<span class="keyword">New</span>)</span><br><span class="line">#<span class="keyword">file</span>.addAction(<span class="string">"New"</span>)				# 方式<span class="number">2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基于file的第二个动作：为动作Action添加一个快捷键的方法；</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save = QAction(<span class="string">"Save"</span>,self)	<span class="comment"># 添加一个动作</span></span><br><span class="line">save.setShortcut(<span class="string">"Ctrl+S"</span>)	<span class="comment"># 添加快捷键；</span></span><br><span class="line">file.addAction(save)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>工具栏QToolBar：由文本、图标或者其他空间按钮组成的可移动面板</p>
+<ul>
+<li>addToolBar()方法：在工具栏区域添加文件工具栏；</li>
+<li>将信号连接到槽函数；每当点击工具栏中的按钮时，都会发射actionTriggered信号。这个信号将关联的QAction对象 的引用发送到连接的槽函数;</li>
+<li>QToolBar类中常用的方法（）</li>
+</ul>
+</li>
+<li><p>状态栏QStatusBar</p>
+<ul>
+<li><p>实例：创建一个file菜单栏，并为其添加一个动作，并为其创建一个编辑框；最后点击show动作时，提示已被点击；</p>
+</li>
+<li><p>保留一个水平条，作为状态栏，用于显示永久的或临时的状态信息；</p>
+</li>
+<li><p>通过主窗口的QMainWindow的setStatusBar()函数设置状态栏</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">self</span>.statusBar= QStatusBar() 	<span class="comment"># QStatusBar设置状态栏，创建一个状态栏对象；</span></span><br><span class="line"><span class="literal">self</span>.<span class="built_in">set</span>StatusBar(<span class="literal">self</span>.statusBar)		<span class="comment"># set设置状态栏显示</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="13-Qprinter"><a href="#13-Qprinter" class="headerlink" title="13. Qprinter"></a>13. Qprinter</h3><ol>
+<li>Qprinter打印图像实际上是在QPaintDevice中画图，与平常在QWidget、QPixmap和QImage画图一样，都是创建一个QPainter对象进行画图；</li>
+<li>打印函数；</li>
 </ol>
 <h3 id="遇到的问题？"><a href="#遇到的问题？" class="headerlink" title="遇到的问题？"></a>遇到的问题？</h3><ol>
 <li><p>问题：同一个GUI是否可以用多个窗口？</p>
@@ -753,6 +910,15 @@
 <li><p>print输出到Terminal的方式：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span>(<span class="string">'current slider value=%s'</span> % <span class="keyword">self</span>.sl.value() )	<span class="comment"># value()获取此时的值</span></span><br><span class="line"><span class="keyword">print</span>(<span class="string">'current slider value= '</span>,  str(<span class="keyword">self</span>.sl.value()) )		<span class="comment"># str()将值转换为人容易阅读的模式；</span></span><br></pre></td></tr></table></figure>
 </li>
+<li><p>初始化QDateTimeEdit 如何指定日期时间为本机此刻的值，而不是通过手动设置？</p>
+<ul>
+<li><p>currentDateTime()，设置日期时间为本机此刻的日期和时间；</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dateTimeEdit = QDateTimeEdit(self)	<span class="comment"># QDateTimeEdit ：默认的日期和时间2000年1月1日 0时0分0秒；</span></span><br><span class="line">dateTimeEdit2 = QDateTimeEdit(QDateTime.currentDateTime(), self)	<span class="comment"># 设置日期时间为本机此刻的日期和时间；</span></span><br><span class="line">dateEdit = QDateTimeEdit(QDate.currentDate(), self)	<span class="comment"># 只设置日期为本机日期</span></span><br><span class="line">timeEdit = QDateTimeEdit(QTime.currentTime(), self)	<span class="comment"># 只设置时间为本机时间</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>菜单栏中：如何为不同的Action分配不同的槽函数？</p>
+</li>
 </ol>
 
       
@@ -774,6 +940,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python-Qt/" rel="tag"># Python Qt</a>
+          
+        </div>
       
 
       
@@ -843,10 +1015,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table Des Matières
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Ensemble
+            Übersicht
           </li>
         </ul>
       
@@ -869,7 +1041,7 @@
                   <a href="/archives">
                 
                     <span class="site-state-item-count">110</span>
-                    <span class="site-state-item-name">articles</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -1024,7 +1196,7 @@
                       
                     
                     <span class="site-state-item-count">71</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -1216,8 +1388,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">90</span>
-                    <span class="site-state-item-name">tags</span>
+                      
+                    
+                    <span class="site-state-item-count">91</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -1252,7 +1426,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQt5-快速开发与实战"><span class="nav-number">1.</span> <span class="nav-text">PyQt5 快速开发与实战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章：认识PyQt5"><span class="nav-number">1.1.</span> <span class="nav-text">第一章：认识PyQt5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、QT与PyQt关系"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、QT与PyQt关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、PyQt5在Windows环境搭建"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、PyQt5在Windows环境搭建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章-Python-基本语法-9-16"><span class="nav-number">1.2.</span> <span class="nav-text">第二章 Python 基本语法(9.16)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-Qt-Designer使用"><span class="nav-number">1.3.</span> <span class="nav-text">第三章 Qt Designer使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-PyQt5-基本窗口控件"><span class="nav-number">1.4.</span> <span class="nav-text">第四章 PyQt5 基本窗口控件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-窗口类型介绍"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 窗口类型介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-QLable标签的使用"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. QLable标签的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-文本框类型控件"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. 文本框类型控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-按钮类控件"><span class="nav-number">1.4.4.</span> <span class="nav-text">4. 按钮类控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-下拉列表框"><span class="nav-number">1.4.5.</span> <span class="nav-text">5. 下拉列表框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-计数器"><span class="nav-number">1.4.6.</span> <span class="nav-text">6. 计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-滑动条"><span class="nav-number">1.4.7.</span> <span class="nav-text">7. 滑动条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-对话框类控件"><span class="nav-number">1.4.8.</span> <span class="nav-text">8. 对话框类控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到的问题？"><span class="nav-number">1.4.9.</span> <span class="nav-text">遇到的问题？</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章：认识PyQt5"><span class="nav-number">1.</span> <span class="nav-text">第一章：认识PyQt5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、QT与PyQt关系"><span class="nav-number">1.1.</span> <span class="nav-text">一、QT与PyQt关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、PyQt5在Windows环境搭建"><span class="nav-number">1.2.</span> <span class="nav-text">二、PyQt5在Windows环境搭建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章-Python-基本语法-9-16"><span class="nav-number">2.</span> <span class="nav-text">第二章 Python 基本语法(9.16)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-Qt-Designer使用"><span class="nav-number">3.</span> <span class="nav-text">第三章 Qt Designer使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-PyQt5-基本窗口控件"><span class="nav-number">4.</span> <span class="nav-text">第四章 PyQt5 基本窗口控件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-窗口类型介绍"><span class="nav-number">4.1.</span> <span class="nav-text">1. 窗口类型介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-QLable标签的使用"><span class="nav-number">4.2.</span> <span class="nav-text">2. QLable标签的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-文本框类型控件"><span class="nav-number">4.3.</span> <span class="nav-text">3. 文本框类型控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-按钮类控件"><span class="nav-number">4.4.</span> <span class="nav-text">4. 按钮类控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-下拉列表框"><span class="nav-number">4.5.</span> <span class="nav-text">5. 下拉列表框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-计数器"><span class="nav-number">4.6.</span> <span class="nav-text">6. 计数器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-滑动条"><span class="nav-number">4.7.</span> <span class="nav-text">7. 滑动条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-对话框类控件"><span class="nav-number">4.8.</span> <span class="nav-text">8. 对话框类控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-窗口绘图类控件"><span class="nav-number">4.9.</span> <span class="nav-text">9. 窗口绘图类控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-拖拽和剪切板"><span class="nav-number">4.10.</span> <span class="nav-text">10. 拖拽和剪切板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-日历与时间"><span class="nav-number">4.11.</span> <span class="nav-text">11. 日历与时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-菜单栏和工具栏"><span class="nav-number">4.12.</span> <span class="nav-text">12. 菜单栏和工具栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-Qprinter"><span class="nav-number">4.13.</span> <span class="nav-text">13. Qprinter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遇到的问题？"><span class="nav-number">4.14.</span> <span class="nav-text">遇到的问题？</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1298,7 +1472,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -1306,7 +1480,7 @@
 
 
 
-  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
 
 
 
