@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="AltiumDesigner软件使用的一些记录AD软件优化设置   快捷键 功能     T+P 打开SCH、PCB的配置选项   Shift + S PCB 的单层显示无阴影   CTRL+SHIFT+鼠标滑轮 PCB布线换层   Shift+F 选元器件   R+B PCB信息   Tab 编辑正在放置的元件属性   Shift+C 取消过滤    PCBPCB界面控件的介绍   模块 快捷键">
+<meta name="keywords" content="AltiumDesigner">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UsingAltiumDesigner">
+<meta property="og:url" content="http://yoursite.com/2020/11/05/UsingAltiumDesigner/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="AltiumDesigner软件使用的一些记录AD软件优化设置   快捷键 功能     T+P 打开SCH、PCB的配置选项   Shift + S PCB 的单层显示无阴影   CTRL+SHIFT+鼠标滑轮 PCB布线换层   Shift+F 选元器件   R+B PCB信息   Tab 编辑正在放置的元件属性   Shift+C 取消过滤    PCBPCB界面控件的介绍   模块 快捷键">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-11-10T05:50:24.886Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UsingAltiumDesigner">
+<meta name="twitter:description" content="AltiumDesigner软件使用的一些记录AD软件优化设置   快捷键 功能     T+P 打开SCH、PCB的配置选项   Shift + S PCB 的单层显示无阴影   CTRL+SHIFT+鼠标滑轮 PCB布线换层   Shift+F 选元器件   R+B PCB信息   Tab 编辑正在放置的元件属性   Shift+C 取消过滤    PCBPCB界面控件的介绍   模块 快捷键">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/11/05/UsingAltiumDesigner/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>UsingAltiumDesigner | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/05/UsingAltiumDesigner/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UsingAltiumDesigner
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2020-11-05 13:51:56" itemprop="dateCreated datePublished" datetime="2020-11-05T13:51:56+08:00">2020-11-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2020-11-10 13:50:24" itemprop="dateModified" datetime="2020-11-10T13:50:24+08:00">2020-11-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AltiumDesigner/" itemprop="url" rel="index"><span itemprop="name">AltiumDesigner</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="AltiumDesigner软件使用的一些记录"><a href="#AltiumDesigner软件使用的一些记录" class="headerlink" title="AltiumDesigner软件使用的一些记录"></a>AltiumDesigner软件使用的一些记录</h1><h2 id="AD软件优化设置"><a href="#AD软件优化设置" class="headerlink" title="AD软件优化设置"></a><a href="https://blog.csdn.net/u011400634/article/details/81390924" target="_blank" rel="noopener">AD软件优化设置</a></h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T+P</td>
+<td>打开SCH、PCB的配置选项</td>
+</tr>
+<tr>
+<td>Shift + S</td>
+<td>PCB 的单层显示无阴影</td>
+</tr>
+<tr>
+<td>CTRL+SHIFT+鼠标滑轮</td>
+<td>PCB布线换层</td>
+</tr>
+<tr>
+<td>Shift+F</td>
+<td>选元器件</td>
+</tr>
+<tr>
+<td>R+B</td>
+<td>PCB信息</td>
+</tr>
+<tr>
+<td>Tab</td>
+<td>编辑正在放置的元件属性</td>
+</tr>
+<tr>
+<td>Shift+C</td>
+<td>取消过滤</td>
+</tr>
+</tbody>
+</table>
+<h2 id="PCB"><a href="#PCB" class="headerlink" title="PCB"></a>PCB</h2><h3 id="PCB界面控件的介绍"><a href="#PCB界面控件的介绍" class="headerlink" title="PCB界面控件的介绍"></a>PCB界面控件的介绍</h3><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一、Place放置</td>
+<td>P+L</td>
+<td>画线</td>
+</tr>
+<tr>
+<td></td>
+<td>P+S</td>
+<td>放置文字</td>
+</tr>
+<tr>
+<td></td>
+<td>P+P</td>
+<td>放置圆盘</td>
+</tr>
+<tr>
+<td></td>
+<td>P+V</td>
+<td>放置过孔</td>
+</tr>
+<tr>
+<td></td>
+<td>P+T</td>
+<td>布线</td>
+</tr>
+<tr>
+<td></td>
+<td>P+I</td>
+<td>差分布线</td>
+</tr>
+<tr>
+<td></td>
+<td>P+C</td>
+<td>放置元器件</td>
+</tr>
+<tr>
+<td></td>
+<td>P+G</td>
+<td>铺铜，规则一定要先设置好</td>
+</tr>
+<tr>
+<td>二、Edit 编辑</td>
+<td>E+S+A</td>
+<td>选择所有信号</td>
+</tr>
+<tr>
+<td></td>
+<td>E+S+N</td>
+<td>选择网络信号</td>
+</tr>
+<tr>
+<td></td>
+<td>E+S+Y</td>
+<td>选择单层上的所有信号</td>
+</tr>
+<tr>
+<td></td>
+<td>E+O+S</td>
+<td>设置参考点</td>
+</tr>
+<tr>
+<td>三、View 视图</td>
+<td>V+C+S</td>
+<td>显示信号线网络连接</td>
+</tr>
+<tr>
+<td></td>
+<td>V+C+H</td>
+<td>隐藏信号线网络连接</td>
+</tr>
+<tr>
+<td></td>
+<td>V+S</td>
+<td>将system、PCB界面隐藏/显示</td>
+</tr>
+<tr>
+<td>四、PCB Filter</td>
+<td></td>
+<td>选中Object的类，该类在PCB中选中，使用F11多元件操作</td>
+</tr>
+<tr>
+<td>五、PCB Rules</td>
+<td>T+D</td>
+<td>DRC时，显示PCB违反规则目录；注意的是必须零错误。否则就根据提示来将其改正。</td>
+</tr>
+<tr>
+<td></td>
+<td>T+C</td>
+<td>查询原理图对应PCB元器件位置</td>
+</tr>
+<tr>
+<td></td>
+<td>T+E</td>
+<td>加泪滴</td>
+</tr>
+<tr>
+<td>六、F11的使用</td>
+<td>PCB Inspector</td>
+<td>可以弹出设置过孔、信号线、器件、丝印等属性的界面</td>
+</tr>
+<tr>
+<td></td>
+<td>Shift+F</td>
+<td>选单个元器件</td>
+</tr>
+<tr>
+<td></td>
+<td>选中单器件 + F11</td>
+<td></td>
+</tr>
+<tr>
+<td>七、Reports 报告</td>
+<td>R+S</td>
+<td>测量导线的长度这个功能</td>
+</tr>
+</tbody>
+</table>
+<h3 id="PCB-中层的概念"><a href="#PCB-中层的概念" class="headerlink" title="PCB 中层的概念"></a>PCB 中层的概念</h3><ol>
+<li><a href="https://wenku.baidu.com/view/cd701e5c482fb4daa58d4bac.html" target="_blank" rel="noopener">PCB中各层的介绍</a><ul>
+<li>Internal plane layer 内部电源/接地层，仅用于多层板；</li>
+<li>midlayers：中间信号层，用于多层板设计</li>
+</ul>
+</li>
+<li><a href="http://blog.csdn.net/qq_29350001/article/details/50904193" target="_blank" rel="noopener">一到八层电路板的叠层设计方式</a><ul>
+<li>六层板的叠层，推荐叠层方式：SIG－GND－SIG－PWR－GND－SIG；</li>
+</ul>
+</li>
+<li><a href="https://blog.csdn.net/qq_29350001/article/details/50904312" target="_blank" rel="noopener">差分信号</a><ul>
+<li>信号的振幅相同，相位相反</li>
+<li>差分走线必须是等长、等宽、紧密靠近、且在同一层面的两根线；差分线对之间要有 GND 隔离，或者保持距离，不要太近。</li>
+<li><strong>一般类型</strong>：USB、以太网、PCIE、SATA、RS485、RS422、HDMI、LVDS</li>
+</ul>
+</li>
+<li><a href="https://www.pcbcart.com/pcb-capability/layer-stackup.html" target="_blank" rel="noopener">Layer Stackup</a></li>
+<li>mark点：电路设计中PCB应用于自动贴片机上的位置识别点<ul>
+<li>mark点一般都是放置于BGA封装器件的对脚，将焊盘改为的mark点。</li>
+</ul>
+</li>
+</ol>
+<h2 id="SCH"><a href="#SCH" class="headerlink" title="SCH"></a>SCH</h2><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一、View</td>
+<td>V+T</td>
+<td>工具栏的显示选择</td>
+</tr>
+<tr>
+<td>二、Designer</td>
+<td>D+T</td>
+<td>原理图图纸大小设置</td>
+</tr>
+<tr>
+<td>三、panels面板</td>
+<td>右下角</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Navigator</td>
+<td>根据选择的元件将其高亮显示</td>
+</tr>
+<tr>
+<td></td>
+<td>Messages</td>
+<td>错误消息的显示窗口</td>
+</tr>
+</tbody>
+</table>
+<h2 id="PCB和SCH通用的快捷键"><a href="#PCB和SCH通用的快捷键" class="headerlink" title="PCB和SCH通用的快捷键"></a>PCB和SCH通用的快捷键</h2><table>
+<thead>
+<tr>
+<th>模块</th>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一、元件放置</td>
+<td>Y</td>
+<td>放置元件时，上下翻转</td>
+</tr>
+<tr>
+<td></td>
+<td>X</td>
+<td>放置元件时，左右翻转</td>
+</tr>
+<tr>
+<td>二、屏幕刷新</td>
+<td>End</td>
+<td>刷新屏幕</td>
+</tr>
+<tr>
+<td></td>
+<td>Home</td>
+<td>以光标为中心刷新屏幕</td>
+</tr>
+<tr>
+<td>三、显示</td>
+<td>V+D</td>
+<td>显示整个文档</td>
+</tr>
+<tr>
+<td></td>
+<td>V+F</td>
+<td>显示所有选中</td>
+</tr>
+<tr>
+<td></td>
+<td>Ctrl + Tab</td>
+<td>循环切换所打开的文档</td>
+</tr>
+<tr>
+<td></td>
+<td>Ctrl + F4</td>
+<td>关闭当前文档</td>
+</tr>
+<tr>
+<td>四、SCH–&gt;PCB</td>
+<td>D+I</td>
+<td>更新PCB，选择Import Changes</td>
+</tr>
+<tr>
+<td></td>
+<td>L</td>
+<td><strong>添加layer层</strong></td>
+</tr>
+<tr>
+<td>五、PCB中层的添加</td>
+<td>D+K</td>
+<td>添加Layers，选择Design-》Layer Stack_Manager</td>
+</tr>
+<tr>
+<td>六、<a href="https://blog.csdn.net/zd845101500/article/details/99725173?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.edu_weight" target="_blank" rel="noopener">AD18中铺铜后不显示了</a></td>
+<td>T+P</td>
+<td>PCB Editor -&gt; Polygon Rebuild -&gt; 选择Repour Polygons After Modification</td>
+</tr>
+<tr>
+<td></td>
+<td>T+G + 重新铺</td>
+<td>隐藏修改后，重现显示铺铜</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="六层板实操体会"><a href="#六层板实操体会" class="headerlink" title="六层板实操体会"></a>六层板实操体会</h2><ol>
+<li>多层板和双层板的误区？<ul>
+<li>双层板：Top和Bottom，双层布线，双面铺铜；所以会觉得双层板是不是会更加简单；</li>
+<li>多层板：除了Top和Bottom，添加了信号层、地层、电层；所以会觉得多层板会很难；</li>
+<li>其实不然，多层板多了偶数信号层，这样在进行布线的时候我们就可以在不同的层进行穿梭，相当于减少了布线的难度，只是生产的时候价格相对会高一些；</li>
+</ul>
+</li>
+<li>多增加了信号层怎么使用呢？<ul>
+<li>类似于Top和Bottom进行布线就可以，没有其他的要求；</li>
+</ul>
+</li>
+<li>电层和地层怎么使用呢？<ul>
+<li>电层：相当于一块铜皮，通过布置一个密闭型框后，选择对应的电源层后，通过打孔连接地层和top/bottom层的电源，便于电源的连接，而且增加了电源的面积；</li>
+<li>地层：同样是一块铜皮，通过布置一个密闭型框后，选择不同的GND后，通过打孔连接地层和top/bottom层的地，便于不同地的连接。</li>
+</ul>
+</li>
+<li>Top和Bottom层使用一个屏蔽的Earth?<ul>
+<li>增加一块屏蔽层，便于信号间的隔离。</li>
+</ul>
+</li>
+<li>PCB布线的技巧？<ul>
+<li>优先进行差分信号的走线，保证其等距离，同一层；</li>
+<li>优先进行主芯片（最多信号线的模块），</li>
+<li>布线的时候尽量横平竖直，模块化布线，同一个区域尽量走同一种信号线；</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AltiumDesigner/" rel="tag"># AltiumDesigner</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/05/PyQt三/" rel="next" title="PyQt5快速开发与实战(三)信号与槽机制">
+                <i class="fa fa-chevron-left"></i> PyQt5快速开发与实战(三)信号与槽机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/26/2020BuyHouse/" rel="prev" title="2020年底会是买房良机吗？">
+                2020年底会是买房良机吗？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">115</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">94</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AltiumDesigner软件使用的一些记录"><span class="nav-number">1.</span> <span class="nav-text">AltiumDesigner软件使用的一些记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AD软件优化设置"><span class="nav-number">1.1.</span> <span class="nav-text">AD软件优化设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCB"><span class="nav-number">1.2.</span> <span class="nav-text">PCB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB界面控件的介绍"><span class="nav-number">1.2.1.</span> <span class="nav-text">PCB界面控件的介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB-中层的概念"><span class="nav-number">1.2.2.</span> <span class="nav-text">PCB 中层的概念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCH"><span class="nav-number">1.3.</span> <span class="nav-text">SCH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCB和SCH通用的快捷键"><span class="nav-number">1.4.</span> <span class="nav-text">PCB和SCH通用的快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六层板实操体会"><span class="nav-number">1.5.</span> <span class="nav-text">六层板实操体会</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
