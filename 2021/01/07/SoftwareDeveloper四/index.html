@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="计算机基础知识操作系统基础OS整体概述 OS作用：提供资源和提供人机交互接口 OS管理资源 硬件资源：CPU、内存、I/O设备； 软件资源：文件管理；    进程介绍 进程的三态模式： 运行&amp;lt;——&amp;gt;就绪&amp;lt;——阻塞； 运行——&amp;gt;就绪：分时运行不同的进程； 运行——&amp;gt;阻塞：外部程序打断；   进程的组成：程序、数据集合、PCB进程控制器 PCB：进程存在的唯一标识； 考：">
+<meta name="keywords" content="考证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SoftwareDeveloper（四）计算机基础知识">
+<meta property="og:url" content="http://yoursite.com/2021/01/07/SoftwareDeveloper四/index.html">
+<meta property="og:site_name" content="Lucky Boy">
+<meta property="og:description" content="计算机基础知识操作系统基础OS整体概述 OS作用：提供资源和提供人机交互接口 OS管理资源 硬件资源：CPU、内存、I/O设备； 软件资源：文件管理；    进程介绍 进程的三态模式： 运行&amp;lt;——&amp;gt;就绪&amp;lt;——阻塞； 运行——&amp;gt;就绪：分时运行不同的进程； 运行——&amp;gt;阻塞：外部程序打断；   进程的组成：程序、数据集合、PCB进程控制器 PCB：进程存在的唯一标识； 考：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-01-11T13:10:42.260Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SoftwareDeveloper（四）计算机基础知识">
+<meta name="twitter:description" content="计算机基础知识操作系统基础OS整体概述 OS作用：提供资源和提供人机交互接口 OS管理资源 硬件资源：CPU、内存、I/O设备； 软件资源：文件管理；    进程介绍 进程的三态模式： 运行&amp;lt;——&amp;gt;就绪&amp;lt;——阻塞； 运行——&amp;gt;就绪：分时运行不同的进程； 运行——&amp;gt;阻塞：外部程序打断；   进程的组成：程序、数据集合、PCB进程控制器 PCB：进程存在的唯一标识； 考：">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/01/07/SoftwareDeveloper四/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>SoftwareDeveloper（四）计算机基础知识 | Lucky Boy</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lucky Boy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">you and me</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/07/SoftwareDeveloper四/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ronghui Qu">
+      <meta itemprop="description" content="Lucky Smile">
+      <meta itemprop="image" content="/images/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Boy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SoftwareDeveloper（四）计算机基础知识
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2021-01-07 21:35:35" itemprop="dateCreated datePublished" datetime="2021-01-07T21:35:35+08:00">2021-01-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2021-01-11 21:10:42" itemprop="dateModified" datetime="2021-01-11T21:10:42+08:00">2021-01-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/class/" itemprop="url" rel="index"><span itemprop="name">class</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Symbols count in article: </span>
+                
+                <span title="Symbols count in article"></span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time"></span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="计算机基础知识"><a href="#计算机基础知识" class="headerlink" title="计算机基础知识"></a>计算机基础知识</h1><h2 id="操作系统基础"><a href="#操作系统基础" class="headerlink" title="操作系统基础"></a>操作系统基础</h2><h3 id="OS整体概述"><a href="#OS整体概述" class="headerlink" title="OS整体概述"></a>OS整体概述</h3><ol>
+<li>OS作用：提供资源和提供人机交互接口</li>
+<li>OS管理资源<ul>
+<li>硬件资源：CPU、内存、I/O设备；</li>
+<li>软件资源：文件管理；</li>
+</ul>
+</li>
+</ol>
+<h3 id="进程介绍"><a href="#进程介绍" class="headerlink" title="进程介绍"></a>进程介绍</h3><ol>
+<li>进程的三态模式：<ul>
+<li>运行&lt;——&gt;就绪&lt;——阻塞；</li>
+<li>运行——&gt;就绪：分时运行不同的进程；</li>
+<li>运行——&gt;阻塞：外部程序打断；</li>
+</ul>
+</li>
+<li>进程的组成：程序、数据集合、PCB进程控制器<ul>
+<li>PCB：进程存在的唯一标识；</li>
+<li><strong>考：判断PCB属于哪种数据结构？</strong><ul>
+<li>线性表：顺序组成；</li>
+<li>链接方式：通过指针的方式进行交叉排列；</li>
+<li>索引方式：通过建立索引表；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>进程间的先后关系表示——<strong>前驱图</strong><ul>
+<li>前驱图：有向无循环图（由节点和有向边组成）；</li>
+<li>前驱关系：（1）并行执行；（2）前面完成后该节点才能执行；</li>
+</ul>
+</li>
+<li>进程间的<strong>互斥</strong>关系——<strong>PV操作</strong>（加锁操作）<ul>
+<li>原因：当两个程序交叉运行时，出现代码交叉执行的问题。</li>
+<li>临界资源（交叉共用的区域）：用<strong>信号量</strong>表示其起源数量；</li>
+<li>PV操作：对信号量值进行操作？<ul>
+<li>P操作：S = S-1，当S&gt;=0时，执行该进程；否则阻塞该进程（无资源可用）；</li>
+<li>V操作：S =S+1，当S&gt;0时，执行该进程；否则将该进程放到就绪队列中等待。</li>
+</ul>
+</li>
+<li><strong>信号量的取值范围</strong> = [ S，(N - S) ]<ul>
+<li>N：进程的个数，S：临界区自愿的数量</li>
+<li>若S为负数：则表示有S个进程正在排队，等待唤醒；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>进程间的<strong>同步</strong>关系——<strong>PV操作</strong><ul>
+<li>生产者——&gt;缓冲区——&gt;消费者</li>
+<li>3个信号量的介绍？<ul>
+<li><strong>同步信号量</strong>—缓冲区：empty（P操作）、full（V操作）；（实现同步问题）</li>
+<li><strong>互斥信号量</strong>—临界资源：mutex；（保证缓冲区一次只能有一个生产者/消费者在缓冲区）</li>
+</ul>
+</li>
+<li>生产者的操作？<ul>
+<li>生产一个数据；在缓冲区存入一个数据（<strong>关键操作</strong>）；</li>
+</ul>
+</li>
+<li>消费者操作？<ul>
+<li>从缓冲区取出一个数据；消费一个数据（<strong>关键操作</strong>）；</li>
+</ul>
+</li>
+<li>PV操作的顺序？<ul>
+<li>在关键操作前，进行一次P操作</li>
+<li>在关键操作后，进行一次V操作；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>考：前驱图 + 信号量的组合？</strong><ul>
+<li>在前驱图上标注信号量S：顺序是从小到大、前驱图的距离优先；</li>
+<li>PV操作设置情况？<ul>
+<li>起始点：只有V操作，唤醒下一个进程；</li>
+<li>终节点：只有P操作，只有前面的进程都完成，这个进程才能开始；</li>
+<li>中间节点：（对于每一个中间节点都有Input和Output）<ul>
+<li>Input：P操作（阻塞等待）</li>
+<li>Output：V操作（唤醒进程）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="存储管理（内存和外存）"><a href="#存储管理（内存和外存）" class="headerlink" title="存储管理（内存和外存）"></a>存储管理（内存和外存）</h3><ol>
+<li><p>地址重定位方式？</p>
+<ul>
+<li>静态重定位方式：<ul>
+<li>绝对地址 = 相关地址 + 程序存放的内存的起始地址；</li>
+<li>静态映射，连续控件；</li>
+</ul>
+</li>
+<li>动态重定位方式：<ul>
+<li>绝对地址 = 重定位寄存器的地址（BR）+ 逻辑地址寄存器的地址（VR）</li>
+<li><strong>寄存器</strong>：当CPU真实寻找时，才进行地址变化；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>存储管理方式——内存</p>
+<ol>
+<li>分区管理：<strong>连续性</strong><ul>
+<li>将用户空间进行划分、存在空白分区；</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>分页存储管理</strong>：逻辑地址——&gt;物理地址<strong>（映射）</strong></p>
+<ul>
+<li>将区域分为大小相同的页；</li>
+<li>逻辑地址32bit：页号（20bit）+ 页内地址-偏移地址（12bit）</li>
+<li>物理地址32bit：块号（20bit）+ 块内地址-偏移地址（12bit）</li>
+</ul>
+<ol>
+<li>页表：用于记录 （页号——块号）对应表<ul>
+<li>页号  = 逻辑地址(十进制)  /  页大小</li>
+<li>页内地址 = 逻辑地址(十进制)  %  页大小</li>
+<li><strong>物理地址</strong> = 块号 * 页大小 + 块内地址（= 页内地址）</li>
+</ul>
+</li>
+<li>考：逻辑地址与物理地址的映射？<ul>
+<li>物理地址的计算；</li>
+<li>两个进程共享物理页n，择各自进程的<strong>物理块号</strong>也是n;</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>分段管理</p>
+<ul>
+<li>根据程序的大小，分为不同的段；</li>
+<li>有地址越界问题？</li>
+</ul>
+</li>
+<li><p>段页管理</p>
+<ul>
+<li>逻辑地址 = 段号 + 页号 + 页内偏移地址；</li>
+</ul>
+</li>
+<li><p>虚拟存储</p>
+<ul>
+<li>内存中暂时不同的存储在虚拟内存里；用的时候进行调用；</li>
+</ul>
+</li>
+</ol>
+<h3 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h3><ol>
+<li>CPU和设备的串行/并行工作方式？<ul>
+<li>程序控制：串行</li>
+</ul>
+</li>
+<li>DMA的工作方式？<ul>
+<li>在<strong>主存与外设</strong>之间建立直接的数据通路；</li>
+</ul>
+</li>
+</ol>
+<h3 id="文件存储管理"><a href="#文件存储管理" class="headerlink" title="文件存储管理"></a>文件存储管理</h3><ol>
+<li>文件的查找问题？——通过索引的方式；<ul>
+<li>直接索引：直接指向物理块；</li>
+<li>间接索引：扩大索引能够检索的内容；<ul>
+<li>一级索引：由索引节点，先指向一个索引表，在指向具体的物理块；</li>
+<li>二级索引：由索引节点，先指向一个索引表，在指向一个索引表，最后指向具体的物理块；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>考题？索引的方式<ul>
+<li>单个文件最大的长度；</li>
+<li>不同的块号对应的索引方式；</li>
+</ul>
+</li>
+</ol>
+<h3 id="文件存储设备管理（存储在外存的管理）"><a href="#文件存储设备管理（存储在外存的管理）" class="headerlink" title="文件存储设备管理（存储在外存的管理）"></a>文件存储设备管理（存储在外存的管理）</h3><ol>
+<li>位示图法：二进制表示，0/1分别表示存储 / 空闲;</li>
+<li>考题？某一块存储的位置，以及该位为0/1？<ul>
+<li>二进制数都是从0开始存储；</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/考证/" rel="tag"># 考证</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/06/SoftwareDeveloper三/" rel="next" title="SoftwareDeveloper（三）软考直播课">
+                <i class="fa fa-chevron-left"></i> SoftwareDeveloper（三）软考直播课
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/11/MoneyManagement四/" rel="prev" title="MoneyManagement（四）">
+                MoneyManagement（四） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/home.jpg" alt="Ronghui Qu">
+            
+              <p class="site-author-name" itemprop="name">Ronghui Qu</p>
+              <p class="site-description motion-element" itemprop="description">Lucky Smile</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">94</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机基础知识"><span class="nav-number">1.</span> <span class="nav-text">计算机基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统基础"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OS整体概述"><span class="nav-number">1.1.1.</span> <span class="nav-text">OS整体概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程介绍"><span class="nav-number">1.1.2.</span> <span class="nav-text">进程介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储管理（内存和外存）"><span class="nav-number">1.1.3.</span> <span class="nav-text">存储管理（内存和外存）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设备管理"><span class="nav-number">1.1.4.</span> <span class="nav-text">设备管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件存储管理"><span class="nav-number">1.1.5.</span> <span class="nav-text">文件存储管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件存储设备管理（存储在外存的管理）"><span class="nav-number">1.1.6.</span> <span class="nav-text">文件存储设备管理（存储在外存的管理）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ronghui Qu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+      
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="true"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

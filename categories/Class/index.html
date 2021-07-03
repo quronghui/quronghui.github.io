@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>Category: class | Lucky Boy</title>
+  <title>Kategorie: class | Lucky Boy</title>
   
 
 
@@ -223,7 +223,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -240,7 +240,7 @@
 
     
 
-    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br>Archives</a>
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br>Archiv</a>
 
   </li>
         
@@ -257,7 +257,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br>Kategorien</a>
 
   </li>
         
@@ -285,7 +285,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -365,9 +365,61 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>class<small>Category</small>
+        <h1>class<small>Kategorie</small>
         </h1>
       </div>
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2021/01/12/SoftwareDeveloper五/" itemprop="url">
+            
+              <span itemprop="name">SoftwareDeveloper（五）计算机基础知识</span>
+            
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2021-01-12T20:32:16+08:00" content="2021-01-12">
+          01-12
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2021/01/07/SoftwareDeveloper四/" itemprop="url">
+            
+              <span itemprop="name">SoftwareDeveloper（四）计算机基础知识</span>
+            
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2021-01-07T21:35:35+08:00" content="2021-01-07">
+          01-07
+        </time>
+      </div>
+
+    </header>
+  </article>
+
 
       
         
@@ -499,8 +551,8 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">119</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -659,7 +711,7 @@
                       
                     
                     <span class="site-state-item-count">73</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -860,7 +912,7 @@
                       
                     
                     <span class="site-state-item-count">94</span>
-                    <span class="site-state-item-name">tags</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -924,7 +976,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -1348,6 +1400,60 @@
 
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+(e) {
       e.stopPropagation();
       if (isfetched === false) {
         searchFunc(path, 'local-search-input', 'local-search-result');

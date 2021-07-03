@@ -106,7 +106,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/12/21/SoftwareDeveloper二/12.21指令执行过程.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/12/21/SoftwareDeveloper二/12.21指令执行过程1.PNG">
-<meta property="og:updated_time" content="2021-01-06T12:02:17.230Z">
+<meta property="og:updated_time" content="2021-01-07T13:34:38.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SoftwareDeveloper（二）计算机基础知识">
 <meta name="twitter:description" content="计算机基础知识计算机组成架构 冯诺依曼： 五大部分：输入，输出，控制器、运算器（核心）、存储器； 指令和地址：指令有操作码和地址码组成； 地址总线：进行寻址操作；   现代计算机： 三大部分：CPU、存储（核心）、I/O CPU：ALU运算单元、控制单元；    考：一条指令的执行过程？ 一条指令要执行的过程？  取指——&amp;gt;解析——&amp;gt;执行；    控制单元？ PC：存储下一条要执行指令">
@@ -227,7 +227,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -244,7 +244,7 @@
 
     
 
-    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br>Archives</a>
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archives"></i> <br>Archiv</a>
 
   </li>
         
@@ -261,7 +261,7 @@
 
     
 
-    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br>Categories</a>
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-categories"></i> <br>Kategorien</a>
 
   </li>
         
@@ -289,7 +289,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Suche</a>
         </li>
       
     </ul>
@@ -395,14 +395,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2020-12-21 20:22:00" itemprop="dateCreated datePublished" datetime="2020-12-21T20:22:00+08:00">2020-12-21</time>
+              <time title="Post created: 2020-12-21 20:22:00" itemprop="dateCreated datePublished" datetime="2020-12-21T20:22:00+08:00">2020-12-21</time>
             
 
             
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-01-06 20:02:17" itemprop="dateModified" datetime="2021-01-06T20:02:17+08:00">2021-01-06</time>
+                <time title="Updated at: 2021-01-07 21:34:38" itemprop="dateModified" datetime="2021-01-07T21:34:38+08:00">2021-01-07</time>
               
             
           </span>
@@ -433,7 +433,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/class/" itemprop="url" rel="index"><span itemprop="name">class</span></a></span>
@@ -536,11 +536,7 @@
 <li>MDR——&gt;IR：在IR中存储要执行指令的地址。</li>
 </ul>
 </li>
-<li>CPU两大部件的组成？<ul>
-<li>
-</li>
-</ul>
-</li>
+<li>CPU两大部件的组成？</li>
 </ol>
 <h3 id="主存：地址总线和数据总线"><a href="#主存：地址总线和数据总线" class="headerlink" title="主存：地址总线和数据总线"></a>主存：地址总线和数据总线</h3><ol>
 <li>存储器的结构？<ul>
@@ -582,12 +578,18 @@
 <li><p>奇偶校验码</p>
 <ul>
 <li>在编码前加1，使其编码中1的个数为偶数（偶校验）/ 奇数(奇校验)</li>
-<li>缺陷：智能判断奇数个位出错，不能判断偶数个位出错；</li>
+<li>缺陷：只能判断奇数个位出错，不能判断偶数个位出错；</li>
 </ul>
 </li>
 <li><p>海明码：分组交叉校验</p>
 <ol>
-<li><p>校验位：位置在2^n处；</p>
+<li><p>特点</p>
+<ul>
+<li>基于奇偶校验的校验码；（为了能够检验偶数位出错）</li>
+<li>码距至少为2，才能检错和纠错；</li>
+<li>检验码所在位置：2^n的位置；</li>
+<li>2^k  &gt;=  n+k+1  (n位数，k位校验码)</li>
+</ul>
 </li>
 <li><p>如何划分组：</p>
 <ul>
@@ -704,8 +706,71 @@
 </li>
 </ol>
 <h3 id="计算机系统结构的分类"><a href="#计算机系统结构的分类" class="headerlink" title="计算机系统结构的分类"></a>计算机系统结构的分类</h3><ol>
-<li>分为四类<ul>
-<li><strong>用的最少的</strong>：多指令流但数据法；</li>
+<li>体系结构的分类——Flynn（数据流和指令流进行划分）<ul>
+<li>SISD：单指令流单数据流；（单核、顺序执行）</li>
+<li>SIMD：单指令流多数据流；（多核、并行执行）</li>
+<li>MISD：多指令流单数据流；（<strong>用的最少的</strong>：单核、顺序执行）</li>
+<li>MIMD：多指令流多数据流；（多核、并行执行）</li>
+</ul>
+</li>
+<li>指令系统：<strong>考区别</strong><ul>
+<li>CISC：复杂指令系统；<ul>
+<li>特点：指令增多、使用频率少、寻址方式多；</li>
+</ul>
+</li>
+<li>RISC：精简指令系统；<ul>
+<li>指令的寻址方式少；</li>
+<li>硬布线逻辑控制为主，组合逻辑电路构建控制器；</li>
+<li>使用<strong>流水线</strong>技术；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h3><ol>
+<li>定义：是一组能为多个部件分时共享的公共信息通路；</li>
+<li>总线分类：<ul>
+<li>内部、外部：相对于CPU、芯片等；</li>
+<li>按照功能划分：地址、数据、控制总线；</li>
+<li>按照数据多少：并行—短距离、串行—长距离；</li>
+</ul>
+</li>
+<li><strong>考：</strong>单工、半双工、全双工 的区别？<ul>
+<li>单工：方向是<strong>单向</strong>的；</li>
+<li>半双工：<strong>两个方向</strong>上数据可以<strong>轮流传递</strong>信息；</li>
+<li>全双工：<strong>两个方向</strong>上<strong>同时传递</strong>信息；</li>
+</ul>
+</li>
+</ol>
+<h3 id="磁盘阵列的划分"><a href="#磁盘阵列的划分" class="headerlink" title="磁盘阵列的划分"></a>磁盘阵列的划分</h3><ol>
+<li><strong>RAID0</strong>：将数据分散到多个磁盘上存取<ul>
+<li>无冗余、无校验；</li>
+<li>最高的存储性能；</li>
+</ul>
+</li>
+<li>RAID1：将数据完全一致分配到两块磁盘上；<ul>
+<li>磁盘镜像阵列，有冗余、无校验；</li>
+<li>50%的磁盘空间利用率；</li>
+</ul>
+</li>
+<li>RAID2：采用海明码校验的磁盘阵列<ul>
+<li>校验盘：提供单纠错和双检错功能；</li>
+</ul>
+</li>
+<li>RAID3/RAID4：交叉校验‘</li>
+<li><strong>RAID5：</strong>无独立校验盘的奇偶校验磁盘；<ul>
+<li>校验码：分散到不同的磁盘中；</li>
+<li><strong>n块磁盘利用率：</strong>用户能利用的存储空间为（n-1）</li>
+<li><strong>存储容量：</strong>以容量最小的盘为准；</li>
+</ul>
+</li>
+<li>RAID6：除了奇偶校验，增加了另一套校验方式；<ul>
+<li>n块磁盘：用户能利用的存储空间为（n-2）</li>
+</ul>
+</li>
+<li>RAID7：加入存储计算机，非磁盘</li>
+<li><strong>RAID1+0：</strong>是RAID1和RAID0的结合；<ul>
+<li>存储性能和可靠性最高；</li>
 </ul>
 </li>
 </ol>
@@ -804,10 +869,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -829,8 +894,8 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">119</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -989,7 +1054,7 @@
                       
                     
                     <span class="site-state-item-count">73</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -1190,7 +1255,7 @@
                       
                     
                     <span class="site-state-item-count">94</span>
-                    <span class="site-state-item-name">tags</span>
+                    <span class="site-state-item-name">Tags</span>
                   </a>
                 </div>
               
@@ -1225,7 +1290,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机基础知识"><span class="nav-number">1.</span> <span class="nav-text">计算机基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机组成架构"><span class="nav-number">1.1.</span> <span class="nav-text">计算机组成架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#考：一条指令的执行过程？"><span class="nav-number">1.1.1.</span> <span class="nav-text">考：一条指令的执行过程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主存：地址总线和数据总线"><span class="nav-number">1.1.2.</span> <span class="nav-text">主存：地址总线和数据总线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器：容量和速度"><span class="nav-number">1.1.3.</span> <span class="nav-text">存储器：容量和速度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#校验码：计算校验码"><span class="nav-number">1.1.4.</span> <span class="nav-text">校验码：计算校验码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令周期"><span class="nav-number">1.1.5.</span> <span class="nav-text">指令周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高速缓冲存储器—Cache"><span class="nav-number">1.1.6.</span> <span class="nav-text">高速缓冲存储器—Cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘存储器—外存"><span class="nav-number">1.1.7.</span> <span class="nav-text">磁盘存储器—外存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机系统结构的分类"><span class="nav-number">1.1.8.</span> <span class="nav-text">计算机系统结构的分类</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机基础知识"><span class="nav-number">1.</span> <span class="nav-text">计算机基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机组成架构"><span class="nav-number">1.1.</span> <span class="nav-text">计算机组成架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#考：一条指令的执行过程？"><span class="nav-number">1.1.1.</span> <span class="nav-text">考：一条指令的执行过程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主存：地址总线和数据总线"><span class="nav-number">1.1.2.</span> <span class="nav-text">主存：地址总线和数据总线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器：容量和速度"><span class="nav-number">1.1.3.</span> <span class="nav-text">存储器：容量和速度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#校验码：计算校验码"><span class="nav-number">1.1.4.</span> <span class="nav-text">校验码：计算校验码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令周期"><span class="nav-number">1.1.5.</span> <span class="nav-text">指令周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高速缓冲存储器—Cache"><span class="nav-number">1.1.6.</span> <span class="nav-text">高速缓冲存储器—Cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘存储器—外存"><span class="nav-number">1.1.7.</span> <span class="nav-text">磁盘存储器—外存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机系统结构的分类"><span class="nav-number">1.1.8.</span> <span class="nav-text">计算机系统结构的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总线"><span class="nav-number">1.1.9.</span> <span class="nav-text">总线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘阵列的划分"><span class="nav-number">1.1.10.</span> <span class="nav-text">磁盘阵列的划分</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1271,7 +1336,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
